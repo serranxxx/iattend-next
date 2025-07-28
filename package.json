@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ag-grid-community/locale": "^34.0.2",
+    "@ant-design/nextjs-registry": "^1.1.0",
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "antd": "^5.25.1",
     "axios": "^1.9.0",
     "firebase": "^11.7.3",
@@ -22,8 +25,10 @@
     "@types/node": "^20.17.47",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
+    "eslint-plugin-unused-imports": "^4.1.4",
     "typescript": "^5.8.3"
   }
 }

@@ -3,7 +3,7 @@ export interface Guests {
     invitationID: string;
     tickets: number | null;
     type: "open" | "private"; // o simplemente `string` si usas más tipos
-    guests: any[]; // Puedes tiparlo más adelante si defines su estructura
+    guests: Guest[]; // Puedes tiparlo más adelante si defines su estructura
     share: {
       email: string;
       password: string;

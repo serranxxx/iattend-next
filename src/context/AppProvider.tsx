@@ -3,7 +3,8 @@
 import { useEffect, useReducer, useState } from "react";
 import { appContext } from "./AppContext";
 import { authReducer } from "./appReducer";
-import { types, AppState, User } from "./types";
+import { types } from "./types";
+import { AppState, AppUser, ColorPalette } from "@/types/context";
 
 const initialState: AppState = {
   logged: false,
@@ -20,7 +21,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
       const isLogged = localStorage.getItem("logged") === "true";
       const user = JSON.parse(
         localStorage.getItem("user") || "null"
-      ) as User | null;
+      ) as AppUser | null;
 
       if (isLogged && user) {
         dispatch({ type: types.LOGIN, payload: user });
@@ -30,7 +31,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, []);
 
-  const login = (newUser: User) => {
+  const login = (newUser: AppUser) => {
     dispatch({ type: types.LOGIN, payload: newUser });
     localStorage.setItem("logged", "true");
     localStorage.setItem("user", JSON.stringify(newUser));
@@ -46,11 +47,8 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const setMainColor = (color: string = "#000000") =>
     dispatch({ type: types.COLOR, payload: color });
 
-  const setColorPalette = (colors: {
-    primary: string;
-    secondary: string;
-    accent: string;
-  }) => dispatch({ type: types.PALETTE, payload: colors });
+  const setColorPalette = (colors: ColorPalette) =>
+    dispatch({ type: types.PALETTE, payload: colors });
 
   const setTheme = (theme: boolean = true) =>
     dispatch({ type: types.THEME, payload: theme });

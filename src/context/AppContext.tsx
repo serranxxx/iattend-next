@@ -1,5 +1,5 @@
-import { createContext } from "react"
-import type { AppStateContextType } from "./types"
+import { AppStateContextType } from "@/types/context";
+import { createContext } from "react";
 
 // Exporta el contexto vacío, pero tipado
-export const appContext = createContext<AppStateContextType | null>(null)
+export const appContext = createContext<AppStateContextType | null>(null);

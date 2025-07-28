@@ -1,3 +1,4 @@
+import { AppUserEnterprise } from "@/types/context";
 import { message } from "antd";
 import { AxiosRequestConfig } from "axios";
 
@@ -8,10 +9,7 @@ import { AxiosRequestConfig } from "axios";
  * @param logout - Función que cierra la sesión del usuario.
  * @param operation - Función que realiza una petición HTTP, típicamente configurada con Axios.
  */
-export const renew_jwt = async (
-  logout: () => void,
-  operation: (params: AxiosRequestConfig) => Promise<void>
-) => {
+export const renew_jwt = async (logout: () => void, operation: (params: AxiosRequestConfig) => Promise<void>) => {
   const expired = localStorage.getItem("token-expires");
   const token = localStorage.getItem("token");
 
@@ -53,11 +51,7 @@ export const renew_jwt = async (
  * @param Email - Correo electrónico del usuario.
  * @param Password - Contraseña del usuario.
  */
-export async function onLogin(
-  operation: (params: AxiosRequestConfig) => Promise<void>,
-  Email: string,
-  Password: string
-) {
+export async function onLogin(operation: (params: AxiosRequestConfig) => Promise<void>, Email: string, Password: string) {
   try {
     await operation({
       method: "POST",
@@ -81,12 +75,7 @@ export async function onLogin(
  * @param Email - Correo electrónico.
  * @param Password - Contraseña.
  */
-export async function onNewUser(
-  operation: (params: AxiosRequestConfig) => Promise<void>,
-  Name: string,
-  Email: string,
-  Password: string
-) {
+export async function onNewUser(operation: (params: AxiosRequestConfig) => Promise<void>, Name: string, Email: string, Password: string) {
   const newUser = {
     Name,
     Email,
@@ -114,9 +103,7 @@ export async function onNewUser(
  *
  * @param operation - Función que realiza la petición HTTP (GET /auth/).
  */
-export async function getUSers(
-  operation: (params: AxiosRequestConfig) => Promise<void>
-) {
+export async function getUSers(operation: (params: AxiosRequestConfig) => Promise<void>) {
   try {
     await operation({
       method: "GET",
@@ -135,18 +122,11 @@ export async function getUSers(
  * @param name_enterprise - Nombre nuevo de la empresa.
  * @param logo_enterpise - URL del nuevo logo de la empresa.
  */
-export async function editUser(
-  operation: (params: AxiosRequestConfig) => Promise<void>,
-  uid: string,
-  name_enterprise: string,
-  logo_enterpise: string | null
-) {
+
+export async function editUser(operation: (params: AxiosRequestConfig) => Promise<void>, uid: string, enterpriseModel: AppUserEnterprise) {
   const token = localStorage.getItem("token");
   const data = {
-    Enterprise: {
-      name: name_enterprise,
-      logo: logo_enterpise,
-    },
+    Enterprise: enterpriseModel,
   };
 
   try {
@@ -157,7 +137,7 @@ export async function editUser(
         accept: "*/*",
         token: token,
       },
-      data,
+      data: data,
     });
   } catch (error) {
     message.error("Es probable que este usuario ya exista");
