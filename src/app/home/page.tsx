@@ -1,6 +1,11 @@
 import { HeaderApp } from "@/components/Header/HeaderApp/HeaderApp";
 import styles from "./page.module.css";
 import { HomeScroll } from "@/components/HomeScroll/HomeScroll";
+import { PiMonitorPlayBold } from "react-icons/pi";
+import dec_1 from "@/assets/decorations/decoration_1.png"
+import build_inv from "@/assets/content/build_invitations.png"
+import Image from "next/image";
+import { HomeCards } from "@/helpers/header";
 
 export default function HomePage() {
   return (
@@ -13,58 +18,56 @@ export default function HomePage() {
           </span>
         </div>
 
-        <HomeScroll />
+        {/* <HomeScroll /> */}
 
-        {/* <div className="dph-box-cont">
-          <div className="dp-head-block">
-            <div className="dph-texts-cont">
-              <span className="dp-primary-text-secondary">Construye invitaciones perfectas</span>
-              <span className="dp-primary-single-text">
-                {" "}
+        <div className={styles.dph_box_cont}>
+          <div className={styles.dp_head_block}>
+            <div className={styles.dph_texts_cont}>
+              <span className={styles.dp_primary_text_secondary}>Construye invitaciones perfectas</span>
+              <span className={styles.d_primary_single_text}>
                 Ajusta cada detalle a tu gusto, desde los colores hasta la tipografía, asegurarte que tu invitación sea tan única como tu
                 celebración.
               </span>
             </div>
 
-            <div className="dph-cards-cont">
-              <img alt="" src={decoration.decoration_1} className="decoration-image-admin" />
+            <div className={styles.dph_cards_cont}>
+              <Image alt="" width={400} src={dec_1} className={styles.decoration_image_admin} />
             </div>
           </div>
-          <div className="test-build-invitation-container first-box">
-            <div className="try-inv-icon-cont disable-icon">
+          <div className={`${styles.test_build_invitation_container} ${styles.first_box}`}>
+            <div className={`${styles.try_inv_icon_cont} ${styles.disable_icon}`}>
               <PiMonitorPlayBold />
             </div>
 
-            <span className="try-inv-head">
+            <span className={styles.try_inv_head}>
               Descubre lo fácil que es diseñar invitaciones personalizadas que capturan la esencia de tu evento
             </span>
-            <span className="try-inv-single discover-description">
-              {" "}
+            <span className={`${styles.try_inv_single} ${styles.discover_description}`}>
               Con nuestras herramientas intuitivas, puedes ajustar cada detalle a tu gusto, desde los colores hasta la tipografía,
               asegurando que tu invitación sea tan única como tu celebración.
             </span>
 
-            <div className="test-build-invitation-second-container">
-              <img alt="" src={images.build_invitations} className="module-image-example" />
+            <div className={styles.test_build_invitation_second_container}>
+              <Image alt="" src={build_inv} className={styles.module_image_example} />
             </div>
           </div>
-          <div className="try-inv-second-section scroll-invitation">
-            {desginCards.map((card, index) => (
-              <div key={index} className="test-build-invitation-container test-build-small-card">
-                <div className="card-dph-single-col">
-                  <div className="try-inv-icon-cont">{card.icon}</div>
+          <div className={`${styles.try_inv_second_section} scroll-invitation`}>
+            {HomeCards.map((card, index) => (
+              <div key={index} className={`${styles.test_build_invitation_container} ${styles.test_build_small_card}`}>
+                <div className={styles.card_dph_single_col}>
+                  <div className={styles.try_inv_icon_cont}>{<card.icon />}</div>
 
-                  <span className="try-inv-head-second" style={{}}>
+                  <span className={styles.try_inv_head_second} style={{}}>
                     {card.title}
                   </span>
-                  <span style={{}} className="try-inv-single-second">
+                  <span style={{}} className={styles.try_inv_single_second}>
                     {card.text}
                   </span>
                 </div>
               </div>
             ))}
           </div>
-        </div> */}
+        </div>
 
         {/* <div ref={exaplesContainer} className="dph-examples-carrusell scroll-invitation">
           {invitation && (
@@ -358,48 +361,48 @@ export default function HomePage() {
           ></button>
         </div> */}
 
-        {/* <div className="dph-box-cont">
-          <div className="dp-head-block">
-            <div className="dph-texts-cont">
-              <span className="dp-primary-text-secondary">Organiza a tus invitados</span>
-              <span className="dp-primary-single-text">
+        {/* <div className={styles.dph_box_cont}>
+          <div className={styles.dp_head_block}>
+            <div className={styles.dph_texts_cont}>
+              <span className={styles.dp_primary_text_secondary}>Organiza a tus invitados</span>
+              <span className={styles.d_primary_single_text}>
                 Administra fácilmente tu lista de invitados, controla quién puede ver tu invitación.
               </span>
             </div>
 
-            <div className="dph-cards-cont">
-              <img alt="" src={decoration.decoration_2} className="decoration-image-admin" />
+            <div className={styles.dph_cards_cont}>
+              <img alt="" src={decoration.decoration_2} className={styles.decoration_image_admin} />
             </div>
           </div>
 
-          <div className="test-build-invitation-container first-box">
-            <div className="try-inv-icon-cont disable-icon">
+          <div className={`${styles.test_build_invitation_container} ${styles.first_box}`}>
+            <div className={`${styles.try_inv_icon_cont} ${styles.disable_icon}`}>
               <PiMonitorPlayBold />
             </div>
 
-            <span className="try-inv-head">Gestiona tus invitados de manera eficiente</span>
-            <span className="try-inv-single discover-description">
+            <span className={styles.try_inv_head}>Gestiona tus invitados de manera eficiente</span>
+            <span className={`${styles.try_inv_single} ${styles.discover_description}`}>
               Administra fácilmente tu lista de invitados, controla quién puede ver tu invitación, y recibe confirmaciones de asistencia en
               tiempo real. Nuestra plataforma te ofrece todas las herramientas necesarias para que la gestión de tus invitados sea sencilla
               y efectiva.
             </span>
 
-            <div className="test-build-invitation-second-container">
-              <img alt="" src={images.guest_page} className="module-image-example" />
+            <div className={styles.test_build_invitation_second_container}>
+              <img alt="" src={images.guest_page} className={styles.module_image_example} />
             </div>
 
           </div>
 
-          <div className="try-inv-second-section croll-invitation">
+          <div className="styles.try_inv_second_section croll-invitation">
             {guestManagementCards.map((card, index) => (
-              <div key={index} className="test-build-invitation-container test-build-small-card">
-                <div className="card-dph-single-col">
-                  <div className="try-inv-icon-cont">{card.icon}</div>
+              <div key={index} className={`${styles.test_build_invitation_container} ${styles.test_build_small_card}`}>
+                <div className={styles.card_dph_single_col}>
+                  <div className="styles.try_inv_icon_cont">{card.icon}</div>
 
-                  <span className="try-inv-head-second" style={{}}>
+                  <span className={styles.try_inv_head_second} style={{}}>
                     {card.title}
                   </span>
-                  <span style={{}} className="try-inv-single-second">
+                  <span style={{}} className={styles.try_inv_single_second}>
                     {card.text}
                   </span>
                 </div>

@@ -7,3 +7,9 @@ export interface navItems {
   path: string;
   position: string;
 }
+
+export interface homeCards {
+  icon: IconType;
+  title: string;
+  text: string;
+}

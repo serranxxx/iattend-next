@@ -1,18 +1,5 @@
-import { HeaderApp } from "@/components/Header/HeaderApp/HeaderApp";
+import { redirect } from 'next/navigation'
 
-export default function Home() {
-  return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "flex-start",
-        justifyContent: "flex-start",
-        flexDirection: "column",
-        width: "100%",
-      }}
-    >
-      <HeaderApp position="land" isVisible={true} />
-      <div>Hola I attend</div>
-    </div>
-  );
+export default function HomeRedirect() {
+  redirect('/home')
 }
