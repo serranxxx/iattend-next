@@ -1,6 +1,6 @@
 import { Guests } from "@/types/guests";
 import { Invitation } from "@/types/invitation";
-import { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { getStorage } from "firebase/storage";
 
 const storage = getStorage();
@@ -134,3 +134,11 @@ export async function getAllDominios(
     console.error(error);
   }
 }
+
+
+export const api = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL, // definido en .env.local
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
