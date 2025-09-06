@@ -1,14 +1,13 @@
 import { Guests } from "@/types/guests";
 import { Invitation } from "@/types/invitation";
 import { AxiosRequestConfig } from "axios";
+
 import { getStorage } from "firebase/storage";
+// import { storage } from  "@/libs/firebase/firebase"
 
-const storage = getStorage();
+// const storage = getStorage();
 
-export async function getInvitationbyID(
-  operation: (params: AxiosRequestConfig) => Promise<void>,
-  invitationID: string
-) {
+export async function getInvitationbyID(operation: (params: AxiosRequestConfig) => Promise<void>, invitationID: string) {
   try {
     await operation({
       method: "GET",
@@ -19,9 +18,7 @@ export async function getInvitationbyID(
   }
 }
 
-export async function getAllInvitations(
-  operation: (params: AxiosRequestConfig) => Promise<void>
-) {
+export async function getAllInvitations(operation: (params: AxiosRequestConfig) => Promise<void>) {
   try {
     await operation({
       method: "GET",
@@ -32,10 +29,7 @@ export async function getAllInvitations(
   }
 }
 
-export async function getAllUserInvitations(
-  operation: (params: AxiosRequestConfig) => Promise<void>,
-  userID: string
-) {
+export async function getAllUserInvitations(operation: (params: AxiosRequestConfig) => Promise<void>, userID: string) {
   const token = localStorage.getItem("token");
   try {
     await operation({
@@ -51,10 +45,7 @@ export async function getAllUserInvitations(
   }
 }
 
-export async function editInvitation(
-  operation: (params: AxiosRequestConfig) => Promise<void>,
-  invitation: Invitation
-) {
+export async function editInvitation(operation: (params: AxiosRequestConfig) => Promise<void>, invitation: Invitation) {
   const token = localStorage.getItem("token");
   // console.log('edit inv: ', invitation)
 
@@ -73,10 +64,7 @@ export async function editInvitation(
   }
 }
 
-export async function newInvitation(
-  operation: (params: AxiosRequestConfig) => Promise<void>,
-  invitation: Invitation
-) {
+export async function newInvitation(operation: (params: AxiosRequestConfig) => Promise<void>, invitation: Invitation) {
   const token = localStorage.getItem("token");
   try {
     await operation({
@@ -93,10 +81,7 @@ export async function newInvitation(
   }
 }
 
-export async function createGuests(
-  operation: (params: AxiosRequestConfig) => Promise<void>,
-  guests: Guests
-) {
+export async function createGuests(operation: (params: AxiosRequestConfig) => Promise<void>, guests: Guests) {
   const token = localStorage.getItem("token");
   try {
     await operation({
@@ -113,10 +98,7 @@ export async function createGuests(
   }
 }
 
-export async function getAllDominios(
-  operation: (params: AxiosRequestConfig) => Promise<void>,
-  label: string
-) {
+export async function getAllDominios(operation: (params: AxiosRequestConfig) => Promise<void>, label: string) {
   const token = localStorage.getItem("token");
   try {
     await operation({

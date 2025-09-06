@@ -2,8 +2,8 @@ import { HeaderApp } from "@/components/Header/HeaderApp/HeaderApp";
 import styles from "./page.module.css";
 import { HomeScroll } from "@/components/HomeScroll/HomeScroll";
 import { PiMonitorPlayBold } from "react-icons/pi";
-import dec_1 from "@/assets/decorations/decoration_1.png"
-import build_inv from "@/assets/content/build_invitations.png"
+import dec_1 from "@/assets/decorations/decoration_1.png";
+import build_inv from "@/assets/content/build_invitations.png";
 import Image from "next/image";
 import { HomeCards } from "@/helpers/header";
 
@@ -18,7 +18,7 @@ export default function HomePage() {
           </span>
         </div>
 
-        {/* <HomeScroll /> */}
+        <HomeScroll />
 
         <div className={styles.dph_box_cont}>
           <div className={styles.dp_head_block}>
@@ -69,14 +69,18 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* <div ref={exaplesContainer} className="dph-examples-carrusell scroll-invitation">
+        {/* <div ref={exaplesContainer} className={`${styles.dph_examples_carrusell} scroll-invitation`}>
           {invitation && (
             <div ref={realInvitation} className="invitation-container-box">
               <div className="dph-scroll-buttons-cont">
-                <button onClick={scrollUp}>
+                <button
+                // onClick={scrollUp}
+                >
                   <IoIosArrowUp size={18} />
                 </button>
-                <button onClick={scrollDown}>
+                <button
+                // onClick={scrollDown}
+                >
                   <IoIosArrowDown size={18} />
                 </button>
               </div>

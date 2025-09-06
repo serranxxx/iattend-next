@@ -134,6 +134,7 @@
     justify-content: space-between;
     flex-direction: row;
     padding: 0px 30px;
+    box-sizing: border-box;
 }
 
 .inv_black_space_ios span {
@@ -179,4 +180,13 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.dph_examples_carrusell {
+    max-width: 100vw;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
 }

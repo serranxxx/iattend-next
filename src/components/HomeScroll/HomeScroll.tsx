@@ -4,6 +4,7 @@ import { cover_samples } from "@/helpers/images";
 import { useEffect, useRef, useState } from "react";
 import ios_settings from "@/assets/tools/iphone-settings.svg";
 import styles from "./homescroll.module.css";
+import Image from "next/image";
 
 export const HomeScroll = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -17,7 +18,7 @@ export const HomeScroll = () => {
 
   useEffect(() => {
     const container = scrollRef.current;
-    const speed = 0.5;
+    const speed = 2.5;
 
     let animationFrame: any;
 
@@ -110,16 +111,16 @@ export const HomeScroll = () => {
               }}
               className={styles.inv_black_space_ios}
             >
-              <span>5:15</span>
+              <span style={{ color: "#FFF" }}>5:15</span>
               {/* <div className={`camera-ios`} /> */}
               <div>
-                <img
+                <Image
                   alt=""
                   src={ios_settings}
                   style={{
                     height: "100%",
                     objectFit: "cover",
-                    marginRight: "50px",
+                    // marginRight: "50px",
                   }}
                 />
               </div>
