@@ -70,31 +70,6 @@ export default function InvitationPage() {
     getInvitationbyID(operation, invitationID);
   }, []);
 
-  const handlePosition = (id: number, index: number) => {
-    switch (id) {
-      case 1:
-        return <Greeting greetingRef={greetingRef} key={index} dev={false} invitation={invitation} />;
-      case 2:
-        return <Family key={index} dev={false} invitation={invitation} />;
-      case 3:
-        return <Quote key={index} dev={false} invitation={invitation} />;
-      case 4:
-        return <Itinerary key={index} dev={false} invitation={invitation} />;
-      case 5:
-        return <DressCode key={index} dev={false} invitation={invitation} />;
-      case 6:
-        return <Gifts key={index} dev={false} invitation={invitation} />;
-      case 7:
-        return <Destinations key={index} dev={false} invitation={invitation} />;
-      case 8:
-        return <Notices key={index} dev={false} invitation={invitation} />;
-      case 9:
-        return <Gallery key={index} dev={false} invitation={invitation} />;
-      default:
-        return null;
-    }
-  };
-
   // Render
   if (loader || !invitation) {
     return (
