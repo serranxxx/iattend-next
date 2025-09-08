@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export function generateSimpleId() {
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
   const numbers = "0123456789";
@@ -78,4 +80,21 @@ export function lighter(hex: string | null, factor: number) {
 
   // Convertir los componentes de nuevo a hexadecimal y devolver el nuevo código
   return `#${(r < 16 ? "0" : "") + r.toString(16)}${(g < 16 ? "0" : "") + g.toString(16)}${(b < 16 ? "0" : "") + b.toString(16)}`;
+}
+
+export function formatDate(dateString: string) {
+  // Crear una fecha desde el string sin aplicar desfase horario
+  const date = new Date(dateString);
+
+  // Ajustar la fecha sumando las horas para evitar desfase
+  const adjustedDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+
+  // Opciones de formateo
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+
+  return adjustedDate.toLocaleDateString("es-ES", options);
 }

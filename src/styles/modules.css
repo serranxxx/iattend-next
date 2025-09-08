@@ -1,0 +1,98 @@
+.gm_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex: 1;
+    z-index: 3;
+    box-sizing: border-box;
+
+    /* border: 1px solid red; */
+}
+
+.g_module_info_container {
+    width: 100%;
+    max-width: 1450px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    /* padding: 32px; */
+    gap: 24px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.g_module_title,
+.g_module_title_dev {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+
+.g_mdoule_regular_text,
+.g_mdoule_regular_text_dev {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.g_module_items_single_col {
+    /* flex: 1; */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 0px
+}
+
+.g_mdoule_light_text {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.texture_img {
+    width: 130%;
+    height: auto;
+    mix-blend-mode: multiply;
+    /* mix-blend-mode: luminosity; */
+    /* filter: grayscale(1) contrast(1.2) brightness(2); */
+    filter: grayscale(1);
+}
+
+.texture_img:nth-child(odd) {
+    transform: scaleY(-1);
+}
+
+.image_texture_container {
+    position: absolute;
+    height: 100%;
+    width: 100vw;
+    border: 1px solid red;
+    left: 0px;
+    top: 0px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 0;
+}
+
+.background_image_quote_container {
+    height: 400px !important;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid red;
+}
+
+
+@media (min-width: 751px) {
+    .qt_image_cnt {
+        max-width: 950px !important;
+        height: 650px !important;
+        border-radius: 12px !important;
+        overflow: hidden;
+    }
+}

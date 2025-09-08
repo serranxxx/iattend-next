@@ -4,18 +4,16 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { forwardRef } from "react";
 import styles from "./cover.module.css";
+import { NewInvitation } from "@/types/new_invitation";
+import Countdown from "../countDown/CountDown";
 
 type CoverProps = {
   dev: boolean;
-  invitation: Invitation | null;
+  invitation: NewInvitation | null;
   height: string;
 };
 
 export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev, invitation, height }, ref) {
-  const content = invitation?.cover;
-  const generals = invitation?.generals;
-  const src = dev ? content?.featured_dev : content?.featured_prod;
-
   //   const [isToday, setIsToday] = useState(false);
 
   //   const cleanDate = (dateString: string | null) => {
@@ -35,9 +33,12 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
   //     return today.getFullYear() === target.getFullYear() && today.getMonth() === target.getMonth() && today.getDate() === target.getDate();
   //   };
 
+  const cover = invitation?.cover;
+  const generals = invitation?.generals;
+  const image_src = dev ? cover?.image.dev : cover?.image.prod;
+
   return (
-    content &&
-    generals && (
+    invitation && (
       <div ref={ref} className={styles.module_cover_container} style={{ position: "relative", zIndex: 3 }}>
         {/* {checkIfToday(cleanDate(content.date)) && <ConfettiComponent palette={colorPalette} />} */}
 
@@ -48,21 +49,21 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
             padding: "0",
             minHeight: "630px",
             maxHeight: !dev ? "" : "730px",
-            background: generals?.palette.primary,
+            background: generals?.colors.primary ?? "#FFFFFF",
           }}
         >
-          {content.featured_dev || content.featured_prod ? (
+          {cover?.image.dev && cover.image.prod ? (
             <div
               className={styles.cover_image_container}
               style={{
-                top: `${content.mapPosition?.y ?? 0}px`,
-                left: `${content.mapPosition?.x ?? 0}px`,
-                transform: `scale(${content.zoomLevel ?? 1})`,
+                top: `${cover.image.position.y ?? 0}px`,
+                left: `${cover.image.position.x ?? 0}px`,
+                transform: `scale(${cover.image.zoom ?? 1})`,
               }}
             >
-              {src && <img alt="" src={src} />}
+              {image_src && <Image fill style={{ objectFit: "cover" }} priority alt="" src={image_src} />}
 
-              {content.background ? (
+              {cover.image.background ? (
                 <div
                   style={{
                     position: "absolute",
@@ -70,11 +71,11 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
                     height: "100%",
                     top: "0px",
                     left: "0px",
-                    background: `linear-gradient(to top, ${darker(generals.palette.primary, 0.2)}, rgba(0,0,0,0))`,
+                    background: `linear-gradient(to top, ${darker(generals?.colors.primary ?? "#FFFFFF", 0.2)}, rgba(0,0,0,0))`,
                   }}
                 ></div>
               ) : (
-                content.blur && <div className={styles.blur_cover}></div>
+                cover.image.blur && <div className={styles.blur_cover}></div>
               )}
             </div>
           ) : (
@@ -84,35 +85,35 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
           <div
             className={styles.background_cover}
             style={{
-              flexDirection: content.flexDirection,
+              flexDirection: cover?.title.position.column_reverse ?? "column",
             }}
           >
             <div
               className={styles.cover_title_container}
               style={{
-                alignItems: content.align,
-                height: content.isDate ? "75%" : "100%",
-                padding: content.isDate ? 0 : "10px",
+                alignItems: cover?.title.position.align_y,
+                height: cover?.date.active ? "75%" : "100%",
+                padding: cover?.date.active ? 0 : "10px",
               }}
             >
               <span
                 style={{
-                  color: content.color ?? lighter(generals.palette.accent, 0.6),
+                  color: cover?.title.text.color ?? lighter(generals?.colors.accent ?? "#000000", 0.6) ?? "#FFFFFF",
                   width: "100%",
-                  textAlign: content.justify,
-                  fontSize: `${content.fontSize}em`,
+                  textAlign: cover?.title.position.align_x,
+                  fontSize: `${cover?.title.text.size}px` ?? "34px",
                   wordBreak: "break-word",
-                  opacity: content.opacity,
-                  fontFamily: content.image ? content.image : "Poppins",
-                  fontWeight: content.fontWeight,
+                  opacity: cover?.title.text.opacity ?? 1,
+                  fontFamily: cover?.title.text.typeFace ?? "Poppins",
+                  fontWeight: cover?.title.text.weight ?? 500,
                   lineHeight: "1",
                 }}
               >
-                {content.title}
+                {cover?.title.text.value}
               </span>
             </div>
 
-            {content.isDate && (
+            {cover?.date.active && (
               <div
                 style={{
                   width: "100%",
@@ -125,17 +126,7 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
                   justifyContent: "center",
                 }}
               >
-                {/* <Countdown
-                  mainColor={content.color}
-                  color={content.timerColor}
-                  colorPalette={colorPalette}
-                  dev={dev}
-                  targetDate={content.date}
-                  MainColor={MainColor}
-                  theme={theme}
-                  font={font}
-                  fontWeight={content.fontWeight}
-                /> */}
+                <Countdown cover={cover} generals={generals} dev={dev} />
               </div>
             )}
           </div>

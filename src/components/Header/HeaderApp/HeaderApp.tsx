@@ -7,7 +7,7 @@ import { AppUser, AppUserEnterprise } from "@/types/context";
 import { Button, Empty, Input, Upload, message } from "antd";
 import { useContext, useEffect, useState } from "react";
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { storage } from "@/libs/firebase/firebase";
+import { storage } from "@/lib/firebase/firebase";
 import { UploadRequestOption } from "rc-upload/lib/interface";
 import { NavItems } from "@/helpers/header";
 import Link from "next/link";
