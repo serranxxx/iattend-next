@@ -71,7 +71,7 @@ export interface ItineraryItem {
   name: string;
   time: string | null;
   subtext: string | null;
-  active: boolean;
+  // active: boolean;
   icon: number | null;
   id: number | null;
   address?: Address;

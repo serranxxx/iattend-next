@@ -31,15 +31,13 @@ export const Quote = forwardRef<HTMLDivElement, quoteProps>(function Greeting({ 
     <>
       {content.active ? (
         <>
-          <span>HOLA</span>
           <div
-            data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
+            // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
             ref={ref}
             className="gm_container"
             style={{
               backgroundColor: content.background ? secondary : primary,
               position: "relative",
-              overflow: "hidden",
               zIndex: 0,
             }}
           >

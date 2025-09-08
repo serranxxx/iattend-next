@@ -1,11 +1,10 @@
 import { darker, lighter } from "@/helpers/functions";
-import { Invitation } from "@/types/invitation";
 import Image from "next/image";
 import React, { useState } from "react";
 import { forwardRef } from "react";
 import styles from "./cover.module.css";
 import { NewInvitation } from "@/types/new_invitation";
-import Countdown from "../countDown/CountDown";
+import Countdown from "./countDown/CountDown";
 
 type CoverProps = {
   dev: boolean;
