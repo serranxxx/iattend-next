@@ -101,11 +101,11 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
                   color: cover?.title.text.color ?? lighter(generals?.colors.accent ?? "#000000", 0.6) ?? "#FFFFFF",
                   width: "100%",
                   textAlign: cover?.title.position.align_x,
-                  fontSize: `${cover?.title.text.size ?? 34}px`,
+                  fontSize: `${cover?.title.text.size}px`,
                   wordBreak: "break-word",
-                  opacity: cover?.title.text.opacity ?? 1,
-                  fontFamily: cover?.title.text.typeFace ?? "Poppins",
-                  fontWeight: cover?.title.text.weight ?? 500,
+                  opacity: cover?.title.text.opacity,
+                  fontFamily: cover?.title.text.typeFace,
+                  fontWeight: cover?.title.text.weight,
                   lineHeight: "1",
                 }}
               >
