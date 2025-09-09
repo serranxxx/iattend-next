@@ -160,7 +160,7 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
 export function simpleaddress(direccion: string, numero: string, colonia: string, codigoPostal: string, ciudad: string, estado: string) {
     const direccionCompleta = `${direccion} ${numero}, ${colonia}, ${codigoPostal}, ${ciudad}, ${estado}, Mexico`;
     // const direccionCodificada = encodeURIComponent(direccionCompleta);
-    const urlMapaGenerado = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBZ8NLpvAl4DiTeE2gYekBqhmSZFx43R0M&q=${encodeURIComponent(direccionCompleta)}`;
+    const urlMapaGenerado = `https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}q=${encodeURIComponent(direccionCompleta)}`;
     return urlMapaGenerado;
 }
 
