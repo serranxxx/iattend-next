@@ -69,6 +69,7 @@ export interface MomentItem {
 
 export interface ItineraryItem {
   name: string;
+  image: string | null;
   time: string | null;
   subtext: string | null;
   // active: boolean;
@@ -164,6 +165,7 @@ export interface ItinerarySection {
   inverted: boolean;
   separator: boolean;
   title: string | null;
+  type: 'cards' | 'time-line'
   object: ItineraryItem[];
 }
 

@@ -3,11 +3,12 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    gap: 12px;
     height: 100px;
     box-sizing: border-box;
     padding: 12px;
     border-radius: 16px;
-    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25), 0 0 6px 0 rgba(134, 134, 134, 0.25) inset;
+    /* box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25), 0 0 6px 0 rgba(134, 134, 134, 0.25) inset; */
 }
 
 .card_icon {
@@ -20,3 +21,38 @@
     align-items: center;
     justify-content: center;
 }
+
+.card_info {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    flex: 1;
+}
+
+
+.open_card_button {
+    border-radius: 99px;
+    width: 35px;
+    height: 35px;
+    min-width: 35px;
+    max-height: 35px;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25), 0 0 6px 0 rgba(134, 134, 134, 0.25) inset;
+}
+
+.open_title {
+    font-size: 16px;
+}
+
+.open_sub {
+    font-size: 14px;
+    /* font-weight: 600; */
+    opacity: 0.7;
+}
+
+.open_text {
+    font-size: 14px;
+    font-style: italic;
+    opacity: 0.7;
+}
+

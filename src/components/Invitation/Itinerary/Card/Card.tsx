@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Button, Col } from 'antd'
 import { LuBadgeHelp } from 'react-icons/lu';
 import { FaArrowDown, FaArrowRight } from 'react-icons/fa';
-import { NewInvitation } from '@/types/new_invitation';
+import { ItineraryItem, NewInvitation } from '@/types/new_invitation';
 import { getItineraryIcon } from '@/helpers/icons';
 import styles from './card.module.css'
+import { getMexicoHour } from '@/helpers/functions';
+import Image from 'next/image';
+import { textures } from '@/helpers/textures';
+import OpenCard from '../OpenCard/OpenCard';
 
 
 type CardProps = {
@@ -23,103 +27,100 @@ export default function Card({ invitation, dev }: CardProps) {
     const actions = generals.colors.actions
 
     const steps = invitation.itinerary.object
-    const [stepsOpen, setStepsOpen] = useState()
+
+    const [activeSteps, setActiveSteps] = useState<ItineraryItem[]>([])
 
 
     const renderIcon = (iconID: number) => {
 
+        if (!iconID) return <LuBadgeHelp size={28} style={{ color: content.background ? primary : accent }} />;
         const Icon = getItineraryIcon(iconID);
         if (Icon) {
-            return <Icon size={35} style={{ color: content.background ? primary : accent }} />;
+            return <Icon size={28} style={{ color: content.background ? primary : accent }} />;
         }
-        return <LuBadgeHelp size={35} style={{ color: content.background ? primary : accent }} />;
+        return <LuBadgeHelp size={28} style={{ color: content.background ? primary : accent }} />;
     };
+
+    useEffect(() => {
+        console.log(activeSteps)
+    }, [activeSteps])
+
 
     return (
         <>
             {
                 steps.map((item, index) => (
                     <div
+
                         key={index}
                         className={styles.step_card_cont}
                         style={{
                             background: content.background ? primary : secondary,
-
+                            height: activeSteps?.includes(item) ? 'auto' : undefined
                         }}
                     >
-                        {/* {item.active ? (
-                            <CustomCard generals={generals} invertedColors={invertedColors} dev={dev} onClose={handleSelectedCard} item={item} MainColor={MainColor} theme={theme} font={font} colorPalette={colorPalette} />
-                        ) : ( */}
-                        <>
-                            <div
-                                className={styles.card_icon}
-                                style={{
-                                    backgroundColor: content.background ? secondary : primary,
-                                }}
-                            >
-                                {item.icon ? renderIcon(item.icon) : <LuBadgeHelp size={32} style={{ color: content.background ? primary : accent }} />}
-                            </div>
-                            <div
-                                style={{
-                                    height: '94px', display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
-                                    color: content.background ? accent : content.inverted ? primary : accent,
-                                }}
-                                className="card-content"
-                            // onClick={() => handleSelectedCard(item.id)}
-                            >
-                                <span className={!dev ? "g-mdoule-regular-text" : "g-mdoule-regular-text-dev"} style={{ lineHeight: 1, fontSize: '16px' }}><b>{item.name}</b></span>
-                                <span className={!dev ? "g-mdoule-light-text" : "g-mdoule-light-text-dev"} style={{ opacity: '0.8' }}>{item.time}</span>
-                                <span className={!dev ? "g-mdoule-regular-text" : "g-mdoule-regular-text-dev"} style={{ fontSize: '13px' }}>{item.subtext}</span>
+                        {activeSteps?.includes(item) ?
+                            <OpenCard dev={dev} invitation={invitation} item={item} setActiveSteps={setActiveSteps} activeSteps={activeSteps} />
+                            :
 
-
-                            </div>
-
-                            {/* {
-                                generals.texture !== null &&
-                                <div className="image-texture-container">
-                                    <div className="image-texture-container">
-                                        {Array.from({ length: 100 }).map((_, index) => (
-                                            <img loading="lazy" decoding="async" alt='' key={index} src={textures[generals.texture].image} className="texture-img"
-                                                style={{
-                                                    opacity: textures[generals.texture].opacity,
-                                                    filter: textures[generals.texture].filter,
-                                                    mixBlendMode: textures[generals.texture].blend
-                                                }}
-                                            />
-                                        ))}
-                                    </div>
+                            <>
+                                <div
+                                    className={styles.card_icon}
+                                    style={{
+                                        backgroundColor: content.background ? secondary : primary,
+                                    }}
+                                >
+                                    {renderIcon(item.icon!)}
                                 </div>
-                            } */}
-
-                            {
-                                (item.moments || item.music || item.address) ? (
-                                    <Button
-                                        icon={<FaArrowRight />}
-                                        // onClick={() => handleSelectedCard(item.id)}
-                                        style={{
-                                            // 
-                                            background: content.background ? secondary : content.inverted ? primary : actions ?? "#FFF",
-                                            // color: background ? colorPalette.primary : invertedColors ? colorPalette.secondary : buttonsColorText(colorPalette.buttons),
-                                            borderRadius: '99px',
-                                            border: 'none',
-                                            // height: '90px',
-                                            flex: 1,
-                                            fontSize: '12px',
-                                            fontWeight: 600,
-                                            // padding: '8px',
-                                            width: '35px',
-                                            minWidth: '35px',
-                                            height: '35px'
-                                            // position: 'absolute', top: '16px', right: '16px'
-                                        }}
-                                    />
-                                ) : null
-                            }
+                                <div className={styles.card_info} style={{
+                                    fontFamily: generals.fonts.body?.typeFace
+                                }}
+                                >
+                                    <span className={styles.open_title} ><b>{item.name}</b></span>
+                                    <span className={styles.open_sub}>{getMexicoHour(item.time!)}</span>
+                                    <span className={styles.open_text}>{item.subtext}</span>
+                                </div>
 
 
-                        </>
-                        {/* )} */}
+                                {content.background && generals.texture !== null && (
+                                    <div className="image_texture_container">
+                                        <div className="image_texture_container">
+                                            {Array.from({ length: 100 }).map((_, index) => (
+                                                <Image
+                                                    fill
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                    alt=""
+                                                    key={index}
+                                                    src={textures[generals.texture].image}
+                                                    className="texture_img"
+                                                    style={{
+                                                        opacity: textures[generals.texture].opacity,
+                                                        filter: textures[generals.texture].filter,
+                                                        mixBlendMode: textures[generals.texture].blend,
+                                                    }}
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
 
+                                {
+                                    (item.moments || item.music || item.address) ? (
+                                        <Button
+                                            onClick={() => setActiveSteps([...activeSteps ?? [], item])}
+                                            className={styles.open_card_button}
+                                            icon={<FaArrowRight />}
+                                            style={{
+                                                background: content.background ? secondary : content.inverted ? primary : actions ?? "#FFF",
+                                            }}
+                                        />
+                                    ) : null
+                                }
+
+
+                            </>
+                        }
 
                     </div >
                 ))
