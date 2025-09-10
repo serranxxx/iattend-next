@@ -77,7 +77,7 @@ export interface ItineraryItem {
   id: number | null;
   address?: Address;
   moments?: MomentItem[];
-  music?: string[];
+  music?: string;
 }
 
 export type GiftCardKind = "store" | "bank";

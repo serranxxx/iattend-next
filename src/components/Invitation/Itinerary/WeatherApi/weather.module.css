@@ -1,0 +1,27 @@
+.wdiget_container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2px;
+    aspect-ratio: 1;
+    box-sizing: border-box;
+    padding: 8px;
+    /* max-width: 120px; */
+    height: 80px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25), 0 0 6px 0 rgba(134, 134, 134, 0.25) inset;
+}
+
+.weather_label {
+    line-height: 1;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.weather_degree {
+    line-height: 1;
+    font-size: 10px;
+    font-weight: 400;
+}

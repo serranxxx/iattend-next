@@ -6,6 +6,10 @@ import Image from "next/image";
 import { IoMdClose } from "react-icons/io";
 import { IoCloseSharp } from "react-icons/io5";
 import { BsFillPinAngleFill } from "react-icons/bs";
+import { RiMapPin2Fill } from "react-icons/ri";
+import { FaDiamondTurnRight } from "react-icons/fa6";
+import { useEffect } from "react";
+import WeatherWidget from "../WeatherApi/WeatherWidget";
 
 type CardProps = {
     invitation: NewInvitation;
@@ -23,7 +27,25 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
     const primary = generals?.colors.primary ?? "#FFFFFF";
     const secondary = generals?.colors.secondary ?? "#FFFFFF";
     const accent = generals?.colors.accent ?? "#FFFFFF";
-    const actions = generals.colors.actions
+    const actions = generals.colors.actions ?? "#FFFFFF"
+
+    const extractSpotifyPath = (url: string | undefined) => {
+        if (!url) return "";
+
+        try {
+            const parsedUrl = new URL(url);
+            // ejemplo: /album/2Ek1q2haOnxVqhvVKqMvJe
+            const path = parsedUrl.pathname.substring(1); // quita el "/"
+            return path; // "album/2Ek1q2haOnxVqhvVKqMvJe"
+        } catch {
+            return "";
+        }
+    };
+
+    useEffect(() => {
+        extractSpotifyPath(item.music)
+    }, [])
+
 
     return (
         <div className={styles.open_card_container} style={{
@@ -48,18 +70,43 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
                 </div>
             } */}
 
-
-            <Button
-                onClick={() =>
-                    setActiveSteps(activeSteps?.filter(step => step !== item) ?? [])
+            <div style={{
+                display:'flex', alignItems:'center', justifyContent:'flex-start', gap:'8px',
+                position:'absolute', top:'-18px', right:'-6px', zIndex:3
+            }}>
+                {item?.address?.url &&
+                    <div className={styles.how_to_button}>
+                        <Button
+                            href={item.address.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            icon={<FaDiamondTurnRight size={14} />}
+                            style={{
+                                margin: "16px 0",
+                                background: content.inverted ? primary : actions,
+                                color: content.inverted
+                                    ? accent
+                                    : buttonsColorText(actions),
+                                boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.25), 0 0 6px 0 rgba(134, 134, 134, 0.25) inset'
+                            }}
+                        >
+                            ¿Cómo llegar?
+                        </Button>
+                    </div>
                 }
-                className={styles.open_card_button}
-                icon={<BsFillPinAngleFill size={18}/>}
-                style={{
-                    background: content.background ? secondary : content.inverted ? primary : actions ?? "#FFF",
-                    color: content.inverted ? accent : buttonsColorText(primary),
-                }}
-            />
+
+                <Button
+                    onClick={() =>
+                        setActiveSteps(activeSteps?.filter(step => step !== item) ?? [])
+                    }
+                    className={styles.open_card_button}
+                    icon={<IoMdClose size={18} />}
+                    style={{
+                        background: content.background ? secondary : content.inverted ? primary : secondary ?? "#FFF",
+                        color: content.inverted ? accent : buttonsColorText(primary),
+                    }}
+                />
+            </div>
 
             <div className={styles.image_header_container}>
                 <Image
@@ -111,13 +158,15 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
             {item.address
                 &&
                 <>
-                    <div className={`custom-card-row ${item.moments ? 'custom-card-row-column' : ''}`} style={{ width: '100%' }}>
+                    <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '12px', flexDirection:'column' }}>
                         {
                             item.address.street && item.address.number && item.address.neighborhood && item.address.zip && item.address.city && item.address.state &&
                             <>
-                                {/* <div className="custom-card-weather" style={{ height: item.moments ? '80px' : '97px' }}>
-                                    <ForecastWeather invertedColors={invertedColors} cp={item.address.CP} MainColor={MainColor} theme={theme} font={font} colorPalette={colorPalette} />
-                                </div> */}
+
+                                {
+                                    <WeatherWidget invitation={invitation} dev={dev} item={item} />
+                                }
+
 
                                 <div className={styles.mapa_container} style={{ backgroundColor: secondary }}>
                                     <iframe
@@ -136,19 +185,21 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
 
 
                     </div>
-                    {/* {item.address.url && (
-                        <Link to={item.address.url} target='_blank' className="custom-card-link" style={{ margin: '16px 0px' }}>
-                            <Button
-                                icon={<RiMapPin2Fill size={16} />}
-                                className={dev ? "custom-card-link-button-dev" : "custom-card-link-button"} style={{ background: invertedColors ? colorPalette.primary : colorPalette.buttons, color: invertedColors ? colorPalette.accent : buttonsColorText(colorPalette.buttons) }}>
-                                ¿Cómo llegar?
-                            </Button>
-                        </Link>
-                    )} */}
+
                 </>
             }
 
-            {/* {item.playlist && <SpotifyWidget url={item.playlist} />} */}
+            {/* {item.music && (
+                <iframe
+                    style={{ borderRadius: "12px", boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.25), 0 0 6px 0 rgba(134, 134, 134, 0.25) inset' }}
+                    src={`https://open.spotify.com/embed/${extractSpotifyPath(item.music)}?utm_source=generator&theme=2`}
+                    width="100%"
+                    height="152"
+                    frameBorder="0"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                />
+            )} */}
 
 
         </div>
@@ -157,32 +208,20 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
 
 
 
-export function simpleaddress(direccion: string, numero: string, colonia: string, codigoPostal: string, ciudad: string, estado: string) {
+export function simpleaddress(
+    direccion: string,
+    numero: string,
+    colonia: string,
+    codigoPostal: string,
+    ciudad: string,
+    estado: string
+) {
     const direccionCompleta = `${direccion} ${numero}, ${colonia}, ${codigoPostal}, ${ciudad}, ${estado}, Mexico`;
-    // const direccionCodificada = encodeURIComponent(direccionCompleta);
-    const urlMapaGenerado = `https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}q=${encodeURIComponent(direccionCompleta)}`;
+    const direccionCodificada = encodeURIComponent(direccionCompleta);
+    const key = "AIzaSyBZ8NLpvAl4DiTeE2gYekBqhmSZFx43R0M"
+    const urlMapaGenerado = `https://www.google.com/maps/embed/v1/place?key=${key}&q=${direccionCodificada}`;
+
+    console.log(urlMapaGenerado);
     return urlMapaGenerado;
 }
 
-// type DynamicMapProps = { query: string; height?: number | string };
-
-// export function DynamicMapEmbed({ query, height = 300 }: DynamicMapProps) {
-//   const q = encodeURIComponent(query); // "Av. Central 123, 31000, Chihuahua, México"
-//   const key = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!;
-//   const src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBZ8NLpvAl4DiTeE2gYekBqhmSZFx43R0M&q=${q}&zoom=16`;
-
-//   return (
-//     <div style={{ width: "100%", height, border: 0 }}>
-//       <iframe
-//         title="Mapa"
-//         width="100%"
-//         height="100%"
-//         style={{ border: 0 }}
-//         loading="lazy"
-//         allowFullScreen
-//         referrerPolicy="no-referrer-when-downgrade"
-//         src={src}
-//       />
-//     </div>
-//   );
-// }
