@@ -14,7 +14,7 @@ export default function WeatherWidget({ invitation, dev, item }: CardProps) {
   const [weather, setWeather] = useState<any>(null);
 
   useEffect(() => {
-    fetch(`http://api.weatherapi.com/v1/current.json?key=fa4d2a7fce5841d5a51205220251009&q=${item.address?.city}&aqi=no`)
+    fetch(`http://api.weatherapi.com/v1/current.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${item.address?.city}&aqi=no`)
       .then(res => res.json())
       .then(data => setWeather(data));
   }, []);
