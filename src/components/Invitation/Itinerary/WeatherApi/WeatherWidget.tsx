@@ -11,11 +11,12 @@ type CardProps = {
 
 export default function WeatherWidget({ invitation, dev, item }: CardProps) {
   const [weather, setWeather] = useState<any>(null);
+  const key = "fa4d2a7fce5841d5a51205220251009"
 
   useEffect(() => {
 
     const getForecast = () => {
-      fetch(`http://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${item.address?.city}=1&aqi=no&alerts=no`)
+      fetch(`http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${item.address?.city}=1&aqi=no&alerts=no`)
         .then(res => res.json())
         .then(data => setWeather(data));
     }
@@ -101,11 +102,11 @@ export default function WeatherWidget({ invitation, dev, item }: CardProps) {
     // </div>
     <div className={styles.wdiget_container} style={{maxWidth:'130px', padding:'12px', gap:'4px', maxHeight:'134px', fontFamily: invitation.generals.fonts.body?.typeFace }}>
 
-          <span className={styles.weather_label}>{weather.location.name}</span>
-          <span className={styles.weather_temperture}>{Math.round(weather.current.temp_c)}°</span>
-          <img src={weather.current.condition.icon} alt="icono" style={{ margin: '-4px 0px', height: '22px', padding: 0 }} />
-          <span className={styles.weather_sec_label}>{weather.current.condition.text}</span>
-          <span className={styles.weather_sec_label}>Max.: {Math.round(weather.forecast.forecastday[0].day.maxtemp_c)}° Min.: {Math.round(weather.forecast.forecastday[0].day.mintemp_c)}° </span>
+          <span className={styles.weather_label}>{weather?.location?.name}</span>
+          <span className={styles.weather_temperture}>{Math.round(weather?.current?.temp_c)}°</span>
+          <img src={weather?.current?.condition?.icon} alt="icono" style={{ margin: '-4px 0px', height: '22px', padding: 0 }} />
+          <span className={styles.weather_sec_label}>{weather?.current?.condition?.text}</span>
+          <span className={styles.weather_sec_label}>Max.: {Math.round(weather?.forecast?.forecastday[0]?.day?.maxtemp_c)}° Min.: {Math.round(weather?.forecast?.forecastday[0]?.day?.mintemp_c)}° </span>
 
     </div>
   );
