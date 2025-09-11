@@ -7,6 +7,7 @@ import { Separador } from "../Separator/Separator";
 import { buttonsColorText } from "@/helpers/functions";
 import styles from './dresscode.module.css'
 import { FaLocationArrow } from "react-icons/fa";
+import PinterestBoard from "./PinterestBoards/PinterestBoard";
 
 type DresscodeProps = {
   dev: boolean;
@@ -77,16 +78,6 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                 {content.description}
               </span>
 
-              {content.colors && (
-                <div className={styles.dresscode_colors}>
-                  {content.colors.map((color, index) => (
-                    <div
-                      data-aos={!dev && generals.texture == null ? 'fade-left' : undefined}
-                      key={index} className={styles.dresscode_color} style={{ backgroundColor: color,}} />
-                  ))}
-                </div>
-              )}
-
               {content.images_active && (
                 <div className={styles.scroll_invitation} style={{ zIndex: 2 }} >
                   {images_src.map((image, index) => (
@@ -94,13 +85,29 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                       data-aos={!dev && generals.texture == null ? 'fade-left' : undefined}
                       style={{ position: 'relative' }}
                       key={index} className={styles.dresscode_image_container}>
-                      <Image fill alt="" loading="lazy" decoding="async" src={image} style={{objectFit:'cover'}} />
+                      <Image fill alt="" loading="lazy" decoding="async" src={image} style={{ objectFit: 'cover' }} />
                     </div>
                   ))}
                 </div>
               )}
 
-              {content.links_active && (
+              {content.colors && (
+                <div className={styles.dresscode_colors}>
+                  {content.colors.map((color, index) => (
+                    <div
+                      data-aos={!dev && generals.texture == null ? 'fade-left' : undefined}
+                      key={index} className={styles.dresscode_color} style={{ backgroundColor: color, }} />
+                  ))}
+                </div>
+              )}
+
+              <PinterestBoard />
+
+
+
+
+
+              {/* {content.links_active && (
                 <div className={dev ? "dresscode-links-dev" : "dresscode-links"}>
                   {content.links && content.links.map((link, index) => (
                     // <Link
@@ -113,7 +120,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                   ))
                   }
                 </div>
-              )}
+              )} */}
             </div>
           </div>
           {content.separator && <Separador generals={generals} value={generals.separator} />}

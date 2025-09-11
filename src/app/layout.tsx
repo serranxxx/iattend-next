@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { AppProvider } from "@/context/AppProvider";
 import "@/styles/globals.css";
 import { AntdProvider } from "@/context/AntdProvider";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,7 +29,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <AppProvider>
-          <AntdProvider>{children}</AntdProvider>
+          <AntdProvider>
+            {children}
+            <Script
+              id="pinterest-sdk"
+              src="https://assets.pinterest.com/js/pinit.js"
+              strategy="afterInteractive"
+            />
+          </AntdProvider>
         </AppProvider>
       </body>
     </html>
