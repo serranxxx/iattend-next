@@ -3,7 +3,6 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: auto;
     flex: 1;
     z-index: 3;
     box-sizing: border-box;
@@ -68,7 +67,6 @@
     position: absolute;
     height: 100%;
     width: 100vw;
-    border: 1px solid red;
     left: 0px;
     top: 0px;
     overflow: hidden;
@@ -80,12 +78,15 @@
 }
 
 .background_image_quote_container {
-    height: 400px !important;
-    width: 100vw;
+    height: 400px;
+    width: 100%;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid red;
+    position: relative;
+    /* border-radius: 12px; */
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25), 0 0 6px 0 rgba(134, 134, 134, 0.25) inset;
 }
 
 

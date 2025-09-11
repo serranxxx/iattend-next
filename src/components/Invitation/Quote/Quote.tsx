@@ -42,14 +42,13 @@ export const Quote = forwardRef<HTMLDivElement, quoteProps>(function Greeting({ 
             }}
           >
             {content.image.active ? (
-              <>
-                <div style={{ backgroundColor: primary, height: "400px" }} className="background_image_quote_container">
+              <div className="background_image_quote_container">
+                <div style={{ backgroundColor: primary, height: "100%", width:'100%' }} >
                   {image_src && <Image fill style={{ objectFit: "cover" }} priority alt="" src={image_src} />}
                 </div>
 
                 {content.text.shadow && (
                   <div
-                    className={!dev ? "qt_image_cnt" : undefined}
                     style={{
                       position: "absolute",
                       width: "100%",
@@ -93,7 +92,7 @@ export const Quote = forwardRef<HTMLDivElement, quoteProps>(function Greeting({ 
                     {content.text.font.value}
                   </span>
                 </div>
-              </>
+              </div>
             ) : (
               <span
                 className="g_mdoule_regular_text"

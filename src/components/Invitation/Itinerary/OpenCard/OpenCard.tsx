@@ -136,11 +136,10 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
 
             {
                 item.moments &&
-                <div className={styles.custom_card_subitems} style={{
-                }}>
+                <div className={styles.custom_card_subitems} style={{borderColor: accent}}>
                     {item.moments.map((subitem) => (
                         <div key={subitem.name} className={styles.custom_card_subitem}>
-                            <div className={styles.custom_card_subitem_bullet} />
+                            <div className={styles.custom_card_subitem_bullet} style={{backgroundColor: accent}} />
                             <span className={styles.custom_card_subitem_title}>
                                 {subitem.name}
                             </span>
@@ -158,7 +157,7 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
             {item.address
                 &&
                 <>
-                    <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '12px', flexDirection:'column' }}>
+                    <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '12px',  }}>
                         {
                             item.address.street && item.address.number && item.address.neighborhood && item.address.zip && item.address.city && item.address.state &&
                             <>

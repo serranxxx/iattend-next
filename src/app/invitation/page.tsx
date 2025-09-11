@@ -131,8 +131,10 @@ export default function InvitationPage() {
         {/* <Cover ref={coverRef} dev={false} invitation={invitation} height={"100vh"} /> */}
         <Greeting ref={greetingRef} dev={false} invitation={invitation} />
         <People ref={peopleRef} dev={false} invitation={invitation} />
-        {/* <Quote ref={quoteRef} dev={false} invitation={invitation} /> */}
+        <Quote ref={quoteRef} dev={false} invitation={invitation} />
         <Itinerary ref={itineraryRef} dev={false} invitation={invitation} />
+        <DressCode ref={dresscodeRef} dev={false} invitation={invitation} />
+
         {/* {invitation.generals.texture !== null && (
           <div className={styles.image_texture_container}>
             {Array.from({ length: 100 }).map((_, index) => (
