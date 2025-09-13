@@ -20,7 +20,7 @@
 .date_divider,
 .date_divider_dev {
     width: 100%;
-    max-width: 75%;
+    max-width: 85%;
     margin: 12px 0px
 }
 
@@ -30,7 +30,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 18px;
 }
 
 .date_col {
