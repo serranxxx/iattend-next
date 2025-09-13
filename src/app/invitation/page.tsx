@@ -1,9 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInvitation } from "@/services/customHook";
-import { Invitation } from "@/types/invitation";
-import { getInvitationbyID } from "@/services/apiInvitation";
 import { Greeting } from "@/components/Invitation/Greeting/Greeting";
 import { Itinerary } from "@/components/Invitation/Itinerary/Itinerary";
 import { DressCode } from "@/components/Invitation/DressCode/DressCode";
@@ -17,7 +14,6 @@ import Image from "next/image";
 import styles from "./invitation.module.css";
 import { createClient } from "@/lib/supabase/client";
 import { NewInvitation } from "@/types/new_invitation";
-import { textures } from "@/helpers/textures";
 import { People } from "@/components/Invitation/Family/Family";
 import { Quote } from "@/components/Invitation/Quote/Quote";
 
@@ -35,8 +31,6 @@ export default function InvitationPage() {
   const galleryRef = useRef<HTMLDivElement>(null);
   const destinationRef = useRef<HTMLDivElement>(null);
 
-  const [isVisible, setIsVisible] = useState(false);
-  const { response, operation } = useInvitation();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [loader, setLoader] = useState(false);
 
@@ -74,7 +68,7 @@ export default function InvitationPage() {
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset;
       const margin = 680;
-      setIsVisible(currentScrollPos >= margin && prevScrollPos > currentScrollPos);
+      // setIsVisible(currentScrollPos >= margin && prevScrollPos > currentScrollPos);
       setPrevScrollPos(currentScrollPos);
     };
     window.addEventListener("scroll", handleScroll);
@@ -83,19 +77,16 @@ export default function InvitationPage() {
 
   useEffect(() => {
     const getInv = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      const { data, error } = await supabase.from("invitations").select("*").eq("user_id", user?.id).eq("id", invitationID);
+      const { data, error } = await supabase.from("invitations").select("data").eq("id", invitationID).maybeSingle();
 
       if (error) {
         console.log(error);
         return;
-      } else {
-        console.log(data);
-        setInvitation(data[0].data);
-        setLoader(false);
       }
+
+      console.log(data);
+      setInvitation(data?.data); // accedes a la columna `data` (jsonb)
+      setLoader(false);
     };
 
     getInv();

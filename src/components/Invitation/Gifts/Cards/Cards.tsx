@@ -83,78 +83,84 @@ export default function Card({ invitation, dev, GiftCard }: CardProps) {
       }
     }
   };
-  return GiftCard?.map((item, index) => (
+  return (
     <>
       {contextHolder}
-      {item.kind === "bank" ? (
-        <div
-          onClick={() => copyToClipboard(item.number!)}
-          key={index}
-          rel="noopener noreferrer"
-          className={`${styles.gift_card_bank} ${styles[handleClass(item)]}`}
-          style={{
-            color: content.background ? accent : content.inverted ? primary : accent,
-            cursor: item.url ? "pointer" : "default",
-          }}
-        >
-          <span
-            className={`g_mdoule_regular_text ${styles.bank_name}`}
-            style={{
-              fontFamily: font,
-              fontSize: "16px",
-            }}
-          >
-            <b>{item.bank}</b>
-          </span>
-          <div className={styles.gifts_single_col}>
-            <span
-              className="g_mdoule_regular_text"
+
+      {GiftCard?.map((item, index) => {
+        const key = (item as any)?.id ?? index; // usa id si existe
+        const color = content.background ? accent : content.inverted ? primary : accent;
+        const baseClass = item.kind === "bank" ? styles.gift_card_bank : styles.gift_card_page;
+        const composedClass = `${baseClass} ${styles[handleClass(item)]}`;
+
+        if (item.kind === "bank") {
+          return (
+            <div
+              key={key}
+              role="button"
+              onClick={() => item.number && copyToClipboard(item.number)}
+              className={composedClass}
               style={{
-                fontFamily: font,
-                fontWeight: 400,
-                letterSpacing: "1px",
-                fontSize: "12px",
-                textTransform: "uppercase",
+                color,
+                cursor: item.number ? "pointer" : "default",
               }}
             >
-              {item.name}
-            </span>
-            <span
-              className="g_mdoule_regular_text"
-              style={{
-                fontFamily: font,
-                fontSize: "16px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-start",
-                gap: "8px",
-              }}
-            >
-              <b>{item.number}</b> <FaCopy />
-            </span>
-          </div>
-        </div>
-      ) : (
-        <a
-          key={index}
-          href={item.url!}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`${styles.gift_card_page} ${styles[handleClass(item)]}`}
-          style={{
-            color: content.background ? accent : content.inverted ? primary : accent,
-            cursor: item.url ? "pointer" : "default",
-          }}
-        >
-          <span
+              <span className={`g_mdoule_regular_text ${styles.bank_name}`} style={{ fontFamily: font, fontSize: "16px" }}>
+                <b>{item.bank}</b>
+              </span>
+
+              <div className={styles.gifts_single_col}>
+                <span
+                  className="g_mdoule_regular_text"
+                  style={{
+                    fontFamily: font,
+                    fontWeight: 400,
+                    letterSpacing: "1px",
+                    fontSize: "12px",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {item.name}
+                </span>
+
+                <span
+                  className="g_mdoule_regular_text"
+                  style={{
+                    fontFamily: font,
+                    fontSize: "16px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                    gap: "8px",
+                  }}
+                >
+                  <b>{item.number}</b> <FaCopy />
+                </span>
+              </div>
+            </div>
+          );
+        }
+
+        // kind !== "bank" → enlace a página/brand
+        return (
+          <a
+            key={key}
+            href={item.url ?? "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={composedClass}
             style={{
-              fontFamily: font,
+              color,
+              cursor: item.url ? "pointer" : "default",
+            }}
+            onClick={(e) => {
+              if (!item.url) e.preventDefault();
             }}
           >
-            {item.brand}
-          </span>
-        </a>
-      )}
+            <span style={{ fontFamily: font }}>{item.brand}</span>
+          </a>
+        );
+      })}
     </>
-  ));
+  );
 }
