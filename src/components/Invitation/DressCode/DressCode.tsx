@@ -1,13 +1,13 @@
-import { Invitation } from "@/types/invitation";
+'use client'
+
 import { NewInvitation } from "@/types/new_invitation";
-import { Button } from "antd";
 import Image from "next/image";
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import { Separador } from "../Separator/Separator";
-import { buttonsColorText } from "@/helpers/functions";
 import styles from './dresscode.module.css'
-import { FaLocationArrow } from "react-icons/fa";
 import PinterestBoard from "./PinterestBoards/PinterestBoard";
+import { Button } from "antd";
+import { FaPinterest, FaPinterestP } from "react-icons/fa";
 
 type DresscodeProps = {
   dev: boolean;
@@ -24,6 +24,8 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
   const actions = generals?.colors.actions ?? "#FFFFFF";
+
+  const [onPinterest, setOnPinterest] = useState<boolean>(false)
 
 
 
@@ -78,6 +80,30 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                 {content.description}
               </span>
 
+              <div className={styles.color_palette_cont}>
+                <span className="g_mdoule_regular_text" style={{
+                  color: content.background && content.inverted ? primary : accent,
+                  fontFamily: generals.fonts.body?.typeFace, opacity: 0.8, fontWeight: 400
+                }}>Paleta de colores</span>
+                {/* {content.colors && (
+                  <div className={styles.dresscode_texts}>
+                    {content.colors.map((color, index) => (
+                      <span style={{ opacity: 0.5, flex: 1, fontSize: '10px', textTransform: 'uppercase', fontFamily: generals.fonts.body?.typeFace }}
+                        key={index}>{color.slice(1, 7)}</span>
+                    ))}
+                  </div>
+                )} */}
+                {content.colors && (
+                  <div className={styles.dresscode_colors}>
+                    {content.colors.map((color, index) => (
+                      <div
+                        data-aos={!dev && generals.texture == null ? 'fade-left' : undefined}
+                        key={index} className={styles.dresscode_color} style={{ borderColor: primary, backgroundColor: color, }} />
+                    ))}
+                  </div>
+                )}
+              </div>
+
               {content.images_active && (
                 <div className={styles.scroll_invitation} style={{ zIndex: 2 }} >
                   {images_src.map((image, index) => (
@@ -91,17 +117,15 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                 </div>
               )}
 
-              {content.colors && (
-                <div className={styles.dresscode_colors}>
-                  {content.colors.map((color, index) => (
-                    <div
-                      data-aos={!dev && generals.texture == null ? 'fade-left' : undefined}
-                      key={index} className={styles.dresscode_color} style={{ backgroundColor: color, }} />
-                  ))}
-                </div>
-              )}
 
-              <PinterestBoard />
+              <Button onClick={() => setOnPinterest(!onPinterest)} icon={<FaPinterest />} style={{ backgroundColor: '#E60024', color: '#FFF', boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.25), 0 0 6px 0 rgba(134, 134, 134, 0.25) inset' }}>
+                ¿Necesitas inspiración?
+              </Button>
+
+
+              {/* <PinterestBoard opacity={onPinterest} /> */}
+
+
 
 
 

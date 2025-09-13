@@ -1,20 +1,44 @@
-.dresscode_colors {
+.dresscode_colors,
+.dresscode_texts {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
     gap: 0px;
-    border-radius: 4px;
-    overflow: hidden;
+    /* border-radius: 4px; */
+    /* overflow: hidden; */
     align-self: stretch;
       /* box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25), 0 0 6px 0 rgba(134, 134, 134, 0.25) inset; */
 }
 
+.dresscode_texts {
+    /* height: 40px; */
+    align-items: flex-end;
+    padding: 4px;
+}
+
 .dresscode_color {
-    height: 6px;
-    flex: 1;
-    border-radius: 0px;
+    height: 40px;
+    width: 40px;
+    margin-left: -12px;
+    border-radius: 99px;
+    border: 3px solid;
+    /* box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25), 0 0 6px 0 rgba(134, 134, 134, 0.25) inset; */
+}
+
+.color_palette_cont {
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-self: stretch;
+    gap: 12px;
+    /* background-color: #FFF; */
+    /* border-radius: 12px; */
+    /* overflow: hidden; */
+    /* padding-top: 4px; */
+    /* box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25), 0 0 6px 0 rgba(134, 134, 134, 0.25) inset; */
 }
 
 .dresscode_image_container {

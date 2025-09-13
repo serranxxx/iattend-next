@@ -1,7 +1,11 @@
 "use client";
 import { useEffect, useRef } from "react";
 
-export default function PinterestWidget() {
+type CardProps = {
+    opacity: boolean
+};
+
+export default function PinterestBoard({ opacity }: CardProps) {
     const built = useRef(false);
 
     useEffect(() => {
@@ -15,6 +19,7 @@ export default function PinterestWidget() {
     return (
 
         <a
+            style={{ opacity: 0.5 }}
             data-pin-do="embedBoard"
             data-pin-board-width="800"
             data-pin-scale-height="220"
