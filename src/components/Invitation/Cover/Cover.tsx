@@ -106,6 +106,8 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
                   fontFamily: cover?.title.text.typeFace,
                   fontWeight: cover?.title.text.weight,
                   lineHeight: "1",
+                  textShadow: "0px 0px 8px rgba(0, 0, 0, 0.5)",
+                  minWidth: "250px",
                 }}
               >
                 {cover?.title.text.value}
@@ -123,6 +125,7 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  minWidth: "250px",
                 }}
               >
                 <Countdown cover={cover} generals={generals} dev={dev} />
