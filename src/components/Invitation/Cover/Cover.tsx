@@ -61,7 +61,7 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
 
                 // Performance y sensación pegajosa al dedo/tilt
                 willChange: "transform",
-                transition: "transform 0.35s ease",
+                transition: "transform 0.07s linear",
               }}
             >
               {image_src && <Image fill style={{ objectFit: "cover", transform: "scale(1.02)" }} priority alt="" src={image_src} />}
@@ -72,6 +72,7 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
                     position: "absolute",
                     width: "100%",
                     height: "100%",
+                    transform: "scale(1.02)",
                     top: "0px",
                     left: "0px",
                     background: `linear-gradient(to top, ${darker(generals?.colors.primary ?? "#FFFFFF", 0.2)}, rgba(0,0,0,0))`,
