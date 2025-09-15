@@ -5,10 +5,6 @@ import { forwardRef } from "react";
 import styles from "./cover.module.css";
 import { NewInvitation } from "@/types/new_invitation";
 import Countdown from "./countDown/CountDown";
-import { useDeviceTilt } from "./useDeviceTilt";
-
-// 👇 importa tu hook
-// ajusta la ruta si es distinta
 
 type CoverProps = {
   dev: boolean;
@@ -20,20 +16,6 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
   const cover = invitation?.cover;
   const generals = invitation?.generals;
   const image_src = dev ? cover?.image.dev : cover?.image.prod;
-
-  // 👇 activa tilt: max desplazamiento en px y suavizado
-  const { tilt, requestPermission } = useDeviceTilt(18, 0.3);
-
-  // Profundidad de la capa (qué tanto se mueve la imagen).
-  // Ajusta a tu gusto: 0.25 (sutil) → 1.0 (muy notorio)
-  const DEPTH = 0.7;
-
-  // Si prefieres respetar "reduce motion", puedes desactivar la transformación:
-  const prefersReduced = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-
-  const imageTransform = prefersReduced
-    ? "none"
-    : `translate3d(${(tilt.x * DEPTH).toFixed(2)}px, ${(tilt.y * DEPTH).toFixed(2)}px, 0) scale(${cover?.image.zoom ?? 1})`;
 
   return (
     invitation && (
@@ -54,17 +36,10 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
               style={{
                 top: `${cover.image.position.y ?? 0}px`,
                 left: `${cover.image.position.x ?? 0}px`,
-
-                // ❗️ANTES: transform: `scale(${cover.image.zoom ?? 1})`,
-                // AHORA: combinamos tilt + zoom:
-                transform: imageTransform,
-
-                // Performance y sensación pegajosa al dedo/tilt
-                willChange: "transform",
-                transition: "transform 0.07s linear",
+                 transform: `scale(${cover.image.zoom ?? 1})`
               }}
             >
-              {image_src && <Image fill style={{ objectFit: "cover", transform: "scale(1.02)" }} priority alt="" src={image_src} />}
+              {image_src && <Image fill style={{ objectFit: "cover", }} priority alt="" src={image_src} />}
 
               {cover.image.background ? (
                 <div
@@ -72,7 +47,6 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
                     position: "absolute",
                     width: "100%",
                     height: "100%",
-                    transform: "scale(1.02)",
                     top: "0px",
                     left: "0px",
                     background: `linear-gradient(to top, ${darker(generals?.colors.primary ?? "#FFFFFF", 0.2)}, rgba(0,0,0,0))`,
@@ -138,27 +112,6 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
             )}
           </div>
         </div>
-
-        {/* 👇 botón para iOS si hace falta permiso */}
-        {tilt.needsPermission && (
-          <button
-            onClick={requestPermission}
-            style={{
-              position: "absolute",
-              // zIndex: 10,
-              right: 12,
-              top: 12,
-              padding: "8px 12px",
-              borderRadius: 12,
-              background: "rgba(255,255,255,0.9)",
-              border: "1px solid rgba(0,0,0,0.08)",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-              zIndex: 999,
-            }}
-          >
-            Activar movimiento
-          </button>
-        )}
       </div>
     )
   );

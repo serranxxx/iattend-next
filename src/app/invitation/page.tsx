@@ -16,9 +16,10 @@ import { createClient } from "@/lib/supabase/client";
 import { NewInvitation } from "@/types/new_invitation";
 import { People } from "@/components/Invitation/Family/Family";
 import { Quote } from "@/components/Invitation/Quote/Quote";
+import { getPublicServerClient } from "@/lib/supabase/public-server";
 
 export default function InvitationPage() {
-  const supabase = createClient();
+  const supabase = getPublicServerClient();
 
   const coverRef = useRef<HTMLDivElement>(null);
   const greetingRef = useRef<HTMLDivElement>(null);
@@ -71,14 +72,15 @@ export default function InvitationPage() {
         console.log(error);
         return;
       }
-
-      console.log(data);
       setInvitation(data?.data); // accedes a la columna `data` (jsonb)
       setLoader(false);
     };
 
-    getInv();
-  }, [supabase]);
+    if (supabase) {
+      getInv();
+    }
+
+  }, []);
 
   // Render
   if (loader || !invitation) {
