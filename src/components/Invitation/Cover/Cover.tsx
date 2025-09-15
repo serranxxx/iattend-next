@@ -22,11 +22,11 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
   const image_src = dev ? cover?.image.dev : cover?.image.prod;
 
   // 👇 activa tilt: max desplazamiento en px y suavizado
-  const { tilt, requestPermission } = useDeviceTilt(18, 0.1);
+  const { tilt, requestPermission } = useDeviceTilt(18, 0.3);
 
   // Profundidad de la capa (qué tanto se mueve la imagen).
   // Ajusta a tu gusto: 0.25 (sutil) → 1.0 (muy notorio)
-  const DEPTH = 0.35;
+  const DEPTH = 0.7;
 
   // Si prefieres respetar "reduce motion", puedes desactivar la transformación:
   const prefersReduced = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
