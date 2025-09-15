@@ -28,7 +28,7 @@ export const HeaderApp = ({ position, isVisible }: Props) => {
   const [messageApi, contextHolder] = message.useMessage();
   const { logged, logout, user, login } = useContext(appContext)!;
   const { operation } = useInvitation();
-  const [IsScrollTop, setIsScrollTop] = useState(false);
+  // const [IsScrollTop, setIsScrollTop] = useState(false);
   const [localUser, setLocalUser] = useState<AppUser | null>(null);
   const [onEnterprise, setOnEnterprise] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
@@ -49,23 +49,23 @@ export const HeaderApp = ({ position, isVisible }: Props) => {
     return str.charAt(0).toUpperCase();
   };
 
-  useEffect(() => {
-    if (position === "home") {
-      const handleScroll = () => {
-        if (window.scrollY >= 0 && window.scrollY <= 100) {
-          setIsScrollTop(false);
-        } else {
-          setIsScrollTop(false);
-        }
-      };
+  // useEffect(() => {
+  //   if (position === "home") {
+  //     const handleScroll = () => {
+  //       if (window.scrollY >= 0 && window.scrollY <= 100) {
+  //         setIsScrollTop(false);
+  //       } else {
+  //         setIsScrollTop(false);
+  //       }
+  //     };
 
-      window.addEventListener("scroll", handleScroll);
+  //     window.addEventListener("scroll", handleScroll);
 
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
-    }
-  }, []);
+  //     return () => {
+  //       window.removeEventListener("scroll", handleScroll);
+  //     };
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (user && user.enterprise) {
@@ -130,6 +130,7 @@ export const HeaderApp = ({ position, isVisible }: Props) => {
       "state_changed",
       (snapshot) => {
         const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        console.log(progress);
         // setProgress(progress); ← descomenta si usas un estado
       },
       (error) => {
@@ -187,7 +188,7 @@ export const HeaderApp = ({ position, isVisible }: Props) => {
           />
           <div className={styles.header_tabs_cont}>
             <div className={styles.header_tabs_cont} style={{ gap: "12px" }}>
-              {NavItems.map((item, index) => {
+              {NavItems.map((item) => {
                 // Condiciones para ocultar el elemento 'Admin'
                 if (item.name === "Admin" && (!logged || localUser?.role !== "Admin")) {
                   return null; // No renderiza nada
@@ -411,7 +412,7 @@ export const HeaderApp = ({ position, isVisible }: Props) => {
           </div>
 
           <div className="mobile-menu-routes">
-            {NavItems.map((item, index) => {
+            {NavItems.map((item) => {
               // Condiciones para ocultar el elemento 'Admin'
               if (item.name === "Admin" && (!logged || localUser?.role !== "Admin")) {
                 return null; // No renderiza nada

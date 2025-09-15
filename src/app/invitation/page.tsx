@@ -31,7 +31,6 @@ export default function InvitationPage() {
   const galleryRef = useRef<HTMLDivElement>(null);
   const destinationRef = useRef<HTMLDivElement>(null);
 
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [loader, setLoader] = useState(false);
 
   const [invitation, setInvitation] = useState<NewInvitation | null>(null);
@@ -63,17 +62,6 @@ export default function InvitationPage() {
   //       return null;
   //   }
   // };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
-      const margin = 680;
-      // setIsVisible(currentScrollPos >= margin && prevScrollPos > currentScrollPos);
-      setPrevScrollPos(currentScrollPos);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [prevScrollPos]);
 
   useEffect(() => {
     const getInv = async () => {

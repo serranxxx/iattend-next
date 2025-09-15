@@ -9,8 +9,8 @@ import Image from "next/image";
 export const HomeScroll = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [centerIndex, setCenterIndex] = useState<number>(0);
-  const [prevScrollPos, setPrevScrollPos] = useState<number>(0);
-  const [isVisible, setIsVisible] = useState(true);
+  // const [prevScrollPos, setPrevScrollPos] = useState<number>(0);
+  // const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     handleScroll();
@@ -35,26 +35,26 @@ export const HomeScroll = () => {
     return () => cancelAnimationFrame(animationFrame);
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
-      const margin = 0; // Ajusta este valor según tu preferencia
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const currentScrollPos = window.pageYOffset;
+  //     const margin = 0; // Ajusta este valor según tu preferencia
 
-      if (currentScrollPos < margin) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(prevScrollPos > currentScrollPos);
+  //     // if (currentScrollPos < margin) {
+  //     //   setIsVisible(false);
+  //     // } else {
+  //     //   setIsVisible(prevScrollPos > currentScrollPos);
 
-        setPrevScrollPos(currentScrollPos);
-      }
-    };
+  //     //   setPrevScrollPos(currentScrollPos);
+  //     // }
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
+  //   window.addEventListener("scroll", handleScroll);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [prevScrollPos]);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, [prevScrollPos]);
 
   const handleScroll = () => {
     const container = scrollRef.current;

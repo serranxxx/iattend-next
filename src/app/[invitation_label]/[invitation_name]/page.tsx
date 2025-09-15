@@ -20,7 +20,7 @@ type PageProps = {
 };
 
 // ------- Metadata dinámica -------
-export async function generateMetadata({ params }: PageProps, _parent?: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { invitation_label, invitation_name } = await params; // 👈 await
   const supabase = await createClient();
 

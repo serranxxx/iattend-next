@@ -1,9 +1,6 @@
-// eslint.config.js (o .ts)
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
-import tseslint from "@typescript-eslint/eslint-plugin";
-import unusedImports from "eslint-plugin-unused-imports";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -25,8 +22,8 @@ const eslintConfig = [
       ],
     },
     plugins: {
-      "@typescript-eslint": tseslint,
-      "unused-imports": unusedImports,
+      "@typescript-eslint": require("@typescript-eslint/eslint-plugin"),
+      "unused-imports": require("eslint-plugin-unused-imports"),
     },
   },
 ];
