@@ -61,10 +61,10 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
 
                 // Performance y sensación pegajosa al dedo/tilt
                 willChange: "transform",
-                transition: "transform 0.03s linear",
+                transition: "transform 0.35s ease",
               }}
             >
-              {image_src && <Image fill style={{ objectFit: "cover" }} priority alt="" src={image_src} />}
+              {image_src && <Image fill style={{ objectFit: "cover", transform: "scale(1.02)" }} priority alt="" src={image_src} />}
 
               {cover.image.background ? (
                 <div
