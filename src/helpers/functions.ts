@@ -100,14 +100,13 @@ export function formatDate(dateString: string) {
 }
 
 export function getMexicoHour(utcString: string): string {
-  const date: Date = new Date(utcString);
+  const date = new Date(utcString);
 
-  return new Intl.DateTimeFormat("es-MX", {
-    timeZone: "America/Mexico_City",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false // cambia a true si quieres AM/PM
-  }).format(date);
+  // Usa la hora "local" del objeto Date (sin aplicar TZ manual)
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+
+  return `${hours}:${minutes}`;
 }
 
 export function buttonsColorText(hex: string) {

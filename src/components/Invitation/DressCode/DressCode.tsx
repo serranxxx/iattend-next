@@ -50,7 +50,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
               position: "relative",
             }}
           >
-            {content.background && generals.texture !== null && (
+            {/* {content.background && generals.texture !== null && (
               <div className="image_texture_container">
                 <div className="image_texture_container">
                   {Array.from({ length: 100 }).map((_, index) => (
@@ -71,7 +71,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                   ))}
                 </div>
               </div>
-            )}
+            )} */}
             <div className="g_module_info_container">
               <span
                 data-aos={!dev && generals.texture == null ? "fade-left" : undefined}

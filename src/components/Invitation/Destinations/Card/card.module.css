@@ -19,9 +19,9 @@
     left: 0px;
     z-index: 1;
     width: 110%;
-    height: 110%;
+    height: 130%;
     border-radius: 12px;
-    mask: linear-gradient(transparent, transparent, black, black);
+    mask: linear-gradient(transparent, transparent, black,black);
     backdrop-filter: blur(8px);
 
 }

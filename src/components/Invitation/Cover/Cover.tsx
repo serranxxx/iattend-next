@@ -1,6 +1,8 @@
+"use client"
+
 import { darker, lighter } from "@/helpers/functions";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import { forwardRef } from "react";
 import styles from "./cover.module.css";
 import { NewInvitation } from "@/types/new_invitation";
@@ -17,6 +19,13 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
   const generals = invitation?.generals;
   const image_src = dev ? cover?.image.dev : cover?.image.prod;
 
+  useEffect(() => {
+    if (invitation) {
+      console.log(invitation.cover)
+    }
+  }, [])
+  
+
   return (
     invitation && (
       <div ref={ref} className={styles.module_cover_container} style={{ position: "relative", zIndex: 3 }}>
@@ -30,13 +39,14 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
             background: generals?.colors.primary ?? "#FFFFFF",
           }}
         >
-          {cover?.image.dev && cover.image.prod ? (
+          {cover?.image.dev || cover?.image.prod ? (
             <div
               className={styles.cover_image_container}
               style={{
                 top: `${cover.image.position.y ?? 0}px`,
                 left: `${cover.image.position.x ?? 0}px`,
-                 transform: `scale(${cover.image.zoom ?? 1})`
+                 transform: `scale(${cover.image.zoom ?? 1})`,
+                 position:'relative'
               }}
             >
               {image_src && <Image fill style={{ objectFit: "cover", }} priority alt="" src={image_src} />}
