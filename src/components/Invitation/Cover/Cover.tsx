@@ -1,10 +1,14 @@
 import { darker, lighter } from "@/helpers/functions";
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 import { forwardRef } from "react";
 import styles from "./cover.module.css";
 import { NewInvitation } from "@/types/new_invitation";
 import Countdown from "./countDown/CountDown";
+import { useDeviceTilt } from "./useDeviceTilt";
+
+// 👇 importa tu hook
+// ajusta la ruta si es distinta
 
 type CoverProps = {
   dev: boolean;
@@ -13,34 +17,27 @@ type CoverProps = {
 };
 
 export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev, invitation, height }, ref) {
-  //   const [isToday, setIsToday] = useState(false);
-
-  //   const cleanDate = (dateString: string | null) => {
-  //     if (dateString) {
-  //       if (dateString.endsWith("000Z")) {
-  //         return dateString.slice(0, -5);
-  //       }
-  //       return dateString;
-  //     }
-  //   };
-
-  //   const checkIfToday = (targetDate: string) => {
-  //     const today = new Date();
-  //     const target = new Date(targetDate);
-
-  //     // Comparar solo el año, mes y día
-  //     return today.getFullYear() === target.getFullYear() && today.getMonth() === target.getMonth() && today.getDate() === target.getDate();
-  //   };
-
   const cover = invitation?.cover;
   const generals = invitation?.generals;
   const image_src = dev ? cover?.image.dev : cover?.image.prod;
 
+  // 👇 activa tilt: max desplazamiento en px y suavizado
+  const { tilt, requestPermission } = useDeviceTilt(18, 0.1);
+
+  // Profundidad de la capa (qué tanto se mueve la imagen).
+  // Ajusta a tu gusto: 0.25 (sutil) → 1.0 (muy notorio)
+  const DEPTH = 0.35;
+
+  // Si prefieres respetar "reduce motion", puedes desactivar la transformación:
+  const prefersReduced = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+
+  const imageTransform = prefersReduced
+    ? "none"
+    : `translate3d(${(tilt.x * DEPTH).toFixed(2)}px, ${(tilt.y * DEPTH).toFixed(2)}px, 0) scale(${cover?.image.zoom ?? 1})`;
+
   return (
     invitation && (
       <div ref={ref} className={styles.module_cover_container} style={{ position: "relative", zIndex: 3 }}>
-        {/* {checkIfToday(cleanDate(content.date)) && <ConfettiComponent palette={colorPalette} />} */}
-
         <div
           className={!dev ? styles.cover_container : styles.cover_container_dev}
           style={{
@@ -57,7 +54,14 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
               style={{
                 top: `${cover.image.position.y ?? 0}px`,
                 left: `${cover.image.position.x ?? 0}px`,
-                transform: `scale(${cover.image.zoom ?? 1})`,
+
+                // ❗️ANTES: transform: `scale(${cover.image.zoom ?? 1})`,
+                // AHORA: combinamos tilt + zoom:
+                transform: imageTransform,
+
+                // Performance y sensación pegajosa al dedo/tilt
+                willChange: "transform",
+                transition: "transform 0.03s linear",
               }}
             >
               {image_src && <Image fill style={{ objectFit: "cover" }} priority alt="" src={image_src} />}
@@ -71,10 +75,11 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
                     top: "0px",
                     left: "0px",
                     background: `linear-gradient(to top, ${darker(generals?.colors.primary ?? "#FFFFFF", 0.2)}, rgba(0,0,0,0))`,
+                    pointerEvents: "none",
                   }}
-                ></div>
+                />
               ) : (
-                cover.image.blur && <div className={styles.blur_cover}></div>
+                cover.image.blur && <div className={styles.blur_cover} />
               )}
             </div>
           ) : (
@@ -119,7 +124,6 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
                 style={{
                   width: "100%",
                   backgroundColor: `transparent`,
-
                   height: "25%",
                   marginTop: "10px",
                   display: "flex",
@@ -134,22 +138,26 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
           </div>
         </div>
 
-        {/* {
-                    generals.texture !== null &&
-                    <div className="image-texture-container">
-                        <div className="image-texture-container">
-                            {Array.from({ length: 100 }).map((_, index) => (
-                                <img alt='' key={index} src={textures[generals.texture].image} className="texture-img"
-                                    style={{
-                                        opacity: textures[generals.texture].opacity,
-                                        filter: textures[generals.texture].filter,
-                                        mixBlendMode: textures[generals.texture].blend
-                                    }}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                } */}
+        {/* 👇 botón para iOS si hace falta permiso */}
+        {tilt.needsPermission && (
+          <button
+            onClick={requestPermission}
+            style={{
+              position: "absolute",
+              // zIndex: 10,
+              right: 12,
+              top: 12,
+              padding: "8px 12px",
+              borderRadius: 12,
+              background: "rgba(255,255,255,0.9)",
+              border: "1px solid rgba(0,0,0,0.08)",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+              zIndex: 999,
+            }}
+          >
+            Activar movimiento
+          </button>
+        )}
       </div>
     )
   );

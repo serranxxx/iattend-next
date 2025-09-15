@@ -1,8 +1,9 @@
 .gift_card_bank,
 .gift_card_page {
-    width: 300px;
-    min-width: 300px;
-    height: 160px;
+    /* width: 300px;
+    min-width: 300px; */
+    aspect-ratio: 5/3;
+    height: 180px;
     border-radius: 16px;
     padding: 24px;
     box-sizing: border-box;

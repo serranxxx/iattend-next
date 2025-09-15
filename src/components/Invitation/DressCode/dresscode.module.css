@@ -42,8 +42,9 @@
 }
 
 .dresscode_image_container {
-    width: 160px;
-    height: 240px;
+    width: 200px;
+    /* aspect-ratio: 3/4; */
+    height: 280px;
     border-radius: 16px;
     flex-shrink: 0;
     overflow: hidden;

@@ -1,7 +1,7 @@
 .destination_card {
-    height: 320px;
-    width: 240px;
-    min-width: 240px;
+    height: 280px;
+    width: 200px;
+    min-width: 200px;
     border-radius: 16px;
     background-color: var(--brand-color-500);
     position: relative;
