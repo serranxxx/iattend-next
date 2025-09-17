@@ -245,7 +245,7 @@ export interface Generals {
   };
   separator: number;
   positions: number[];
-  texture: number;
+  texture: number | null;
 }
 
 // export interface InvitationMeta {

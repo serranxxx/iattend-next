@@ -55,7 +55,7 @@ export const Gallery = forwardRef<HTMLDivElement, DresscodeProps>(function galle
                     className={styles.gallery_items_inner_container}
                     style={{ backgroundColor: primary, position: "relative" }}
                   >
-                    <Image fill alt="" loading="lazy" decoding="async" src={item} style={{ objectFit: "cover" }} />
+                    <img src={item} style={{ objectFit: "cover", width:'100%', height:'100%'}} loading="lazy" decoding="async" alt="" />
                   </div>
                 ))}
               </div>

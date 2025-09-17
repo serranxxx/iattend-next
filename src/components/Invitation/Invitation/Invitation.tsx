@@ -82,7 +82,7 @@ export default function Invitation({ invitation, loader }: invProps) {
   const scrollableContentRef = useRef<HTMLDivElement>(null);
   const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
-  const tex = textures[invitation.generals.texture];
+  const tex = textures[invitation.generals?.texture ?? 0];
 
   return (
     <div style={{ display: "flex", width: "100%", alignItems: "center", justifyContent: "center" }}>
@@ -97,7 +97,7 @@ export default function Invitation({ invitation, loader }: invProps) {
         <Cover ref={coverRef} dev={false} invitation={invitation} height={"100vh"} />
         {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
 
-        {invitation.generals.texture != null && (
+        {invitation.generals.texture != null && tex && (
           <TextureOverlay
             containerRef={scrollableContentRef as unknown as React.RefObject<HTMLElement>}
             coverHeightPx={coverHeightPx}

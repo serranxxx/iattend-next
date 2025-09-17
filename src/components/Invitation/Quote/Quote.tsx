@@ -43,7 +43,7 @@ export const Quote = forwardRef<HTMLDivElement, quoteProps>(function Greeting({ 
             {content.image.active ? (
               <div className="background_image_quote_container">
                 <div style={{ backgroundColor: primary, height: "100%", width: "100%" }}>
-                  {image_src && <Image fill style={{ objectFit: "cover" }} priority alt="" src={image_src} />}
+                  {image_src && <img style={{ objectFit: "cover", width:'100%', height:'100%'}} loading="lazy" decoding="async" alt=""  src={image_src} />}
                 </div>
 
                 {content.text.shadow && (

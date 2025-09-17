@@ -49,7 +49,7 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
                  position:'relative'
               }}
             >
-              {image_src && <Image fill style={{ objectFit: "cover", }} priority alt="" src={image_src} />}
+              {image_src && <img style={{ objectFit: "cover", width:'100%', height:'100%'}} loading="lazy" decoding="async" alt="" src={image_src} />}
 
               {cover.image.background ? (
                 <div

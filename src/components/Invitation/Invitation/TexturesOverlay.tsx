@@ -19,7 +19,8 @@ type Props = {
   texture: Texture;
   tileW?: number;
   tileH?: number;
-  zIndex?: number | string; // 👈 nuevo
+  zIndex?: number | string;
+  extraMarginPx?: number; // 👈 margen extra hacia abajo
 };
 
 export function TextureOverlay({
@@ -28,7 +29,8 @@ export function TextureOverlay({
   texture,
   tileW = 1024,
   tileH = 1024,
-  zIndex = 0, // 👈 default
+  zIndex = 0,
+  extraMarginPx = 50, // 👈 default: 50px de margen
 }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
   const patternId = useId();
@@ -41,7 +43,8 @@ export function TextureOverlay({
 
     const recalc = () => {
       const total = cont.scrollHeight;
-      const overlayH = Math.max(0, total - coverHeightPx);
+      // 👇 le sumamos un margen extra para que la textura sobresalga
+      const overlayH = Math.max(0, total - coverHeightPx + extraMarginPx);
       svg.style.top = `${coverHeightPx}px`;
       svg.setAttribute("width", String(cont.clientWidth));
       svg.setAttribute("height", String(overlayH));
@@ -56,7 +59,7 @@ export function TextureOverlay({
       ro.disconnect();
       window.removeEventListener("resize", recalc);
     };
-  }, [coverHeightPx, containerRef]);
+  }, [coverHeightPx, containerRef, extraMarginPx]);
 
   const scale = 0.6;
 
@@ -69,7 +72,7 @@ export function TextureOverlay({
         left: 0,
         width: "100%",
         pointerEvents: "none",
-        zIndex, // 👈 usa el prop
+        zIndex, // 👈 configurable
         filter: texture.filter,
         mixBlendMode: texture.blend,
         opacity: texture.opacity,
@@ -77,8 +80,22 @@ export function TextureOverlay({
       preserveAspectRatio="none"
     >
       <defs>
-        <pattern id={patternId} patternUnits="userSpaceOnUse" width={tileW} height={tileH * 2} patternTransform={`scale(${scale})`}>
-          <image href={texSrc} x="0" y="0" width={tileW} height={tileH} preserveAspectRatio="none" imageRendering="crisp-edges" />
+        <pattern
+          id={patternId}
+          patternUnits="userSpaceOnUse"
+          width={tileW}
+          height={tileH * 2}
+          patternTransform={`scale(${scale})`}
+        >
+          <image
+            href={texSrc}
+            x="0"
+            y="0"
+            width={tileW}
+            height={tileH}
+            preserveAspectRatio="none"
+            imageRendering="crisp-edges"
+          />
           <image
             href={texSrc}
             x="0"
