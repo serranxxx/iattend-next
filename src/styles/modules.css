@@ -99,6 +99,28 @@
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.25), 0 0 8px 0 rgba(134, 134, 134, 0.25) inset;
 }
 
+.fan_container,
+.fan_container_active {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    overflow: auto;
+
+}
+
+.fan_container:hover {
+    transform: scale(1.05);
+}
+
+.fan-container:hover .fan-card:last-child {
+    /* opcional: levanta la carta “más al centro” si quieres interacción */
+    transform: translate(-50%, -50%) rotate(0deg) scale(1.02);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  }
+
 
 @media (min-width: 751px) {
     .qt_image_cnt {

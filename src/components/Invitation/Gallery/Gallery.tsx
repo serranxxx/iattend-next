@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { forwardRef } from "react";
 import { Separador } from "../Separator/Separator";
 import styles from "./gallery.module.css";
+import FanStack from "./FanStack";
 
 type DresscodeProps = {
   dev: boolean;
@@ -29,11 +30,13 @@ export const Gallery = forwardRef<HTMLDivElement, DresscodeProps>(function galle
             ref={ref}
             className="gm_container"
             style={{
-              padding: content.background ? "32px" : "0px 32px",
+              padding: content.background ? "32px" : "0px",
               position: "relative",
             }}
           >
-            <div className="g_module_info_container">
+            <div className="g_module_info_container" style={{
+              // width:'auto'
+            }}>
               <span
                 data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
                 className="g_module_title"
@@ -44,21 +47,30 @@ export const Gallery = forwardRef<HTMLDivElement, DresscodeProps>(function galle
               >
                 {content.title}
               </span>
-              <div
+              {/* <div
                 data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
                 style={{ zIndex: 2, padding: "6px 24px" }}
-                className="scroll_invitation"
-              >
-                {images?.map((item, index) => (
+                className={styles.image_gallery_cont}
+              // className="scroll_invitation"
+              > */}
+              <FanStack
+                images={images}
+                size={230}
+                radius={12}
+                maxFanDeg={16}
+                gap={24}
+              />
+              {/* {images?.map((item, index) => (
                   <div
                     key={index}
-                    className={styles.gallery_items_inner_container}
-                    style={{ backgroundColor: primary, position: "relative" }}
+                    className={styles.image_gallery_item}
+                    // className={styles.gallery_items_inner_container}
+                    style={{ backgroundColor: primary, transform:`rotate(${index}0deg)`}}
                   >
                     <img src={item} style={{ objectFit: "cover", width:'100%', height:'100%'}} loading="lazy" decoding="async" alt="" />
                   </div>
-                ))}
-              </div>
+                ))} */}
+              {/* </div> */}
             </div>
           </div>
         </div>

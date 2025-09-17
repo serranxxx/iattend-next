@@ -53,19 +53,19 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                 {content.description}
               </span>
 
-              <div className={styles.color_palette_cont}>
-                <span
-                  className="g_mdoule_regular_text"
-                  style={{
-                    color: content.background && content.inverted ? primary : accent,
-                    fontFamily: generals.fonts.body?.typeFace,
-                    opacity: 0.8,
-                    fontWeight: 400,
-                  }}
-                >
-                  Paleta de colores
-                </span>
-                {content.colors && (
+              {content.colors && (
+                <div className={styles.color_palette_cont}>
+                  <span
+                    className="g_mdoule_regular_text"
+                    style={{
+                      color: content.background && content.inverted ? primary : accent,
+                      fontFamily: generals.fonts.body?.typeFace,
+                      opacity: 0.8,
+                      fontWeight: 400,
+                    }}
+                  >
+                    Paleta de colores
+                  </span>
                   <div className={styles.dresscode_colors}>
                     {content.colors.map((color, index) => (
                       <div
@@ -76,15 +76,16 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                       />
                     ))}
                   </div>
-                )}
-              </div>
+
+                </div>
+              )}
 
               {content.images_active && (
                 <div className={styles.scroll_invitation} style={{ zIndex: 2 }}>
                   {images_src.map((image, index) => (
                     <div
                       data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
-                      style={{ position: "relative" }}
+                      style={{ position: "relative", padding:'6px 24px' }}
                       key={index}
                       className={styles.dresscode_image_container}
                     >
