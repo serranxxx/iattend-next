@@ -8,9 +8,10 @@ type CardProps = {
   invitation: NewInvitation;
   dev: boolean;
   GiftCard: GiftCard[];
+  onSelect?: (index: number) => void; // 👉 nuevo callback
 };
 
-export default function Card({ invitation, dev, GiftCard }: CardProps) {
+export default function Card({ invitation, dev, GiftCard, onSelect }: CardProps) {
   const content = invitation.gifts;
   const generals = invitation.generals;
   const font = generals.fonts.body?.typeFace;
@@ -87,7 +88,7 @@ export default function Card({ invitation, dev, GiftCard }: CardProps) {
     <>
       {contextHolder}
 
-      {GiftCard?.map((item, index) => {
+      {GiftCard?.slice().reverse().map((item, index) => {
         const key = (item as any)?.id ?? index; // usa id si existe
         const color = content.background ? accent : content.inverted ? primary : accent;
         const baseClass = item.kind === "bank" ? styles.gift_card_bank : styles.gift_card_page;
@@ -98,11 +99,14 @@ export default function Card({ invitation, dev, GiftCard }: CardProps) {
             <div
               key={key}
               role="button"
-              onClick={() => item.number && copyToClipboard(item.number)}
-              className={composedClass}
+              onClick={() => onSelect?.(index)}
+              // onClick={() => item.number && copyToClipboard(item.number)}
+              className={`${styles.gift_card} ${composedClass}`}
               style={{
                 color,
                 cursor: item.number ? "pointer" : "default",
+                top: `calc(50px * ${index})`,
+                // zIndex: GiftCard.length - index,
               }}
             >
               <span className={`g_mdoule_regular_text ${styles.bank_name}`} style={{ fontFamily: font, fontSize: "16px" }}>
@@ -148,14 +152,20 @@ export default function Card({ invitation, dev, GiftCard }: CardProps) {
             href={item.url ?? "#"}
             target="_blank"
             rel="noopener noreferrer"
-            className={composedClass}
+            className={`${styles.gift_card} ${composedClass}`}
             style={{
               color,
               cursor: item.url ? "pointer" : "default",
+              top: `calc(50px * ${index})`,
+              // zIndex: GiftCard.length - index,
             }}
             onClick={(e) => {
-              if (!item.url) e.preventDefault();
+              e.preventDefault();
+              onSelect?.(index); // 👉 notifica
             }}
+            // onClick={(e) => {
+            //   if (!item.url) e.preventDefault();
+            // }}
           >
             <span style={{ fontFamily: font }}>{item.brand}</span>
           </a>

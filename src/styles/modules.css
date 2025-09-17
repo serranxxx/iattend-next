@@ -111,9 +111,10 @@
 
 }
 
-.fan_container:hover {
+
+/* .fan_container:hover {
     transform: scale(1.05);
-}
+} */
 
 .fan-container:hover .fan-card:last-child {
     /* opcional: levanta la carta “más al centro” si quieres interacción */
