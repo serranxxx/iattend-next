@@ -36,6 +36,7 @@ export default function FanStack({
                 minWidth:'100vw',
                 padding:'0px 24px',
                 marginTop:'-30px',
+                // overflowY:'auto'
                 // maxWidth: size + 40,
                 // aspectRatio: "1 / 1",
                 // margin: "0 auto",
@@ -74,7 +75,7 @@ export default function FanStack({
                             boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25), 0 0 8px 0 rgba(134, 134, 134, 0.45) inset",
                             background: "#e9ecef",
                             zIndex: z,
-                            transition: "transform .25s ease, box-shadow .25s ease",
+                            transition: "all 0.35s ease",
                         }}
                     >
                         <img
