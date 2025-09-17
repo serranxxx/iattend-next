@@ -4,8 +4,6 @@ import React, { forwardRef, useEffect } from "react";
 import styles from "./greeting.module.css";
 
 import "aos/dist/aos.css";
-import { textures } from "@/helpers/textures";
-import Image from "next/image";
 import { Separador } from "../Separator/Separator";
 
 type GreetingProps = {
@@ -19,7 +17,6 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
   const primary = generals?.colors.primary ?? "#FFFFFF";
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
-  const actions = generals?.colors.actions ?? "#FFFFFF";
 
   // useEffect(() => {
   //   AOS.init({
@@ -32,7 +29,8 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
   return (
     <>
       {content?.active && generals?.colors ? (
-        <>
+        <div style={{ position: "relative", width: "100%" }}>
+          <div className="textures_background" style={{ backgroundColor: content.background ? secondary : "transparent" }} />
           <div
             // data-aos="fade-up"
             style={{ position: "relative" }}
@@ -42,7 +40,6 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
             <div
               className="g_module_info_container"
               style={{
-                backgroundColor: content.background ? secondary : "transparent",
                 padding: content.background ? "32px" : "0px 32px",
                 width: "100%",
                 height: "100%",
@@ -70,34 +67,11 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
                 {content.description}
               </span>
             </div>
-
-            {content.background && generals.texture !== null && (
-              <div className="image_texture_container">
-                <div className="image_texture_container">
-                  {Array.from({ length: 100 }).map((_, index) => (
-                    <Image
-                      fill
-                      loading="lazy"
-                      decoding="async"
-                      alt=""
-                      key={index}
-                      src={textures[generals.texture].image}
-                      className="texture_img"
-                      style={{
-                        opacity: textures[generals.texture].opacity,
-                        filter: textures[generals.texture].filter,
-                        mixBlendMode: textures[generals.texture].blend,
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
-
-          {content.separator && <Separador generals={generals} value={generals.separator} />}
-        </>
+        </div>
       ) : null}
+
+      {content?.separator && <Separador generals={generals} value={generals?.separator ?? 1} />}
     </>
   );
 });

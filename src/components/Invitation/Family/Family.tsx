@@ -1,7 +1,4 @@
-import { textures } from "@/helpers/textures";
-import { Invitation } from "@/types/invitation";
 import { NewInvitation } from "@/types/new_invitation";
-import Image from "next/image";
 import React, { forwardRef } from "react";
 import { Separador } from "../Separator/Separator";
 
@@ -29,13 +26,13 @@ export const People = forwardRef<HTMLDivElement, peopleProps>(function Greeting(
   return (
     <>
       {content?.active && generals.colors ? (
-        <>
+        <div style={{ position: "relative", width: "100%" }}>
+          <div className="textures_background" style={{ backgroundColor: content.background ? secondary : "transparent" }} />
           <div
             // data-aos="fade-up"
             ref={ref}
             className="gm_container"
             style={{
-              backgroundColor: content.background ? secondary : "transparent",
               padding: content.background ? "32px" : "0px 32px",
               position: "relative",
             }}
@@ -95,34 +92,11 @@ export const People = forwardRef<HTMLDivElement, peopleProps>(function Greeting(
                   ))
                 : null}
             </div>
-
-            {content.background && generals.texture !== null && (
-              <div className="image_texture_container">
-                <div className="image_texture_container">
-                  {Array.from({ length: 100 }).map((_, index) => (
-                    <Image
-                      fill
-                      loading="lazy"
-                      decoding="async"
-                      alt=""
-                      key={index}
-                      src={textures[generals.texture].image}
-                      className="texture_img"
-                      style={{
-                        opacity: textures[generals.texture].opacity,
-                        filter: textures[generals.texture].filter,
-                        mixBlendMode: textures[generals.texture].blend,
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
-
-          {content.separator && <Separador generals={generals} value={generals.separator} />}
-        </>
+        </div>
       ) : null}
+
+      {content?.separator && <Separador generals={generals} value={generals?.separator ?? 1} />}
     </>
   );
 });

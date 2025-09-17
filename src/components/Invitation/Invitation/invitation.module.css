@@ -7,37 +7,7 @@
     padding-bottom: 36px;
     box-sizing: border-box;
     width: 100%;
-    /* max-width: 350px; */
     position: relative;
     overflow: auto;
     max-height: 100vh;
-    overflow: auto;
-}
-
-.texture_img {
-    width: 130%;
-    height: auto;
-    mix-blend-mode: multiply;
-    /* mix-blend-mode: luminosity; */
-    /* filter: grayscale(1) contrast(1.2) brightness(2); */
-    filter: grayscale(1);
-}
-
-.texture_img:nth-child(odd) {
-    transform: scaleY(-1);
-}
-
-.image_texture_container {
-    position: absolute;
-    height: 100%;
-    width: 100vw;
-    border: 1px solid red;
-    left: 0px;
-    top: 0px;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex-direction: column;
-    gap: 0;
 }

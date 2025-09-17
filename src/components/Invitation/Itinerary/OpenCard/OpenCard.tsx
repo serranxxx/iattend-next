@@ -1,5 +1,5 @@
 import { ItineraryItem, NewInvitation } from "@/types/new_invitation";
-import styles from './open.module.css'
+import styles from "./open.module.css";
 import { Button } from "antd";
 import { buttonsColorText, darker, getMexicoHour } from "@/helpers/functions";
 import Image from "next/image";
@@ -12,48 +12,48 @@ import { useEffect } from "react";
 import WeatherWidget from "../WeatherApi/WeatherWidget";
 
 type CardProps = {
-    invitation: NewInvitation;
-    dev: boolean;
-    item: ItineraryItem;
-    setActiveSteps: React.Dispatch<React.SetStateAction<ItineraryItem[]>>
-    activeSteps: ItineraryItem[];
+  invitation: NewInvitation;
+  dev: boolean;
+  item: ItineraryItem;
+  setActiveSteps: React.Dispatch<React.SetStateAction<ItineraryItem[]>>;
+  activeSteps: ItineraryItem[];
 };
 
 export default function OpenCard({ invitation, dev, item, activeSteps, setActiveSteps }: CardProps) {
+  const content = invitation.itinerary;
+  const generals = invitation.generals;
 
-    const content = invitation.itinerary
-    const generals = invitation.generals
+  const primary = generals?.colors.primary ?? "#FFFFFF";
+  const secondary = generals?.colors.secondary ?? "#FFFFFF";
+  const accent = generals?.colors.accent ?? "#FFFFFF";
+  const actions = generals.colors.actions ?? "#FFFFFF";
 
-    const primary = generals?.colors.primary ?? "#FFFFFF";
-    const secondary = generals?.colors.secondary ?? "#FFFFFF";
-    const accent = generals?.colors.accent ?? "#FFFFFF";
-    const actions = generals.colors.actions ?? "#FFFFFF"
+  const extractSpotifyPath = (url: string | undefined) => {
+    if (!url) return "";
 
-    const extractSpotifyPath = (url: string | undefined) => {
-        if (!url) return "";
+    try {
+      const parsedUrl = new URL(url);
+      // ejemplo: /album/2Ek1q2haOnxVqhvVKqMvJe
+      const path = parsedUrl.pathname.substring(1); // quita el "/"
+      return path; // "album/2Ek1q2haOnxVqhvVKqMvJe"
+    } catch {
+      return "";
+    }
+  };
 
-        try {
-            const parsedUrl = new URL(url);
-            // ejemplo: /album/2Ek1q2haOnxVqhvVKqMvJe
-            const path = parsedUrl.pathname.substring(1); // quita el "/"
-            return path; // "album/2Ek1q2haOnxVqhvVKqMvJe"
-        } catch {
-            return "";
-        }
-    };
+  useEffect(() => {
+    extractSpotifyPath(item.music);
+  }, []);
 
-    useEffect(() => {
-        extractSpotifyPath(item.music)
-    }, [])
-
-
-    return (
-        <div className={styles.open_card_container} style={{
-            fontFamily: generals.fonts.body?.typeFace,
-            color: content.inverted ? primary : accent
-        }}>
-
-            {/* {
+  return (
+    <div
+      className={styles.open_card_container}
+      style={{
+        fontFamily: generals.fonts.body?.typeFace,
+        color: content.inverted ? primary : accent,
+      }}
+    >
+      {/* {
                 generals.texture !== null &&
                 <div className="image-texture-container">
                     <div className="image-texture-container">
@@ -70,125 +70,131 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
                 </div>
             } */}
 
-            <div style={{
-                display:'flex', alignItems:'center', justifyContent:'flex-start', gap:'8px',
-                position:'absolute', top:'-18px', right:'-6px', zIndex:3
-            }}>
-                {item?.address?.url &&
-                    <div className={styles.how_to_button}>
-                        <Button
-                            href={item.address.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            icon={<FaDiamondTurnRight size={14} />}
-                            style={{
-                                margin: "16px 0",
-                                background: content.inverted ? primary : actions,
-                                color: content.inverted
-                                    ? accent
-                                    : buttonsColorText(actions),
-                                boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.25), 0 0 6px 0 rgba(134, 134, 134, 0.25) inset'
-                            }}
-                        >
-                            ¿Cómo llegar?
-                        </Button>
-                    </div>
-                }
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          gap: "8px",
+          position: "absolute",
+          top: "-18px",
+          right: "-6px",
+          zIndex: 3,
+        }}
+      >
+        {item?.address?.url && (
+          <div className={styles.how_to_button}>
+            <Button
+              href={item.address.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              icon={<FaDiamondTurnRight size={14} />}
+              style={{
+                margin: "16px 0",
+                background: content.inverted ? primary : actions,
+                color: content.inverted ? accent : buttonsColorText(actions),
+                boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25), 0 0 6px 0 rgba(134, 134, 134, 0.25) inset",
+              }}
+            >
+              ¿Cómo llegar?
+            </Button>
+          </div>
+        )}
 
-                <Button
-                    onClick={() =>
-                        setActiveSteps(activeSteps?.filter(step => step !== item) ?? [])
-                    }
-                    className={styles.open_card_button}
-                    icon={<IoMdClose size={18} />}
-                    style={{
-                        background: content.background ? secondary : content.inverted ? primary : secondary ?? "#FFF",
-                        color: content.inverted ? accent : buttonsColorText(primary),
-                    }}
-                />
+        <Button
+          onClick={() => setActiveSteps(activeSteps?.filter((step) => step !== item) ?? [])}
+          className={styles.open_card_button}
+          icon={<IoMdClose size={18} />}
+          style={{
+            background: content.background ? secondary : content.inverted ? primary : secondary ?? "#FFF",
+            color: content.inverted ? accent : buttonsColorText(primary),
+          }}
+        />
+      </div>
+
+      {item.image ? (
+        <div className={styles.image_header_container}>
+          <Image alt="" fill src={item.image!} style={{ objectFit: "cover", width: "100%", height: "100%" }} />
+        </div>
+      ) : (
+        <div
+          className={styles.image_header_container}
+          style={{
+            height: "20px",
+            backgroundColor: content.background ? accent : content.inverted ? primary : accent ?? "#FFF",
+            boxShadow: "0px 0px 0px rgba(0,0,0,0)",
+            // borderRadius: "99px",
+          }}
+        ></div>
+      )}
+
+      <div className={styles.open_card_info}>
+        <span className={styles.open_title}>
+          {" "}
+          <b>{item.name}</b>{" "}
+        </span>
+        <span className={styles.open_sub}> {item.time} </span>
+        <span className={styles.open_text}> {item.subtext} </span>
+        {item.address && (
+          <span className={styles.open_card_address} style={{ color: content.inverted ? `${primary}80` : `${accent}80` }}>
+            {`${item.address.street}, ${item.address.number}, ${item.address.neighborhood}, ${item.address.zip}, ${item.address.city}, ${item.address.state}`}
+          </span>
+        )}
+      </div>
+
+      {item.moments && item.moments.length > 0 && (
+        <div className={styles.custom_card_subitems} style={{ borderColor: accent }}>
+          {item.moments.map((subitem) => (
+            <div key={subitem.name} className={styles.custom_card_subitem} style={{ lineHeight: "1.3" }}>
+              <div className={styles.custom_card_subitem_bullet} style={{ backgroundColor: accent }} />
+              <span className={styles.custom_card_subitem_title}>{subitem.name}</span>
+              <span className={styles.custom_card_subitem_time}>{subitem.time}</span>
+              <span className={styles.custom_card_subitem_description} style={{ color: content.inverted ? `${primary}80` : `${accent}80` }}>
+                {subitem.description}
+              </span>
             </div>
+          ))}
+        </div>
+      )}
 
-            <div className={styles.image_header_container}>
-                <Image
-                    alt=""
-                    fill
-                    src={item.image!}
-                    style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                />
-            </div>
-
-
-            <div className={styles.open_card_info}>
-                <span className={styles.open_title}> <b>{item.name}</b> </span>
-                <span className={styles.open_sub}> {getMexicoHour(item.time!)} </span>
-                <span className={styles.open_text}> {item.subtext} </span>
-                {
-                    item.address &&
-                    <span className={styles.open_card_address} style={{ color: content.inverted ? `${primary}80` : `${accent}80` }}>
-                        {`${item.address.street}, ${item.address.number}, ${item.address.neighborhood}, ${item.address.zip}, ${item.address.city}, ${item.address.state}`}
-                    </span>
-                }
-            </div>
-
-
-
-
-
-            {
-                item.moments &&
-                <div className={styles.custom_card_subitems} style={{borderColor: accent}}>
-                    {item.moments.map((subitem) => (
-                        <div key={subitem.name} className={styles.custom_card_subitem}>
-                            <div className={styles.custom_card_subitem_bullet} style={{backgroundColor: accent}} />
-                            <span className={styles.custom_card_subitem_title}>
-                                {subitem.name}
-                            </span>
-                            <span className={styles.custom_card_subitem_time}>
-                                {getMexicoHour(subitem.time!)}
-                            </span>
-                            <span className={styles.custom_card_subitem_description} style={{ color: content.inverted ? `${primary}80` : `${accent}80` }}>
-                                {subitem.description}
-                            </span>
-                        </div>
-                    ))}
-                </div>
-            }
-
-            {item.address
-                &&
+      {item.address && (
+        <>
+          <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "flex-start", gap: "12px" }}>
+            {item.address.street &&
+              item.address.number &&
+              item.address.neighborhood &&
+              item.address.zip &&
+              item.address.city &&
+              item.address.state && (
                 <>
-                    <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '12px',  }}>
-                        {
-                            item.address.street && item.address.number && item.address.neighborhood && item.address.zip && item.address.city && item.address.state &&
-                            <>
+                  {<WeatherWidget invitation={invitation} dev={dev} item={item} />}
 
-                                {
-                                    <WeatherWidget invitation={invitation} dev={dev} item={item} />
-                                }
-
-
-                                <div className={styles.mapa_container} style={{ backgroundColor: secondary }}>
-                                    <iframe
-                                        title="Mapa"
-                                        width="100%"
-                                        height="100%"
-                                        style={{ border: 0 }}
-                                        loading="lazy"
-                                        allowFullScreen
-                                        referrerPolicy="no-referrer-when-downgrade"
-                                        src={simpleaddress(item.address.street, item.address.number, item.address.neighborhood, item.address.zip, item.address.city, item.address.state)}
-                                    />
-                                </div>
-                            </>
-                        }
-
-
-                    </div>
-
+                  <div className={styles.mapa_container} style={{ backgroundColor: secondary }}>
+                    <iframe
+                      title="Mapa"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      loading="lazy"
+                      allowFullScreen
+                      referrerPolicy="no-referrer-when-downgrade"
+                      src={simpleaddress(
+                        item.address.street,
+                        item.address.number,
+                        item.address.neighborhood,
+                        item.address.zip,
+                        item.address.city,
+                        item.address.state
+                      )}
+                    />
+                  </div>
                 </>
-            }
+              )}
+          </div>
+        </>
+      )}
 
-            {/* {item.music && (
+      {/* {item.music && (
                 <iframe
                     style={{ borderRadius: "12px", boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.25), 0 0 6px 0 rgba(134, 134, 134, 0.25) inset' }}
                     src={`https://open.spotify.com/embed/${extractSpotifyPath(item.music)}?utm_source=generator&theme=2`}
@@ -199,28 +205,16 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
                     loading="lazy"
                 />
             )} */}
-
-
-        </div>
-    )
+    </div>
+  );
 }
 
+export function simpleaddress(direccion: string, numero: string, colonia: string, codigoPostal: string, ciudad: string, estado: string) {
+  const direccionCompleta = `${direccion} ${numero}, ${colonia}, ${codigoPostal}, ${ciudad}, ${estado}, Mexico`;
+  const direccionCodificada = encodeURIComponent(direccionCompleta);
+  const key = "AIzaSyBZ8NLpvAl4DiTeE2gYekBqhmSZFx43R0M";
+  const urlMapaGenerado = `https://www.google.com/maps/embed/v1/place?key=${key}&q=${direccionCodificada}`;
 
-
-export function simpleaddress(
-    direccion: string,
-    numero: string,
-    colonia: string,
-    codigoPostal: string,
-    ciudad: string,
-    estado: string
-) {
-    const direccionCompleta = `${direccion} ${numero}, ${colonia}, ${codigoPostal}, ${ciudad}, ${estado}, Mexico`;
-    const direccionCodificada = encodeURIComponent(direccionCompleta);
-    const key = "AIzaSyBZ8NLpvAl4DiTeE2gYekBqhmSZFx43R0M"
-    const urlMapaGenerado = `https://www.google.com/maps/embed/v1/place?key=${key}&q=${direccionCodificada}`;
-
-    console.log(urlMapaGenerado);
-    return urlMapaGenerado;
+  console.log(urlMapaGenerado);
+  return urlMapaGenerado;
 }
-

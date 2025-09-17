@@ -5,10 +5,8 @@ import Image from "next/image";
 import React, { forwardRef, useState } from "react";
 import { Separador } from "../Separator/Separator";
 import styles from "./dresscode.module.css";
-import PinterestBoard from "./PinterestBoards/PinterestBoard";
 import { Button } from "antd";
-import { FaPinterest, FaPinterestP } from "react-icons/fa";
-import { textures } from "@/helpers/textures";
+import { FaPinterest } from "react-icons/fa";
 
 type DresscodeProps = {
   dev: boolean;
@@ -24,54 +22,20 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
   const primary = generals?.colors.primary ?? "#FFFFFF";
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
-  const actions = generals?.colors.actions ?? "#FFFFFF";
-
-  const [onPinterest, setOnPinterest] = useState<boolean>(false);
-
-  // useEffect(() => {
-  //   AOS.init({
-  //     duration: 900,       // duración de las animaciones (en ms)
-  //     once: true,          // si se anima solo la primera vez
-  //     easing: 'ease-out',  // tipo de easing
-  //   });
-  // }, []);
 
   return (
     <>
       {content.active && generals ? (
-        <>
+        <div style={{ position: "relative", width: "100%" }}>
+          <div className="textures_background" style={{ backgroundColor: content.background ? secondary : "transparent" }} />
           <div
-            //data-aos={!dev ? 'fade-left' : undefined}
             ref={ref}
             className="gm_container"
             style={{
-              backgroundColor: content.background ? secondary : "transparent",
               padding: content.background ? "32px" : "0px 32px",
               position: "relative",
             }}
           >
-            {/* {content.background && generals.texture !== null && (
-              <div className="image_texture_container">
-                <div className="image_texture_container">
-                  {Array.from({ length: 100 }).map((_, index) => (
-                    <Image
-                      fill
-                      loading="lazy"
-                      decoding="async"
-                      alt=""
-                      key={index}
-                      src={textures[generals.texture].image}
-                      className="texture_img"
-                      style={{
-                        opacity: textures[generals.texture].opacity,
-                        filter: textures[generals.texture].filter,
-                        mixBlendMode: textures[generals.texture].blend,
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-            )} */}
             <div className="g_module_info_container">
               <span
                 data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
@@ -108,7 +72,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                         data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
                         key={index}
                         className={styles.dresscode_color}
-                        style={{ borderColor: primary, backgroundColor: color }}
+                        style={{ borderColor: content.background ? secondary : primary, backgroundColor: color }}
                       />
                     ))}
                   </div>
@@ -139,7 +103,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                         href={link.url}
                         icon={<FaPinterest />}
                         style={{
-                          backgroundColor: primary,
+                          backgroundColor: content.background ? secondary : primary,
                           color: accent,
                           // backgroundColor: "#E60024",
                           // color: "#FFF",
@@ -154,7 +118,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
             </div>
           </div>
           {content.separator && <Separador generals={generals} value={generals.separator} />}
-        </>
+        </div>
       ) : null}
     </>
   );

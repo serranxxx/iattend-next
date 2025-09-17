@@ -1,5 +1,3 @@
-import { textures } from "@/helpers/textures";
-import { Invitation } from "@/types/invitation";
 import { NewInvitation } from "@/types/new_invitation";
 import Image from "next/image";
 import React, { forwardRef } from "react";
@@ -21,17 +19,16 @@ export const Gallery = forwardRef<HTMLDivElement, DresscodeProps>(function galle
   const primary = generals?.colors.primary ?? "#FFFFFF";
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
-  const actions = generals?.colors.actions ?? "#FFFFFF";
 
   return (
     <>
       {content.active && generals && (
-        <>
+        <div style={{ position: "relative", width: "100%" }}>
+          <div className="textures_background" style={{ backgroundColor: content.background ? secondary : "transparent" }} />
           <div
             ref={ref}
             className="gm_container"
             style={{
-              backgroundColor: content.background ? secondary : "transparent",
               padding: content.background ? "32px" : "0px 32px",
               position: "relative",
             }}
@@ -47,30 +44,6 @@ export const Gallery = forwardRef<HTMLDivElement, DresscodeProps>(function galle
               >
                 {content.title}
               </span>
-
-              {content.background && generals.texture !== null && (
-                <div className="image_texture_container">
-                  <div className="image_texture_container">
-                    {Array.from({ length: 100 }).map((_, index) => (
-                      <Image
-                        fill
-                        loading="lazy"
-                        decoding="async"
-                        alt=""
-                        key={index}
-                        src={textures[generals.texture].image}
-                        className="texture_img"
-                        style={{
-                          opacity: textures[generals.texture].opacity,
-                          filter: textures[generals.texture].filter,
-                          mixBlendMode: textures[generals.texture].blend,
-                        }}
-                      />
-                    ))}
-                  </div>
-                </div>
-              )}
-
               <div
                 data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
                 style={{ zIndex: 2, padding: "6px 24px" }}
@@ -88,9 +61,9 @@ export const Gallery = forwardRef<HTMLDivElement, DresscodeProps>(function galle
               </div>
             </div>
           </div>
-          {content.separator && <Separador generals={generals} value={generals.separator} />}
-        </>
+        </div>
       )}
+      {content?.separator && <Separador generals={generals} value={generals?.separator ?? 1} />}
     </>
   );
 });

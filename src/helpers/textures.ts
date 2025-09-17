@@ -9,10 +9,11 @@ import { StaticImageData } from "next/image";
 import { CSSProperties } from "react";
 
 type Texture = {
-  image: StaticImageData;
+  image: StaticImageData | string;
   opacity: number;
   blend: CSSProperties["mixBlendMode"]; // ← en vez de string
   filter: CSSProperties["filter"]; // ← también tipado
+  path: string;
 };
 
 export const textures: Texture[] = [
@@ -21,6 +22,7 @@ export const textures: Texture[] = [
     opacity: 1,
     blend: "multiply",
     filter: "grayscale(1) contrast(1) brightness(1)",
+    path: "@/assets/textures/paper.jpg",
   },
 
   {
@@ -28,6 +30,7 @@ export const textures: Texture[] = [
     opacity: 0.5,
     blend: "multiply",
     filter: "grayscale(1) contrast(1) brightness(1)",
+    path: "@/assets/textures/paper.jpg",
   },
 
   {
@@ -35,6 +38,7 @@ export const textures: Texture[] = [
     opacity: 0.5,
     blend: "multiply",
     filter: "grayscale(1) contrast(1) brightness(1)",
+    path: "@/assets/textures/paper.jpg",
   },
 
   {
@@ -42,6 +46,7 @@ export const textures: Texture[] = [
     opacity: 0.5,
     blend: "multiply",
     filter: "grayscale(1) contrast(1) brightness(1)",
+    path: "@/assets/textures/paper.jpg",
   },
 
   {
@@ -49,6 +54,7 @@ export const textures: Texture[] = [
     opacity: 0.5,
     blend: "multiply",
     filter: "grayscale(1) contrast(1) brightness(1)",
+    path: "@/assets/textures/paper.jpg",
   },
 
   {
@@ -56,6 +62,7 @@ export const textures: Texture[] = [
     opacity: 0.5,
     blend: "multiply",
     filter: "grayscale(1) contrast(1) brightness(1)",
+    path: "@/assets/textures/paper.jpg",
   },
 
   {
@@ -63,5 +70,6 @@ export const textures: Texture[] = [
     opacity: 0.5,
     blend: "multiply",
     filter: "grayscale(1) contrast(1.1) brightness(1)",
+    path: "@/assets/textures/paper.jpg",
   },
 ];

@@ -29,17 +29,17 @@ export default function Card({ invitation, dev }: CardProps) {
   const [activeSteps, setActiveSteps] = useState<ItineraryItem[]>([]);
 
   const renderIcon = (iconID: number) => {
-    if (!iconID) return <LuBadgeHelp size={28} style={{ color: content.background ? primary : accent }} />;
+    if (!iconID) return <LuBadgeHelp size={28} style={{ color: content.background ? accent : accent }} />;
     const Icon = getItineraryIcon(iconID);
     if (Icon) {
-      return <Icon size={28} style={{ color: content.background ? primary : accent }} />;
+      return <Icon size={28} style={{ color: content.background ? accent : accent }} />;
     }
-    return <LuBadgeHelp size={28} style={{ color: content.background ? primary : accent }} />;
+    return <LuBadgeHelp size={28} style={{ color: content.background ? accent : accent }} />;
   };
 
   useEffect(() => {
-    console.log(activeSteps);
-  }, [activeSteps]);
+    console.log("card: ", invitation);
+  }, [invitation]);
 
   return (
     <>
@@ -48,9 +48,14 @@ export default function Card({ invitation, dev }: CardProps) {
           key={index}
           className={styles.step_card_cont}
           style={{
-            background: content.background ? primary : secondary,
+            background: content.background
+              ? `${primary}${Number.isFinite(generals.texture) ? "80" : ""}`
+              : `${secondary}${Number.isFinite(generals.texture) ? "80" : ""}`,
             height: activeSteps?.includes(item) ? "auto" : undefined,
+            // border: Number.isFinite(generals.texture) ? "1px solid red" : "1px solid blue",
             border: `1px solid ${accent}10`,
+            boxShadow: Number.isFinite(generals.texture) ? "0 0 8px 0 rgba(0, 0, 0, 0.25)" : undefined,
+            backdropFilter: "blur(10px)",
           }}
         >
           {activeSteps?.includes(item) ? (
@@ -74,33 +79,9 @@ export default function Card({ invitation, dev }: CardProps) {
                 <span className={styles.open_title}>
                   <b>{item.name}</b>
                 </span>
-                <span className={styles.open_sub}>{getMexicoHour(item.time!)}</span>
+                <span className={styles.open_sub}>{item.time}</span>
                 <span className={styles.open_text}>{item.subtext}</span>
               </div>
-
-              {content.background && generals.texture !== null && (
-                <div className="image_texture_container">
-                  <div className="image_texture_container">
-                    {Array.from({ length: 100 }).map((_, index) => (
-                      <Image
-                        fill
-                        loading="lazy"
-                        decoding="async"
-                        alt=""
-                        key={index}
-                        src={textures[generals.texture].image}
-                        className="texture_img"
-                        style={{
-                          opacity: textures[generals.texture].opacity,
-                          filter: textures[generals.texture].filter,
-                          mixBlendMode: textures[generals.texture].blend,
-                        }}
-                      />
-                    ))}
-                  </div>
-                </div>
-              )}
-
               {item.moments || item.music || item.address ? (
                 <Button
                   onClick={() => setActiveSteps([...(activeSteps ?? []), item])}
