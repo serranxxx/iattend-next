@@ -1,7 +1,7 @@
 // FanStack.tsx
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 type FanStackProps = {
     images: string[];
@@ -23,6 +23,17 @@ export default function FanStack({
     const mid = (n - 1) / 2;
 
     const [onScroll, setOnScroll] = useState<boolean>(false)
+    const [handleImages, setHandleImages] = useState<string[]>([])
+
+
+    useEffect(() => {
+        if (onScroll) {
+            setHandleImages(images)
+        } else {
+            setHandleImages(images.slice(0,3))
+        }
+      }, [onScroll])
+    
 
     return (
         <div
@@ -42,16 +53,33 @@ export default function FanStack({
                 // margin: "0 auto",
             }}
         >
-            {images.map((src, i) => {
+            {handleImages.map((src, i) => {
                 // ángulo repartido de -maxFanDeg a +maxFanDeg
-                const t = mid === 0 ? 0 : (i - mid) / mid; // -1..1
-                const rot = t * maxFanDeg;
+                // Control manual de posición para hasta 4 imágenes
+                let dx = 0;
+                let dy = 0;
+                let rot = 0;
+                let scale = 1;
 
-                // desplazamiento leve; más afuera => más desplazado
-                const dx = t * gap * 2;               // izquierda/derecha
-                const dy = Math.abs(t) * gap * 1.2;   // hacia abajo
-                // leve escala: la carta del centro un poco más grande
-                const scale = 0.94 + (1 - Math.abs(t)) * 0.08;
+                if (i === 1) {
+                    dx = -80; // izquierda
+                    dy = 10;
+                    rot = -20;
+                    scale = 0.9;
+                } else if (i === 2) {
+                    dx = 80; // derecha
+                    dy = 10;
+                    rot = 20;
+                    scale = 0.9;
+                } 
+
+                // else if (i === 3) {
+                //     dx = 40; // derecha
+                //     dy = -10;
+                //     rot = 30;
+                //     scale = 0.9;
+                // } 
+
 
                 // z-index: la de arriba (centro) al frente
                 // const z = Math.round((1 - Math.abs(t)) * 100) + i;
