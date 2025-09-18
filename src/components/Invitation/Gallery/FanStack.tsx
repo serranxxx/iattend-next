@@ -43,10 +43,12 @@ export default function FanStack({
                 position: "relative",
                 width: "100%",
                 maxWidth:'100vw',
-                height:'360px',
+                height:'380px',
                 minWidth:'100vw',
                 padding:'0px 24px',
                 marginTop:'-30px',
+                overflow: onScroll ? 'auto' : 'hidden'
+                // border:'1px solid'
                 // overflowY:'auto'
                 // maxWidth: size + 40,
                 // aspectRatio: "1 / 1",
@@ -62,14 +64,14 @@ export default function FanStack({
                 let scale = 1;
 
                 if (i === 1) {
-                    dx = -80; // izquierda
+                    dx = -50; // izquierda
                     dy = 10;
-                    rot = -20;
+                    rot = -10;
                     scale = 0.9;
                 } else if (i === 2) {
-                    dx = 80; // derecha
+                    dx = 50; // derecha
                     dy = 10;
-                    rot = 20;
+                    rot = 10;
                     scale = 0.9;
                 } 
 
@@ -93,14 +95,14 @@ export default function FanStack({
                             position: onScroll ? "static" : "absolute",
                             left: onScroll ? '' : "50%",
                             top:onScroll ? '' :  "50%",
-                            minWidth: onScroll ? '200px' : '',
-                            width: 200,
-                            height: 280, // proporción 4:3; ajusta a tu gusto
+                            minWidth: onScroll ? '220px' : '',
+                            width: 220,
+                            height: 300, // proporción 4:3; ajusta a tu gusto
                             transform: onScroll ? '' : `translate(-50%, -50%) translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(${scale})`,
                             transformOrigin: "center",
                             borderRadius: radius,
                             overflow: "hidden",
-                            boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25), 0 0 8px 0 rgba(134, 134, 134, 0.45) inset",
+                            boxShadow: "0 0 8px 0 rgba(0, 0, 0, 0.35), 0 0 8px 0 rgba(134, 134, 134, 0.45) inset",
                             background: "#e9ecef",
                             zIndex: z,
                             transition: "all 0.35s ease",

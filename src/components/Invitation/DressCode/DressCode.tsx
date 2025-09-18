@@ -53,7 +53,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                 {content.description}
               </span>
 
-              {content.colors && (
+              {content.colors && content.colors.length > 0 && (
                 <div className={styles.color_palette_cont}>
                   <span
                     className="g_mdoule_regular_text"
@@ -80,7 +80,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                 </div>
               )}
 
-              {content.images_active && (
+              {/* {content.images_active && (
                 <div className={styles.scroll_invitation} style={{ zIndex: 2 }}>
                   {images_src.map((image, index) => (
                     <div
@@ -93,7 +93,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                     </div>
                   ))}
                 </div>
-              )}
+              )} */}
 
               {content.links_active && (
                 <div className={dev ? "dresscode-links-dev" : "dresscode-links"}>
