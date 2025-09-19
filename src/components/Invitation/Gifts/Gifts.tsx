@@ -3,6 +3,7 @@ import React, { forwardRef, useState } from "react";
 import { Separador } from "../Separator/Separator";
 import Card from "./Cards/Cards";
 import styles from "./gifts.module.css";
+import Wallet from "../DressCode/Wallet/Wallet";
 
 type DresscodeProps = {
   dev: boolean;
@@ -72,19 +73,20 @@ export const Gifts = forwardRef<HTMLDivElement, DresscodeProps>(function Greetin
                 {content.description}
               </span>
               <div
-                style={{
-                  padding: "6px 24px",
-                  height: `calc(180px + 50px*(${cards.length - 1}))`,
-                }}
+                // style={{
+                //   padding: "6px 24px",
+                //   height: `calc(180px + 50px*(${cards.length - 1}))`,
+                // }}
                 className={styles.cards_container}
               >
                 {/* 👉 Pasamos cards y callback */}
-                <Card
+                <Wallet invitation={invitation} dev={dev}/>
+                {/* <Card
                   invitation={invitation}
                   dev={dev}
                   GiftCard={cards}
                   onSelect={moveToTop}
-                />
+                /> */}
               </div>
             </div>
           </div>

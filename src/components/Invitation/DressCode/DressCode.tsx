@@ -38,7 +38,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
           >
             <div className="g_module_info_container">
               <span
-                data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
+                // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
                 className="g_module_title"
                 style={{ color: content.background && content.inverted ? primary : accent, fontFamily: generals.fonts.body?.typeFace }}
               >
@@ -46,7 +46,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
               </span>
 
               <span
-                data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
+                // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
                 className="g_mdoule_regular_text"
                 style={{ color: content.background && content.inverted ? primary : accent, fontFamily: generals.fonts.body?.typeFace }}
               >
@@ -69,7 +69,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                   <div className={styles.dresscode_colors}>
                     {content.colors.map((color, index) => (
                       <div
-                        data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
+                        // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
                         key={index}
                         className={styles.dresscode_color}
                         style={{ borderColor: content.background ? secondary : primary, backgroundColor: color }}
@@ -104,7 +104,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                         href={link.url}
                         icon={<FaPinterest />}
                         style={{
-                          backgroundColor: content.background ? secondary : primary,
+                          backgroundColor: content.background ? content.inverted ? primary : secondary : primary,
                           color: accent,
                           // backgroundColor: "#E60024",
                           // color: "#FFF",

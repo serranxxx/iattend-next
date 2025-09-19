@@ -96,7 +96,7 @@
     justify-content: center;
     position: relative;
     /* border-radius: 12px; */
-    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.25), 0 0 8px 0 rgba(134, 134, 134, 0.25) inset;
+    /* box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.25), 0 0 8px 0 rgba(134, 134, 134, 0.25) inset; */
 }
 
 .fan_container,

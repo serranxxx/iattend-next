@@ -41,7 +41,7 @@ export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function 
           >
             <div className="g_module_info_container">
               <span
-                data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
+                // data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
                 className="g_module_title"
                 style={{
                   color: content.background && content.inverted ? primary : accent,
@@ -52,7 +52,7 @@ export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function 
               </span>
 
               <span
-                data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
+                // data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
                 className="g_mdoule_regular_text"
                 style={{
                   color: content.background && content.inverted ? primary : accent,
@@ -63,7 +63,7 @@ export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function 
               </span>
               <div
                 style={{ padding: "6px 24px" }}
-                data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
+                // data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
                 className="scroll_invitation"
               >
                 <Card invitation={invitation} />

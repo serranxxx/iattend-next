@@ -39,7 +39,7 @@ export const People = forwardRef<HTMLDivElement, peopleProps>(function Greeting(
           >
             <div className="g_module_info_container">
               <span
-                data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
+                // data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
                 className="g_module_title"
                 style={{
                   color: content.background && content.inverted ? primary : accent,
@@ -63,7 +63,7 @@ export const People = forwardRef<HTMLDivElement, peopleProps>(function Greeting(
                       }}
                     >
                       <div
-                        data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
+                        // data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
                         key={index}
                         className="g_module_items_single_col"
                       >

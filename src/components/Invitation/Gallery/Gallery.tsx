@@ -38,7 +38,7 @@ export const Gallery = forwardRef<HTMLDivElement, DresscodeProps>(function galle
               // width:'auto'
             }}>
               <span
-                data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
+                // data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
                 className="g_module_title"
                 style={{
                   fontFamily: font,

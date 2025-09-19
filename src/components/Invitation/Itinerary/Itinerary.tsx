@@ -41,7 +41,7 @@ export const Itinerary = forwardRef<HTMLDivElement, quoteProps>(function Greetin
           >
             <div className="g_module_info_container">
               <span
-                data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
+                // data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
                 className="g_module_title"
                 style={{
                   color: content.background && content.inverted ? primary : accent,
@@ -50,7 +50,9 @@ export const Itinerary = forwardRef<HTMLDivElement, quoteProps>(function Greetin
               >
                 {content.title}
               </span>
-              <div data-aos={!dev && generals.texture == null ? "fade-right" : undefined} className={styles.itinerary_cards_container}>
+              <div 
+              // data-aos={!dev && generals.texture == null ? "fade-right" : undefined} 
+              className={styles.itinerary_cards_container}>
                 <Card invitation={invitation} dev={dev} />
               </div>
             </div>

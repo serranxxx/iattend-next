@@ -47,7 +47,7 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
               }}
             >
               <span
-                data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
+                // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
                 className="g_module_title"
                 style={{
                   color: content.background && content.inverted ? primary : accent,
@@ -57,7 +57,7 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
                 {content.title}
               </span>
               <span
-                data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
+                // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
                 className="g_module_regular_text"
                 style={{
                   color: content.background && content.inverted ? primary : accent,

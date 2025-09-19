@@ -74,6 +74,7 @@ export default function Card({ invitation, dev }: CardProps) {
                 className={styles.card_info}
                 style={{
                   fontFamily: generals.fonts.body?.typeFace,
+                  color: content.background ? accent : content.inverted ? primary : accent
                 }}
               >
                 <span className={styles.open_title}>

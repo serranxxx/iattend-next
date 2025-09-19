@@ -94,10 +94,7 @@ export default function Invitation({ invitation, loader }: invProps) {
           backgroundColor: invitation.generals.colors.primary ?? "#FFF",
         }}
       >
-        <Cover ref={coverRef} dev={false} invitation={invitation} height={"100vh"} />
-        {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
-
-        {invitation.generals.texture != null && tex && (
+        {invitation.generals.texture && tex && (
           <TextureOverlay
             containerRef={scrollableContentRef as unknown as React.RefObject<HTMLElement>}
             coverHeightPx={coverHeightPx}
@@ -111,6 +108,10 @@ export default function Invitation({ invitation, loader }: invProps) {
             tileH={1024}
           />
         )}
+        <Cover ref={coverRef} dev={false} invitation={invitation} height={"100vh"} />
+        {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
+
+        
       </div>
       {/* <FooterInvitation invitation={invitation} /> */}
     </div>
