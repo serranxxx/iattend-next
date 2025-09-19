@@ -25,7 +25,7 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
     }
     // ⬆ salto responsivo según alto del contenedor
     const h = ref.current?.clientHeight ?? 340;
-    const jump = Math.max(160, Math.min(260, h - 80)); // 160–260 aprox
+    const jump = Math.max(160, Math.min(600, h - 10)); // 160–260 aprox
     const next = [...base];
     next[index] = jump;
     setBottoms(next);
