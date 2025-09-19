@@ -38,8 +38,8 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
 
     return (
         <div className={styles.wallet} style={{
-            background: content.background ? primary : secondary,
-            border: `1px solid ${lighter(content.background ? primary : secondary, 0.1)}`
+            background: accent,
+            // border: `1px solid ${lighter(accent 0.1)}`
         }}>
 
 
@@ -88,13 +88,13 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
 
             {/* Separadores */}
             <div style={{
-                background: content.background ? primary : secondary,
+                background: accent
             }} className={`${styles.department} ${styles.one}`} />
             <div style={{
-                background: content.background ? primary : secondary,
+                background: accent
             }} className={`${styles.department} ${styles.two}`} />
             <div style={{
-                background: content.background ? primary : secondary,
+                background: accent
             }} className={`${styles.department} ${styles.three}`} />
 
             {/* Logo inferior (texto) */}
