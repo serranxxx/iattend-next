@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./wallet.module.css";
 import { GiftCard, NewInvitation } from "@/types/new_invitation";
 import { darker } from "@/helpers/functions";
@@ -16,7 +16,8 @@ type CardProps = {
 };
 
 export default function Wallet({ invitation, dev = false }: CardProps) {
-  const base = [14, 54, 94]; // offsets base
+  // const base = [14, 54, 94]; // offsets base
+  const [base, setBase] = useState<number[]>([]);
   const [bottoms, setBottoms] = useState<number[]>(base);
   const [movedIndex, setMovedIndex] = useState<number | null>(null);
   const ref = useRef<HTMLDivElement>(null);
@@ -27,7 +28,7 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
   const secondary = invitation.generals?.colors?.secondary ?? "#FFFFFF";
   const fontFamily = invitation.generals.fonts.body?.typeFace;
   const title = invitation.cover.title.text.value;
-  const cards = invitation.gifts.cards;
+  const cards = invitation.gifts.cards.slice(0, 3);
 
   const handleClick = (index: number) => {
     if (movedIndex === index) {
@@ -52,6 +53,25 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
       console.error("Error al copiar el texto: ", err);
     }
   };
+
+  useEffect(() => {
+    switch (cards.length) {
+      case 1:
+        setBase([94]);
+        break;
+
+      case 2:
+        setBase([54, 94]);
+        break;
+
+      case 3:
+        setBase([14, 54, 94]);
+        break;
+
+      default:
+        break;
+    }
+  }, [cards]);
 
   return (
     <>
