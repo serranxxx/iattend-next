@@ -18,7 +18,8 @@ type CardProps = {
 export default function Wallet({ invitation, dev = false }: CardProps) {
   // const base = [14, 54, 94]; // offsets base
   const [base, setBase] = useState<number[]>([]);
-  const [bottoms, setBottoms] = useState<number[]>(base);
+  const [bottoms, setBottoms] = useState<number[]>([]);
+  const [cards, setCards] = useState<GiftCard[] | null>(null);
   const [movedIndex, setMovedIndex] = useState<number | null>(null);
   const ref = useRef<HTMLDivElement>(null);
   const [messageApi, contextHolder] = message.useMessage();
@@ -28,7 +29,7 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
   const secondary = invitation.generals?.colors?.secondary ?? "#FFFFFF";
   const fontFamily = invitation.generals.fonts.body?.typeFace;
   const title = invitation.cover.title.text.value;
-  const cards = invitation.gifts.cards.slice(0, 3);
+  // const cards = invitation.gifts.cards.slice(0, 3);
 
   const handleClick = (index: number) => {
     if (movedIndex === index) {
@@ -55,78 +56,98 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
   };
 
   useEffect(() => {
-    switch (cards.length) {
-      case 1:
-        setBase([94]);
-        break;
+    if (invitation) {
+      const sliced = invitation.gifts.cards.slice(0, 3);
+      switch (sliced.length) {
+        case 1:
+          setBase([94]);
+          break;
 
-      case 2:
-        setBase([54, 94]);
-        break;
+        case 2:
+          setBase([54, 94]);
+          break;
 
-      case 3:
-        setBase([14, 54, 94]);
-        break;
+        case 3:
+          setBase([14, 54, 94]);
+          break;
 
-      default:
-        break;
+        default:
+          break;
+      }
     }
-  }, [cards]);
+  }, [invitation]);
+
+  useEffect(() => {
+    if (base) {
+      setBottoms(base);
+    }
+  }, [base]);
+
+  useEffect(() => {
+    if (invitation) {
+      setCards(invitation.gifts.cards.slice(0, 3));
+    }
+  }, []);
 
   return (
     <>
       {contextHolder}
       <div ref={ref} className={styles.wallet} style={{ backgroundColor: darker(secondary, 0.9) ?? "#FFF", transform: "scale(0.8)" }}>
-        {cards.map((card, index) => (
-          <div
-            className={`${styles.card} ${styles[classifyGiftCard(card).className]}`}
-            style={{ zIndex: cards.length + 1 - index, bottom: `${bottoms[index]}px`, padding: movedIndex === index ? "24px" : undefined }}
-            onClick={() => handleClick(index)}
-          >
+        {bottoms.length > 0 &&
+          cards?.map((card, index) => (
             <div
-              className={styles.card_logo_container}
+              className={`${styles.card} ${styles[classifyGiftCard(card).className]}`}
               style={{
-                height: movedIndex === index ? "24px" : undefined,
+                zIndex: cards.length + 1 - index,
+                bottom: `${bottoms[index]}px`,
+                padding: movedIndex === index ? "24px" : undefined,
               }}
+              onClick={() => handleClick(index)}
             >
-              <img src={classifyGiftCard(card).imageUrl ?? ""} alt="" style={{ height: "100%", objectFit: "cover" }} />
-            </div>
-
-            {card.kind === "store" ? (
-              <div className={styles.wallet_col} style={{ gap: "6px" }}>
-                <span>Descubre nuestra mesa de regalos</span>
-                <Button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    window.open(card.url!, "_blank");
-                  }}
-                  className={styles.cta_button}
-                  icon={<MdArrowOutward />}
-                >
-                  Ver regalos
-                </Button>
+              <div
+                className={styles.card_logo_container}
+                style={{
+                  height: movedIndex === index ? "24px" : undefined,
+                }}
+              >
+                <img src={classifyGiftCard(card).imageUrl ?? ""} alt="" style={{ height: "100%", objectFit: "cover" }} />
               </div>
-            ) : (
-              <div className={styles.wallet_col} style={{ gap: "6px" }}>
-                <span>{card.name}</span>
-                <span>
-                  {card.number}{" "}
+
+              {card.kind === "store" ? (
+                <div className={styles.wallet_col} style={{ gap: "6px" }}>
+                  <span>Descubre nuestra mesa de regalos</span>
                   <Button
                     onClick={(e) => {
-                      e.stopPropagation(); // evita que se dispare el onClick del padre
-                      copyToClipboard(card.number!); // o usa router.push si es interno
+                      e.stopPropagation();
+                      window.open(card.url!, "_blank");
                     }}
-                    icon={<FaCopy style={{ color: "#FFF" }} />}
-                    type="text"
-                  />
-                </span>
-              </div>
-            )}
-            {/* <span className={`${styles.bank_name}`}>
+                    className={styles.cta_button}
+                    icon={<MdArrowOutward />}
+                  >
+                    Ver regalos
+                  </Button>
+                </div>
+              ) : (
+                <div className={styles.wallet_col} style={{ gap: "6px" }}>
+                  <span>{card.name}</span>
+                  <span>
+                    {card.number}{" "}
+                    <Button
+                      onClick={(e) => {
+                        e.stopPropagation(); // evita que se dispare el onClick del padre
+                        copyToClipboard(card.number!); // o usa router.push si es interno
+                      }}
+                      icon={<FaCopy style={{ color: "#FFF" }} />}
+                      type="text"
+                    />
+                  </span>
+                </div>
+              )}
+              {/* <span className={`${styles.bank_name}`}>
             
           </span> */}
-          </div>
-        ))}
+            </div>
+          ))}
 
         {/* Lines debajo y sin eventos */}
         <div style={{ backgroundColor: darker(secondary, 0.9) ?? "#FFF" }} className={`${styles.department} ${styles.one}`}>
