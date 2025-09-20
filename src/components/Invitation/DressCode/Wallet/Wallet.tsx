@@ -2,7 +2,13 @@
 
 import React, { useRef, useState } from "react";
 import styles from "./wallet.module.css";
-import { NewInvitation } from "@/types/new_invitation";
+import { GiftCard, NewInvitation } from "@/types/new_invitation";
+import { darker } from "@/helpers/functions";
+import Image from "next/image";
+import { classifyGiftCard } from "./classifyGiftCard";
+import { Button, message } from "antd";
+import { MdArrowOutward } from "react-icons/md";
+import { FaCopy } from "react-icons/fa";
 
 type CardProps = {
   invitation: NewInvitation;
@@ -10,12 +16,18 @@ type CardProps = {
 };
 
 export default function Wallet({ invitation, dev = false }: CardProps) {
-  const base = [4, 50, 100];                // offsets base
+  const base = [14, 54, 94]; // offsets base
   const [bottoms, setBottoms] = useState<number[]>(base);
   const [movedIndex, setMovedIndex] = useState<number | null>(null);
   const ref = useRef<HTMLDivElement>(null);
+  const [messageApi, contextHolder] = message.useMessage();
 
   const accent = invitation.generals?.colors?.accent ?? "#FFFFFF";
+  const primary = invitation.generals?.colors?.primary ?? "#FFFFFF";
+  const secondary = invitation.generals?.colors?.secondary ?? "#FFFFFF";
+  const fontFamily = invitation.generals.fonts.body?.typeFace;
+  const title = invitation.cover.title.text.value;
+  const cards = invitation.gifts.cards;
 
   const handleClick = (index: number) => {
     if (movedIndex === index) {
@@ -32,34 +44,78 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
     setMovedIndex(index);
   };
 
+  const copyToClipboard = async (textToCopy: string) => {
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+      messageApi.info("Número de cuenta copiado");
+    } catch (err) {
+      console.error("Error al copiar el texto: ", err);
+    }
+  };
+
   return (
-    <div
-      ref={ref}
-      className={styles.wallet}
-      style={{ background: accent, transform:'scale(0.8)' }}
-    >
-      <div
-        className={`${styles.card} ${styles.card1}`}
-        style={{ bottom: `${bottoms[0]}px` }}
-        onClick={() => handleClick(0)}
-      />
-      <div
-        className={`${styles.card} ${styles.card2}`}
-        style={{ bottom: `${bottoms[1]}px` }}
-        onClick={() => handleClick(1)}
-      />
-      <div
-        className={`${styles.card} ${styles.card3}`}
-        style={{ bottom: `${bottoms[2]}px` }}
-        onClick={() => handleClick(2)}
-      />
+    <>
+      {contextHolder}
+      <div ref={ref} className={styles.wallet} style={{ backgroundColor: darker(secondary, 0.9) ?? "#FFF", transform: "scale(0.8)" }}>
+        {cards.map((card, index) => (
+          <div
+            className={`${styles.card} ${styles[classifyGiftCard(card).className]}`}
+            style={{ zIndex: cards.length + 1 - index, bottom: `${bottoms[index]}px`, padding: movedIndex === index ? "24px" : undefined }}
+            onClick={() => handleClick(index)}
+          >
+            <div
+              className={styles.card_logo_container}
+              style={{
+                height: movedIndex === index ? "24px" : undefined,
+              }}
+            >
+              <img src={classifyGiftCard(card).imageUrl ?? ""} alt="" style={{ height: "100%", objectFit: "cover" }} />
+            </div>
 
-      {/* Lines debajo y sin eventos */}
-      <div style={{ background: accent }} className={`${styles.department} ${styles.one}`} />
-      <div style={{ background: accent }} className={`${styles.department} ${styles.two}`} />
-      <div style={{ background: accent }} className={`${styles.department} ${styles.three}`} />
+            {card.kind === "store" ? (
+              <div className={styles.wallet_col} style={{ gap: "6px" }}>
+                <span>Descubre nuestra mesa de regalos</span>
+                <Button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.open(card.url!, "_blank");
+                  }}
+                  className={styles.cta_button}
+                  icon={<MdArrowOutward />}
+                >
+                  Ver regalos
+                </Button>
+              </div>
+            ) : (
+              <div className={styles.wallet_col} style={{ gap: "6px" }}>
+                <span>{card.name}</span>
+                <span>
+                  {card.number}{" "}
+                  <Button
+                    onClick={(e) => {
+                      e.stopPropagation(); // evita que se dispare el onClick del padre
+                      copyToClipboard(card.number!); // o usa router.push si es interno
+                    }}
+                    icon={<FaCopy style={{ color: "#FFF" }} />}
+                    type="text"
+                  />
+                </span>
+              </div>
+            )}
+            {/* <span className={`${styles.bank_name}`}>
+            
+          </span> */}
+          </div>
+        ))}
 
-      {/* <span className={styles.logo}>WALLET</span> */}
-    </div>
+        {/* Lines debajo y sin eventos */}
+        <div style={{ backgroundColor: darker(secondary, 0.9) ?? "#FFF" }} className={`${styles.department} ${styles.one}`}>
+          <div className={styles.wallet_col} style={{ fontFamily: fontFamily, color: accent }}>
+            <span className={styles.wallet_label}>{title}</span>
+            <span className={styles.wallet_sec_label}>Tarjetas de regalo</span>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
