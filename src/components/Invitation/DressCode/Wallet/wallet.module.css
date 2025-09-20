@@ -1,7 +1,7 @@
 .wallet {
   position: relative;
   display: block;
-  width: 105vw;
+  width: 100vw;
   /* max-width: 450px; */
   min-width: 350px;
   min-height: 326px;
