@@ -106,7 +106,7 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
       <div
         ref={ref}
         className={styles.wallet}
-        style={{ backgroundColor: darker(content.background ? secondary : primary, 1) ?? "#FFF", transform: "scale(0.8)" }}
+        style={{ backgroundColor: darker(!content.background ? secondary : primary, 1) ?? "#FFF", transform: "scale(0.8)" }}
       >
         {bottoms.length > 0 &&
           cards?.map((card, index) => (
@@ -167,7 +167,7 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
         {/* Lines debajo y sin eventos */}
         <div
           onClick={handleReset}
-          style={{ backgroundColor: darker(content.background ? secondary : primary, 1) ?? "#FFF" }}
+          style={{ backgroundColor: darker(!content.background ? secondary : primary, 1) ?? "#FFF" }}
           className={`${styles.department} ${styles.one}`}
         >
           <div className={styles.wallet_col} style={{ fontFamily: fontFamily }}>

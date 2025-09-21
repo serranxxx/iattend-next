@@ -68,8 +68,8 @@
     position: relative;
 
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+    align-items: flex-end;
+    justify-content: flex-end;
     flex-direction: column;
     box-sizing: border-box;
     padding: 12px;
@@ -103,13 +103,18 @@
 
 
 .dest_label {
-    font-size: 18px;
+    font-size: 34px;
     font-weight: 800;
     line-height: 1.2;
     text-align: left;
     text-transform: uppercase;
     z-index: 3;
-    width: 80%;
+    /* width: 80%; */
+    position: absolute;
+    bottom: 12px;
+    left: 8px;
+    writing-mode: sideways-lr;
+    text-orientation: mixed;
     /* font-family: 'Poppins'; */
 }
 

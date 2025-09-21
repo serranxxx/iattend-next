@@ -79,7 +79,7 @@ export default function Card({ invitation }: CardProps) {
               position: "absolute",
               left: "50%",
               top: "50%",
-              width: 170,
+              width: 150,
               height: 340,
               transform: `translate(-50%, -50%) translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(${scale})`,
               transformOrigin: "center",
@@ -103,6 +103,7 @@ export default function Card({ invitation }: CardProps) {
               </span>
 
               <Button
+                // icon={<MdArrowOutward />}
                 style={{
                   zIndex: 5,
                   fontSize: "12px",
@@ -112,10 +113,10 @@ export default function Card({ invitation }: CardProps) {
                   backdropFilter: "blur(10px)",
                   boxShadow: "0px 0px 4px rgba(0,0,0,0.1)",
                   color: `${accent}99`,
-                  width: "100%",
+                  // width: "100%",
                 }}
               >
-                Información
+                Info
               </Button>
 
               <div className={styles.image_dest_cont} style={{ borderColor: secondary }}>
