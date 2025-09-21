@@ -21,7 +21,7 @@
     width: 110%;
     height: 130%;
     border-radius: 12px;
-    mask: linear-gradient(transparent, transparent, black,black);
+    mask: linear-gradient(transparent, transparent, black, black);
     backdrop-filter: blur(8px);
 
 }
@@ -59,4 +59,72 @@
     color: #000;
     border-radius: 12px;
     box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25), 0 0 8px 0 rgba(134, 134, 134, 0.45) inset;
+}
+
+.main_dest_card {
+    background-color: #FFF;
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 12px;
+}
+
+.image_dest_cont {
+    position: absolute;
+    height: 250px;
+    width: 180px;
+    border-radius: 99px 99px 0px 0px;
+    background-color: #FFF;
+    bottom: -10px;
+    right: -80px;
+    overflow: hidden;
+    border: 2px solid;
+
+}
+
+.card_name_abs {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    text-transform: uppercase;
+    font-size: 10px;
+    opacity: 0.2;
+    line-height: 1;
+
+    writing-mode: sideways-lr;
+    text-orientation: mixed;
+}
+
+
+.dest_label {
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-align: left;
+    text-transform: uppercase;
+    z-index: 3;
+    width: 80%;
+    /* font-family: 'Poppins'; */
+}
+
+
+.card_texture {
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    inset: 0;
+    /* cubre toda la card */
+    z-index: 4;
+    /* sobre la imagen, bajo textos/botón */
+    pointer-events: none;
+    /* no bloquea clics */
+    mix-blend-mode: multiply;
+    /* AQUI la mezcla */
+
 }

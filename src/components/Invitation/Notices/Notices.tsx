@@ -32,7 +32,7 @@ export const Notices = forwardRef<HTMLDivElement, DresscodeProps>(function notic
           >
             <div className="g_module_info_container">
               <span
-                data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
+                // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
                 className="g_module_title"
                 style={{
                   fontFamily: font,
@@ -46,7 +46,7 @@ export const Notices = forwardRef<HTMLDivElement, DresscodeProps>(function notic
                 content.notices.map((item, index) => (
                   <div key={index} className="g_module_items_single_col" style={{ gap: "12px" }}>
                     <span
-                      data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
+                      // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
                       className="g_mdoule_regular_text"
                       style={{
                         color: content.background && content.inverted ? primary : accent,
@@ -58,7 +58,7 @@ export const Notices = forwardRef<HTMLDivElement, DresscodeProps>(function notic
 
                     {index < content.notices.length - 1 && (
                       <span
-                        data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
+                        // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
                         className="g_mdoule_regular_text"
                         style={{
                           fontFamily: font,

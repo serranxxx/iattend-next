@@ -24,6 +24,7 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [messageApi, contextHolder] = message.useMessage();
 
+  const content = invitation.gifts;
   const accent = invitation.generals?.colors?.accent ?? "#FFFFFF";
   const primary = invitation.generals?.colors?.primary ?? "#FFFFFF";
   const secondary = invitation.generals?.colors?.secondary ?? "#FFFFFF";
@@ -44,6 +45,16 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
     next[index] = jump;
     setBottoms(next);
     setMovedIndex(index);
+  };
+
+  const handleReset = () => {
+    console.log("hola");
+    console.log(movedIndex);
+    if (movedIndex !== null) {
+      setBottoms(base);
+      setMovedIndex(null);
+      return;
+    }
   };
 
   const copyToClipboard = async (textToCopy: string) => {
@@ -92,7 +103,11 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
   return (
     <>
       {contextHolder}
-      <div ref={ref} className={styles.wallet} style={{ backgroundColor: darker(secondary, 0.9) ?? "#FFF", transform: "scale(0.8)" }}>
+      <div
+        ref={ref}
+        className={styles.wallet}
+        style={{ backgroundColor: darker(content.background ? secondary : primary, 1) ?? "#FFF", transform: "scale(0.8)" }}
+      >
         {bottoms.length > 0 &&
           cards?.map((card, index) => (
             <div
@@ -150,10 +165,18 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
           ))}
 
         {/* Lines debajo y sin eventos */}
-        <div style={{ backgroundColor: darker(secondary, 0.9) ?? "#FFF" }} className={`${styles.department} ${styles.one}`}>
-          <div className={styles.wallet_col} style={{ fontFamily: fontFamily, color: accent }}>
-            <span className={styles.wallet_label}>{title}</span>
-            <span className={styles.wallet_sec_label}>Tarjetas de regalo</span>
+        <div
+          onClick={handleReset}
+          style={{ backgroundColor: darker(content.background ? secondary : primary, 1) ?? "#FFF" }}
+          className={`${styles.department} ${styles.one}`}
+        >
+          <div className={styles.wallet_col} style={{ fontFamily: fontFamily }}>
+            <span style={{ color: content.background ? primary : accent }} className={styles.wallet_label}>
+              {title}
+            </span>
+            <span style={{ color: content.background ? primary : accent }} className={styles.wallet_sec_label}>
+              Tarjetas de regalo
+            </span>
           </div>
         </div>
       </div>

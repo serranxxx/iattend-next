@@ -55,7 +55,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
 
               {content.colors && content.colors.length > 0 && (
                 <div className={styles.color_palette_cont}>
-                  <span
+                  {/* <span
                     className="g_mdoule_regular_text"
                     style={{
                       color: content.background && content.inverted ? primary : accent,
@@ -65,7 +65,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                     }}
                   >
                     Paleta de colores
-                  </span>
+                  </span> */}
                   <div className={styles.dresscode_colors}>
                     {content.colors.map((color, index) => (
                       <div
@@ -76,16 +76,15 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                       />
                     ))}
                   </div>
-
                 </div>
               )}
 
-              {/* {content.images_active && (
+              {content.images_active && (
                 <div className={styles.scroll_invitation} style={{ zIndex: 2 }}>
                   {images_src.map((image, index) => (
                     <div
-                      data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
-                      style={{ position: "relative", padding:'6px 24px' }}
+                      // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
+                      style={{ position: "relative", padding: "6px 24px" }}
                       key={index}
                       className={styles.dresscode_image_container}
                     >
@@ -93,7 +92,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                     </div>
                   ))}
                 </div>
-              )} */}
+              )}
 
               {content.links_active && (
                 <div className={dev ? "dresscode-links-dev" : "dresscode-links"}>
@@ -104,7 +103,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                         href={link.url}
                         icon={<FaPinterest />}
                         style={{
-                          backgroundColor: content.background ? content.inverted ? primary : secondary : primary,
+                          backgroundColor: content.background ? (content.inverted ? primary : secondary) : primary,
                           color: accent,
                           // backgroundColor: "#E60024",
                           // color: "#FFF",

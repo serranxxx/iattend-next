@@ -62,9 +62,9 @@ export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function 
                 {content.description}
               </span>
               <div
-                style={{ padding: "6px 24px" }}
+                style={{ overflow: "hidden" }}
                 // data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
-                className="scroll_invitation"
+                // className="scroll_invitation"
               >
                 <Card invitation={invitation} />
               </div>
