@@ -5,6 +5,7 @@ import { Button } from "antd";
 import { MdArrowOutward } from "react-icons/md";
 import magazine from "@/assets/textures/magzne.png";
 import Image from "next/image";
+import { darker } from "@/helpers/functions";
 
 type CardProps = {
   invitation: NewInvitation;
@@ -85,7 +86,7 @@ export default function Card({ invitation }: CardProps) {
               transformOrigin: "center",
               borderRadius: 4,
               overflow: "hidden",
-              boxShadow: "4px 2px 6px rgba(0,0,0,0.25)",
+              boxShadow: invitation.generals.texture !== null ? "4px 2px 6px rgba(0,0,0,0.25)" : undefined,
               background: "#e9ecef",
               zIndex: z,
               transition: "transform .35s ease, z-index .35s ease",
@@ -95,10 +96,10 @@ export default function Card({ invitation }: CardProps) {
             <div
               className={styles.main_dest_card}
               style={{
-                backgroundColor: primary,
+                backgroundColor: darker(content.background ? secondary : primary, invitation.generals.texture == null ? 0.9 : 1) ?? "#FFF",
               }}
             >
-              <span className={styles.dest_label} style={{ color: accent }}>
+              <span className={styles.dest_label} style={{ color: !content.background ? primary : accent }}>
                 {card.name}
               </span>
 
@@ -109,10 +110,10 @@ export default function Card({ invitation }: CardProps) {
                   fontSize: "12px",
                   height: "20px",
                   fontWeight: 400,
-                  backgroundColor: `${primary}80`,
+                  backgroundColor: `${primary}99`,
                   backdropFilter: "blur(10px)",
                   boxShadow: "0px 0px 4px rgba(0,0,0,0.1)",
-                  color: `${accent}99`,
+                  color: `${primary}99`,
                   // width: "100%",
                 }}
               >
@@ -132,9 +133,11 @@ export default function Card({ invitation }: CardProps) {
 
               <span className={styles.card_name_abs}>{card.name}</span>
 
-              <div className={styles.card_texture}>
-                {magazine && <Image src={magazine} alt="" fill style={{ objectFit: "cover", opacity: 1 }} />}
-              </div>
+              {invitation.generals.texture !== null && (
+                <div className={styles.card_texture}>
+                  {magazine && <Image src={magazine} alt="" fill style={{ objectFit: "cover", opacity: 1 }} />}
+                </div>
+              )}
             </div>
           </div>
         );
