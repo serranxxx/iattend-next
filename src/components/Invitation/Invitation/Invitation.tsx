@@ -1,7 +1,7 @@
 "use client";
 
 import { NewInvitation } from "@/types/new_invitation";
-import { forwardRef, useRef } from "react";
+import { forwardRef, useRef, useState } from "react";
 import styles from "./invitation.module.css";
 import { Cover } from "../Cover/Cover";
 import { Greeting } from "../Greeting/Greeting";
@@ -17,7 +17,7 @@ import load from "@/assets/tools/load.gif";
 import Image, { StaticImageData } from "next/image";
 import { textures } from "@/helpers/textures";
 import { TextureOverlay } from "./TexturesOverlay";
-import { Button } from "antd";
+import { Button, Drawer } from "antd";
 
 type invProps = {
   invitation: NewInvitation | null;
@@ -35,6 +35,13 @@ export default function Invitation({ invitation, loader }: invProps) {
   const noticesRef = useRef<HTMLDivElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
   const destinationRef = useRef<HTMLDivElement>(null);
+
+  const [open, setOpen] = useState(false)
+
+  const primary = invitation?.generals?.colors.primary ?? "#FFFFFF";
+  const secondary = invitation?.generals?.colors.secondary ?? "#FFFFFF";
+  const accent = invitation?.generals?.colors.accent ?? "#FFFFFF";
+  const actions = invitation?.generals?.colors.actions ?? "#FFFFFF";
 
   // const scrollableContentRef = useRef<HTMLDivElement | null>(null);
 
@@ -86,47 +93,96 @@ export default function Invitation({ invitation, loader }: invProps) {
   const tex = textures[invitation.generals?.texture ?? 0];
 
   return (
-    <div style={{ display: "flex", width: "100%", alignItems: "center", justifyContent: "center" }}>
-      {/* <HeaderInvitation visible={isVisible} content={invitation.cover} invitation={invitation} /> */}
-      <div
-        ref={scrollableContentRef}
-        className={styles.invitation_main_cont}
-        style={{
-          backgroundColor: invitation.generals.colors.primary ?? "#FFF",
-        }}
-      >
-        {invitation.generals.texture !== null && tex && (
-          <TextureOverlay
-            containerRef={scrollableContentRef as unknown as React.RefObject<HTMLElement>}
-            coverHeightPx={coverHeightPx}
-            texture={{
-              image: tex.image, // StaticImageData o "/public/..."
-              opacity: tex.opacity,
-              blend: tex.blend,
-              filter: tex.filter,
-            }}
-            tileW={1024} // ajusta a tu imagen
-            tileH={1024}
-          />
-        )}
-        <Cover ref={coverRef} dev={false} invitation={invitation} height={"100vh"} />
-        {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
-        <Button style={{
-          position:'fixed',
-          left:'50%',
-          transform: 'translateX(-50%)',
-          bottom:'20px',
-          zIndex: 999,
-          height: '44px',
-          letterSpacing:'2px',
-          fontSize:'18px',
-          backgroundColor: `${invitation.generals.colors.actions}80` ?? "#FFF",
-          backdropFilter:'blur(10px)',
-          color: invitation.generals.colors.accent ?? "#FFF",
-          boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.25)'
-        }}>CONFIRMAR</Button>
+    <>
+      <div style={{ display: "flex", width: "100%", alignItems: "center", justifyContent: "center" }}>
+        {/* <HeaderInvitation visible={isVisible} content={invitation.cover} invitation={invitation} /> */}
+        <div
+          ref={scrollableContentRef}
+          className={styles.invitation_main_cont}
+          style={{
+            backgroundColor: invitation.generals.colors.primary ?? "#FFF",
+          }}
+        >
+          {invitation.generals.texture !== null && tex && (
+            <TextureOverlay
+              containerRef={scrollableContentRef as unknown as React.RefObject<HTMLElement>}
+              coverHeightPx={coverHeightPx}
+              texture={{
+                image: tex.image, // StaticImageData o "/public/..."
+                opacity: tex.opacity,
+                blend: tex.blend,
+                filter: tex.filter,
+              }}
+              tileW={1024} // ajusta a tu imagen
+              tileH={1024}
+            />
+          )}
+          <Cover ref={coverRef} dev={false} invitation={invitation} height={"100vh"} />
+          {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
+          <Button 
+          onClick={() => setOpen(true)}
+          style={{
+            position: 'fixed',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            bottom: '20px',
+            zIndex: 999,
+            height: '44px',
+            letterSpacing: '2px',
+            fontSize: '18px',
+            backgroundColor: `${invitation.generals.colors.actions}80` ?? "#FFF",
+            backdropFilter: 'blur(10px)',
+            color: invitation.generals.colors.accent ?? "#FFF",
+            boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.25)'
+          }}>CONFIRMAR</Button>
+        </div>
+        {/* <FooterInvitation invitation={invitation} /> */}
+
       </div>
-      {/* <FooterInvitation invitation={invitation} /> */}
-    </div>
+
+      <Drawer
+        placement="bottom"
+        onClose={() => setOpen(false)}
+        open={open}
+        title={<div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '6px', fontFamily: invitation.generals.fonts.body?.typeFace,
+          fontSize: '20px',
+          color: accent,
+        }}> Confirmar asistencia</div>}
+        height={'80%'}
+        closeIcon={false}
+        style={{
+          maxHeight: '800px',
+          borderRadius: '32px 32px 0px 0px',
+          backgroundColor: primary
+        }}
+        styles={{
+          header: {
+            backgroundColor: primary
+          },
+          body: {
+            backgroundColor:  primary,
+            paddingTop: '12px',
+          }
+        }}
+        // extra={
+        //   open?.address?.url &&
+        //   <Button
+        //     href={open?.address.url}
+        //     target="_blank"
+        //     rel="noopener noreferrer"
+        //     icon={<FaDiamondTurnRight size={14} />}
+        //     style={{
+        //       background: content.inverted ? primary : actions ?? "#FFF",
+        //       color: content.inverted ? accent : buttonsColorText(actions!),
+        //     }}
+        //   >
+        //     ¿Cómo llegar?
+        //   </Button>
+        // }
+
+      >
+      </Drawer>
+    </>
   );
 }
