@@ -6,6 +6,7 @@ import { MdArrowOutward } from "react-icons/md";
 import magazine from "@/assets/textures/magzne.png";
 import Image from "next/image";
 import { darker } from "@/helpers/functions";
+import { useFitText } from "./useFitText";
 
 type CardProps = {
   invitation: NewInvitation;
@@ -18,6 +19,7 @@ export default function Card({ invitation }: CardProps) {
   const primary = invitation.generals.colors.primary ?? "#FFF";
   const secondary = invitation.generals.colors.secondary ?? "#FFF";
   const accent = invitation.generals.colors.accent ?? "#FFF";
+  const { containerRef, textRef, fontSize } = useFitText({ min: 10, max: 220 });
 
   // orden visual (índices del arreglo original)
   const [order, setOrder] = useState<number[]>(
@@ -80,7 +82,7 @@ export default function Card({ invitation }: CardProps) {
               position: "absolute",
               left: "50%",
               top: "50%",
-              width: 150,
+              width: 180,
               height: 340,
               transform: `translate(-50%, -50%) translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(${scale})`,
               transformOrigin: "center",
@@ -96,12 +98,18 @@ export default function Card({ invitation }: CardProps) {
             <div
               className={styles.main_dest_card}
               style={{
-                backgroundColor: darker(content.background ? secondary : primary, invitation.generals.texture == null ? 0.9 : 1) ?? "#FFF",
+                border: `1px solid ${accent}10`,
+                backgroundColor: darker(!content.background ? secondary : primary, invitation.generals.texture == null ? 0.9 : 1) ?? "#FFF",
               }}
             >
-              <span className={styles.dest_label} style={{ color: !content.background ? primary : accent }}>
-                {card.name}
-              </span>
+              <div ref={containerRef} className={styles.dest_text_box}>
+                <span 
+                 ref={textRef as any}
+                className={styles.dest_label} style={{ color: !content.background ? primary : accent, fontSize }}>
+                  {card.name}
+                </span>
+              </div>
+
 
               <Button
                 // icon={<MdArrowOutward />}
@@ -110,10 +118,10 @@ export default function Card({ invitation }: CardProps) {
                   fontSize: "12px",
                   height: "20px",
                   fontWeight: 400,
-                  backgroundColor: `${primary}99`,
+                  backgroundColor: `${primary}`,
                   backdropFilter: "blur(10px)",
                   boxShadow: "0px 0px 4px rgba(0,0,0,0.1)",
-                  color: `${primary}99`,
+                  color: `${accent}99`,
                   // width: "100%",
                 }}
               >
@@ -131,7 +139,7 @@ export default function Card({ invitation }: CardProps) {
                 />
               </div>
 
-              <span className={styles.card_name_abs}>{card.name}</span>
+              <span className={styles.card_name_abs}>{card.name?.slice(0,10)}</span>
 
               {invitation.generals.texture !== null && (
                 <div className={styles.card_texture}>

@@ -106,7 +106,7 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
       <div
         ref={ref}
         className={invitation.generals.texture !== null ? styles.wallet : styles.wallet_light}
-        style={{ backgroundColor: darker(content.background ? secondary : primary, 0.9) ?? "#FFF", transform: "scale(0.8)" }}
+        style={{ backgroundColor: darker(!content.background ? secondary : primary, 0.9) ?? "#FFF", transform: "scale(0.8)" }}
       >
         {bottoms.length > 0 &&
           cards?.map((card, index) => (
@@ -116,6 +116,7 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
                 zIndex: cards.length + 1 - index,
                 bottom: `${bottoms[index]}px`,
                 padding: movedIndex === index ? "24px" : undefined,
+                border: `1px solid ${accent}10`,
               }}
               onClick={() => handleClick(index)}
             >
@@ -168,16 +169,16 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
         <div
           onClick={handleReset}
           style={{
-            backgroundColor: darker(content.background ? secondary : primary, 0.9) ?? "#FFF",
-            borderColor: content.background ? `${primary}60` : `${accent}60`,
+            backgroundColor: darker(!content.background ? secondary : primary, 0.9) ?? "#FFF",
+            borderColor: !content.background ? `${primary}60` : `${accent}60`,
           }}
           className={`${invitation.generals.texture !== null ? styles.department : styles.department_light} ${styles.one}`}
         >
           <div className={styles.wallet_col} style={{ fontFamily: fontFamily }}>
-            <span style={{ color: content.background ? primary : accent }} className={styles.wallet_label}>
+            <span style={{ color: !content.background ? primary : accent }} className={styles.wallet_label}>
               {title}
             </span>
-            <span style={{ color: content.background ? primary : accent }} className={styles.wallet_sec_label}>
+            <span style={{ color: !content.background ? primary : accent }} className={styles.wallet_sec_label}>
               Tarjetas de regalo
             </span>
           </div>
