@@ -17,6 +17,7 @@ import load from "@/assets/tools/load.gif";
 import Image, { StaticImageData } from "next/image";
 import { textures } from "@/helpers/textures";
 import { TextureOverlay } from "./TexturesOverlay";
+import { Button } from "antd";
 
 type invProps = {
   invitation: NewInvitation | null;
@@ -110,6 +111,20 @@ export default function Invitation({ invitation, loader }: invProps) {
         )}
         <Cover ref={coverRef} dev={false} invitation={invitation} height={"100vh"} />
         {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
+        <Button style={{
+          position:'fixed',
+          left:'50%',
+          transform: 'translateX(-50%)',
+          bottom:'20px',
+          zIndex: 999,
+          height: '44px',
+          letterSpacing:'2px',
+          fontSize:'18px',
+          backgroundColor: `${invitation.generals.colors.actions}80` ?? "#FFF",
+          backdropFilter:'blur(10px)',
+          color: invitation.generals.colors.accent ?? "#FFF",
+          boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.25)'
+        }}>CONFIRMAR</Button>
       </div>
       {/* <FooterInvitation invitation={invitation} /> */}
     </div>
