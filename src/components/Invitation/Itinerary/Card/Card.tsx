@@ -120,7 +120,7 @@ export default function Card({ invitation, dev }: CardProps) {
                       onClick={() => setOpen(item)}
                       style={{
                         backgroundColor: invitation.generals.texture !== null ? content.background ? primary : secondary : secondary,
-                        color: invitation.generals.texture !== null ? content.background ? accent : primary : primary
+                        color: content.background ? accent : content.inverted ? primary : accent
                       }}
                       // onClick={() => setActiveSteps([...(activeSteps ?? []), item])} 
                       icon={<MdArrowOutward />}>Detalles</Button>
@@ -156,7 +156,7 @@ export default function Card({ invitation, dev }: CardProps) {
                 title={<div style={{ 
                   display:'flex',alignItems:'center', justifyContent:'flex-start', gap:'6px', fontFamily: invitation.generals.fonts.body?.typeFace,
                   fontSize:'20px',
-                  color: !content.inverted ? secondary : primary }}> {renderIcon(open?.icon!, 20, content.inverted)}{open?.name}</div>}
+                  color:  content.background ? accent : content.inverted ? primary : accent, }}> {renderIcon(open?.icon!, 20, content.inverted)}{open?.name}</div>}
                 height={'auto'}
                 closeIcon={false}
                 style={{

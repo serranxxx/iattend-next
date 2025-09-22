@@ -20,7 +20,7 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
   const [base, setBase] = useState<number[]>([]);
   const [bottoms, setBottoms] = useState<number[]>([]);
   const [cards, setCards] = useState<GiftCard[] | null>(null);
-  const [movedIndex, setMovedIndex] = useState<number | null>(null);
+  // const [movedIndex, setMovedIndex] = useState<number | null>(null);
   const ref = useRef<HTMLDivElement>(null);
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -30,30 +30,61 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
   const secondary = invitation.generals?.colors?.secondary ?? "#FFFFFF";
   const fontFamily = invitation.generals.fonts.body?.typeFace;
   const title = invitation.cover.title.text.value;
+
+  const ANIM_MS = 250;        // duración de cada fase
+  const SCALE_UP = 1.2;       // escala al abrir
+  const DOWN_PX = 50;         // “bajar” después de subir
+
+  const [movedIndex, setMovedIndex] = useState<number | null>(null); // ya lo tienes
+  const [isScaled, setIsScaled] = useState(false);                   // NUEVO
   // const cards = invitation.gifts.cards.slice(0, 3);
 
   const handleClick = (index: number) => {
+    // Si click sobre la misma tarjeta -> cerrar (secuencia inversa)
     if (movedIndex === index) {
-      setBottoms(base);
-      setMovedIndex(null);
+      // 1) Sube: quita la bajada y el scale
+      setIsScaled(false); // quita scale y el translateY(50px)
+      // 2) Tras la animación, regresa a base y z-index original
+      setTimeout(() => {
+        setBottoms(base);
+        setMovedIndex(null);
+      }, ANIM_MS);
       return;
     }
-    // ⬆ salto responsivo según alto del contenedor
+
+    // Si había otra abierta, primero ciérrala y luego abre la nueva
+    if (movedIndex !== null && movedIndex !== index) {
+      setIsScaled(false);
+      setTimeout(() => {
+        setBottoms(base);
+        setMovedIndex(null);
+        // abre la nueva después de cerrar la previa
+        setTimeout(() => handleClick(index), ANIM_MS);
+      }, ANIM_MS);
+      return;
+    }
+
+    // Abrir la tarjeta seleccionada
     const h = ref.current?.clientHeight ?? 340;
-    const jump = Math.max(160, Math.min(600, h - 10)); // 160–260 aprox
+    const jump = Math.max(160, Math.min(600, h - 10)); // tu cálculo actual
     const next = [...base];
-    next[index] = jump;
+    next[index] = jump;            // 1) Sube
     setBottoms(next);
     setMovedIndex(index);
+
+    // 2) Después de subir, aplica scale y “bajada” visual
+    setTimeout(() => {
+      setIsScaled(true);
+    }, ANIM_MS);
   };
 
   const handleReset = () => {
-    console.log("hola");
-    console.log(movedIndex);
     if (movedIndex !== null) {
-      setBottoms(base);
-      setMovedIndex(null);
-      return;
+      setIsScaled(false);
+      setTimeout(() => {
+        setBottoms(base);
+        setMovedIndex(null);
+      }, ANIM_MS);
     }
   };
 
@@ -113,10 +144,17 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
             <div
               className={`${styles.card} ${styles[classifyGiftCard(card).className]}`}
               style={{
-                zIndex: cards.length + 1 - index,
+                zIndex: movedIndex === index ? 12 : (cards.length + 1 - index), // z-index 12 si activa
                 bottom: `${bottoms[index]}px`,
                 padding: movedIndex === index ? "24px" : undefined,
                 border: `1px solid ${accent}10`,
+                transition: "bottom 250ms ease, transform 250ms ease",
+                // cuando está activa: escala y “bajar” 50px visualmente
+                transform:
+                  movedIndex === index
+                    ? (isScaled ? `scale(${SCALE_UP}) translateY(${DOWN_PX}px)` : "scale(1) translateY(0)")
+                    : "scale(1) translateY(0)",
+                transformOrigin: "center bottom", // para que “crezca” hacia arriba
               }}
               onClick={() => handleClick(index)}
             >
