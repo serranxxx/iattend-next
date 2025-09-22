@@ -119,27 +119,17 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
         />
       </div> */}
 
-      {item.image ? (
+      {item.image && (
         <div className={styles.image_header_container}>
           <Image alt="" fill src={item.image!} style={{ objectFit: "cover", width: "100%", height: "100%" }} />
         </div>
-      ) : (
-        <div
-          className={styles.image_header_container}
-          style={{
-            height: "90px",
-            backgroundColor: content.background ? accent : content.inverted ? primary : accent ?? "#FFF",
-            boxShadow: "0px 0px 0px rgba(0,0,0,0)",
-            // borderRadius: "99px",
-          }}
-        ></div>
       )}
 
       <div className={styles.open_card_info}>
-        <span className={styles.open_title}>
+        {/* <span className={styles.open_title}>
           {" "}
           <b>{item.name}</b>{" "}
-        </span>
+        </span> */}
         <span className={styles.open_sub}> {item.time} </span>
         <span className={styles.open_text}> {item.subtext} </span>
         {item.address && (

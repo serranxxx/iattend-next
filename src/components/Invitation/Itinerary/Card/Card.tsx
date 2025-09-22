@@ -35,7 +35,7 @@ export default function Card({ invitation, dev }: CardProps) {
     if (!iconID) return <LuBadgeHelp size={28} style={{ color: content.background ? accent : accent }} />;
     const Icon = getItineraryIcon(iconID);
     if (Icon) {
-      return <Icon size={56} style={{ color: content.background ? accent : accent }} />;
+      return <Icon size={56} style={{ color: content.background ? primary : accent }} />;
     }
     return <LuBadgeHelp size={28} style={{ color: content.background ? accent : accent }} />;
   };
@@ -116,7 +116,8 @@ export default function Card({ invitation, dev }: CardProps) {
                     <Button
                       onClick={() => setOpen(item)}
                       style={{
-                        backgroundColor: invitation.generals.texture !== null ? content.background ? primary : secondary : secondary
+                        backgroundColor: invitation.generals.texture !== null ? content.background ? primary : secondary : secondary,
+                        color: invitation.generals.texture !== null ? content.background ? accent : primary : primary
                       }}
                       // onClick={() => setActiveSteps([...(activeSteps ?? []), item])} 
                       icon={<MdArrowOutward />}>Detalles</Button>
@@ -149,14 +150,15 @@ export default function Card({ invitation, dev }: CardProps) {
                 placement="bottom"
                 onClose={() => setOpen(null)}
                 open={open ? true : false}
-                title={open?.name}
+                title={<b style={{ color: !content.inverted ? secondary : primary }}>{open?.name}</b>}
                 height={'auto'}
                 styles={{
                   header: {
-                    backgroundColor:primary
+                    backgroundColor: content.inverted ? secondary : primary
                   },
                   body: {
-                    backgroundColor: primary
+                    backgroundColor: content.inverted ? secondary : primary,
+                    paddingTop: '12px'
                   }
                 }}
                 extra={

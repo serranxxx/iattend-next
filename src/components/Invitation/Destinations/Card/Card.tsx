@@ -99,13 +99,13 @@ export default function Card({ invitation }: CardProps) {
               className={styles.main_dest_card}
               style={{
                 border: `1px solid ${accent}10`,
-                backgroundColor: darker(!content.background ? secondary : primary, invitation.generals.texture == null ? 1 : 1) ?? "#FFF",
+                backgroundColor: darker(content.inverted ? darker(secondary, 0.95) ?? "#FFF" : darker(primary, 0.95) ?? "#FFF", invitation.generals.texture == null ? 1 : 1) ?? "#FFF",
               }}
             >
               <div ref={containerRef} className={styles.dest_text_box}>
-                <span 
-                 ref={textRef as any}
-                className={styles.dest_label} style={{ color: !content.background ? primary : accent, fontSize }}>
+                <span
+                  ref={textRef as any}
+                  className={styles.dest_label} style={{ color: content.inverted ? primary : accent, fontSize }}>
                   {card.name}
                 </span>
               </div>
@@ -139,7 +139,7 @@ export default function Card({ invitation }: CardProps) {
                 />
               </div>
 
-              <span className={styles.card_name_abs}>{card.name?.slice(0,10)}</span>
+              <span className={styles.card_name_abs}>{card.name?.slice(0, 10)}</span>
 
               {invitation.generals.texture !== null && (
                 <div className={styles.card_texture}>
