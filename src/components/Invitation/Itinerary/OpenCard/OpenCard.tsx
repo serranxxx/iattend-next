@@ -51,13 +51,13 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
       style={{
         fontFamily: generals.fonts.body?.typeFace,
         color: content.inverted ? primary : accent,
-        position:'absolute',
-        width:'100%',
-        backgroundColor: primary,
-        zIndex:10,
-        padding:'16px',
-        borderRadius:'16px',
-        boxShadow:'0px 0px 12px rgba(0,0,0,0.5)'
+        // position:'absolute',
+        // width:'100%',
+        // backgroundColor: primary,
+        // zIndex:10,
+        // padding:'16px',
+        // borderRadius:'16px',
+        // boxShadow:'0px 0px 12px rgba(0,0,0,0.5)'
       }}
     >
       {/* {
@@ -77,7 +77,7 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
                 </div>
             } */}
 
-      <div
+      {/* <div
         style={{
           display: "flex",
           alignItems: "center",
@@ -117,7 +117,7 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
             color: content.inverted ? accent : buttonsColorText(primary),
           }}
         />
-      </div>
+      </div> */}
 
       {item.image ? (
         <div className={styles.image_header_container}>

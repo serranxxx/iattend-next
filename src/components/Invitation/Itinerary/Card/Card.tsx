@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col } from "antd";
+import { Button, Col, Drawer } from "antd";
 import { LuBadgeHelp } from "react-icons/lu";
 import { FaArrowDown, FaArrowRight } from "react-icons/fa";
 import { ItineraryItem, NewInvitation } from "@/types/new_invitation";
 import { getItineraryIcon } from "@/helpers/icons";
 import styles from "./card.module.css";
-import { getMexicoHour } from "@/helpers/functions";
+import { buttonsColorText, getMexicoHour } from "@/helpers/functions";
 import Image from "next/image";
 import { textures } from "@/helpers/textures";
 import OpenCard from "../OpenCard/OpenCard";
 import { MdArrowOutward } from "react-icons/md";
+import { FaDiamondTurnRight } from "react-icons/fa6";
 
 type CardProps = {
   invitation: NewInvitation;
@@ -19,6 +20,7 @@ type CardProps = {
 export default function Card({ invitation, dev }: CardProps) {
   const content = invitation.itinerary;
   const generals = invitation.generals;
+  const [open, setOpen] = useState<ItineraryItem | null>(null)
 
   const primary = generals?.colors.primary ?? "#FFFFFF";
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
@@ -111,7 +113,10 @@ export default function Card({ invitation, dev }: CardProps) {
                   </span>
                   <span style={{ fontWeight: 400 }}>{item.time}</span>
                   <div style={{ marginTop: 6 }}>
-                    <Button onClick={() => setActiveSteps([...(activeSteps ?? []), item])} icon={<MdArrowOutward />}>Detalles</Button>
+                    <Button
+                      onClick={() => setOpen(item)}
+                      // onClick={() => setActiveSteps([...(activeSteps ?? []), item])} 
+                      icon={<MdArrowOutward />}>Detalles</Button>
                   </div>
                 </div>
               </div>
@@ -131,11 +136,44 @@ export default function Card({ invitation, dev }: CardProps) {
                 }}
               />
 
-              {
+              {/* {
                 activeSteps?.includes(item) && (
                   <OpenCard dev={dev} invitation={invitation} item={item} setActiveSteps={setActiveSteps} activeSteps={activeSteps} />
                 )
-              }
+              } */}
+
+              <Drawer
+                placement="bottom"
+                onClose={() => setOpen(null)}
+                open={open ? true : false}
+                title={open?.name}
+                height={600}
+                headerStyle={{backgroundColor:primary}}
+                styles={{
+                  body: {
+                    backgroundColor: primary
+                  }
+                }}
+                extra={
+                  open?.address?.url &&
+                  <Button
+                    href={open?.address.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    icon={<FaDiamondTurnRight size={14} />}
+                    style={{
+                      background: content.inverted ? primary : actions ?? "#FFF",
+                      color: content.inverted ? accent : buttonsColorText(actions!),
+                      boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25), 0 0 6px 0 rgba(134, 134, 134, 0.25) inset",
+                    }}
+                  >
+                    ¿Cómo llegar?
+                  </Button>
+                }
+
+              >
+                <OpenCard dev={dev} invitation={invitation} item={open ?? item} setActiveSteps={setActiveSteps} activeSteps={activeSteps} />
+              </Drawer>
             </div>
           );
         })}
