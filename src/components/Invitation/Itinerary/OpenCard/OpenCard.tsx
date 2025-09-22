@@ -51,6 +51,13 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
       style={{
         fontFamily: generals.fonts.body?.typeFace,
         color: content.inverted ? primary : accent,
+        position:'absolute',
+        width:'100%',
+        backgroundColor: primary,
+        zIndex:10,
+        padding:'16px',
+        borderRadius:'16px',
+        boxShadow:'0px 0px 12px rgba(0,0,0,0.5)'
       }}
     >
       {/* {
@@ -77,9 +84,9 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
           justifyContent: "flex-start",
           gap: "8px",
           position: "absolute",
-          top: "-18px",
-          right: "-6px",
-          zIndex: 3,
+          top: "0px",
+          right: "0px",
+          zIndex: 999
         }}
       >
         {item?.address?.url && (
@@ -120,7 +127,7 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
         <div
           className={styles.image_header_container}
           style={{
-            height: "20px",
+            height: "90px",
             backgroundColor: content.background ? accent : content.inverted ? primary : accent ?? "#FFF",
             boxShadow: "0px 0px 0px rgba(0,0,0,0)",
             // borderRadius: "99px",

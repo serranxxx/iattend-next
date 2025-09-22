@@ -4,7 +4,21 @@
     justify-content: flex-start;
     flex-direction: column;
     width: 100%;
-    gap: 24px;
+    gap: 0px;
     /* padding: 0px 24px; */
 
+}
+
+.start_dot {
+    height: 12px;
+    width: 12px;
+    border-radius: 99px;
+    background-color: black;
+}
+
+.line_it {
+    width: 4px;
+    height: 20px;
+    background-color: black;
+    /* margin: -6px 0px; */
 }

@@ -50,10 +50,28 @@ export const Itinerary = forwardRef<HTMLDivElement, quoteProps>(function Greetin
               >
                 {content.title}
               </span>
-              <div 
-              // data-aos={!dev && generals.texture == null ? "fade-right" : undefined} 
-              className={styles.itinerary_cards_container}>
+              <div
+                // data-aos={!dev && generals.texture == null ? "fade-right" : undefined} 
+                className={styles.itinerary_cards_container}>
+                {/* <div style={{
+                  background: content.background
+                    ? `${primary}`
+                    : `${accent}`,
+                    border: `1px solid ${accent}10`
+                }} className={styles.start_dot} />
+                <div style={{
+                  background: content.background
+                    ? `${primary}`
+                    : `${accent}`,
+                    border: `1px solid ${accent}10`
+                }} className={styles.line_it} /> */}
                 <Card invitation={invitation} dev={dev} />
+                {/* <div style={{
+                  background: content.background
+                    ? `${primary}`
+                    : `${accent}`,
+                    border: `1px solid ${accent}10`
+                }} className={styles.start_dot} /> */}
               </div>
             </div>
           </div>
