@@ -115,6 +115,9 @@ export default function Card({ invitation, dev }: CardProps) {
                   <div style={{ marginTop: 6 }}>
                     <Button
                       onClick={() => setOpen(item)}
+                      style={{
+                        backgroundColor: invitation.generals.texture !== null ? content.background ? primary : secondary : secondary
+                      }}
                       // onClick={() => setActiveSteps([...(activeSteps ?? []), item])} 
                       icon={<MdArrowOutward />}>Detalles</Button>
                   </div>
@@ -147,9 +150,11 @@ export default function Card({ invitation, dev }: CardProps) {
                 onClose={() => setOpen(null)}
                 open={open ? true : false}
                 title={open?.name}
-                height={600}
-                headerStyle={{backgroundColor:primary}}
+                height={'auto'}
                 styles={{
+                  header: {
+                    backgroundColor:primary
+                  },
                   body: {
                     backgroundColor: primary
                   }
