@@ -6,7 +6,7 @@ import { ItineraryItem, NewInvitation } from "@/types/new_invitation";
 import { getItineraryIcon } from "@/helpers/icons";
 import styles from "./card.module.css";
 import { buttonsColorText, getMexicoHour } from "@/helpers/functions";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { textures } from "@/helpers/textures";
 import OpenCard from "../OpenCard/OpenCard";
 import { MdArrowOutward } from "react-icons/md";
@@ -39,6 +39,9 @@ export default function Card({ invitation, dev }: CardProps) {
     }
     return <LuBadgeHelp size={size} style={{ color: content.background ? accent : accent }} />;
   };
+
+  const toBg = (img?: string | StaticImageData) =>
+    img ? `url(${typeof img === "string" ? img : img.src})` : undefined;
 
 
 
@@ -105,7 +108,7 @@ export default function Card({ invitation, dev }: CardProps) {
                     boxSizing: "border-box",
                     padding: "0px 6px",
                     fontFamily: invitation.generals.fonts.body?.typeFace,
-                    fontSize: "12px",
+                    fontSize: "14px",
                   }}
                 >
                   <span style={{ fontWeight: 600, fontSize: "16px" }}>
@@ -160,7 +163,8 @@ export default function Card({ invitation, dev }: CardProps) {
                 height={'auto'}
                 closeIcon={false}
                 style={{
-                  maxHeight: '800px'
+                  maxHeight: '800px',
+                  borderRadius:'32px 32px 0px 0px',
                 }}
                 styles={{
                   header: {
@@ -168,7 +172,7 @@ export default function Card({ invitation, dev }: CardProps) {
                   },
                   body: {
                     backgroundColor: content.inverted ? secondary : primary,
-                    paddingTop: '12px'
+                    paddingTop: '12px',
                   }
                 }}
                 extra={
@@ -181,7 +185,6 @@ export default function Card({ invitation, dev }: CardProps) {
                     style={{
                       background: content.inverted ? primary : actions ?? "#FFF",
                       color: content.inverted ? accent : buttonsColorText(actions!),
-                      boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25), 0 0 6px 0 rgba(134, 134, 134, 0.25) inset",
                     }}
                   >
                     ¿Cómo llegar?
