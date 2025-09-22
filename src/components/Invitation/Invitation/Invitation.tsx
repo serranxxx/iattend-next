@@ -130,9 +130,9 @@ export default function Invitation({ invitation, loader }: invProps) {
             height: '44px',
             letterSpacing: '2px',
             fontSize: '18px',
-            backgroundColor: `${invitation.generals.colors.actions}80` ?? "#FFF",
+            backgroundColor: `${actions}80`,
             backdropFilter: 'blur(10px)',
-            color: invitation.generals.colors.accent ?? "#FFF",
+            color: accent,
             boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.25)'
           }}>CONFIRMAR</Button>
         </div>
