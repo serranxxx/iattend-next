@@ -88,7 +88,7 @@ export default function Card({ invitation }: CardProps) {
               transformOrigin: "center",
               borderRadius: 4,
               overflow: "hidden",
-              boxShadow: invitation.generals.texture !== null ? "4px 2px 6px rgba(0,0,0,0.25)" : undefined,
+              boxShadow: "4px 2px 6px rgba(0,0,0,0.25)",
               background: "#e9ecef",
               zIndex: z,
               transition: "transform .35s ease, z-index .35s ease",
@@ -99,7 +99,7 @@ export default function Card({ invitation }: CardProps) {
               className={styles.main_dest_card}
               style={{
                 border: `1px solid ${accent}10`,
-                backgroundColor: darker(!content.background ? secondary : primary, invitation.generals.texture == null ? 0.9 : 1) ?? "#FFF",
+                backgroundColor: darker(!content.background ? secondary : primary, invitation.generals.texture == null ? 1 : 1) ?? "#FFF",
               }}
             >
               <div ref={containerRef} className={styles.dest_text_box}>
