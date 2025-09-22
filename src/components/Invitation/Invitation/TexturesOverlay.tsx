@@ -30,7 +30,7 @@ export function TextureOverlay({
   tileW = 1024,
   tileH = 1024,
   zIndex = 0,
-  extraMarginPx = 50, // 👈 default: 50px de margen
+  extraMarginPx = 0, // 👈 default: 50px de margen
 }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
   const patternId = useId();

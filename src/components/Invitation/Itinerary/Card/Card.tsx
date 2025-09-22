@@ -31,14 +31,17 @@ export default function Card({ invitation, dev }: CardProps) {
 
   const [activeSteps, setActiveSteps] = useState<ItineraryItem[]>([]);
 
-  const renderIcon = (iconID: number) => {
-    if (!iconID) return <LuBadgeHelp size={28} style={{ color: content.background ? accent : accent }} />;
+  const renderIcon = (iconID: number, size: number, variable: boolean) => {
+    if (!iconID) return <LuBadgeHelp size={size} style={{ color: content.background ? accent : accent }} />;
     const Icon = getItineraryIcon(iconID);
     if (Icon) {
-      return <Icon size={56} style={{ color: content.background ? primary : accent }} />;
+      return <Icon size={size} style={{ color: variable ? primary : accent }} />;
     }
-    return <LuBadgeHelp size={28} style={{ color: content.background ? accent : accent }} />;
+    return <LuBadgeHelp size={size} style={{ color: content.background ? accent : accent }} />;
   };
+
+
+
   const ROW_HEIGHT = 180; // alto mínimo de cada fila (ajústalo a tu diseño)
   const GAP = 0;
 
@@ -92,7 +95,7 @@ export default function Card({ invitation, dev }: CardProps) {
                   flexDirection: "column",
                 }}
               >
-                {renderIcon(item.icon!)}
+                {renderIcon(item.icon!, 56, content.background)}
                 <div
                   style={{
                     display: "flex",
@@ -150,8 +153,15 @@ export default function Card({ invitation, dev }: CardProps) {
                 placement="bottom"
                 onClose={() => setOpen(null)}
                 open={open ? true : false}
-                title={<b style={{ color: !content.inverted ? secondary : primary }}>{open?.name}</b>}
+                title={<div style={{ 
+                  display:'flex',alignItems:'center', justifyContent:'flex-start', gap:'6px', fontFamily: invitation.generals.fonts.body?.typeFace,
+                  fontSize:'20px',
+                  color: !content.inverted ? secondary : primary }}> {renderIcon(open?.icon!, 20, content.inverted)}{open?.name}</div>}
                 height={'auto'}
+                closeIcon={false}
+                style={{
+                  maxHeight: '800px'
+                }}
                 styles={{
                   header: {
                     backgroundColor: content.inverted ? secondary : primary
