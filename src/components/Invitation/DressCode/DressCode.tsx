@@ -107,7 +107,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                           color: accent,
                           // backgroundColor: "#E60024",
                           // color: "#FFF",
-                          boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25), 0 0 6px 0 rgba(134, 134, 134, 0.25) inset",
+                          boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
                         }}
                       >
                         ¿Necesitas inspiración?

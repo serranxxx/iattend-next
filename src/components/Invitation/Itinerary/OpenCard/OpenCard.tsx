@@ -171,7 +171,7 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
                       title="Mapa"
                       width="100%"
                       height="100%"
-                      style={{ border: 0 }}
+                      style={{ border: `1px solid ${accent}10` }}
                       loading="lazy"
                       allowFullScreen
                       referrerPolicy="no-referrer-when-downgrade"

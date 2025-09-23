@@ -93,6 +93,7 @@ export interface GiftCard {
 export interface DestinationCard {
   image: string | null;
   name: string | null;
+  description: string | null;
   url: string | null;
 }
 
