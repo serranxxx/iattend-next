@@ -10,6 +10,6 @@
     /* max-width: 350px; */
     position: relative;
     overflow: auto;
-    max-height: 100vh;
+    max-height: 100dvh;
     overflow: auto;
 }
