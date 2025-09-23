@@ -20,31 +20,40 @@ type PageProps = {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
 
-// // ------- Metadata dinámica -------
-// export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-//   const { invitation_label, invitation_name } = await params; // 👈 await
-//   const supabase = await createClient();
+// ------- Metadata dinámica -------
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { invitation_label, invitation_name } = await params; // 👈 await
+  const supabase = await createClient();
 
-//   const label = decodeURIComponent(invitation_label);
-//   const name = decodeURIComponent(invitation_name);
+  const label = decodeURIComponent(invitation_label);
+  const name = decodeURIComponent(invitation_name);
 
-//   const { data } = await supabase.from("invitations").select("data").eq("label", label).eq("name", name).maybeSingle();
+  const { data } = await supabase.from("invitations").select("data").eq("label", label).eq("name", name).maybeSingle();
 
-//   if (!data?.data) {
-//     return { title: "I attend", description: "Diseña, comparte, celebra." };
-//   }
+  if (!data?.data) {
+    return { title: "I attend", description: "Diseña, comparte, celebra." };
+  }
 
-//   const inv = data.data as NewInvitation;
+  const inv = data.data as NewInvitation;
 
-//   return {
-//     title: inv?.cover?.title?.text?.value ?? "Invitación",
-//     // description: inv?.cover?.subtitle ?? "Invitación digital",
-//     openGraph: {
-//       title: inv?.cover?.title?.text?.value ?? "Invitación",
-//       // images: inv?.cover?.image?.prod ? [inv.cover.image.prod] : undefined,
-//     },
-//   };
-// }
+  return {
+    title: inv?.cover?.title?.text?.value,
+    description: inv.greeting.title,
+    openGraph: {
+      title: inv?.cover?.title?.text?.value ?? "Invitación",
+      description: inv.greeting.title,
+      images: inv?.cover?.image?.prod
+        ? [{ url: inv.cover.image.prod, width: 1200, height: 630, alt: inv?.cover?.title?.text?.value ?? "Invitación" }]
+        : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: inv?.cover?.title?.text?.value ?? "Invitación",
+      description: inv.greeting.title,
+      images: inv?.cover?.image?.prod ? [inv.cover.image.prod] : undefined,
+    },
+  };
+}
 
 // ------- Página -------
 export default async function InvitationDynamicPage({ params }: PageProps) {
