@@ -17,7 +17,7 @@ import load from "@/assets/tools/load.gif";
 import Image, { StaticImageData } from "next/image";
 import { textures } from "@/helpers/textures";
 import { TextureOverlay } from "./TexturesOverlay";
-import { Button, Drawer } from "antd";
+import { Button, Drawer, Layout } from "antd";
 
 type invProps = {
   invitation: NewInvitation | null;
@@ -102,7 +102,7 @@ export default function Invitation({ invitation, loader }: invProps) {
 
   return (
     <>
-      <div style={{ minHeight: "100dvh", display: "flex", width: "100%", alignItems: "center", justifyContent: "center" }}>
+      <Layout style={{ display: "flex", width:'100%'}}>
         {/* <HeaderInvitation visible={isVisible} content={invitation.cover} invitation={invitation} /> */}
         <div
           ref={scrollableContentRef}
@@ -147,7 +147,7 @@ export default function Invitation({ invitation, loader }: invProps) {
         </div>
         {/* <FooterInvitation invitation={invitation} /> */}
 
-      </div>
+      </Layout>
 
       <Drawer
         placement="bottom"

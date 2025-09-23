@@ -8,24 +8,9 @@
     gap: 36px;
     box-sizing: border-box;
     width: 100%;
-  
-    /* Alto correcto en móviles (orden = mejor compatibilidad) */
-    min-height: 100dvh;             /* dinámico (iOS 16+/modernos) */
-    min-height: 100svh;             /* “small” vh cuando UI visible */
-    min-height: -webkit-fill-available; /* fallback iOS */
-    min-height: 100vh;              /* último fallback */
-  
-    /* Si necesitas scroll interno: */
+    max-height: 100dvh;
     overflow: auto;
-  
-    /* Respeta los gestos/notch (suma tu padding si lo quieres) */
-    padding-top: calc(0px + env(safe-area-inset-top));
-    padding-bottom: calc(36px + env(safe-area-inset-bottom));
+    padding-bottom: 44px;
   }
 
-  .invitation_main_cont {
-    position: fixed;
-    inset: 0;            /* top/right/bottom/left: 0 */
-    overflow: auto;
-    padding: calc(env(safe-area-inset-top)) 0 calc(36px + env(safe-area-inset-bottom));
-  }
+ 
