@@ -1,7 +1,7 @@
 "use client";
 
 import { NewInvitation } from "@/types/new_invitation";
-import { forwardRef, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import styles from "./invitation.module.css";
 import { Cover } from "../Cover/Cover";
 import { Greeting } from "../Greeting/Greeting";
@@ -35,6 +35,8 @@ export default function Invitation({ invitation, loader }: invProps) {
   const noticesRef = useRef<HTMLDivElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
   const destinationRef = useRef<HTMLDivElement>(null);
+  const scrollableContentRef = useRef<HTMLDivElement>(null);
+  const [heightSize, setHeightSize] = useState<number>(0)
 
   const [open, setOpen] = useState(false)
 
@@ -71,11 +73,18 @@ export default function Invitation({ invitation, loader }: invProps) {
     }
   };
 
+  useEffect(() => {
+    
+    const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    setHeightSize(coverHeightPx)
+  }, [])
+
+
   if (loader || !invitation) {
     return (
       <div
         style={{
-          height: "100vh",
+          minHeight: "100dvh",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -87,14 +96,13 @@ export default function Invitation({ invitation, loader }: invProps) {
     );
   }
 
-  const scrollableContentRef = useRef<HTMLDivElement>(null);
-  const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
 
   const tex = textures[invitation.generals?.texture ?? 0];
 
   return (
     <>
-      <div style={{ display: "flex", width: "100%", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ minHeight: "100dvh", display: "flex", width: "100%", alignItems: "center", justifyContent: "center" }}>
         {/* <HeaderInvitation visible={isVisible} content={invitation.cover} invitation={invitation} /> */}
         <div
           ref={scrollableContentRef}
@@ -106,7 +114,7 @@ export default function Invitation({ invitation, loader }: invProps) {
           {invitation.generals.texture !== null && tex && (
             <TextureOverlay
               containerRef={scrollableContentRef as unknown as React.RefObject<HTMLElement>}
-              coverHeightPx={coverHeightPx}
+              coverHeightPx={heightSize}
               texture={{
                 image: tex.image, // StaticImageData o "/public/..."
                 opacity: tex.opacity,
@@ -117,25 +125,25 @@ export default function Invitation({ invitation, loader }: invProps) {
               tileH={1024}
             />
           )}
-          <Cover ref={coverRef} dev={false} invitation={invitation} height={"100vh"} />
+          <Cover ref={coverRef} dev={false} invitation={invitation} height={"100dvh"} />
           {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
-          <Button 
-          onClick={() => setOpen(true)}
-          style={{
-            position: 'fixed',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            bottom: '20px',
-            zIndex: 999,
-            // height: '44px',
-            letterSpacing: '2px',
-            fontSize: '16px',
-            padding:'6px 12px',
-            backgroundColor: `${actions}80`,
-            backdropFilter: 'blur(10px)',
-            color: accent,
-            boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.25)'
-          }}>CONFIRMAR</Button>
+          <Button
+            onClick={() => setOpen(true)}
+            style={{
+              position: 'fixed',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              bottom: '20px',
+              zIndex: 999,
+              // height: '44px',
+              letterSpacing: '2px',
+              fontSize: '16px',
+              padding: '6px 12px',
+              backgroundColor: `${actions}80`,
+              backdropFilter: 'blur(10px)',
+              color: accent,
+              boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.25)'
+            }}>CONFIRMAR</Button>
         </div>
         {/* <FooterInvitation invitation={invitation} /> */}
 
@@ -162,25 +170,25 @@ export default function Invitation({ invitation, loader }: invProps) {
             backgroundColor: primary
           },
           body: {
-            backgroundColor:  primary,
+            backgroundColor: primary,
             paddingTop: '12px',
           }
         }}
-        // extra={
-        //   open?.address?.url &&
-        //   <Button
-        //     href={open?.address.url}
-        //     target="_blank"
-        //     rel="noopener noreferrer"
-        //     icon={<FaDiamondTurnRight size={14} />}
-        //     style={{
-        //       background: content.inverted ? primary : actions ?? "#FFF",
-        //       color: content.inverted ? accent : buttonsColorText(actions!),
-        //     }}
-        //   >
-        //     ¿Cómo llegar?
-        //   </Button>
-        // }
+      // extra={
+      //   open?.address?.url &&
+      //   <Button
+      //     href={open?.address.url}
+      //     target="_blank"
+      //     rel="noopener noreferrer"
+      //     icon={<FaDiamondTurnRight size={14} />}
+      //     style={{
+      //       background: content.inverted ? primary : actions ?? "#FFF",
+      //       color: content.inverted ? accent : buttonsColorText(actions!),
+      //     }}
+      //   >
+      //     ¿Cómo llegar?
+      //   </Button>
+      // }
 
       >
       </Drawer>
