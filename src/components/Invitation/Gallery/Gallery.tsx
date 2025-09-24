@@ -55,10 +55,8 @@ export const Gallery = forwardRef<HTMLDivElement, DresscodeProps>(function galle
               > */}
               <FanStack
                 images={images}
-                size={230}
                 radius={12}
-                maxFanDeg={16}
-                gap={24}
+                invitation={invitation}
               />
               {/* {images?.map((item, index) => (
                   <div
