@@ -95,6 +95,7 @@ export interface DestinationCard {
   name: string | null;
   description: string | null;
   url: string | null;
+  type: "hotel" | "food" | "activitie"
 }
 
 /** Secciones */
