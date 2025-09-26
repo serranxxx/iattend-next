@@ -177,7 +177,7 @@
     backface-visibility: hidden;
     border-radius: 4px;
     overflow: hidden;
-    box-shadow: 4px 2px 6px rgba(0, 0, 0, 0.25);
+    box-shadow: 6px 8px 12px 4px rgba(0, 0, 0, 0.25);
 }
 
 .flip_front {
@@ -197,19 +197,19 @@
 .hotel {
     width: 170px;
     height: 300px;
-    background-color: #06AEFF;
+    /* background-color: #06AEFF; */
 }
 
 .food {
     width: 170px;
     height: 170px;
-    background-color: #FDD00E;
+    /* background-color: #FDD00E; */
 }
 
 .activitie {
     width: 170px;
     height: 380px;
-    background-color: #35AE40;
+    /* background-color: #35AE40; */
 }
 
 

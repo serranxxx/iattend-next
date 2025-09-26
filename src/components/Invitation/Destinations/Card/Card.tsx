@@ -105,18 +105,6 @@ export default function Card({ invitation }: CardProps) {
 
       </div>
 
-      {/* <div style={{
-        minWidth: '100vw',
-        border: `1px solid ${accent}40`,
-        position: 'absolute',
-        top: '0px',
-        left: '0px',
-        height: '2px',
-        boxShadow: `0px 24px 1222px 122px ${primary}10`,
-      }}>
-
-      </div> */}
-
       {visibleCards.map((card, i) => {
         const rank = order.indexOf(i);
         const { dx, dy, rot, scale, z } = getPos(rank, total);
@@ -136,7 +124,7 @@ export default function Card({ invitation }: CardProps) {
               transform: `translate(-50%) translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(${scale})`,
               transformOrigin: "center",
               borderRadius: 4,
-              backgroundColor: lighter(primary, 0.1) ?? "#FFF",
+              // backgroundColor: lighter(primary, 0.1) ?? "#FFF",
               // background: "transparent",
               zIndex: z,
               transition: "transform .35s ease, z-index .35s ease",
@@ -150,13 +138,15 @@ export default function Card({ invitation }: CardProps) {
                     className={styles.main_dest_card}
                     style={{
                       border: `1px solid ${accent}10`,
-                      // backgroundColor:
-                      //   darker(
-                      //     content.inverted
-                      //       ? darker(secondary, 0.95) ?? "transparent"
-                      //       : darker(primary, 0.95) ?? "transparent",
-                      //     invitation.generals.texture == null ? 1 : 1
-                      //   ) ?? "transparent",
+                      backgroundColor:
+                        darker(
+                          content.background ?
+                          content.inverted
+                            ? darker(secondary, 0.95) ?? "transparent"
+                            : darker(primary, 0.95) ?? "transparent" : darker(secondary, 0.9) ?? "#FFF",
+                          invitation.generals.texture == null ? 1 : 1
+                          
+                        ) ?? "transparent",
                     }}
                   >
                     <div className={styles.dest_text_box}>
@@ -209,7 +199,7 @@ export default function Card({ invitation }: CardProps) {
                     {invitation.generals.texture !== null && (
                       <div className={styles.card_texture}>
                         {magazine && (
-                          <Image src={magazine} alt="" fill style={{ objectFit: "cover", opacity: 0.3, mixBlendMode: 'multiply' }} />
+                          <Image src={magazine} alt="" fill style={{ objectFit: "cover", opacity: 1 }} />
                         )}
                       </div>
                     )}
