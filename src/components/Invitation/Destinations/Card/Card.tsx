@@ -6,6 +6,9 @@ import magazine from "@/assets/textures/magzne.png";
 import Image from "next/image";
 import { darker, lighter } from "@/helpers/functions";
 import { useFitText } from "./useFitText";
+import { ImSpoonKnife } from "react-icons/im";
+import { FaHotel } from "react-icons/fa";
+import { MdArrowOutward, MdOpenInFull, MdSportsGymnastics } from "react-icons/md";
 
 type CardProps = {
   invitation: NewInvitation;
@@ -14,7 +17,7 @@ type CardProps = {
 export default function Card({ invitation }: CardProps) {
   const content = invitation.destinations;
 
-  const slice = 6
+  const slice = 6;
 
   // AHORA hasta 6
   const visibleCards = content.cards.slice(0, slice);
@@ -35,14 +38,26 @@ export default function Card({ invitation }: CardProps) {
 
   const translateType = (type: string) => {
     switch (type) {
-      case 'hotel': return 'Hospedajes'
-      case 'activitie': return 'Actividades'
-      case 'food': return 'Comidas'
+      case "hotel":
+        return {
+          label: "Hospedjae",
+          icon: <FaHotel size={10} style={{ color: "#FFF" }} />,
+        };
+      case "activitie":
+        return {
+          label: "Actividades",
+          icon: <MdSportsGymnastics size={10} style={{ color: "#FFF" }} />,
+        };
+      case "food":
+        return {
+          label: "Comida",
+          icon: <ImSpoonKnife size={10} style={{ color: "#000" }} />,
+        }; // return "Comidas";
 
       default:
         break;
     }
-  }
+  };
 
   const bringToFront = (idx: number) => {
     if (total <= 1) return;
@@ -51,31 +66,28 @@ export default function Card({ invitation }: CardProps) {
     setFlipped(false);
   };
 
-  /**
-   * Posición genérica en "abanico" para 1–6 cartas.
-   * - dx: desplaza lateralmente entre -maxDX y +maxDX
-   * - rot: rota entre -maxRot y +maxRot
-   * - dy/scale: sutil profundidad
-   */
-  const BASE_GAP = 40;
+  // arriba del return
+  const PERSPECTIVE = 900; // efecto 3D sutil
+  const BASE_GAP = 36; // separación lateral
+  const MAX_ROT = 7; // grados totales (izq - der)
+  const SCALE_STEP = 0.05; // cuanto disminuye hacia los lados
+  const DY_STEP = 4; // caída vertical hacia atrás
 
   const getPos = (rank: number, total: number) => {
-    if (total <= 1) return { dx: 0, dy: 0, rot: 0, scale: 1, z: 2 };
+    if (total <= 1) return { dx: 0, dy: 0, rot: 0, scale: 1, z: 10, shadow: 1 };
 
-    // índice "ideal" del centro
     const center = (total - 1) / 2;
+    const offset = rank - center; // negativo a la izq, positivo a la der
+    const dist = Math.abs(offset);
 
-    // separación horizontal centrada
-    const dx = (rank - center) * BASE_GAP;
+    const dx = offset * BASE_GAP;
+    const rot = (offset / center) * MAX_ROT; // -MAX_ROT … +MAX_ROT
+    const scale = 1 - dist * SCALE_STEP; // más chica a los lados
+    const dy = dist * DY_STEP; // baja un poquito hacia atrás
+    const z = total - rank + 5; // asegura pila correcta
+    const shadow = 1 - dist * 0.18; // menos sombra al fondo (0..1)
 
-    // opcional: ligera rotación/escala por profundidad
-    const dist = Math.abs(rank - center);
-    const rot = 0;              // o por ejemplo: (rank - center) * 2
-    const dy = 0;               // puedes usar dist * -2 si quieres una caída sutil
-    const scale = 1;            // o 1 - dist * 0.02 para disminuir laterales
-    const z = total - rank;     // mantén tu z actual
-
-    return { dx, dy, rot, scale, z };
+    return { dx, dy, rot, scale, z, shadow };
   };
 
   return (
@@ -83,31 +95,34 @@ export default function Card({ invitation }: CardProps) {
       className="fan_container"
       style={{
         position: "relative",
-        width: "100%",
         maxWidth: "100vw",
-        height: 420,
+        height: "340px",
         minWidth: "100vw",
-        padding: "0 24px",
-        marginTop: -20,
+        padding: "24px",
+        boxSizing: "border-box",
+        // border: "1px solid",
+        perspective: `${PERSPECTIVE}px`,
       }}
     >
-
-      <div style={{
-        minWidth: '100vw',
-        // border: `1px solid ${accent}40`,
-        position: 'absolute',
-        bottom: '0px',
-        left: '0px',
-        height: '12px',
-        backgroundColor: `${accent}`,
-        boxShadow: `0px -8px 36px 12px ${accent}60`,
-      }}>
-
-      </div>
+      {/* <div
+        style={{
+          position: "absolute",
+          bottom: "0",
+          left: "0",
+          right: "0",
+          height: "22px",
+          background: `linear-gradient(to bottom,
+      ${darker(accent, 0.25) ?? "#000"},
+      ${darker(accent, 0.9) ?? "#000"}
+    )`,
+          boxShadow: `0 -6px 24px ${accent}66, 0 -22px 26px rgba(0,0,0,.35) inset`,
+        }}
+      /> */}
 
       {visibleCards.map((card, i) => {
         const rank = order.indexOf(i);
-        const { dx, dy, rot, scale, z } = getPos(rank, total);
+        const { dx, dy, rot, scale, z, shadow } = getPos(rank, total);
+        const elev = i === frontCard ? 1 : shadow; // al frente, más fuerte
 
         return (
           <div
@@ -115,20 +130,18 @@ export default function Card({ invitation }: CardProps) {
             className={styles[card.type]}
             onClick={(e) => {
               e.stopPropagation();
-              bringToFront(i);
+              i == frontCard ? setFlipped((prev) => !prev) : bringToFront(i);
             }}
             style={{
               position: "absolute",
               left: "50%",
-              bottom: "6px",
-              transform: `translate(-50%) translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(${scale})`,
+              bottom: "53%",
+              transform: `translate(-50%, 50%) translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(${scale})`,
               transformOrigin: "center",
-              borderRadius: 4,
-              // backgroundColor: lighter(primary, 0.1) ?? "#FFF",
-              // background: "transparent",
               zIndex: z,
               transition: "transform .35s ease, z-index .35s ease",
               cursor: total > 1 ? "pointer" : "default",
+              filter: `drop-shadow(4px 8px ${12 * elev}px rgba(0,0,0,${0.1 + 0.1 * (elev * 2)}))`,
             }}
           >
             <div className={`${styles.flip_card} ${i === frontCard && flipped ? styles.flipped : ""}`}>
@@ -137,53 +150,11 @@ export default function Card({ invitation }: CardProps) {
                   <div
                     className={styles.main_dest_card}
                     style={{
-                      border: `1px solid ${accent}10`,
-                      backgroundColor:
-                        darker(
-                          content.background ?
-                          content.inverted
-                            ? darker(secondary, 0.95) ?? "transparent"
-                            : darker(primary, 0.95) ?? "transparent" : darker(secondary, 0.9) ?? "#FFF",
-                          invitation.generals.texture == null ? 1 : 1
-                          
-                        ) ?? "transparent",
+                      // backgroundColor: "#FFF",
+                      backgroundColor: lighter(primary, 0.9) ?? "#FFF",
                     }}
                   >
-                    <div className={styles.dest_text_box}>
-                      <span
-                        // ref={textRef as any}
-                        className={styles.dest_label}
-                        // style={{ color: content.inverted ? primary : accent }}
-                      >
-                        {card.name}
-                      </span>
-                    </div>
-
-                    {/* {i === frontCard && ( */}
-                    <Button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setFlipped((prev) => !prev);
-                      }}
-                      style={{
-                        zIndex: 5,
-                        fontSize: "12px",
-                        height: "20px",
-                        fontWeight: 400,
-                        backgroundColor: `${primary}`,
-                        backdropFilter: "blur(10px)",
-                        boxShadow: "0px 0px 4px rgba(0,0,0,0.1)",
-                        color: `${accent}99`,
-                        position: 'absolute',
-                        bottom: '16px',
-                        left: '16px'
-                      }}
-                    >
-                      Ver más
-                    </Button>
-                    {/* )} */}
-
-                    <div className={styles.image_dest_cont} style={{ borderColor: secondary }}>
+                    <div className={styles.image_dest_cont}>
                       <img
                         src={card.image!}
                         style={{
@@ -192,15 +163,52 @@ export default function Card({ invitation }: CardProps) {
                           objectFit: "cover",
                         }}
                       />
-                    </div>
 
-                    <span className={styles.card_name_abs}>{translateType(card.type)}</span>
+                      <div className={styles.dest_text_box}>
+                        <span
+                          className={styles.dest_label}
+                          style={{
+                            color: lighter(primary, 0.9) ?? "#FFF",
+                          }}
+                        >
+                          {card.name}
+                        </span>
+                      </div>
+
+                      {frontCard === i && (
+                        <Button
+                          icon={<MdOpenInFull />}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setFlipped((prev) => !prev);
+                          }}
+                          style={{
+                            zIndex: 5,
+                            fontSize: "12px",
+                            fontWeight: 800,
+                            // backgroundColor: `${lighter(primary, 0.9)}40` ?? "#FFF",
+                            backdropFilter: "blur(4px)",
+                            boxShadow: "0px 0px 8px rgba(0,0,0,0.35)",
+                            color: `#000`,
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            height: "40px",
+                            width: "40px",
+                            transform: "translate(-50%,-50%)",
+                          }}
+                        />
+                      )}
+
+                      <div className={styles.tag_label_container}>
+                        <span className={styles.card_label_class}>{translateType(card.type)?.label}</span>
+                        <span className={styles.card_icon_class}>{translateType(card.type)?.icon}</span>
+                      </div>
+                    </div>
 
                     {invitation.generals.texture !== null && (
                       <div className={styles.card_texture}>
-                        {magazine && (
-                          <Image src={magazine} alt="" fill style={{ objectFit: "cover", opacity: 1 }} />
-                        )}
+                        {magazine && <Image src={magazine} alt="" fill style={{ objectFit: "cover", opacity: 0.6 }} />}
                       </div>
                     )}
                   </div>
@@ -216,48 +224,54 @@ export default function Card({ invitation }: CardProps) {
                   <div
                     className={styles.main_dest_card}
                     style={{
-                      border: `1px solid ${accent}10`,
-                      alignItems: "center",
-                      justifyContent: "flex-start",
-                      gap: "12px",
-                      backgroundColor:
-                        darker(
-                          content.inverted
-                            ? darker(secondary, 0.95) ?? "transparent"
-                            : darker(primary, 0.95) ?? "transparent",
-                          invitation.generals.texture == null ? 1 : 1
-                        ) ?? "transparent",
+                      alignItems: "flex-start",
+                      justifyContent: "space-between",
+                      flexDirection: "column",
+                      padding: "12px",
+                      backgroundColor: lighter(primary, 0.9) ?? "#FFF",
+                      gap: "6px",
                     }}
                   >
-                    <span style={{ color: content.inverted ? primary : accent, fontSize: "16px" }}>
-                      <b>Detalles del destino</b>
-                    </span>
-                    <span style={{ color: content.inverted ? primary : accent, fontSize: "12px" }}>
-                      {card.description}
-                    </span>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "flex-start",
+                        justifyContent: "flex-start",
+                        flexDirection: "column",
+                        gap: "6px",
+                        color: accent,
+                        maxHeight: "100%",
+                        overflow: "auto",
+                        paddingBottom: "6px",
+                      }}
+                    >
+                      <span className={styles.reversed_card_title}>
+                        <b>Información</b>
+                      </span>
+                      <span className={styles.reversed_card_text}>{card.description}</span>
+                    </div>
+
                     <Button
                       onClick={(e) => {
                         e.stopPropagation();
                       }}
+                      icon={<MdArrowOutward />}
                       style={{
                         zIndex: 5,
                         fontSize: "12px",
-                        height: "20px",
                         fontWeight: 400,
-                        backgroundColor: content.inverted ? primary : accent,
+                        backgroundColor: accent,
                         backdropFilter: "blur(10px)",
                         boxShadow: "0px 0px 4px rgba(0,0,0,0.1)",
-                        color: !content.inverted ? primary : accent,
+                        color: lighter(primary, 0.9) ?? "#FFF",
                       }}
                     >
-                      Información
+                      Navegar
                     </Button>
 
                     {invitation.generals.texture !== null && (
                       <div className={styles.card_texture}>
-                        {magazine && (
-                          <Image src={magazine} alt="" fill style={{ objectFit: "cover", opacity: 1 }} />
-                        )}
+                        {magazine && <Image src={magazine} alt="" fill style={{ objectFit: "cover", opacity: 1 }} />}
                       </div>
                     )}
                   </div>
@@ -267,8 +281,6 @@ export default function Card({ invitation }: CardProps) {
           </div>
         );
       })}
-
-
     </div>
   );
 }

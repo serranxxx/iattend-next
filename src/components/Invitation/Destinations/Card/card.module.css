@@ -72,62 +72,73 @@
     justify-content: space-between;
     flex-direction: column;
     box-sizing: border-box;
-    padding: 8px;
+    padding: 4px;
+    /* padding-bottom: 0px; */
+    /* border-bottom: 4px solid; */
+    border-radius: 0px 8px 0px 0px;
 }
 
 .image_dest_cont {
     width: 100%;
     height: 100%;
-    /* position: absolute;
-    height: 270px;
-    width: 190px;
-    border-radius: 99px 99px 0px 0px;
-    background-color: transparent;
-    bottom: -10px;
-    right: -95px;
-    overflow: hidden; */
-    /* border: 2px solid; */
-
+    overflow: hidden;
+    border-radius: 0px 8px 0px 0px;
+    position: relative;
+    /* position: absolute; */
 }
 
-.card_name_abs {
+.tag_label_container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
     position: absolute;
-    top: 8px;
-    right: 8px;
+    bottom: 4px;
+    right: 4px;
+}
+
+.card_label_class {
     text-transform: uppercase;
-    font-size: 10px;
+    font-size: 12px;
+    font-weight: 800;
     opacity: 1;
     line-height: 1;
     color: #FFF;
-    writing-mode: sideways-lr;
-    text-orientation: mixed;
+    text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card_icon_class {
     padding: 8px 2px;
-    border-radius: 0px 0px 99px 99px;
-    /* box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25); */
+    border-radius: 99px;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .dest_text_box {
-    max-width: 75%;
-    height: 100px;
     position: absolute;
-    top: 16px;
-    left: 16px;
+    left: 8px;
+    top: 8px;
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 
 
 .dest_label {
+    text-align: left;
+    width: 100%;
     font-weight: 800;
     line-height: 1.1;
-    text-align: left;
     text-transform: uppercase;
-    z-index: 3;
-    max-width: 100%;
-    word-wrap: break-word;
-    font-size: 24px;
+    font-size: 18px;
     color: #FFF;
-    text-orientation: mixed;
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
 }
 
 
@@ -136,13 +147,9 @@
     width: 120%;
     height: 120%;
     inset: 0;
-    /* cubre toda la card */
     z-index: 4;
-    /* sobre la imagen, bajo textos/botón */
     pointer-events: none;
-    /* no bloquea clics */
     mix-blend-mode: multiply;
-    /* AQUI la mezcla */
 
 }
 
@@ -175,9 +182,8 @@
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    border-radius: 4px;
     overflow: hidden;
-    box-shadow: 6px 8px 12px 4px rgba(0, 0, 0, 0.25);
+    /* box-shadow: 6px 0px 12px 2px rgba(0, 0, 0, 0.5); */
 }
 
 .flip_front {
@@ -208,20 +214,97 @@
 
 .activitie {
     width: 170px;
-    height: 380px;
+    height: 240px;
     /* background-color: #35AE40; */
 }
 
 
-.hotel .card_name_abs {
+.hotel .card_icon_class {
     background-color: #06AEFF;
 }
 
-.food .card_name_abs {
+.food .card_icon_class {
     background-color: #FDD00E;
     color: #000;
 }
 
-.activitie .card_name_abs {
+.activitie .card_icon_class {
     background-color: #35AE40;
+}
+
+.hotel .main_dest_card {
+    border-color: #06AEFF;
+}
+
+.food .main_dest_card {
+    border-color: #FDD00E;
+}
+
+.activitie .main_dest_card {
+    border-color: #35AE40;
+}
+
+.hotel button {
+    background-color: #06AEFF60;
+}
+
+.food button {
+    background-color: #FDD00E60;
+    color: #000;
+}
+
+.activitie button {
+    background-color: #35AE4060;
+}
+
+
+/* Reduce la sombra global fuerte y deja que JS controle el drop-shadow 3D */
+.flip_front,
+.flip_back {
+    box-shadow: 0 6px 4px rgba(0, 0, 0, .12);
+    border-radius: 0px 12px 0 0;
+    overflow: hidden;
+}
+
+/* Bisel/edge highlight (canto de la revista) */
+.main_dest_card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, .18),
+            rgba(255, 255, 255, 0) 18% 82%,
+            rgba(0, 0, 0, .10));
+    mix-blend-mode: overlay;
+    z-index: 2;
+    border-radius: 10px 10px 0 0;
+}
+
+.image_dest_cont::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to top, rgba(0, 0, 0, .40), rgba(0, 0, 0, 0) 40%),
+        linear-gradient(to bottom, rgba(0, 0, 0, .25), rgba(0, 0, 0, 0) 35%);
+    z-index: 1;
+}
+
+/* asegura que texto/etiquetas queden encima del vignette */
+.dest_text_box,
+.tag_label_container {
+    z-index: 2;
+}
+
+.reversed_card_title,
+.reversed_card_text {
+    width: 100%;
+    text-align: left;
+    font-weight: 800;
+}
+
+.reversed_card_text {
+    font-weight: 400;
+    font-size: 12px;
 }
