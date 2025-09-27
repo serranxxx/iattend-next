@@ -1,23 +1,24 @@
 // FanStack.tsx
 "use client";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import grunge from '../../../assets/textures/grunge.jpg'
+import grunge from "../../../assets/textures/grunge.jpg";
 import { NewInvitation } from "@/types/new_invitation";
 import { lighter } from "@/helpers/functions";
+import { Image } from "antd";
 
 type FanStackProps = {
   images: string[];
- 
+
   radius?: number; // border-radius
-  invitation: NewInvitation
+  invitation: NewInvitation;
 };
 
-export default function FanStack({ images, radius = 24, invitation}: FanStackProps) {
+export default function FanStack({ images, radius = 24, invitation }: FanStackProps) {
   // centro “conceptual” del abanico
 
   const [onScroll, setOnScroll] = useState<boolean>(false);
   const [handleImages, setHandleImages] = useState<string[]>([]);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     if (onScroll) {
@@ -35,12 +36,11 @@ export default function FanStack({ images, radius = 24, invitation}: FanStackPro
         position: "relative",
         maxWidth: "100vw",
         height: "380px",
-        minHeight: onScroll ? '500px' : '', 
+        // minHeight: onScroll ? "500px" : "",
         minWidth: "100vw",
         padding: "0px 24px",
-        marginTop: onScroll ? "0px" : "-30px",
+        marginTop: "-30px",
         overflow: onScroll ? "auto" : "hidden",
-        
       }}
     >
       {handleImages.map((src, i) => {
@@ -80,13 +80,14 @@ export default function FanStack({ images, radius = 24, invitation}: FanStackPro
               position: onScroll ? "static" : "absolute",
               left: onScroll ? "" : "50%",
               top: onScroll ? "" : "50%",
-              minWidth: onScroll ? "320px" : "",
-              minHeight: onScroll ? "470px" : "",
-              width: onscroll ? '320px' : '220px',
-              height: onscroll ? '470px' : '300px', // proporción 4:3; ajusta a tu gusto
+              minWidth: "220px",
+              // minWidth: onScroll ? "320px" : "",
+              // minHeight: onScroll ? "470px" : "",
+              width: "220px",
+              height: "300px", // proporción 4:3; ajusta a tu gusto
               transform: onScroll ? "" : `translate(-50%, -50%) translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(${scale})`,
               transformOrigin: "center",
-              borderRadius: radius,
+              borderRadius: "6px",
               overflow: "hidden",
               boxShadow: "0 0 8px 0 rgba(0, 0, 0, 0.35), 0 0 8px 0 rgba(134, 134, 134, 0.45) inset",
               background: "#e9ecef",
@@ -94,7 +95,8 @@ export default function FanStack({ images, radius = 24, invitation}: FanStackPro
               transition: "all 0.35s ease",
             }}
           >
-            <img
+            <Image
+              preview={false}
               src={src}
               alt=""
               // fill
