@@ -141,7 +141,7 @@ export default function Card({ invitation }: CardProps) {
               zIndex: z,
               transition: "transform .35s ease, z-index .35s ease",
               cursor: total > 1 ? "pointer" : "default",
-              filter: `drop-shadow(4px 8px ${12 * elev}px rgba(0,0,0,${0.1 + 0.1 * (elev * 2)}))`,
+              // filter: `drop-shadow(4px 8px ${12 * elev}px rgba(0,0,0,${0.1 + 0.1 * (elev * 2)}))`,
             }}
           >
             <div className={`${styles.flip_card} ${i === frontCard && flipped ? styles.flipped : ""}`}>

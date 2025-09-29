@@ -95,8 +95,8 @@ export default function FanStack({ images, radius = 24, invitation }: FanStackPr
               transition: "all 0.35s ease",
             }}
           >
-            <Image
-              preview={false}
+            <img
+              // preview={false}
               src={src}
               alt=""
               // fill

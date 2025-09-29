@@ -1,6 +1,6 @@
 "use client";
 
-import { NewInvitation } from "@/types/new_invitation";
+import { InvitationType, NewInvitation } from "@/types/new_invitation";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import styles from "./invitation.module.css";
 import { Cover } from "../Cover/Cover";
@@ -17,14 +17,20 @@ import load from "@/assets/tools/load.gif";
 import Image, { StaticImageData } from "next/image";
 import { textures } from "@/helpers/textures";
 import { TextureOverlay } from "./TexturesOverlay";
-import { Button, Drawer, Layout } from "antd";
+import { Button, Drawer, Input, Layout, message } from "antd";
+import Confirm from "../Confirm/Confirm";
+import { FaLock } from "react-icons/fa";
+import axios from "axios";
+import { GuestAccessPayload } from "@/types/guests";
 
 type invProps = {
   invitation: NewInvitation | null;
   loader: boolean;
+  type: InvitationType;
+  mongoID: string | null;
 };
 
-export default function Invitation({ invitation, loader }: invProps) {
+export default function Invitation({ invitation, loader, type, mongoID }: invProps) {
   const coverRef = useRef<HTMLDivElement>(null);
   const greetingRef = useRef<HTMLDivElement>(null);
   const peopleRef = useRef<HTMLDivElement>(null);
@@ -36,9 +42,13 @@ export default function Invitation({ invitation, loader }: invProps) {
   const galleryRef = useRef<HTMLDivElement>(null);
   const destinationRef = useRef<HTMLDivElement>(null);
   const scrollableContentRef = useRef<HTMLDivElement>(null);
-  const [heightSize, setHeightSize] = useState<number>(0)
+  const [heightSize, setHeightSize] = useState<number>(0);
 
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+  const [guestCode, setGuestCode] = useState<string>("");
+  const [validated, setValidated] = useState<boolean>(false);
+  const [messageApi, contextHolder] = message.useMessage();
+  const [guestInfo, setGuestInfo] = useState<GuestAccessPayload | null>(null);
 
   const primary = invitation?.generals?.colors.primary ?? "#FFFFFF";
   const secondary = invitation?.generals?.colors.secondary ?? "#FFFFFF";
@@ -73,12 +83,43 @@ export default function Invitation({ invitation, loader }: invProps) {
     }
   };
 
-  useEffect(() => {
-    
-    const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    setHeightSize(coverHeightPx)
-  }, [])
+  const onValidateUser = async () => {
+    try {
+      const response = await axios.post(`https://i-attend-22z4h.ondigitalocean.app/api/guests/login`, {
+        invitationID: mongoID,
+        guestID: guestCode,
+      });
 
+      if (response.data.ok) {
+        messageApi.success(`Bienvenido ${response.data.data.username}`);
+        setGuestCode("");
+        setValidated(true);
+        setGuestInfo(response.data.data);
+        return response.data.data;
+      } else {
+        messageApi.error(`Código incorrecto`);
+        setGuestCode("");
+        return null;
+      }
+    } catch (error: any) {
+      console.error("❌ Error en login:", error.response?.data || error.message);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    setHeightSize(coverHeightPx);
+  }, []);
+
+  useEffect(() => {
+    console.log(type);
+    if (type === "open") {
+      setValidated(true);
+    } else {
+      setValidated(false);
+    }
+  }, [type]);
 
   if (loader || !invitation) {
     return (
@@ -96,101 +137,131 @@ export default function Invitation({ invitation, loader }: invProps) {
     );
   }
 
-
-
   const tex = textures[invitation.generals?.texture ?? 0];
 
   return (
     <>
-      <Layout style={{ display: "flex", width:'100%'}}>
-        {/* <HeaderInvitation visible={isVisible} content={invitation.cover} invitation={invitation} /> */}
-        <div
-          ref={scrollableContentRef}
-          className={styles.invitation_main_cont}
+      {contextHolder}
+      {validated ? (
+        <Layout style={{ display: "flex", width: "100%" }}>
+          {/* <HeaderInvitation visible={isVisible} content={invitation.cover} invitation={invitation} /> */}
+          <div
+            ref={scrollableContentRef}
+            className={styles.invitation_main_cont}
+            style={{
+              backgroundColor: invitation.generals.colors.primary ?? "#FFF",
+            }}
+          >
+            {invitation.generals.texture !== null && tex && (
+              <TextureOverlay
+                containerRef={scrollableContentRef as unknown as React.RefObject<HTMLElement>}
+                coverHeightPx={heightSize}
+                texture={{
+                  image: tex.image, // StaticImageData o "/public/..."
+                  opacity: tex.opacity,
+                  blend: tex.blend,
+                  filter: tex.filter,
+                }}
+                tileW={1024} // ajusta a tu imagen
+                tileH={1024}
+              />
+            )}
+            <Cover ref={coverRef} dev={false} invitation={invitation} height={"100dvh"} />
+            {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
+            <Button
+              onClick={() => setOpen(true)}
+              style={{
+                position: "fixed",
+                left: "50%",
+                transform: "translateX(-50%)",
+                bottom: "20px",
+                zIndex: 999,
+                // height: '44px',
+                letterSpacing: "2px",
+                fontSize: "16px",
+                padding: "6px 12px",
+                backgroundColor: `${actions}80`,
+                backdropFilter: "blur(10px)",
+                color: accent,
+                boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
+              }}
+            >
+              CONFIRMAR
+            </Button>
+          </div>
+          {/* <FooterInvitation invitation={invitation} /> */}
+        </Layout>
+      ) : (
+        <Layout
           style={{
-            backgroundColor: invitation.generals.colors.primary ?? "#FFF",
+            width: "100%",
+            height: "100dvh",
           }}
         >
-          {invitation.generals.texture !== null && tex && (
-            <TextureOverlay
-              containerRef={scrollableContentRef as unknown as React.RefObject<HTMLElement>}
-              coverHeightPx={heightSize}
-              texture={{
-                image: tex.image, // StaticImageData o "/public/..."
-                opacity: tex.opacity,
-                blend: tex.blend,
-                filter: tex.filter,
-              }}
-              tileW={1024} // ajusta a tu imagen
-              tileH={1024}
-            />
-          )}
-          <Cover ref={coverRef} dev={false} invitation={invitation} height={"100dvh"} />
-          {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
-          <Button
-            onClick={() => setOpen(true)}
-            style={{
-              position: 'fixed',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              bottom: '20px',
-              zIndex: 999,
-              // height: '44px',
-              letterSpacing: '2px',
-              fontSize: '16px',
-              padding: '6px 12px',
-              backgroundColor: `${actions}80`,
-              backdropFilter: 'blur(10px)',
-              color: accent,
-              boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.25)'
-            }}>CONFIRMAR</Button>
-        </div>
-        {/* <FooterInvitation invitation={invitation} /> */}
-
-      </Layout>
+          <div className={styles.invitation_locked_cont}>
+            <div className={styles.inv_locked_image}>
+              <Cover ref={coverRef} dev={false} invitation={invitation} height={"100dvh"} />
+            </div>
+            <div className={styles.inv_locked_blured} style={{ backgroundColor: `${primary}20` }}>
+              <div className={styles.locked_icon}>
+                <FaLock size={44} style={{ color: "#FFF" }} />
+              </div>
+              <span className={styles.locked_title}>Invitación Privada</span>
+              <span className={styles.locked_text}>
+                Esta invitación es <b>exclusiva para ti</b>. Ingresa tu código de invitado para continuar y disfrutar de esta experiencia
+                única.
+              </span>
+              <Input
+                value={guestCode}
+                onChange={(e) => setGuestCode(e.target.value)}
+                placeholder="Código de invitado"
+                className="locked-input"
+                style={{ maxWidth: "350px", marginTop: "12px" }}
+              />
+              <Button onClick={onValidateUser}>Continuar</Button>
+            </div>
+          </div>
+        </Layout>
+      )}
 
       <Drawer
         placement="bottom"
         onClose={() => setOpen(false)}
         open={open}
-        title={<div style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '6px', fontFamily: invitation.generals.fonts.body?.typeFace,
-          fontSize: '20px',
-          color: accent,
-        }}> Confirmar asistencia</div>}
-        height={'80%'}
+        title={
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-start",
+              gap: "6px",
+              fontFamily: invitation.generals.fonts.body?.typeFace,
+              fontSize: "20px",
+              color: accent,
+            }}
+          >
+            {" "}
+            Confirmar asistencia
+          </div>
+        }
+        height={"80%"}
         closeIcon={false}
         style={{
-          maxHeight: '800px',
-          borderRadius: '32px 32px 0px 0px',
-          backgroundColor: primary
+          maxHeight: "800px",
+          borderRadius: "32px 32px 0px 0px",
+          backgroundColor: primary,
         }}
         styles={{
           header: {
-            backgroundColor: primary
+            backgroundColor: primary,
           },
           body: {
             backgroundColor: primary,
-            paddingTop: '12px',
-          }
+            paddingTop: "12px",
+          },
         }}
-      // extra={
-      //   open?.address?.url &&
-      //   <Button
-      //     href={open?.address.url}
-      //     target="_blank"
-      //     rel="noopener noreferrer"
-      //     icon={<FaDiamondTurnRight size={14} />}
-      //     style={{
-      //       background: content.inverted ? primary : actions ?? "#FFF",
-      //       color: content.inverted ? accent : buttonsColorText(actions!),
-      //     }}
-      //   >
-      //     ¿Cómo llegar?
-      //   </Button>
-      // }
-
       >
+        {guestInfo && mongoID && <Confirm invitation={invitation} type={type} guestInfo={guestInfo} mongoID={mongoID} />}
       </Drawer>
     </>
   );

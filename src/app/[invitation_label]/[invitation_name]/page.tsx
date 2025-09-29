@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import type { Metadata, ResolvingMetadata } from "next";
 import Invitation from "@/components/Invitation/Invitation/Invitation";
-import { NewInvitation } from "@/types/new_invitation";
+import { InvitationType, NewInvitation } from "@/types/new_invitation";
 import { getPublicServerClient } from "@/lib/supabase/public-server";
 
 export const dynamic = "force-dynamic";
@@ -29,6 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const name = decodeURIComponent(invitation_name);
 
   const { data } = await supabase.from("invitations").select("data").eq("label", label).eq("name", name).maybeSingle();
+  console.log(data);
 
   if (!data?.data) {
     return { title: "I attend", description: "Diseña, comparte, celebra." };
@@ -63,18 +64,26 @@ export default async function InvitationDynamicPage({ params }: PageProps) {
   const label = decodeURIComponent(invitation_label);
   const name = decodeURIComponent(invitation_name);
 
-  const { data, error } = await supabase.from("invitations").select("data").eq("label", label).eq("name", name).maybeSingle();
+  const { data, error } = await supabase
+    .from("invitations")
+    .select("data, type, mongo_id")
+    .eq("label", label)
+    .eq("name", name)
+    .maybeSingle();
 
   if (error) {
     console.error("[Supabase error]", error);
     notFound();
-  } 
+  }
 
   if (!data?.data) notFound();
 
   const invitation = data!.data as NewInvitation;
+  const type = data.type as InvitationType;
+  const mongoID = data.mongo_id as string | null;
+
   const loader = false;
 
-  return  <Invitation invitation={invitation} loader={loader} />;
-  // 
+  return <Invitation invitation={invitation} loader={loader} type={type} mongoID={mongoID} />;
+  //
 }
