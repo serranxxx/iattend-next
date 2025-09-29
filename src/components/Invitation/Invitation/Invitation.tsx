@@ -23,6 +23,7 @@ import { FaLock } from "react-icons/fa";
 import axios from "axios";
 import { GuestAccessPayload } from "@/types/guests";
 import SwipeToConfirm from "./SwipeToConfirm";
+import SwipeLock from "./SwipeLock";
 
 type invProps = {
   invitation: NewInvitation | null;
@@ -84,6 +85,14 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
     }
   };
 
+  const handleUnlock = () => {
+    console.log("🔓 Desbloqueado!");
+  };
+
+  const handleRelock = () => {
+    console.log("🔒 Vuelto a bloquear!");
+  }
+
   const onValidateUser = async () => {
     try {
       const response = await axios.post(`https://i-attend-22z4h.ondigitalocean.app/api/guests/login`, {
@@ -144,7 +153,7 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
     <>
       {contextHolder}
 
-      <Layout style={{ display: "flex", width: "100%", minHeight:'100dvh' }}>
+      <Layout style={{ display: "flex", width: "100%", minHeight: '100dvh' }}>
         {/* <HeaderInvitation visible={isVisible} content={invitation.cover} invitation={invitation} /> */}
         <div
           ref={scrollableContentRef}
@@ -195,7 +204,7 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
               </Button>
             </>
           }
-          <div className={styles.inv_locked_blured} style={{ pointerEvents: validated ? 'none' : undefined,  opacity: validated ? '0' : '1', backgroundColor: `${primary}20` }}>
+          <div className={styles.inv_locked_blured} style={{ pointerEvents: validated ? 'none' : undefined, opacity: validated ? '0' : '1', backgroundColor: `${primary}20` }}>
             <div className={styles.locked_icon}>
               <FaLock size={32} style={{ color: '#FFF' }} />
             </div>
@@ -225,6 +234,12 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
               threshold={0.85}
               resetOnConfirm
               onConfirm={onValidateUser}
+            />
+
+            <SwipeLock
+              label="Swipe"
+              onUnlock={handleUnlock}
+              onRelock={handleRelock}
             />
 
             {/* <Button onClick={onValidateUser}>Acceder</Button> */}

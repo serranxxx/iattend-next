@@ -86,3 +86,5 @@
 .dragging .stc_progress { transition: none; }
 /* clase para el snap-back corto */
 .snap { transition: width 0.16s ease, transform 0.16s ease; }
+
+
