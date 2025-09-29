@@ -22,6 +22,7 @@ import Confirm from "../Confirm/Confirm";
 import { FaLock } from "react-icons/fa";
 import axios from "axios";
 import { GuestAccessPayload } from "@/types/guests";
+import SwipeToConfirm from "./SwipeToConfirm";
 
 type invProps = {
   invitation: NewInvitation | null;
@@ -142,87 +143,94 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
   return (
     <>
       {contextHolder}
-      {validated ? (
-        <Layout style={{ display: "flex", width: "100%" }}>
-          {/* <HeaderInvitation visible={isVisible} content={invitation.cover} invitation={invitation} /> */}
-          <div
-            ref={scrollableContentRef}
-            className={styles.invitation_main_cont}
-            style={{
-              backgroundColor: invitation.generals.colors.primary ?? "#FFF",
-            }}
-          >
-            {invitation.generals.texture !== null && tex && (
-              <TextureOverlay
-                containerRef={scrollableContentRef as unknown as React.RefObject<HTMLElement>}
-                coverHeightPx={heightSize}
-                texture={{
-                  image: tex.image, // StaticImageData o "/public/..."
-                  opacity: tex.opacity,
-                  blend: tex.blend,
-                  filter: tex.filter,
-                }}
-                tileW={1024} // ajusta a tu imagen
-                tileH={1024}
-              />
-            )}
-            <Cover ref={coverRef} dev={false} invitation={invitation} height={"100dvh"} />
-            {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
-            <Button
-              onClick={() => setOpen(true)}
-              style={{
-                position: "fixed",
-                left: "50%",
-                transform: "translateX(-50%)",
-                bottom: "20px",
-                zIndex: 999,
-                // height: '44px',
-                letterSpacing: "2px",
-                fontSize: "16px",
-                padding: "6px 12px",
-                backgroundColor: `${actions}80`,
-                backdropFilter: "blur(10px)",
-                color: accent,
-                boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
-              }}
-            >
-              CONFIRMAR
-            </Button>
-          </div>
-          {/* <FooterInvitation invitation={invitation} /> */}
-        </Layout>
-      ) : (
-        <Layout
+
+      <Layout style={{ display: "flex", width: "100%" }}>
+        {/* <HeaderInvitation visible={isVisible} content={invitation.cover} invitation={invitation} /> */}
+        <div
+          ref={scrollableContentRef}
+          className={styles.invitation_main_cont}
           style={{
-            width: "100%",
-            height: "100dvh",
+            backgroundColor: invitation.generals.colors.primary ?? "#FFF",
+            paddingBottom: validated ? '44px' : '0px'
           }}
         >
-          <div className={styles.invitation_locked_cont}>
-            <div className={styles.inv_locked_image}>
-              <Cover ref={coverRef} dev={false} invitation={invitation} height={"100dvh"} />
+          {invitation.generals.texture !== null && tex && (
+            <TextureOverlay
+              containerRef={scrollableContentRef as unknown as React.RefObject<HTMLElement>}
+              coverHeightPx={heightSize}
+              texture={{
+                image: tex.image, // StaticImageData o "/public/..."
+                opacity: tex.opacity,
+                blend: tex.blend,
+                filter: tex.filter,
+              }}
+              tileW={1024} // ajusta a tu imagen
+              tileH={1024}
+            />
+          )}
+          <Cover ref={coverRef} dev={false} invitation={invitation} height={"100dvh"} />
+          {
+            validated &&
+            <>
+              {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
+              <Button
+                onClick={() => setOpen(true)}
+                style={{
+                  position: "fixed",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  bottom: "20px",
+                  zIndex: 999,
+                  // height: '44px',
+                  letterSpacing: "2px",
+                  fontSize: "16px",
+                  padding: "6px 12px",
+                  backgroundColor: `${actions}80`,
+                  backdropFilter: "blur(10px)",
+                  color: accent,
+                  boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
+                }}
+              >
+                CONFIRMAR
+              </Button>
+            </>
+          }
+          <div className={styles.inv_locked_blured} style={{ pointerEvents: validated ? 'none' : undefined,  opacity: validated ? '0' : '1', backgroundColor: `${primary}20` }}>
+            <div className={styles.locked_icon}>
+              <FaLock size={32} style={{ color: '#FFF' }} />
             </div>
-            <div className={styles.inv_locked_blured} style={{ backgroundColor: `${primary}20` }}>
-              <div className={styles.locked_icon}>
-                <FaLock size={44} style={{ color: "#FFF" }} />
-              </div>
-              <span className={styles.locked_title}>Invitación Privada</span>
+            <span className={styles.locked_title}>Invitación Privada</span>
+            <div style={{
+              display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '8px'
+            }}>
+              <span className={styles.locked_text}>
+                Nos alegra mucho que seas parte de este evento tan especial.
+              </span>
               <span className={styles.locked_text}>
                 Esta invitación es <b>exclusiva para ti</b>. Ingresa tu código de invitado para continuar y disfrutar de esta experiencia
                 única.
               </span>
-              <Input
-                value={guestCode}
-                onChange={(e) => setGuestCode(e.target.value)}
-                placeholder="Código de invitado"
-                className="locked-input"
-                style={{ maxWidth: "350px", marginTop: "12px" }}
-              />
-              <Button onClick={onValidateUser}>Continuar</Button>
             </div>
+            <Input
+              value={guestCode}
+              // length={6}
+              size="large"
+              onChange={(e) => setGuestCode(e.target.value)}
+              placeholder="Código de invitado"
+              className="locked-input"
+              style={{ fontSize: '18px', textAlign: 'center', maxWidth: "280px", borderRadius: '99px', minHeight: '56px' }}
+            />
+            <SwipeToConfirm
+              label="Desliza para desbloquear"
+              threshold={0.85}
+              resetOnConfirm
+              onConfirm={onValidateUser}
+            />
           </div>
-        </Layout>
-      )}
+        </div>
+        {/* <FooterInvitation invitation={invitation} /> */}
+      </Layout>
+
 
       <Drawer
         placement="bottom"
