@@ -144,7 +144,7 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
     <>
       {contextHolder}
 
-      <Layout style={{ display: "flex", width: "100%" }}>
+      <Layout style={{ display: "flex", width: "100%", minHeight:'100dvh' }}>
         {/* <HeaderInvitation visible={isVisible} content={invitation.cover} invitation={invitation} /> */}
         <div
           ref={scrollableContentRef}
@@ -226,6 +226,8 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
               resetOnConfirm
               onConfirm={onValidateUser}
             />
+
+            <Button onClick={onValidateUser}>Acceder</Button>
           </div>
         </div>
         {/* <FooterInvitation invitation={invitation} /> */}

@@ -5,6 +5,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import Invitation from "@/components/Invitation/Invitation/Invitation";
 import { InvitationType, NewInvitation } from "@/types/new_invitation";
 import { getPublicServerClient } from "@/lib/supabase/public-server";
+import { Layout } from "antd";
 
 export const dynamic = "force-dynamic";
 
@@ -84,6 +85,9 @@ export default async function InvitationDynamicPage({ params }: PageProps) {
 
   const loader = false;
 
-  return <Invitation invitation={invitation} loader={loader} type={type} mongoID={mongoID} />;
+  return <Layout style={{ display: "flex", width: "100%", minHeight: '100dvh' }}>
+    <Invitation invitation={invitation} loader={loader} type={type} mongoID={mongoID} />;
+  </Layout>
+
   //
 }
