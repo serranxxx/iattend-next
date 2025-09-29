@@ -141,7 +141,7 @@ export default function SwipeLock({
         aria-label={unlocked ? "lock_outline" : "lock_open"}
       >
         {
-            unlocked ? <FaUnlock /> : <FaLock />
+            !unlocked ? <FaUnlock size={18} style={{color:'#00000040'}} /> : <FaLock size={18} style={{color:'#00000040'}}/>
         }
        
       </button>

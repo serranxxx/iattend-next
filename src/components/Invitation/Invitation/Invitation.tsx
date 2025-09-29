@@ -229,16 +229,16 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
               className="locked-input"
               style={{ fontSize: '18px', textAlign: 'center', maxWidth: "280px", borderRadius: '99px', minHeight: '56px' }}
             />
-            <SwipeToConfirm
+            {/* <SwipeToConfirm
               label="Desliza para desbloquear"
               threshold={0.85}
               resetOnConfirm
               onConfirm={onValidateUser}
-            />
+            /> */}
 
             <SwipeLock
-              label="Swipe"
-              onUnlock={handleUnlock}
+              label="Desliza para desbloquear"
+              onUnlock={onValidateUser}
               onRelock={handleRelock}
             />
 
