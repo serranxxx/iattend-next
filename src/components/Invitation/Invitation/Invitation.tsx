@@ -227,7 +227,7 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
               onConfirm={onValidateUser}
             />
 
-            <Button onClick={onValidateUser}>Acceder</Button>
+            {/* <Button onClick={onValidateUser}>Acceder</Button> */}
           </div>
         </div>
         {/* <FooterInvitation invitation={invitation} /> */}

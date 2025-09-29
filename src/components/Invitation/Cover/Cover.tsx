@@ -32,10 +32,10 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
         <div
           className={!dev ? styles.cover_container : styles.cover_container_dev}
           style={{
-            height: height,
+            height: "100dvh",
             padding: "0",
-            minHeight: "630px",
-            maxHeight: !dev ? "" : "730px",
+            minHeight: "100dvh",
+            maxHeight: "100dvh",
             background: generals?.colors.primary ?? "#FFFFFF",
           }}
         >

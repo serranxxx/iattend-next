@@ -354,6 +354,12 @@
     --danger-color: var(--danger-color-500);
     --warning-color: var(--warning-color-500);
     --info-color: var(--info-color-500);
+
+
+    --sat: env(safe-area-inset-top, 0px);
+    --sab: env(safe-area-inset-bottom, 0px);
+    --sal: env(safe-area-inset-left, 0px);
+    --sar: env(safe-area-inset-right, 0px);
 }
 
 * {
@@ -370,15 +376,7 @@ body {
     line-height: 24px;
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    min-height: 100%;
-    /* iOS Safari fallback cuando la barra está visible */
-    height: -webkit-fill-available;
-    background: #fff; /* o tu color */
-  }
+
 
 *,
 *::before,
@@ -398,11 +396,12 @@ body {
     padding: 0;
     overflow: hidden;
     display: flex;
-}
-
-body {
     flex: 1;
 }
+
+html, body { height: 100%; margin: 0; }
+#__next { height: 100%; } 
+
 
 hr {
     border-top: 1px solid var(--border-color);
@@ -537,3 +536,51 @@ h5,
     width: 0px;
     height: 0px;
 }
+
+/* Reset básico */
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Variables de zonas seguras (notch, barra inferior) */
+/* Contenedor principal de tu pantalla */
+.app-fullheight {
+    /* iOS moderno: ocupa el viewport dinámico real (sin saltos) */
+    min-height: 100dvh;
+
+    /* Fallbacks para navegadores que no soportan dvh */
+    /* (iOS antiguos y Android viejos) */
+    min-height: 100svh;
+    /* small viewport */
+}
+
+@supports not (height: 100dvh) {
+    .app-fullheight {
+        /* iOS viejos (12–15): ocupa todo lo que pueda */
+        min-height: -webkit-fill-available;
+    }
+}
+
+/* Si quieres que el fondo llegue a los bordes físicos del dispositivo, 
+   añade padding con las safe areas para que el contenido no quede bajo el notch/bottom bar */
+/* pantalla completa real */
+.app-fullheight {
+    height: 100dvh;          /* iOS moderno */
+    padding-top: var(--sat);
+    padding-bottom: var(--sab);
+    padding-left: var(--sal);
+    padding-right: var(--sar);
+    box-sizing: border-box;
+  }
+  
+  /* Fallbacks */
+  @supports not (height: 100dvh) {
+    .app-fullheight { height: 100svh; }
+  }
+  @supports not (height: 100svh) {
+    .app-fullheight { height: -webkit-fill-available; }
+  }
+
+  

@@ -29,7 +29,7 @@
     align-items: center;
     justify-content: center;
     font-size: 0.95rem;
-    transition: opacity 200ms ease;
+    transition: opacity 0.1s ease;
     pointer-events: none;
     left: 40px;
     /* width: 100%; */
@@ -43,7 +43,7 @@
     bottom: 0;
     border-radius: 999px;
     background: #FFF;
-    transition: width 150ms ease;
+    transition: width 0.1s ease;
   }
   
   .stc_knob {
@@ -62,7 +62,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s ease, background 150ms ease, color 150ms ease;
+    transition: all 0.2s ease;
     cursor: pointer;
     outline: none;
     touch-action: none;

@@ -125,7 +125,7 @@ export default function SwipeToConfirm({
           aria-label={confirmed ? "Confirmado" : "Desliza para desbloquear"}
           disabled={disabled}
         >
-          <FaUnlock size={18} />
+          <FaUnlock size={18} style={{color:'#00000030'}} />
         </button>
       </div>
     </div>
