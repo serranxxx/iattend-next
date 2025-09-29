@@ -42,13 +42,21 @@ export default function SwipeToConfirm({
 
   const onPointerDown = (e: React.PointerEvent) => {
     if (disabled || confirmed) return;
-    (e.target as Element).setPointerCapture(e.pointerId);
+    // capturar desde el propio knob (más fiable en iOS)
+    knobRef.current?.setPointerCapture(e.pointerId);
     setDragging(true);
     startX.current = e.clientX - dragX;
   };
 
   const onPointerMove = (e: React.PointerEvent) => {
     if (!dragging) return;
+
+    // En mouse: si no hay botón presionado, ignora
+    if (e.pointerType === "mouse" && (e as any).buttons === 0) return;
+
+    // En mobile: evita que el navegador haga scroll/gestos
+    e.preventDefault();
+
     const x = e.clientX - startX.current;
     setDragX(Math.max(0, Math.min(x, maxX)));
   };
@@ -68,7 +76,7 @@ export default function SwipeToConfirm({
         }, 800);
       }
     } else {
-      setDragX(0); // vuelve al inicio
+      setDragX(0);
     }
   };
 
@@ -99,10 +107,7 @@ export default function SwipeToConfirm({
           {label}
         </div>
 
-        <div
-          className={styles.stc_progress}
-          style={{ width: dragX + 56 /* ancho aprox del knob */ }}
-        />
+        <div className={styles.stc_progress} style={{ width: dragX + 56 }} />
 
         <button
           ref={knobRef}
@@ -115,6 +120,7 @@ export default function SwipeToConfirm({
           onPointerMove={onPointerMove}
           onPointerUp={release}
           onPointerCancel={release}
+          onPointerLeave={release}         // <-- respaldo extra
           onKeyDown={onKeyDown}
           aria-label={confirmed ? "Confirmado" : "Desliza para desbloquear"}
           disabled={disabled}
