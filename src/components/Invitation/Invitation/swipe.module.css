@@ -78,3 +78,11 @@
   .stc_knob:focus {
     box-shadow: 0 0 0 2px #FFF inset, 0 4px 16px rgba(0,0,0,0.25);
   }
+
+  .stc_progress { background:#FFF; border-radius:999px; position:absolute; left:0; top:0; bottom:0; width:56px; transition: width 0.16s ease; }
+.stc_knob { transition: transform 0.16s ease; touch-action:none; will-change: transform; }
+/* mientras arrastras, sin transiciones */
+.dragging .stc_knob,
+.dragging .stc_progress { transition: none; }
+/* clase para el snap-back corto */
+.snap { transition: width 0.16s ease, transform 0.16s ease; }
