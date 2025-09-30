@@ -226,8 +226,11 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
               size="large"
               onChange={(e) => setGuestCode(e.target.value)}
               placeholder="Código de invitado"
-              className="locked-input"
-              style={{ fontSize: '18px', textAlign: 'center', maxWidth: "280px", borderRadius: '99px', minHeight: '56px' }}
+              className={styles.locked_input}
+              style={{ 
+                backgroundColor:"#FFFFFF20",boxShadow:'0px 0px 12px rgba(0,0,0,0.2)',
+                borderWidth:'2px', color:'#FFF',
+                fontSize: '18px', textAlign: 'center', maxWidth: "280px", borderRadius: '99px', minHeight: '56px' }}
             />
             {/* <SwipeToConfirm
               label="Desliza para desbloquear"
@@ -236,13 +239,18 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
               onConfirm={onValidateUser}
             /> */}
 
-            <SwipeLock
+            {/* <SwipeLock
               label="Desliza para desbloquear"
               onUnlock={onValidateUser}
               onRelock={handleRelock}
-            />
+            /> */}
 
-            {/* <Button onClick={onValidateUser}>Acceder</Button> */}
+            <Button 
+            className={styles.locked_btn}
+            style={{
+              height:'56px', width:'280px', fontSize:'18px',
+              fontWeight:600, letterSpacing:'2px', boxShadow:'0px 0px 12px rgba(0,0,0,0.2)'
+            }} onClick={onValidateUser}>ACCEDER</Button>
           </div>
         </div>
         {/* <FooterInvitation invitation={invitation} /> */}

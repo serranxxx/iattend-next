@@ -74,3 +74,26 @@
   text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
   text-align: center;
 }
+
+.locked_input::placeholder {
+  color: #FFFFFF80;
+  font-style: italic;
+}
+
+
+.locked_btn {background-image: linear-gradient(to right, #ECE9E6 0%, #FFFFFF  51%, #ECE9E6  100%)}
+.locked_btn {
+   margin: 10px;
+   padding: 15px 45px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;         
+   display: block;
+   transition: 0.3s ease all;
+ }
+
+ .locked_btn:hover {
+   background-position: right center; /* change the direction of the change here */
+   text-decoration: none;
+ }
