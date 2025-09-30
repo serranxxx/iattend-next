@@ -5,13 +5,18 @@ import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { useEffect, useState } from "react";
 import { Button, Input, message } from "antd";
-import { FaMinus, FaRegCalendar, FaRegCalendarCheck } from "react-icons/fa";
+import { FaMinus, FaPlus, FaRegCalendar, FaRegCalendarCheck } from "react-icons/fa";
 import { buttonsColorText, generateSimpleId } from "@/helpers/functions";
 import { IoMdAdd } from "react-icons/io";
 import { FaRegCalendarXmark } from "react-icons/fa6";
 import { InvitationType, NewInvitation } from "@/types/new_invitation";
-import { GuestAccessPayload } from "@/types/guests";
-import axios from "axios";
+import { Guest, GuestAccessPayload } from "@/types/guests";
+import { useInvitation } from "@/services/customHook";
+import { confirmGuests, editGuestsGuest } from "@/services/apiGuests";
+import styles from './confirm.module.css'
+import { IoCalendarNumberOutline } from "react-icons/io5";
+import { BsCalendar2Check } from "react-icons/bs";
+import { AddToCalendarButton } from "add-to-calendar-button-react";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -19,22 +24,22 @@ dayjs.extend(timezone);
 type ConfirmProps = {
   invitation: NewInvitation;
   type: InvitationType;
-  guestInfo: GuestAccessPayload;
+  guestInfo: GuestAccessPayload | null;
   mongoID: string;
 };
 
 export default function Confirm({ invitation, type, guestInfo, mongoID }: ConfirmProps) {
   const [messageApi, contextHolder] = message.useMessage();
 
-  const content = invitation?.greeting;
   const generals = invitation?.generals;
   const primary = generals?.colors.primary ?? "#FFFFFF";
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
   const actions = generals?.colors.actions ?? "#FFFFFF";
 
-  //   const { response, operation } = useInvitation();
+  const { response, operation } = useInvitation();
   const [tickets, setTickets] = useState<string[]>([]);
+  const [localStatus, setLocalStatus] = useState<"esperando" | "confirmado" | "rechazado">("esperando");
   const [freeTickets, setFreeTickets] = useState<number>(0);
   const [confirmed, setConfirmed] = useState<"esperando" | "confirmado" | "rechazado">("esperando");
   const [currentGuestName, setCurrentGuestName] = useState<string | null>(null);
@@ -55,105 +60,130 @@ export default function Confirm({ invitation, type, guestInfo, mongoID }: Confir
     }
   };
 
-  const acceptInvitation = async () => {
-    if (tickets.some((ticket) => ticket.trim() === "")) {
-      return message.warning("Escribe los nombres de tus acompañantes");
+  // const acceptInvitation = async () => {
+  //   if (tickets.some((ticket) => ticket.trim() === "")) {
+  //     return message.warning("Escribe los nombres de tus acompañantes");
+  //   }
+
+  //   if (!currentGuestName) {
+  //     return message.warning("Por favor escribe tu nombre");
+  //   }
+
+  //   let url = "";
+  //   let payload: any = {};
+
+  //   if (type === "open") {
+  //     payload = {
+  //       name: currentGuestName,
+  //       username: "000-000",
+  //       id: generateSimpleId(),
+  //       available_cards: [currentGuestName, ...tickets].length,
+  //       companions: [currentGuestName, ...tickets],
+  //       state: "confirmado",
+  //       last_action: "accepted",
+  //       last_update_date: new Date(),
+  //       creation_date: new Date(),
+  //     };
+  //     url = `http://localhost:4000/api/guests/confirm/${mongoID}`;
+  //   } else if (type === "closed") {
+  //     payload = {
+  //       id: guestInfo?.guestID,
+  //       guestUpdates: {
+  //         name: guestInfo?.username,
+  //         state: "confirmado",
+  //         last_action: "accepted",
+  //         available_cards: guestInfo?.cards,
+  //         companions: [currentGuestName, ...tickets],
+  //       },
+  //     };
+  //     url = `http://localhost:4000/api/guests/${mongoID}/guests`;
+  //   }
+
+  //   console.log(type)
+  //   console.log(payload)
+  //   console.log(url)
+  //   console.log(mongoID)
+
+  //   try {
+  //     const response = await axios.patch(url, { data: payload });
+
+  //     if (response.data.ok) {
+  //       console.log("✅ Invitación confirmada:", response);
+  //       console.log(response.data.guest)
+  //     } else {
+  //       return null;
+  //     }
+  //   } catch (error: any) {
+  //     console.error("❌ Error en confirmación:", error.response?.data || error.message);
+  //     return null;
+  //   }
+  // };
+
+  const acceptInvitation = () => {
+    if (tickets.some(ticket => ticket.trim() === "")) {
+      message.warning("Escribe los nombres de tus acompañantes");
+      return;
     }
 
     if (!currentGuestName) {
-      return message.warning("Por favor escribe tu nombre");
+      message.warning("Por favor escribe tu nombre");
+      return;
     }
 
-    let url = "";
-    let payload: any = {};
+    setLocalStatus('confirmado')
 
-    if (type === "open") {
-      payload = {
+    if (type === 'open') {
+      const newGuest: Guest = {
         name: currentGuestName,
-        username: "000-000",
+        username: '000-000',
         id: generateSimpleId(),
         available_cards: [currentGuestName, ...tickets].length,
         companions: [currentGuestName, ...tickets],
-        state: "confirmado",
-        last_action: "accepted",
+        state: 'confirmado',
+        last_action: 'accepted',
         last_update_date: new Date(),
-        creation_date: new Date(),
-      };
-      url = `https://i-attend-22z4h.ondigitalocean.app/api/guests/confirm/${mongoID}`;
-    } else if (type === "closed") {
-      payload = {
-        id: guestInfo.guestID,
-        guestUpdates: {
-          name: guestInfo.username,
-          state: confirmed,
-          last_action: confirmed === "confirmado" ? "accepted" : "rejected",
-          available_cards: guestInfo.cards,
-          companions: confirmed === "confirmado" ? [currentGuestName, ...tickets] : tickets,
-        },
-      };
-      url = `https://i-attend-22z4h.ondigitalocean.app/api/guests/${mongoID}/guests`;
-    }
-
-    try {
-      const response = await axios.patch(url, { data: payload });
-
-      if (response.data.ok) {
-        console.log("✅ Invitación confirmada:", response);
-      } else {
-        return null;
+        creation_date: new Date()
       }
-    } catch (error: any) {
-      console.error("❌ Error en confirmación:", error.response?.data || error.message);
-      return null;
+      console.log(newGuest)
+      confirmGuests(operation, mongoID, newGuest)
     }
+
+    else if (type === 'closed' && guestInfo) {
+      editGuestsGuest(operation, mongoID, guestInfo, 'confirmado', tickets, currentGuestName)
+    }
+
   };
-
   const rejectInvitation = async () => {
+    if (tickets.some(ticket => ticket.trim() === "")) {
+      message.warning("Escribe los nombres de tus acompañantes");
+      return;
+    }
+
     if (!currentGuestName) {
-      return message.warning("Por favor escribe tu nombre");
+      message.warning("Por favor escribe tu nombre");
+      return;
     }
 
-    let url = "";
-    let payload: any = {};
+    setLocalStatus('rechazado')
 
-    if (type === "open") {
-      payload = {
+    if (type === 'open') {
+      const newGuest: Guest = {
         name: currentGuestName,
-        username: "000-000",
+        username: '000-000',
         id: generateSimpleId(),
-        available_cards: 1,
-        companions: [],
-        state: "rechazado",
-        last_action: "rejected",
+        available_cards: [currentGuestName, ...tickets].length,
+        companions: [currentGuestName, ...tickets],
+        state: 'rechazado',
+        last_action: 'rejected',
         last_update_date: new Date(),
-        creation_date: new Date(),
-      };
-      url = `https://i-attend-22z4h.ondigitalocean.app/api/guests/confirm/${mongoID}`;
-    } else if (type === "closed") {
-      payload = {
-        id: guestInfo.guestID,
-        guestUpdates: {
-          name: guestInfo.username,
-          state: "rechazado",
-          last_action: "rejected",
-          available_cards: guestInfo.cards,
-          companions: tickets,
-        },
-      };
-      url = `https://i-attend-22z4h.ondigitalocean.app/api/guests/confirm/${mongoID}/guests`;
+        creation_date: new Date()
+      }
+      console.log(newGuest)
+      confirmGuests(operation, mongoID, newGuest)
     }
 
-    try {
-      const response = await axios.patch(url, { data: payload });
-
-      if (response.data.ok) {
-        console.log("❌ Invitación rechazada:", response);
-      } else {
-        return null;
-      }
-    } catch (error: any) {
-      console.error("❌ Error en rechazo:", error.response?.data || error.message);
-      return null;
+    else if (type === 'closed' && guestInfo) {
+      editGuestsGuest(operation, mongoID, guestInfo, 'rechazado', tickets, currentGuestName)
     }
   };
 
@@ -166,6 +196,31 @@ export default function Confirm({ invitation, type, guestInfo, mongoID }: Confir
       default:
         return `¡Tu asistencia y la de tus ${companions} acompañantes ha sido confirmada!`;
     }
+  };
+
+  const getTitle = (title: unknown): string => {
+    // si ya es string
+    if (typeof title === "string") return title;
+    // si es objeto con .text o .value (ajústalo a tu modelo)
+    if (title && typeof title === "object") {
+      // @ts-expect-error acceder flexible
+      return title.text ?? title.value ?? "Mi evento";
+    }
+    return "Mi evento";
+  };
+  
+  const toYYYYMMDD = (dateLike: unknown): string => {
+    // acepta string ISO o { value: string }
+    let raw: string | undefined;
+    if (typeof dateLike === "string") raw = dateLike;
+    else if (dateLike && typeof dateLike === "object") {
+      // @ts-expect-error acceder flexible
+      raw = dateLike.value;
+    }
+    if (!raw) return "";
+    const d = new Date(raw);
+    // Asegura formato 'YYYY-MM-DD'
+    return isNaN(d.getTime()) ? "" : d.toISOString().slice(0, 10);
   };
 
   useEffect(() => {
@@ -182,34 +237,47 @@ export default function Confirm({ invitation, type, guestInfo, mongoID }: Confir
     }
   }, []);
 
+  useEffect(() => {
+    if (response) {
+      if (response.data.ok) {
+        switch (response.data.msg) {
+          case "Guest updated successfully":
+            setConfirmed(localStatus)
+            break;
+
+          default:
+            break;
+        }
+      }
+    }
+  }, [response])
+
   return (
     <>
       {contextHolder}
 
-      <div className="confirm-componentes-container">
+      <div className={styles.confirm_container}>
         {
-          // currentGuest && (
-
           confirmed === "esperando" ? (
-            <div className="confirm-main-container">
-              <div
-                className="icon-container"
+            <div className={styles.confirm_cont}>
+              {/* <div
+                className={styles.icon_cont}
                 style={{
-                  border: `3px solid ${secondary}`,
+                  backgroundColor:`${accent}20`
                 }}
               >
-                <FaRegCalendar size={42} style={{ color: accent }} />
-              </div>
+                <BsCalendar2Check size={32} style={{ color: accent }} />
+              </div> */}
 
               <span
-                className="drawer-confirm-label"
+                className={styles.confirm_label}
                 style={{
                   color: accent,
                 }}
               >
                 {freeTickets ? (
                   <span>
-                    ¡Hola <b>{currentGuestName}</b>! Tienes <b>{guestInfo.cards} pases</b> disponibles para ti y tus acompañantes
+                    ¡Hola <b>{currentGuestName}</b>! Tienes <b>{guestInfo?.cards} pases</b> disponibles para ti y tus acompañantes
                   </span>
                 ) : !freeTickets && currentGuestName ? (
                   <span>
@@ -220,126 +288,116 @@ export default function Confirm({ invitation, type, guestInfo, mongoID }: Confir
                 )}
               </span>
 
-              <div
-                className="how-much-tickets-container"
+
+              <span
+                className={styles.confirm_label}
                 style={{
-                  border: `3px solid ${secondary}`,
+                  color: accent,
+                  fontWeight: 800,
+                  marginTop: '-8px'
                 }}
               >
-                <span
-                  className="drawer-confirm-label"
-                  style={{
-                    color: accent,
-                    fontSize: "22px",
-                    fontWeight: 600,
-                  }}
-                >
-                  ¿Cuántos pases vas a utilizar?
-                </span>
+                ¿Cuántos pases vas a utilizar?
+              </span>
 
-                <div className="input-number-tickets-row">
-                  <Button
-                    disabled={tickets.length === 0 ? true : false}
-                    onClick={removeLastTicket}
-                    icon={<FaMinus size={20} />}
-                    id="ticket-button"
+              <div className={styles.confirm_tickets_row}>
+                <Button
+                  disabled={tickets.length === 0 ? true : false}
+                  onClick={removeLastTicket}
+                  icon={<FaMinus size={12} style={{ color: primary }} />}
+                  className={styles.add_less_btn}
+                  style={{
+                    color: buttonsColorText(actions),
+                    backgroundColor: tickets.length === 0 ? `${accent}20` : accent,
+                  }}
+                />
+                <div
+                  className={styles.simulate_input}
+                  style={{ borderColor: `${accent}20` }}
+                >
+                  <span
+                    className={styles.confirm_label}
                     style={{
-                      color: buttonsColorText(actions),
-                      backgroundColor: tickets.length === 0 ? "rgba(0,0,0,0.20)" : actions,
-                    }}
-                  />
-                  <div
-                    className="simulated-input"
-                    style={{
-                      backgroundColor: "var(--ft-color)",
+                      color: accent,
+                      fontSize: '64px',
+                      fontWeight: 800,
+                      lineHeight: 1
                     }}
                   >
-                    <span
-                      className="drawer-confirm-label"
-                      style={{
-                        color: accent,
-                        margin: 0,
-                      }}
-                    >
-                      {tickets.length + 1}
-                    </span>
-                  </div>
-                  {freeTickets ? (
-                    <Button
-                      onClick={addTicket}
-                      disabled={tickets.length === guestInfo.cards - 1 ? true : false}
-                      icon={<IoMdAdd size={25} />}
-                      id="ticket-button"
-                      style={{
-                        color: buttonsColorText(actions),
-                        backgroundColor: tickets.length === guestInfo.cards - 1 ? "rgba(0,0,0,0.20)" : actions,
-                      }}
-                    />
-                  ) : (
-                    <Button
-                      onClick={addTicket}
-                      icon={<IoMdAdd size={25} />}
-                      id="ticket-button"
-                      style={{
-                        color: buttonsColorText(actions),
-                        backgroundColor: actions,
-                      }}
-                    />
-                  )}
+                    {tickets.length + 1}
+                  </span>
                 </div>
-
-                <span
-                  className="drawer-confirm-label"
-                  style={{
-                    color: accent,
-                    fontWeight: 600,
-                  }}
-                >
-                  {freeTickets === 1 ? "Agrega tu nombre" : "Agrega tu nombre y el de tus acompañantes"}
-                </span>
-
-                <div className="confirm-inputs-container">
-                  <Input
-                    value={currentGuestName ?? ""}
-                    onChange={(e) => setCurrentGuestName(e.target.value)}
-                    className="confirm-input"
-                    placeholder="Tu nombre"
+                {freeTickets ? (
+                  <Button
+                    onClick={addTicket}
+                    disabled={tickets.length === (guestInfo?.cards ?? 1) - 1 ? true : false}
+                    icon={<FaPlus size={12} style={{ color: primary }} />}
+                    className={styles.add_less_btn}
                     style={{
-                      background: `var(--ft-color)`,
-                      border: `0px solid ${secondary}`,
-                      color: accent,
+                      color: buttonsColorText(actions),
+                      backgroundColor: tickets.length === (guestInfo?.cards ?? 1) - 1 ? `${accent}20` : accent,
                     }}
                   />
-                  {tickets.map((tck, index) => (
-                    <Input
-                      onChange={(e) => handleInputChange(index, e.target.value)}
-                      key={index}
-                      placeholder="Acompañante"
-                      className="confirm-input"
-                      value={tck}
-                      style={{
-                        background: "var(--ft-color)",
-                        border: `0px solid ${secondary}`,
-                        color: accent,
-                      }}
-                    />
-                  ))}
-                </div>
+                ) : (
+                  <Button
+                    onClick={addTicket}
+                    icon={<FaPlus size={12} />}
+                    className={styles.add_less_btn}
+                    style={{
+                      color: buttonsColorText(actions),
+                      backgroundColor: actions,
+                    }}
+                  />
+                )}
+              </div>
+
+              <span
+                className={styles.confirm_label}
+                style={{
+                  color: accent,
+                  fontWeight: 600,
+                }}
+              >
+                Escribe tu nombre y quienes te acompañan
+              </span>
+
+              <div className={styles.inputs_cont}>
+                <Input
+                  value={currentGuestName ?? ""}
+                  onChange={(e) => setCurrentGuestName(e.target.value)}
+                  className={styles.confirm_input}
+                  placeholder="Tu nombre"
+                  style={{
+                    color: accent,
+                    borderColor: `${accent}20`
+                  }}
+                />
+                {tickets.map((tck, index) => (
+                  <Input
+                    onChange={(e) => handleInputChange(index, e.target.value)}
+                    key={index}
+                    placeholder="Acompañante"
+                    className={styles.confirm_input}
+                    value={tck}
+                    style={{
+                      color: accent,
+                      borderColor: `${accent}20`
+                    }}
+                  />
+                ))}
               </div>
             </div>
+
           ) : confirmed === "rechazado" ? (
-            <div className="confirm-main-container">
+            <div className={styles.confirm_cont}>
               <div
-                className="icon-container"
-                style={{
-                  backgroundColor: secondary,
-                }}
+                className={styles.icon_cont}
               >
                 <FaRegCalendarXmark size={50} style={{ color: accent }} />
               </div>
 
               <span
-                className="drawer-confirm-label"
+                className={styles.confirm_label}
                 style={{
                   color: accent,
                 }}
@@ -348,19 +406,15 @@ export default function Confirm({ invitation, type, guestInfo, mongoID }: Confir
               </span>
             </div>
           ) : (
-            <div className="confirm-main-container">
+            <div className={styles.confirm_cont}>
               <div
-                className="icon-container"
-                style={{
-                  backgroundColor: secondary,
-                  // border: `1px solid ${theme ? darker(MainColor, 0.8) : lighter(MainColor, 0.8)}20`
-                }}
+                className={styles.icon_cont}
               >
                 <FaRegCalendarCheck size={50} style={{ color: accent }} />
               </div>
 
               <span
-                className="drawer-confirm-label"
+                className={styles.confirm_label}
                 style={{
                   color: accent,
                 }}
@@ -378,37 +432,39 @@ export default function Confirm({ invitation, type, guestInfo, mongoID }: Confir
               />
 
               <span
-                className="drawer-confirm-label"
+                className={styles.confirm_label}
                 style={{
                   color: accent,
                 }}
               >
                 Agrega el evento a tu calendario
               </span>
+              {
+                invitation &&
+                <AddToCalendarButton
+                  name={getTitle(invitation?.cover?.title)}
+                  options={["Google"]}
+                  // startDate={formatISODate(invitation.cover.date)}
+                  startDate={toYYYYMMDD(invitation?.cover?.date)}
+                  timeZone="America/Los_Angeles"
+                ></AddToCalendarButton>
+              }
 
-              {/* <AddToCalendarButton
-                name={invitation.cover.title}
-                options={["Google"]}
-                // startDate={formatISODate(invitation.cover.date)}
-                startDate={invitation.cover.date.split("T")[0]}
-                timeZone="America/Los_Angeles"
-              ></AddToCalendarButton> */}
             </div>
           )
           // )
         }
 
-        <div className="confirm-buttons-container">
+        <div className={styles.buttons_container}>
           {confirmed !== "esperando" ? (
             type === "closed" && (
               <Button
                 onClick={() => setConfirmed("esperando")}
-                id="confirm-confirm-button"
                 style={{
                   background: "transparent",
-                  marginTop: "50px",
-                  border: `2px solid  ${actions}`,
-                  color: actions,
+                  height: '44px', width: '100%', fontSize: '16px',
+                  border: `2px solid  ${accent}`,
+                  color: accent,
                 }}
               >
                 Cambiar respuesta
@@ -417,12 +473,12 @@ export default function Confirm({ invitation, type, guestInfo, mongoID }: Confir
           ) : (
             <>
               <Button
-                onClick={acceptInvitation}
-                id="confirm-confirm-button"
+                onClick={() => { acceptInvitation(), setConfirmed("esperando") }}
                 style={{
-                  color: buttonsColorText(actions),
-                  backgroundColor: actions,
+                  color: primary,
+                  backgroundColor: accent,
                   letterSpacing: "2px",
+                  height: '44px', width: '100%', fontSize: '16px'
                 }}
               >
                 CONFIRMAR
@@ -430,12 +486,12 @@ export default function Confirm({ invitation, type, guestInfo, mongoID }: Confir
 
               <Button
                 onClick={rejectInvitation}
-                id="confirm-confirm-button"
                 style={{
-                  background: "var(--ft-color)",
-                  border: `2px solid  ${secondary}`,
+
+                  border: `2px solid  ${accent}`,
                   color: accent,
-                  backgroundColor: primary,
+                  backgroundColor: 'transparent',
+                  height: '44px', width: '100%', fontSize: '16px'
                 }}
               >
                 No podré asistir
@@ -519,7 +575,7 @@ export default function Confirm({ invitation, type, guestInfo, mongoID }: Confir
 //                         <b>¿Cuántos pases vas a utilizar?</b>
 //                     </span>
 
-//                     <div className='input-number-tickets-row'>
+//                     <div className={styles.confirm_tickets_row}>
 //                         <Button
 //                             disabled={tickets.length === 0 ? true : false}
 //                             onClick={() => setTickets(tickets.slice(0, -1))}

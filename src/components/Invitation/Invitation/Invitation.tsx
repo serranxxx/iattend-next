@@ -193,9 +193,11 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
                   // height: '44px',
                   letterSpacing: "2px",
                   fontSize: "16px",
-                  padding: "6px 12px",
+                  height:'44px',
+                  width:'200px',
                   backgroundColor: `${actions}80`,
                   backdropFilter: "blur(10px)",
+                  border:`1px solid ${actions}80`,
                   color: accent,
                   boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
                 }}
@@ -294,7 +296,7 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
           },
         }}
       >
-        {guestInfo && mongoID && <Confirm invitation={invitation} type={type} guestInfo={guestInfo} mongoID={mongoID} />}
+        {(guestInfo || type === "open" )&& mongoID && <Confirm invitation={invitation} type={type} guestInfo={guestInfo} mongoID={mongoID} />}
       </Drawer>
     </>
   );

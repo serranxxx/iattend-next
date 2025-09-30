@@ -1,0 +1,81 @@
+.confirm_container {
+    padding: 12px 0px;
+    gap: 24px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.confirm_cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.icon_cont {
+    height: 64px;
+    width: 64px;
+    border-radius: 99px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirm_label {
+    font-size: 16px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.confirm_tickets_row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    gap: 24px;
+    margin: 12px 0px;
+}
+
+.simulate_input {
+    /* flex: 1; */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add_less_btn {
+    height: 28px;
+    min-height: 28px;
+    min-width: 28px;
+    max-width: 28px;
+}
+
+.inputs_cont {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 12px;
+    align-self: stretch;
+}
+
+.confirm_input {
+    width: 100%;
+    border: 1px solid;
+    min-height: 34px;
+    background-color: #FFFFFF40;
+    font-size: 16px;
+}
+
+.buttons_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    align-self: stretch;
+    gap: 12px;
+}

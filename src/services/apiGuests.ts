@@ -70,6 +70,25 @@ export async function deleteGuestByID(operation: (params: AxiosRequestConfig) =>
   }
 }
 
+export async function confirmGuests(operation: (params: AxiosRequestConfig) => Promise<void>, invitationID: string, newGuest: Guest){
+
+  const data = {
+      guest: newGuest // Enviar solo el invitado, no todo el array
+  }
+
+  try {
+      await operation({
+          method: "PATCH",
+          url: `/guests/confirm/${invitationID}`,
+          data: data
+      })
+
+  } catch (error) {
+      console.error(error)
+  }
+}
+
+
 export async function moveTickets(operation: (params: AxiosRequestConfig) => Promise<void>, invitationID: string, card: Guest) {
   const token = localStorage.getItem("token");
 
@@ -167,19 +186,19 @@ export async function guestLogin(operation: (params: AxiosRequestConfig) => Prom
 export async function editGuestsGuest(
   operation: (params: AxiosRequestConfig) => Promise<void>,
   invitationID: string,
-  currentGuest: GuestAccessPayload,
+  guestInfo: GuestAccessPayload,
   confirmed: string,
   tickets: string[],
   currentGuestName: string
 ) {
-  const token = localStorage.getItem("guest-token");
+  // const token = localStorage.getItem("guest-token");
   const data = {
-    id: currentGuest.guestID,
+    id: guestInfo.guestID,
     guestUpdates: {
-      name: currentGuest.username,
+      name: guestInfo.username,
       state: confirmed,
       last_action: confirmed === "confirmado" ? "accepted" : "rejected",
-      available_cards: currentGuest.cards,
+      available_cards: guestInfo.cards,
       companions: confirmed === "confirmado" ? [currentGuestName, ...tickets] : tickets,
     },
   };
@@ -189,7 +208,6 @@ export async function editGuestsGuest(
       url: `/guests/${invitationID}/guests`,
       headers: {
         accept: "*/*",
-        token: token,
       },
       data: data,
     });
