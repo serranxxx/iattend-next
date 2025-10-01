@@ -85,13 +85,13 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
     }
   };
 
-  const handleUnlock = () => {
-    console.log("🔓 Desbloqueado!");
-  };
+  // const handleUnlock = () => {
+  //   console.log("🔓 Desbloqueado!");
+  // };
 
-  const handleRelock = () => {
-    console.log("🔒 Vuelto a bloquear!");
-  }
+  // const handleRelock = () => {
+  //   console.log("🔒 Vuelto a bloquear!");
+  // }
 
   const onValidateUser = async () => {
     try {
@@ -99,6 +99,11 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
         invitationID: mongoID,
         guestID: guestCode,
       });
+
+      console.log(guestCode)
+      console.log(mongoID)
+
+      console.log(response)
 
       if (response.data.ok) {
         messageApi.success(`Bienvenido ${response.data.data.username}`);
@@ -197,7 +202,7 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
                   width:'200px',
                   backgroundColor: `${actions}80`,
                   backdropFilter: "blur(10px)",
-                  border:`1px solid ${actions}80`,
+                  border:`1px solid ${actions}40`,
                   color: accent,
                   boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
                 }}

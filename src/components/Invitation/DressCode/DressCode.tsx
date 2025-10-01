@@ -26,7 +26,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
   return (
     <>
       {content.active && generals ? (
-        <div style={{ position: "relative", width: "100%" }}>
+        <div style={{ position: "relative", width: "100%", paddingBottom: content.separator ?'36px' : undefined }}>
           <div className="textures_background" style={{ backgroundColor: content.background ? secondary : "transparent" }} />
           <div
             ref={ref}
