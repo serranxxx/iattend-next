@@ -7,6 +7,7 @@ import { forwardRef } from "react";
 import styles from "./cover.module.css";
 import { NewInvitation } from "@/types/new_invitation";
 import Countdown from "./countDown/CountDown";
+import ConfettiButton from "./Confetti/Confetti";
 
 type CoverProps = {
   dev: boolean;
@@ -117,6 +118,7 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
                   minWidth: "250px",
                 }}
               >
+                <ConfettiButton />
                 <Countdown cover={cover} generals={generals} dev={dev} />
               </div>
             )}
