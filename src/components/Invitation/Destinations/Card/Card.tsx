@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { NewInvitation } from "@/types/new_invitation";
 import styles from "./card.module.css";
 import { Button } from "antd";
-import magazine from "@/assets/textures/magzne.png";
 import Image from "next/image";
 import { darker, lighter } from "@/helpers/functions";
 import { useFitText } from "./useFitText";
@@ -208,7 +207,7 @@ export default function Card({ invitation }: CardProps) {
 
                     {invitation.generals.texture !== null && (
                       <div className={styles.card_texture}>
-                        {magazine && <Image src={magazine} alt="" fill style={{ objectFit: "cover", opacity: 0.6 }} />}
+                        <Image src={"/textures/magzne.png"} alt="" fill style={{ objectFit: "cover", opacity: 0.6 }} />
                       </div>
                     )}
                   </div>
@@ -271,7 +270,7 @@ export default function Card({ invitation }: CardProps) {
 
                     {invitation.generals.texture !== null && (
                       <div className={styles.card_texture}>
-                        {magazine && <Image src={magazine} alt="" fill style={{ objectFit: "cover", opacity: 1 }} />}
+                        <Image src={"/textures/magzne.png"} alt="" fill style={{ objectFit: "cover", opacity: 1 }} />
                       </div>
                     )}
                   </div>

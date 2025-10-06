@@ -1,15 +1,6 @@
-import type { StaticImageData } from "next/image";
-import amazon from "../../../../assets/banks/AMAZON.png";
-import banamex from "../../../../assets/banks/BANAMEX.png";
-import banorte from "../../../../assets/banks/BANORTE.png";
-import bbva from "../../../../assets/banks/BBVA.png";
-import hsbc from "../../../../assets/banks/HSBC.png";
-import liverpool from "../../../../assets/banks/LIVERPOOL.png";
-import nu from "../../../../assets/banks/NU.png";
-import palacio from "../../../../assets/banks/PALACIO.png";
-import santander from "../../../../assets/banks/SANTANDER.png";
-import scotiabank from "../../../../assets/banks/SCOTIABANK.png";
-import sears from "../../../../assets/banks/SEARS.png";
+// ❌ ya no importes imágenes desde src
+// import amazon from "../../../../banks/AMAZON.png";
+// ...
 
 export type GiftCard = {
   kind: "store" | "bank";
@@ -32,7 +23,7 @@ export type BrandKey =
 
 type BrandMeta = {
   className: BrandKey | "default";
-  image?: StaticImageData;
+  imagePath?: string; // 👉 ruta pública
 };
 
 const normalize = (s?: string) =>
@@ -63,31 +54,30 @@ const ALIAS_TO_KEY: Record<string, BrandKey> = {
   "banco nu": "nu",
 };
 
+// 👇 mapea a rutas públicas
 const BRAND_META: Record<BrandKey, BrandMeta> = {
-  amazon: { className: "amazon", image: amazon },
-  banamex: { className: "banamex", image: banamex },
-  banorte: { className: "banorte", image: banorte },
-  bbva: { className: "bbva", image: bbva },
-  hsbc: { className: "hsbc", image: hsbc },
-  liverpool: { className: "liverpool", image: liverpool },
-  nu: { className: "nu", image: nu },
-  palacio: { className: "palacio", image: palacio },
-  santander: { className: "santander", image: santander },
-  scotiabank: { className: "scotiabank", image: scotiabank },
-  sears: { className: "sears", image: sears },
+  amazon:     { className: "amazon",     imagePath: "/banks/AMAZON.png" },
+  banamex:    { className: "banamex",    imagePath: "/banks/BANAMEX.png" },
+  banorte:    { className: "banorte",    imagePath: "/banks/BANORTE.png" },
+  bbva:       { className: "bbva",       imagePath: "/banks/BBVA.png" },
+  hsbc:       { className: "hsbc",       imagePath: "/banks/HSBC.png" },
+  liverpool:  { className: "liverpool",  imagePath: "/banks/LIVERPOOL.png" },
+  nu:         { className: "nu",         imagePath: "/banks/NU.png" },
+  palacio:    { className: "palacio",    imagePath: "/banks/PALACIO.png" },
+  santander:  { className: "santander",  imagePath: "/banks/SANTANDER.png" },
+  scotiabank: { className: "scotiabank", imagePath: "/banks/SCOTIABANK.png" },
+  sears:      { className: "sears",      imagePath: "/banks/SEARS.png" },
 };
 
 export function classifyGiftCard(card: GiftCard): {
   key?: BrandKey;
   className: string;
-  imageUrl: string | null; // 👈 URL lista para <img>
+  imageUrl: string | null; // listo para <img> o next/image
 } {
   const raw = card.kind === "store" ? card.brand ?? "" : card.bank ?? "";
   const key = ALIAS_TO_KEY[normalize(raw)];
   if (!key) return { className: "default", imageUrl: null };
 
   const meta = BRAND_META[key];
-  const imageUrl = typeof meta.image === "string" ? meta.image : (meta.image as StaticImageData | undefined)?.src ?? null;
-
-  return { key, className: meta.className, imageUrl };
+  return { key, className: meta.className, imageUrl: meta.imagePath ?? null };
 }

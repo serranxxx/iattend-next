@@ -10,7 +10,7 @@
   margin: 0 auto;
   overflow: visible;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, .35);
-  background-image: url('../../../../assets/textures/magzne.png');
+  background-image: url('/textures/magzne.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -39,7 +39,7 @@
   left: 0;
   right: 0;
   margin: auto;
-  background-image: url('../../../../assets/textures/magzne.png');
+  background-image: url('/textures/magzne.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

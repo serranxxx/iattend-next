@@ -1,75 +1,62 @@
-import paper from "@/assets/textures/paper.jpg";
-import pared from "@/assets/textures/pared.jpg";
-import paper2 from "@/assets/textures/paper-2.jpg";
-import textile from "@/assets/textures/textile.jpg";
-import grunge from "@/assets/textures/grunge.jpg";
-import crumpled from "@/assets/textures/crumpled.jpg";
-import cotton from "@/assets/textures/cotton.jpg";
-import { StaticImageData } from "next/image";
 import { CSSProperties } from "react";
 
 type Texture = {
-  image: StaticImageData | string;
+  /** ruta pública dentro de /public */
+  image: string; // ej: "/textures/paper.jpg"
   opacity: number;
-  blend: CSSProperties["mixBlendMode"]; // ← en vez de string
-  filter: CSSProperties["filter"]; // ← también tipado
-  path: string;
+  blend: CSSProperties["mixBlendMode"];
+  filter: CSSProperties["filter"];
+  path: string;   // si quieres mantenerlo, puede ser igual que image
 };
 
 export const textures: Texture[] = [
   {
-    image: paper,
+    image: "/textures/paper.jpg",
     opacity: 1,
     blend: "multiply",
     filter: "grayscale(1) contrast(1) brightness(1)",
-    path: "@/assets/textures/paper.jpg",
+    path: "/textures/paper.jpg",
   },
-
   {
-    image: pared,
+    image: "/textures/pared.jpg",
     opacity: 0.5,
     blend: "multiply",
     filter: "grayscale(1) contrast(1) brightness(1)",
-    path: "@/assets/textures/paper.jpg",
+    path: "/textures/pared.jpg",
   },
-
   {
-    image: paper2,
+    image: "/textures/paper-2.jpg",
     opacity: 0.5,
     blend: "multiply",
     filter: "grayscale(1) contrast(1) brightness(1)",
-    path: "@/assets/textures/paper.jpg",
+    path: "/textures/paper-2.jpg",
   },
-
   {
-    image: textile,
+    image: "/textures/textile.jpg",
     opacity: 0.5,
     blend: "multiply",
     filter: "grayscale(1) contrast(1) brightness(1)",
-    path: "@/assets/textures/paper.jpg",
+    path: "/textures/textile.jpg",
   },
-
   {
-    image: grunge,
+    image: "/textures/grunge.jpg",
     opacity: 0.5,
     blend: "multiply",
     filter: "grayscale(1) contrast(1) brightness(1)",
-    path: "@/assets/textures/paper.jpg",
+    path: "/textures/grunge.jpg",
   },
-
   {
-    image: crumpled,
+    image: "/textures/crumpled.jpg",
     opacity: 0.5,
     blend: "multiply",
     filter: "grayscale(1) contrast(1) brightness(1)",
-    path: "@/assets/textures/paper.jpg",
+    path: "/textures/crumpled.jpg",
   },
-
   {
-    image: cotton,
+    image: "/textures/cotton.jpg",
     opacity: 0.5,
     blend: "multiply",
     filter: "grayscale(1) contrast(1.1) brightness(1)",
-    path: "@/assets/textures/paper.jpg",
+    path: "/textures/cotton.jpg",
   },
 ];

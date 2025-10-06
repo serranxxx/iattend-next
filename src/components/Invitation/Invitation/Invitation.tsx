@@ -13,7 +13,6 @@ import { Gifts } from "../Gifts/Gifts";
 import { Destinations } from "../Destinations/Destinations";
 import { Notices } from "../Notices/Notices";
 import { Gallery } from "../Gallery/Gallery";
-import load from "@/assets/tools/load.gif";
 import Image, { StaticImageData } from "next/image";
 import { textures } from "@/helpers/textures";
 import { TextureOverlay } from "./TexturesOverlay";
@@ -30,9 +29,10 @@ type invProps = {
   loader: boolean;
   type: InvitationType;
   mongoID: string | null;
+  dev: boolean
 };
 
-export default function Invitation({ invitation, loader, type, mongoID }: invProps) {
+export default function Invitation({ invitation, loader, type, mongoID, dev }: invProps) {
   const coverRef = useRef<HTMLDivElement>(null);
   const greetingRef = useRef<HTMLDivElement>(null);
   const peopleRef = useRef<HTMLDivElement>(null);
@@ -147,7 +147,7 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
           width: "100%",
         }}
       >
-        <Image alt="" src={load} width={250} />
+        <Image alt="" src={"/assets/tools/load.gif"} width={250} />
       </div>
     );
   }
@@ -187,28 +187,32 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
             validated &&
             <>
               {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
-              <Button
-                onClick={() => setOpen(true)}
-                style={{
-                  position: "fixed",
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  bottom: "20px",
-                  zIndex: 999,
-                  // height: '44px',
-                  letterSpacing: "2px",
-                  fontSize: "16px",
-                  height:'44px',
-                  width:'200px',
-                  backgroundColor: `${actions}80`,
-                  backdropFilter: "blur(10px)",
-                  border:`1px solid ${actions}40`,
-                  color: accent,
-                  boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
-                }}
-              >
-                CONFIRMAR
-              </Button>
+              {
+                !dev &&
+
+                <Button
+                  onClick={() => setOpen(true)}
+                  style={{
+                    position: "fixed",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    bottom: "20px",
+                    zIndex: 999,
+                    // height: '44px',
+                    letterSpacing: "2px",
+                    fontSize: "16px",
+                    height: '44px',
+                    width: '200px',
+                    backgroundColor: `${actions}80`,
+                    backdropFilter: "blur(10px)",
+                    border: `1px solid ${actions}40`,
+                    color: accent,
+                    boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
+                  }}
+                >
+                  CONFIRMAR
+                </Button>
+              }
             </>
           }
           <div className={styles.inv_locked_blured} style={{ pointerEvents: validated ? 'none' : undefined, opacity: validated ? '0' : '1', backgroundColor: `${primary}20` }}>
@@ -234,10 +238,11 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
               onChange={(e) => setGuestCode(e.target.value)}
               placeholder="Código de invitado"
               className={styles.locked_input}
-              style={{ 
-                backgroundColor:"#FFFFFF20",boxShadow:'0px 0px 12px rgba(0,0,0,0.2)',
-                borderWidth:'2px', color:'#FFF',
-                fontSize: '18px', textAlign: 'center', maxWidth: "280px", borderRadius: '99px', minHeight: '56px' }}
+              style={{
+                backgroundColor: "#FFFFFF20", boxShadow: '0px 0px 12px rgba(0,0,0,0.2)',
+                borderWidth: '2px', color: '#FFF',
+                fontSize: '18px', textAlign: 'center', maxWidth: "280px", borderRadius: '99px', minHeight: '56px'
+              }}
             />
             {/* <SwipeToConfirm
               label="Desliza para desbloquear"
@@ -252,12 +257,12 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
               onRelock={handleRelock}
             /> */}
 
-            <Button 
-            className={styles.locked_btn}
-            style={{
-              height:'56px', width:'280px', fontSize:'18px',
-              fontWeight:600, letterSpacing:'2px', boxShadow:'0px 0px 12px rgba(0,0,0,0.2)'
-            }} onClick={onValidateUser}>ACCEDER</Button>
+            <Button
+              className={styles.locked_btn}
+              style={{
+                height: '56px', width: '280px', fontSize: '18px',
+                fontWeight: 600, letterSpacing: '2px', boxShadow: '0px 0px 12px rgba(0,0,0,0.2)'
+              }} onClick={onValidateUser}>ACCEDER</Button>
           </div>
         </div>
         {/* <FooterInvitation invitation={invitation} /> */}
@@ -301,7 +306,7 @@ export default function Invitation({ invitation, loader, type, mongoID }: invPro
           },
         }}
       >
-        {(guestInfo || type === "open" )&& mongoID && <Confirm invitation={invitation} type={type} guestInfo={guestInfo} mongoID={mongoID} />}
+        {(guestInfo || type === "open") && mongoID && <Confirm invitation={invitation} type={type} guestInfo={guestInfo} mongoID={mongoID} />}
       </Drawer>
     </>
   );

@@ -9,7 +9,6 @@ import { Destinations } from "@/components/Invitation/Destinations/Destinations"
 import { Notices } from "@/components/Invitation/Notices/Notices";
 import { Gallery } from "@/components/Invitation/Gallery/Gallery";
 import { Cover } from "@/components/Invitation/Cover/Cover";
-import load from "@/assets/tools/load.gif";
 import Image from "next/image";
 import styles from "./invitation.module.css";
 import { createClient } from "@/lib/supabase/client";
@@ -94,7 +93,7 @@ export default function InvitationPage() {
           width: "100%",
         }}
       >
-        <Image alt="" src={load} width={250} />
+        <Image alt="" src={"/assets/tools/load.gif"} width={250} />
       </div>
     );
   }
