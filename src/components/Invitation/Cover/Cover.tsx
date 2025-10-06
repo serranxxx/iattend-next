@@ -118,7 +118,7 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
                   minWidth: "250px",
                 }}
               >
-                <ConfettiButton />
+                {/* <ConfettiButton /> */}
                 <Countdown cover={cover} generals={generals} dev={dev} />
               </div>
             )}
