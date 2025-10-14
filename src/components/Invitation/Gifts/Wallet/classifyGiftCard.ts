@@ -1,5 +1,5 @@
 // ❌ ya no importes imágenes desde src
-// import amazon from "../../../../banks/AMAZON.png";
+// import amazon from "../../../../assets/banks/AMAZON.png";
 // ...
 
 export type GiftCard = {
@@ -56,17 +56,17 @@ const ALIAS_TO_KEY: Record<string, BrandKey> = {
 
 // 👇 mapea a rutas públicas
 const BRAND_META: Record<BrandKey, BrandMeta> = {
-  amazon:     { className: "amazon",     imagePath: "/banks/AMAZON.png" },
-  banamex:    { className: "banamex",    imagePath: "/banks/BANAMEX.png" },
-  banorte:    { className: "banorte",    imagePath: "/banks/BANORTE.png" },
-  bbva:       { className: "bbva",       imagePath: "/banks/BBVA.png" },
-  hsbc:       { className: "hsbc",       imagePath: "/banks/HSBC.png" },
-  liverpool:  { className: "liverpool",  imagePath: "/banks/LIVERPOOL.png" },
-  nu:         { className: "nu",         imagePath: "/banks/NU.png" },
-  palacio:    { className: "palacio",    imagePath: "/banks/PALACIO.png" },
-  santander:  { className: "santander",  imagePath: "/banks/SANTANDER.png" },
-  scotiabank: { className: "scotiabank", imagePath: "/banks/SCOTIABANK.png" },
-  sears:      { className: "sears",      imagePath: "/banks/SEARS.png" },
+  amazon: { className: "amazon", imagePath: "/assets/banks/AMAZON.png" },
+  banamex: { className: "banamex", imagePath: "/assets/banks/BANAMEX.png" },
+  banorte: { className: "banorte", imagePath: "/assets/banks/BANORTE.png" },
+  bbva: { className: "bbva", imagePath: "/assets/banks/BBVA.png" },
+  hsbc: { className: "hsbc", imagePath: "/assets/banks/HSBC.png" },
+  liverpool: { className: "liverpool", imagePath: "/assets/banks/LIVERPOOL.png" },
+  nu: { className: "nu", imagePath: "/assets/banks/NU.png" },
+  palacio: { className: "palacio", imagePath: "/assets/banks/PALACIO.png" },
+  santander: { className: "santander", imagePath: "/assets/banks/SANTANDER.png" },
+  scotiabank: { className: "scotiabank", imagePath: "/assets/banks/SCOTIABANK.png" },
+  sears: { className: "sears", imagePath: "/assets/banks/SEARS.png" },
 };
 
 export function classifyGiftCard(card: GiftCard): {

@@ -20,7 +20,7 @@ type CardProps = {
 export default function Card({ invitation, dev }: CardProps) {
   const content = invitation.itinerary;
   const generals = invitation.generals;
-  const [open, setOpen] = useState<ItineraryItem | null>(null)
+  const [open, setOpen] = useState<ItineraryItem | null>(null);
 
   const primary = generals?.colors.primary ?? "#FFFFFF";
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
@@ -32,25 +32,37 @@ export default function Card({ invitation, dev }: CardProps) {
   const [activeSteps, setActiveSteps] = useState<ItineraryItem[]>([]);
 
   const renderIcon = (iconID: number, size: number, variable: boolean) => {
-    if (!iconID) return <LuBadgeHelp size={size} style={{ color: content.background ? accent : accent }} />;
+    if (!iconID)
+      return (
+        <LuBadgeHelp
+          size={size}
+          style={{ color: content.background ? (content.inverted ? primary : accent) : content.inverted ? accent : accent }}
+        />
+      );
     const Icon = getItineraryIcon(iconID);
     if (Icon) {
-      return <Icon size={size} style={{ color: variable ? primary : accent }} />;
+      return (
+        <Icon
+          size={size}
+          style={{ color: content.background ? (content.inverted ? primary : accent) : content.inverted ? accent : accent }}
+        />
+      );
     }
-    return <LuBadgeHelp size={size} style={{ color: content.background ? accent : accent }} />;
   };
 
-  const toBg = (img?: string | StaticImageData) =>
-    img ? `url(${typeof img === "string" ? img : img.src})` : undefined;
-
-
+  const renderDrawerIcon = (iconID: number, size: number, variable: boolean) => {
+    if (!iconID) return <LuBadgeHelp size={size} style={{ color: content.inverted ? primary : accent }} />;
+    const Icon = getItineraryIcon(iconID);
+    if (Icon) {
+      return <Icon size={size} style={{ color: content.inverted ? primary : accent }} />;
+    }
+  };
 
   const ROW_HEIGHT = 180; // alto mínimo de cada fila (ajústalo a tu diseño)
   const GAP = 0;
 
   return (
     <>
-
       <div
         style={{
           position: "relative",
@@ -67,7 +79,7 @@ export default function Card({ invitation, dev }: CardProps) {
             left: "50%",
             width: 3,
             transform: "translateX(-50%)",
-            background: content.background ? `${primary}` : `${accent}`,
+            background: content.background ? (content.inverted ? primary : accent) : content.inverted ? accent : accent,
             zIndex: 1,
           }}
         />
@@ -98,7 +110,7 @@ export default function Card({ invitation, dev }: CardProps) {
                   flexDirection: "column",
                 }}
               >
-                {renderIcon(item.icon!, 56, content.background)}
+                {renderIcon(item.icon!, 56, content.inverted)}
                 <div
                   style={{
                     display: "flex",
@@ -109,25 +121,25 @@ export default function Card({ invitation, dev }: CardProps) {
                     padding: "0px 6px",
                     fontFamily: invitation.generals.fonts.body?.typeFace,
                     fontSize: "14px",
+                    color: content.background ? (content.inverted ? primary : accent) : content.inverted ? accent : accent,
                   }}
                 >
-                  <span style={{ fontWeight: 600, fontSize: "16px" }}>
-                    {item.name}
-                  </span>
-                  <span style={{ fontWeight: 400, opacity: "0.5" }}>
-                    {item.subtext}
-                  </span>
+                  <span style={{ fontWeight: 600, fontSize: "16px" }}>{item.name}</span>
+                  <span style={{ fontWeight: 400, opacity: "0.5" }}>{item.subtext}</span>
                   <span style={{ fontWeight: 400 }}>{item.time}</span>
                   <div style={{ marginTop: 6 }}>
                     <Button
                       onClick={() => setOpen(item)}
                       style={{
-                        backgroundColor: invitation.generals.texture !== null ? content.background ? primary : secondary : secondary,
-                        color: content.background ? accent : content.inverted ? primary : accent,
-                        boxShadow: generals.texture !== null ? '0 0 6px 0 rgba(0, 0, 0, 0.25)' : undefined
+                        backgroundColor: content.background ? (content.inverted ? primary : secondary) : secondary,
+                        color: content.background ? (content.inverted ? accent : accent) : content.inverted ? primary : accent,
+                        boxShadow: generals.texture !== null ? "0 0 6px 0 rgba(0, 0, 0, 0.25)" : undefined,
                       }}
-                      // onClick={() => setActiveSteps([...(activeSteps ?? []), item])} 
-                      icon={<MdArrowOutward />}>Detalles</Button>
+                      // onClick={() => setActiveSteps([...(activeSteps ?? []), item])}
+                      icon={<MdArrowOutward />}
+                    >
+                      Detalles
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -141,7 +153,7 @@ export default function Card({ invitation, dev }: CardProps) {
                   width: 16,
                   height: 16,
                   borderRadius: "50%",
-                  background: content.background ? `${primary}` : `${accent}`,
+                  background: content.background ? (content.inverted ? primary : accent) : content.inverted ? accent : accent,
                   transform: "translate(-50%, -50%)",
                   zIndex: 2,
                 }}
@@ -157,41 +169,55 @@ export default function Card({ invitation, dev }: CardProps) {
                 placement="bottom"
                 onClose={() => setOpen(null)}
                 open={open ? true : false}
-                title={<div style={{ 
-                  display:'flex',alignItems:'center', justifyContent:'flex-start', gap:'6px', fontFamily: invitation.generals.fonts.body?.typeFace,
-                  fontSize:'20px',
-                  color:  content.background ? accent : content.inverted ? primary : accent, }}> {renderIcon(open?.icon!, 20, content.inverted)}{open?.name}</div>}
-                height={'auto'}
+                title={
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "flex-start",
+                      gap: "6px",
+                      fontFamily: invitation.generals.fonts.body?.typeFace,
+                      fontSize: "20px",
+                      color: content.inverted ? primary : accent,
+                    }}
+                  >
+                    {" "}
+                    {}
+                    {renderDrawerIcon(open?.icon!, 20, content.inverted)}
+                    {open?.name}
+                  </div>
+                }
+                height={"auto"}
                 closeIcon={false}
                 style={{
-                  maxHeight: '800px',
-                  borderRadius:'32px 32px 0px 0px',
+                  maxHeight: "800px",
+                  borderRadius: "32px 32px 0px 0px",
                 }}
                 styles={{
                   header: {
-                    backgroundColor: content.inverted ? secondary : primary
+                    backgroundColor: content.inverted ? secondary : primary,
                   },
                   body: {
                     backgroundColor: content.inverted ? secondary : primary,
-                    paddingTop: '12px',
-                  }
+                    paddingTop: "12px",
+                  },
                 }}
                 extra={
-                  open?.address?.url &&
-                  <Button
-                    href={open?.address.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    icon={<FaDiamondTurnRight size={14} />}
-                    style={{
-                      background: content.inverted ? primary : actions ?? "#FFF",
-                      color: content.inverted ? accent : buttonsColorText(actions!),
-                    }}
-                  >
-                    ¿Cómo llegar?
-                  </Button>
+                  open?.address?.url && (
+                    <Button
+                      href={open?.address.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      icon={<FaDiamondTurnRight size={14} />}
+                      style={{
+                        background: content.inverted ? primary : actions ?? "#FFF",
+                        color: content.inverted ? accent : buttonsColorText(actions!),
+                      }}
+                    >
+                      ¿Cómo llegar?
+                    </Button>
+                  )
                 }
-
               >
                 <OpenCard dev={dev} invitation={invitation} item={open ?? item} setActiveSteps={setActiveSteps} activeSteps={activeSteps} />
               </Drawer>
@@ -275,11 +301,6 @@ export default function Card({ invitation, dev }: CardProps) {
               ? `${primary}`
               : `${accent}`,
           }} className={styles.line_it} /> */}
-
-
-
     </>
   );
 }
-
-

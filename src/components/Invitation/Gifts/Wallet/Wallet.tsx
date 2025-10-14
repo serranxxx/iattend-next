@@ -31,12 +31,12 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
   const fontFamily = invitation.generals.fonts.body?.typeFace;
   const title = invitation.cover.title.text.value;
 
-  const ANIM_MS = 250;        // duración de cada fase
-  const SCALE_UP = 1.2;       // escala al abrir
-  const DOWN_PX = 50;         // “bajar” después de subir
+  const ANIM_MS = 250; // duración de cada fase
+  const SCALE_UP = 1.2; // escala al abrir
+  const DOWN_PX = 50; // “bajar” después de subir
 
   const [movedIndex, setMovedIndex] = useState<number | null>(null); // ya lo tienes
-  const [isScaled, setIsScaled] = useState(false);                   // NUEVO
+  const [isScaled, setIsScaled] = useState(false); // NUEVO
   // const cards = invitation.gifts.cards.slice(0, 3);
 
   const handleClick = (index: number) => {
@@ -68,7 +68,7 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
     const h = ref.current?.clientHeight ?? 340;
     const jump = Math.max(160, Math.min(600, h - 10)); // tu cálculo actual
     const next = [...base];
-    next[index] = jump;            // 1) Sube
+    next[index] = jump; // 1) Sube
     setBottoms(next);
     setMovedIndex(index);
 
@@ -129,7 +129,7 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
     if (invitation) {
       setCards(invitation.gifts.cards.slice(0, 3));
     }
-  }, []);
+  }, [invitation]);
 
   return (
     <>
@@ -144,7 +144,7 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
             <div
               className={`${styles.card} ${styles[classifyGiftCard(card).className]}`}
               style={{
-                zIndex: movedIndex === index ? 12 : (cards.length + 1 - index), // z-index 12 si activa
+                zIndex: movedIndex === index ? 12 : cards.length + 1 - index, // z-index 12 si activa
                 bottom: `${bottoms[index]}px`,
                 padding: movedIndex === index ? "24px" : undefined,
                 border: `1px solid ${accent}10`,
@@ -152,7 +152,9 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
                 // cuando está activa: escala y “bajar” 50px visualmente
                 transform:
                   movedIndex === index
-                    ? (isScaled ? `scale(${SCALE_UP}) translateY(${DOWN_PX}px)` : "scale(1) translateY(0)")
+                    ? isScaled
+                      ? `scale(${SCALE_UP}) translateY(${DOWN_PX}px)`
+                      : "scale(1) translateY(0)"
                     : "scale(1) translateY(0)",
                 transformOrigin: "center bottom", // para que “crezca” hacia arriba
               }}

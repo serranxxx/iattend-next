@@ -70,6 +70,7 @@ export function TextureOverlay({
       style={{
         position: "absolute",
         left: 0,
+        top: 0,
         width: "100%",
         pointerEvents: "none",
         zIndex, // 👈 configurable
@@ -80,22 +81,8 @@ export function TextureOverlay({
       preserveAspectRatio="none"
     >
       <defs>
-        <pattern
-          id={patternId}
-          patternUnits="userSpaceOnUse"
-          width={tileW}
-          height={tileH * 2}
-          patternTransform={`scale(${scale})`}
-        >
-          <image
-            href={texSrc}
-            x="0"
-            y="0"
-            width={tileW}
-            height={tileH}
-            preserveAspectRatio="none"
-            imageRendering="crisp-edges"
-          />
+        <pattern id={patternId} patternUnits="userSpaceOnUse" width={tileW} height={tileH * 2} patternTransform={`scale(${scale})`}>
+          <image href={texSrc} x="0" y="0" width={tileW} height={tileH} preserveAspectRatio="none" imageRendering="crisp-edges" />
           <image
             href={texSrc}
             x="0"

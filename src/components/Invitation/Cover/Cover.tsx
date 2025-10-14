@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { darker, lighter } from "@/helpers/functions";
 import Image from "next/image";
@@ -12,7 +12,7 @@ import ConfettiButton from "./Confetti/Confetti";
 type CoverProps = {
   dev: boolean;
   invitation: NewInvitation | null;
-  height: string;
+  height: string | number;
 };
 
 export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev, invitation, height }, ref) {
@@ -22,10 +22,9 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
 
   useEffect(() => {
     if (invitation) {
-      console.log(invitation.cover)
+      console.log(invitation.cover);
     }
-  }, [])
-  
+  }, []);
 
   return (
     invitation && (
@@ -33,10 +32,8 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
         <div
           className={!dev ? styles.cover_container : styles.cover_container_dev}
           style={{
-            height: "100dvh",
+            height: height,
             padding: "0",
-            minHeight: "100dvh",
-            maxHeight: "100dvh",
             background: generals?.colors.primary ?? "#FFFFFF",
           }}
         >
@@ -46,11 +43,13 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
               style={{
                 top: `${cover.image.position.y ?? 0}px`,
                 left: `${cover.image.position.x ?? 0}px`,
-                 transform: `scale(${cover.image.zoom ?? 1})`,
-                 position:'relative'
+                transform: `scale(${cover.image.zoom ?? 1})`,
+                position: "relative",
               }}
             >
-              {image_src && <img style={{ objectFit: "cover", width:'100%', height:'100%'}} loading="lazy" decoding="async" alt="" src={image_src} />}
+              {image_src && (
+                <img style={{ objectFit: "cover", width: "100%", height: "100%" }} loading="lazy" decoding="async" alt="" src={image_src} />
+              )}
 
               {cover.image.background ? (
                 <div

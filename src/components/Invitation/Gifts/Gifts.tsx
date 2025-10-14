@@ -3,17 +3,14 @@ import React, { forwardRef, useState } from "react";
 import { Separador } from "../Separator/Separator";
 import Card from "./Cards/Cards";
 import styles from "./gifts.module.css";
-import Wallet from "../DressCode/Wallet/Wallet";
+import Wallet from "./Wallet/Wallet";
 
 type DresscodeProps = {
   dev: boolean;
   invitation: NewInvitation;
 };
 
-export const Gifts = forwardRef<HTMLDivElement, DresscodeProps>(function Greeting(
-  { dev, invitation },
-  ref
-) {
+export const Gifts = forwardRef<HTMLDivElement, DresscodeProps>(function Greeting({ dev, invitation }, ref) {
   const content = invitation.gifts;
   const generals = invitation.generals;
   const font = generals.fonts.body?.typeFace;
@@ -80,7 +77,7 @@ export const Gifts = forwardRef<HTMLDivElement, DresscodeProps>(function Greetin
                 className={styles.cards_container}
               >
                 {/* 👉 Pasamos cards y callback */}
-                <Wallet invitation={invitation} dev={dev}/>
+                <Wallet invitation={invitation} dev={dev} />
                 {/* <Card
                   invitation={invitation}
                   dev={dev}
@@ -92,9 +89,7 @@ export const Gifts = forwardRef<HTMLDivElement, DresscodeProps>(function Greetin
           </div>
         </div>
       ) : null}
-      {content?.separator && (
-        <Separador generals={generals} value={generals?.separator ?? 1} />
-      )}
+      {content?.separator && <Separador generals={generals} value={generals?.separator ?? 1} />}
     </>
   );
 });

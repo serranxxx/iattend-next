@@ -85,9 +85,7 @@ export default async function InvitationDynamicPage({ params }: PageProps) {
 
   const loader = false;
 
-  return <Layout style={{ display: "flex", width: "100%", minHeight: '100dvh' }}>
-    <Invitation dev={false} invitation={invitation} loader={loader} type={type} mongoID={mongoID} />;
-  </Layout>
+  return <Invitation height={null} dev={false} invitation={invitation} loader={loader} type={type} mongoID={mongoID} />;
 
   //
 }

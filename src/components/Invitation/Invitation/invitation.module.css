@@ -8,7 +8,6 @@
   gap: 44px;
   box-sizing: border-box;
   width: 100%;
-  max-height: 100dvh;
   overflow: auto;
   padding-bottom: 44px;
 }
@@ -81,19 +80,23 @@
 }
 
 
-.locked_btn {background-image: linear-gradient(to right, #ECE9E6 0%, #FFFFFF  51%, #ECE9E6  100%)}
 .locked_btn {
-   margin: 10px;
-   padding: 15px 45px;
-   text-align: center;
-   text-transform: uppercase;
-   transition: 0.5s;
-   background-size: 200% auto;         
-   display: block;
-   transition: 0.3s ease all;
- }
+  background-image: linear-gradient(to right, #ECE9E6 0%, #FFFFFF 51%, #ECE9E6 100%)
+}
 
- .locked_btn:hover {
-   background-position: right center; /* change the direction of the change here */
-   text-decoration: none;
- }
+.locked_btn {
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  display: block;
+  transition: 0.3s ease all;
+}
+
+.locked_btn:hover {
+  background-position: right center;
+  /* change the direction of the change here */
+  text-decoration: none;
+}

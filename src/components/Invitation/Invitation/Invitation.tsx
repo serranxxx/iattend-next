@@ -1,7 +1,7 @@
 "use client";
 
 import { InvitationType, NewInvitation } from "@/types/new_invitation";
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./invitation.module.css";
 import { Cover } from "../Cover/Cover";
 import { Greeting } from "../Greeting/Greeting";
@@ -13,7 +13,7 @@ import { Gifts } from "../Gifts/Gifts";
 import { Destinations } from "../Destinations/Destinations";
 import { Notices } from "../Notices/Notices";
 import { Gallery } from "../Gallery/Gallery";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { textures } from "@/helpers/textures";
 import { TextureOverlay } from "./TexturesOverlay";
 import { Button, Drawer, Input, Layout, message } from "antd";
@@ -21,18 +21,17 @@ import Confirm from "../Confirm/Confirm";
 import { FaLock } from "react-icons/fa";
 import axios from "axios";
 import { GuestAccessPayload } from "@/types/guests";
-import SwipeToConfirm from "./SwipeToConfirm";
-import SwipeLock from "./SwipeLock";
 
 type invProps = {
   invitation: NewInvitation | null;
   loader: boolean;
   type: InvitationType;
   mongoID: string | null;
-  dev: boolean
+  dev: boolean;
+  height: number | string | null;
 };
 
-export default function Invitation({ invitation, loader, type, mongoID, dev }: invProps) {
+export default function Invitation({ invitation, loader, type, mongoID, dev, height }: invProps) {
   const coverRef = useRef<HTMLDivElement>(null);
   const greetingRef = useRef<HTMLDivElement>(null);
   const peopleRef = useRef<HTMLDivElement>(null);
@@ -84,15 +83,6 @@ export default function Invitation({ invitation, loader, type, mongoID, dev }: i
         break;
     }
   };
-
-  // const handleUnlock = () => {
-  //   console.log("🔓 Desbloqueado!");
-  // };
-
-  // const handleRelock = () => {
-  //   console.log("🔒 Vuelto a bloquear!");
-  // }
-
   const onValidateUser = async () => {
     try {
       const response = await axios.post(`https://i-attend-22z4h.ondigitalocean.app/api/guests/login`, {
@@ -100,10 +90,10 @@ export default function Invitation({ invitation, loader, type, mongoID, dev }: i
         guestID: guestCode,
       });
 
-      console.log(guestCode)
-      console.log(mongoID)
+      console.log(guestCode);
+      console.log(mongoID);
 
-      console.log(response)
+      console.log(response);
 
       if (response.data.ok) {
         messageApi.success(`Bienvenido ${response.data.data.username}`);
@@ -123,8 +113,12 @@ export default function Invitation({ invitation, loader, type, mongoID, dev }: i
   };
 
   useEffect(() => {
-    const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    setHeightSize(coverHeightPx);
+    if (height) {
+      setHeightSize(670);
+    } else {
+      const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+      setHeightSize(coverHeightPx);
+    }
   }, []);
 
   useEffect(() => {
@@ -158,117 +152,118 @@ export default function Invitation({ invitation, loader, type, mongoID, dev }: i
     <>
       {contextHolder}
 
-      <Layout style={{ display: "flex", width: "100%", minHeight: '100dvh' }}>
-        {/* <HeaderInvitation visible={isVisible} content={invitation.cover} invitation={invitation} /> */}
+      <div
+        ref={scrollableContentRef}
+        className={styles.invitation_main_cont}
+        style={{
+          backgroundColor: invitation.generals.colors.primary ?? "#FFF",
+          paddingBottom: validated ? "44px" : "0px",
+          maxHeight: "100vh",
+        }}
+      >
+        {invitation.generals.texture !== null && tex && (
+          <TextureOverlay
+            containerRef={scrollableContentRef as unknown as React.RefObject<HTMLElement>}
+            coverHeightPx={heightSize}
+            texture={{
+              image: tex.image, // StaticImageData o "/public/..."
+              opacity: tex.opacity,
+              blend: tex.blend,
+              filter: tex.filter,
+            }}
+            tileW={1024} // ajusta a tu imagen
+            tileH={1024}
+          />
+        )}
+        <Cover ref={coverRef} dev={false} invitation={invitation} height={height ?? "100vh"} />
+        {validated && (
+          <>
+            {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
+            {!dev && (
+              <Button
+                onClick={() => setOpen(true)}
+                style={{
+                  position: "fixed",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  bottom: "20px",
+                  zIndex: 999,
+                  // height: '44px',
+                  letterSpacing: "2px",
+                  fontSize: "16px",
+                  height: "44px",
+                  width: "200px",
+                  backgroundColor: `${actions}80`,
+                  backdropFilter: "blur(10px)",
+                  border: `1px solid ${actions}40`,
+                  color: accent,
+                  boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
+                }}
+              >
+                CONFIRMAR
+              </Button>
+            )}
+          </>
+        )}
         <div
-          ref={scrollableContentRef}
-          className={styles.invitation_main_cont}
-          style={{
-            backgroundColor: invitation.generals.colors.primary ?? "#FFF",
-            paddingBottom: validated ? '44px' : '0px'
-          }}
+          className={styles.inv_locked_blured}
+          style={{ pointerEvents: validated ? "none" : undefined, opacity: validated ? "0" : "1", backgroundColor: `${primary}20` }}
         >
-          {invitation.generals.texture !== null && tex && (
-            <TextureOverlay
-              containerRef={scrollableContentRef as unknown as React.RefObject<HTMLElement>}
-              coverHeightPx={heightSize}
-              texture={{
-                image: tex.image, // StaticImageData o "/public/..."
-                opacity: tex.opacity,
-                blend: tex.blend,
-                filter: tex.filter,
-              }}
-              tileW={1024} // ajusta a tu imagen
-              tileH={1024}
-            />
-          )}
-          <Cover ref={coverRef} dev={false} invitation={invitation} height={"100dvh"} />
-          {
-            validated &&
-            <>
-              {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
-              {
-                !dev &&
-
-                <Button
-                  onClick={() => setOpen(true)}
-                  style={{
-                    position: "fixed",
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    bottom: "20px",
-                    zIndex: 999,
-                    // height: '44px',
-                    letterSpacing: "2px",
-                    fontSize: "16px",
-                    height: '44px',
-                    width: '200px',
-                    backgroundColor: `${actions}80`,
-                    backdropFilter: "blur(10px)",
-                    border: `1px solid ${actions}40`,
-                    color: accent,
-                    boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
-                  }}
-                >
-                  CONFIRMAR
-                </Button>
-              }
-            </>
-          }
-          <div className={styles.inv_locked_blured} style={{ pointerEvents: validated ? 'none' : undefined, opacity: validated ? '0' : '1', backgroundColor: `${primary}20` }}>
-            <div className={styles.locked_icon}>
-              <FaLock size={32} style={{ color: '#FFF' }} />
-            </div>
-            <span className={styles.locked_title}>Invitación Privada</span>
-            <div style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '8px'
-            }}>
-              <span className={styles.locked_text}>
-                Nos alegra mucho que seas parte de este evento tan especial.
-              </span>
-              <span className={styles.locked_text}>
-                Esta invitación es <b>exclusiva para ti</b>. Ingresa tu código de invitado para continuar y disfrutar de esta experiencia
-                única.
-              </span>
-            </div>
-            <Input
-              value={guestCode}
-              // length={6}
-              size="large"
-              onChange={(e) => setGuestCode(e.target.value)}
-              placeholder="Código de invitado"
-              className={styles.locked_input}
-              style={{
-                backgroundColor: "#FFFFFF20", boxShadow: '0px 0px 12px rgba(0,0,0,0.2)',
-                borderWidth: '2px', color: '#FFF',
-                fontSize: '18px', textAlign: 'center', maxWidth: "280px", borderRadius: '99px', minHeight: '56px'
-              }}
-            />
-            {/* <SwipeToConfirm
-              label="Desliza para desbloquear"
-              threshold={0.85}
-              resetOnConfirm
-              onConfirm={onValidateUser}
-            /> */}
-
-            {/* <SwipeLock
-              label="Desliza para desbloquear"
-              onUnlock={onValidateUser}
-              onRelock={handleRelock}
-            /> */}
-
-            <Button
-              className={styles.locked_btn}
-              style={{
-                height: '56px', width: '280px', fontSize: '18px',
-                fontWeight: 600, letterSpacing: '2px', boxShadow: '0px 0px 12px rgba(0,0,0,0.2)'
-              }} onClick={onValidateUser}>ACCEDER</Button>
+          <div className={styles.locked_icon}>
+            <FaLock size={32} style={{ color: "#FFF" }} />
           </div>
+          <span className={styles.locked_title}>Invitación Privada</span>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
+              gap: "8px",
+            }}
+          >
+            <span className={styles.locked_text}>Nos alegra mucho que seas parte de este evento tan especial.</span>
+            <span className={styles.locked_text}>
+              Esta invitación es <b>exclusiva para ti</b>. Ingresa tu código de invitado para continuar y disfrutar de esta experiencia
+              única.
+            </span>
+          </div>
+          <Input
+            value={guestCode}
+            // length={6}
+            size="large"
+            onChange={(e) => setGuestCode(e.target.value)}
+            placeholder="Código de invitado"
+            className={styles.locked_input}
+            style={{
+              backgroundColor: "#FFFFFF20",
+              boxShadow: "0px 0px 12px rgba(0,0,0,0.2)",
+              borderWidth: "2px",
+              color: "#FFF",
+              fontSize: "18px",
+              textAlign: "center",
+              maxWidth: "280px",
+              borderRadius: "99px",
+              minHeight: "56px",
+            }}
+          />
+
+          <Button
+            className={styles.locked_btn}
+            style={{
+              height: "56px",
+              width: "280px",
+              fontSize: "18px",
+              fontWeight: 600,
+              letterSpacing: "2px",
+              boxShadow: "0px 0px 12px rgba(0,0,0,0.2)",
+            }}
+            onClick={onValidateUser}
+          >
+            ACCEDER
+          </Button>
         </div>
-        {/* <FooterInvitation invitation={invitation} /> */}
-      </Layout>
-
-
+      </div>
       <Drawer
         placement="bottom"
         onClose={() => setOpen(false)}
@@ -306,7 +301,9 @@ export default function Invitation({ invitation, loader, type, mongoID, dev }: i
           },
         }}
       >
-        {(guestInfo || type === "open") && mongoID && <Confirm invitation={invitation} type={type} guestInfo={guestInfo} mongoID={mongoID} />}
+        {(guestInfo || type === "open") && mongoID && (
+          <Confirm invitation={invitation} type={type} guestInfo={guestInfo} mongoID={mongoID} />
+        )}
       </Drawer>
     </>
   );

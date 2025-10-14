@@ -10,7 +10,7 @@
   margin: 0 auto;
   overflow: visible;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, .35);
-  background-image: url('/textures/magzne.png');
+  background-image: url('/assets/textures/magzne.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -39,7 +39,7 @@
   left: 0;
   right: 0;
   margin: auto;
-  background-image: url('/textures/magzne.png');
+  background-image: url('/assets/textures/magzne.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -177,7 +177,7 @@
 
 .hsbc {
   background: linear-gradient(270deg, #D8D8D8 0%, #b8b6b6 100%);
-  color: #FFFFFF;
+  color: #000000;
 }
 
 .sears {
@@ -192,10 +192,12 @@
 
 .scotiabank {
   background: linear-gradient(270deg, #AD1E0D 0%, #C1250F 100%);
+  color: #FFF;
 }
 
 .banorte {
   background: radial-gradient(50% 50% at 50% 50%, #484649 0%, #3F3D40 100%);
+  color: #FFFFFF;
 }
 
 .bank_name {
