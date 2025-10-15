@@ -90,11 +90,6 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
         guestID: guestCode,
       });
 
-      console.log(guestCode);
-      console.log(mongoID);
-
-      console.log(response);
-
       if (response.data.ok) {
         messageApi.success(`Bienvenido ${response.data.data.username}`);
         setGuestCode("");
@@ -113,12 +108,8 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
   };
 
   useEffect(() => {
-    if (height) {
-      setHeightSize(670);
-    } else {
-      const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-      setHeightSize(coverHeightPx);
-    }
+    const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    setHeightSize(coverHeightPx);
   }, []);
 
   useEffect(() => {
@@ -134,7 +125,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
     return (
       <div
         style={{
-          minHeight: "100dvh",
+          minHeight: "100vh",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -175,7 +166,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
             tileH={1024}
           />
         )}
-        <Cover ref={coverRef} dev={false} invitation={invitation} height={height ?? "100vh"} />
+        <Cover ref={coverRef} dev={false} invitation={invitation} height={"100vh"} />
         {validated && (
           <>
             {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}

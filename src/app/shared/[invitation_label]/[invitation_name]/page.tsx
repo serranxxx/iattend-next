@@ -41,7 +41,7 @@ export default function Page() {
   }, []);
 
   return invitation ? (
-    <Invitation height={"680px"} dev={true} invitation={invitation} loader={false} type={"open" as InvitationType} mongoID={null} />
+    <Invitation height={"100vh"} dev={true} invitation={invitation} loader={false} type={"open" as InvitationType} mongoID={null} />
   ) : (
     <></>
   );
