@@ -65,11 +65,11 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
       case 2:
         return <People ref={peopleRef} dev={false} invitation={invitation} />;
       case 3:
-        return <Quote ref={quoteRef} dev={false} invitation={invitation} />;
+        return <Quote ref={quoteRef} dev={dev} invitation={invitation} />;
       case 4:
         return <Itinerary ref={itineraryRef} dev={false} invitation={invitation} />;
       case 5:
-        return <DressCode ref={dresscodeRef} dev={dev} invitation={invitation} />;
+        return <DressCode ref={dresscodeRef} dev={false} invitation={invitation} />;
       case 6:
         return <Gifts ref={giftsRef} dev={false} invitation={invitation} />;
       case 7:
