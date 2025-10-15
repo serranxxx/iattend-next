@@ -166,7 +166,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
             tileH={1024}
           />
         )}
-        <Cover ref={coverRef} dev={false} invitation={invitation} height={"100vh"} />
+        <Cover ref={coverRef} dev={dev} invitation={invitation} height={"100vh"} />
         {validated && (
           <>
             {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
