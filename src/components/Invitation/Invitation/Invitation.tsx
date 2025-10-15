@@ -69,7 +69,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
       case 4:
         return <Itinerary ref={itineraryRef} dev={false} invitation={invitation} />;
       case 5:
-        return <DressCode ref={dresscodeRef} dev={false} invitation={invitation} />;
+        return <DressCode ref={dresscodeRef} dev={dev} invitation={invitation} />;
       case 6:
         return <Gifts ref={giftsRef} dev={false} invitation={invitation} />;
       case 7:
@@ -77,7 +77,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
       case 8:
         return <Notices ref={noticesRef} dev={false} invitation={invitation} />;
       case 9:
-        return <Gallery ref={galleryRef} dev={false} invitation={invitation} />;
+        return <Gallery ref={galleryRef} dev={dev} invitation={invitation} />;
 
       default:
         break;
