@@ -69,7 +69,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
       case 4:
         return <Itinerary ref={itineraryRef} dev={false} invitation={invitation} />;
       case 5:
-        return <DressCode ref={dresscodeRef} dev={false} invitation={invitation} />;
+        return <DressCode ref={dresscodeRef} dev={dev} invitation={invitation} />;
       case 6:
         return <Gifts ref={giftsRef} dev={false} invitation={invitation} />;
       case 7:
