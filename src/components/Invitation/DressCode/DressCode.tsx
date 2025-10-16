@@ -98,7 +98,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                 <div className={dev ? "dresscode-links-dev" : "dresscode-links"}>
                   {content.links &&
                     content.links.map((link, index) => (
-                      link.url && link.url !== "" &&
+                      (link.url && link.url !== "") &&
                       <Button
                         key={index}
                         href={link.url}
