@@ -26,7 +26,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
   return (
     <>
       {content.active && generals ? (
-        <div style={{ position: "relative", width: "100%", paddingBottom: content.separator ?'36px' : undefined }}>
+        <div style={{ position: "relative", width: "100%", paddingBottom: content.separator ? '36px' : undefined }}>
           <div className="textures_background" style={{ backgroundColor: content.background ? secondary : "transparent" }} />
           <div
             ref={ref}
@@ -98,6 +98,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                 <div className={dev ? "dresscode-links-dev" : "dresscode-links"}>
                   {content.links &&
                     content.links.map((link, index) => (
+                      link.url && link.url !== "" &&
                       <Button
                         key={index}
                         href={link.url}
