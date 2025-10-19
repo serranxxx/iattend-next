@@ -99,7 +99,7 @@ export default function Countdown({ cover, generals, dev }: CountdownProps) {
         </span>
       ) : (
         <>
-          <hr className={!dev ? styles.date_divider : styles.date_divider_dev} style={{ border: "1px solid", color, borderColor: color }} />
+          <hr className={styles.date_divider} style={{ border: "1px solid", color, borderColor: color }} />
           <Row className={!dev ? styles.date_row : styles.date_row_dev}>
             {(["days", "hours", "minutes", "seconds"] as Units[]).map((u) => (
               <Col key={u} className={styles.date_col}>

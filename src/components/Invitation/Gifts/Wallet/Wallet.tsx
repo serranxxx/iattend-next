@@ -137,7 +137,11 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
       <div
         ref={ref}
         className={invitation.generals.texture !== null ? styles.wallet : styles.wallet_light}
-        style={{ backgroundColor: darker(content.inverted ? secondary : primary, 0.95) ?? "#FFF", transform: "scale(0.7)" }}
+        style={{
+          backgroundColor:
+            darker(content.background ? (content.inverted ? primary : secondary) : content.inverted ? secondary : primary, 0.95) ?? "#FFF",
+          transform: "scale(0.7)",
+        }}
       >
         {bottoms.length > 0 &&
           cards?.map((card, index) => (
@@ -209,16 +213,24 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
         <div
           onClick={handleReset}
           style={{
-            backgroundColor: darker(content.inverted ? secondary : primary, 0.95) ?? "#FFF",
+            backgroundColor:
+              darker(content.background ? (content.inverted ? primary : secondary) : content.inverted ? secondary : primary, 0.95) ??
+              "#FFF",
             borderColor: content.inverted ? `${accent}60` : `${primary}60`,
           }}
           className={`${invitation.generals.texture !== null ? styles.department : styles.department_light} ${styles.one}`}
         >
           <div className={styles.wallet_col} style={{ fontFamily: fontFamily }}>
-            <span style={{ color: content.inverted ? primary : accent }} className={styles.wallet_label}>
+            <span
+              style={{ color: content.background ? (content.inverted ? accent : primary) : content.inverted ? primary : accent }}
+              className={styles.wallet_label}
+            >
               {title}
             </span>
-            <span style={{ color: content.inverted ? primary : accent }} className={styles.wallet_sec_label}>
+            <span
+              style={{ color: content.background ? (content.inverted ? accent : primary) : content.inverted ? primary : accent }}
+              className={styles.wallet_sec_label}
+            >
               Tarjetas de regalo
             </span>
           </div>

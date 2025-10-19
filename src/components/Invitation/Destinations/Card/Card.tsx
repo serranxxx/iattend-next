@@ -247,7 +247,9 @@ export default function Card({ invitation }: CardProps) {
                       <span className={styles.reversed_card_title}>
                         <b>Información</b>
                       </span>
-                      <span className={styles.reversed_card_text}>{card.description}</span>
+                      <span className={styles.reversed_card_text} style={{ whiteSpace: "pre-line" }}>
+                        {card.description}
+                      </span>
                     </div>
 
                     <Button

@@ -126,10 +126,6 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
       )}
 
       <div className={styles.open_card_info}>
-        {/* <span className={styles.open_title}>
-          {" "}
-          <b>{item.name}</b>{" "}
-        </span> */}
         <span className={styles.open_sub}> {item.time} </span>
         <span className={styles.open_text}> {item.subtext} </span>
         {item.address && (
@@ -171,7 +167,7 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
                       title="Mapa"
                       width="100%"
                       height="100%"
-                      style={{ borderColor: content.inverted ? primary : secondary}}
+                      style={{ borderColor: content.inverted ? primary : secondary }}
                       loading="lazy"
                       allowFullScreen
                       referrerPolicy="no-referrer-when-downgrade"
