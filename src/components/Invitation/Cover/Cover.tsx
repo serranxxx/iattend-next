@@ -34,7 +34,6 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
           style={{
             padding: "0",
             background: generals?.colors.primary ?? "#FFFFFF",
-            backgroundColor:'red'
           }}
         >
           {cover?.image.dev || cover?.image.prod ? (
