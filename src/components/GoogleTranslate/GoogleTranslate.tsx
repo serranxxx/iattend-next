@@ -13,7 +13,7 @@ export default function GoogleTranslate() {
     (window as any).googleTranslateElementInit = () => {
       new (window as any).google.translate.TranslateElement(
         {
-          pageLanguage: "es",
+          pageLanguage: "es, en",
           includedLanguages: "en,es,fr,it,de,pt",
           layout:
             (window as any).google.translate.TranslateElement.InlineLayout
