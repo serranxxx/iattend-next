@@ -13,9 +13,10 @@ type CoverProps = {
   dev: boolean;
   invitation: NewInvitation | null;
   height: string | number;
+  validated?: boolean
 };
 
-export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev, invitation, height }, ref) {
+export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev, invitation, height , validated = true}, ref) {
   const cover = invitation?.cover;
   const generals = invitation?.generals;
   const image_src = dev ? cover?.image.dev : cover?.image.prod;
@@ -28,7 +29,7 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
 
   return (
     invitation && (
-      <div ref={ref} className={styles.module_cover_container} style={{ position: "relative", zIndex: 3, }}>
+      <div ref={ref} className={styles.module_cover_container} style={{ position: "relative", zIndex: 4, }}>
         <div
           className={!dev ? styles.cover_container : styles.cover_container_dev}
           style={{
@@ -116,8 +117,8 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
                   minWidth: "250px",
                 }}
               >
-                {/* <ConfettiButton /> */}
-                <Countdown cover={cover} generals={generals} dev={dev} />
+                
+                <Countdown cover={cover} generals={generals} dev={dev} validated={validated}/>
               </div>
             )}
           </div>

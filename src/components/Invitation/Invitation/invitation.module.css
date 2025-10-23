@@ -86,7 +86,7 @@
 } */
 
 .locked_btn {
-  cursor: pointer !important;
+  cursor: default !important;
   position: relative;
   overflow: hidden;
   background: #FFF !important;

@@ -186,7 +186,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
             tileH={1024}
           />
         )}
-        <Cover ref={coverRef} dev={dev} invitation={invitation} height={"100vh"} />
+        <Cover ref={coverRef} dev={dev} invitation={invitation} height={"100vh"} validated={validated}/>
         {validated && (
           <>
             {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
@@ -198,7 +198,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
                   left: "50%",
                   transform: "translateX(-50%)",
                   bottom: "20px",
-                  zIndex: 999,
+                  zIndex: 3,
                   // height: '44px',
                   letterSpacing: "2px",
                   fontSize: "16px",

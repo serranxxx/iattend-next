@@ -1,9 +1,22 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import confetti from "canvas-confetti";
+import { CoverSection, Generals } from "@/types/new_invitation";
+import { Button } from "antd";
+import { PiConfetti } from "react-icons/pi";
+import styles from './confetti.module.css'
+import { darker } from "@/helpers/functions";
 
-export default function ConfettiButton() {
+type CountdownProps = {
+  cover: CoverSection;
+  generals?: Generals;
+  validated?: boolean
+};
+
+
+export default function ConfettiButton({ cover, generals, validated = true }: CountdownProps) {
+
   const onClick = useCallback(() => {
     confetti({
       particleCount: 150,
@@ -11,11 +24,24 @@ export default function ConfettiButton() {
     });
   }, []);
 
+  useEffect(() => {
+    if (validated) {
+      onClick()
+    }
+  }, [validated])
+  
+
   return (
-    <button style={{position:'absolute', bottom:'200px'}} className="button" onClick={onClick}>
-      <span>🎉</span>
-      <span>Like</span>
-    </button>
+    <Button 
+    icon={<PiConfetti />}
+    className={`${styles.animate} ${styles.action_button}`}
+    style={{
+      backgroundColor: generals?.colors.actions!,
+      borderBottom: `5px solid ${darker(generals?.colors.actions!, 0.8)}`
+    }} 
+      onClick={onClick}>
+      ¡Es hoy!
+    </Button>
   );
 }
 

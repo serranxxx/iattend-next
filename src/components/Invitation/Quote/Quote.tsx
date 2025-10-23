@@ -38,7 +38,7 @@ export const Quote = forwardRef<HTMLDivElement, quoteProps>(function Greeting({ 
             className="gm_container"
             style={{
               position: "relative",
-              zIndex: 5,
+              zIndex: 2,
             }}
           >
             {content.image.active ? (

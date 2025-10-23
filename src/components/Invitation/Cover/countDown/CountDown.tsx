@@ -6,11 +6,13 @@ import React, { useEffect, useMemo, useState } from "react";
 import { lighter, formatDate } from "@/helpers/functions";
 import { CoverSection, Generals } from "@/types/new_invitation";
 import styles from "./count.module.css";
+import ConfettiButton from "../Confetti/Confetti";
 
 type CountdownProps = {
   cover: CoverSection;
   generals?: Generals;
   dev: boolean;
+  validated?: boolean;
 };
 
 type Units = "days" | "hours" | "minutes" | "seconds";
@@ -44,7 +46,7 @@ const labels: Record<Units, { singular: string; plural: string }> = {
   seconds: { singular: "segundo", plural: "segundos" },
 };
 
-export default function Countdown({ cover, generals, dev }: CountdownProps) {
+export default function Countdown({ cover, generals, dev, validated = true }: CountdownProps) {
   const targetDate = useMemo(() => {
     const s = cleanDate(cover?.date?.value);
     const t = s ? new Date(s) : null;
@@ -94,9 +96,12 @@ export default function Countdown({ cover, generals, dev }: CountdownProps) {
       </span>
 
       {isToday ? (
-        <span className={styles.date_unit} style={{ fontSize: "22px", color, fontFamily: font }}>
-          ¡Es Hoy!
-        </span>
+        // <span className={styles.date_unit} style={{ fontSize: "22px", marginTop:'12px', color, fontFamily: font }}>
+        //   ¡Es Hoy!
+        // </span>
+
+        <ConfettiButton cover={cover} generals={generals} validated={validated}/>
+
       ) : (
         <>
           <hr className={styles.date_divider} style={{ border: "1px solid", color, borderColor: color }} />
