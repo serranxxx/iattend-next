@@ -12,7 +12,7 @@ type FadeDownProps = {
         <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             viewport={{ once: true, amount: 0.3 }}
             style={{width:'100%', zIndex: zIndex, display:'flex',alignItems:'center',justifyContent:'center'}}
         >

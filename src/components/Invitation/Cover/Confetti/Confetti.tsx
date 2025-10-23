@@ -19,8 +19,10 @@ export default function ConfettiButton({ cover, generals, validated = true }: Co
 
   const onClick = useCallback(() => {
     confetti({
-      particleCount: 150,
-      spread: 60,
+      particleCount: 200,
+      spread: 80,
+      angle: 90,                 // 90 = hacia abajo, 270 = hacia arriba
+      origin: { x: 0.5, y: 0.9 }
     });
   }, []);
 

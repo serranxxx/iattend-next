@@ -65,23 +65,23 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
   const handlePosition = (id: number, invitation: NewInvitation, index: number) => {
     switch (id) {
       case 1:
-        return <Greeting ref={greetingRef} dev={false} invitation={invitation} />;
+        return <Greeting key={index} ref={greetingRef} dev={false} invitation={invitation} />;
       case 2:
-        return <People ref={peopleRef} dev={false} invitation={invitation} />;
+        return <People key={index}  ref={peopleRef} dev={false} invitation={invitation} />;
       case 3:
-        return <Quote ref={quoteRef} dev={dev} invitation={invitation} />;
+        return <Quote key={index}  ref={quoteRef} dev={dev} invitation={invitation} />;
       case 4:
-        return <Itinerary ref={itineraryRef} dev={false} invitation={invitation} />;
+        return <Itinerary key={index}  ref={itineraryRef} dev={false} invitation={invitation} />;
       case 5:
-        return <DressCode ref={dresscodeRef} dev={dev} invitation={invitation} />;
+        return <DressCode key={index} ref={dresscodeRef} dev={dev} invitation={invitation} />;
       case 6:
-        return <Gifts ref={giftsRef} dev={false} invitation={invitation} />;
+        return <Gifts key={index}  ref={giftsRef} dev={false} invitation={invitation} />;
       case 7:
-        return <Destinations ref={destinationRef} dev={false} invitation={invitation} />;
+        return <Destinations key={index}  ref={destinationRef} dev={false} invitation={invitation} />;
       case 8:
-        return <Notices ref={noticesRef} dev={false} invitation={invitation} />;
+        return <Notices key={index}  ref={noticesRef} dev={false} invitation={invitation} />;
       case 9:
-        return <Gallery ref={galleryRef} dev={dev} invitation={invitation} />;
+        return <Gallery key={index}  ref={galleryRef} dev={dev} invitation={invitation} />;
 
       default:
         break;

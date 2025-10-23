@@ -82,7 +82,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
             {content.images_active && (
               <div className={styles.scroll_invitation} style={{ zIndex: 2 }}>
                 {images_src.map((image, index) => (
-                  <FadeIn>
+                  <FadeIn key={index}>
                     <div
                       style={{ position: "relative", padding: "6px 24px" }}
                       key={index}
