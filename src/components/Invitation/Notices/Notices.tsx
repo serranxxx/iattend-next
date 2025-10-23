@@ -1,6 +1,7 @@
 import { NewInvitation } from "@/types/new_invitation";
 import React, { forwardRef } from "react";
 import { Separador } from "../Separator/Separator";
+import FadeLeft from "@/components/Motion/FadeLeft";
 
 type DresscodeProps = {
   dev: boolean;
@@ -22,7 +23,6 @@ export const Notices = forwardRef<HTMLDivElement, DresscodeProps>(function notic
         <div style={{ position: "relative", width: "100%" }}>
           <div className="textures_background" style={{ backgroundColor: content.background ? secondary : "transparent" }} />
           <div
-            // data-aos="fade-up"
             ref={ref}
             className="gm_container"
             style={{
@@ -31,42 +31,46 @@ export const Notices = forwardRef<HTMLDivElement, DresscodeProps>(function notic
             }}
           >
             <div className="g_module_info_container">
-              <span
-                // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
-                className="g_module_title"
-                style={{
-                  fontFamily: font,
-                  color: content.background && content.inverted ? primary : accent,
-                }}
-              >
-                {content.title}
-              </span>
+              <FadeLeft>
+                <span
+                  className="g_module_title"
+                  style={{
+                    fontFamily: font,
+                    color: content.background && content.inverted ? primary : accent,
+                  }}
+                >
+                  {content.title}
+                </span>
+              </FadeLeft>
 
               {content.notices &&
                 content.notices.map((item, index) => (
                   <div key={index} className="g_module_items_single_col" style={{ gap: "12px" }}>
-                    <span
-                      // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
-                      className="g_mdoule_regular_text"
-                      style={{
-                        color: content.background && content.inverted ? primary : accent,
-                        fontFamily: font,
-                      }}
-                    >
-                      {item}
-                    </span>
-
-                    {index < content.notices.length - 1 && (
+                    <FadeLeft>
                       <span
-                        // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
                         className="g_mdoule_regular_text"
                         style={{
-                          fontFamily: font,
                           color: content.background && content.inverted ? primary : accent,
+                          fontFamily: font,
                         }}
                       >
-                        ...
+                        {item}
                       </span>
+                    </FadeLeft>
+
+                    {index < content.notices.length - 1 && (
+                      <FadeLeft>
+                        <span
+                          // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
+                          className="g_mdoule_regular_text"
+                          style={{
+                            fontFamily: font,
+                            color: content.background && content.inverted ? primary : accent,
+                          }}
+                        >
+                          ...
+                        </span>
+                      </FadeLeft>
                     )}
                   </div>
                 ))}

@@ -8,6 +8,10 @@ import { useFitText } from "./useFitText";
 import { ImSpoonKnife } from "react-icons/im";
 import { FaHotel } from "react-icons/fa";
 import { MdArrowOutward, MdOpenInFull, MdSportsGymnastics } from "react-icons/md";
+import FadeIn from "@/components/Motion/FadeIn";
+import FadeLeft from "@/components/Motion/FadeLeft";
+
+
 
 type CardProps = {
   invitation: NewInvitation;
@@ -103,20 +107,7 @@ export default function Card({ invitation }: CardProps) {
         perspective: `${PERSPECTIVE}px`,
       }}
     >
-      {/* <div
-        style={{
-          position: "absolute",
-          bottom: "0",
-          left: "0",
-          right: "0",
-          height: "22px",
-          background: `linear-gradient(to bottom,
-      ${darker(accent, 0.25) ?? "#000"},
-      ${darker(accent, 0.9) ?? "#000"}
-    )`,
-          boxShadow: `0 -6px 24px ${accent}66, 0 -22px 26px rgba(0,0,0,.35) inset`,
-        }}
-      /> */}
+
 
       {visibleCards.map((card, i) => {
         const rank = order.indexOf(i);
@@ -124,162 +115,165 @@ export default function Card({ invitation }: CardProps) {
         const elev = i === frontCard ? 1 : shadow; // al frente, más fuerte
 
         return (
-          <div
-            key={i}
-            className={styles[card.type]}
-            onClick={(e) => {
-              e.stopPropagation();
-              i == frontCard ? setFlipped((prev) => !prev) : bringToFront(i);
-            }}
-            style={{
-              position: "absolute",
-              left: "50%",
-              bottom: "53%",
-              transform: `translate(-50%, 50%) translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(${scale})`,
-              transformOrigin: "center",
-              zIndex: z,
-              transition: "transform .35s ease, z-index .35s ease",
-              cursor: total > 1 ? "pointer" : "default",
-              // filter: `drop-shadow(4px 8px ${12 * elev}px rgba(0,0,0,${0.1 + 0.1 * (elev * 2)}))`,
-            }}
-          >
-            <div className={`${styles.flip_card} ${i === frontCard && flipped ? styles.flipped : ""}`}>
-              <div className={styles.flip_inner}>
-                <div className={styles.flip_front}>
-                  <div
-                    className={styles.main_dest_card}
-                    style={{
-                      // backgroundColor: "#FFF",
-                      backgroundColor: lighter(primary, 0.9) ?? "#FFF",
-                    }}
-                  >
-                    <div className={styles.image_dest_cont}>
-                      <img
-                        src={card.image!}
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                        }}
-                      />
-
-                      <div className={styles.dest_text_box}>
-                        <span
-                          className={styles.dest_label}
+          <FadeLeft zIndex={z} duration={i} start={-10 - (i*2)} end={180 + (-28*i)}>
+            <div
+              key={i}
+              className={styles[card.type]}
+              onClick={(e) => {
+                e.stopPropagation();
+                i == frontCard ? setFlipped((prev) => !prev) : bringToFront(i);
+              }}
+              style={{
+                position: "absolute",
+                left: "50%",
+                bottom: "53%",
+                transform: `translate(-50%, 50%) translate(${dx}px, ${dy}px) rotate(${rot}deg) scale(${scale})`,
+                transformOrigin: "center",
+                zIndex: z,
+                transition: "transform .35s ease, z-index .35s ease",
+                cursor: total > 1 ? "pointer" : "default",
+                // filter: `drop-shadow(4px 8px ${12 * elev}px rgba(0,0,0,${0.1 + 0.1 * (elev * 2)}))`,
+              }}
+            >
+              <div className={`${styles.flip_card} ${i === frontCard && flipped ? styles.flipped : ""}`}>
+                <div className={styles.flip_inner}>
+                  <div className={styles.flip_front}>
+                    <div
+                      className={styles.main_dest_card}
+                      style={{
+                        // backgroundColor: "#FFF",
+                        backgroundColor: lighter(primary, 0.9) ?? "#FFF",
+                      }}
+                    >
+                      <div className={styles.image_dest_cont}>
+                        <img
+                          src={card.image!}
                           style={{
-                            color: lighter(primary, 0.9) ?? "#FFF",
-                          }}
-                        >
-                          {card.name}
-                        </span>
-                      </div>
-
-                      {frontCard === i && (
-                        <Button
-                          icon={<MdOpenInFull />}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setFlipped((prev) => !prev);
-                          }}
-                          style={{
-                            zIndex: 5,
-                            fontSize: "12px",
-                            fontWeight: 800,
-                            // backgroundColor: `${lighter(primary, 0.9)}40` ?? "#FFF",
-                            backdropFilter: "blur(4px)",
-                            boxShadow: "0px 0px 8px rgba(0,0,0,0.35)",
-                            color: `#000`,
-                            position: "absolute",
-                            top: "50%",
-                            left: "50%",
-                            height: "40px",
-                            width: "40px",
-                            transform: "translate(-50%,-50%)",
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
                           }}
                         />
+
+                        <div className={styles.dest_text_box}>
+                          <span
+                            className={styles.dest_label}
+                            style={{
+                              color: lighter(primary, 0.9) ?? "#FFF",
+                            }}
+                          >
+                            {card.name}
+                          </span>
+                        </div>
+
+                        {frontCard === i && (
+                          <Button
+                            icon={<MdOpenInFull />}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setFlipped((prev) => !prev);
+                            }}
+                            style={{
+                              zIndex: 5,
+                              fontSize: "12px",
+                              fontWeight: 800,
+                              // backgroundColor: `${lighter(primary, 0.9)}40` ?? "#FFF",
+                              backdropFilter: "blur(4px)",
+                              boxShadow: "0px 0px 8px rgba(0,0,0,0.35)",
+                              color: `#000`,
+                              position: "absolute",
+                              top: "50%",
+                              left: "50%",
+                              height: "40px",
+                              width: "40px",
+                              transform: "translate(-50%,-50%)",
+                            }}
+                          />
+                        )}
+
+                        <div className={styles.tag_label_container}>
+                          <span className={styles.card_label_class}>{translateType(card.type)?.label}</span>
+                          <span className={styles.card_icon_class}>{translateType(card.type)?.icon}</span>
+                        </div>
+                      </div>
+
+                      {invitation.generals.texture !== null && (
+                        <div className={styles.card_texture}>
+                          <Image src={"/assets/textures/magzne.png"} alt="" fill style={{ objectFit: "cover", opacity: 0.6 }} />
+                        </div>
                       )}
-
-                      <div className={styles.tag_label_container}>
-                        <span className={styles.card_label_class}>{translateType(card.type)?.label}</span>
-                        <span className={styles.card_icon_class}>{translateType(card.type)?.icon}</span>
-                      </div>
                     </div>
-
-                    {invitation.generals.texture !== null && (
-                      <div className={styles.card_texture}>
-                        <Image src={"/assets/textures/magzne.png"} alt="" fill style={{ objectFit: "cover", opacity: 0.6 }} />
-                      </div>
-                    )}
                   </div>
-                </div>
 
-                <div
-                  className={styles.flip_back}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setFlipped((prev) => !prev);
-                  }}
-                >
                   <div
-                    className={styles.main_dest_card}
-                    style={{
-                      alignItems: "flex-start",
-                      justifyContent: "space-between",
-                      flexDirection: "column",
-                      padding: "12px",
-                      backgroundColor: lighter(primary, 0.9) ?? "#FFF",
-                      gap: "6px",
+                    className={styles.flip_back}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setFlipped((prev) => !prev);
                     }}
                   >
                     <div
+                      className={styles.main_dest_card}
                       style={{
-                        display: "flex",
                         alignItems: "flex-start",
-                        justifyContent: "flex-start",
+                        justifyContent: "space-between",
                         flexDirection: "column",
+                        padding: "12px",
+                        backgroundColor: lighter(primary, 0.9) ?? "#FFF",
                         gap: "6px",
-                        color: accent,
-                        maxHeight: "100%",
-                        overflow: "auto",
-                        paddingBottom: "6px",
                       }}
                     >
-                      <span className={styles.reversed_card_title}>
-                        <b>Información</b>
-                      </span>
-                      <span className={styles.reversed_card_text} style={{ whiteSpace: "pre-line" }}>
-                        {card.description}
-                      </span>
-                    </div>
-
-                    <Button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                      }}
-                      icon={<MdArrowOutward />}
-                      style={{
-                        zIndex: 5,
-                        fontSize: "12px",
-                        fontWeight: 400,
-                        backgroundColor: accent,
-                        backdropFilter: "blur(10px)",
-                        boxShadow: "0px 0px 4px rgba(0,0,0,0.1)",
-                        color: lighter(primary, 0.9) ?? "#FFF",
-                      }}
-                    >
-                      Navegar
-                    </Button>
-
-                    {invitation.generals.texture !== null && (
-                      <div className={styles.card_texture}>
-                        <Image src={"/assets/textures/magzne.png"} alt="" fill style={{ objectFit: "cover", opacity: 1 }} />
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "flex-start",
+                          justifyContent: "flex-start",
+                          flexDirection: "column",
+                          gap: "6px",
+                          color: accent,
+                          maxHeight: "100%",
+                          overflow: "auto",
+                          paddingBottom: "6px",
+                        }}
+                      >
+                        <span className={styles.reversed_card_title}>
+                          <b>Información</b>
+                        </span>
+                        <span className={styles.reversed_card_text} style={{ whiteSpace: "pre-line" }}>
+                          {card.description}
+                        </span>
                       </div>
-                    )}
+
+                      <Button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                        icon={<MdArrowOutward />}
+                        style={{
+                          zIndex: 5,
+                          fontSize: "12px",
+                          fontWeight: 400,
+                          backgroundColor: accent,
+                          backdropFilter: "blur(10px)",
+                          boxShadow: "0px 0px 4px rgba(0,0,0,0.1)",
+                          color: lighter(primary, 0.9) ?? "#FFF",
+                        }}
+                      >
+                        Navegar
+                      </Button>
+
+                      {invitation.generals.texture !== null && (
+                        <div className={styles.card_texture}>
+                          <Image src={"/assets/textures/magzne.png"} alt="" fill style={{ objectFit: "cover", opacity: 1 }} />
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
+              
             </div>
-          </div>
+          </FadeLeft>
         );
       })}
     </div>

@@ -1,3 +1,4 @@
+import FadeIn from "@/components/Motion/FadeIn";
 import { Generals } from "@/types/new_invitation";
 
 type separatorProps = {
@@ -298,7 +299,9 @@ export const Separador = ({ value, generals }: separatorProps) => {
         justifyContent: "center",
       }}
     >
-      {handleSeparators(value)}
+      <FadeIn>
+        {handleSeparators(value)}
+      </FadeIn>
     </div>
   );
 };

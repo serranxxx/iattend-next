@@ -9,6 +9,8 @@ import { classifyGiftCard } from "./classifyGiftCard";
 import { Button, message } from "antd";
 import { MdArrowOutward } from "react-icons/md";
 import { FaCopy } from "react-icons/fa";
+import FadeIn from "@/components/Motion/FadeIn";
+import FadeDown from "@/components/Motion/FadeDown";
 
 type CardProps = {
   invitation: NewInvitation;
@@ -134,108 +136,112 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
   return (
     <>
       {contextHolder}
-      <div
-        ref={ref}
-        className={invitation.generals.texture !== null ? styles.wallet : styles.wallet_light}
-        style={{
-          backgroundColor:
-            darker(content.background ? (content.inverted ? primary : secondary) : content.inverted ? secondary : primary, 0.95) ?? "#FFF",
-          transform: "scale(0.7)",
-        }}
-      >
-        {bottoms.length > 0 &&
-          cards?.map((card, index) => (
-            <div
-              className={`${styles.card} ${styles[classifyGiftCard(card).className]}`}
-              style={{
-                zIndex: movedIndex === index ? 12 : cards.length + 1 - index, // z-index 12 si activa
-                bottom: `${bottoms[index]}px`,
-                padding: movedIndex === index ? "24px" : undefined,
-                border: `1px solid ${accent}10`,
-                transition: "bottom 250ms ease, transform 250ms ease",
-                // cuando está activa: escala y “bajar” 50px visualmente
-                transform:
-                  movedIndex === index
-                    ? isScaled
-                      ? `scale(${SCALE_UP}) translateY(${DOWN_PX}px)`
-                      : "scale(1) translateY(0)"
-                    : "scale(1) translateY(0)",
-                transformOrigin: "center bottom", // para que “crezca” hacia arriba
-              }}
-              onClick={() => handleClick(index)}
-            >
-              <div
-                className={styles.card_logo_container}
-                style={{
-                  height: movedIndex === index ? "24px" : undefined,
-                }}
-              >
-                <img src={classifyGiftCard(card).imageUrl ?? ""} alt="" style={{ height: "100%", objectFit: "cover" }} />
-              </div>
-
-              {card.kind === "store" ? (
-                <div className={styles.wallet_col} style={{ gap: "6px" }}>
-                  <span>Descubre nuestra mesa de regalos</span>
-                  <Button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      window.open(card.url!, "_blank");
-                    }}
-                    className={styles.cta_button}
-                    icon={<MdArrowOutward />}
-                  >
-                    Ver regalos
-                  </Button>
-                </div>
-              ) : (
-                <div className={styles.wallet_col} style={{ gap: "6px" }}>
-                  <span>{card.name}</span>
-                  <span>
-                    {card.number}{" "}
-                    <Button
-                      onClick={(e) => {
-                        e.stopPropagation(); // evita que se dispare el onClick del padre
-                        copyToClipboard(card.number!); // o usa router.push si es interno
-                      }}
-                      icon={<FaCopy style={{ color: "#FFF" }} />}
-                      type="text"
-                    />
-                  </span>
-                </div>
-              )}
-              {/* <span className={`${styles.bank_name}`}>
-            
-          </span> */}
-            </div>
-          ))}
-
-        {/* Lines debajo y sin eventos */}
+      <FadeIn>
         <div
-          onClick={handleReset}
+          ref={ref}
+          className={invitation.generals.texture !== null ? styles.wallet : styles.wallet_light}
           style={{
             backgroundColor:
-              darker(content.background ? (content.inverted ? primary : secondary) : content.inverted ? secondary : primary, 0.95) ??
-              "#FFF",
-            borderColor: content.inverted ? `${accent}60` : `${primary}60`,
+              darker(content.background ? (content.inverted ? primary : secondary) : content.inverted ? secondary : primary, 0.95) ?? "#FFF",
+            transform: "scale(0.7)",
           }}
-          className={`${invitation.generals.texture !== null ? styles.department : styles.department_light} ${styles.one}`}
         >
-          <div className={styles.wallet_col} style={{ fontFamily: fontFamily }}>
-            <span
-              style={{ color: content.background ? (content.inverted ? accent : primary) : content.inverted ? primary : accent }}
-              className={styles.wallet_label}
-            >
-              {title}
-            </span>
-            <span
-              style={{ color: content.background ? (content.inverted ? accent : primary) : content.inverted ? primary : accent }}
-              className={styles.wallet_sec_label}
-            >
-              Tarjetas de regalo
-            </span>
+          {bottoms.length > 0 &&
+            cards?.map((card, index) => (
+              <FadeDown duration={index} zIndex={movedIndex === index ? 12 : cards.length + 1 - index}>
+                <div
+                  className={`${styles.card} ${styles[classifyGiftCard(card).className]}`}
+                  style={{
+                    zIndex: movedIndex === index ? 12 : cards.length + 1 - index, // z-index 12 si activa
+                    bottom: `${bottoms[index]}px`,
+                    padding: movedIndex === index ? "24px" : undefined,
+                    border: `1px solid ${accent}10`,
+                    transition: "bottom 250ms ease, transform 250ms ease",
+                    // cuando está activa: escala y “bajar” 50px visualmente
+                    transform:
+                      movedIndex === index
+                        ? isScaled
+                          ? `scale(${SCALE_UP}) translateY(${DOWN_PX}px)`
+                          : "scale(1) translateY(0)"
+                        : "scale(1) translateY(0)",
+                    transformOrigin: "center bottom", // para que “crezca” hacia arriba
+                  }}
+                  onClick={() => handleClick(index)}
+                >
+                  <div
+                    className={styles.card_logo_container}
+                    style={{
+                      height: movedIndex === index ? "24px" : undefined,
+                    }}
+                  >
+                    <img src={classifyGiftCard(card).imageUrl ?? ""} alt="" style={{ height: "100%", objectFit: "cover" }} />
+                  </div>
+
+                  {card.kind === "store" ? (
+                    <div className={styles.wallet_col} style={{ gap: "6px" }}>
+                      <span>Descubre nuestra mesa de regalos</span>
+                      <Button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.open(card.url!, "_blank");
+                        }}
+                        className={styles.cta_button}
+                        icon={<MdArrowOutward />}
+                      >
+                        Ver regalos
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className={styles.wallet_col} style={{ gap: "6px" }}>
+                      <span>{card.name}</span>
+                      <span>
+                        {card.number}{" "}
+                        <Button
+                          onClick={(e) => {
+                            e.stopPropagation(); // evita que se dispare el onClick del padre
+                            copyToClipboard(card.number!); // o usa router.push si es interno
+                          }}
+                          icon={<FaCopy style={{ color: "#FFF" }} />}
+                          type="text"
+                        />
+                      </span>
+                    </div>
+                  )}
+                  {/* <span className={`${styles.bank_name}`}>
+            
+          </span> */}
+                </div>
+              </FadeDown>
+            ))}
+
+          {/* Lines debajo y sin eventos */}
+          <div
+            onClick={handleReset}
+            style={{
+              backgroundColor:
+                darker(content.background ? (content.inverted ? primary : secondary) : content.inverted ? secondary : primary, 0.95) ??
+                "#FFF",
+              borderColor: content.inverted ? `${accent}60` : `${primary}60`,
+            }}
+            className={`${invitation.generals.texture !== null ? styles.department : styles.department_light} ${styles.one}`}
+          >
+            <div className={styles.wallet_col} style={{ fontFamily: fontFamily }}>
+              <span
+                style={{ color: content.background ? (content.inverted ? accent : primary) : content.inverted ? primary : accent }}
+                className={styles.wallet_label}
+              >
+                {title}
+              </span>
+              <span
+                style={{ color: content.background ? (content.inverted ? accent : primary) : content.inverted ? primary : accent }}
+                className={styles.wallet_sec_label}
+              >
+                Tarjetas de regalo
+              </span>
+            </div>
           </div>
         </div>
-      </div>
+      </FadeIn>
     </>
   );
 }

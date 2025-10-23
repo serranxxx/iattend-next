@@ -4,6 +4,8 @@ import React, { forwardRef } from "react";
 import { Separador } from "../Separator/Separator";
 import styles from "./gallery.module.css";
 import FanStack from "./FanStack";
+import FadeLeft from "@/components/Motion/FadeLeft";
+import FadeIn from "@/components/Motion/FadeIn";
 
 type DresscodeProps = {
   dev: boolean;
@@ -37,38 +39,24 @@ export const Gallery = forwardRef<HTMLDivElement, DresscodeProps>(function galle
             <div className="g_module_info_container" style={{
               // width:'auto'
             }}>
-              <span
-                // data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
-                className="g_module_title"
-                style={{
-                  fontFamily: font,
-                  color: content.background && content.inverted ? primary : accent,
-                }}
-              >
-                {content.title}
-              </span>
-              {/* <div
-                data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
-                style={{ zIndex: 2, padding: "6px 24px" }}
-                className={styles.image_gallery_cont}
-              // className="scroll_invitation"
-              > */}
-              <FanStack
-                images={images}
-                radius={12}
-                invitation={invitation}
-              />
-              {/* {images?.map((item, index) => (
-                  <div
-                    key={index}
-                    className={styles.image_gallery_item}
-                    // className={styles.gallery_items_inner_container}
-                    style={{ backgroundColor: primary, transform:`rotate(${index}0deg)`}}
-                  >
-                    <img src={item} style={{ objectFit: "cover", width:'100%', height:'100%'}} loading="lazy" decoding="async" alt="" />
-                  </div>
-                ))} */}
-              {/* </div> */}
+              <FadeLeft>
+                <span
+                  className="g_module_title"
+                  style={{
+                    fontFamily: font,
+                    color: content.background && content.inverted ? primary : accent,
+                  }}
+                >
+                  {content.title}
+                </span>
+              </FadeLeft>
+              <FadeIn>
+                <FanStack
+                  images={images}
+                  radius={12}
+                  invitation={invitation}
+                />
+              </FadeIn>
             </div>
           </div>
         </div>

@@ -28,13 +28,13 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
 
   return (
     invitation && (
-      <div ref={ref} className={styles.module_cover_container} style={{ position: "relative", zIndex: 3 }}>
+      <div ref={ref} className={styles.module_cover_container} style={{ position: "relative", zIndex: 3, }}>
         <div
           className={!dev ? styles.cover_container : styles.cover_container_dev}
           style={{
-            height: height,
             padding: "0",
             background: generals?.colors.primary ?? "#FFFFFF",
+            backgroundColor:'red'
           }}
         >
           {cover?.image.dev || cover?.image.prod ? (

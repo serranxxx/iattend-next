@@ -103,7 +103,7 @@ export default function InvitationPage() {
       {/* <HeaderInvitation visible={isVisible} content={invitation.cover} invitation={invitation} /> */}
       <div
         ref={scrollableContentRef}
-        className={styles.invitation_main_cont}
+        className={`${styles.invitation_main_cont} invitation-scroll`}
         style={{
           backgroundColor: invitation.generals.colors.primary ?? "#F5F3F2",
         }}

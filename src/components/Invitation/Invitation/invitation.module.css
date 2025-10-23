@@ -80,23 +80,57 @@
 }
 
 
-.locked_btn {
+/* .locked_btn {
   background-image: linear-gradient(to right, #ECE9E6 0%, #FFFFFF 51%, #ECE9E6 100%)
-}
+} */
 
 .locked_btn {
-  margin: 10px;
-  padding: 15px 45px;
-  text-align: center;
-  text-transform: uppercase;
-  transition: 0.5s;
-  background-size: 200% auto;
-  display: block;
-  transition: 0.3s ease all;
+  cursor: pointer !important;
+  position: relative;
+  overflow: hidden;
+  background: #FFF !important;
+  color: #00000080 !important; /* usa el color dinámico si existe */
+  border: 2px solid #FFF!important;
+  transition: color 0.3s ease, border-color 0.3s ease !important;
+}
+
+.locked_btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: var(--hover-color, #a0d97b); /* usa el color dinámico */
+  z-index: 0;
+  transition: left 0.3s ease;
+}
+
+.locked_btn:hover::before {
+  left: 0;
+}
+
+.locked_btn span {
+  position: relative;
+  z-index: 1;
 }
 
 .locked_btn:hover {
-  background-position: right center;
-  /* change the direction of the change here */
-  text-decoration: none;
+  color: #fff !important;
+  border-color: var(--hover-color, #a0d97b) !important;
+}
+
+.translate_cont {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  padding: 12px;
+  align-self: stretch;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+.translate_cont:hover {
+  opacity: 1;
 }

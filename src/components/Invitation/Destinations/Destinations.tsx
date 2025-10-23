@@ -2,6 +2,7 @@ import { NewInvitation } from "@/types/new_invitation";
 import React, { forwardRef } from "react";
 import Card from "./Card/Card";
 import { Separador } from "../Separator/Separator";
+import FadeLeft from "@/components/Motion/FadeLeft";
 
 type DresscodeProps = {
   dev: boolean;
@@ -40,31 +41,32 @@ export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function 
             }}
           >
             <div className="g_module_info_container">
-              <span
-                // data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
-                className="g_module_title"
-                style={{
-                  color: content.background && content.inverted ? primary : accent,
-                  fontFamily: font,
-                }}
-              >
-                {content.title}
-              </span>
+              <FadeLeft>
+                <span
+                  className="g_module_title"
+                  style={{
+                    color: content.background && content.inverted ? primary : accent,
+                    fontFamily: font,
+                  }}
+                >
+                  {content.title}
+                </span>
+              </FadeLeft>
 
-              <span
-                // data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
-                className="g_mdoule_regular_text"
-                style={{
-                  color: content.background && content.inverted ? primary : accent,
-                  fontFamily: font,
-                }}
-              >
-                {content.description}
-              </span>
+              <FadeLeft>
+                <span
+                  className="g_mdoule_regular_text"
+                  style={{
+                    color: content.background && content.inverted ? primary : accent,
+                    fontFamily: font,
+                  }}
+                >
+                  {content.description}
+                </span>
+              </FadeLeft>
               <div
                 style={{ overflow: "hidden" }}
-                // data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
-                // className="scroll_invitation"
+              // className="scroll_invitation"
               >
                 <Card invitation={invitation} />
               </div>

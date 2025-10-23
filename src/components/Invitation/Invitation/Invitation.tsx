@@ -21,6 +21,7 @@ import Confirm from "../Confirm/Confirm";
 import { FaLock } from "react-icons/fa";
 import axios from "axios";
 import { GuestAccessPayload } from "@/types/guests";
+import GoogleTranslate from "@/components/GoogleTranslate/GoogleTranslate";
 
 type invProps = {
   invitation: NewInvitation | null;
@@ -30,6 +31,8 @@ type invProps = {
   dev: boolean;
   height: number | string | null;
 };
+
+
 
 export default function Invitation({ invitation, loader, type, mongoID, dev, height }: invProps) {
   const coverRef = useRef<HTMLDivElement>(null);
@@ -55,6 +58,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
   const secondary = invitation?.generals?.colors.secondary ?? "#FFFFFF";
   const accent = invitation?.generals?.colors.accent ?? "#FFFFFF";
   const actions = invitation?.generals?.colors.actions ?? "#FFFFFF";
+  const font = invitation?.generals.fonts.body?.typeFace ?? "Poppins"
 
   // const scrollableContentRef = useRef<HTMLDivElement | null>(null);
 
@@ -83,6 +87,22 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
         break;
     }
   };
+
+  interface CSSVars extends React.CSSProperties {
+    ['--hover-color']?: string;
+  }
+
+  const btnStyle: CSSVars = {
+    ['--hover-color']: `${actions}`,
+    height: '56px',
+    width: '280px',
+    fontSize: '18px',
+    fontWeight: 600,
+    letterSpacing: '2px',
+    boxShadow: '0px 0px 12px rgba(0,0,0,0.2)',
+    fontFamily: font,
+  };
+
   const onValidateUser = async () => {
     try {
       const response = await axios.post(`https://i-attend-22z4h.ondigitalocean.app/api/guests/login`, {
@@ -149,7 +169,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
         style={{
           backgroundColor: invitation.generals.colors.primary ?? "#FFF",
           paddingBottom: validated ? "44px" : "0px",
-          maxHeight: "100vh",
+          maxHeight: "100vh", position: 'relative'
         }}
       >
         {invitation.generals.texture !== null && tex && (
@@ -194,6 +214,9 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
                 CONFIRMAR
               </Button>
             )}
+            {/* <div className={styles.translate_cont}>
+              <GoogleTranslate />
+            </div> */}
           </>
         )}
         <div
@@ -203,7 +226,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
           <div className={styles.locked_icon}>
             <FaLock size={32} style={{ color: "#FFF" }} />
           </div>
-          <span className={styles.locked_title}>Invitación Privada</span>
+          <span style={{ fontFamily: font }} className={styles.locked_title}>Invitación Privada</span>
           <div
             style={{
               display: "flex",
@@ -213,8 +236,8 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
               gap: "8px",
             }}
           >
-            <span className={styles.locked_text}>Nos alegra mucho que seas parte de este evento tan especial.</span>
-            <span className={styles.locked_text}>
+            <span style={{ fontFamily: font }} className={styles.locked_text}>Nos alegra mucho que seas parte de este evento tan especial.</span>
+            <span style={{ fontFamily: font }} className={styles.locked_text}>
               Esta invitación es <b>exclusiva para ti</b>. Ingresa tu código de invitado para continuar y disfrutar de esta experiencia
               única.
             </span>
@@ -236,24 +259,27 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
               maxWidth: "280px",
               borderRadius: "99px",
               minHeight: "56px",
+              fontFamily: font
             }}
           />
 
           <Button
             className={styles.locked_btn}
-            style={{
-              height: "56px",
-              width: "280px",
-              fontSize: "18px",
-              fontWeight: 600,
-              letterSpacing: "2px",
-              boxShadow: "0px 0px 12px rgba(0,0,0,0.2)",
-            }}
+            style={btnStyle}
             onClick={onValidateUser}
           >
             ACCEDER
           </Button>
+
+          <div className={styles.translate_cont} style={{
+            position:'absolute', bottom:'8px', right:'8px'
+          }}>
+            <GoogleTranslate />
+          </div>
         </div>
+
+
+
       </div>
       <Drawer
         placement="bottom"

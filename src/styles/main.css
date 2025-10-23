@@ -1,3 +1,4 @@
+
 :root {
     --border-color: #EBEBEB;
 
@@ -526,5 +527,15 @@ h5,
 .scroll_invitation::-webkit-scrollbar {
     width: 0px;
     height: 0px;
+}
+
+.gt-widget,
+#google_translate_element {
+  /* position: absolute;
+  bottom: 8px;
+  left: 8px; */
+  border-radius: 99px !important;
+  opacity: 0.9;
+  z-index: 100;
 }
 

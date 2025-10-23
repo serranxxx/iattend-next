@@ -5,15 +5,12 @@ import { useEffect, useRef, useState } from "react";
 
 const HOST_ORIGIN = "http://localhost:3001"; // 👈 sin ruta
 
-type InvitationConfig = unknown;
-
 export default function Page() {
-  const [data, setData] = useState<{ invitationConfig: InvitationConfig } | null>(null);
+
   const [invitation, setInvitation] = useState<NewInvitation | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Avisamos al host que estamos listos
     window.parent?.postMessage({ type: "REMOTE_READY" }, HOST_ORIGIN);
   }, []);
 

@@ -2,6 +2,7 @@ import { NewInvitation } from "@/types/new_invitation";
 import Image from "next/image";
 import React, { forwardRef } from "react";
 import { Separador } from "../Separator/Separator";
+import FadeIn from "@/components/Motion/FadeIn";
 
 type quoteProps = {
   dev: boolean;
@@ -41,57 +42,59 @@ export const Quote = forwardRef<HTMLDivElement, quoteProps>(function Greeting({ 
             }}
           >
             {content.image.active ? (
-              <div className="background_image_quote_container">
-                <div style={{ backgroundColor: primary, height: "100%", width: "100%" }}>
-                  {image_src && <img style={{ objectFit: "cover", width:'100%', height:'100%'}} loading="lazy" decoding="async" alt=""  src={image_src} />}
-                </div>
+              <FadeIn>
+                <div className="background_image_quote_container">
+                  <div style={{ backgroundColor: primary, height: "100%", width: "100%" }}>
+                    {image_src && <img style={{ objectFit: "cover", width: '100%', height: '100%' }} loading="lazy" decoding="async" alt="" src={image_src} />}
+                  </div>
 
-                {content.text.shadow && (
+                  {content.text.shadow && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        width: "100%",
+                        height: "400px",
+                        top: "0px",
+                        left: "50%",
+                        transform: "translate(-50%)",
+                        background: `linear-gradient(to top, ${accent}, rgba(0,0,0,0))`,
+                      }}
+                    ></div>
+                  )}
+
                   <div
+                    className={!dev ? "qt_image_cnt" : undefined}
                     style={{
+                      height: "400px",
+                      display: "flex",
+                      alignItems: content.text.align,
                       position: "absolute",
                       width: "100%",
-                      height: "400px",
                       top: "0px",
                       left: "50%",
                       transform: "translate(-50%)",
-                      background: `linear-gradient(to top, ${accent}, rgba(0,0,0,0))`,
-                    }}
-                  ></div>
-                )}
-
-                <div
-                  className={!dev ? "qt_image_cnt" : undefined}
-                  style={{
-                    height: "400px",
-                    display: "flex",
-                    alignItems: content.text.align,
-                    position: "absolute",
-                    width: "100%",
-                    top: "0px",
-                    left: "50%",
-                    transform: "translate(-50%)",
-                    padding: "24px",
-                    justifyContent: "center",
-                  }}
-                >
-                  <span
-                    className="g_mdoule_regular_text"
-                    style={{
-                      whiteSpace: "pre-line",
-                      color: content.text.font.color,
-                      fontFamily: content.text.font.typeFace ?? "Poppins",
-                      fontSize: `${content.text.font.size}px`,
-                      opacity: content.text.font.opacity,
-                      fontWeight: content.text.font.weight,
-                      textAlign: content.text.justify,
-                      width: `${content.text.width}%`,
+                      padding: "24px",
+                      justifyContent: "center",
                     }}
                   >
-                    {content.text.font.value}
-                  </span>
+                    <span
+                      className="g_mdoule_regular_text"
+                      style={{
+                        whiteSpace: "pre-line",
+                        color: content.text.font.color,
+                        fontFamily: content.text.font.typeFace ?? "Poppins",
+                        fontSize: `${content.text.font.size}px`,
+                        opacity: content.text.font.opacity,
+                        fontWeight: content.text.font.weight,
+                        textAlign: content.text.justify,
+                        width: `${content.text.width}%`,
+                      }}
+                    >
+                      {content.text.font.value}
+                    </span>
+                  </div>
                 </div>
-              </div>
+              </FadeIn>
             ) : (
               <span
                 className="g_mdoule_regular_text"

@@ -7,6 +7,8 @@ import { Separador } from "../Separator/Separator";
 import styles from "./dresscode.module.css";
 import { Button } from "antd";
 import { FaPinterest } from "react-icons/fa";
+import FadeLeft from "@/components/Motion/FadeLeft";
+import FadeIn from "@/components/Motion/FadeIn";
 
 type DresscodeProps = {
   dev: boolean;
@@ -42,59 +44,53 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
           }}
         >
           <div className="g_module_info_container">
-            <span
-              // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
-              className="g_module_title"
-              style={{ color: content.background && content.inverted ? primary : accent, fontFamily: generals.fonts.body?.typeFace }}
-            >
-              {content.title}
-            </span>
+            <FadeLeft>
+              <span
+                className="g_module_title"
+                style={{ color: content.background && content.inverted ? primary : accent, fontFamily: generals.fonts.body?.typeFace }}
+              >
+                {content.title}
+              </span>
+            </FadeLeft>
 
-            <span
-              // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
-              className="g_mdoule_regular_text"
-              style={{ color: content.background && content.inverted ? primary : accent, fontFamily: generals.fonts.body?.typeFace }}
-            >
-              {content.description}
-            </span>
+            <FadeLeft>
+              <span
+                className="g_mdoule_regular_text"
+                style={{ color: content.background && content.inverted ? primary : accent, fontFamily: generals.fonts.body?.typeFace }}
+              >
+                {content.description}
+              </span>
+            </FadeLeft>
 
             {content.colors && content.colors.length > 0 && (
-              <div className={styles.color_palette_cont}>
-                {/* <span
-                    className="g_mdoule_regular_text"
-                    style={{
-                      color: content.background && content.inverted ? primary : accent,
-                      fontFamily: generals.fonts.body?.typeFace,
-                      opacity: 0.8,
-                      fontWeight: 400,
-                    }}
-                  >
-                    Paleta de colores
-                  </span> */}
-                <div className={styles.dresscode_colors}>
-                  {content.colors.map((color, index) => (
-                    <div
-                      // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
-                      key={index}
-                      className={styles.dresscode_color}
-                      style={{ borderColor: content.background ? secondary : primary, backgroundColor: color }}
-                    />
-                  ))}
+              <FadeIn>
+                <div className={styles.color_palette_cont}>
+
+                  <div className={styles.dresscode_colors}>
+                    {content.colors.map((color, index) => (
+                      <div
+                        key={index}
+                        className={styles.dresscode_color}
+                        style={{ borderColor: content.background ? secondary : primary, backgroundColor: color }}
+                      />
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </FadeIn>
             )}
 
             {content.images_active && (
               <div className={styles.scroll_invitation} style={{ zIndex: 2 }}>
                 {images_src.map((image, index) => (
-                  <div
-                    // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
-                    style={{ position: "relative", padding: "6px 24px" }}
-                    key={index}
-                    className={styles.dresscode_image_container}
-                  >
-                    <Image fill alt="" loading="lazy" decoding="async" src={image} style={{ objectFit: "cover" }} />
-                  </div>
+                  <FadeIn>
+                    <div
+                      style={{ position: "relative", padding: "6px 24px" }}
+                      key={index}
+                      className={styles.dresscode_image_container}
+                    >
+                      <Image fill alt="" loading="lazy" decoding="async" src={image} style={{ objectFit: "cover" }} />
+                    </div>
+                  </FadeIn>
                 ))}
               </div>
             )}
@@ -103,7 +99,8 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
               <div className={dev ? "dresscode-links-dev" : "dresscode-links"}>
                 {content.links &&
                   content.links.map((link, index) => (
-                    <Button
+                    <FadeIn>
+                      <Button
                       key={index}
                       href={link.url}
                       icon={<FaPinterest />}
@@ -117,6 +114,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                     >
                       ¿Necesitas inspiración?
                     </Button>
+                    </FadeIn>
                   ))}
               </div>
             )}

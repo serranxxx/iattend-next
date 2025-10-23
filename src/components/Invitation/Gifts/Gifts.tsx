@@ -4,6 +4,7 @@ import { Separador } from "../Separator/Separator";
 import Card from "./Cards/Cards";
 import styles from "./gifts.module.css";
 import Wallet from "./Wallet/Wallet";
+import FadeLeft from "@/components/Motion/FadeLeft";
 
 type DresscodeProps = {
   dev: boolean;
@@ -51,39 +52,36 @@ export const Gifts = forwardRef<HTMLDivElement, DresscodeProps>(function Greetin
             }}
           >
             <div className="g_module_info_container">
-              <span
-                className="g_module_title"
-                style={{
-                  color: content.background && content.inverted ? primary : accent,
-                  fontFamily: font,
-                }}
-              >
-                {content.title}
-              </span>
-              <span
-                className="g_mdoule_regular_text"
-                style={{
-                  color: content.background && content.inverted ? primary : accent,
-                  fontFamily: font,
-                }}
-              >
-                {content.description}
-              </span>
+              <FadeLeft>
+                <span
+                  className="g_module_title"
+                  style={{
+                    color: content.background && content.inverted ? primary : accent,
+                    fontFamily: font,
+                  }}
+                >
+                  {content.title}
+                </span>
+              </FadeLeft>
+              <FadeLeft>
+                <span
+                  className="g_mdoule_regular_text"
+                  style={{
+                    color: content.background && content.inverted ? primary : accent,
+                    fontFamily: font,
+                  }}
+                >
+                  {content.description}
+                </span>
+              </FadeLeft>
               <div
-                // style={{
-                //   padding: "6px 24px",
-                //   height: `calc(180px + 50px*(${cards.length - 1}))`,
-                // }}
                 className={styles.cards_container}
               >
-                {/* 👉 Pasamos cards y callback */}
-                <Wallet invitation={invitation} dev={dev} />
-                {/* <Card
-                  invitation={invitation}
-                  dev={dev}
-                  GiftCard={cards}
-                  onSelect={moveToTop}
-                /> */}
+                {
+                  invitation.gifts.cards.length > 0 &&
+                  <Wallet invitation={invitation} dev={dev} />
+                }
+
               </div>
             </div>
           </div>

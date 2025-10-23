@@ -11,6 +11,8 @@ import { textures } from "@/helpers/textures";
 import OpenCard from "../OpenCard/OpenCard";
 import { MdArrowOutward } from "react-icons/md";
 import { FaDiamondTurnRight } from "react-icons/fa6";
+import FadeLeft from "@/components/Motion/FadeLeft";
+import FadeSides from "@/components/Motion/FadeSides";
 
 type CardProps = {
   invitation: NewInvitation;
@@ -101,48 +103,50 @@ export default function Card({ invitation, dev }: CardProps) {
               }}
             >
               {/* Tarjeta del evento */}
-              <div
-                style={{
-                  width: "44%",
-                  margin: "0 2%",
-                  display: "flex",
-                  alignItems: "center",
-                  flexDirection: "column",
-                }}
-              >
-                {renderIcon(item.icon!, 56, content.inverted)}
+              <FadeSides side={leftSide}>
                 <div
                   style={{
+                    width: "44%",
+                    margin: "0 2%",
                     display: "flex",
+                    alignItems: "center",
                     flexDirection: "column",
-                    lineHeight: 1.25,
-                    gap: 4,
-                    boxSizing: "border-box",
-                    padding: "0px 6px",
-                    fontFamily: invitation.generals.fonts.body?.typeFace,
-                    fontSize: "14px",
-                    color: content.background ? (content.inverted ? primary : accent) : content.inverted ? accent : accent,
                   }}
                 >
-                  <span style={{ fontWeight: 600, fontSize: "16px" }}>{item.name}</span>
-                  <span style={{ fontWeight: 400, opacity: "0.5" }}>{item.subtext}</span>
-                  <span style={{ fontWeight: 400 }}>{item.time}</span>
-                  <div style={{ marginTop: 6 }}>
-                    <Button
-                      onClick={() => setOpen(item)}
-                      style={{
-                        backgroundColor: content.background ? (content.inverted ? primary : secondary) : secondary,
-                        color: content.background ? (content.inverted ? accent : accent) : content.inverted ? primary : accent,
-                        boxShadow: generals.texture !== null ? "0 0 6px 0 rgba(0, 0, 0, 0.25)" : undefined,
-                      }}
-                      // onClick={() => setActiveSteps([...(activeSteps ?? []), item])}
-                      icon={<MdArrowOutward />}
-                    >
-                      Detalles
-                    </Button>
+                  {renderIcon(item.icon!, 56, content.inverted)}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      lineHeight: 1.25,
+                      gap: 4,
+                      boxSizing: "border-box",
+                      padding: "0px 6px",
+                      fontFamily: invitation.generals.fonts.body?.typeFace,
+                      fontSize: "14px",
+                      color: content.background ? (content.inverted ? primary : accent) : content.inverted ? accent : accent,
+                    }}
+                  >
+                    <span style={{ fontWeight: 600, fontSize: "16px" }}>{item.name}</span>
+                    <span style={{ fontWeight: 400, opacity: "0.5" }}>{item.subtext}</span>
+                    <span style={{ fontWeight: 400 }}>{item.time}</span>
+                    <div style={{ marginTop: 6 }}>
+                      <Button
+                        onClick={() => setOpen(item)}
+                        style={{
+                          backgroundColor: content.background ? (content.inverted ? primary : secondary) : secondary,
+                          color: content.background ? (content.inverted ? accent : accent) : content.inverted ? primary : accent,
+                          boxShadow: generals.texture !== null ? "0 0 6px 0 rgba(0, 0, 0, 0.25)" : undefined,
+                        }}
+                        // onClick={() => setActiveSteps([...(activeSteps ?? []), item])}
+                        icon={<MdArrowOutward />}
+                      >
+                        Detalles
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </FadeSides>
 
               {/* Punto sobre la línea */}
               <div
@@ -159,11 +163,6 @@ export default function Card({ invitation, dev }: CardProps) {
                 }}
               />
 
-              {/* {
-                activeSteps?.includes(item) && (
-                  <OpenCard dev={dev} invitation={invitation} item={item} setActiveSteps={setActiveSteps} activeSteps={activeSteps} />
-                )
-              } */}
 
               <Drawer
                 placement="bottom"
@@ -182,7 +181,7 @@ export default function Card({ invitation, dev }: CardProps) {
                     }}
                   >
                     {" "}
-                    {}
+                    { }
                     {renderDrawerIcon(open?.icon!, 20, content.inverted)}
                     {open?.name}
                   </div>
@@ -190,7 +189,7 @@ export default function Card({ invitation, dev }: CardProps) {
                 height={"auto"}
                 closeIcon={false}
                 style={{
-                  maxHeight: "800px",
+                  maxHeight: "75vh",
                   borderRadius: "32px 32px 0px 0px",
                 }}
                 styles={{

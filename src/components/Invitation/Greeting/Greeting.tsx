@@ -1,10 +1,10 @@
-import { Invitation } from "@/types/invitation";
+
+"use client";
+
 import { NewInvitation } from "@/types/new_invitation";
 import React, { forwardRef, useEffect } from "react";
-import styles from "./greeting.module.css";
-
-import "aos/dist/aos.css";
 import { Separador } from "../Separator/Separator";
+import FadeLeft from "@/components/Motion/FadeLeft";
 
 type GreetingProps = {
   dev: boolean;
@@ -18,13 +18,6 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
 
-  // useEffect(() => {
-  //   AOS.init({
-  //     duration: 900,
-  //     once: true,
-  //     easing: "ease-out",
-  //   });
-  // }, []);
 
   return (
     <>
@@ -32,7 +25,6 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
         <div style={{ position: "relative", width: "100%" }}>
           <div className="textures_background" style={{ backgroundColor: content.background ? secondary : "transparent" }} />
           <div
-            // data-aos="fade-up"
             style={{ position: "relative" }}
             ref={ref}
             className="gm_container"
@@ -46,26 +38,32 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
                 boxSizing: "border-box",
               }}
             >
-              <span
-                // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
-                className="g_module_title"
-                style={{
-                  color: content.background && content.inverted ? primary : accent,
-                  fontFamily: generals.fonts.body?.typeFace ?? "Poppins",
-                }}
-              >
-                {content.title}
-              </span>
-              <span
-                // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
-                className="g_module_regular_text"
-                style={{
-                  color: content.background && content.inverted ? primary : accent,
-                  fontFamily: generals.fonts.body?.typeFace ?? "Poppins",
-                }}
-              >
-                {content.description}
-              </span>
+              <FadeLeft>
+                <span
+                  className="g_module_title"
+                  style={{
+                    display: "inline-block",
+                    color: content.background && content.inverted ? primary : accent,
+                    fontFamily: generals.fonts.body?.typeFace ?? "Poppins",
+                  }}
+                >
+                  {content.title}
+                </span>
+              </FadeLeft>
+
+              <FadeLeft>
+                <span
+                  className="g_module_regular_text"
+                  style={{
+                    display: "inline-block",
+                    color: content.background && content.inverted ? primary : accent,
+                    fontFamily: generals.fonts.body?.typeFace ?? "Poppins",
+                  }}
+                >
+                  {content.description}
+                </span>
+              </FadeLeft>
+
             </div>
           </div>
         </div>
