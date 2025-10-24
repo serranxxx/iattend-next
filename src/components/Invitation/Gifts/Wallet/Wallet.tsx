@@ -18,11 +18,11 @@ type CardProps = {
 };
 
 export default function Wallet({ invitation, dev = false }: CardProps) {
-  // const base = [14, 54, 94]; // offsets base
   const [base, setBase] = useState<number[]>([]);
+  const baseRef = useRef<number[]>([]);
   const [bottoms, setBottoms] = useState<number[]>([]);
   const [cards, setCards] = useState<GiftCard[] | null>(null);
-  // const [movedIndex, setMovedIndex] = useState<number | null>(null);
+
   const ref = useRef<HTMLDivElement>(null);
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -33,59 +33,111 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
   const fontFamily = invitation.generals.fonts.body?.typeFace;
   const title = invitation.cover.title.text.value;
 
-  const ANIM_MS = 250; // duración de cada fase
+  const ANIM_MS = 250; // duración de cada fase (match con CSS)
   const SCALE_UP = 1.2; // escala al abrir
   const DOWN_PX = 50; // “bajar” después de subir
 
-  const [movedIndex, setMovedIndex] = useState<number | null>(null); // ya lo tienes
-  const [isScaled, setIsScaled] = useState(false); // NUEVO
-  // const cards = invitation.gifts.cards.slice(0, 3);
+  const [movedIndex, setMovedIndex] = useState<number | null>(null);
+  const [isScaled, setIsScaled] = useState(false);
 
-  const handleClick = (index: number) => {
-    // Si click sobre la misma tarjeta -> cerrar (secuencia inversa)
-    if (movedIndex === index) {
-      // 1) Sube: quita la bajada y el scale
-      setIsScaled(false); // quita scale y el translateY(50px)
-      // 2) Tras la animación, regresa a base y z-index original
-      setTimeout(() => {
-        setBottoms(base);
-        setMovedIndex(null);
-      }, ANIM_MS);
-      return;
-    }
+  // ---- Control de animaciones y timeouts ----
+  const timeoutsRef = useRef<number[]>([]);
+  const animatingRef = useRef(false);
 
-    // Si había otra abierta, primero ciérrala y luego abre la nueva
-    if (movedIndex !== null && movedIndex !== index) {
-      setIsScaled(false);
-      setTimeout(() => {
-        setBottoms(base);
-        setMovedIndex(null);
-        // abre la nueva después de cerrar la previa
-        setTimeout(() => handleClick(index), ANIM_MS);
-      }, ANIM_MS);
-      return;
-    }
+  function clearAllTimeouts() {
+    timeoutsRef.current.forEach((id) => clearTimeout(id));
+    timeoutsRef.current = [];
+  }
+  function schedule(fn: () => void, ms: number) {
+    const id = window.setTimeout(fn, ms);
+    timeoutsRef.current.push(id);
+  }
 
-    // Abrir la tarjeta seleccionada
+  useEffect(() => {
+    return () => {
+      // cleanup al desmontar
+      clearAllTimeouts();
+    };
+  }, []);
+
+  // ---- Lógica de abrir/cerrar aislada ----
+  const openCard = (index: number) => {
     const h = ref.current?.clientHeight ?? 340;
-    const jump = Math.max(160, Math.min(600, h - 10)); // tu cálculo actual
-    const next = [...base];
-    next[index] = jump; // 1) Sube
-    setBottoms(next);
+    const jump = Math.max(160, Math.min(600, h - 10));
+
+    setBottoms(() => {
+      const next = [...baseRef.current];
+      next[index] = jump; // sube
+      return next;
+    });
+
     setMovedIndex(index);
 
-    // 2) Después de subir, aplica scale y “bajada” visual
-    setTimeout(() => {
+    // después de subir, aplicar scale y “bajada”
+    schedule(() => {
       setIsScaled(true);
     }, ANIM_MS);
   };
 
-  const handleReset = () => {
-    if (movedIndex !== null) {
+  const closeCurrent = () => {
+    setIsScaled(false);
+    schedule(() => {
+      setBottoms(baseRef.current);
+      setMovedIndex(null);
+    }, ANIM_MS);
+  };
+
+  const handleClick = (index: number) => {
+    // evitar reentradas durante animación
+    if (animatingRef.current) return;
+
+    // cancelar orquestaciones previas
+    clearAllTimeouts();
+    animatingRef.current = true;
+
+    // A) click sobre la misma → cerrar
+    if (movedIndex === index) {
+      closeCurrent();
+      schedule(() => {
+        animatingRef.current = false;
+      }, ANIM_MS + 5);
+      return;
+    }
+
+    // B) hay otra abierta → cerrar y luego abrir la nueva
+    if (movedIndex !== null && movedIndex !== index) {
       setIsScaled(false);
-      setTimeout(() => {
-        setBottoms(base);
+      schedule(() => {
+        setBottoms(baseRef.current);
         setMovedIndex(null);
+        // pequeña espera para asegurar re-render antes de abrir
+        schedule(() => {
+          openCard(index);
+          schedule(() => {
+            animatingRef.current = false;
+          }, ANIM_MS + 5);
+        }, 20);
+      }, ANIM_MS);
+      return;
+    }
+
+    // C) no hay abierta → abrir directo
+    openCard(index);
+    schedule(() => {
+      animatingRef.current = false;
+    }, ANIM_MS + 5);
+  };
+
+  const handleReset = () => {
+    // cerrar si hay una abierta
+    clearAllTimeouts();
+    if (movedIndex !== null) {
+      animatingRef.current = true;
+      setIsScaled(false);
+      schedule(() => {
+        setBottoms(baseRef.current);
+        setMovedIndex(null);
+        animatingRef.current = false;
       }, ANIM_MS);
     }
   };
@@ -99,6 +151,7 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
     }
   };
 
+  // ---- Inicialización de base según cantidad de tarjetas ----
   useEffect(() => {
     if (invitation) {
       const sliced = invitation.gifts.cards.slice(0, 3);
@@ -106,27 +159,26 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
         case 1:
           setBase([94]);
           break;
-
         case 2:
           setBase([54, 94]);
           break;
-
         case 3:
           setBase([14, 54, 94]);
           break;
-
         default:
+          setBase([]);
           break;
       }
     }
   }, [invitation]);
 
+  // mantener baseRef sincronizada y setear bottoms
   useEffect(() => {
-    if (base) {
-      setBottoms(base);
-    }
+    baseRef.current = base;
+    setBottoms(base);
   }, [base]);
 
+  // setear tarjetas visibles
   useEffect(() => {
     if (invitation) {
       setCards(invitation.gifts.cards.slice(0, 3));
@@ -142,29 +194,35 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
           className={invitation.generals.texture !== null ? styles.wallet : styles.wallet_light}
           style={{
             backgroundColor:
-              darker(content.background ? (content.inverted ? primary : secondary) : content.inverted ? secondary : primary, 0.95) ?? "#FFF",
+              darker(
+                content.background ? (content.inverted ? primary : secondary) : content.inverted ? secondary : primary,
+                0.95
+              ) ?? "#FFF",
             transform: "scale(0.7)",
           }}
         >
           {bottoms.length > 0 &&
             cards?.map((card, index) => (
-              <FadeDown duration={index} zIndex={movedIndex === index ? 12 : cards.length + 1 - index}>
+              <FadeDown
+                key={`${classifyGiftCard(card).className}-${index}`} // ✅ key para estabilidad en el render
+                duration={index}
+                zIndex={movedIndex === index ? 12 : cards.length + 1 - index}
+              >
                 <div
                   className={`${styles.card} ${styles[classifyGiftCard(card).className]}`}
                   style={{
-                    zIndex: movedIndex === index ? 12 : cards.length + 1 - index, // z-index 12 si activa
+                    zIndex: movedIndex === index ? 12 : cards.length + 1 - index,
                     bottom: `${bottoms[index]}px`,
                     padding: movedIndex === index ? "24px" : undefined,
                     border: `1px solid ${accent}10`,
                     transition: "bottom 250ms ease, transform 250ms ease",
-                    // cuando está activa: escala y “bajar” 50px visualmente
                     transform:
                       movedIndex === index
                         ? isScaled
                           ? `scale(${SCALE_UP}) translateY(${DOWN_PX}px)`
                           : "scale(1) translateY(0)"
                         : "scale(1) translateY(0)",
-                    transformOrigin: "center bottom", // para que “crezca” hacia arriba
+                    transformOrigin: "center bottom",
                   }}
                   onClick={() => handleClick(index)}
                 >
@@ -174,7 +232,11 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
                       height: movedIndex === index ? "24px" : undefined,
                     }}
                   >
-                    <img src={classifyGiftCard(card).imageUrl ?? ""} alt="" style={{ height: "100%", objectFit: "cover" }} />
+                    <img
+                      src={classifyGiftCard(card).imageUrl ?? ""}
+                      alt=""
+                      style={{ height: "100%", objectFit: "cover" }}
+                    />
                   </div>
 
                   {card.kind === "store" ? (
@@ -198,8 +260,8 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
                         {card.number}{" "}
                         <Button
                           onClick={(e) => {
-                            e.stopPropagation(); // evita que se dispare el onClick del padre
-                            copyToClipboard(card.number!); // o usa router.push si es interno
+                            e.stopPropagation();
+                            copyToClipboard(card.number!);
                           }}
                           icon={<FaCopy style={{ color: "#FFF" }} />}
                           type="text"
@@ -207,9 +269,6 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
                       </span>
                     </div>
                   )}
-                  {/* <span className={`${styles.bank_name}`}>
-            
-          </span> */}
                 </div>
               </FadeDown>
             ))}
@@ -219,8 +278,10 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
             onClick={handleReset}
             style={{
               backgroundColor:
-                darker(content.background ? (content.inverted ? primary : secondary) : content.inverted ? secondary : primary, 0.95) ??
-                "#FFF",
+                darker(
+                  content.background ? (content.inverted ? primary : secondary) : content.inverted ? secondary : primary,
+                  0.95
+                ) ?? "#FFF",
               borderColor: content.inverted ? `${accent}60` : `${primary}60`,
             }}
             className={`${invitation.generals.texture !== null ? styles.department : styles.department_light} ${styles.one}`}
