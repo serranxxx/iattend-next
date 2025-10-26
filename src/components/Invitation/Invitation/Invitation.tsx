@@ -22,6 +22,7 @@ import { FaLock } from "react-icons/fa";
 import axios from "axios";
 import { GuestAccessPayload } from "@/types/guests";
 import GoogleTranslate from "@/components/GoogleTranslate/GoogleTranslate";
+import { useScreenWidth } from "@/hooks/useScreenWidth";
 
 type invProps = {
   invitation: NewInvitation | null;
@@ -60,6 +61,8 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
   const actions = invitation?.generals?.colors.actions ?? "#FFFFFF";
   const font = invitation?.generals.fonts.body?.typeFace ?? "Poppins"
 
+  const width = useScreenWidth();
+  const isLargeScreen = width >= 768;
   // const scrollableContentRef = useRef<HTMLDivElement | null>(null);
 
   const handlePosition = (id: number, invitation: NewInvitation, index: number) => {
@@ -67,21 +70,21 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
       case 1:
         return <Greeting key={index} ref={greetingRef} dev={false} invitation={invitation} />;
       case 2:
-        return <People key={index}  ref={peopleRef} dev={false} invitation={invitation} />;
+        return <People key={index} ref={peopleRef} dev={false} invitation={invitation} />;
       case 3:
-        return <Quote key={index}  ref={quoteRef} dev={dev} invitation={invitation} />;
+        return <Quote key={index} ref={quoteRef} dev={dev} invitation={invitation} />;
       case 4:
-        return <Itinerary key={index}  ref={itineraryRef} dev={false} invitation={invitation} />;
+        return <Itinerary key={index} ref={itineraryRef} dev={false} invitation={invitation} />;
       case 5:
         return <DressCode key={index} ref={dresscodeRef} dev={dev} invitation={invitation} />;
       case 6:
-        return <Gifts key={index}  ref={giftsRef} dev={false} invitation={invitation} />;
+        return <Gifts key={index} ref={giftsRef} dev={false} invitation={invitation} />;
       case 7:
-        return <Destinations key={index}  ref={destinationRef} dev={false} invitation={invitation} />;
+        return <Destinations key={index} ref={destinationRef} dev={false} invitation={invitation} />;
       case 8:
-        return <Notices key={index}  ref={noticesRef} dev={false} invitation={invitation} />;
+        return <Notices key={index} ref={noticesRef} dev={false} invitation={invitation} />;
       case 9:
-        return <Gallery key={index}  ref={galleryRef} dev={dev} invitation={invitation} />;
+        return <Gallery key={index} ref={galleryRef} dev={dev} invitation={invitation} />;
 
       default:
         break;
@@ -186,7 +189,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
             tileH={1024}
           />
         )}
-        <Cover ref={coverRef} dev={dev} invitation={invitation} height={"100vh"} validated={validated}/>
+        <Cover ref={coverRef} dev={dev} invitation={invitation} height={"100vh"} validated={validated} />
         {validated && (
           <>
             {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
@@ -272,7 +275,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
           </Button>
 
           <div className={styles.translate_cont} style={{
-            position:'absolute', bottom:'8px', right:'8px'
+            position: 'absolute', bottom: '8px', right: '8px'
           }}>
             <GoogleTranslate />
           </div>
@@ -282,7 +285,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
 
       </div>
       <Drawer
-        placement="bottom"
+        placement={isLargeScreen ? 'left' : 'bottom'}
         onClose={() => setOpen(false)}
         open={open}
         title={
@@ -301,11 +304,11 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
             Confirmar asistencia
           </div>
         }
-        height={"80%"}
+        height={isLargeScreen ? "100%" : "80%"}
         closeIcon={false}
         style={{
-          maxHeight: "800px",
-          borderRadius: "32px 32px 0px 0px",
+          maxHeight: isLargeScreen ? '1010vh' : "800px",
+          borderRadius: isLargeScreen ? '0px 32px 32px 0px' : "32px 32px 0px 0px",
           backgroundColor: primary,
         }}
         styles={{

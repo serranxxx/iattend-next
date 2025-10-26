@@ -28,6 +28,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
   return content.active && generals ? (
     <>
       <div
+        className="main_container"
         style={{
           position: "relative",
           width: "100%",
@@ -99,7 +100,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
               <div className={dev ? "dresscode-links-dev" : "dresscode-links"}>
                 {content.links &&
                   content.links.map((link, index) => (
-                    <FadeIn>
+                    <FadeIn key={index}>
                       <Button
                       key={index}
                       href={link.url}

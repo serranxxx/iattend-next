@@ -4,6 +4,7 @@
   width: 100vw;
   /* max-width: 450px; */
   min-width: 350px;
+  max-width: 450px;
   min-height: 326px;
   max-height: 320px;
   border-radius: 24px;

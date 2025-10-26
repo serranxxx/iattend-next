@@ -8,6 +8,7 @@ import styles from "./cover.module.css";
 import { NewInvitation } from "@/types/new_invitation";
 import Countdown from "./countDown/CountDown";
 import ConfettiButton from "./Confetti/Confetti";
+import { useScreenWidth } from "@/hooks/useScreenWidth";
 
 type CoverProps = {
   dev: boolean;
@@ -16,10 +17,13 @@ type CoverProps = {
   validated?: boolean
 };
 
-export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev, invitation, height , validated = true}, ref) {
+export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev, invitation, height, validated = true }, ref) {
   const cover = invitation?.cover;
   const generals = invitation?.generals;
   const image_src = dev ? cover?.image.dev : cover?.image.prod;
+
+  const width = useScreenWidth();
+  const isLargeScreen = width >= 768;
 
   useEffect(() => {
     if (invitation) {
@@ -86,11 +90,12 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
               }}
             >
               <span
+                className=""
                 style={{
                   color: cover?.title.text.color ?? lighter(generals?.colors.accent ?? "#000000", 0.6) ?? "#FFFFFF",
                   width: "100%",
                   textAlign: cover?.title.position.align_x,
-                  fontSize: `${cover?.title.text.size}px`,
+                  fontSize: `${cover?.title.text.size! + (isLargeScreen ? 30 : 0)}px`,
                   wordBreak: "break-word",
                   opacity: cover?.title.text.opacity,
                   fontFamily: cover?.title.text.typeFace,
@@ -117,13 +122,14 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
                   minWidth: "250px",
                 }}
               >
-                
-                <Countdown cover={cover} generals={generals} dev={dev} validated={validated}/>
+
+                <Countdown cover={cover} generals={generals} dev={dev} validated={validated} />
               </div>
             )}
           </div>
         </div>
       </div>
+
     )
   );
 });

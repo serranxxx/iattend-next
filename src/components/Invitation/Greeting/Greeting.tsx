@@ -22,7 +22,7 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
   return (
     <>
       {content?.active && generals?.colors ? (
-        <div style={{ position: "relative", width: "100%" }}>
+        <div className="main_container " style={{ position: "relative", width: "100%", }}>
           <div className="textures_background" style={{ backgroundColor: content.background ? secondary : "transparent" }} />
           <div
             style={{ position: "relative" }}

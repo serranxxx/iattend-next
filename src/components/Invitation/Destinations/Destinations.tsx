@@ -29,7 +29,7 @@ export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function 
   return (
     <>
       {content.active && generals ? (
-        <div style={{ position: "relative", width: "100%" }}>
+        <div className="main_container" style={{ position: "relative", width: "100%" }}>
           <div className="textures_background" style={{ backgroundColor: content.background ? secondary : "transparent" }} />
           <div
             //    data-aos={!dev ? 'fade-left' : undefined}
@@ -65,7 +65,9 @@ export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function 
                 </span>
               </FadeLeft>
               <div
-                style={{ overflow: "hidden" }}
+                style={{ overflow: "hidden", maxWidth:'450px',
+                  // display:'flex',alignItems:'center',justifyContent:'flex-start'
+                 }}
               // className="scroll_invitation"
               >
                 <Card invitation={invitation} />

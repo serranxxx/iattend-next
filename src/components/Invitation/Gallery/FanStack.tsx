@@ -41,6 +41,7 @@ export default function FanStack({ images, radius = 24, invitation }: FanStackPr
         padding: "0px 24px",
         marginTop: "-30px",
         overflow: onScroll ? "auto" : "hidden",
+        // display:'flex',alignItems:'center',justifyContent:'center'
       }}
     >
       {handleImages.map((src, i) => {

@@ -52,3 +52,25 @@
     font-size: 12px;
     line-height: 1;
 }
+
+@media (min-width: 768px) {
+    .date_date {
+        font-size: 24px;
+    }
+
+    .date_container {
+        gap: 8px;
+    }
+
+    .date_time {
+        font-size: 36px;
+    }
+    
+    .date_unit {
+        font-size: 18px;
+    }
+
+    .date_col {
+        gap: 16px;
+    }
+  }

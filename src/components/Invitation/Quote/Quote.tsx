@@ -30,7 +30,7 @@ export const Quote = forwardRef<HTMLDivElement, quoteProps>(function Greeting({ 
   return (
     <>
       {content.active ? (
-        <div style={{ position: "relative", width: "100%" }}>
+        <div className="main_container" style={{ position: "relative", width: "100%" }}>
           <div className="textures_background" style={{ backgroundColor: content.background ? secondary : "transparent" }} />
           <div
             // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
@@ -39,6 +39,7 @@ export const Quote = forwardRef<HTMLDivElement, quoteProps>(function Greeting({ 
             style={{
               position: "relative",
               zIndex: 2,
+              maxWidth:'1250px !important'
             }}
           >
             {content.image.active ? (

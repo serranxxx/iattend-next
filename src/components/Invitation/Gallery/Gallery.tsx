@@ -26,7 +26,7 @@ export const Gallery = forwardRef<HTMLDivElement, DresscodeProps>(function galle
   return (
     <>
       {content.active && generals && (
-        <div style={{ position: "relative", width: "100%" }}>
+        <div className="main_container" style={{ position: "relative", width: "100%" }}>
           <div className="textures_background" style={{ backgroundColor: content.background ? secondary : "transparent" }} />
           <div
             ref={ref}

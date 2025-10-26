@@ -13,6 +13,7 @@ import { MdArrowOutward } from "react-icons/md";
 import { FaDiamondTurnRight } from "react-icons/fa6";
 import FadeLeft from "@/components/Motion/FadeLeft";
 import FadeSides from "@/components/Motion/FadeSides";
+import { useScreenWidth } from "@/hooks/useScreenWidth";
 
 type CardProps = {
   invitation: NewInvitation;
@@ -28,6 +29,9 @@ export default function Card({ invitation, dev }: CardProps) {
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
   const actions = generals.colors.actions;
+
+  const width = useScreenWidth();
+  const isLargeScreen = width >= 768;
 
   const steps = invitation.itinerary.object;
 
@@ -165,7 +169,7 @@ export default function Card({ invitation, dev }: CardProps) {
 
 
               <Drawer
-                placement="bottom"
+                placement={isLargeScreen ? 'left' : 'bottom'}
                 onClose={() => setOpen(null)}
                 open={open ? true : false}
                 title={
@@ -189,8 +193,8 @@ export default function Card({ invitation, dev }: CardProps) {
                 height={"auto"}
                 closeIcon={false}
                 style={{
-                  maxHeight: "75vh",
-                  borderRadius: "32px 32px 0px 0px",
+                  maxHeight: isLargeScreen ? "100vh" : "75vh",
+                  borderRadius: isLargeScreen ? '0px 32px 32px 0px' : "32px 32px 0px 0px",
                 }}
                 styles={{
                   header: {

@@ -11,6 +11,7 @@ import { MdArrowOutward } from "react-icons/md";
 import { FaCopy } from "react-icons/fa";
 import FadeIn from "@/components/Motion/FadeIn";
 import FadeDown from "@/components/Motion/FadeDown";
+import { useScreenWidth } from "@/hooks/useScreenWidth";
 
 type CardProps = {
   invitation: NewInvitation;
@@ -32,6 +33,9 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
   const secondary = invitation.generals?.colors?.secondary ?? "#FFFFFF";
   const fontFamily = invitation.generals.fonts.body?.typeFace;
   const title = invitation.cover.title.text.value;
+
+  const width = useScreenWidth();
+  const isLargeScreen = width >= 768;
 
   const ANIM_MS = 250; // duración de cada fase (match con CSS)
   const SCALE_UP = 1.2; // escala al abrir
@@ -198,7 +202,8 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
                 content.background ? (content.inverted ? primary : secondary) : content.inverted ? secondary : primary,
                 0.95
               ) ?? "#FFF",
-            transform: "scale(0.7)",
+            transform:  `scale(${!isLargeScreen ? '0.7' : '0.9'})`,
+            marginTop: isLargeScreen ? '28px' : undefined
           }}
         >
           {bottoms.length > 0 &&
