@@ -1,4 +1,4 @@
-// app/[invitation_label]/[invitation_name]/page.tsx
+// app/[label]/[name]/page.tsx
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import type { Metadata, ResolvingMetadata } from "next";
@@ -10,8 +10,8 @@ import { getPublicServerClient } from "@/lib/supabase/public-server";
 export const dynamic = "force-dynamic";
 
 type RouteParams = {
-    invitation_label: string;
-    invitation_name: string;
+    label: string;
+    name: string;
 };
 
 // 👇 OJO: En Next 15, los tipos generados pueden declarar params como Promise<...>
@@ -23,13 +23,13 @@ type PageProps = {
 
 // ------- Metadata dinámica -------
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-    const { invitation_label, invitation_name } = await params; // 👈 await
+    const { label, name } = await params; // 👈 await
     const supabase = await createClient();
 
-    const label = decodeURIComponent(invitation_label);
-    const name = decodeURIComponent(invitation_name);
+    const label_inv = decodeURIComponent(label);
+    const name_inv = decodeURIComponent(name);
 
-    const { data } = await supabase.from("invitations").select("data").eq("label", label).eq("name", name).maybeSingle();
+    const { data } = await supabase.from("invitations").select("data").eq("label", label_inv).eq("name", name_inv).maybeSingle();
 
     if (!data?.data) {
         return { title: "I attend", description: "Diseña, comparte, celebra." };
@@ -58,17 +58,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 // ------- Página -------
 export default async function InvitationDynamicPage({ params }: PageProps) {
-    const { invitation_label, invitation_name } = await params; // 👈 await
+    const { label, name } = await params; // 👈 await
     const supabase = await getPublicServerClient();
 
-    const label = decodeURIComponent(invitation_label);
-    const name = decodeURIComponent(invitation_name);
+    const label_inv = decodeURIComponent(label);
+    const name_inv = decodeURIComponent(name);
 
     const { data, error } = await supabase
         .from("invitations")
         .select("data, type, mongo_id")
-        .eq("label", label)
-        .eq("name", name)
+        .eq("label", label_inv)
+        .eq("name", name_inv)
         .maybeSingle();
 
     if (error) {
