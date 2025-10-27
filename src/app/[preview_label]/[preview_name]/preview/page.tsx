@@ -10,8 +10,8 @@ import { getPublicServerClient } from "@/lib/supabase/public-server";
 export const dynamic = "force-dynamic";
 
 type RouteParams = {
-    label: string;
-    name: string;
+    preview_label: string;
+    preview_name: string;
 };
 
 // 👇 OJO: En Next 15, los tipos generados pueden declarar params como Promise<...>
@@ -23,13 +23,13 @@ type PageProps = {
 
 // ------- Metadata dinámica -------
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-    const { label, name } = await params; // 👈 await
+    const { preview_label, preview_name } = await params; // 👈 await
     const supabase = await createClient();
 
-    const label_inv = decodeURIComponent(label);
-    const name_inv = decodeURIComponent(name);
+    const label = decodeURIComponent(preview_label);
+    const name = decodeURIComponent(preview_name);
 
-    const { data } = await supabase.from("invitations").select("data").eq("label", label_inv).eq("name", name_inv).maybeSingle();
+    const { data } = await supabase.from("invitations").select("data").eq("label", label).eq("name", name).maybeSingle();
 
     if (!data?.data) {
         return { title: "I attend", description: "Diseña, comparte, celebra." };
@@ -58,17 +58,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 // ------- Página -------
 export default async function InvitationDynamicPage({ params }: PageProps) {
-    const { label, name } = await params; // 👈 await
+    const { preview_label, preview_name } = await params; // 👈 await
     const supabase = await getPublicServerClient();
 
-    const label_inv = decodeURIComponent(label);
-    const name_inv = decodeURIComponent(name);
+    const label = decodeURIComponent(preview_label);
+    const name = decodeURIComponent(preview_name);
 
     const { data, error } = await supabase
         .from("invitations")
         .select("data, type, mongo_id")
-        .eq("label", label_inv)
-        .eq("name", name_inv)
+        .eq("label", label)
+        .eq("name", name)
         .maybeSingle();
 
     if (error) {
