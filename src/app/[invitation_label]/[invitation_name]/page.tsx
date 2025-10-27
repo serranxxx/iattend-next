@@ -30,7 +30,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const name = decodeURIComponent(invitation_name);
 
   const { data } = await supabase.from("invitations").select("data").eq("label", label).eq("name", name).maybeSingle();
-  console.log(data);
 
   if (!data?.data) {
     return { title: "I attend", description: "Diseña, comparte, celebra." };
