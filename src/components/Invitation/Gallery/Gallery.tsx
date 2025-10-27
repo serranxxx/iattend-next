@@ -50,13 +50,16 @@ export const Gallery = forwardRef<HTMLDivElement, DresscodeProps>(function galle
                   {content.title}
                 </span>
               </FadeLeft>
-              <FadeIn>
-                <FanStack
-                  images={images}
-                  radius={12}
-                  invitation={invitation}
-                />
-              </FadeIn>
+              {
+                images.length > 0 &&
+                <FadeIn>
+                  <FanStack
+                    images={images}
+                    radius={12}
+                    invitation={invitation}
+                  />
+                </FadeIn>
+              }
             </div>
           </div>
         </div>
