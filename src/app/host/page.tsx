@@ -6,8 +6,8 @@ import { useEffect, useRef, useState } from "react";
 // 👇 Lista de orígenes permitidos
 const ALLOWED_ORIGINS = [
   "http://localhost:3001",
-  "http://localhost:3000",
-  "https://www.iattend.mx",
+  "https://i-attend.vercel.app",
+  "https://i-attend-224dh.ondigitalocean.app",
 ];
 
 export default function Page() {
@@ -69,17 +69,15 @@ export default function Page() {
   }, [hostOrigin]);
 
   return (
-    <div ref={rootRef}>
-      {invitation ? (
-        <Invitation
-          height="100vh"
-          dev={true}
-          invitation={invitation}
-          loader={false}
-          type={"open" as InvitationType}
-          mongoID={null}
-        />
-      ) : null}
-    </div>
+    invitation ? (
+      <Invitation
+        height="100vh"
+        dev={true}
+        invitation={invitation}
+        loader={false}
+        type={"open" as InvitationType}
+        mongoID={null}
+      />
+    ) : null
   );
 }

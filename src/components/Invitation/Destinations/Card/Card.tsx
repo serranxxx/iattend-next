@@ -115,7 +115,7 @@ export default function Card({ invitation }: CardProps) {
         const elev = i === frontCard ? 1 : shadow; // al frente, más fuerte
 
         return (
-          <FadeLeft zIndex={z} duration={i} start={-10 - (i*2)} end={180 + (-28*i)}>
+          <FadeLeft key={i} zIndex={z} duration={i} start={-10 - (i*2)} end={180 + (-28*i)}>
             <div
               key={i}
               className={styles[card.type]}
