@@ -6,8 +6,8 @@ import { useEffect, useRef, useState } from "react";
 // 👇 Lista de orígenes permitidos
 const ALLOWED_ORIGINS = [
   "http://localhost:3001",
-  "https://i-attend.vercel.app",
-  "https://i-attend-224dh.ondigitalocean.app",
+  "http://localhost:3000",
+  "https://www.iattend.mx",
 ];
 
 export default function Page() {
