@@ -89,7 +89,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                       key={index}
                       className={styles.dresscode_image_container}
                     >
-                      <Image fill alt="" loading="lazy" decoding="async" src={image} style={{ objectFit: "cover" }} />
+                      <Image fill alt="" loading="lazy"  src={image} style={{ objectFit: "cover" }} />
                     </div>
                   </FadeIn>
                 ))}

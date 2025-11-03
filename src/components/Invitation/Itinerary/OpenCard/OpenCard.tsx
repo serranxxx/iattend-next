@@ -130,7 +130,7 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
         <span className={styles.open_text}> {item.subtext} </span>
         {item.address && (
           <span className={styles.open_card_address} style={{ color: content.inverted ? `${primary}80` : `${accent}80` }}>
-            {`${item.address.street}, ${item.address.number}, ${item.address.neighborhood}, ${item.address.zip}, ${item.address.city}, ${item.address.state}`}
+            {`${item.address.street ?? ""} ${item.address.number ?? ""} ${item.address.neighborhood ?? ""} ${item.address.zip ?? ""} ${item.address.city ?? ""} ${item.address.state ?? ""}`}
           </span>
         )}
       </div>
