@@ -277,7 +277,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
           <div className={styles.translate_cont} style={{
             position: 'absolute', bottom: '8px', right: '8px'
           }}>
-            <GoogleTranslate />
+            <GoogleTranslate id={mongoID}/>
           </div>
         </div>
 
