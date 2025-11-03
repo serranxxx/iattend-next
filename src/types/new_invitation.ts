@@ -171,10 +171,10 @@ export interface ItinerarySection {
   object: ItineraryItem[];
 }
 
-export interface DressCodeLink {
-  name: string;
-  url: string;
-}
+// export interface DressCodeLink {
+//   name: string;
+//   url: string;
+// }
 
 export interface DresscodeSection {
   active: boolean;
@@ -184,7 +184,7 @@ export interface DresscodeSection {
   title: string | null;
   description: string | null;
   colors: string[];
-  links: DressCodeLink[];
+  links: string[];
   prod: string[];
   dev: string[];
   images_active: boolean;

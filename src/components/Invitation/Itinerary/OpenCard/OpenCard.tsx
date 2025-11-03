@@ -130,7 +130,7 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
         <span className={styles.open_text}> {item.subtext} </span>
         {item.address && (
           <span className={styles.open_card_address} style={{ color: content.inverted ? `${primary}80` : `${accent}80` }}>
-            {`${item.address.street ?? ""} ${item.address.number ?? ""} ${item.address.neighborhood ?? ""} ${item.address.zip ?? ""} ${item.address.city ?? ""} ${item.address.state ?? ""}`}
+            {`${item.address.street ?? ""} ${item.address.number ?? ""} ${item.address.neighborhood ?? ""} ${item.address.zip ?? ""} ${item.address.city ?? ""} ${item.address.state ?? ""} ${item.address.country ?? ""}`}
           </span>
         )}
       </div>
@@ -153,12 +153,8 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
       {item.address && (
         <>
           <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "flex-start", gap: "12px" }}>
-            {item.address.street &&
-              item.address.number &&
-              item.address.neighborhood &&
-              item.address.zip &&
-              item.address.city &&
-              item.address.state && (
+            {
+              item.address.city &&(
                 <>
                   {<WeatherWidget invitation={invitation} dev={dev} item={item} />}
 
@@ -177,7 +173,8 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
                         item.address.neighborhood,
                         item.address.zip,
                         item.address.city,
-                        item.address.state
+                        item.address.state,
+                        item.address.country
                       )}
                     />
                   </div>
@@ -202,8 +199,8 @@ export default function OpenCard({ invitation, dev, item, activeSteps, setActive
   );
 }
 
-export function simpleaddress(direccion: string, numero: string, colonia: string, codigoPostal: string, ciudad: string, estado: string) {
-  const direccionCompleta = `${direccion} ${numero}, ${colonia}, ${codigoPostal}, ${ciudad}, ${estado}, Mexico`;
+export function simpleaddress(direccion: string | null, numero: string | null, colonia: string | null, codigoPostal: string | null, ciudad: string | null, estado: string | null, pais: string | null) {
+  const direccionCompleta = `${direccion} ${numero}, ${colonia}, ${codigoPostal}, ${ciudad}, ${estado}, ${pais}`;
   const direccionCodificada = encodeURIComponent(direccionCompleta);
   const key = "AIzaSyBZ8NLpvAl4DiTeE2gYekBqhmSZFx43R0M";
   const urlMapaGenerado = `https://www.google.com/maps/embed/v1/place?key=${key}&q=${direccionCodificada}`;

@@ -103,7 +103,8 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                     <FadeIn key={index}>
                       <Button
                       key={index}
-                      href={link.url}
+                      href={link}
+                      target="_blank"
                       icon={<FaPinterest />}
                       style={{
                         backgroundColor: content.background ? (content.inverted ? primary : secondary) : primary,
