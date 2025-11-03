@@ -4,8 +4,7 @@ import React, { useEffect, useState } from "react";
 import grunge from "../../../assets/textures/grunge.jpg";
 import { NewInvitation } from "@/types/new_invitation";
 import { lighter } from "@/helpers/functions";
-import Image from "next/image";
-
+import { Image } from "antd";
 
 type FanStackProps = {
   images: string[];
@@ -97,15 +96,15 @@ export default function FanStack({ images, radius = 24, invitation }: FanStackPr
               transition: "all 0.35s ease",
             }}
           >
-            <Image
+            <img
               // preview={false}
               src={src}
               alt=""
-              fill
+              // fill
               loading="lazy"
               style={{
-                // width: "100%",
-                // height: "100%",
+                width: "100%",
+                height: "100%",
                 objectFit: "cover",
                 // display: "block",
               }}
