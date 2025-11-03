@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./wallet.module.css";
-import { GiftCard, NewInvitation } from "@/types/new_invitation";
+import { GiftCard, InvitationUIBundle, NewInvitation } from "@/types/new_invitation";
 import { darker } from "@/helpers/functions";
 import Image from "next/image";
 import { classifyGiftCard } from "./classifyGiftCard";
@@ -16,9 +16,10 @@ import { useScreenWidth } from "@/hooks/useScreenWidth";
 type CardProps = {
   invitation: NewInvitation;
   dev?: boolean;
+  ui:InvitationUIBundle
 };
 
-export default function Wallet({ invitation, dev = false }: CardProps) {
+export default function Wallet({ ui, invitation, dev = false }: CardProps) {
   const [base, setBase] = useState<number[]>([]);
   const baseRef = useRef<number[]>([]);
   const [bottoms, setBottoms] = useState<number[]>([]);
@@ -246,7 +247,7 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
 
                   {card.kind === "store" ? (
                     <div className={styles.wallet_col} style={{ gap: "6px" }}>
-                      <span>Descubre nuestra mesa de regalos</span>
+                      <span>D{ui.labels.DiscoverGifts}</span>
                       <Button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -255,7 +256,7 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
                         className={styles.cta_button}
                         icon={<MdArrowOutward />}
                       >
-                        Ver regalos
+                        {ui.labels.seeGifts}
                       </Button>
                     </div>
                   ) : (
@@ -302,7 +303,7 @@ export default function Wallet({ invitation, dev = false }: CardProps) {
                 style={{ color: content.background ? (content.inverted ? accent : primary) : content.inverted ? primary : accent }}
                 className={styles.wallet_sec_label}
               >
-                Tarjetas de regalo
+                {ui.labels.cards}
               </span>
             </div>
           </div>

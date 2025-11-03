@@ -5,7 +5,7 @@ import Image from "next/image";
 import React, { useEffect } from "react";
 import { forwardRef } from "react";
 import styles from "./cover.module.css";
-import { NewInvitation } from "@/types/new_invitation";
+import { InvitationUIBundle, NewInvitation } from "@/types/new_invitation";
 import Countdown from "./countDown/CountDown";
 import ConfettiButton from "./Confetti/Confetti";
 import { useScreenWidth } from "@/hooks/useScreenWidth";
@@ -14,10 +14,11 @@ type CoverProps = {
   dev: boolean;
   invitation: NewInvitation | null;
   height: string | number;
-  validated?: boolean
+  validated?: boolean;
+  ui?: InvitationUIBundle | null
 };
 
-export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev, invitation, height, validated = true }, ref) {
+export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ui, dev, invitation, height, validated = true }, ref) {
   const cover = invitation?.cover;
   const generals = invitation?.generals;
   const image_src = dev ? cover?.image.dev : cover?.image.prod;
@@ -118,7 +119,7 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ dev
               }}
             >
 
-              <Countdown cover={cover} generals={generals} dev={dev} validated={validated} />
+              <Countdown ui={ui} cover={cover} generals={generals} dev={dev} validated={validated} />
             </div>
           )}
         </div>

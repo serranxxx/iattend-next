@@ -1,4 +1,4 @@
-import { NewInvitation } from "@/types/new_invitation";
+import { InvitationUIBundle, NewInvitation } from "@/types/new_invitation";
 import React, { forwardRef } from "react";
 import Card from "./Card/Card";
 import { Separador } from "../Separator/Separator";
@@ -7,9 +7,10 @@ import FadeLeft from "@/components/Motion/FadeLeft";
 type DresscodeProps = {
   dev: boolean;
   invitation: NewInvitation;
+  ui?: InvitationUIBundle | null;
 };
 
-export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function destinations({ dev, invitation }, ref) {
+export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function destinations({ ui, dev, invitation }, ref) {
   const content = invitation.destinations;
   const generals = invitation.generals;
   const font = generals.fonts.body?.typeFace;
@@ -73,7 +74,7 @@ export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function 
               >
                 {
                   invitation.destinations.cards.length > 0 &&
-                  <Card invitation={invitation} />
+                  <Card invitation={invitation} ui={ui} />
                 }
               </div>
             </div>

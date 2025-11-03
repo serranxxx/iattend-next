@@ -283,6 +283,61 @@ export interface NewInvitation {
   // updatedAt?: string;
 }
 
+export interface InvitationUIBundle {
+  cover: {
+    countdown: {
+      days: string;
+      hours: string;
+      minutes: string;
+      seconds: string;
+    };
+    datePrefix: string;
+  };
+
+  labels: {
+    food: string;
+    lodging: string;
+    activities: string;
+    cards: string;
+    DiscoverGifts:string;
+    seeGifts:string;
+  };
+
+  locked: {
+    p1: string;
+    p2: string;
+    title: string;
+    access: string;
+    placeholder: string;
+  };
+
+  buttons: {
+    confirm: string;
+    details: string;
+    directions: string;
+    inspiration: string;
+  };
+
+  confirm: {
+    cta: string;
+    hello: string;
+    passes: string;
+    decline: string;
+    howMany: string;
+    yourName: string;
+    declinedMsg: string;
+    drawerTitle: string;
+    changeAnswer: string;
+    addToCalendar: string;
+    declinedTitle: string;
+    confirmedTitle: string;
+    changeAnswerBtn: string;
+    addToCalendarBtn: string;
+    confirmedMsgBold: string;
+    thanks: string;
+  };
+}
+
 /** Payload para crear/actualizar desde formularios del cliente */
 export type NewInvitationCreate = Omit<NewInvitation, "_id" | "createdAt" | "updatedAt">;
 export type NewInvitationUpdate = Partial<NewInvitationCreate> & { _id: Id };

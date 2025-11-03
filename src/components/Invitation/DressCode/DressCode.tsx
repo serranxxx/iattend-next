@@ -1,6 +1,6 @@
 "use client";
 
-import { NewInvitation } from "@/types/new_invitation";
+import { InvitationUIBundle, NewInvitation } from "@/types/new_invitation";
 import Image from "next/image";
 import React, { forwardRef, useState } from "react";
 import { Separador } from "../Separator/Separator";
@@ -13,9 +13,10 @@ import FadeIn from "@/components/Motion/FadeIn";
 type DresscodeProps = {
   dev: boolean;
   invitation: NewInvitation;
+  ui?: InvitationUIBundle | null;
 };
 
-export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Greeting({ dev, invitation }, ref) {
+export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Greeting({ ui, dev, invitation }, ref) {
   const content = invitation.dresscode;
   const generals = invitation.generals;
 
@@ -114,7 +115,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                         boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
                       }}
                     >
-                      ¿Necesitas inspiración?
+                      {ui?.buttons.inspiration ?? "HOLA"}
                     </Button>
                     </FadeIn>
                   ))}

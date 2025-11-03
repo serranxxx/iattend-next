@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { NewInvitation } from "@/types/new_invitation";
+import { InvitationUIBundle, NewInvitation } from "@/types/new_invitation";
 import styles from "./card.module.css";
 import { Button } from "antd";
 import Image from "next/image";
@@ -15,9 +15,10 @@ import FadeLeft from "@/components/Motion/FadeLeft";
 
 type CardProps = {
   invitation: NewInvitation;
+  ui?: InvitationUIBundle | null
 };
 
-export default function Card({ invitation }: CardProps) {
+export default function Card({ ui, invitation }: CardProps) {
   const content = invitation.destinations;
 
   const slice = 6;
@@ -43,17 +44,17 @@ export default function Card({ invitation }: CardProps) {
     switch (type) {
       case "hotel":
         return {
-          label: "Hospedjae",
+          label: ui?.labels.lodging,
           icon: <FaHotel size={10} style={{ color: "#FFF" }} />,
         };
       case "activitie":
         return {
-          label: "Actividades",
+          label: ui?.labels.activities,
           icon: <MdSportsGymnastics size={10} style={{ color: "#FFF" }} />,
         };
       case "food":
         return {
-          label: "Comida",
+          label: ui?.labels.food,
           icon: <ImSpoonKnife size={10} style={{ color: "#000" }} />,
         }; // return "Comidas";
 

@@ -4,7 +4,7 @@
 import { Col, Row } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
 import { lighter, formatDate } from "@/helpers/functions";
-import { CoverSection, Generals } from "@/types/new_invitation";
+import { CoverSection, Generals, InvitationUIBundle } from "@/types/new_invitation";
 import styles from "./count.module.css";
 import ConfettiButton from "../Confetti/Confetti";
 
@@ -13,6 +13,7 @@ type CountdownProps = {
   generals?: Generals;
   dev: boolean;
   validated?: boolean;
+  ui?: InvitationUIBundle | null;
 };
 
 type Units = "days" | "hours" | "minutes" | "seconds";
@@ -46,7 +47,7 @@ const labels: Record<Units, { singular: string; plural: string }> = {
   seconds: { singular: "segundo", plural: "segundos" },
 };
 
-export default function Countdown({ cover, generals, dev, validated = true }: CountdownProps) {
+export default function Countdown({ ui,cover, generals, dev, validated = true }: CountdownProps) {
   const targetDate = useMemo(() => {
     const s = cleanDate(cover?.date?.value);
     const t = s ? new Date(s) : null;

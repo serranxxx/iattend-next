@@ -1,4 +1,4 @@
-import { NewInvitation } from "@/types/new_invitation";
+import { InvitationUIBundle, NewInvitation } from "@/types/new_invitation";
 import React, { forwardRef, useState } from "react";
 import { Separador } from "../Separator/Separator";
 import Card from "./Cards/Cards";
@@ -9,9 +9,10 @@ import FadeLeft from "@/components/Motion/FadeLeft";
 type DresscodeProps = {
   dev: boolean;
   invitation: NewInvitation;
+  ui: InvitationUIBundle;
 };
 
-export const Gifts = forwardRef<HTMLDivElement, DresscodeProps>(function Greeting({ dev, invitation }, ref) {
+export const Gifts = forwardRef<HTMLDivElement, DresscodeProps>(function Greeting({ ui, dev, invitation }, ref) {
   const content = invitation.gifts;
   const generals = invitation.generals;
   const font = generals.fonts.body?.typeFace;
@@ -79,7 +80,7 @@ export const Gifts = forwardRef<HTMLDivElement, DresscodeProps>(function Greetin
               >
                 {
                   invitation.gifts.cards.length > 0 &&
-                  <Wallet invitation={invitation} dev={dev} />
+                  <Wallet ui={ui} invitation={invitation} dev={dev} />
                 }
 
               </div>

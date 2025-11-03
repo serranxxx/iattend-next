@@ -9,7 +9,7 @@ import { FaMinus, FaPlus, FaRegCalendar, FaRegCalendarCheck } from "react-icons/
 import { buttonsColorText, generateSimpleId } from "@/helpers/functions";
 import { IoMdAdd } from "react-icons/io";
 import { FaRegCalendarXmark } from "react-icons/fa6";
-import { InvitationType, NewInvitation } from "@/types/new_invitation";
+import { InvitationType, InvitationUIBundle, NewInvitation } from "@/types/new_invitation";
 import { Guest, GuestAccessPayload } from "@/types/guests";
 import { useInvitation } from "@/services/customHook";
 import { confirmGuests, editGuestsGuest } from "@/services/apiGuests";
@@ -17,6 +17,7 @@ import styles from './confirm.module.css'
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import { BsCalendar2Check } from "react-icons/bs";
 import { AddToCalendarButton } from "add-to-calendar-button-react";
+import { interpolateNodes } from "@/lib/utils/interpolateText";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -26,9 +27,10 @@ type ConfirmProps = {
   type: InvitationType;
   guestInfo: GuestAccessPayload | null;
   mongoID: string;
+  ui: InvitationUIBundle;
 };
 
-export default function Confirm({ invitation, type, guestInfo, mongoID }: ConfirmProps) {
+export default function Confirm({ ui, invitation, type, guestInfo, mongoID }: ConfirmProps) {
   const [messageApi, contextHolder] = message.useMessage();
 
   const generals = invitation?.generals;
@@ -190,7 +192,7 @@ export default function Confirm({ invitation, type, guestInfo, mongoID }: Confir
   const handleDescription = (companions: number) => {
     switch (companions) {
       case 0:
-        return `¡Tu asistencia ha sido confirmada!`;
+        return ui.confirm.confirmedMsgBold;
       case 1:
         return `¡Tu asistencia y la de tu acompañante ha sido confirmada!`;
       default:
@@ -208,7 +210,7 @@ export default function Confirm({ invitation, type, guestInfo, mongoID }: Confir
     }
     return "Mi evento";
   };
-  
+
   const toYYYYMMDD = (dateLike: unknown): string => {
     // acepta string ISO o { value: string }
     let raw: string | undefined;
@@ -275,16 +277,34 @@ export default function Confirm({ invitation, type, guestInfo, mongoID }: Confir
                   color: accent,
                 }}
               >
+
                 {freeTickets ? (
-                  <span>
-                    ¡Hola <b>{currentGuestName}</b>! Tienes <b>{guestInfo?.cards} pases</b> disponibles para ti y tus acompañantes
-                  </span>
-                ) : !freeTickets && currentGuestName ? (
-                  <span>
-                    ¡Hola <b>{currentGuestName}</b>! Estamos felices de que nos puedas acompañar
-                  </span>
+                  <>
+                    {
+                      // "¡Hola {name}!"
+                      interpolateNodes(ui.confirm.hello, {
+                        name: <b>{currentGuestName ?? ""}</b>,
+                      })
+                    }{" "}
+                    {
+                      // "Tienes {count} pases disponibles..."
+                      interpolateNodes(ui.confirm.passes, {
+                        count: <b>{guestInfo?.cards ?? 0}</b>,
+                      })
+                    }
+                  </>
+                ) : currentGuestName ? (
+                  <>
+                    {
+                      interpolateNodes(ui.confirm.hello, {
+                        name: <b>{currentGuestName}</b>,
+                      })
+                    }{" "}
+                    {/* puedes usar un texto fijo o agregar algo tipo confirm.thanks al bundle */}
+                    <span>{ui.confirm.thanks}</span>
+                  </>
                 ) : (
-                  <span>¡Hola! Estamos felices de que nos puedas acompañar</span>
+                  <span>{ui.confirm.thanks}</span>
                 )}
               </span>
 
@@ -297,7 +317,7 @@ export default function Confirm({ invitation, type, guestInfo, mongoID }: Confir
                   marginTop: '-8px'
                 }}
               >
-                ¿Cuántos pases vas a utilizar?
+                {ui?.confirm.howMany}
               </span>
 
               <div className={styles.confirm_tickets_row}>
@@ -358,7 +378,7 @@ export default function Confirm({ invitation, type, guestInfo, mongoID }: Confir
                   fontWeight: 600,
                 }}
               >
-                Escribe tu nombre y quienes te acompañan
+                {ui?.confirm.yourName}
               </span>
 
               <div className={styles.inputs_cont}>
@@ -402,7 +422,7 @@ export default function Confirm({ invitation, type, guestInfo, mongoID }: Confir
                   color: accent,
                 }}
               >
-                Lamentamos no poder contar con tu asistencia esperamos pronto poder celebrar juntos
+                {ui?.confirm.declinedMsg}
               </span>
             </div>
           ) : (
@@ -419,7 +439,7 @@ export default function Confirm({ invitation, type, guestInfo, mongoID }: Confir
                   color: accent,
                 }}
               >
-                {handleDescription(tickets.length)} <b>Esperamos verte y celebrar juntos muy pronto.</b>
+                {ui.confirm.confirmedMsgBold}
               </span>
 
               <div
@@ -437,7 +457,7 @@ export default function Confirm({ invitation, type, guestInfo, mongoID }: Confir
                   color: accent,
                 }}
               >
-                Agrega el evento a tu calendario
+                {ui?.confirm.addToCalendar}
               </span>
               {
                 invitation &&
@@ -467,7 +487,7 @@ export default function Confirm({ invitation, type, guestInfo, mongoID }: Confir
                   color: accent,
                 }}
               >
-                Cambiar respuesta
+                {ui?.confirm.changeAnswer}
               </Button>
             )
           ) : (
@@ -481,7 +501,7 @@ export default function Confirm({ invitation, type, guestInfo, mongoID }: Confir
                   height: '44px', width: '100%', fontSize: '16px'
                 }}
               >
-                CONFIRMAR
+                {ui?.confirm.cta}
               </Button>
 
               <Button
@@ -494,7 +514,7 @@ export default function Confirm({ invitation, type, guestInfo, mongoID }: Confir
                   height: '44px', width: '100%', fontSize: '16px'
                 }}
               >
-                No podré asistir
+                {ui?.confirm.decline}
               </Button>
             </>
           )}

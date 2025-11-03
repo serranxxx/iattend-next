@@ -1,7 +1,10 @@
 "use client";
 import Invitation from "@/components/Invitation/Invitation/Invitation";
-import { InvitationType, NewInvitation } from "@/types/new_invitation";
+import uiES from "@/data/ui/invitation_ui_es";
+import { InvitationType, InvitationUIBundle, NewInvitation } from "@/types/new_invitation";
 import { useEffect, useRef, useState } from "react";
+
+
 
 // 👇 Lista de orígenes permitidos
 const ALLOWED_ORIGINS = [
@@ -17,59 +20,45 @@ export default function Page() {
 
   // Handshake inicial
   useEffect(() => {
-    // Opción segura: envía a todos los hosts permitidos
     ALLOWED_ORIGINS.forEach((origin) => {
       window.parent?.postMessage({ type: "REMOTE_READY" }, origin);
     });
   }, []);
 
-  // Escuchar mensajes desde cualquiera de los hosts válidos
+  // Escuchar mensajes del host
   useEffect(() => {
     function onMessage(ev: MessageEvent) {
-      if (!ALLOWED_ORIGINS.includes(ev.origin)) return; // valida el origen
+      if (!ALLOWED_ORIGINS.includes(ev.origin)) return;
       const { type, payload } = ev.data || {};
-
-      // Guardamos el host válido para responderle después
       if (!hostOrigin) setHostOrigin(ev.origin);
-
       if (type === "HOST_PROPS" && payload?.invitationConfig) {
         setInvitation(payload.invitationConfig as NewInvitation);
       }
     }
-
     window.addEventListener("message", onMessage);
     return () => window.removeEventListener("message", onMessage);
   }, [hostOrigin]);
 
-  // Reportar la altura al host correcto
+  // Reportar altura al host
   useEffect(() => {
     const el = rootRef.current;
     if (!el) return;
-
     const ro = new ResizeObserver(() => {
       const height = el.getBoundingClientRect().height;
       if (hostOrigin) {
-        window.parent?.postMessage(
-          { type: "REMOTE_HEIGHT", payload: { height } },
-          hostOrigin
-        );
+        window.parent?.postMessage({ type: "REMOTE_HEIGHT", payload: { height } }, hostOrigin);
       } else {
-        // Enviar a todos los hosts si aún no se identificó uno
         ALLOWED_ORIGINS.forEach((origin) => {
-          window.parent?.postMessage(
-            { type: "REMOTE_HEIGHT", payload: { height } },
-            origin
-          );
+          window.parent?.postMessage({ type: "REMOTE_HEIGHT", payload: { height } }, origin);
         });
       }
     });
-
     ro.observe(el);
     return () => ro.disconnect();
   }, [hostOrigin]);
 
-  return (
-    invitation ? (
+  return invitation ? (
+    <div ref={rootRef}>
       <Invitation
         height="100vh"
         dev={true}
@@ -77,7 +66,8 @@ export default function Page() {
         loader={false}
         type={"open" as InvitationType}
         mongoID={null}
+        ui={uiES as InvitationUIBundle} 
       />
-    ) : null
-  );
+    </div>
+  ) : null;
 }

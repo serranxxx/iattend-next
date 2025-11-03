@@ -1,4 +1,4 @@
-import { NewInvitation } from "@/types/new_invitation";
+import { InvitationUIBundle, NewInvitation } from "@/types/new_invitation";
 import React, { forwardRef } from "react";
 import { Separador } from "../Separator/Separator";
 import styles from "./itinerary.module.css";
@@ -7,15 +7,18 @@ import Card from "./Card/Card";
 type quoteProps = {
   dev: boolean;
   invitation: NewInvitation;
+  ui: InvitationUIBundle;
 };
 
-export const Itinerary = forwardRef<HTMLDivElement, quoteProps>(function Greeting({ dev, invitation }, ref) {
+export const Itinerary = forwardRef<HTMLDivElement, quoteProps>(function Greeting({ ui, dev, invitation }, ref) {
   const content = invitation.itinerary;
   const generals = invitation.generals;
 
   const primary = generals?.colors.primary ?? "#FFFFFF";
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
+
+  console.log('it: ', ui)
 
   // useEffect(() => {
   //   AOS.init({
@@ -54,7 +57,7 @@ export const Itinerary = forwardRef<HTMLDivElement, quoteProps>(function Greetin
                 // data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
                 className={styles.itinerary_cards_container}
               >
-                <Card invitation={invitation} dev={dev} />
+                <Card ui={ui} invitation={invitation} dev={dev} />
               </div>
             </div>
           </div>

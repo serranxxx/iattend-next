@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Drawer } from "antd";
 import { LuBadgeHelp } from "react-icons/lu";
 import { FaArrowDown, FaArrowRight } from "react-icons/fa";
-import { ItineraryItem, NewInvitation } from "@/types/new_invitation";
+import { InvitationUIBundle, ItineraryItem, NewInvitation } from "@/types/new_invitation";
 import { getItineraryIcon } from "@/helpers/icons";
 import styles from "./card.module.css";
 import { buttonsColorText, getMexicoHour } from "@/helpers/functions";
@@ -18,9 +18,10 @@ import { useScreenWidth } from "@/hooks/useScreenWidth";
 type CardProps = {
   invitation: NewInvitation;
   dev: boolean;
+  ui: InvitationUIBundle;
 };
 
-export default function Card({ invitation, dev }: CardProps) {
+export default function Card({ui, invitation, dev }: CardProps) {
   const content = invitation.itinerary;
   const generals = invitation.generals;
   const [open, setOpen] = useState<ItineraryItem | null>(null);
@@ -145,7 +146,7 @@ export default function Card({ invitation, dev }: CardProps) {
                         // onClick={() => setActiveSteps([...(activeSteps ?? []), item])}
                         icon={<MdArrowOutward />}
                       >
-                        Detalles
+                        {ui?.buttons.details}
                       </Button>
                     </div>
                   </div>
@@ -217,7 +218,7 @@ export default function Card({ invitation, dev }: CardProps) {
                         color: content.inverted ? accent : buttonsColorText(actions!),
                       }}
                     >
-                      ¿Cómo llegar?
+                      {ui?.buttons.directions}
                     </Button>
                   )
                 }

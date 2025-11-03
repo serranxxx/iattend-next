@@ -1,6 +1,6 @@
 "use client";
 
-import { InvitationType, NewInvitation } from "@/types/new_invitation";
+import { InvitationType, InvitationUIBundle, NewInvitation } from "@/types/new_invitation";
 import { useEffect, useRef, useState } from "react";
 import styles from "./invitation.module.css";
 import { Cover } from "../Cover/Cover";
@@ -31,11 +31,12 @@ type invProps = {
   mongoID: string | null;
   dev: boolean;
   height: number | string | null;
+  ui: InvitationUIBundle;
 };
 
 
 
-export default function Invitation({ invitation, loader, type, mongoID, dev, height }: invProps) {
+export default function Invitation({ ui,invitation, loader, type, mongoID, dev, height }: invProps) {
   const coverRef = useRef<HTMLDivElement>(null);
   const greetingRef = useRef<HTMLDivElement>(null);
   const peopleRef = useRef<HTMLDivElement>(null);
@@ -74,13 +75,13 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
       case 3:
         return <Quote key={index} ref={quoteRef} dev={dev} invitation={invitation} />;
       case 4:
-        return <Itinerary key={index} ref={itineraryRef} dev={false} invitation={invitation} />;
+        return <Itinerary ui={ui} key={index} ref={itineraryRef} dev={false} invitation={invitation} />;
       case 5:
-        return <DressCode key={index} ref={dresscodeRef} dev={dev} invitation={invitation} />;
+        return <DressCode ui={ui} key={index} ref={dresscodeRef} dev={dev} invitation={invitation} />;
       case 6:
-        return <Gifts key={index} ref={giftsRef} dev={false} invitation={invitation} />;
+        return <Gifts ui={ui} key={index} ref={giftsRef} dev={false} invitation={invitation} />;
       case 7:
-        return <Destinations key={index} ref={destinationRef} dev={false} invitation={invitation} />;
+        return <Destinations ui={ui} key={index} ref={destinationRef} dev={false} invitation={invitation} />;
       case 8:
         return <Notices key={index} ref={noticesRef} dev={false} invitation={invitation} />;
       case 9:
@@ -189,7 +190,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
             tileH={1024}
           />
         )}
-        <Cover ref={coverRef} dev={dev} invitation={invitation} height={"100vh"} validated={validated} />
+        <Cover ui={ui} ref={coverRef} dev={dev} invitation={invitation} height={"100vh"} validated={validated} />
         {validated && (
           <>
             {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
@@ -214,7 +215,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
                   boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
                 }}
               >
-                CONFIRMAR
+                {ui?.buttons.confirm}
               </Button>
             )}
             {/* <div className={styles.translate_cont}>
@@ -229,7 +230,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
           <div className={styles.locked_icon}>
             <FaLock size={32} style={{ color: "#FFF" }} />
           </div>
-          <span style={{ fontFamily: font }} className={styles.locked_title}>Invitación Privada</span>
+          <span style={{ fontFamily: font }} className={styles.locked_title}>{ui?.locked.title}</span>
           <div
             style={{
               display: "flex",
@@ -239,10 +240,9 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
               gap: "8px",
             }}
           >
-            <span style={{ fontFamily: font }} className={styles.locked_text}>Nos alegra mucho que seas parte de este evento tan especial.</span>
+            <span style={{ fontFamily: font }} className={styles.locked_text}>{ui?.locked?.p1}</span>
             <span style={{ fontFamily: font }} className={styles.locked_text}>
-              Esta invitación es <b>exclusiva para ti</b>. Ingresa tu código de invitado para continuar y disfrutar de esta experiencia
-              única.
+            {ui?.locked?.p2}
             </span>
           </div>
           <Input
@@ -250,7 +250,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
             // length={6}
             size="large"
             onChange={(e) => setGuestCode(e.target.value)}
-            placeholder="Código de invitado"
+            placeholder={ui?.locked.placeholder}
             className={styles.locked_input}
             style={{
               backgroundColor: "#FFFFFF20",
@@ -271,14 +271,14 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
             style={btnStyle}
             onClick={onValidateUser}
           >
-            ACCEDER
+            {ui?.locked.access}
           </Button>
 
-          <div className={styles.translate_cont} style={{
+          {/* <div className={styles.translate_cont} style={{
             position: 'absolute', bottom: '8px', right: '8px'
           }}>
             <GoogleTranslate id={mongoID}/>
-          </div>
+          </div> */}
         </div>
 
 
@@ -301,7 +301,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
             }}
           >
             {" "}
-            Confirmar asistencia
+            {ui?.confirm.drawerTitle}
           </div>
         }
         height={isLargeScreen ? "100%" : "80%"}
@@ -322,7 +322,7 @@ export default function Invitation({ invitation, loader, type, mongoID, dev, hei
         }}
       >
         {(guestInfo || type === "open") && mongoID && (
-          <Confirm invitation={invitation} type={type} guestInfo={guestInfo} mongoID={mongoID} />
+          <Confirm ui={ui} invitation={invitation} type={type} guestInfo={guestInfo} mongoID={mongoID} />
         )}
       </Drawer>
     </>
