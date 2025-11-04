@@ -58,7 +58,7 @@ export default function Page() {
   }, [hostOrigin]);
 
   return invitation ? (
-    <div ref={rootRef}>
+    <div ref={rootRef} style={{ width: '100%' }}>
       <Invitation
         height="100vh"
         dev={true}
@@ -66,7 +66,7 @@ export default function Page() {
         loader={false}
         type={"open" as InvitationType}
         mongoID={null}
-        ui={uiES as InvitationUIBundle} 
+        ui={uiES as InvitationUIBundle}
       />
     </div>
   ) : null;

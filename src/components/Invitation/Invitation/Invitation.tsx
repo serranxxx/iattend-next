@@ -218,9 +218,6 @@ export default function Invitation({ ui,invitation, loader, type, mongoID, dev, 
                 {ui?.buttons.confirm}
               </Button>
             )}
-            {/* <div className={styles.translate_cont}>
-              <GoogleTranslate />
-            </div> */}
           </>
         )}
         <div
@@ -274,11 +271,6 @@ export default function Invitation({ ui,invitation, loader, type, mongoID, dev, 
             {ui?.locked.access}
           </Button>
 
-          {/* <div className={styles.translate_cont} style={{
-            position: 'absolute', bottom: '8px', right: '8px'
-          }}>
-            <GoogleTranslate id={mongoID}/>
-          </div> */}
         </div>
 
 
