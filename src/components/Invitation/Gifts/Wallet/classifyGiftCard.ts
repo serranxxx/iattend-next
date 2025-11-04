@@ -19,6 +19,7 @@ export type BrandKey =
   | "palacio"
   | "santander"
   | "scotiabank"
+  | "crelan"
   | "sears";
 
 type BrandMeta = {
@@ -40,6 +41,7 @@ const ALIAS_TO_KEY: Record<string, BrandKey> = {
   "palacio de hierro": "palacio",
   "el palacio de hierro": "palacio",
   amazon: "amazon",
+  crelan: "crelan",
   sears: "sears",
   bbva: "bbva",
   banamex: "banamex",
@@ -57,7 +59,8 @@ const ALIAS_TO_KEY: Record<string, BrandKey> = {
 // 👇 mapea a rutas públicas
 const BRAND_META: Record<BrandKey, BrandMeta> = {
   amazon: { className: "amazon", imagePath: "/assets/banks/AMAZON.png" },
-  banamex: { className: "banamex", imagePath: "/assets/banks/BANAMEX.png" },
+  crelan: { className: "crelan", imagePath: "/assets/banks/AMAZON.png" },
+  banamex: { className: "banamex", imagePath: "/assets/banks/crelan.png" },
   banorte: { className: "banorte", imagePath: "/assets/banks/BANORTE.png" },
   bbva: { className: "bbva", imagePath: "/assets/banks/BBVA.png" },
   hsbc: { className: "hsbc", imagePath: "/assets/banks/HSBC.png" },
