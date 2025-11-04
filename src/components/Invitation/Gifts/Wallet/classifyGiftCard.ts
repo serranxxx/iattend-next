@@ -59,8 +59,8 @@ const ALIAS_TO_KEY: Record<string, BrandKey> = {
 // 👇 mapea a rutas públicas
 const BRAND_META: Record<BrandKey, BrandMeta> = {
   amazon: { className: "amazon", imagePath: "/assets/banks/AMAZON.png" },
-  crelan: { className: "crelan", imagePath: "/assets/banks/AMAZON.png" },
-  banamex: { className: "banamex", imagePath: "/assets/banks/crelan.png" },
+  crelan: { className: "crelan", imagePath: "/assets/banks/crelan.png" },
+  banamex: { className: "banamex", imagePath: "/assets/banks/BANAMEX.png" },
   banorte: { className: "banorte", imagePath: "/assets/banks/BANORTE.png" },
   bbva: { className: "bbva", imagePath: "/assets/banks/BBVA.png" },
   hsbc: { className: "hsbc", imagePath: "/assets/banks/HSBC.png" },
