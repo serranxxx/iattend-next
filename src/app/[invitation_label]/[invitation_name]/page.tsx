@@ -114,6 +114,7 @@ export default async function InvitationDynamicPage({ params, searchParams }: Pa
       dev={false}
       ui={ui}  
       invitation={invitationForRender}
+      invitationID={id}
       loader={loader}
       type={type}
       mongoID={mongoID}

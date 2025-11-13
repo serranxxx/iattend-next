@@ -70,3 +70,25 @@ export interface GuestAccessPayload {
   token: string;
   type: InvitationType;
 }
+
+export interface GuestSubabasePayload {
+  companion_id: string | null;
+  created_at: string;
+  has_companion: boolean;
+  id: number;
+  invitation_id: string;
+  last_action: string;
+  last_action_by: boolean;
+  last_update_date: string;
+  meal: string | null;
+  name: string | null;
+  notes: string | null;
+  password: string;
+  phone_number: string | null;
+  side: null;
+  state: string;
+  table: string | null;
+  tag: string | null;
+  ticket: boolean;
+  tier: string | null;
+}

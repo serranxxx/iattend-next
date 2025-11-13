@@ -20,9 +20,10 @@ import { Button, Drawer, Input, Layout, message } from "antd";
 import Confirm from "../Confirm/Confirm";
 import { FaLock } from "react-icons/fa";
 import axios from "axios";
-import { GuestAccessPayload } from "@/types/guests";
+import { GuestAccessPayload, GuestSubabasePayload } from "@/types/guests";
 import GoogleTranslate from "@/components/GoogleTranslate/GoogleTranslate";
 import { useScreenWidth } from "@/hooks/useScreenWidth";
+import { createClient } from "@/lib/supabase/client";
 
 type invProps = {
   invitation: NewInvitation | null;
@@ -32,11 +33,12 @@ type invProps = {
   dev: boolean;
   height: number | string | null;
   ui: InvitationUIBundle;
+  invitationID?: string;
 };
 
 
 
-export default function Invitation({ ui,invitation, loader, type, mongoID, dev, height }: invProps) {
+export default function Invitation({ invitationID, ui, invitation, loader, type, mongoID, dev, height }: invProps) {
   const coverRef = useRef<HTMLDivElement>(null);
   const greetingRef = useRef<HTMLDivElement>(null);
   const peopleRef = useRef<HTMLDivElement>(null);
@@ -49,6 +51,7 @@ export default function Invitation({ ui,invitation, loader, type, mongoID, dev, 
   const destinationRef = useRef<HTMLDivElement>(null);
   const scrollableContentRef = useRef<HTMLDivElement>(null);
   const [heightSize, setHeightSize] = useState<number>(0);
+  const supabase = createClient();
 
   const [open, setOpen] = useState(false);
   const [guestCode, setGuestCode] = useState<string>("");
@@ -108,26 +111,51 @@ export default function Invitation({ ui,invitation, loader, type, mongoID, dev, 
   };
 
   const onValidateUser = async () => {
-    try {
-      const response = await axios.post(`https://i-attend-22z4h.ondigitalocean.app/api/guests/login`, {
-        invitationID: mongoID,
-        guestID: guestCode,
-      });
+    // try {
+    //   const response = await axios.post(`https://i-attend-22z4h.ondigitalocean.app/api/guests/login`, {
+    //     invitationID: mongoID,
+    //     guestID: guestCode,
+    //   });
 
-      if (response.data.ok) {
-        messageApi.success(`Bienvenido ${response.data.data.username}`);
-        setGuestCode("");
-        setValidated(true);
-        setGuestInfo(response.data.data);
-        return response.data.data;
-      } else {
-        messageApi.error(`Código incorrecto`);
-        setGuestCode("");
-        return null;
+    //   if (response.data.ok) {
+    //     messageApi.success(`Bienvenido ${response.data.data.username}`);
+    //     setGuestCode("");
+    //     setValidated(true);
+    //     setGuestInfo(response.data.data);
+    //     return response.data.data;
+    //   } else {
+    //     messageApi.error(`Código incorrecto`);
+    //     setGuestCode("");
+    //     return null;
+    //   }
+    // } catch (error: any) {
+    //   console.error("❌ Error en login:", error.response?.data || error.message);
+    //   return null;
+    // }
+
+    try {
+      const { data, error } = await supabase
+        .from("guests")
+        .select("*")
+        .eq("password", guestCode)
+        .maybeSingle();
+
+      if (error) {
+        console.log(error, 'not found')
+        return
       }
-    } catch (error: any) {
-      console.error("❌ Error en login:", error.response?.data || error.message);
-      return null;
+
+      if (!data) {
+        messageApi.error(`Código incorrecto`);
+        return
+      }
+      
+      console.log(data)
+      // setGuestInfo(data)
+      
+
+    } catch (error) {
+
     }
   };
 
@@ -239,7 +267,7 @@ export default function Invitation({ ui,invitation, loader, type, mongoID, dev, 
           >
             <span style={{ fontFamily: font }} className={styles.locked_text}>{ui?.locked?.p1}</span>
             <span style={{ fontFamily: font }} className={styles.locked_text}>
-            {ui?.locked?.p2}
+              {ui?.locked?.p2}
             </span>
           </div>
           <Input
