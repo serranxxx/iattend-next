@@ -10,14 +10,16 @@ import { buttonsColorText, generateSimpleId } from "@/helpers/functions";
 import { IoMdAdd } from "react-icons/io";
 import { FaRegCalendarXmark } from "react-icons/fa6";
 import { InvitationType, InvitationUIBundle, NewInvitation } from "@/types/new_invitation";
-import { Guest, GuestAccessPayload } from "@/types/guests";
+import { Guest, GuestAccessPayload, GuestSubabasePayload } from "@/types/guests";
 import { useInvitation } from "@/services/customHook";
 import { confirmGuests, editGuestsGuest } from "@/services/apiGuests";
 import styles from './confirm.module.css'
-import { IoCalendarNumberOutline } from "react-icons/io5";
+import { IoCalendarNumberOutline, IoCheckmark, IoClose } from "react-icons/io5";
 import { BsCalendar2Check } from "react-icons/bs";
 import { AddToCalendarButton } from "add-to-calendar-button-react";
 import { interpolateNodes } from "@/lib/utils/interpolateText";
+import { createClient } from "@/lib/supabase/client";
+import { MdEdit } from "react-icons/md";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -25,7 +27,7 @@ dayjs.extend(timezone);
 type ConfirmProps = {
   invitation: NewInvitation;
   type: InvitationType;
-  guestInfo: GuestAccessPayload | null;
+  guestInfo: GuestSubabasePayload | null;
   mongoID: string;
   ui: InvitationUIBundle;
 };
@@ -39,11 +41,15 @@ export default function Confirm({ ui, invitation, type, guestInfo, mongoID }: Co
   const accent = generals?.colors.accent ?? "#FFFFFF";
   const actions = generals?.colors.actions ?? "#FFFFFF";
 
+  const supabase = createClient();
+
   const { response, operation } = useInvitation();
   const [tickets, setTickets] = useState<string[]>([]);
-  const [localStatus, setLocalStatus] = useState<"esperando" | "confirmado" | "rechazado">("esperando");
+  const [mainGuest, setMainGuest] = useState<GuestSubabasePayload | null>(null)
+  const [localStatus, setLocalStatus] = useState<"creado" | "esperando" | "confirmado" | "rechazado">("esperando");
   const [freeTickets, setFreeTickets] = useState<number>(0);
-  const [confirmed, setConfirmed] = useState<"esperando" | "confirmado" | "rechazado">("esperando");
+  const [companions, setCompanions] = useState<GuestSubabasePayload[] | null>(null)
+  const [confirmed, setConfirmed] = useState<"creado" | "esperando" | "confirmado" | "rechazado">("esperando");
   const [currentGuestName, setCurrentGuestName] = useState<string | null>(null);
 
   const addTicket = () => {
@@ -122,71 +128,72 @@ export default function Confirm({ ui, invitation, type, guestInfo, mongoID }: Co
   // };
 
   const acceptInvitation = () => {
-    if (tickets.some(ticket => ticket.trim() === "")) {
-      message.warning("Escribe los nombres de tus acompañantes");
-      return;
-    }
 
-    if (!currentGuestName) {
-      message.warning("Por favor escribe tu nombre");
-      return;
-    }
+    // if (tickets.some(ticket => ticket.trim() === "")) {
+    //   message.warning("Escribe los nombres de tus acompañantes");
+    //   return;
+    // }
+
+    // if (!currentGuestName) {
+    //   message.warning("Por favor escribe tu nombre");
+    //   return;
+    // }
 
     setLocalStatus('confirmado')
 
-    if (type === 'open') {
-      const newGuest: Guest = {
-        name: currentGuestName,
-        username: '000-000',
-        id: generateSimpleId(),
-        available_cards: [currentGuestName, ...tickets].length,
-        companions: [currentGuestName, ...tickets],
-        state: 'confirmado',
-        last_action: 'accepted',
-        last_update_date: new Date(),
-        creation_date: new Date()
-      }
-      console.log(newGuest)
-      confirmGuests(operation, mongoID, newGuest)
-    }
+    // if (type === 'open') {
+    //   const newGuest: Guest = {
+    //     name: currentGuestName,
+    //     username: '000-000',
+    //     id: generateSimpleId(),
+    //     available_cards: [currentGuestName, ...tickets].length,
+    //     companions: [currentGuestName, ...tickets],
+    //     state: 'confirmado',
+    //     last_action: 'accepted',
+    //     last_update_date: new Date(),
+    //     creation_date: new Date()
+    //   }
+    //   console.log(newGuest)
+    //   confirmGuests(operation, mongoID, newGuest)
+    // }
 
-    else if (type === 'closed' && guestInfo) {
-      editGuestsGuest(operation, mongoID, guestInfo, 'confirmado', tickets, currentGuestName)
-    }
+    // else if (type === 'closed' && guestInfo) {
+    //   editGuestsGuest(operation, mongoID, guestInfo, 'confirmado', tickets, currentGuestName)
+    // }
 
   };
   const rejectInvitation = async () => {
-    if (tickets.some(ticket => ticket.trim() === "")) {
-      message.warning("Escribe los nombres de tus acompañantes");
-      return;
-    }
+    // if (tickets.some(ticket => ticket.trim() === "")) {
+    //   message.warning("Escribe los nombres de tus acompañantes");
+    //   return;
+    // }
 
-    if (!currentGuestName) {
-      message.warning("Por favor escribe tu nombre");
-      return;
-    }
+    // if (!currentGuestName) {
+    //   message.warning("Por favor escribe tu nombre");
+    //   return;
+    // }
 
     setLocalStatus('rechazado')
 
-    if (type === 'open') {
-      const newGuest: Guest = {
-        name: currentGuestName,
-        username: '000-000',
-        id: generateSimpleId(),
-        available_cards: [currentGuestName, ...tickets].length,
-        companions: [currentGuestName, ...tickets],
-        state: 'rechazado',
-        last_action: 'rejected',
-        last_update_date: new Date(),
-        creation_date: new Date()
-      }
-      console.log(newGuest)
-      confirmGuests(operation, mongoID, newGuest)
-    }
+    // if (type === 'open') {
+    //   const newGuest: Guest = {
+    //     name: currentGuestName,
+    //     username: '000-000',
+    //     id: generateSimpleId(),
+    //     available_cards: [currentGuestName, ...tickets].length,
+    //     companions: [currentGuestName, ...tickets],
+    //     state: 'rechazado',
+    //     last_action: 'rejected',
+    //     last_update_date: new Date(),
+    //     creation_date: new Date()
+    //   }
+    //   console.log(newGuest)
+    //   confirmGuests(operation, mongoID, newGuest)
+    // }
 
-    else if (type === 'closed' && guestInfo) {
-      editGuestsGuest(operation, mongoID, guestInfo, 'rechazado', tickets, currentGuestName)
-    }
+    // else if (type === 'closed' && guestInfo) {
+    //   editGuestsGuest(operation, mongoID, guestInfo, 'rechazado', tickets, currentGuestName)
+    // }
   };
 
   const handleDescription = (companions: number) => {
@@ -225,52 +232,63 @@ export default function Confirm({ ui, invitation, type, guestInfo, mongoID }: Co
     return isNaN(d.getTime()) ? "" : d.toISOString().slice(0, 10);
   };
 
+  const getCompanions = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("guests")
+        .select("*")
+        .eq("companion_id", guestInfo?.id)
+
+      if (error) {
+        console.log(error, 'not found')
+        return
+      }
+
+      console.log('companions: ', data)
+      setCompanions(data)
+
+
+    } catch (error) {
+
+    }
+  }
+
   useEffect(() => {
     if (guestInfo) {
-      setConfirmed(guestInfo.status);
-      setTickets(guestInfo.companions.slice(1));
-      setFreeTickets(guestInfo.tickets);
-      setCurrentGuestName(guestInfo.username);
+      setMainGuest(guestInfo)
+      if (guestInfo.has_companion) {
+        getCompanions()
+      }
     } else {
       setConfirmed("esperando");
       setTickets([]);
-      setFreeTickets(0);
       setCurrentGuestName(null);
     }
   }, []);
 
-  useEffect(() => {
-    if (response) {
-      if (response.data.ok) {
-        switch (response.data.msg) {
-          case "Guest updated successfully":
-            setConfirmed(localStatus)
-            break;
+  // useEffect(() => {
+  //   if (response) {
+  //     if (response.data.ok) {
+  //       switch (response.data.msg) {
+  //         case "Guest updated successfully":
+  //           setConfirmed(localStatus)
+  //           break;
 
-          default:
-            break;
-        }
-      }
-    }
-  }, [response])
+  //         default:
+  //           break;
+  //       }
+  //     }
+  //   }
+  // }, [response])
 
   return (
     <>
       {contextHolder}
 
       <div className={styles.confirm_container}>
-        {
+        {/* {
           confirmed === "esperando" ? (
             <div className={styles.confirm_cont}>
-              {/* <div
-                className={styles.icon_cont}
-                style={{
-                  backgroundColor:`${accent}20`
-                }}
-              >
-                <BsCalendar2Check size={32} style={{ color: accent }} />
-              </div> */}
-
               <span
                 className={styles.confirm_label}
                 style={{
@@ -300,7 +318,6 @@ export default function Confirm({ ui, invitation, type, guestInfo, mongoID }: Co
                         name: <b>{currentGuestName}</b>,
                       })
                     }{" "}
-                    {/* puedes usar un texto fijo o agregar algo tipo confirm.thanks al bundle */}
                     <span>{ui.confirm.thanks}</span>
                   </>
                 ) : (
@@ -473,9 +490,106 @@ export default function Confirm({ ui, invitation, type, guestInfo, mongoID }: Co
             </div>
           )
           // )
+        } */}
+
+        <span className={styles.confirm_label}>
+          Hola <b>{mainGuest?.name}</b>, estamos muy contentos de que formes parte de este momento.
+        </span>
+        {
+          companions &&
+          <span className={styles.confirm_label}>Tu invitación contempla tu asistencia y la de <b>{companions?.length} acompañantes.</b></span>
         }
 
-        <div className={styles.buttons_container}>
+        {
+          companions?.find((comp) => comp.state !== 'esperando') &&
+          <span className={styles.confirm_label}>Algunos de tus acompañantes ya han confirmado. Por favor, <b>completa tu confirmación</b> para continuar.</span>
+        }
+
+        {
+          companions?.find((comp) => comp.name === '' || comp.name === undefined || comp.name === null) &&
+          <span className={styles.confirm_label}>Por favor agrega los datos faltantes de algunos de tus acompañantes</span>
+        }
+
+
+        <div className={styles.companion_cards_cont}>
+          <div className={`${styles.guest_card}  ${styles[`state-${mainGuest?.state}`]}`}>
+            <span>{mainGuest?.name}</span>
+            {/* <span>{mainGuest?.state}</span> */}
+            {
+              mainGuest?.state === 'esperando' || mainGuest?.state === 'creado' ?
+                <div className={styles.guest_card_row}>
+                  <Button onClick={() =>
+                    setMainGuest(prev => ({ ...prev!, state: "rechazado" }))
+                  } icon={<IoClose />}></Button>
+                  <Button onClick={() =>
+                    setMainGuest(prev => ({ ...prev!, state: "confirmado" }))
+                  } icon={<IoCheckmark />}></Button>
+                </div>
+
+                :
+                <div className={styles.guest_card_row}>
+                  <span style={{ textTransform: 'capitalize' }}>{mainGuest?.state}</span>
+                  <Button
+                    icon={<MdEdit />}
+                    style={{ fontWeight: 400 }} className={`${styles[`state-${mainGuest?.state}`]}`} onClick={() =>
+                      setMainGuest(prev => ({ ...prev!, state: "esperando" }))
+                    }></Button>
+                </div>
+            }
+          </div>
+
+          {
+            companions?.map((comp, index) => (
+              <div key={index} className={`${styles.guest_card} ${styles[`state-${comp?.state}`]}`}>
+                {
+                  comp.name ? <span>{comp?.name}</span>
+                    : <Input placeholder="Nombre de acompañante" style={{ maxWidth: '50%' }} />
+                }
+
+                {
+                  comp?.state === 'esperando' || comp?.state === 'creado' ?
+                    <div className={styles.guest_card_row}>
+                      <Button onClick={() =>
+                        setCompanions(prev =>
+                          prev
+                            ? prev.map((c, i) =>
+                              i === index ? { ...c, state: "rechazado" } : c
+                            )
+                            : prev
+                        )
+                      } icon={<IoClose />}></Button>
+                      <Button onClick={() =>
+                        setCompanions(prev =>
+                          prev
+                            ? prev.map((c, i) =>
+                              i === index ? { ...c, state: "confirmado" } : c
+                            )
+                            : prev
+                        )
+                      } icon={<IoCheckmark />}></Button>
+                    </div>
+                    : <div className={styles.guest_card_row}>
+                      <span style={{ textTransform: 'capitalize' }}>{comp?.state}</span>
+                      <Button
+                        icon={<MdEdit />}
+                        style={{ fontWeight: 400 }} className={`${styles[`state-${comp?.state}`]}`} 
+                        onClick={() =>
+                          setCompanions(prev =>
+                            prev
+                              ? prev.map((c, i) =>
+                                i === index ? { ...c, state: "esperando" } : c
+                              )
+                              : prev
+                          )
+                        }></Button>
+                    </div>
+                }
+              </div>
+            ))
+          }
+        </div>
+
+        {/* <div className={styles.buttons_container}>
           {confirmed !== "esperando" ? (
             type === "closed" && (
               <Button
@@ -518,7 +632,7 @@ export default function Confirm({ ui, invitation, type, guestInfo, mongoID }: Co
               </Button>
             </>
           )}
-        </div>
+        </div> */}
       </div>
     </>
   );

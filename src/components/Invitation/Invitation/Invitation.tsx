@@ -57,7 +57,7 @@ export default function Invitation({ invitationID, ui, invitation, loader, type,
   const [guestCode, setGuestCode] = useState<string>("");
   const [validated, setValidated] = useState<boolean>(false);
   const [messageApi, contextHolder] = message.useMessage();
-  const [guestInfo, setGuestInfo] = useState<GuestAccessPayload | null>(null);
+  const [guestInfo, setGuestInfo] = useState<GuestSubabasePayload | null>(null);
 
   const primary = invitation?.generals?.colors.primary ?? "#FFFFFF";
   const secondary = invitation?.generals?.colors.secondary ?? "#FFFFFF";
@@ -151,7 +151,9 @@ export default function Invitation({ invitationID, ui, invitation, loader, type,
       }
       
       console.log(data)
-      // setGuestInfo(data)
+      messageApi.success(`Bienvenido ${data.name}`);
+      setValidated(true);
+      setGuestInfo(data)
       
 
     } catch (error) {
@@ -329,14 +331,14 @@ export default function Invitation({ invitationID, ui, invitation, loader, type,
         style={{
           maxHeight: isLargeScreen ? '1010vh' : "800px",
           borderRadius: isLargeScreen ? '0px 32px 32px 0px' : "32px 32px 0px 0px",
-          backgroundColor: primary,
+          backgroundColor: "#F5F3F2",
         }}
         styles={{
           header: {
-            backgroundColor: primary,
+            backgroundColor: "#F5F3F2",
           },
           body: {
-            backgroundColor: primary,
+            backgroundColor: "#F5F3F2",
             paddingTop: "12px",
           },
         }}

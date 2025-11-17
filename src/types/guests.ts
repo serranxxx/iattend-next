@@ -86,7 +86,7 @@ export interface GuestSubabasePayload {
   password: string;
   phone_number: string | null;
   side: null;
-  state: string;
+  state: "creado" | "esperando" | "confirmado" | "rechazado";
   table: string | null;
   tag: string | null;
   ticket: boolean;
