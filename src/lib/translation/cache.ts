@@ -35,9 +35,9 @@ export async function getTranslatedInvitationFromCache({
     .eq("lang", lang)
     .maybeSingle();
 
-  if (!error && row && row.source_hash === source_hash) {
-    return row.content; // ✅ cache hit
-  }
+    if (!error && row && row.content) {
+      return row.content; 
+    }
 
   // 2) Traduce
   const translated = await translateInvitationObject(invitation, lang, sourceLang as any);
