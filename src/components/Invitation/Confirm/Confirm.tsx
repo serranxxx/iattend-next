@@ -18,6 +18,7 @@ import { IoCalendarNumberOutline } from "react-icons/io5";
 import { BsCalendar2Check } from "react-icons/bs";
 import { AddToCalendarButton } from "add-to-calendar-button-react";
 import { interpolateNodes } from "@/lib/utils/interpolateText";
+import { count } from "console";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -261,7 +262,7 @@ export default function Confirm({ ui, invitation, type, guestInfo, mongoID }: Co
       <div className={styles.confirm_container}>
         {
           confirmed === "esperando" ? (
-            <div className={styles.confirm_cont}>
+            <div className={styles.confirm_cont} style={{width:'100%'}}>
               {/* <div
                 className={styles.icon_cont}
                 style={{
@@ -280,26 +281,14 @@ export default function Confirm({ ui, invitation, type, guestInfo, mongoID }: Co
 
                 {freeTickets ? (
                   <>
-                    {
-                      // "¡Hola {name}!"
-                      interpolateNodes(ui.confirm.hello, {
-                        name: <b>{currentGuestName ?? ""}</b>,
-                      })
-                    }{" "}
-                    {
-                      // "Tienes {count} pases disponibles..."
-                      interpolateNodes(ui.confirm.passes, {
-                        count: <b>{guestInfo?.cards ?? 0}</b>,
-                      })
-                    }
+                  <span>{ui.confirm.hello}, <b>{currentGuestName ?? ""} </b></span>
+                  <span>{ui.confirm.passes1} <b>{guestInfo?.cards ?? ""}</b> {ui.confirm.passes2}</span>
+
                   </>
                 ) : currentGuestName ? (
                   <>
-                    {
-                      interpolateNodes(ui.confirm.hello, {
-                        name: <b>{currentGuestName}</b>,
-                      })
-                    }{" "}
+                     <span>{ui.confirm.hello}, <b>{currentGuestName ?? ""} </b></span>
+                     <span>{ui.confirm.passes1} <b>{guestInfo?.cards ?? ""}</b> {ui.confirm.passes2}</span>
                     {/* puedes usar un texto fijo o agregar algo tipo confirm.thanks al bundle */}
                     <span>{ui.confirm.thanks}</span>
                   </>
