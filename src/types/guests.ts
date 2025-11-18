@@ -75,7 +75,7 @@ export interface GuestSubabasePayload {
   companion_id: string | null;
   created_at: string;
   has_companion: boolean;
-  id: number;
+  id?: number;
   invitation_id: string;
   last_action: string;
   last_action_by: boolean;

@@ -149,12 +149,12 @@ export default function Invitation({ invitationID, ui, invitation, loader, type,
         messageApi.error(`Código incorrecto`);
         return
       }
-      
+
       console.log(data)
       messageApi.success(`Bienvenido ${data.name}`);
       setValidated(true);
       setGuestInfo(data)
-      
+
 
     } catch (error) {
 
@@ -331,20 +331,20 @@ export default function Invitation({ invitationID, ui, invitation, loader, type,
         style={{
           maxHeight: isLargeScreen ? '1010vh' : "800px",
           borderRadius: isLargeScreen ? '0px 32px 32px 0px' : "32px 32px 0px 0px",
-          backgroundColor: "#F5F3F2",
+          backgroundColor: primary,
         }}
         styles={{
           header: {
-            backgroundColor: "#F5F3F2",
+            backgroundColor: primary,
           },
           body: {
-            backgroundColor: "#F5F3F2",
+            backgroundColor: primary,
             paddingTop: "12px",
           },
         }}
       >
         {(guestInfo || type === "open") && mongoID && (
-          <Confirm ui={ui} invitation={invitation} type={type} guestInfo={guestInfo} mongoID={mongoID} />
+          <Confirm invitationID={invitationID} ui={ui} invitation={invitation} type={type} guestInfo={guestInfo} mongoID={mongoID} />
         )}
       </Drawer>
     </>
