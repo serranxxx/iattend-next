@@ -89,6 +89,11 @@ export default async function InvitationDynamicPage({ params, searchParams }: Pa
   const id = String(data.id); // 👈 define `id`
 
   const lang = typeof q.lang === "string" ? q.lang : undefined;
+  const password = typeof q.password === "string" ? q.password : undefined;
+
+  if (password) {
+    console.log("password: ", password)
+  }
 
   const invitationForRender =
     lang
@@ -114,6 +119,7 @@ export default async function InvitationDynamicPage({ params, searchParams }: Pa
       dev={false}
       ui={ui}  
       invitation={invitationForRender}
+      password={password}
       invitationID={id}
       loader={loader}
       type={type}

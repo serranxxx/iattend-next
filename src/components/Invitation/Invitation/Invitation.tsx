@@ -34,11 +34,12 @@ type invProps = {
   height: number | string | null;
   ui: InvitationUIBundle;
   invitationID?: string;
+  password?: string;
 };
 
 
 
-export default function Invitation({ invitationID, ui, invitation, loader, type, mongoID, dev, height }: invProps) {
+export default function Invitation({ password, invitationID, ui, invitation, loader, type, mongoID, dev, height }: invProps) {
   const coverRef = useRef<HTMLDivElement>(null);
   const greetingRef = useRef<HTMLDivElement>(null);
   const peopleRef = useRef<HTMLDivElement>(null);
@@ -111,27 +112,6 @@ export default function Invitation({ invitationID, ui, invitation, loader, type,
   };
 
   const onValidateUser = async () => {
-    // try {
-    //   const response = await axios.post(`https://i-attend-22z4h.ondigitalocean.app/api/guests/login`, {
-    //     invitationID: mongoID,
-    //     guestID: guestCode,
-    //   });
-
-    //   if (response.data.ok) {
-    //     messageApi.success(`Bienvenido ${response.data.data.username}`);
-    //     setGuestCode("");
-    //     setValidated(true);
-    //     setGuestInfo(response.data.data);
-    //     return response.data.data;
-    //   } else {
-    //     messageApi.error(`Código incorrecto`);
-    //     setGuestCode("");
-    //     return null;
-    //   }
-    // } catch (error: any) {
-    //   console.error("❌ Error en login:", error.response?.data || error.message);
-    //   return null;
-    // }
 
     try {
       const { data, error } = await supabase
@@ -150,7 +130,6 @@ export default function Invitation({ invitationID, ui, invitation, loader, type,
         return
       }
 
-      console.log(data)
       messageApi.success(`Bienvenido ${data.name}`);
       setValidated(true);
       setGuestInfo(data)
@@ -161,192 +140,222 @@ export default function Invitation({ invitationID, ui, invitation, loader, type,
     }
   };
 
-  useEffect(() => {
-    const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    setHeightSize(coverHeightPx);
-  }, []);
+  const onMagicLogin = async (code: string) => {
+    try {
+      const { data, error } = await supabase
+        .from("guests")
+        .select("*")
+        .eq("password", code)
+        .maybeSingle();
 
-  useEffect(() => {
-    console.log(type);
-    if (type === "open") {
+      if (error) {
+        console.log(error, 'not found')
+        return
+      }
+
+      if (!data) {
+        messageApi.error(`Código incorrecto`);
+        return
+      }
+
+      messageApi.success(`Bienvenido ${data.name}`);
       setValidated(true);
-    } else {
-      setValidated(false);
+      setGuestInfo(data)
     }
-  }, [type]);
-
-  if (loader || !invitation) {
-    return (
-      <div
-        style={{
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "100%",
-        }}
-      >
-        <Image alt="" src={"/assets/tools/load.gif"} width={250} />
-      </div>
-    );
+    catch(error) {
+      console.log(error)
+    }
   }
 
-  const tex = textures[invitation.generals?.texture ?? 0];
+  useEffect(() => {
+      const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+      setHeightSize(coverHeightPx);
+      if (password) {
+        onMagicLogin(password)
+      }
+    }, []);
 
-  return (
-    <>
-      {contextHolder}
+    useEffect(() => {
+      console.log(type);
+      if (type === "open") {
+        setValidated(true);
+      } else {
+        setValidated(false);
+      }
+    }, [type]);
 
-      <div
-        ref={scrollableContentRef}
-        className={styles.invitation_main_cont}
-        style={{
-          backgroundColor: invitation.generals.colors.primary ?? "#FFF",
-          paddingBottom: validated ? "44px" : "0px",
-          maxHeight: "100vh", position: 'relative'
-        }}
-      >
-        {invitation.generals.texture !== null && tex && (
-          <TextureOverlay
-            containerRef={scrollableContentRef as unknown as React.RefObject<HTMLElement>}
-            coverHeightPx={heightSize}
-            texture={{
-              image: tex.image, // StaticImageData o "/public/..."
-              opacity: tex.opacity,
-              blend: tex.blend,
-              filter: tex.filter,
-            }}
-            tileW={1024} // ajusta a tu imagen
-            tileH={1024}
-          />
-        )}
-        <Cover ui={ui} ref={coverRef} dev={dev} invitation={invitation} height={"100vh"} validated={validated} />
-        {validated && (
-          <>
-            {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
-            {!dev && (
-              <Button
-                onClick={() => setOpen(true)}
-                style={{
-                  position: "fixed",
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  bottom: "20px",
-                  zIndex: 3,
-                  // height: '44px',
-                  letterSpacing: "2px",
-                  fontSize: "16px",
-                  height: "44px",
-                  width: "200px",
-                  backgroundColor: `${actions}80`,
-                  backdropFilter: "blur(10px)",
-                  border: `1px solid ${actions}40`,
-                  color: accent,
-                  boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
-                }}
-              >
-                {ui?.buttons.confirm}
-              </Button>
-            )}
-          </>
-        )}
+    if (loader || !invitation) {
+      return (
         <div
-          className={styles.inv_locked_blured}
-          style={{ pointerEvents: validated ? "none" : undefined, opacity: validated ? "0" : "1", backgroundColor: `${primary}20` }}
+          style={{
+            minHeight: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+          }}
         >
-          <div className={styles.locked_icon}>
-            <FaLock size={32} style={{ color: "#FFF" }} />
-          </div>
-          <span style={{ fontFamily: font }} className={styles.locked_title}>{ui?.locked.title}</span>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "column",
-              gap: "8px",
-            }}
-          >
-            <span style={{ fontFamily: font }} className={styles.locked_text}>{ui?.locked?.p1}</span>
-            <span style={{ fontFamily: font }} className={styles.locked_text}>
-              {ui?.locked?.p2}
-            </span>
-          </div>
-          <Input
-            value={guestCode}
-            // length={6}
-            size="large"
-            onChange={(e) => setGuestCode(e.target.value)}
-            placeholder={ui?.locked.placeholder}
-            className={styles.locked_input}
-            style={{
-              backgroundColor: "#FFFFFF20",
-              boxShadow: "0px 0px 12px rgba(0,0,0,0.2)",
-              borderWidth: "2px",
-              color: "#FFF",
-              fontSize: "18px",
-              textAlign: "center",
-              maxWidth: "280px",
-              borderRadius: "99px",
-              minHeight: "56px",
-              fontFamily: font
-            }}
-          />
+          <Image alt="" src={"/assets/tools/load.gif"} width={250} />
+        </div>
+      );
+    }
 
-          <Button
-            className={styles.locked_btn}
-            style={btnStyle}
-            onClick={onValidateUser}
+    const tex = textures[invitation.generals?.texture ?? 0];
+
+    return (
+      <>
+        {contextHolder}
+
+        <div
+          ref={scrollableContentRef}
+          className={styles.invitation_main_cont}
+          style={{
+            backgroundColor: invitation.generals.colors.primary ?? "#FFF",
+            paddingBottom: validated ? "44px" : "0px",
+            maxHeight: "100vh", position: 'relative'
+          }}
+        >
+          {invitation.generals.texture !== null && tex && (
+            <TextureOverlay
+              containerRef={scrollableContentRef as unknown as React.RefObject<HTMLElement>}
+              coverHeightPx={heightSize}
+              texture={{
+                image: tex.image, // StaticImageData o "/public/..."
+                opacity: tex.opacity,
+                blend: tex.blend,
+                filter: tex.filter,
+              }}
+              tileW={1024} // ajusta a tu imagen
+              tileH={1024}
+            />
+          )}
+          <Cover ui={ui} ref={coverRef} dev={dev} invitation={invitation} height={"100vh"} validated={validated} />
+          {validated && (
+            <>
+              {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
+              {!dev && (
+                <Button
+                  onClick={() => setOpen(true)}
+                  style={{
+                    position: "fixed",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    bottom: "20px",
+                    zIndex: 3,
+                    // height: '44px',
+                    letterSpacing: "2px",
+                    fontSize: "16px",
+                    height: "44px",
+                    width: "200px",
+                    backgroundColor: `${actions}80`,
+                    backdropFilter: "blur(10px)",
+                    border: `1px solid ${actions}40`,
+                    color: accent,
+                    boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
+                  }}
+                >
+                  {ui?.buttons.confirm}
+                </Button>
+              )}
+            </>
+          )}
+          <div
+            className={styles.inv_locked_blured}
+            style={{ pointerEvents: validated ? "none" : undefined, opacity: validated ? "0" : "1", backgroundColor: `${primary}20` }}
           >
-            {ui?.locked.access}
-          </Button>
+            <div className={styles.locked_icon}>
+              <FaLock size={32} style={{ color: "#FFF" }} />
+            </div>
+            <span style={{ fontFamily: font }} className={styles.locked_title}>{ui?.locked.title}</span>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "column",
+                gap: "8px",
+              }}
+            >
+              <span style={{ fontFamily: font }} className={styles.locked_text}>{ui?.locked?.p1}</span>
+              <span style={{ fontFamily: font }} className={styles.locked_text}>
+                {ui?.locked?.p2}
+              </span>
+            </div>
+            <Input
+              value={guestCode}
+              // length={6}
+              size="large"
+              onChange={(e) => setGuestCode(e.target.value)}
+              placeholder={ui?.locked.placeholder}
+              className={styles.locked_input}
+              style={{
+                backgroundColor: "#FFFFFF20",
+                boxShadow: "0px 0px 12px rgba(0,0,0,0.2)",
+                borderWidth: "2px",
+                color: "#FFF",
+                fontSize: "18px",
+                textAlign: "center",
+                maxWidth: "280px",
+                borderRadius: "99px",
+                minHeight: "56px",
+                fontFamily: font
+              }}
+            />
+
+            <Button
+              className={styles.locked_btn}
+              style={btnStyle}
+              onClick={onValidateUser}
+            >
+              {ui?.locked.access}
+            </Button>
+
+          </div>
+
+
 
         </div>
-
-
-
-      </div>
-      <Drawer
-        placement={isLargeScreen ? 'left' : 'bottom'}
-        onClose={() => setOpen(false)}
-        open={open}
-        title={
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-start",
-              gap: "6px",
-              fontFamily: invitation.generals.fonts.body?.typeFace,
-              fontSize: "20px",
-              color: accent,
-            }}
-          >
-            {" "}
-            {ui?.confirm.drawerTitle}
-          </div>
-        }
-        height={isLargeScreen ? "100%" : "80%"}
-        closeIcon={false}
-        style={{
-          maxHeight: isLargeScreen ? '1010vh' : "800px",
-          borderRadius: isLargeScreen ? '0px 32px 32px 0px' : "32px 32px 0px 0px",
-          backgroundColor: primary,
-        }}
-        styles={{
-          header: {
+        <Drawer
+          placement={isLargeScreen ? 'left' : 'bottom'}
+          onClose={() => setOpen(false)}
+          open={open}
+          title={
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-start",
+                gap: "6px",
+                fontFamily: invitation.generals.fonts.body?.typeFace,
+                fontSize: "20px",
+                color: accent,
+              }}
+            >
+              {" "}
+              {ui?.confirm.drawerTitle}
+            </div>
+          }
+          height={isLargeScreen ? "100%" : "80%"}
+          closeIcon={false}
+          style={{
+            maxHeight: isLargeScreen ? '1010vh' : "800px",
+            borderRadius: isLargeScreen ? '0px 32px 32px 0px' : "32px 32px 0px 0px",
             backgroundColor: primary,
-          },
-          body: {
-            backgroundColor: primary,
-            paddingTop: "12px",
-          },
-        }}
-      >
-        {(guestInfo || type === "open") && mongoID && (
-          <Confirm invitationID={invitationID} ui={ui} invitation={invitation} type={type} guestInfo={guestInfo} mongoID={mongoID} />
-        )}
-      </Drawer>
-    </>
-  );
-}
+          }}
+          styles={{
+            header: {
+              backgroundColor: primary,
+            },
+            body: {
+              backgroundColor: primary,
+              paddingTop: "12px",
+            },
+          }}
+        >
+          {(guestInfo || type === "open") && mongoID && (
+            <Confirm invitationID={invitationID} ui={ui} invitation={invitation} type={type} guestInfo={guestInfo} mongoID={mongoID} />
+          )}
+        </Drawer>
+      </>
+    );
+  }

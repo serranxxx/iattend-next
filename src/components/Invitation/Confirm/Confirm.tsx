@@ -169,7 +169,7 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
         getCompanions()
       }
       setOpenInvitation(false)
-      setLocalStatus(guestInfo.state)
+      setLocalStatus(guestInfo.state === 'creado' ? 'esperando' : guestInfo.state )
     } else {
       if (invitationID) {
         console.log('inv id:', invitationID)
@@ -534,7 +534,7 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
                           )
                           : prev
                       )
-                    }>Cambiar respuesta</Button>
+                    }>Editar</Button>
                     : c.state !== 'confirmado' &&
                     <Button style={{ height: '38px' }} onClick={() =>
                       setCompanions(prev =>
