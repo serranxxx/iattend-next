@@ -450,10 +450,10 @@ export default function Confirm({ ui, invitation, type, guestInfo, mongoID }: Co
               {
                 invitation &&
                 <AddToCalendarButton
-                  name={getTitle(invitation?.cover?.title)}
+                  name={getTitle(invitation?.cover?.title.text.value)}
                   options={["Google"]}
                   // startDate={formatISODate(invitation.cover.date)}
-                  startDate={toYYYYMMDD(invitation?.cover?.date)}
+                  startDate={toYYYYMMDD(invitation?.cover?.date.value)}
                   timeZone="America/Los_Angeles"
                 ></AddToCalendarButton>
               }
