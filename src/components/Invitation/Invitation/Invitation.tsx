@@ -34,9 +34,7 @@ type invProps = {
   ui: InvitationUIBundle;
 };
 
-
-
-export default function Invitation({ ui,invitation, loader, type, mongoID, dev, height }: invProps) {
+export default function Invitation({ ui, invitation, loader, type, mongoID, dev, height }: invProps) {
   const coverRef = useRef<HTMLDivElement>(null);
   const greetingRef = useRef<HTMLDivElement>(null);
   const peopleRef = useRef<HTMLDivElement>(null);
@@ -60,7 +58,7 @@ export default function Invitation({ ui,invitation, loader, type, mongoID, dev, 
   const secondary = invitation?.generals?.colors.secondary ?? "#FFFFFF";
   const accent = invitation?.generals?.colors.accent ?? "#FFFFFF";
   const actions = invitation?.generals?.colors.actions ?? "#FFFFFF";
-  const font = invitation?.generals.fonts.body?.typeFace ?? "Poppins"
+  const font = invitation?.generals.fonts.body?.typeFace ?? "Poppins";
 
   const width = useScreenWidth();
   const isLargeScreen = width >= 768;
@@ -93,17 +91,17 @@ export default function Invitation({ ui,invitation, loader, type, mongoID, dev, 
   };
 
   interface CSSVars extends React.CSSProperties {
-    ['--hover-color']?: string;
+    ["--hover-color"]?: string;
   }
 
   const btnStyle: CSSVars = {
-    ['--hover-color']: `${actions}`,
-    height: '56px',
-    width: '280px',
-    fontSize: '18px',
+    ["--hover-color"]: `${actions}`,
+    height: "56px",
+    width: "280px",
+    fontSize: "18px",
     fontWeight: 600,
-    letterSpacing: '2px',
-    boxShadow: '0px 0px 12px rgba(0,0,0,0.2)',
+    letterSpacing: "2px",
+    boxShadow: "0px 0px 12px rgba(0,0,0,0.2)",
     fontFamily: font,
   };
 
@@ -173,7 +171,8 @@ export default function Invitation({ ui,invitation, loader, type, mongoID, dev, 
         style={{
           backgroundColor: invitation.generals.colors.primary ?? "#FFF",
           paddingBottom: validated ? "44px" : "0px",
-          maxHeight: "100vh", position: 'relative'
+          maxHeight: "100vh",
+          position: "relative",
         }}
       >
         {invitation.generals.texture !== null && tex && (
@@ -194,6 +193,23 @@ export default function Invitation({ ui,invitation, loader, type, mongoID, dev, 
         {validated && (
           <>
             {invitation?.generals.positions.map((position, index) => handlePosition(position, invitation, index))}
+            {mongoID === "68ffdb9cd673a17f84312991" && (
+              <div
+                style={{
+                  width: "80%",
+                }}
+              >
+                <img
+                  src="/assets/AA.png"
+                  alt=""
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
+            )}
             {!dev && (
               <Button
                 onClick={() => setOpen(true)}
@@ -227,7 +243,9 @@ export default function Invitation({ ui,invitation, loader, type, mongoID, dev, 
           <div className={styles.locked_icon}>
             <FaLock size={32} style={{ color: "#FFF" }} />
           </div>
-          <span style={{ fontFamily: font }} className={styles.locked_title}>{ui?.locked.title}</span>
+          <span style={{ fontFamily: font }} className={styles.locked_title}>
+            {ui?.locked.title}
+          </span>
           <div
             style={{
               display: "flex",
@@ -237,9 +255,11 @@ export default function Invitation({ ui,invitation, loader, type, mongoID, dev, 
               gap: "8px",
             }}
           >
-            <span style={{ fontFamily: font }} className={styles.locked_text}>{ui?.locked?.p1}</span>
             <span style={{ fontFamily: font }} className={styles.locked_text}>
-            {ui?.locked?.p2}
+              {ui?.locked?.p1}
+            </span>
+            <span style={{ fontFamily: font }} className={styles.locked_text}>
+              {ui?.locked?.p2}
             </span>
           </div>
           <Input
@@ -259,25 +279,17 @@ export default function Invitation({ ui,invitation, loader, type, mongoID, dev, 
               maxWidth: "280px",
               borderRadius: "99px",
               minHeight: "56px",
-              fontFamily: font
+              fontFamily: font,
             }}
           />
 
-          <Button
-            className={styles.locked_btn}
-            style={btnStyle}
-            onClick={onValidateUser}
-          >
+          <Button className={styles.locked_btn} style={btnStyle} onClick={onValidateUser}>
             {ui?.locked.access}
           </Button>
-
         </div>
-
-
-
       </div>
       <Drawer
-        placement={isLargeScreen ? 'left' : 'bottom'}
+        placement={isLargeScreen ? "left" : "bottom"}
         onClose={() => setOpen(false)}
         open={open}
         title={
@@ -299,8 +311,8 @@ export default function Invitation({ ui,invitation, loader, type, mongoID, dev, 
         height={isLargeScreen ? "100%" : "80%"}
         closeIcon={false}
         style={{
-          maxHeight: isLargeScreen ? '1010vh' : "800px",
-          borderRadius: isLargeScreen ? '0px 32px 32px 0px' : "32px 32px 0px 0px",
+          maxHeight: isLargeScreen ? "1010vh" : "800px",
+          borderRadius: isLargeScreen ? "0px 32px 32px 0px" : "32px 32px 0px 0px",
           backgroundColor: primary,
         }}
         styles={{

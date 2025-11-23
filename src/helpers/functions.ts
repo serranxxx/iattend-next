@@ -83,20 +83,21 @@ export function lighter(hex: string | null, factor: number) {
 }
 
 export function formatDate(dateString: string) {
-  // Crear una fecha desde el string sin aplicar desfase horario
-  const date = new Date(dateString);
+  if (!dateString) return "";
 
-  // Ajustar la fecha sumando las horas para evitar desfase
-  const adjustedDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+  // Nos quedamos solo con YYYY-MM-DD
+  const ymd = dateString.slice(0, 10); // "2026-04-04"
+  const [y, m, d] = ymd.split("-").map(Number);
 
-  // Opciones de formateo
-  const options: Intl.DateTimeFormatOptions = {
+  // Creamos fecha en UTC (no se mueve por timezone del usuario)
+  const utcDate = new Date(Date.UTC(y, m - 1, d));
+
+  return utcDate.toLocaleDateString("es-ES", {
     year: "numeric",
     month: "long",
     day: "numeric",
-  };
-
-  return adjustedDate.toLocaleDateString("es-ES", options);
+    timeZone: "UTC", // clave
+  });
 }
 
 export function getMexicoHour(utcString: string): string {
@@ -124,15 +125,15 @@ export function buttonsColorText(hex: string) {
   // Adjust color brightness
   const adjustment = 150; // You can increase this value for more contrast
   if (isLight) {
-      // Make the color much darker
-      r = Math.max(0, r - adjustment);
-      g = Math.max(0, g - adjustment);
-      b = Math.max(0, b - adjustment);
+    // Make the color much darker
+    r = Math.max(0, r - adjustment);
+    g = Math.max(0, g - adjustment);
+    b = Math.max(0, b - adjustment);
   } else {
-      // Make the color much lighter
-      r = Math.min(255, r + adjustment);
-      g = Math.min(255, g + adjustment);
-      b = Math.min(255, b + adjustment);
+    // Make the color much lighter
+    r = Math.min(255, r + adjustment);
+    g = Math.min(255, g + adjustment);
+    b = Math.min(255, b + adjustment);
   }
 
   // Convert RGB back to hex
@@ -140,4 +141,3 @@ export function buttonsColorText(hex: string) {
 
   return newHex;
 }
-

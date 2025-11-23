@@ -3,7 +3,7 @@
 
 import { Col, Row } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
-import { lighter, formatDate } from "@/helpers/functions";
+import { lighter } from "@/helpers/functions";
 import { CoverSection, Generals, InvitationUIBundle } from "@/types/new_invitation";
 import styles from "./count.module.css";
 import ConfettiButton from "../Confetti/Confetti";
@@ -21,23 +21,60 @@ type TimeLeft = Record<Units, number>;
 
 const ZERO: TimeLeft = { days: 0, hours: 0, minutes: 0, seconds: 0 };
 
-function cleanDate(dateString?: string | null): string | null {
+/**
+ * Parsea una fecha de invitación como "date-only".
+ * Toma solo YYYY-MM-DD y crea un Date en UTC (00:00),
+ * evitando el desfase por timezone del usuario.
+ */
+function parseDateOnly(dateString?: string | null): Date | null {
   if (!dateString) return null;
-  return dateString.endsWith("000Z") ? dateString.slice(0, -5) : dateString;
+
+  // Nos quedamos con "YYYY-MM-DD"
+  const ymd = dateString.slice(0, 10);
+  const [y, m, d] = ymd.split("-").map(Number);
+
+  if (!y || !m || !d) return null;
+
+  // 00:00 UTC de ese día (no se mueve por TZ local)
+  return new Date(Date.UTC(y, m - 1, d));
+}
+
+/**
+ * Formatea la fecha para mostrar SIEMPRE el mismo día
+ * sin importar timezone.
+ */
+export function formatDate(dateString: string) {
+  if (!dateString) return "";
+
+  const ymd = dateString.slice(0, 10);
+  const [y, m, d] = ymd.split("-").map(Number);
+
+  if (!y || !m || !d) return "";
+
+  const utcDate = new Date(Date.UTC(y, m - 1, d));
+
+  return utcDate.toLocaleDateString("es-ES", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC",
+  });
 }
 
 function diffToTimeLeft(target: Date, now = new Date()): TimeLeft {
   const ms = Math.max(0, +target - +now);
   const totalSeconds = Math.floor(ms / 1000);
+
   const days = Math.floor(totalSeconds / (24 * 3600));
   const hours = Math.floor((totalSeconds % (24 * 3600)) / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = Math.floor(totalSeconds % 60);
+
   return { days, hours, minutes, seconds };
 }
 
-function isSameYMD(a: Date, b: Date) {
-  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+function isSameYMD_UTC(a: Date, b: Date) {
+  return a.getUTCFullYear() === b.getUTCFullYear() && a.getUTCMonth() === b.getUTCMonth() && a.getUTCDate() === b.getUTCDate();
 }
 
 const labels: Record<Units, { singular: string; plural: string }> = {
@@ -47,10 +84,9 @@ const labels: Record<Units, { singular: string; plural: string }> = {
   seconds: { singular: "segundo", plural: "segundos" },
 };
 
-export default function Countdown({ ui,cover, generals, dev, validated = true }: CountdownProps) {
+export default function Countdown({ ui, cover, generals, dev, validated = true }: CountdownProps) {
   const targetDate = useMemo(() => {
-    const s = cleanDate(cover?.date?.value);
-    const t = s ? new Date(s) : null;
+    const t = parseDateOnly(cover?.date?.value);
     return t && !isNaN(+t) ? t : null;
   }, [cover?.date?.value]);
 
@@ -64,13 +100,12 @@ export default function Countdown({ ui,cover, generals, dev, validated = true }:
       return;
     }
 
-    // tick inmediato y luego cada segundo
     const tick = () => {
       setTimeLeft(diffToTimeLeft(targetDate));
-      setIsToday(isSameYMD(new Date(), targetDate));
+      setIsToday(isSameYMD_UTC(new Date(), targetDate));
     };
-    tick();
 
+    tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, [targetDate]);
@@ -79,11 +114,9 @@ export default function Countdown({ ui,cover, generals, dev, validated = true }:
   const font = generals?.fonts.body?.typeFace ?? "Poppins";
 
   if (!targetDate) {
-    // sin fecha válida: muestra solo la fecha cruda o nada
     return (
       <div className={styles.date_container}>
         <span className={styles.date_date} style={{ color, fontFamily: font }}>
-          {/* si tienes un label alterno, úsalo aquí */}
           {cover?.date?.value ? formatDate(cover.date.value) : "Fecha por definir"}
         </span>
       </div>
@@ -97,15 +130,11 @@ export default function Countdown({ ui,cover, generals, dev, validated = true }:
       </span>
 
       {isToday ? (
-        // <span className={styles.date_unit} style={{ fontSize: "22px", marginTop:'12px', color, fontFamily: font }}>
-        //   ¡Es Hoy!
-        // </span>
-
-        <ConfettiButton cover={cover} generals={generals} validated={validated}/>
-
+        <ConfettiButton cover={cover} generals={generals} validated={validated} />
       ) : (
         <>
           <hr className={styles.date_divider} style={{ border: "1px solid", color, borderColor: color }} />
+
           <Row className={!dev ? styles.date_row : styles.date_row_dev}>
             {(["days", "hours", "minutes", "seconds"] as Units[]).map((u) => (
               <Col key={u} className={styles.date_col}>
