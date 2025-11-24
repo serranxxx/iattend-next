@@ -212,17 +212,21 @@ export default function Confirm({ ui, invitation, type, guestInfo, mongoID }: Co
   };
 
   const toYYYYMMDD = (dateLike: unknown): string => {
-    // acepta string ISO o { value: string }
     let raw: string | undefined;
+
     if (typeof dateLike === "string") raw = dateLike;
     else if (dateLike && typeof dateLike === "object") {
-      // @ts-expect-error acceder flexible
-      raw = dateLike.value;
+      raw = (dateLike as any).value;
     }
+
     if (!raw) return "";
-    const d = new Date(raw);
-    // Asegura formato 'YYYY-MM-DD'
-    return isNaN(d.getTime()) ? "" : d.toISOString().slice(0, 10);
+
+    // Si ya viene ISO, lo seguro es cortar el día
+    // ("2026-04-04T00:00:00.000Z" -> "2026-04-04")
+    const ymd = raw.slice(0, 10);
+
+    // Validación básica
+    return /^\d{4}-\d{2}-\d{2}$/.test(ymd) ? ymd : "";
   };
 
   useEffect(() => {
@@ -261,7 +265,7 @@ export default function Confirm({ ui, invitation, type, guestInfo, mongoID }: Co
       <div className={styles.confirm_container}>
         {
           confirmed === "esperando" ? (
-            <div className={styles.confirm_cont} style={{width:'100%'}}>
+            <div className={styles.confirm_cont} style={{ width: '100%' }}>
               {/* <div
                 className={styles.icon_cont}
                 style={{
@@ -280,14 +284,14 @@ export default function Confirm({ ui, invitation, type, guestInfo, mongoID }: Co
 
                 {freeTickets ? (
                   <>
-                  <span>{ui.confirm.hello}, <b>{currentGuestName ?? ""} </b></span>
-                  <span>{ui.confirm.passes1} <b>{guestInfo?.cards ?? ""}</b> {ui.confirm.passes2}</span>
+                    <span>{ui.confirm.hello}, <b>{currentGuestName ?? ""} </b></span>
+                    <span>{ui.confirm.passes1} <b>{guestInfo?.cards ?? ""}</b> {ui.confirm.passes2}</span>
 
                   </>
                 ) : currentGuestName ? (
                   <>
-                     <span>{ui.confirm.hello}, <b>{currentGuestName ?? ""} </b></span>
-                     <span>{ui.confirm.passes1} <b>{guestInfo?.cards ?? ""}</b> {ui.confirm.passes2}</span>
+                    <span>{ui.confirm.hello}, <b>{currentGuestName ?? ""} </b></span>
+                    <span>{ui.confirm.passes1} <b>{guestInfo?.cards ?? ""}</b> {ui.confirm.passes2}</span>
                     {/* puedes usar un texto fijo o agregar algo tipo confirm.thanks al bundle */}
                     <span>{ui.confirm.thanks}</span>
                   </>
