@@ -179,6 +179,7 @@ export default function Invitation({ ui, invitation, loader, type, mongoID, dev,
           <TextureOverlay
             containerRef={scrollableContentRef as unknown as React.RefObject<HTMLElement>}
             coverHeightPx={heightSize}
+            extraMarginPx={mongoID ===  "68ffdb9cd673a17f84312991" ? 400 : 0}
             texture={{
               image: tex.image, // StaticImageData o "/public/..."
               opacity: tex.opacity,

@@ -113,6 +113,8 @@ export const Quote = forwardRef<HTMLDivElement, quoteProps>(function Greeting({ 
               </span>
             )}
           </div>
+
+          
         </div>
       ) : (
         <></>
