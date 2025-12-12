@@ -28,9 +28,10 @@ type ConfirmProps = {
   mongoID: string;
   ui: InvitationUIBundle;
   invitationID?: string;
+  refreshGuest:() => Promise<void>
 };
 
-export default function Confirm({ invitationID, ui, invitation, type, guestInfo, mongoID }: ConfirmProps) {
+export default function Confirm({ invitationID, ui, invitation, type, guestInfo, mongoID, refreshGuest }: ConfirmProps) {
   const [messageApi, contextHolder] = message.useMessage();
 
   const generals = invitation?.generals;
@@ -76,6 +77,7 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
 
     console.log("✅ Invitados actualizados:", data);
     setLocalStatus('rechazado')
+    refreshGuest()
 
 
   };
@@ -271,7 +273,9 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
 
     console.log("✅ Invitados actualizados:", data);
     setLocalStatus('confirmado')
+    refreshGuest()
   };
+  
 
   const changeAnswer = () => {
     if (openInvitation) {
