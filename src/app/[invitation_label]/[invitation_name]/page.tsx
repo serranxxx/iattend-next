@@ -57,6 +57,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: inv.greeting.title,
       images: inv?.cover?.image?.prod ? [inv.cover.image.prod] : undefined,
     },
+    icons: {
+      icon: [
+        { url: "/icon.png", type: "image/png" },
+        { url: "/icon.svg", type: "image/svg+xml" },
+      ],
+      apple: "/apple-icon.png",
+    },
   };
 }
 

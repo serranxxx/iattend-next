@@ -8,6 +8,13 @@ export const metadata: Metadata = {
   title: "I attend",
   description: "Diseña, comparte, celebra.",
   keywords: ["invitaciones digitales", "bodas", "fiestas", "i attend"],
+  icons: {
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-icon.png",
+  }
 };
 
 
