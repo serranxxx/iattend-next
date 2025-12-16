@@ -29,8 +29,9 @@ const uiES: InvitationUIBundle = {
   },
   confirm: {
     cta: "CONFIRMAR",
-    hello: "¡Hola {name}!",
-    passes: "Tienes {count} pases disponibles para ti y tus acompañantes",
+    hello: "Hola",
+    passes1: "Tienes",
+    passes2: "pases disponibles para ti y tus acompañantes",
     decline: "No podré asistir",
     howMany: "¿Cuántos pases vas a utilizar?",
     yourName: "Escribe tu nombre y quienes te acompañan",

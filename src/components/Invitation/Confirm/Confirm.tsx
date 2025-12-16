@@ -94,17 +94,21 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
   };
 
   const toYYYYMMDD = (dateLike: unknown): string => {
-    // acepta string ISO o { value: string }
     let raw: string | undefined;
+
     if (typeof dateLike === "string") raw = dateLike;
     else if (dateLike && typeof dateLike === "object") {
-      // @ts-expect-error acceder flexible
-      raw = dateLike.value;
+      raw = (dateLike as any).value;
     }
+
     if (!raw) return "";
-    const d = new Date(raw);
-    // Asegura formato 'YYYY-MM-DD'
-    return isNaN(d.getTime()) ? "" : d.toISOString().slice(0, 10);
+
+    // Si ya viene ISO, lo seguro es cortar el día
+    // ("2026-04-04T00:00:00.000Z" -> "2026-04-04")
+    const ymd = raw.slice(0, 10);
+
+    // Validación básica
+    return /^\d{4}-\d{2}-\d{2}$/.test(ymd) ? ymd : "";
   };
 
   const getCompanions = async () => {

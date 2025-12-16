@@ -248,6 +248,7 @@ export default function Card({ ui, invitation }: CardProps) {
                       <Button
                         onClick={(e) => {
                           e.stopPropagation();
+                          window.open(card.url!, "_blank");
                         }}
                         icon={<MdArrowOutward />}
                         style={{

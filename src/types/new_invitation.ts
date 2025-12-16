@@ -321,7 +321,8 @@ export interface InvitationUIBundle {
   confirm: {
     cta: string;
     hello: string;
-    passes: string;
+    passes1: string;
+    passes2: string;
     decline: string;
     howMany: string;
     yourName: string;
