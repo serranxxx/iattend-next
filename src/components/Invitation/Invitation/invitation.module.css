@@ -293,7 +293,6 @@
   overflow: hidden;
 }
 
-/* glow */
 .glow_button::before {
   content: "";
   position: absolute;
