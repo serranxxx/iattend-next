@@ -140,6 +140,9 @@ export const AntdProvider = ({ children }: { children: React.ReactNode }) => {
               // controlHeightLG: 44
               // yearControlWidth:
             },
+            Notification: {
+              borderRadius:36
+            }
           },
         }}
       >

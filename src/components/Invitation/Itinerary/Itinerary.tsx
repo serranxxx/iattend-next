@@ -18,7 +18,7 @@ export const Itinerary = forwardRef<HTMLDivElement, quoteProps>(function Greetin
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
 
-  console.log('it: ', ui)
+
 
   // useEffect(() => {
   //   AOS.init({

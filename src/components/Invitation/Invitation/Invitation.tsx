@@ -27,6 +27,7 @@ import { createClient } from "@/lib/supabase/client";
 import { PiTicketDuotone } from "react-icons/pi";
 import { BsPass } from "react-icons/bs";
 import { FaArrowsRotate } from "react-icons/fa6";
+import AnimatedPath from "@/components/Motion/AnimatedPath";
 
 type invProps = {
   invitation: NewInvitation | null;
@@ -61,8 +62,11 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
   const [onShowTicket, setOnShowTicket] = useState(false)
   const [guestCode, setGuestCode] = useState<string>("");
   const [validated, setValidated] = useState<boolean>(false);
+  const [animation, setAnimation] = useState<boolean>(false);
+  const [animatedText, setAnimatedText] = useState<boolean>(false);
   const [messageApi, contextHolder] = message.useMessage();
   const [guestInfo, setGuestInfo] = useState<GuestSubabasePayload | null>(null);
+  const [companions, setCompanions] = useState<GuestSubabasePayload[]>([])
 
   const primary = invitation?.generals?.colors.primary ?? "#FFFFFF";
   const secondary = invitation?.generals?.colors.secondary ?? "#FFFFFF";
@@ -73,6 +77,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
   const width = useScreenWidth();
   const isLargeScreen = width >= 768;
   // const scrollableContentRef = useRef<HTMLDivElement | null>(null);
+
 
   const handlePosition = (id: number, invitation: NewInvitation, index: number) => {
     switch (id) {
@@ -134,7 +139,20 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
         return
       }
 
-      messageApi.success(`Bienvenido ${data.name}`);
+      if (data?.has_companion) {
+        const { data: companions, error: isErr } = await supabase
+          .from("guests")
+          .select("*")
+          .eq("companion_id", data.id)
+
+        if (isErr) {
+          console.log(isErr, 'not found')
+        }
+
+        setCompanions(companions?.filter(c => c.state === 'confirmado') ?? [])
+      }
+
+      // messageApi.success(`Bienvenido ${data.name}`);
       setValidated(true);
       setGuestInfo(data)
 
@@ -145,6 +163,8 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
   };
 
   const onMagicLogin = async (code: string) => {
+
+    // console.log('getting guest ----')
     try {
       const { data, error } = await supabase
         .from("guests")
@@ -162,7 +182,20 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
         return
       }
 
-      messageApi.success(`Bienvenido ${data.name}`);
+      if (data?.has_companion) {
+        const { data: companions, error: isErr } = await supabase
+          .from("guests")
+          .select("*")
+          .eq("companion_id", data.id)
+
+        if (isErr) {
+          console.log(isErr, 'not found')
+        }
+
+        setCompanions(companions?.filter(c => c.state === 'confirmado') ?? [])
+      }
+
+
       setValidated(true);
       setGuestInfo(data)
     }
@@ -185,6 +218,19 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
         return
       }
 
+      if (data?.has_companion) {
+        const { data: companions, error: isErr } = await supabase
+          .from("guests")
+          .select("*")
+          .eq("companion_id", data.id)
+
+        if (isErr) {
+          console.log(isErr, 'not found')
+        }
+
+        setCompanions(companions?.filter(c => c.state === 'confirmado') ?? [])
+      }
+
       setGuestInfo(data)
     } catch (err) {
       console.error('Error al refrescar invitado:', err)
@@ -196,19 +242,39 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
   useEffect(() => {
     const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     setHeightSize(coverHeightPx);
-    if (password) {
-      onMagicLogin(password)
-    }
-  }, []);
 
-  useEffect(() => {
-    console.log(type);
     if (type === "open") {
       setValidated(true);
     } else {
       setValidated(false);
+      if (password) {
+        onMagicLogin(password)
+      }
     }
-  }, [type]);
+  }, []);
+
+
+  useEffect(() => {
+    if (validated && guestInfo) {
+      // messageApi.info(`Bienvenido ${guestInfo?.name}`);
+      setAnimation(true)
+      setTimeout(() => {
+        setAnimatedText(true)
+      }, 1800);
+    }
+  }, [validated])
+
+  useEffect(() => {
+    if (animation) {
+      setTimeout(() => {
+        setAnimation(false)
+        setAnimatedText(false)
+      }, 2500);
+    }
+  }, [animation])
+
+
+
 
   const formatShortDate = (dateString: string) => {
     const [year, month, day] = dateString.split("T")[0].split("-");
@@ -258,7 +324,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
           <TextureOverlay
             containerRef={scrollableContentRef as unknown as React.RefObject<HTMLElement>}
             coverHeightPx={heightSize}
-            extraMarginPx={mongoID ===  "68ffdb9cd673a17f84312991" ? 400 : 0}
+            extraMarginPx={mongoID === "68ffdb9cd673a17f84312991" ? 400 : 0}
             texture={{
               image: tex.image, // StaticImageData o "/public/..."
               opacity: tex.opacity,
@@ -351,63 +417,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
               </div>
             )}
 
-            {
-              onShowTicket &&
-              <div onClick={() => setOnShowTicket(false)} className={styles.ticket_bg}>
-              </div>
-            }
 
-            <div onClick={() => setOnShowTicket(false)} className={styles.ticket_container} style={{
-              backgroundColor: `${accent}20`, bottom: onShowTicket ? '20px' : '-80vh',
-              transition: 'all 0.3s ease'
-            }} >
-              <div className={styles.ticket_first_section} style={{
-                background: `linear-gradient(to top, ${accent} 0%, ${secondary} 100%)`,
-                color: accent,
-                borderColor: accent
-              }}>
-                <div className={styles.ticket_head} style={{ fontFamily: invitation.generals.fonts.body?.value ?? 'Poppins', color: primary }}>
-                  <span style={{ fontSize: '16px', fontWeight: 600 }}>{invitation.cover.title.text.value}</span>
-                  <div className={styles.ticket_col}>
-                    <span style={{ fontWeight: 600, fontSize: '14px' }}>{formatShortDate(invitation.cover.date.value)}</span>
-                    <span>{invitation.itinerary.object[0].time ?? ""}</span>
-                  </div>
-
-                </div>
-
-                <div className={styles.ticket_image}>
-                  <Image fill src={invitation.cover.image.prod!} alt="" style={{ objectFit: 'cover' }} />
-                  <div style={{
-                    background: `linear-gradient(to top, ${accent} 0%, transparent 30%,  transparent 70%, ${accent} 110%)`
-                  }} className={styles.ticket_shadow}></div>
-
-                  <div className={styles.ticket_logo}>
-                    <img src="/assets/images/blanco.png" alt="" style={{ width: '70px', }} />
-                  </div>
-                </div>
-
-
-
-                <div className={styles.ticket_row} style={{ fontFamily: invitation.generals.fonts.body?.value ?? 'Poppins', color: primary }}>
-                  <div className={styles.ticket_col} style={{ gap: '12px' }}>
-                    <div className={styles.ticket_col}>
-                      <span style={{ opacity: '0.4' }}>Nombre</span>
-                      <span>{guestInfo?.name ?? "Sin nombre"}</span>
-                    </div>
-                    <div className={styles.ticket_col}>
-                      <span style={{ opacity: '0.4' }}>Mesa</span>
-                      <span>{guestInfo?.table ?? 'Sin asignar'}</span>
-                    </div>
-                  </div>
-
-                  <QRCode size={140} color={primary} value="www.iattend.mx" />
-                </div>
-
-
-              </div>
-
-              <div className={styles.ticket_effect}></div>
-            </div>
           </>
         )}
         <div
@@ -461,6 +471,141 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
             {ui?.locked.access}
           </Button>
         </div>
+        <div style={{ opacity: animation ? 1 : 0 }} className={styles.animation_cont}>
+          {
+            animation &&
+            <AnimatedPath
+              color={primary}
+              opacityStart={0.3}
+              opacityEnd={0.5}
+              duration={2.5}
+            />
+          }
+
+
+        </div>
+        <span
+          style={{ opacity: animatedText ? 1 : 0, fontFamily: invitation.generals.fonts.body?.value ?? "Poppins", color: primary }}
+          className={styles.welcome_label}>¡Hola <b style={{ marginLeft: '12px', color: secondary }}>{guestInfo?.name}!</b></span>
+        {
+          onShowTicket &&
+          <div onClick={() => setOnShowTicket(false)} className={styles.ticket_bg}>
+          </div>
+        }
+
+        <div className={styles.ticket_cont}
+          style={{ bottom: onShowTicket ? '20px' : '-80vh', transition: 'all 0.3s ease', justifyContent: companions.length === 0 ? 'center' : 'flex-start' }}>
+
+          <div onClick={() => setOnShowTicket(false)} className={styles.ticket_container} style={{
+            backgroundColor: `${accent}20`,
+            transition: 'all 0.3s ease'
+          }} >
+            <div className={styles.ticket_first_section} style={{
+              background: `linear-gradient(to top, ${accent} 0%, ${secondary} 100%)`,
+              color: accent,
+              borderColor: accent
+            }}>
+              <div className={styles.ticket_head} style={{ fontFamily: invitation.generals.fonts.body?.value ?? 'Poppins', color: primary }}>
+                <span style={{ fontSize: '16px', fontWeight: 600 }}>{invitation.cover.title.text.value}</span>
+                <div className={styles.ticket_col}>
+                  <span style={{ fontWeight: 600, fontSize: '14px' }}>{formatShortDate(invitation.cover.date.value)}</span>
+                  <span>{invitation.itinerary.object[0].time ?? ""}</span>
+                </div>
+
+              </div>
+
+              <div className={styles.ticket_image}>
+                <Image fill src={invitation.cover.image.prod!} alt="" style={{ objectFit: 'cover' }} />
+                <div style={{
+                  background: `linear-gradient(to top, ${accent} 0%, transparent 30%,  transparent 70%, ${accent} 110%)`
+                }} className={styles.ticket_shadow}></div>
+
+                <div className={styles.ticket_logo}>
+                  <img src="/assets/images/blanco.png" alt="" style={{ width: '70px', }} />
+                </div>
+              </div>
+
+
+
+              <div className={styles.ticket_row} style={{ fontFamily: invitation.generals.fonts.body?.value ?? 'Poppins', color: primary }}>
+                <div className={styles.ticket_col} style={{ gap: '12px' }}>
+                  <div className={styles.ticket_col}>
+                    <span style={{ opacity: '0.4' }}>Nombre</span>
+                    <span>{guestInfo?.name ?? "Sin nombre"}</span>
+                  </div>
+                  <div className={styles.ticket_col}>
+                    <span style={{ opacity: '0.4' }}>Mesa</span>
+                    <span>{guestInfo?.table ?? 'Sin asignar'}</span>
+                  </div>
+                </div>
+
+                <QRCode size={140} color={primary} value="www.iattend.mx" />
+              </div>
+
+
+            </div>
+
+            <div className={styles.ticket_effect}></div>
+          </div>
+
+          {
+            companions?.map((companion) => (
+              <div key={companion.id} onClick={() => setOnShowTicket(false)} className={styles.ticket_container} style={{
+                backgroundColor: `${accent}20`, bottom: onShowTicket ? '20px' : '-80vh',
+                transition: 'all 0.3s ease'
+              }} >
+                <div className={styles.ticket_first_section} style={{
+                  background: `linear-gradient(to top, ${accent} 0%, ${secondary} 100%)`,
+                  color: accent,
+                  borderColor: accent
+                }}>
+                  <div className={styles.ticket_head} style={{ fontFamily: invitation.generals.fonts.body?.value ?? 'Poppins', color: primary }}>
+                    <span style={{ fontSize: '16px', fontWeight: 600 }}>{invitation.cover.title.text.value}</span>
+                    <div className={styles.ticket_col}>
+                      <span style={{ fontWeight: 600, fontSize: '14px' }}>{formatShortDate(invitation.cover.date.value)}</span>
+                      <span>{invitation.itinerary.object[0].time ?? ""}</span>
+                    </div>
+
+                  </div>
+
+                  <div className={styles.ticket_image}>
+                    <Image fill src={invitation.cover.image.prod!} alt="" style={{ objectFit: 'cover' }} />
+                    <div style={{
+                      background: `linear-gradient(to top, ${accent} 0%, transparent 30%,  transparent 70%, ${accent} 110%)`
+                    }} className={styles.ticket_shadow}></div>
+
+                    <div className={styles.ticket_logo}>
+                      <img src="/assets/images/blanco.png" alt="" style={{ width: '70px', }} />
+                    </div>
+                  </div>
+
+
+
+                  <div className={styles.ticket_row} style={{ fontFamily: invitation.generals.fonts.body?.value ?? 'Poppins', color: primary }}>
+                    <div className={styles.ticket_col} style={{ gap: '12px' }}>
+                      <div className={styles.ticket_col}>
+                        <span style={{ opacity: '0.4' }}>Nombre</span>
+                        <span>{companion?.name ?? "Sin nombre"}</span>
+                      </div>
+                      <div className={styles.ticket_col}>
+                        <span style={{ opacity: '0.4' }}>Mesa</span>
+                        <span>{companion?.table ?? 'Sin asignar'}</span>
+                      </div>
+                    </div>
+
+                    <QRCode size={140} color={primary} value="www.iattend.mx" />
+                  </div>
+
+
+                </div>
+
+                <div className={styles.ticket_effect}></div>
+              </div>
+            ))
+          }
+        </div>
+
+
       </div>
       <Drawer
         placement={isLargeScreen ? "left" : "bottom"}
