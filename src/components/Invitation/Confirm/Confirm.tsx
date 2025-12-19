@@ -247,8 +247,6 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
   };
 
   const onConfirmAssitence = async () => {
-    console.log(mainGuest);
-    console.log(companions);
 
     // Si no hay mainGuest, no hacemos nada
     if (!mainGuest) return;
@@ -330,6 +328,8 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
     }
 
     const mainGuestID = mainInserted?.[0]?.id;
+
+    localStorage.setItem(mainInserted?.[0]?.invitation_id, mainInserted?.[0]?.password);
 
     if (!mainGuestID) {
       console.error("❌ No se recibió ID del mainGuest desde Supabase");

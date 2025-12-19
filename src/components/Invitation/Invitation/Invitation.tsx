@@ -67,6 +67,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
   const [messageApi, contextHolder] = message.useMessage();
   const [guestInfo, setGuestInfo] = useState<GuestSubabasePayload | null>(null);
   const [companions, setCompanions] = useState<GuestSubabasePayload[]>([])
+  const [tables, setTables] = useState<any[]>([])
 
   const primary = invitation?.generals?.colors.primary ?? "#FFFFFF";
   const secondary = invitation?.generals?.colors.secondary ?? "#FFFFFF";
@@ -120,13 +121,13 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
     fontFamily: font,
   };
 
-  const onValidateUser = async () => {
+  const onValidateUser = async (code: string) => {
 
     try {
       const { data, error } = await supabase
         .from("guests")
         .select("*")
-        .eq("password", guestCode)
+        .eq("password", code)
         .maybeSingle();
 
       if (error) {
@@ -148,7 +149,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
         if (isErr) {
           console.log(isErr, 'not found')
         }
-
+        getTables()
         setCompanions(companions?.filter(c => c.state === 'confirmado') ?? [])
       }
 
@@ -192,6 +193,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
           console.log(isErr, 'not found')
         }
 
+        getTables()
         setCompanions(companions?.filter(c => c.state === 'confirmado') ?? [])
       }
 
@@ -238,13 +240,40 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
     }
   }
 
+  const getTables = async () => {
+    if (invitationID) {
+      const { data, error } = await supabase
+        .from('tables')
+        .select('*')
+        .eq('invitation_id', invitationID)
+
+      if (error) {
+        console.error('Error al obtener mesas:', error)
+        return
+      }
+
+      setTables(data)
+      console.log('mesas: ', data)
+
+    }
+  }
+
 
   useEffect(() => {
     const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     setHeightSize(coverHeightPx);
 
     if (type === "open") {
-      setValidated(true);
+
+      const active_guest = localStorage.getItem(invitationID!)
+      if (active_guest) {
+        onValidateUser(active_guest)
+      }
+
+      else {
+        setValidated(true);
+      }
+
     } else {
       setValidated(false);
       if (password) {
@@ -252,6 +281,17 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
       }
     }
   }, []);
+
+  useEffect(() => {
+    if (type === "open") {
+
+      const active_guest = localStorage.getItem(invitationID!)
+      if (active_guest) {
+        onValidateUser(active_guest)
+      }
+    }
+  }, [open])
+
 
 
   useEffect(() => {
@@ -272,6 +312,12 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
       }, 2500);
     }
   }, [animation])
+
+  useEffect(() => {
+    console.log('main guest: ', guestInfo)
+    console.log('companions: ', companions)
+  }, [guestInfo, companions])
+
 
 
 
@@ -467,7 +513,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
             }}
           />
 
-          <Button className={styles.locked_btn} style={btnStyle} onClick={onValidateUser}>
+          <Button className={styles.locked_btn} style={btnStyle} onClick={() => onValidateUser(guestCode)}>
             {ui?.locked.access}
           </Button>
         </div>
@@ -535,7 +581,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
                   </div>
                   <div className={styles.ticket_col}>
                     <span style={{ opacity: '0.4' }}>Mesa</span>
-                    <span>{guestInfo?.table ?? 'Sin asignar'}</span>
+                    <span>{tables.find(t => t.id === guestInfo?.table)?.number ?? 'Sin asignar'}</span>
                   </div>
                 </div>
 
@@ -589,7 +635,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
                       </div>
                       <div className={styles.ticket_col}>
                         <span style={{ opacity: '0.4' }}>Mesa</span>
-                        <span>{companion?.table ?? 'Sin asignar'}</span>
+                        <span>{tables.find(t => t.id === companion?.table)?.number ?? 'Sin asignar'}</span>
                       </div>
                     </div>
 
