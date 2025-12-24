@@ -253,8 +253,6 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
       }
 
       setTables(data)
-      console.log('mesas: ', data)
-
     }
   }
 
@@ -283,15 +281,14 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
   }, []);
 
   useEffect(() => {
-    if (type === "open") {
-
+    
+    if (!open && type === "open") {
       const active_guest = localStorage.getItem(invitationID!)
       if (active_guest) {
         onValidateUser(active_guest)
       }
     }
   }, [open])
-
 
 
   useEffect(() => {
@@ -312,13 +309,6 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
       }, 2500);
     }
   }, [animation])
-
-  useEffect(() => {
-    console.log('main guest: ', guestInfo)
-    console.log('companions: ', companions)
-  }, [guestInfo, companions])
-
-
 
 
 

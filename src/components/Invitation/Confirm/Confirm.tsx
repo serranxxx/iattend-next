@@ -75,7 +75,7 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
     }
 
 
-    console.log("✅ Invitados actualizados:", data);
+    // console.log("✅ Invitados actualizados:", data);
     setLocalStatus('rechazado')
     refreshGuest()
 
@@ -123,7 +123,7 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
         return
       }
 
-      console.log('companions: ', data)
+      // console.log('companions: ', data)
       setCompanions(data)
 
 
@@ -178,7 +178,6 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
       setLocalStatus(guestInfo.state === 'creado' ? 'esperando' : guestInfo.state )
     } else {
       if (invitationID) {
-        console.log('inv id:', invitationID)
         const newguest: GuestSubabasePayload = {
           invitation_id: invitationID,
           password: generateSimpleId(),
@@ -273,7 +272,7 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
     }
 
 
-    console.log("✅ Invitados actualizados:", data);
+    // console.log("✅ Invitados actualizados:", data);
     setLocalStatus('confirmado')
     refreshGuest()
   };
@@ -336,7 +335,7 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
       return;
     }
 
-    console.log("🟢 Main guest creado con ID:", mainGuestID);
+    // console.log("🟢 Main guest creado con ID:", mainGuestID);
 
     // 3. Si NO hay companions válidos, terminamos
     if (!hasCompanions) {
@@ -363,7 +362,7 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
       return;
     }
 
-    console.log("🟢 Companions creados:", companionsInserted);
+    // console.log("🟢 Companions creados:", companionsInserted);
 
     // 6. Actualizar UI
     setLocalStatus("confirmado");
