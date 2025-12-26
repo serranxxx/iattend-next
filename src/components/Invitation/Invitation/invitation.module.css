@@ -90,8 +90,9 @@
   position: relative;
   overflow: hidden;
   background: #FFF !important;
-  color: #00000080 !important; /* usa el color dinámico si existe */
-  border: 2px solid #FFF!important;
+  color: #00000080 !important;
+  /* usa el color dinámico si existe */
+  border: 2px solid #FFF !important;
   transition: color 0.3s ease, border-color 0.3s ease !important;
 }
 
@@ -102,7 +103,8 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background-color: var(--hover-color, #a0d97b); /* usa el color dinámico */
+  background-color: var(--hover-color, #a0d97b);
+  /* usa el color dinámico */
   z-index: 0;
   transition: left 0.3s ease;
 }
@@ -134,4 +136,225 @@
 
 .translate_cont:hover {
   opacity: 1;
+}
+
+.ticket_container {
+
+ 
+  /* bottom: 20px; */
+  z-index: 99;
+  /* height:70vh; */
+  width: 80%;
+  max-width: 370px;
+  min-width: 370px;
+  border-radius: 24px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  background-color: transparent;
+}
+
+.ticket_first_section {
+  mask-image: radial-gradient(circle 30px at 50% -30,
+      transparent 0,
+      transparent 50px,
+      black 50px);
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  height: 100%;
+}
+
+.ticket_second_section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 23vh;
+}
+
+.ticket_head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  line-height: 1;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+}
+
+.ticket_col {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.ticket_image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  width: 100%;
+  /* border-bottom: 2px dashed; */
+  position: relative;
+}
+
+.ticket_shadow {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+
+}
+
+.ticket_row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  box-sizing: border-box;
+}
+
+.ticket_logo {
+  /* width: 100%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 12px;
+  position: absolute;
+  bottom: 0px;
+  left: 14px;
+
+}
+
+.ticket_cont {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  max-width: 100%;
+  overflow-x: scroll;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0px 24px;
+  z-index: 99;
+}
+
+.ticket_bg {
+  width: 100%;
+  height: 100%;
+  background-color: #00000030;
+  position: fixed;
+  z-index: 99;
+}
+
+.ticket_effect {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background: linear-gradient(120deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0.05) 50%,
+      transparent 60%);
+
+  background-size: 300% 300%;
+  animation: ticketShine 4s linear infinite;
+}
+
+@keyframes ticketShine {
+
+  /* ida (más lenta) */
+  0% {
+    background-position: 170% 0%;
+  }
+
+  /* llega al final al 66% del tiempo */
+  66% {
+    background-position: 0% 0%;
+  }
+
+  /* regreso más rápido (33% del tiempo) */
+  100% {
+    background-position: 170% 0%;
+  }
+}
+
+.glow_button {
+  position: relative;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: none;
+  background: #000;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.glow_button::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(90deg,
+      #ffffff,
+      transparent,
+      #ffffff,
+      transparent);
+  background-size: 300% 300%;
+  filter: blur(8px);
+  opacity: 0.6;
+  z-index: -1;
+  animation: glowMove 6s linear infinite;
+}
+
+@keyframes glowMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
+.animation_cont {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 130%;
+  z-index: 99;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.welcome_label {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99;
+  font-size: 36px;
+  line-height: 1.2;
+  font-weight: 400;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.3s ease;
 }

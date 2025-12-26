@@ -16,13 +16,18 @@ import { Gallery } from "../Gallery/Gallery";
 import Image from "next/image";
 import { textures } from "@/helpers/textures";
 import { TextureOverlay } from "./TexturesOverlay";
-import { Button, Drawer, Input, Layout, message } from "antd";
+import { Button, Drawer, Input, Layout, message, QRCode } from "antd";
 import Confirm from "../Confirm/Confirm";
 import { FaLock } from "react-icons/fa";
 import axios from "axios";
-import { GuestAccessPayload } from "@/types/guests";
+import { GuestAccessPayload, GuestSubabasePayload } from "@/types/guests";
 import GoogleTranslate from "@/components/GoogleTranslate/GoogleTranslate";
 import { useScreenWidth } from "@/hooks/useScreenWidth";
+import { createClient } from "@/lib/supabase/client";
+import { PiTicketDuotone } from "react-icons/pi";
+import { BsPass } from "react-icons/bs";
+import { FaArrowsRotate } from "react-icons/fa6";
+import AnimatedPath from "@/components/Motion/AnimatedPath";
 
 type invProps = {
   invitation: NewInvitation | null;
@@ -32,9 +37,13 @@ type invProps = {
   dev: boolean;
   height: number | string | null;
   ui: InvitationUIBundle;
+  invitationID?: string;
+  password?: string;
 };
 
-export default function Invitation({ ui, invitation, loader, type, mongoID, dev, height }: invProps) {
+
+
+export default function Invitation({ password, invitationID, ui, invitation, loader, type, mongoID, dev, height }: invProps) {
   const coverRef = useRef<HTMLDivElement>(null);
   const greetingRef = useRef<HTMLDivElement>(null);
   const peopleRef = useRef<HTMLDivElement>(null);
@@ -47,12 +56,18 @@ export default function Invitation({ ui, invitation, loader, type, mongoID, dev,
   const destinationRef = useRef<HTMLDivElement>(null);
   const scrollableContentRef = useRef<HTMLDivElement>(null);
   const [heightSize, setHeightSize] = useState<number>(0);
+  const supabase = createClient();
 
   const [open, setOpen] = useState(false);
+  const [onShowTicket, setOnShowTicket] = useState(false)
   const [guestCode, setGuestCode] = useState<string>("");
   const [validated, setValidated] = useState<boolean>(false);
+  const [animation, setAnimation] = useState<boolean>(false);
+  const [animatedText, setAnimatedText] = useState<boolean>(false);
   const [messageApi, contextHolder] = message.useMessage();
-  const [guestInfo, setGuestInfo] = useState<GuestAccessPayload | null>(null);
+  const [guestInfo, setGuestInfo] = useState<GuestSubabasePayload | null>(null);
+  const [companions, setCompanions] = useState<GuestSubabasePayload[]>([])
+  const [tables, setTables] = useState<any[]>([])
 
   const primary = invitation?.generals?.colors.primary ?? "#FFFFFF";
   const secondary = invitation?.generals?.colors.secondary ?? "#FFFFFF";
@@ -63,6 +78,7 @@ export default function Invitation({ ui, invitation, loader, type, mongoID, dev,
   const width = useScreenWidth();
   const isLargeScreen = width >= 768;
   // const scrollableContentRef = useRef<HTMLDivElement | null>(null);
+
 
   const handlePosition = (id: number, invitation: NewInvitation, index: number) => {
     switch (id) {
@@ -105,43 +121,208 @@ export default function Invitation({ ui, invitation, loader, type, mongoID, dev,
     fontFamily: font,
   };
 
-  const onValidateUser = async () => {
-    try {
-      const response = await axios.post(`https://i-attend-22z4h.ondigitalocean.app/api/guests/login`, {
-        invitationID: mongoID,
-        guestID: guestCode,
-      });
+  const onValidateUser = async (code: string) => {
 
-      if (response.data.ok) {
-        messageApi.success(`Bienvenido ${response.data.data.username}`);
-        setGuestCode("");
-        setValidated(true);
-        setGuestInfo(response.data.data);
-        return response.data.data;
-      } else {
-        messageApi.error(`Código incorrecto`);
-        setGuestCode("");
-        return null;
+    try {
+      const { data, error } = await supabase
+        .from("guests")
+        .select("*")
+        .eq("password", code)
+        .maybeSingle();
+
+      if (error) {
+        console.log(error, 'not found')
+        return
       }
-    } catch (error: any) {
-      console.error("❌ Error en login:", error.response?.data || error.message);
-      return null;
+
+      if (!data) {
+        messageApi.error(`Código incorrecto`);
+        return
+      }
+
+      if (data?.has_companion) {
+        const { data: companions, error: isErr } = await supabase
+          .from("guests")
+          .select("*")
+          .eq("companion_id", data.id)
+
+        if (isErr) {
+          console.log(isErr, 'not found')
+        }
+        getTables()
+        setCompanions(companions?.filter(c => c.state === 'confirmado') ?? [])
+      }
+
+      // messageApi.success(`Bienvenido ${data.name}`);
+      setValidated(true);
+      setGuestInfo(data)
+
+
+    } catch (error) {
+
     }
   };
+
+  const onMagicLogin = async (code: string) => {
+
+    // console.log('getting guest ----')
+    try {
+      const { data, error } = await supabase
+        .from("guests")
+        .select("*")
+        .eq("password", code)
+        .maybeSingle();
+
+      if (error) {
+        console.log(error, 'not found')
+        return
+      }
+
+      if (!data) {
+        messageApi.error(`Código incorrecto`);
+        return
+      }
+
+      if (data?.has_companion) {
+        const { data: companions, error: isErr } = await supabase
+          .from("guests")
+          .select("*")
+          .eq("companion_id", data.id)
+
+        if (isErr) {
+          console.log(isErr, 'not found')
+        }
+
+        getTables()
+        setCompanions(companions?.filter(c => c.state === 'confirmado') ?? [])
+      }
+
+
+      setValidated(true);
+      setGuestInfo(data)
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
+
+  const refreshGuest = async () => {
+
+    try {
+      const { data, error } = await supabase
+        .from('guests')
+        .select('*')
+        .eq('id', guestInfo?.id)
+        .maybeSingle()
+
+      if (error || !data) {
+        messageApi.error('Código incorrecto')
+        return
+      }
+
+      if (data?.has_companion) {
+        const { data: companions, error: isErr } = await supabase
+          .from("guests")
+          .select("*")
+          .eq("companion_id", data.id)
+
+        if (isErr) {
+          console.log(isErr, 'not found')
+        }
+
+        setCompanions(companions?.filter(c => c.state === 'confirmado') ?? [])
+      }
+
+      setGuestInfo(data)
+    } catch (err) {
+      console.error('Error al refrescar invitado:', err)
+      messageApi.error('Ocurrió un error inesperado')
+    }
+  }
+
+  const getTables = async () => {
+    if (invitationID) {
+      const { data, error } = await supabase
+        .from('tables')
+        .select('*')
+        .eq('invitation_id', invitationID)
+
+      if (error) {
+        console.error('Error al obtener mesas:', error)
+        return
+      }
+
+      setTables(data)
+    }
+  }
+
 
   useEffect(() => {
     const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     setHeightSize(coverHeightPx);
+
+    if (type === "open") {
+
+      const active_guest = localStorage.getItem(invitationID!)
+      if (active_guest) {
+        onValidateUser(active_guest)
+      }
+
+      else {
+        setValidated(true);
+      }
+
+    } else {
+      setValidated(false);
+      if (password) {
+        onMagicLogin(password)
+      }
+    }
   }, []);
 
   useEffect(() => {
-    console.log(type);
-    if (type === "open") {
-      setValidated(true);
-    } else {
-      setValidated(false);
+    
+    if (!open && type === "open") {
+      const active_guest = localStorage.getItem(invitationID!)
+      if (active_guest) {
+        onValidateUser(active_guest)
+      }
     }
-  }, [type]);
+  }, [open])
+
+
+  useEffect(() => {
+    if (validated && guestInfo) {
+      // messageApi.info(`Bienvenido ${guestInfo?.name}`);
+      setAnimation(true)
+      setTimeout(() => {
+        setAnimatedText(true)
+      }, 1800);
+    }
+  }, [validated])
+
+  useEffect(() => {
+    if (animation) {
+      setTimeout(() => {
+        setAnimation(false)
+        setAnimatedText(false)
+      }, 2500);
+    }
+  }, [animation])
+
+
+
+  const formatShortDate = (dateString: string) => {
+    const [year, month, day] = dateString.split("T")[0].split("-");
+
+    const months = [
+      "ENE", "FEB", "MAR", "ABR", "MAY", "JUN",
+      "JUL", "AGO", "SEP", "OCT", "NOV", "DIC",
+    ];
+
+    return `${months[Number(month) - 1]} ${Number(day)}`;
+  }
+
 
   if (loader || !invitation) {
     return (
@@ -179,7 +360,7 @@ export default function Invitation({ ui, invitation, loader, type, mongoID, dev,
           <TextureOverlay
             containerRef={scrollableContentRef as unknown as React.RefObject<HTMLElement>}
             coverHeightPx={heightSize}
-            extraMarginPx={mongoID ===  "68ffdb9cd673a17f84312991" ? 400 : 0}
+            extraMarginPx={mongoID === "68ffdb9cd673a17f84312991" ? 400 : 0}
             texture={{
               image: tex.image, // StaticImageData o "/public/..."
               opacity: tex.opacity,
@@ -212,29 +393,67 @@ export default function Invitation({ ui, invitation, loader, type, mongoID, dev,
               </div>
             )}
             {!dev && (
-              <Button
-                onClick={() => setOpen(true)}
-                style={{
-                  position: "fixed",
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  bottom: "20px",
-                  zIndex: 3,
-                  // height: '44px',
-                  letterSpacing: "2px",
-                  fontSize: "16px",
-                  height: "44px",
-                  width: "200px",
-                  backgroundColor: `${actions}80`,
-                  backdropFilter: "blur(10px)",
-                  border: `1px solid ${actions}40`,
-                  color: accent,
-                  boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
-                }}
-              >
-                {ui?.buttons.confirm}
-              </Button>
+              <div style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px',
+                position: "fixed",
+                left: "50%",
+                transform: "translateX(-50%)",
+                bottom: "20px",
+                zIndex: 3,
+                // flexDirection:'column'
+              }}>
+                <Button
+                  onClick={() => setOpen(true)}
+                  style={{
+
+                    // height: '44px',
+                    letterSpacing: "2px",
+                    fontSize: "16px",
+                    height: "44px",
+                    width: guestInfo?.state === 'confirmado' ? "auto" : '200px',
+                    backgroundColor: `${actions}80`,
+                    backdropFilter: "blur(10px)",
+                    border: `1px solid ${actions}40`,
+                    color: accent,
+                    boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
+                  }}
+                >
+                  {
+                    guestInfo?.state === 'confirmado' ?
+                      <FaArrowsRotate />
+                      : ui?.buttons.confirm
+                  }
+
+                </Button>
+
+                {
+                  guestInfo?.state === 'confirmado' &&
+                  <Button
+                    className={styles.glow_button}
+                    icon={<PiTicketDuotone size={20} />}
+                    onClick={() => setOnShowTicket(true)}
+                    style={{
+
+                      // height: '44px',
+                      letterSpacing: "2px",
+                      fontSize: "16px",
+                      height: "44px",
+                      minWidth: '44px',
+                      backgroundColor: `${secondary}80`,
+                      backdropFilter: "blur(10px)",
+                      border: `1px solid ${secondary}40`,
+                      color: accent,
+                      boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
+                      // zIndex: 99999999999999
+                    }}
+                  >
+                    Pase Digital
+                  </Button>
+                }
+              </div>
             )}
+
+
           </>
         )}
         <div
@@ -284,10 +503,145 @@ export default function Invitation({ ui, invitation, loader, type, mongoID, dev,
             }}
           />
 
-          <Button className={styles.locked_btn} style={btnStyle} onClick={onValidateUser}>
+          <Button className={styles.locked_btn} style={btnStyle} onClick={() => onValidateUser(guestCode)}>
             {ui?.locked.access}
           </Button>
         </div>
+        <div style={{ opacity: animation ? 1 : 0 }} className={styles.animation_cont}>
+          {
+            animation &&
+            <AnimatedPath
+              color={primary}
+              opacityStart={0.3}
+              opacityEnd={0.5}
+              duration={2.5}
+            />
+          }
+
+
+        </div>
+        <span
+          style={{ opacity: animatedText ? 1 : 0, fontFamily: invitation.generals.fonts.body?.value ?? "Poppins", color: primary }}
+          className={styles.welcome_label}>¡Hola <b style={{ marginLeft: '12px', color: secondary }}>{guestInfo?.name}!</b></span>
+        {
+          onShowTicket &&
+          <div onClick={() => setOnShowTicket(false)} className={styles.ticket_bg}>
+          </div>
+        }
+
+        <div className={styles.ticket_cont}
+          style={{ bottom: onShowTicket ? '20px' : '-80vh', transition: 'all 0.3s ease', justifyContent: companions.length === 0 ? 'center' : 'flex-start' }}>
+
+          <div onClick={() => setOnShowTicket(false)} className={styles.ticket_container} style={{
+            backgroundColor: `${accent}20`,
+            transition: 'all 0.3s ease'
+          }} >
+            <div className={styles.ticket_first_section} style={{
+              background: `linear-gradient(to top, ${accent} 0%, ${secondary} 100%)`,
+              color: accent,
+              borderColor: accent
+            }}>
+              <div className={styles.ticket_head} style={{ fontFamily: invitation.generals.fonts.body?.value ?? 'Poppins', color: primary }}>
+                <span style={{ fontSize: '16px', fontWeight: 600 }}>{invitation.cover.title.text.value}</span>
+                <div className={styles.ticket_col}>
+                  <span style={{ fontWeight: 600, fontSize: '14px' }}>{formatShortDate(invitation.cover.date.value)}</span>
+                  <span>{invitation.itinerary.object[0].time ?? ""}</span>
+                </div>
+
+              </div>
+
+              <div className={styles.ticket_image}>
+                <Image fill src={invitation.cover.image.prod!} alt="" style={{ objectFit: 'cover' }} />
+                <div style={{
+                  background: `linear-gradient(to top, ${accent} 0%, transparent 30%,  transparent 70%, ${accent} 110%)`
+                }} className={styles.ticket_shadow}></div>
+
+                <div className={styles.ticket_logo}>
+                  <img src="/assets/images/blanco.png" alt="" style={{ width: '70px', }} />
+                </div>
+              </div>
+
+
+
+              <div className={styles.ticket_row} style={{ fontFamily: invitation.generals.fonts.body?.value ?? 'Poppins', color: primary }}>
+                <div className={styles.ticket_col} style={{ gap: '12px' }}>
+                  <div className={styles.ticket_col}>
+                    <span style={{ opacity: '0.4' }}>Nombre</span>
+                    <span>{guestInfo?.name ?? "Sin nombre"}</span>
+                  </div>
+                  <div className={styles.ticket_col}>
+                    <span style={{ opacity: '0.4' }}>Mesa</span>
+                    <span>{tables.find(t => t.id === guestInfo?.table)?.number ?? 'Sin asignar'}</span>
+                  </div>
+                </div>
+
+                <QRCode size={140} color={primary} value="www.iattend.mx" />
+              </div>
+
+
+            </div>
+
+            <div className={styles.ticket_effect}></div>
+          </div>
+
+          {
+            companions?.map((companion) => (
+              <div key={companion.id} onClick={() => setOnShowTicket(false)} className={styles.ticket_container} style={{
+                backgroundColor: `${accent}20`, bottom: onShowTicket ? '20px' : '-80vh',
+                transition: 'all 0.3s ease'
+              }} >
+                <div className={styles.ticket_first_section} style={{
+                  background: `linear-gradient(to top, ${accent} 0%, ${secondary} 100%)`,
+                  color: accent,
+                  borderColor: accent
+                }}>
+                  <div className={styles.ticket_head} style={{ fontFamily: invitation.generals.fonts.body?.value ?? 'Poppins', color: primary }}>
+                    <span style={{ fontSize: '16px', fontWeight: 600 }}>{invitation.cover.title.text.value}</span>
+                    <div className={styles.ticket_col}>
+                      <span style={{ fontWeight: 600, fontSize: '14px' }}>{formatShortDate(invitation.cover.date.value)}</span>
+                      <span>{invitation.itinerary.object[0].time ?? ""}</span>
+                    </div>
+
+                  </div>
+
+                  <div className={styles.ticket_image}>
+                    <Image fill src={invitation.cover.image.prod!} alt="" style={{ objectFit: 'cover' }} />
+                    <div style={{
+                      background: `linear-gradient(to top, ${accent} 0%, transparent 30%,  transparent 70%, ${accent} 110%)`
+                    }} className={styles.ticket_shadow}></div>
+
+                    <div className={styles.ticket_logo}>
+                      <img src="/assets/images/blanco.png" alt="" style={{ width: '70px', }} />
+                    </div>
+                  </div>
+
+
+
+                  <div className={styles.ticket_row} style={{ fontFamily: invitation.generals.fonts.body?.value ?? 'Poppins', color: primary }}>
+                    <div className={styles.ticket_col} style={{ gap: '12px' }}>
+                      <div className={styles.ticket_col}>
+                        <span style={{ opacity: '0.4' }}>Nombre</span>
+                        <span>{companion?.name ?? "Sin nombre"}</span>
+                      </div>
+                      <div className={styles.ticket_col}>
+                        <span style={{ opacity: '0.4' }}>Mesa</span>
+                        <span>{tables.find(t => t.id === companion?.table)?.number ?? 'Sin asignar'}</span>
+                      </div>
+                    </div>
+
+                    <QRCode size={140} color={primary} value="www.iattend.mx" />
+                  </div>
+
+
+                </div>
+
+                <div className={styles.ticket_effect}></div>
+              </div>
+            ))
+          }
+        </div>
+
+
       </div>
       <Drawer
         placement={isLargeScreen ? "left" : "bottom"}
@@ -327,7 +681,7 @@ export default function Invitation({ ui, invitation, loader, type, mongoID, dev,
         }}
       >
         {(guestInfo || type === "open") && mongoID && (
-          <Confirm ui={ui} invitation={invitation} type={type} guestInfo={guestInfo} mongoID={mongoID} />
+          <Confirm invitationID={invitationID} ui={ui} invitation={invitation} type={type} guestInfo={guestInfo} mongoID={mongoID} refreshGuest={refreshGuest} />
         )}
       </Drawer>
     </>
