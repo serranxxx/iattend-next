@@ -261,10 +261,11 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
     const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     setHeightSize(coverHeightPx);
 
-    if (type === "open") {
+    if (type === "open" && invitationID) {
 
-      const active_guest = localStorage.getItem(invitationID!)
+      const active_guest = localStorage.getItem(invitationID)
       if (active_guest) {
+        // console.log('active g: ', active_guest)
         onValidateUser(active_guest)
       }
 

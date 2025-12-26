@@ -155,6 +155,8 @@ export default async function InvitationDynamicPage({
     "es"
   );
 
+  console.log('type: ', type)
+
   return (
     <Invitation
       height={null}
