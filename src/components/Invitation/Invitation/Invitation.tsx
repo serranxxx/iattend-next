@@ -447,7 +447,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
                       // zIndex: 99999999999999
                     }}
                   >
-                    Pase Digital
+                    {ui.confirm.digital_pass}
                   </Button>
                 }
               </div>
@@ -522,7 +522,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
         </div>
         <span
           style={{ opacity: animatedText ? 1 : 0, fontFamily: invitation.generals.fonts.body?.value ?? "Poppins", color: primary }}
-          className={styles.welcome_label}>¡Hola <b style={{ marginLeft: '12px', color: secondary }}>{guestInfo?.name}!</b></span>
+          className={styles.welcome_label}>{ui.confirm.hello} <b style={{ marginLeft: '12px', color: secondary }}>{guestInfo?.name}!</b></span>
         {
           onShowTicket &&
           <div onClick={() => setOnShowTicket(false)} className={styles.ticket_bg}>
@@ -566,11 +566,11 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
               <div className={styles.ticket_row} style={{ fontFamily: invitation.generals.fonts.body?.value ?? 'Poppins', color: primary }}>
                 <div className={styles.ticket_col} style={{ gap: '12px' }}>
                   <div className={styles.ticket_col}>
-                    <span style={{ opacity: '0.4' }}>Nombre</span>
+                    <span style={{ opacity: '0.4' }}>{ui.confirm.digital_name}</span>
                     <span>{guestInfo?.name ?? "Sin nombre"}</span>
                   </div>
                   <div className={styles.ticket_col}>
-                    <span style={{ opacity: '0.4' }}>Mesa</span>
+                    <span style={{ opacity: '0.4' }}>{ui.confirm.digital_table}</span>
                     <span>{tables.find(t => t.id === guestInfo?.table)?.number ?? 'Sin asignar'}</span>
                   </div>
                 </div>

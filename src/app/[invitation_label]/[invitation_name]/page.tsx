@@ -1,28 +1,39 @@
-// app/[invitation_label]/[invitation_name]/page.tsx
 import { notFound } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
 import type { Metadata } from "next";
 import Invitation from "@/components/Invitation/Invitation/Invitation";
 import { InvitationType, NewInvitation } from "@/types/new_invitation";
+import { createClient } from "@/lib/supabase/server";
 import { getPublicServerClient } from "@/lib/supabase/public-server";
 import { getTranslatedInvitationFromCache } from "@/lib/translation/cache";
 import { getTranslatedCopy } from "@/lib/translation/copy-cache";
 
 export const dynamic = "force-dynamic";
 
+// --------------------
+// Types
+// --------------------
 type RouteParams = {
   invitation_label: string;
   invitation_name: string;
 };
 
 type PageProps = {
-  params: Promise<RouteParams>;
-  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+  params: RouteParams;
+  searchParams?: {
+    lang?: string;
+    password?: string;
+  };
 };
 
-// ------- Metadata dinámica -------
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { invitation_label, invitation_name } = await params;
+// --------------------
+// Metadata dinámica
+// --------------------
+export async function generateMetadata({
+  params,
+}: {
+  params: RouteParams;
+}): Promise<Metadata> {
+  const { invitation_label, invitation_name } = params;
   const supabase = await createClient();
 
   const label = decodeURIComponent(invitation_label);
@@ -36,26 +47,41 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     .maybeSingle();
 
   if (!data?.data) {
-    return { title: "I attend", description: "Diseña, comparte, celebra." };
+    return {
+      title: "I attend",
+      description: "Diseña, comparte, celebra.",
+    };
   }
 
   const inv = data.data as NewInvitation;
 
+  const title = inv?.cover?.title?.text?.value ?? "Invitación";
+  const description = inv.greeting?.title ?? "Invitación digital";
+
   return {
-    title: inv?.cover?.title?.text?.value,
-    description: inv.greeting.title,
+    title,
+    description,
     openGraph: {
-      title: inv?.cover?.title?.text?.value ?? "Invitación",
-      description: inv.greeting.title,
+      title,
+      description,
       images: inv?.cover?.image?.prod
-        ? [{ url: inv.cover.image.prod, width: 1200, height: 630, alt: inv?.cover?.title?.text?.value ?? "Invitación" }]
+        ? [
+            {
+              url: inv.cover.image.prod,
+              width: 1200,
+              height: 630,
+              alt: title,
+            },
+          ]
         : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: inv?.cover?.title?.text?.value ?? "Invitación",
-      description: inv.greeting.title,
-      images: inv?.cover?.image?.prod ? [inv.cover.image.prod] : undefined,
+      title,
+      description,
+      images: inv?.cover?.image?.prod
+        ? [inv.cover.image.prod]
+        : undefined,
     },
     icons: {
       icon: [
@@ -67,10 +93,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-// ------- Página -------
-export default async function InvitationDynamicPage({ params, searchParams }: PageProps) {
-  const { invitation_label, invitation_name } = await params;
-  const q = (await searchParams) ?? {}; // 👈 ahora sí existe `q`
+// --------------------
+// Página
+// --------------------
+export default async function InvitationDynamicPage({
+  params,
+  searchParams = {},
+}: PageProps) {
+  const { invitation_label, invitation_name } = params;
 
   const supabase = await getPublicServerClient();
 
@@ -88,47 +118,48 @@ export default async function InvitationDynamicPage({ params, searchParams }: Pa
     console.error("[Supabase error]", error);
     notFound();
   }
+
   if (!data?.data) notFound();
 
   const invitation = data.data as NewInvitation;
   const type = data.type as InvitationType;
   const mongoID = data.mongo_id as string | null;
-  const id = String(data.id); // 👈 define `id`
+  const invitationID = String(data.id);
 
-  const lang = typeof q.lang === "string" ? q.lang : undefined;
-  const password = typeof q.password === "string" ? q.password : undefined;
+  const lang =
+    typeof searchParams.lang === "string"
+      ? searchParams.lang
+      : undefined;
 
-  if (password) {
-    console.log("password: ", password)
-  }
+  const password =
+    typeof searchParams.password === "string"
+      ? searchParams.password
+      : undefined;
 
-  const invitationForRender =
-    lang
-      ? await getTranslatedInvitationFromCache({
-        invitationId: id,     // 👈 ahora existe
+  const invitationForRender = lang
+    ? await getTranslatedInvitationFromCache({
+        invitationId: invitationID,
         invitation,
         lang,
-        sourceLang: "es",      // si tu contenido base es ES
+        sourceLang: "es",
       })
-      : invitation;
+    : invitation;
 
-  const loader = false;
-
-  const ui = lang
-  ? await getTranslatedCopy("invitation_ui_v1", lang, "es")
-  : await getTranslatedCopy("invitation_ui_v1", "es", "es");
-
-  console.log(ui)
+  const ui = await getTranslatedCopy(
+    "invitation_ui_v1",
+    lang ?? "es",
+    "es"
+  );
 
   return (
     <Invitation
       height={null}
       dev={false}
-      ui={ui}  
+      ui={ui}
       invitation={invitationForRender}
       password={password}
-      invitationID={id}
-      loader={loader}
+      invitationID={invitationID}
+      loader={false}
       type={type}
       mongoID={mongoID}
     />

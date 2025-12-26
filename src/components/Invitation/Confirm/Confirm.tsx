@@ -381,10 +381,10 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
         <div className={styles.confirm_container}>
 
           <span className={styles.confirm_label}>
-            Hola, estamos muy contentos de que formes parte de este momento.
+            {ui.confirm.open_hi}
           </span>
 
-          <span className={styles.confirm_label}><b>Por favor agrega tu nombre y el de las personas que te acompañan.</b></span>
+          <span className={styles.confirm_label}><b>{ui.confirm.open_add_name}</b></span>
 
 
 
@@ -404,7 +404,7 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
             />
 
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-              <span style={{ width: 'auto' }} className={styles.confirm_label}><b>Agregar acompañante</b></span>
+              <span style={{ width: 'auto' }} className={styles.confirm_label}><b>{ui.confirm.add_companion}</b></span>
               <div style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px'
               }}>
@@ -439,7 +439,7 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
 
             {
               companions?.find((comp) => comp.name === '' || comp.name === undefined || comp.name === null) &&
-              <span className={styles.confirm_label_tip}>No olvides agregar el nombre de tus acompañantes</span>
+              <span className={styles.confirm_label_tip}>{ui.confirm.dont_forget}</span>
             }
           </div>
 
@@ -468,16 +468,16 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
         <div className={styles.confirm_container}>
 
           <span className={styles.confirm_label}>
-            Hola <b>{mainGuest?.name}</b>, estamos muy contentos de que formes parte de este momento.
+            {ui.confirm.closed_hi} <b>{mainGuest?.name}</b>, {ui.confirm.closed_happy}.
           </span>
           {
             companions &&
-            <span className={styles.confirm_label}>Tu invitación contempla tu asistencia y la de <b>{companions?.length} acompañantes.</b></span>
+            <span className={styles.confirm_label}>{ui.confirm.closed_invitation} <b>{companions?.length} {ui.confirm.closed_companion}.</b></span>
           }
 
           {
             companions &&
-            <span className={styles.confirm_label}><b>Por favor indica si alguno de ellos no podrá asistir.</b></span>
+            <span className={styles.confirm_label}><b>{ui.confirm.closed_notgoing}.</b></span>
           }
 
 
@@ -520,14 +520,14 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
                     c.state === 'confirmado' &&
                     <div
                       style={{ backgroundColor: accent, color: primary }}
-                      className={styles.confirm_tag}>¡Ya ha confirmado!</div>
+                      className={styles.confirm_tag}>{ui.confirm.confirmed}</div>
                   }
 
                   {
                     c.state === 'rechazado' &&
                     <div
                       style={{ backgroundColor: secondary, color: accent, borderColor: 'transparent' }}
-                      className={styles.confirm_tag}>No asistirá</div>
+                      className={styles.confirm_tag}>{ui.confirm.not_going}</div>
                   }
 
                 </div>
@@ -560,7 +560,7 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
 
             {
               companions?.find((comp) => comp.name === '' || comp.name === undefined || comp.name === null) &&
-              <span className={styles.confirm_label_tip}>No olvides agregar el nombre de algunos de tus acompañantes</span>
+              <span className={styles.confirm_label_tip}>{ui.confirm.dont_forget}</span>
             }
           </div>
 

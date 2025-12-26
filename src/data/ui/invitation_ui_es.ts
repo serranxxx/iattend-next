@@ -29,7 +29,7 @@ const uiES: InvitationUIBundle = {
   },
   confirm: {
     cta: "CONFIRMAR",
-    hello: "Hola",
+    hello: "¡Hola",
     passes1: "Tienes",
     passes2: "pases disponibles para ti y tus acompañantes",
     decline: "No podré asistir",
@@ -45,6 +45,20 @@ const uiES: InvitationUIBundle = {
     addToCalendarBtn: "Add to Calendar",
     confirmedMsgBold: "¡Tu asistencia ha sido confirmada! Esperamos verte y celebrar juntos muy pronto.",
     thanks: "Estamos felices de que nos puedas acompañar",
+    closed_hi: "Hola",
+    closed_happy: "Estamos muy contentos de que formes parte de este momento",
+    closed_invitation: "Tu invitación contempla tu asistencia y la de",
+    closed_companion: "acompañantes",
+    closed_notgoing: "Por favor indica si alguno de ellos no podrá asistir",
+    confirmed: "¡Ya ha confirmado!",
+    not_going: "No asistirá",
+    dont_forget:"No olvides agregar el nombre de algunos de tus acompañantes",
+    add_companion: "Agregar acompañante",
+    open_add_name:"Por favor agrega tu nombre y el de las personas que te acompañan.",
+    open_hi:"Hola, estamos muy contentos de que formes parte de este momento.",
+    digital_pass: "Pase Digital",
+    digital_name: "Nombre",
+    digital_table: "Mesa"
   }
 };
 

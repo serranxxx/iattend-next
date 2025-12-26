@@ -336,6 +336,20 @@ export interface InvitationUIBundle {
     addToCalendarBtn: string;
     confirmedMsgBold: string;
     thanks: string;
+    closed_hi: string,
+    closed_happy: string,
+    closed_invitation: string,
+    closed_companion: string,
+    closed_notgoing: string,
+    confirmed: string,
+    not_going:string,
+    dont_forget: string,
+    add_companion:string,
+    open_add_name:string,
+    open_hi:string,
+    digital_pass:string,
+    digital_name:string,
+    digital_table:string
   };
 }
 
