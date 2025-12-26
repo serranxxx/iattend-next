@@ -17,12 +17,14 @@ type RouteParams = {
   invitation_name: string;
 };
 
+type SearchParams = {
+  lang?: string;
+  password?: string;
+};
+
 type PageProps = {
-  params: RouteParams;
-  searchParams?: {
-    lang?: string;
-    password?: string;
-  };
+  params: Promise<RouteParams>;
+  searchParams?: Promise<SearchParams>;
 };
 
 // --------------------
@@ -31,9 +33,10 @@ type PageProps = {
 export async function generateMetadata({
   params,
 }: {
-  params: RouteParams;
+  params: Promise<RouteParams>;
 }): Promise<Metadata> {
-  const { invitation_label, invitation_name } = params;
+  const { invitation_label, invitation_name } = await params;
+
   const supabase = await createClient();
 
   const label = decodeURIComponent(invitation_label);
@@ -98,9 +101,10 @@ export async function generateMetadata({
 // --------------------
 export default async function InvitationDynamicPage({
   params,
-  searchParams = {},
+  searchParams,
 }: PageProps) {
-  const { invitation_label, invitation_name } = params;
+  const { invitation_label, invitation_name } = await params;
+  const resolvedSearchParams = await searchParams;
 
   const supabase = await getPublicServerClient();
 
@@ -127,13 +131,13 @@ export default async function InvitationDynamicPage({
   const invitationID = String(data.id);
 
   const lang =
-    typeof searchParams.lang === "string"
-      ? searchParams.lang
+    typeof resolvedSearchParams?.lang === "string"
+      ? resolvedSearchParams.lang
       : undefined;
 
   const password =
-    typeof searchParams.password === "string"
-      ? searchParams.password
+    typeof resolvedSearchParams?.password === "string"
+      ? resolvedSearchParams.password
       : undefined;
 
   const invitationForRender = lang
