@@ -263,17 +263,18 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
 
     if (type === "open") {
 
-      if (invitationID) {
-        const active_guest = localStorage.getItem(invitationID)
-        if (active_guest) {
-          console.log('active g: ', active_guest)
-          onValidateUser(active_guest)
-        }
-      }
+      setValidated(true);
+      // if (invitationID) {
+      //   const active_guest = localStorage.getItem(invitationID)
+      //   if (active_guest) {
+      //     console.log('active g: ', active_guest)
+      //     onValidateUser(active_guest)
+      //   }
+      // }
 
-      else {
-        setValidated(true);
-      }
+      // else {
+      //   setValidated(true);
+      // }
 
     } else {
       setValidated(false);
