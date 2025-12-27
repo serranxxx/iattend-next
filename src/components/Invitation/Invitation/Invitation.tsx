@@ -261,12 +261,14 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
     const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     setHeightSize(coverHeightPx);
 
-    if (type === "open" && invitationID) {
+    if (type === "open") {
 
-      const active_guest = localStorage.getItem(invitationID)
-      if (active_guest) {
-        // console.log('active g: ', active_guest)
-        onValidateUser(active_guest)
+      if (invitationID) {
+        const active_guest = localStorage.getItem(invitationID)
+        if (active_guest) {
+          console.log('active g: ', active_guest)
+          onValidateUser(active_guest)
+        }
       }
 
       else {
@@ -282,7 +284,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
   }, []);
 
   useEffect(() => {
-    
+
     if (!open && type === "open") {
       const active_guest = localStorage.getItem(invitationID!)
       if (active_guest) {
