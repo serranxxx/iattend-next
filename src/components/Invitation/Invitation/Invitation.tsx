@@ -310,7 +310,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
       setTimeout(() => {
         setAnimation(false)
         setAnimatedText(false)
-      }, 2500);
+      }, 3000);
     }
   }, [animation])
 
@@ -524,9 +524,13 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
 
 
         </div>
-        <span
-          style={{ opacity: animatedText ? 1 : 0, fontFamily: invitation.generals.fonts.body?.value ?? "Poppins", color: primary }}
-          className={styles.welcome_label}>{ui.confirm.hello} <b style={{ marginLeft: '12px', color: secondary }}>{guestInfo?.name}!</b></span>
+        <div
+          style={{
+            opacity: animatedText ? 1 : 0, fontFamily: invitation.generals.fonts.body?.value ?? "Poppins", color: '#FFFFFF99', display: 'flex', alignItems: 'flex-start', justifyContent: 'center' ,gap:'0px',
+            flexWrap:'wrap'
+
+          }}
+          className={styles.welcome_label}><span style={{marginRight:'8px'}}>{ui.confirm.hello}</span> <b style={{ color: '#FFF', textAlign: 'left', }}>{guestInfo?.name}</b></div>
         {
           onShowTicket &&
           <div onClick={() => setOnShowTicket(false)} className={styles.ticket_bg}>
