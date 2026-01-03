@@ -1,3 +1,13 @@
+.main_container_land {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: auto;
+    background-image: linear-gradient(#FFF 70%, #CFBEE660);
+}
+
 .home_page_container {
     display: flex;
     align-items: flex-start;

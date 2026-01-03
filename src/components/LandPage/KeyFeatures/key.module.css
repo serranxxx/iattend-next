@@ -1,0 +1,64 @@
+.key_cont {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-self: stretch;
+    padding: 36px 0px;
+    gap: 18px;
+    position: relative;
+    /* overflow: hidden;
+    min-height: auto; */
+    /* z-index: -1; */
+}
+
+.key_title {
+    padding: 0px 24px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #20212b;
+    font-family: 'Outfit', 'Poppins';
+    line-height: 110%;
+    z-index: 2;
+}
+
+.loop_img {
+    width: 100%;
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.key_main_cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    gap: 12px;
+    height: 420px;
+    z-index: 2;
+    box-sizing: border-box;
+    padding: 0px 24px;
+}
+
+.key_col {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+    align-self: stretch;
+}
+
+.key_item {
+    background-color: #CFBEE680;
+    align-self: stretch;
+    flex: 1;
+    border-radius: 24px;
+}
+
+.key_space {
+    height: 34px;
+}
