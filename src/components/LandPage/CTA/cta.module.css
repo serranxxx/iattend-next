@@ -1,0 +1,60 @@
+.key_cont {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-self: stretch;
+    padding: 36px 24px;
+    gap: 8px;
+    /* z-index: -1; */
+}
+
+.key_title {
+    /* padding: 0px 24px; */
+    font-size: 24px;
+    font-weight: 600;
+    color: #20212B;
+    font-family: 'Outfit', 'Poppins';
+    line-height: 110%;
+    z-index: 2;
+}
+
+.cta_text {
+    /* padding: 0px 24px; */
+    font-weight: 400;
+    color: #20212B;
+    font-family: 'Outfit', 'Poppins';
+    line-height: 140%;
+    font-size: 18px;
+}
+
+
+.cta_button {
+    margin-top: 12px;
+    font-size: 16px;
+    background-color: rgb(206, 189, 229);
+    color: #20212B;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 500;
+
+    height: 42px;
+    cursor: pointer;
+
+    box-shadow:
+        0 0 8px rgba(206, 189, 229, 0.4),
+        0 0 16px rgba(206, 189, 229, 0.2),
+        0 0 32px rgba(206, 189, 229, 0.1);
+
+    transition: box-shadow 0.1s ease, transform 0.2s ease;
+}
+
+.cta_button:hover {
+    box-shadow:
+        0 0 12px rgba(206, 189, 229, 0.8),
+        0 0 24px rgba(206, 189, 229, 0.6),
+        0 0 48px rgba(206, 189, 229, 0.4);
+
+    transform: translateY(-1px);
+}

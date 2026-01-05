@@ -13,7 +13,7 @@
     padding: 0px 24px;
     font-size: 24px;
     font-weight: 600;
-    color: #20212b;
+    color: #20212B;
     font-family: 'Outfit', 'Poppins';
     line-height: 110%;
     z-index: 2;
@@ -29,6 +29,7 @@
     padding: 0px 24px;
     gap: 12px;
     position: relative;
+    transform: scale(0.9);
 }
 
 .plan_card {
@@ -54,6 +55,5 @@
 .plan_image {
     max-width: 90%;
     border-radius: 12px;
-    
-}
 
+}

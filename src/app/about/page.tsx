@@ -5,6 +5,9 @@ import { WorkFlow } from "@/components/LandPage/WorkFlow/WorkFlow";
 import { IdealCustomer } from "@/components/LandPage/IdealCustomer/IdealCustomer";
 import { Reviews } from "@/components/LandPage/Reviews/Reviews";
 import { Plans } from "@/components/LandPage/Plans/Plans";
+import { FAQs } from "@/components/LandPage/FAQs/FAQs";
+import { Footer } from "@/components/LandPage/Footer/Footer";
+import { CTA } from "@/components/LandPage/CTA/CTA";
 
 export default function LandPage() {
   return (
@@ -13,9 +16,12 @@ export default function LandPage() {
       <KeyFeatures></KeyFeatures>
       <WorkFlow></WorkFlow>
       <IdealCustomer></IdealCustomer>
-      <Reviews></Reviews>
       <Plans></Plans>
-    </div>
+      <Reviews></Reviews>
 
+      <FAQs></FAQs>
+      <CTA></CTA>
+      <Footer></Footer>
+    </div>
   );
 }

@@ -5,7 +5,7 @@
     flex-direction: column;
     width: 100%;
     overflow-y: auto;
-    background-image: linear-gradient(#FFF 70%, #CFBEE660);
+    background-image: linear-gradient(#FFFFFF 70%, #b09ccb);
 }
 
 .home_page_container {
@@ -894,7 +894,7 @@
         padding-bottom: 120px;
     }
 
-    
+
 
     .invitation-container-box {
         justify-content: center;
