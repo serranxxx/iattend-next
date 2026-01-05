@@ -6,6 +6,7 @@
     align-self: stretch;
     padding: 36px 0px;
     gap: 18px;
+    padding-bottom: 0px;
     /* z-index: -1; */
 }
 
@@ -29,10 +30,37 @@
     align-self: stretch;
 }
 
+.button_cont,
+.question_head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+}
+
+.question_head {
+    justify-content: space-between;
+    gap: 12px;
+}
+
 .ideal_card {
-    height: 40px;
+    /* height: 40px; */
     align-self: stretch;
     border-radius: 8px;
-    background-color: #CFBEE680;
+    background-image: linear-gradient(to right, #F5F3F260, #CFBEE640);
+    backdrop-filter: blur(10px);
     transition: all 0.3s ease;
+    padding: 12px 16px;
+    color: #20212B;
+    font-family: 'Outfit', 'Poppins';
+    line-height: 120%;
+    min-height: 50px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    gap: 16px;
+    
+
 }

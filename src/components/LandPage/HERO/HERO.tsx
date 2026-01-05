@@ -1,8 +1,11 @@
+'use client'
+
 import React from "react";
 import styles from "./hero.module.css";
 import { Button } from "antd";
 import { FaBars, FaPaperPlane } from "react-icons/fa";
 import Image from "next/image";
+import AnimatedPath from "@/components/Motion/AnimatedPath";
 
 export const HeroSection = () => {
   return (
@@ -24,6 +27,17 @@ export const HeroSection = () => {
           CREAR MI EVENTO
         </Button>
       </div>
+
+      <div className={styles.animated}>
+        <AnimatedPath
+          color={"#ffffff"}
+          opacityStart={0.9}
+          opacityEnd={0.8}
+          duration={1.5}
+        />
+      </div>
+
+
     </div>
   );
 };

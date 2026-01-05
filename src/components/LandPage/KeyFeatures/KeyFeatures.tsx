@@ -10,6 +10,8 @@ import { MdOutlinePhoneAndroid, MdOutlinePhonelink, MdOutlinePhonelinkLock } fro
 import { BsPassport } from "react-icons/bs";
 import { ImSpoonKnife } from "react-icons/im";
 import { FaTableList, FaTicket, FaUnlockKeyhole } from "react-icons/fa6";
+import { LuArrowUpRight } from "react-icons/lu";
+import AnimatedPath from "@/components/Motion/AnimatedPath";
 
 type Feature = {
   label: React.ReactNode | null;
@@ -84,10 +86,10 @@ export const KEY_FEATURES: KeyFeature[] = [
 
 const FEATURES: Feature[][] = [
   [
-    {
-      label: null,
-      seed: null,
-    },
+    // {
+    //   label: null,
+    //   seed: null,
+    // },
     {
       label: (
         <>
@@ -105,16 +107,16 @@ const FEATURES: Feature[][] = [
       seed: "invitados",
     },
 
-    {
-      label: null,
-      seed: null,
-    },
+    // {
+    //   label: null,
+    //   seed: null,
+    // },
   ],
   [
-    {
-      label: <b>Respuestas</b>,
-      seed: "respuestas",
-    },
+    // {
+    //   label: <b>Respuestas</b>,
+    //   seed: "respuestas",
+    // },
     {
       label: <b>Privacidad</b>,
       seed: "privacidad",
@@ -129,10 +131,10 @@ const FEATURES: Feature[][] = [
     },
   ],
   [
-    {
-      label: null,
-      seed: null,
-    },
+    // {
+    //   label: null,
+    //   seed: null,
+    // },
     {
       label: (
         <>
@@ -149,10 +151,10 @@ const FEATURES: Feature[][] = [
       ),
       seed: "whatsapp",
     },
-    {
-      label: null,
-      seed: null,
-    },
+    // {
+    //   label: null,
+    //   seed: null,
+    // },
   ],
 ];
 
@@ -223,14 +225,14 @@ export const KeyFeatures = () => {
                     <div className={styles.shadow}></div>
                     <span className={styles.key_label}>{feature.label}</span>
                     <Button
+                      icon={<LuArrowUpRight />}
                       onClick={() => {
                         setOpen(true);
                         setCurrentItem(feature.seed);
                       }}
                       className={styles.key_button}
-                    >
-                      Ver
-                    </Button>
+                      style={{ position: "absolute", top: "0px", right: "16px" }}
+                    ></Button>
                   </div>
                 ) : (
                   <div key={index} className={styles.key_space} />
@@ -294,12 +296,30 @@ export const KeyFeatures = () => {
             alt=""
             style={{ position: "absolute", objectFit: "cover" }}
           />
-          <img className={styles.loop_drawer} src="/assets/images/espiral.svg" alt="" />
+          {/* <div className={styles.animated}>
+            <AnimatedPath
+              color={"#ffffff"}
+              opacityStart={0.4}
+              opacityEnd={0.7}
+              duration={1.5}
+            />
+          </div> */}
+          {/* <img className={styles.loop_drawer} src="/assets/images/espiral.svg" alt="" /> */}
         </div>
 
         <span className={styles.drawer_title}>{KEY_FEATURES.find((k) => k.key === currentItem)?.title}</span>
         <span className={styles.drawer_value}>{KEY_FEATURES.find((k) => k.key === currentItem)?.value}</span>
       </Drawer>
+
+      <section className={styles.seo_content}>
+        {KEY_FEATURES.map(f => (
+          <article key={f.key}>
+            <h2>{f.title}</h2>
+            <p>{f.value}</p>
+          </article>
+        ))}
+      </section>
+
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./reviews.module.css";
 import { FaQuoteLeft } from "react-icons/fa";
+import { reviews } from "./reviews";
 
 const cards = [
   {
@@ -26,11 +27,11 @@ export const Reviews = () => {
       <span className={styles.key_title}>Personas reales, eventos reales</span>
 
       <div className={styles.flow_container}>
-        {cards.map((card, index) => (
+        {reviews.map((card, index) => (
           <div key={index} className={styles.flow_card}>
             <FaQuoteLeft size={24} style={{ color: "#CFBEE6" }} />
             <span>{card.review}</span>
-            <span>— {card.user}</span>
+            <span>— {card.name}</span>
           </div>
         ))}
       </div>

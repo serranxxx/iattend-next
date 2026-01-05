@@ -4,25 +4,38 @@ import React, { useState } from "react";
 import styles from "./faqs.module.css";
 import { Button } from "antd";
 import { FaBars } from "react-icons/fa";
+import { faqs } from "./faqs";
+import { LuChevronDown, LuChevronUp } from "react-icons/lu";
 
 export const FAQs = () => {
   const [activeCard, setActiveCard] = useState<number | null>(null);
-
-  const questions = [1, 1, 1, 1, 1, 1];
 
   return (
     <div className={styles.key_cont}>
       <span className={styles.key_title}>¿Tienes más preguntas?</span>
 
       <div className={styles.ideal_cont}>
-        {questions.map((q, index) => (
+        {faqs.slice(0, 5).map((q, index) => (
           <div
             key={index}
             onClick={() => setActiveCard((prev) => (prev === index ? null : index))}
-            style={{ height: activeCard === index ? "220px" : undefined }}
             className={styles.ideal_card}
-          ></div>
+          >
+            <div className={styles.question_head}>
+              <span>{q.question}</span>
+              <Button icon={<LuChevronDown style={{ transform: activeCard === index ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'all 0.3s ease' }} size={16} />} style={{ backgroundColor: '#FFF', maxHeight: '26px', minWidth: '26px', maxWidth: '26px' }}></Button>
+            </div>
+
+            {
+              activeCard === index &&
+              <span style={{fontWeight:200, whiteSpace: "pre-line",}}>{q.answer}</span>
+            }
+
+          </div>
         ))}
+      </div>
+      <div className={styles.button_cont}>
+        <Button style={{ textDecoration: 'underline', }} type="text">Ver más</Button>
       </div>
     </div>
   );

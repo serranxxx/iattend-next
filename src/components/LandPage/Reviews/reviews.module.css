@@ -6,6 +6,7 @@
     align-self: stretch;
     padding: 36px 0px;
     gap: 24px;
+    padding-bottom: 0px;
     /* z-index: -1; */
 }
 
@@ -49,4 +50,5 @@
     color: #20212B;
     font-family: 'Outfit', 'Poppins';
     line-height: 150%;
+    min-height: 220px;
 }
