@@ -3,11 +3,11 @@ import { KeyFeatures } from "@/components/LandPage/KeyFeatures/KeyFeatures";
 import styles from "./page.module.css";
 import { WorkFlow } from "@/components/LandPage/WorkFlow/WorkFlow";
 import { IdealCustomer } from "@/components/LandPage/IdealCustomer/IdealCustomer";
-import { Reviews } from "@/components/LandPage/Reviews/Reviews";
 import { Plans } from "@/components/LandPage/Plans/Plans";
 import { FAQs } from "@/components/LandPage/FAQs/FAQs";
 import { Footer } from "@/components/LandPage/Footer/Footer";
 import { CTA } from "@/components/LandPage/CTA/CTA";
+import { Reviews } from "@/components/LandPage/Reviews/Reviews";
 
 export default function LandPage() {
   return (

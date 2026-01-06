@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "./reviews.module.css";
 import { FaQuoteLeft } from "react-icons/fa";
-import { reviews_list } from "./reviews";
+import { reviews_list } from "@/helpers/SEO/reviews";
+
+
 
 export const Reviews = () => {
   return (

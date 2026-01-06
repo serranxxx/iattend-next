@@ -3,8 +3,9 @@
 import React, { useState } from "react";
 import styles from "./faqs.module.css";
 import { Button } from "antd";
-import { faqs_list } from "./faqs";
+
 import { LuChevronDown } from "react-icons/lu";
+import { faqs_list } from "@/helpers/SEO/faqs";
 
 export const FAQs = () => {
   const [activeCard, setActiveCard] = useState<number | null>(null);
