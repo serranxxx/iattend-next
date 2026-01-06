@@ -5,7 +5,9 @@
     flex-direction: column;
     width: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
     background-image: linear-gradient(#FFFFFF 70%, #b09ccb);
+    gap: 24px;
 }
 
 .home_page_container {

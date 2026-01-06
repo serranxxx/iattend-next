@@ -14,11 +14,11 @@ export default function LandPage() {
     <div className={styles.main_container_land}>
       <HeroSection></HeroSection>
       <KeyFeatures></KeyFeatures>
-      <WorkFlow></WorkFlow>
       <IdealCustomer></IdealCustomer>
-      <Plans></Plans>
-      <Reviews></Reviews>
+      <WorkFlow></WorkFlow>
 
+      <Reviews></Reviews>
+      <Plans></Plans>
       <FAQs></FAQs>
       <CTA></CTA>
       <Footer></Footer>

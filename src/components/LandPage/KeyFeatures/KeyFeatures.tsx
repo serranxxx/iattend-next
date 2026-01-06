@@ -208,7 +208,6 @@ export const KeyFeatures = () => {
   return (
     <>
       <section className={styles.key_cont}>
-        <img className={styles.loop_img} src="/assets/images/espiral.svg" alt="" />
         <span className={styles.key_title}>Todo fluye cuando tienes el control</span>
         <div className={styles.key_main_cont}>
           {FEATURES.map((column, colIndex) => (
@@ -240,6 +239,7 @@ export const KeyFeatures = () => {
               )}
             </div>
           ))}
+          <img className={styles.loop_img} src="/assets/images/espiral.svg" alt="" />
         </div>
         {/* <div className={styles.key_grid}>
           {FEAT.map((feature, index) => (
@@ -312,14 +312,13 @@ export const KeyFeatures = () => {
       </Drawer>
 
       <section className={styles.seo_content}>
-        {KEY_FEATURES.map(f => (
+        {KEY_FEATURES.map((f) => (
           <article key={f.key}>
             <h2>{f.title}</h2>
             <p>{f.value}</p>
           </article>
         ))}
       </section>
-
     </>
   );
 };

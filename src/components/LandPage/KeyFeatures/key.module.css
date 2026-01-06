@@ -5,7 +5,7 @@
     flex-direction: column;
     align-self: stretch;
     padding: 36px 0px;
-    gap: 24px;
+    gap: 16px;
     position: relative;
     padding-bottom: 0px;
     /* overflow: hidden;
@@ -24,11 +24,14 @@
 }
 
 .loop_img {
-    width: 100%;
+    width: 140%;
     position: absolute;
-    top: -24px;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%);
+    transform: translate(-50%, -50%);
+    opacity: 0.2;
+    pointer-events: none;
+
     /* opacity: 0.1; */
 }
 
@@ -37,12 +40,16 @@
     align-items: center;
     justify-content: center;
     align-self: stretch;
-    gap: 12px;
+    /* gap: 12px; */
     height: 420px;
     z-index: 2;
     box-sizing: border-box;
-    padding: 0px 24px;
+    /* padding: 0px 24px; */
     transform: scale(0.9);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.2);
+    position: relative;
 }
 
 .key_col {
@@ -50,7 +57,7 @@
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-    gap: 12px;
+    /* gap: 12px; */
     flex: 1;
     align-self: stretch;
 }
@@ -59,9 +66,9 @@
     /* background-color: #CFBEE680; */
     align-self: stretch;
     flex: 1;
-    border-radius: 34px;
+    /* border-radius: 34px; */
     box-sizing: border-box;
-    padding: 12px;
+    padding: 16px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -71,7 +78,7 @@
     /* max-height: 120px; */
     min-height: 120px;
     min-width: 120px;
-    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.2);
+
 
 }
 
@@ -84,7 +91,8 @@
     color: #FFF;
     font-family: 'Outfit', 'Poppins';
     line-height: 130%;
-    font-size: 12px;
+    font-size: 14px;
+    line-height: 1.4;
     text-transform: uppercase;
     z-index: 2;
 }
@@ -190,7 +198,7 @@
     top: -5%;
     right: -15%;
     width: 100%;
-    z-index:999;
+    z-index: 999;
     pointer-events: none;
     transition: all 0.3s ease;
     transform: rotate(64deg);
@@ -200,5 +208,4 @@
 .seo_content {
     position: absolute;
     left: -9999px;
-  }
-  
+}

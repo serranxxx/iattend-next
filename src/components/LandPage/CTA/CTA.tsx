@@ -17,7 +17,7 @@ export const CTA = () => {
         Crea tu evento, gestiona invitados y controla la asistencia desde un solo lugar. Sin complicaciones, sin herramientas extra.
       </span>
       <Button icon={<FaPaperPlane />} className={styles.cta_button}>
-        CREAR MI EVENTO
+        QUIERO MÁS INFORMACIÓN
       </Button>
     </div>
   );
