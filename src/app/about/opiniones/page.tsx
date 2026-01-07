@@ -1,6 +1,8 @@
+import BackButton from "@/components/BackButton/BackButton";
 import { reviews_list } from "@/helpers/SEO/reviews";
 import { Metadata } from "next";
 import Script from "next/script";
+import { IoMdReturnLeft } from "react-icons/io";
 
 /* =========================
    SEO METADATA
@@ -30,10 +32,10 @@ export default function ReviewsPage() {
       },
       reviewRating: review.review
         ? {
-            "@type": "Rating",
-            ratingValue: review.name,
-            bestRating: "5",
-          }
+          "@type": "Rating",
+          ratingValue: review.name,
+          bestRating: "5",
+        }
         : undefined,
     })),
     aggregateRating: {
@@ -60,25 +62,29 @@ export default function ReviewsPage() {
       {/* =========================
           REVIEWS CONTENT
       ========================= */}
-      <section style={{
-                maxHeight: '100%', overflow: 'auto'
-            }}>
-        <h1>Opiniones de quienes ya usan I attend</h1>
+      <div style={{ width: '100%', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '36px', boxSizing: 'border-box', maxHeight: '100%', overflow: 'auto' }}>
+        <section className="seo_container" id="invitacion-reviews">
 
-        <p>
-          Estas son algunas experiencias reales de personas que han organizado
-          sus eventos utilizando <strong>I attend</strong>.
-        </p>
+          <div className="action_wrap">
+            <BackButton></BackButton>
+          </div>
+          <h1>Opiniones de quienes ya usan I attend</h1>
 
-        {reviews_list.map((review, index) => (
-          <article key={index}>
-            <blockquote>“{review.review}”</blockquote>
-            <p>
-              <strong>{review.name}</strong>
-            </p>
-          </article>
-        ))}
-      </section>
+          <p>
+            Estas son algunas experiencias reales de personas que han organizado
+            sus eventos utilizando <strong>I attend</strong>.
+          </p>
+
+          {reviews_list.map((review, index) => (
+            <article key={index}>
+              <blockquote>“{review.review}”</blockquote>
+              <p>
+                <strong>{review.name}</strong>
+              </p>
+            </article>
+          ))}
+        </section>
+      </div>
     </>
   );
 }

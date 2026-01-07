@@ -7,11 +7,12 @@ import Image from "next/image";
 import { body } from "motion/react-client";
 import { FaAngleRight, FaEnvelopeOpen, FaPaperPlane, FaUber } from "react-icons/fa";
 import { MdOutlinePhoneAndroid, MdOutlinePhonelink, MdOutlinePhonelinkLock } from "react-icons/md";
-import { BsPassport } from "react-icons/bs";
+import { BsPassport, BsStars } from "react-icons/bs";
 import { ImSpoonKnife } from "react-icons/im";
 import { FaTableList, FaTicket, FaUnlockKeyhole } from "react-icons/fa6";
 import { LuArrowUpRight } from "react-icons/lu";
 import AnimatedPath from "@/components/Motion/AnimatedPath";
+import Link from "next/link";
 
 type Feature = {
   label: React.ReactNode | null;
@@ -30,66 +31,63 @@ export type KeyFeature = {
   title: string;
   value: string;
   image: string | null;
+  path: string;
 };
 
 export const KEY_FEATURES: KeyFeature[] = [
-  {
-    key: "respuestas",
-    title: "Respuestas",
-    value:
-      "Conoce quién asistirá a tu evento en tiempo real. Tus invitados confirman su asistencia de forma sencilla y tú mantienes el control total de las respuestas, sin mensajes perdidos ni listas manuales.",
-    image: null,
-  },
+
   {
     key: "paperless",
     title: "Invitación Paperless",
     value:
-      "Tu invitación vive en línea, siempre actualizada y fácil de compartir. Olvídate del papel y de los reenvíos infinitos, todo tu evento en un solo enlace.",
+      "Invitaciones digitales paperless para bodas y eventos: elegantes, personalizables y fáciles de usar. Comparte toda tu información en un solo enlace, actualizable, visual y accesible desde cualquier dispositivo.",
     image: null,
+    path: "invitacion-paperless"
   },
   {
     key: "invitados",
     title: "Gestión de invitados",
     value:
-      "Administra tu lista de invitados desde un solo lugar. Agrega, edita y organiza invitados fácilmente, controla accesos y mantén todo bajo control sin complicaciones.",
+      "Guest Management de I attend: controla invitados en un solo lugar. Envía invitaciones por WhatsApp, gestiona accesos, confirma asistencias en tiempo real y mantén tu evento organizado, claro y sin estrés.",
     image: null,
+    path: "guest-management"
   },
   {
     key: "privacidad",
     title: "Privacidad",
     value:
-      "Tu evento solo para quien tú decidas. Controla quién puede ver tu invitación mediante accesos privados, códigos o enlaces seguros, protegiendo la información de tu evento.",
+      "Privacidad total en tus invitaciones digitales: elige eventos públicos o privados, controla accesos, personaliza cada invitado y cambia la modalidad cuando quieras, con seguridad, flexibilidad y control absoluto.",
     image: null,
+    path: "privacidad"
   },
   {
     key: "pases",
     title: "Pases digitales",
     value:
-      "Convierte la invitación en un pase de acceso. Cada invitado cuenta con su pase digital para validar su entrada y facilitar el control el día del evento.",
+      "Pases digitales personalizados para bodas y eventos: acceso seguro desde el celular, generación automática al confirmar asistencia, mesas asignadas y control claro de invitados, sin boletos físicos y con una experiencia moderna.",
     image: null,
+    path: "pases-digitales"
   },
   {
     key: "whatsapp",
     title: "Envíos por WhatsApp",
     value:
-      "Comparte tu invitación de forma rápida y directa. Envía accesos personalizados por WhatsApp y asegúrate de que tu invitación llegue a cada invitado sin fricciones.",
+      "Envía invitaciones por WhatsApp de forma automática y segura con I attend. Usa el API oficial, evita bloqueos, controla envíos con créditos y comunica tu evento de manera profesional y confiable.",
     image: null,
+    path: "envios-whatsapp"
   },
   {
     key: "mesas",
     title: "Acomodo por mesas",
     value:
-      "Organiza a tus invitados de forma clara y visual. Define mesas, asigna lugares y ajusta el acomodo cuando lo necesites para que el día del evento todo fluya sin estrés.",
+      "Organiza a tus invitados sin estrés con el seating chart digital de I attend: mapa de mesas interactivo, asignación visual, edición flexible y control total para bodas y eventos de cualquier tamaño.",
     image: null,
+    path: "mapa-de-mesas"
   },
 ];
 
 const FEATURES: Feature[][] = [
   [
-    // {
-    //   label: null,
-    //   seed: null,
-    // },
     {
       label: (
         <>
@@ -106,17 +104,8 @@ const FEATURES: Feature[][] = [
       ),
       seed: "invitados",
     },
-
-    // {
-    //   label: null,
-    //   seed: null,
-    // },
   ],
   [
-    // {
-    //   label: <b>Respuestas</b>,
-    //   seed: "respuestas",
-    // },
     {
       label: <b>Privacidad</b>,
       seed: "privacidad",
@@ -131,10 +120,6 @@ const FEATURES: Feature[][] = [
     },
   ],
   [
-    // {
-    //   label: null,
-    //   seed: null,
-    // },
     {
       label: (
         <>
@@ -151,55 +136,9 @@ const FEATURES: Feature[][] = [
       ),
       seed: "whatsapp",
     },
-    // {
-    //   label: null,
-    //   seed: null,
-    // },
   ],
 ];
 
-const FEAT: Feat[] = [
-  {
-    label: "Invitación Paperless",
-    seed: "paperless",
-    icon: FaEnvelopeOpen,
-    desc: "Tu invitación vive en línea, siempre actualizada y fácil de compartir.",
-  },
-  {
-    label: "Gestión de invitados",
-    seed: "invitados",
-    icon: FaTableList,
-    desc: "Administra tu lista de invitados desde un solo lugar.",
-  },
-  //   {
-  //     label: <b>Respuestas</b>,
-  //     seed: "respuestas",
-  //   },
-  {
-    label: "Privacidad",
-    seed: "privacidad",
-    icon: FaUnlockKeyhole,
-    desc: "Controla quién puede ver tu invitación mediante accesos privados.",
-  },
-  {
-    label: "Pases digitales",
-    seed: "pases",
-    icon: FaTicket,
-    desc: "Convierte la invitación en un pase de acceso.",
-  },
-  {
-    label: "Acomodo por mesas",
-    seed: "mesas",
-    icon: ImSpoonKnife,
-    desc: "Organiza a tus invitados de forma clara y visual.",
-  },
-  {
-    label: "Envíos por Whatsapp",
-    seed: "whatsapp",
-    icon: FaPaperPlane,
-    desc: "Comparte tu invitación de forma rápida y directa.",
-  },
-];
 
 export const KeyFeatures = () => {
   const [open, setOpen] = useState(false);
@@ -223,15 +162,18 @@ export const KeyFeatures = () => {
                     />
                     <div className={styles.shadow}></div>
                     <span className={styles.key_label}>{feature.label}</span>
-                    <Button
-                      icon={<LuArrowUpRight />}
-                      onClick={() => {
-                        setOpen(true);
-                        setCurrentItem(feature.seed);
-                      }}
-                      className={styles.key_button}
-                      style={{ position: "absolute", top: "0px", right: "16px" }}
-                    ></Button>
+                    <div className={styles.key_wrap}>
+                      <Button
+                        icon={<LuArrowUpRight />}
+                        onClick={() => {
+                          setOpen(true);
+                          setCurrentItem(feature.seed);
+                        }}
+                        className={styles.key_button}
+                        // style={{ position: "absolute", top: "0px", right: "16px" }}
+                      ></Button>
+                    </div>
+
                   </div>
                 ) : (
                   <div key={index} className={styles.key_space} />
@@ -265,13 +207,13 @@ export const KeyFeatures = () => {
       </section>
 
       <Drawer
-        placement="bottom"
+        placement="left"
         open={open}
         onClose={() => setOpen(false)}
         height="auto"
         closeIcon={false}
         style={{
-          borderRadius: "24px 24px 0 0",
+          borderRadius: "0px 24px 24px 0",
           backgroundImage: `linear-gradient(to bottom, #FFF 40%, #CFBEE660)`,
         }}
         styles={{
@@ -296,19 +238,25 @@ export const KeyFeatures = () => {
             alt=""
             style={{ position: "absolute", objectFit: "cover" }}
           />
-          {/* <div className={styles.animated}>
-            <AnimatedPath
-              color={"#ffffff"}
-              opacityStart={0.4}
-              opacityEnd={0.7}
-              duration={1.5}
-            />
-          </div> */}
-          {/* <img className={styles.loop_drawer} src="/assets/images/espiral.svg" alt="" /> */}
         </div>
 
         <span className={styles.drawer_title}>{KEY_FEATURES.find((k) => k.key === currentItem)?.title}</span>
         <span className={styles.drawer_value}>{KEY_FEATURES.find((k) => k.key === currentItem)?.value}</span>
+        <div style={{ marginTop: '16px' }} className={styles.action_wrap}>
+          <Button
+            icon={<LuArrowUpRight size={16} />}
+            className={styles.action_button}
+
+          >
+            <Link
+              href={`/about/${KEY_FEATURES.find((k) => k.key === currentItem)?.path ?? "privacidad"}`}
+            >
+              Más información
+            </Link>
+          </Button>
+        </div>
+
+        {/* <a className={styles.drawer_a} href={`about/features/${KEY_FEATURES.find((k) => k.key === currentItem)?.path ?? 'privacidad'}`}>Ver más</a> */}
       </Drawer>
 
       <section className={styles.seo_content}>

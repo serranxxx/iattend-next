@@ -1,5 +1,7 @@
 import React from "react";
 import Head from "next/head";
+import { IoMdReturnLeft } from "react-icons/io";
+import BackButton from "@/components/BackButton/BackButton";
 
 export default function WorkflowPage() {
     const workflowSchema = {
@@ -98,111 +100,114 @@ export default function WorkflowPage() {
             </Head>
 
             {/* ================= CONTENIDO ================= */}
-            <section id="flujo-de-trabajo" style={{
-                maxHeight: '100%', overflow: 'auto'
-            }}>
+            <div style={{ width: '100%', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '36px', boxSizing: 'border-box', maxHeight: '100%', overflow: 'auto' }}>
+                <section className="seo_container" id="invitacion-privada">
 
-                <h2>Cómo funciona I attend: organiza tu evento paso a paso, sin complicarte</h2>
+                    <div className="action_wrap">
+                        <BackButton></BackButton>
+                    </div>
 
-                <p>
-                    <strong>I attend</strong> está diseñada para que organizar tu evento
-                    sea un proceso claro, intuitivo y sin estrés.
-                    Desde la creación de tu lista de invitados hasta el control final de confirmaciones,
-                    todo el flujo de trabajo está pensado para acompañarte
-                    <strong>paso a paso</strong>, sin procesos complicados ni herramientas externas.
-                </p>
+                    <h2>Cómo funciona I attend: organiza tu evento paso a paso, sin complicarte</h2>
 
-                <p>
-                    A continuación te mostramos cómo funciona I attend
-                    y cómo puedes gestionar tu evento de principio a fin
-                    desde una sola plataforma.
-                </p>
+                    <p>
+                        <strong>I attend</strong> está diseñada para que organizar tu evento
+                        sea un proceso claro, intuitivo y sin estrés.
+                        Desde la <a href="/about/guest-mamagement">creación de tu lista de invitados</a> hasta el control final de confirmaciones,
+                        todo el flujo de trabajo está pensado para acompañarte
+                        <strong>paso a paso</strong>, sin procesos complicados ni herramientas externas.
+                    </p>
 
-                <h3>1. Haz tu lista de invitados</h3>
+                    <p>
+                        A continuación te mostramos cómo funciona I attend
+                        y cómo puedes gestionar tu evento de principio a fin
+                        desde una sola plataforma.
+                    </p>
 
-                <p>
-                    El primer paso para organizar tu evento es crear tu
-                    <strong>lista de invitados digital</strong>.
-                    Desde I attend puedes agregar y organizar a tus invitados
-                    en un solo lugar, clasificarlos por categorías
-                    y definir acompañantes de forma sencilla.
-                </p>
+                    <h3>1. Haz tu lista de invitados</h3>
 
-                <p>
-                    Esta lista se convierte en la base de toda la organización,
-                    permitiéndote tener control desde el primer invitado
-                    y facilitando la gestión conforme tu evento avanza.
-                </p>
+                    <p>
+                        El primer paso para organizar tu evento es crear tu
+                        <strong> <a href="/about/guest-mamagement">lista de invitados digital</a></strong>.
+                        Desde I attend puedes agregar y organizar a tus invitados
+                        en un solo lugar, clasificarlos por categorías
+                        y definir acompañantes de forma sencilla.
+                    </p>
 
-                <h3>2. Diseña tu invitación</h3>
+                    <p>
+                        Esta lista se convierte en la base de toda la organización,
+                        permitiéndote tener control desde el primer invitado
+                        y facilitando la gestión conforme tu evento avanza.
+                    </p>
 
-                <p>
-                    Una vez creada tu lista, puedes
-                    <strong>diseñar tu invitación digital</strong>
-                    de manera fácil y sin complicaciones.
-                    Personaliza cada sección, agrega la información de tu evento
-                    y adapta el diseño para que refleje tu estilo.
-                </p>
+                    <h3>2. Diseña tu invitación</h3>
 
-                <p>
-                    No necesitas conocimientos de diseño.
-                    I attend te permite crear una invitación clara,
-                    visual y completamente editable en cualquier momento.
-                </p>
+                    <p>
+                        Una vez creada tu lista, puedes
+                        <strong><a href="/about/invitation-paperless"> diseñar tu invitación digital </a></strong>
+                        de manera fácil y sin complicaciones.
+                        Personaliza cada sección, agrega la información de tu evento
+                        y adapta el diseño para que refleje tu estilo.
+                    </p>
 
-                <h3>3. Comparte con tus invitados</h3>
+                    <p>
+                        No necesitas conocimientos de diseño.
+                        I attend te permite <a href="/about/invitation-paperless">crear una invitación</a> clara,
+                        visual y completamente editable en cualquier momento.
+                    </p>
 
-                <p>
-                    Cuando tu invitación está lista,
-                    puedes <strong>compartirla con tus invitados</strong>
-                    de forma rápida y directa.
-                    Envía la invitación por WhatsApp,
-                    utiliza links personalizados o códigos de acceso,
-                    según la privacidad que elijas para tu evento.
-                </p>
+                    <h3>3. Comparte con tus invitados</h3>
 
-                <p>
-                    Este paso asegura que cada invitado reciba
-                    la información correcta y pueda confirmar su asistencia
-                    de forma sencilla desde su celular.
-                </p>
+                    <p>
+                        Cuando tu invitación está lista,
+                        puedes <strong><a href="/about/envios-whatsapp">compartirla con tus invitados </a></strong>
+                        de forma rápida y directa.
+                        Envía la invitación por <a href="/about/envios-whatsapp">WhatsApp</a>,
+                        utiliza <a href="/about/guest-mamagement">links personalizados</a> o <a href="/about/guest-mamagement">códigos de acceso</a>,
+                        según la privacidad que elijas para tu evento.
+                    </p>
 
-                <h3>4. Controla confirmaciones y acomodo</h3>
+                    <p>
+                        Este paso asegura que cada invitado reciba
+                        la información correcta y pueda confirmar su asistencia
+                        de forma sencilla desde su celular.
+                    </p>
 
-                <p>
-                    Conforme tus invitados responden,
-                    puedes <strong>visualizar las confirmaciones en tiempo real</strong>.
-                    I attend organiza automáticamente a tus invitados
-                    en confirmados, cancelados o pendientes,
-                    dándote una vista clara del estado de tu evento.
-                </p>
+                    <h3>4. Controla confirmaciones y acomodo</h3>
 
-                <p>
-                    Además, puedes asignar mesas,
-                    generar pases digitales personalizados
-                    y mantener el control total del acomodo,
-                    todo desde la misma plataforma.
-                </p>
+                    <p>
+                        Conforme tus invitados responden,
+                        puedes <a href="/about/guest-mamagement">visualizar las confirmaciones en tiempo real</a>.
+                        I attend organiza automáticamente a tus invitados
+                        en confirmados, cancelados o pendientes,
+                        dándote una vista clara del estado de tu evento.
+                    </p>
 
-                <h3>Un flujo de trabajo claro y sin estrés</h3>
+                    <p>
+                        Además, puedes <a href="/about/mapa-de-mesas">asignar mesas</a>,
+                        generar <a href="/about/pases-digitales">pases digitales</a> personalizados
+                        y mantener el control total del acomodo,
+                        todo desde la misma plataforma.
+                    </p>
 
-                <p>
-                    El flujo de trabajo de <strong>I attend</strong>
-                    está diseñado para acompañarte en cada etapa,
-                    eliminando la confusión y el trabajo manual.
-                    Todo fluye de forma natural,
-                    permitiéndote enfocarte en disfrutar tu evento
-                    mientras la plataforma se encarga de la organización.
-                </p>
+                    <h3>Un flujo de trabajo claro y sin estrés</h3>
 
-                <p>
-                    Si buscas una forma <strong>simple, ordenada y digital</strong>
-                    de organizar eventos, I attend te guía paso a paso
-                    desde el inicio hasta el gran día.
-                </p>
+                    <p>
+                        El flujo de trabajo de <strong>I attend</strong>
+                        está diseñado para acompañarte en cada etapa,
+                        eliminando la confusión y el trabajo manual.
+                        Todo fluye de forma natural,
+                        permitiéndote enfocarte en disfrutar tu evento
+                        mientras la plataforma se encarga de la organización.
+                    </p>
 
-            </section>
+                    <p>
+                        Si buscas una forma <strong>simple, ordenada y digital</strong>
+                        de organizar eventos, I attend te guía paso a paso
+                        desde el inicio hasta el gran día.
+                    </p>
 
+                </section>
+            </div>
         </>
     );
 }

@@ -1,6 +1,8 @@
+import BackButton from "@/components/BackButton/BackButton";
 import { faqs_list } from "@/helpers/SEO/faqs";
 import { Metadata } from "next";
 import Script from "next/script";
+import { IoMdReturnLeft } from "react-icons/io";
 
 /* =========================
    SEO METADATA
@@ -15,7 +17,6 @@ export const metadata: Metadata = {
    PAGE COMPONENT
 ========================= */
 export default function FAQsPage() {
-  console.log("faqs: ", faqs_list);
   return (
     <>
       {/* =========================
@@ -44,18 +45,22 @@ export default function FAQsPage() {
       {/* =========================
                 FAQ CONTENT
             ========================= */}
-      <section style={{
-        maxHeight: '100%', overflow: 'auto'
-      }}>
-        <h1>Preguntas frecuentes</h1>
+      <div style={{ width: '100%', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '36px', boxSizing: 'border-box', maxHeight: '100%', overflow: 'auto' }}>
+        <section className="seo_container" id="invitacion-faqs">
 
-        {faqs_list?.map((faq, index) => (
-          <article key={index} >
-            <h2>{faq.question}</h2>
-            <p>{faq.answer}</p>
-          </article>
-        ))}
-      </section>
+          <div className="action_wrap">
+            <BackButton></BackButton>
+          </div>
+          <h1>Preguntas frecuentes</h1>
+
+          {faqs_list?.map((faq, index) => (
+            <article key={index} >
+              <h2>{faq.question}</h2>
+              <p>{faq.answer}</p>
+            </article>
+          ))}
+        </section>
+      </div>
     </>
   );
 }

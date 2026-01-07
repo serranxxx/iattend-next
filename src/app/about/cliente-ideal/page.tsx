@@ -1,5 +1,8 @@
 import React from "react";
 import Head from "next/head";
+import { Footer } from "@/components/LandPage/Footer/Footer";
+import { IoMdReturnLeft } from "react-icons/io";
+import BackButton from "@/components/BackButton/BackButton";
 
 export default function WhatsAppDeliveryPage() {
     const idealCustomerSchema = {
@@ -47,7 +50,10 @@ export default function WhatsAppDeliveryPage() {
 
 
     return (
-        <>
+        <div style={{
+            display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', flexDirection: 'column',
+            maxHeight: '100vh', overflow: 'auto'
+        }}>
             {/* ================= SEO HEAD ================= */}
             <Head>
                 <title>Para Quién es I attend | Plataforma para Organizar Eventos</title>
@@ -112,92 +118,97 @@ export default function WhatsAppDeliveryPage() {
             </Head>
 
             {/* ================= CONTENIDO ================= */}
-            <section id="ideal-customer" style={{
-                maxHeight: '100%', overflow: 'auto'
-            }}>
+            <div style={{ width: '100%', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '36px', boxSizing: 'border-box', maxHeight: '100%', overflow: 'auto' }}>
+                <section className="seo_container" id="ideal-customer">
 
-                <h2>I attend: la plataforma ideal para quienes organizan eventos</h2>
+                    <div className="action_wrap">
+                        <BackButton></BackButton>
+                    </div>
 
-                <p>
-                    <strong>I attend</strong> está diseñada para personas que buscan
-                    <strong>organizar eventos de forma clara, ordenada y sin estrés</strong>.
-                    Ya sea una boda, un evento social o la gestión profesional de múltiples celebraciones,
-                    la plataforma se adapta a distintos perfiles que comparten una misma necesidad:
-                    <strong>tener control total sobre sus invitados y su evento</strong>.
-                </p>
+                    <h2>I attend: la plataforma ideal para quienes organizan eventos</h2>
 
-                <p>
-                    A continuación, te mostramos para quién es ideal I attend
-                    y cómo puede ayudarte según tu rol en la organización del evento.
-                </p>
+                    <p>
+                        <strong>I attend</strong> está diseñada para personas que buscan
+                        <strong>organizar eventos de forma clara, ordenada y sin estrés</strong>.
+                        Ya sea una boda, un evento social o la gestión profesional de múltiples celebraciones,
+                        la plataforma se adapta a distintos perfiles que comparten una misma necesidad:
+                        <strong>tener <a href="/about/guest-management">control total sobre sus invitados</a> y su evento</strong>.
+                    </p>
 
-                <h3>Parejas que organizan su boda</h3>
+                    <p>
+                        A continuación, te mostramos para quién es ideal I attend
+                        y cómo puede ayudarte según tu rol en la organización del evento.
+                    </p>
 
-                <p>
-                    I attend es ideal para <strong>parejas que están planeando su boda</strong>
-                    y desean tener el control completo desde el primer invitado hasta el gran día.
-                    La plataforma les permite organizar su evento paso a paso,
-                    gestionando invitaciones, confirmaciones, accesos y acomodos
-                    de manera clara y sencilla.
-                </p>
+                    <h3>Parejas que organizan su boda</h3>
 
-                <p>
-                    Con I attend, las parejas pueden <strong>organizar su boda sin estrés innecesario</strong>,
-                    evitando confusiones, listas desordenadas o mensajes perdidos.
-                    Todo el proceso se centraliza en un solo lugar,
-                    brindando tranquilidad, confianza y una mejor experiencia
-                    durante cada etapa de la planeación.
-                </p>
+                    <p>
+                        I attend es ideal para <strong>parejas que están planeando su boda</strong>
+                        y desean tener el control completo desde el primer invitado hasta el gran día.
+                        La plataforma les permite organizar su evento paso a paso,
+                        gestionando <a href="/about/invitaciones-paperless">invitaciones</a>, <a href="/about/guest-management">confirmaciones</a>, accesos y <a href="/about/mapa-de-mesas">acomodos</a>
+                        de manera clara y sencilla.
+                    </p>
 
-                <h3>Event planners y organizadores profesionales</h3>
+                    <p>
+                        Con I attend, las parejas pueden <strong>organizar su boda sin estrés innecesario</strong>,
+                        evitando confusiones, listas desordenadas o mensajes perdidos.
+                        Todo el proceso se centraliza en un solo lugar,
+                        brindando tranquilidad, confianza y una mejor experiencia
+                        durante cada etapa de la planeación.
+                    </p>
 
-                <p>
-                    Para los <strong>event planners</strong>, I attend funciona como una
-                    <strong>herramienta profesional de gestión de eventos</strong>.
-                    Permite administrar <strong>múltiples eventos</strong>
-                    de forma clara, ordenada y eficiente desde una sola plataforma.
-                </p>
+                    <h3>Event planners y organizadores profesionales</h3>
 
-                <p>
-                    El control de invitados, accesos, confirmaciones y mesas
-                    facilita el trabajo operativo y mejora la comunicación con los clientes.
-                    Esto se traduce en una <strong>mejor experiencia tanto para el organizador
-                        como para los asistentes</strong>, elevando el nivel del servicio ofrecido.
-                </p>
+                    <p>
+                        Para los <strong>event planners</strong>, I attend funciona como una
+                        <strong>herramienta profesional de gestión de eventos</strong>.
+                        Permite administrar <strong>múltiples eventos</strong>
+                        de forma clara, ordenada y eficiente desde una sola plataforma.
+                    </p>
 
-                <h3>Hosts y personas que cuidan cada detalle</h3>
+                    <p>
+                        El control de invitados, accesos, <a href="/about/guest-management">confirmaciones</a> y <a href="about/mapa-de-mesas">mesas</a>
+                        facilita el trabajo operativo y mejora la comunicación con los clientes.
+                        Esto se traduce en una <strong>mejor experiencia tanto para el organizador
+                            como para los asistentes</strong>, elevando el nivel del servicio ofrecido.
+                    </p>
 
-                <p>
-                    I attend también es ideal para <strong>hosts y anfitriones</strong>
-                    que se involucran en cada detalle de su evento.
-                    Desde la organización de invitados hasta el control de asistencia,
-                    la plataforma ofrece una <strong>gestión clara y estructurada</strong>
-                    para que todo fluya sin contratiempos.
-                </p>
+                    <h3>Hosts y personas que cuidan cada detalle</h3>
 
-                <p>
-                    Esto permite que el anfitrión se enfoque en disfrutar su evento,
-                    sabiendo que la logística está organizada y bajo control
-                    desde el primer invitado hasta el último momento.
-                </p>
+                    <p>
+                        I attend también es ideal para <strong>hosts y anfitriones</strong>
+                        que se involucran en cada detalle de su evento.
+                        Desde la organización de invitados hasta el <a href="about/guest-management">control de asistencia,</a>
+                        la plataforma ofrece una <strong>gestión clara y estructurada</strong>
+                        para que todo fluya sin contratiempos.
+                    </p>
 
-                <h3>Una solución flexible para distintos tipos de eventos</h3>
+                    <p>
+                        Esto permite que el anfitrión se enfoque en disfrutar su evento,
+                        sabiendo que la logística está organizada y bajo control
+                        desde el primer invitado hasta el último momento.
+                    </p>
 
-                <p>
-                    I attend se adapta tanto a eventos pequeños como a celebraciones de gran escala.
-                    Su enfoque flexible permite que cada usuario utilice solo las herramientas
-                    que necesita, sin procesos complejos ni configuraciones innecesarias.
-                </p>
+                    <h3>Una solución flexible para distintos tipos de eventos</h3>
 
-                <p>
-                    Si buscas una <strong>plataforma digital para organizar eventos</strong>,
-                    gestionar invitados y confirmar asistencia con claridad,
-                    I attend es una solución pensada para ti.
-                </p>
+                    <p>
+                        I attend se adapta tanto a eventos pequeños como a celebraciones de gran escala.
+                        Su enfoque flexible permite que cada usuario utilice solo las herramientas
+                        que necesita, sin procesos complejos ni configuraciones innecesarias.
+                    </p>
 
-            </section>
+                    <p>
+                        Si buscas una <strong>plataforma digital para organizar eventos</strong>,
+                        <a href="about/guest-management">gestionar invitados</a> y confirmar asistencia con claridad,
+                        I attend es una solución pensada para ti.
+                    </p>
 
+                </section>
+            </div>
 
-        </>
+            {/* <Footer></Footer> */}
+
+        </div>
     );
 }

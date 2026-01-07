@@ -6,14 +6,16 @@ import { Button } from "antd";
 import { FaBars, FaPaperPlane } from "react-icons/fa";
 import Image from "next/image";
 import AnimatedPath from "@/components/Motion/AnimatedPath";
+import { LuArrowUpRight } from "react-icons/lu";
+import Link from "next/link";
 
 export const HeroSection = () => {
   return (
     <div
       className={styles.hero_cont}
-      //   style={{
-      //     backgroundImage: `url(https://picsum.photos/1200/800)`,
-      //   }}
+    //   style={{
+    //     backgroundImage: `url(https://picsum.photos/1200/800)`,
+    //   }}
     >
       <Image src="https://picsum.photos/1200/800" alt="" fill style={{ objectFit: "cover", position: "absolute", zIndex: "-1" }} />
       <div className={styles.shadow}></div>
@@ -24,9 +26,17 @@ export const HeroSection = () => {
       <div className={styles.hero_info_box}>
         <span className={styles.hero_h1}>Organiza a tus invitados sin estrés</span>
         <span className={styles.hero_h2}>I attend te acompaña durante todo el proceso</span>
-        <Button icon={<FaPaperPlane />} className={styles.hero_cta}>
+        <div className={styles.action_wrap}>
+          <Button
+            icon={<LuArrowUpRight size={16} />}
+            className={styles.action_button}
+          >
+            AGENDA UNA REUNIÓN
+          </Button>
+        </div>
+        {/* <Button icon={<FaPaperPlane />} className={styles.hero_cta}>
           QUIERO MÁS INFORMACIÓN
-        </Button>
+        </Button> */}
       </div>
 
       <div className={styles.animated}>
