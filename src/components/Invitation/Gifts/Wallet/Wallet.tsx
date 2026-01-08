@@ -16,7 +16,7 @@ import { useScreenWidth } from "@/hooks/useScreenWidth";
 type CardProps = {
   invitation: NewInvitation;
   dev?: boolean;
-  ui:InvitationUIBundle
+  ui: InvitationUIBundle;
 };
 
 export default function Wallet({ ui, invitation, dev = false }: CardProps) {
@@ -199,12 +199,10 @@ export default function Wallet({ ui, invitation, dev = false }: CardProps) {
           className={invitation.generals.texture !== null ? styles.wallet : styles.wallet_light}
           style={{
             backgroundColor:
-              darker(
-                content.background ? (content.inverted ? primary : secondary) : content.inverted ? secondary : primary,
-                0.95
-              ) ?? "#FFF",
-            transform:  `scale(${!isLargeScreen ? '0.7' : '0.9'})`,
-            marginTop: isLargeScreen ? '28px' : undefined
+              darker(content.background ? (content.inverted ? primary : secondary) : content.inverted ? secondary : primary, 0.95) ??
+              "#FFF",
+            transform: `scale(${!isLargeScreen ? "0.7" : "0.9"})`,
+            marginTop: isLargeScreen ? "28px" : undefined,
           }}
         >
           {bottoms.length > 0 &&
@@ -238,16 +236,12 @@ export default function Wallet({ ui, invitation, dev = false }: CardProps) {
                       height: movedIndex === index ? "24px" : undefined,
                     }}
                   >
-                    <img
-                      src={classifyGiftCard(card).imageUrl ?? ""}
-                      alt=""
-                      style={{ height: "100%", objectFit: "cover" }}
-                    />
+                    <img src={classifyGiftCard(card).imageUrl ?? ""} alt="" style={{ height: "100%", objectFit: "cover" }} />
                   </div>
 
                   {card.kind === "store" ? (
                     <div className={styles.wallet_col} style={{ gap: "6px" }}>
-                      <span>D{ui.labels.DiscoverGifts}</span>
+                      <span>{ui.labels.DiscoverGifts}</span>
                       <Button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -284,10 +278,8 @@ export default function Wallet({ ui, invitation, dev = false }: CardProps) {
             onClick={handleReset}
             style={{
               backgroundColor:
-                darker(
-                  content.background ? (content.inverted ? primary : secondary) : content.inverted ? secondary : primary,
-                  0.95
-                ) ?? "#FFF",
+                darker(content.background ? (content.inverted ? primary : secondary) : content.inverted ? secondary : primary, 0.95) ??
+                "#FFF",
               borderColor: content.inverted ? `${accent}60` : `${primary}60`,
             }}
             className={`${invitation.generals.texture !== null ? styles.department : styles.department_light} ${styles.one}`}
