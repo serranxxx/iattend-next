@@ -54,7 +54,7 @@ export const KEY_FEATURES: KeyFeature[] = [
   },
   {
     key: "privacidad",
-    title: "Privacidad",
+    title: "Invitación privada",
     value:
       "Privacidad total en tus invitaciones digitales: elige eventos públicos o privados, controla accesos, personaliza cada invitado y cambia la modalidad cuando quieras, con seguridad, flexibilidad y control absoluto.",
     image: null,
@@ -86,57 +86,52 @@ export const KEY_FEATURES: KeyFeature[] = [
   },
 ];
 
-const FEATURES: Feature[][] = [
-  [
-    {
-      label: (
-        <>
-          Invitación <b>Paperless</b>
-        </>
-      ),
-      seed: "paperless",
-    },
-    {
-      label: (
-        <>
-          Gestión de <b>invitados</b>
-        </>
-      ),
-      seed: "invitados",
-    },
-  ],
-  [
-    {
-      label: <b>Privacidad</b>,
-      seed: "privacidad",
-    },
-    {
-      label: (
-        <>
-          <b>Pases</b> digitales
-        </>
-      ),
-      seed: "pases",
-    },
-  ],
-  [
-    {
-      label: (
-        <>
-          Acomodo por <b>mesas</b>
-        </>
-      ),
-      seed: "mesas",
-    },
-    {
-      label: (
-        <>
-          Envíos por <b>Whatsapp</b>
-        </>
-      ),
-      seed: "whatsapp",
-    },
-  ],
+const FEATURES: Feature[] = [
+
+  {
+    label: (
+      <>
+        Invitación <b>Paperless</b>
+      </>
+    ),
+    seed: "paperless",
+  },
+  {
+    label: (
+      <>
+        Gestión de <b>invitados</b>
+      </>
+    ),
+    seed: "invitados",
+  },
+  {
+    label: (<> Invitación <b>Privada</b></>),
+    seed: "privacidad",
+  },
+  {
+    label: (
+      <>
+        <b>Pases</b> digitales
+      </>
+    ),
+    seed: "pases",
+  },
+  {
+    label: (
+      <>
+        Acomodo por <b>mesas</b>
+      </>
+    ),
+    seed: "mesas",
+  },
+  {
+    label: (
+      <>
+        Envíos por <b>Whatsapp</b>
+      </>
+    ),
+    seed: "whatsapp",
+  },
 ];
 
 
@@ -149,37 +144,41 @@ export const KeyFeatures = () => {
       <section className={styles.key_cont}>
         <span className={styles.key_title}>Todo fluye cuando tienes el control</span>
         <div className={styles.key_main_cont}>
-          {FEATURES.map((column, colIndex) => (
-            <div key={colIndex} className={styles.key_col}>
-              {column.map((feature, index) =>
-                feature && feature.seed ? (
-                  <div key={index} className={styles.key_item}>
-                    <Image
-                      src={`https://picsum.photos/seed/${feature.seed}/600/400`}
-                      alt=""
-                      fill
-                      style={{ position: "absolute", objectFit: "cover" }}
-                    />
-                    <div className={styles.shadow}></div>
-                    <span className={styles.key_label}>{feature.label}</span>
-                    <div className={styles.key_wrap}>
-                      <Button
-                        icon={<LuArrowUpRight />}
-                        onClick={() => {
-                          setOpen(true);
-                          setCurrentItem(feature.seed);
-                        }}
-                        className={styles.key_button}
-                        // style={{ position: "absolute", top: "0px", right: "16px" }}
-                      ></Button>
-                    </div>
+          {FEATURES.map((feature, colIndex) => (
+            <div key={colIndex} className={styles.key_item}>
+              <Image
+                src={`https://picsum.photos/seed/${feature.seed}/600/400`}
+                alt=""
+                fill
+                style={{ position: "absolute", objectFit: "cover" }}
+              />
+              <div className={styles.shadow}></div>
+              <span className={styles.key_label}>{feature.label}</span>
+              <div style={{ position: "absolute", top: "16px", right: "16px" }}>
+                <div className={styles.key_wrap}>
+                  <Button
+                    icon={<LuArrowUpRight />}
+                    onClick={() => {
+                      setOpen(true);
+                      setCurrentItem(feature.seed);
+                    }}
+                    className={styles.key_button}
+                  // 
+                  ></Button>
+                </div>
+              </div>
 
-                  </div>
-                ) : (
-                  <div key={index} className={styles.key_space} />
-                )
-              )}
+
             </div>
+            // <div key={colIndex} className={styles.key_col}>
+            //   {column.map((feature, index) =>
+            //     feature && feature.seed ? (
+
+            //     ) : (
+            //       <div key={index} className={styles.key_space} />
+            //     )
+            //   )}
+            // </div>
           ))}
           <img className={styles.loop_img} src="/assets/images/espiral.svg" alt="" />
         </div>
@@ -213,8 +212,9 @@ export const KeyFeatures = () => {
         height="auto"
         closeIcon={false}
         style={{
-          borderRadius: "0px 24px 24px 0",
+          borderRadius: "0px 12px 12px 0",
           backgroundImage: `linear-gradient(to bottom, #FFF 40%, #CFBEE660)`,
+          maxWidth: '90%'
         }}
         styles={{
           header: {

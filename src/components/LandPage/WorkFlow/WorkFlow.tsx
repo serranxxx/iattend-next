@@ -9,7 +9,7 @@ export const WorkFlow = () => {
       <span className={styles.key_title}>Paso a paso, sin complicarte</span>
 
       <div className={styles.flow_container}>
-        <div className={styles.flow_card} style={{ backgroundImage: `url(https://picsum.photos/seed/list/600/400)` }}>
+        <div className={styles.flow_card}  style={{ backgroundImage: `url(https://picsum.photos/seed/list/600/400)`, }}>
           <div className={styles.shadow}></div>
           <img className={styles.lines} src="/assets/images/line_1.svg" alt="" />
           <span className={styles.flow_title}>
@@ -19,7 +19,7 @@ export const WorkFlow = () => {
         </div>
         <div className={styles.flow_card} style={{ backgroundImage: `url(https://picsum.photos/seed/design/600/400)` }}>
           <div className={styles.shadow}></div>
-          <img style={{ bottom: "-16px" }} className={styles.lines} src="/assets/images/line_2.svg" alt="" />
+          <img style={{ bottom: "-18px" }} className={styles.lines} src="/assets/images/line_2.svg" alt="" />
           <span className={styles.flow_title}>
             Diseña tu <span style={{ color: "#CFBEE6" }}>invitación</span>
           </span>
@@ -27,15 +27,15 @@ export const WorkFlow = () => {
         </div>
         <div className={styles.flow_card} style={{ backgroundImage: `url(https://picsum.photos/seed/share/600/400)` }}>
           <div className={styles.shadow}></div>
-          <img className={styles.lines} src="/assets/images/line_3.svg" alt="" />
+          <img  style={{ bottom: "-22px",  }}className={styles.lines} src="/assets/images/line_3.svg" alt="" />
           <span className={styles.flow_title}>
             <span style={{ color: "#CFBEE6" }}>Comparte</span> con tus invitados
           </span>
           <span className={styles.flow_sub}>Envía tu invitación de manera rápida y directa.</span>
         </div>
-        <div className={styles.flow_card} style={{ backgroundImage: `url(https://picsum.photos/seed/manage/600/400)` }}>
+        <div className={styles.flow_card} style={{ backgroundImage: `url(https://picsum.photos/seed/manage/600/400)`, }}>
           <div className={styles.shadow}></div>
-          <img style={{ bottom: "8px" }} className={styles.lines} src="/assets/images/line_4.svg" alt="" />
+          <img style={{ bottom: "-8px",  }} className={styles.lines} src="/assets/images/line_4.svg" alt="" />
           <span className={styles.flow_title}>
             <span style={{ color: "#CFBEE6" }}>Controla</span> confirmaciones y acomodo
           </span>

@@ -38,7 +38,7 @@ export default function WhatsAppDeliveryPage() {
     };
 
     return (
-        <>
+        <div className="seo_first_container">
             {/* ================= SEO HEAD ================= */}
             <Head>
                 <title>Envíos de Invitaciones por WhatsApp | I attend</title>
@@ -103,7 +103,7 @@ export default function WhatsAppDeliveryPage() {
             </Head>
 
             {/* ================= CONTENIDO ================= */}
-            <div style={{ width: '100%', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '36px', boxSizing: 'border-box', maxHeight: '100%', overflow: 'auto' }}>
+            <div className="seo_second_container">
                 <section className="seo_container" id="envios-whatsapp">
 
                     <div className="action_wrap">
@@ -202,6 +202,6 @@ export default function WhatsAppDeliveryPage() {
                 </section>
             </div>
 
-        </>
+        </div>
     );
 }

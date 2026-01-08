@@ -18,7 +18,10 @@ export const metadata: Metadata = {
 ========================= */
 export default function FAQsPage() {
   return (
-    <>
+    <div style={{
+      display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', flexDirection: 'column',
+      maxHeight: '100vh', overflow: 'auto', width: '100%'
+    }}>
       {/* =========================
                 FAQ SCHEMA (JSON-LD)
             ========================= */}
@@ -45,7 +48,7 @@ export default function FAQsPage() {
       {/* =========================
                 FAQ CONTENT
             ========================= */}
-      <div style={{ width: '100%', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '36px', boxSizing: 'border-box', maxHeight: '100%', overflow: 'auto' }}>
+      <div className="seo_second_container">
         <section className="seo_container" id="invitacion-faqs">
 
           <div className="action_wrap">
@@ -61,6 +64,6 @@ export default function FAQsPage() {
           ))}
         </section>
       </div>
-    </>
+    </div>
   );
 }

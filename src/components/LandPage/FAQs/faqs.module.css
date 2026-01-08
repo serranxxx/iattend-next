@@ -46,7 +46,7 @@
 .ideal_card {
     /* height: 40px; */
     align-self: stretch;
-    border-radius: 8px;
+    border-radius: 6px;
     background-image: linear-gradient(to right, #F5F3F260, #CFBEE640);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
@@ -61,6 +61,47 @@
     flex-direction: column;
     transition: all 0.3s ease;
     gap: 16px;
-    
 
+
+}
+
+.key_wrap {
+    position: relative;
+    display: inline-block;
+    transition: all 0.3s ease;
+    /* margin: 12px 0px 0px 0px; */
+}
+
+.key_wrap::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    top: 15px;
+    height: 50%;
+    background-color: #B2A7C4;
+    border-radius: 4px;
+    z-index: 0;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+    pointer-events: none;
+
+}
+
+
+.key_wrap:hover {
+    transform: translateY(-5px);
+}
+
+.key_button {
+    height: 24px;
+    min-height: 24px;
+    max-width: 24px;
+    min-width: 24px;
+    font-size: 12px;
+    /* margin-top: 12px; */
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    backdrop-filter: blur(10px);
+    color: #000;
+    position: relative;
+    z-index: 3;
 }

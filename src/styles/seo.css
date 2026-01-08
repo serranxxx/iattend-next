@@ -1,9 +1,31 @@
+.seo_first_container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    max-height: 100vh;
+    width: 100%;
+    overflow: auto;
+    padding-top: 24px;
+}
+
+.seo_second_container {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 12px;
+    box-sizing: border-box;
+    max-height: 100%;
+    overflow: auto;
+}
+
 .seo_container {
     color: #20212B;
     font-family: 'Outfit', 'Poppins';
     line-height: 180%;
     box-sizing: border-box;
-    padding: 36px;
+    padding: 24px;
     gap: 24px;
     display: flex;
     align-items: flex-start;
@@ -11,8 +33,8 @@
     flex-direction: column;
     min-height: 100vh;
     max-width: 800px;
-    background-color: #F5F3F2;
-    border-radius: 36px;
+    background-color: #F5F3F280;
+    border-radius: 12px;
 }
 
 .seo_container h1 {

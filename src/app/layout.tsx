@@ -6,8 +6,8 @@ import { AntdProvider } from "@/context/AntdProvider";
 
 export const metadata: Metadata = {
   title: "I attend",
-  description: "Diseña, comparte, celebra.",
-  keywords: ["invitaciones digitales", "bodas", "fiestas", "i attend"],
+  description: "Plan with ease",
+  keywords: ["invitaciones digitales", "bodas", "fiestas", "I attend"],
   icons: {
     icon: [
       { url: "/icon.png", type: "image/png" },
@@ -18,14 +18,10 @@ export const metadata: Metadata = {
 };
 
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
 
   return (
-    <html lang="en">
+    <html lang="en" >
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <link
@@ -33,14 +29,12 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>
+      <body style={{ margin: 0, padding: 0 }}>
         <AppProvider>
           <AntdProvider>
             {children}
           </AntdProvider>
         </AppProvider>
-
-        {/* <GoogleTranslate /> */}
       </body>
     </html>
   );

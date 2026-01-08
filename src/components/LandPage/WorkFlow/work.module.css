@@ -24,11 +24,14 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 12px;
+    gap: 6px;
     width: 100%;
     max-width: 100%;
     overflow-x: auto;
-    padding: 8px 24px;
+    padding: 0;
+    background-color: #000;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.4);
+
 }
 
 .flow_card {
@@ -36,7 +39,7 @@
     overflow: hidden;
     min-width: 220px;
     height: 320px;
-    border-radius: 24px;
+    border-radius: 0px;
     background-color: #CFBEE680;
     box-sizing: border-box;
     padding: 16px;
@@ -47,7 +50,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.4);
+    /* box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.4); */
 }
 
 .lines {

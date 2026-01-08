@@ -6,6 +6,7 @@ import { Button } from "antd";
 
 import { LuChevronDown } from "react-icons/lu";
 import { faqs_list } from "@/helpers/SEO/faqs";
+import Link from "next/link";
 
 export const FAQs = () => {
   const [activeCard, setActiveCard] = useState<number | null>(null);
@@ -19,7 +20,20 @@ export const FAQs = () => {
           <div key={index} onClick={() => setActiveCard((prev) => (prev === index ? null : index))} className={styles.ideal_card}>
             <div className={styles.question_head}>
               <span>{q.question}</span>
-              <Button
+
+              <div className={styles.key_wrap}>
+                <Button
+                  icon={
+                    <LuChevronDown
+                      style={{ transform: activeCard === index ? "rotate(180deg)" : "rotate(0deg)", transition: "all 0.3s ease" }}
+                      size={16}
+                    />
+                  }
+                  className={styles.key_button}
+                // 
+                ></Button>
+              </div>
+              {/* <Button
                 icon={
                   <LuChevronDown
                     style={{ transform: activeCard === index ? "rotate(180deg)" : "rotate(0deg)", transition: "all 0.3s ease" }}
@@ -27,7 +41,7 @@ export const FAQs = () => {
                   />
                 }
                 style={{ backgroundColor: "#FFF", maxHeight: "26px", minWidth: "26px", maxWidth: "26px" }}
-              ></Button>
+              ></Button> */}
             </div>
 
             {activeCard === index && <span style={{ fontWeight: 200, whiteSpace: "pre-line" }}>{q.answer}</span>}
@@ -35,9 +49,12 @@ export const FAQs = () => {
         ))}
       </div>
       <div className={styles.button_cont}>
-        <Button style={{ textDecoration: "underline" }} type="text">
-          Ver más
-        </Button>
+        <Link href="/about/faqs">
+          <Button style={{ textDecoration: "underline", fontWeight:800, color:'#6E3DFA' }} type="text">
+            Ver más
+          </Button>
+        </Link>
+
       </div>
     </div>
   );

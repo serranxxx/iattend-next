@@ -39,7 +39,7 @@ export default function GuestManagementPage() {
     };
 
     return (
-        <>
+        <div className="seo_first_container">
             {/* ================= SEO & METADATA ================= */}
             <Head>
                 <title>Privacidad y Control de Acceso en Invitaciones Digitales | I attend</title>
@@ -101,7 +101,7 @@ export default function GuestManagementPage() {
             </Head>
 
             {/* ================= CONTENIDO ================= */}
-            <div style={{ width: '100%', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '36px', boxSizing: 'border-box', maxHeight: '100%', overflow: 'auto' }}>
+            <div className="seo_second_container">
                 <section className="seo_container" id="invitacion-privada">
 
                     <div className="action_wrap">
@@ -215,6 +215,6 @@ export default function GuestManagementPage() {
 
 
 
-        </>
+        </div>
     );
 }

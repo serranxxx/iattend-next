@@ -29,7 +29,7 @@ export default function Page() {
     };
 
     return (
-        <>
+        <div className="seo_first_container">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
@@ -38,7 +38,7 @@ export default function Page() {
             />
 
             {/* ================= CONTENIDO ================= */}
-            <div style={{ width: '100%', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '36px', boxSizing: 'border-box', maxHeight: '100%', overflow: 'auto' }}>
+            <div className="seo_second_container">
                 <section className="seo_container" id="invitacion-paperless">
 
                     <div className="action_wrap">
@@ -169,6 +169,6 @@ export default function Page() {
                 </section>
             </div>
 
-        </>
+        </div>
     );
 }

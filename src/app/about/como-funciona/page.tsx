@@ -38,7 +38,7 @@ export default function WorkflowPage() {
     };
 
     return (
-        <>
+        <div className="seo_first_container">
             {/* ================= SEO HEAD ================= */}
             <Head>
                 <title>Cómo Funciona I attend | Organiza tu Evento Paso a Paso</title>
@@ -100,8 +100,8 @@ export default function WorkflowPage() {
             </Head>
 
             {/* ================= CONTENIDO ================= */}
-            <div style={{ width: '100%', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '36px', boxSizing: 'border-box', maxHeight: '100%', overflow: 'auto' }}>
-                <section className="seo_container" id="invitacion-privada">
+            <div className="seo_second_container">
+                <section className="seo_container" id="como-funciona">
 
                     <div className="action_wrap">
                         <BackButton></BackButton>
@@ -208,6 +208,6 @@ export default function WorkflowPage() {
 
                 </section>
             </div>
-        </>
+        </div>
     );
 }
