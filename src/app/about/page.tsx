@@ -12,10 +12,12 @@ import { Reviews } from "@/components/LandPage/Reviews/Reviews";
 export default function LandPage() {
   return (
     <div className={styles.main_container_land}>
+      
       <HeroSection></HeroSection>
-      <KeyFeatures></KeyFeatures>
-      <IdealCustomer></IdealCustomer>
       <WorkFlow></WorkFlow>
+      
+      <IdealCustomer></IdealCustomer>
+      <KeyFeatures></KeyFeatures>
 
       <Reviews></Reviews>
       <Plans></Plans>

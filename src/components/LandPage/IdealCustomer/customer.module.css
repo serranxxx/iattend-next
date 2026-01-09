@@ -5,17 +5,17 @@
     flex-direction: column;
     align-self: stretch;
     padding: 36px 0px;
-    gap: 24px;
+    gap: 32px;
     padding-bottom: 0px;
     /* z-index: -1; */
 }
 
 .key_title {
     padding: 0px 24px;
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 32px;
+    font-weight: 800;
     color: #20212B;
-    font-family: 'Outfit', 'Poppins';
+    font-family: 'Geom', 'Outfit', 'Poppins';
     line-height: 110%;
     z-index: 2;
 }
@@ -53,7 +53,7 @@
     justify-content: flex-start;
     gap: 8px;
     color: #20212B;
-    font-family: 'Outfit', 'Poppins';
+    font-family: 'Geom', 'Outfit', 'Poppins';
     line-height: 110%;
     font-size: 18px;
     font-weight: 700;
@@ -65,7 +65,7 @@
 
 .card_desc {
     color: #20212B80;
-    font-family: 'Outfit', 'Poppins';
+    font-family: 'Geom', 'Outfit', 'Poppins';
     line-height: 150%;
     font-weight: 400;
     font-size: 16px;

@@ -42,7 +42,7 @@ export const KEY_FEATURES: KeyFeature[] = [
     value:
       "Invitaciones digitales paperless para bodas y eventos: elegantes, personalizables y fáciles de usar. Comparte toda tu información en un solo enlace, actualizable, visual y accesible desde cualquier dispositivo.",
     image: null,
-    path: "invitacion-paperless"
+    path: "invitacion-digital"
   },
   {
     key: "invitados",

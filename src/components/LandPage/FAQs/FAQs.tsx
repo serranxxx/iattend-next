@@ -13,7 +13,7 @@ export const FAQs = () => {
 
   return (
     <div className={styles.key_cont}>
-      <span className={styles.key_title}>¿Tienes más preguntas?</span>
+      <span className={styles.key_title}>Lo que necesitas saber</span>
 
       <div className={styles.ideal_cont}>
         {faqs_list.slice(0, 5).map((q, index) => (
@@ -50,7 +50,7 @@ export const FAQs = () => {
       </div>
       <div className={styles.button_cont}>
         <Link href="/about/faqs">
-          <Button style={{ textDecoration: "underline", fontWeight:800, color:'#6E3DFA' }} type="text">
+          <Button style={{ textDecoration: "underline", fontWeight:800, color:'#20212B' }} type="text">
             Ver más
           </Button>
         </Link>

@@ -5,17 +5,17 @@
     flex-direction: column;
     align-self: stretch;
     padding: 36px 0px;
-    gap: 24px;
+    gap: 32px;
     padding-bottom: 0px;
     /* z-index: -1; */
 }
 
 .key_title {
     padding: 0px 24px;
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 32px;
+    font-weight: 800;
     color: #20212B;
-    font-family: 'Outfit', 'Poppins';
+    font-family: 'Geom', 'Outfit', 'Poppins';
     line-height: 110%;
     z-index: 2;
 }
@@ -48,7 +48,7 @@
     font-size: 16px;
     font-weight: 400;
     color: #20212B;
-    font-family: 'Outfit', 'Poppins';
+    font-family: 'Geom', 'Outfit', 'Poppins';
     line-height: 150%;
     min-height: 220px;
 }

@@ -7,7 +7,7 @@
     max-height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
-    background-image: linear-gradient(#FFFFFF 70%, #b09ccb);
+    background-image: linear-gradient(#F9F9F9 80%, #b09ccb40);
     gap: 24px;
 }
 

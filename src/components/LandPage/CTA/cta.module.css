@@ -5,16 +5,16 @@
     flex-direction: column;
     align-self: stretch;
     padding: 36px 24px;
-    gap: 8px;
+    gap: 32px;
+    padding-bottom: 0px;
     /* z-index: -1; */
 }
 
 .key_title {
-    /* padding: 0px 24px; */
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 32px;
+    font-weight: 800;
     color: #20212B;
-    font-family: 'Outfit', 'Poppins';
+    font-family: 'Geom', 'Outfit', 'Poppins';
     line-height: 110%;
     z-index: 2;
 }
@@ -23,14 +23,13 @@
     /* padding: 0px 24px; */
     font-weight: 400;
     color: #20212B;
-    font-family: 'Outfit', 'Poppins';
+    font-family: 'Geom', 'Outfit', 'Poppins';
     line-height: 140%;
     font-size: 18px;
 }
 
 
 .cta_button {
-    margin-top: 12px;
     font-size: 16px;
     background-color: rgb(206, 189, 229);
     color: #20212B;
@@ -63,7 +62,8 @@
     position: relative;
     display: inline-block;
     transition: all 0.3s ease;
-    margin: 12px 0px 0px 0px;
+    margin-bottom: 36px;
+    /* margin: 12px 0px 0px 0px; */
 }
 
 .action_wrap::before {

@@ -5,21 +5,18 @@
     flex-direction: column;
     align-self: stretch;
     padding: 36px 0px;
-    gap: 24px;
-    position: relative;
+    gap: 0px;
     padding-bottom: 0px;
-    /* border: 1px solid; */
-    /* overflow: hidden;
-    min-height: auto; */
+    margin-bottom: -24px;
     /* z-index: -1; */
 }
 
 .key_title {
     padding: 0px 24px;
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 32px;
+    font-weight: 800;
     color: #20212B;
-    font-family: 'Outfit', 'Poppins';
+    font-family: 'Geom', 'Outfit', 'Poppins';
     line-height: 110%;
     z-index: 2;
 }
@@ -30,8 +27,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    opacity: 0.2;
+    opacity: 0.3;
     pointer-events: none;
+    
 
     /* opacity: 0.1; */
 }
@@ -44,13 +42,13 @@
     align-items: stretch;
     justify-items: stretch;
 
-    height: 520px;
+    height: 480px;
     z-index: 2;
     box-sizing: border-box;
-    /* transform: scale(0.9); */
-    /* border-radius: 12px; */
+    transform: scale(0.88);
+    border-radius: 12px;
     overflow: hidden;
-    /* box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.2); */
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.2);
     position: relative;
 
 }
@@ -93,7 +91,7 @@
 .key_label {
     text-align: center;
     color: #FFF;
-    font-family: 'Outfit', 'Poppins';
+    font-family: 'Geom', 'Outfit', 'Poppins';
     line-height: 130%;
     font-size: 14px;
     line-height: 1.4;
@@ -108,6 +106,7 @@
     height: 100%;
     bottom: 0px;
     left: 0px;
+    mix-blend-mode: multiply;
 }
 
 .image_cont {
@@ -122,8 +121,8 @@
 .drawer_value {
     font-size: 22px;
     font-weight: 600;
-    color: #20212B;
-    font-family: 'Outfit', 'Poppins';
+    font-family: 'Geom', 'Outfit', 'Poppins';
+    color: #000;
     line-height: 140%;
 }
 
@@ -211,8 +210,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #20212B;
-    font-family: 'Outfit', 'Poppins';
+    font-family: 'Geom', 'Outfit', 'Poppins';
     line-height: 110%;
     display: flex;
     align-items: flex-start;

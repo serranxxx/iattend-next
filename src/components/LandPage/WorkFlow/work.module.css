@@ -5,17 +5,17 @@
     flex-direction: column;
     align-self: stretch;
     padding: 36px 0px;
-    gap: 24px;
+    gap: 32px;
     padding-bottom: 0px;
     /* z-index: -1; */
 }
 
 .key_title {
     padding: 0px 24px;
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 32px;
+    font-weight: 800;
     color: #20212B;
-    font-family: 'Outfit', 'Poppins';
+    font-family: 'Geom', 'Outfit', 'Poppins';
     line-height: 110%;
     z-index: 2;
 }
@@ -38,7 +38,7 @@
     position: relative;
     overflow: hidden;
     min-width: 220px;
-    height: 320px;
+    height: 280px;
     border-radius: 0px;
     background-color: #CFBEE680;
     box-sizing: border-box;
@@ -59,6 +59,7 @@
     bottom: 0;
     left: 50%;
     transform: translate(-50%);
+    
 }
 
 
@@ -70,13 +71,14 @@
     background-image: linear-gradient(to bottom, #20212B80 40%, rgba(255, 255, 255, 0));
     left: 0;
     top: 0;
+    mix-blend-mode: multiply;
     /* z-index: -1; */
 }
 
 .flow_title,
 .flow_sub {
     color: #FFF;
-    font-family: 'Outfit', 'Poppins';
+    font-family: 'Geom', 'Outfit', 'Poppins';
     line-height: 110%;
     font-size: 22px;
     font-weight: 600;
