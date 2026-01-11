@@ -3,15 +3,19 @@ import styles from "./work.module.css";
 import { Button } from "antd";
 import { FaBars } from "react-icons/fa";
 import Image from "next/image";
+import { PiFlowArrowBold } from "react-icons/pi";
 
 export const WorkFlow = () => {
   return (
     <div className={styles.key_cont}>
-      <span className={styles.key_title}>Paso a paso, sin complicarte</span>
+      {/* <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '4px', padding:'0px 24px' }}> */}
+        {/* <PiFlowArrowBold size={120} style={{color:'#6E3DFA'}} /> */}
+        <span className={styles.key_title}>Paso a paso, sin complicarte</span>
+      {/* </div> */}
 
       <div className={styles.flow_container}>
         <div className={styles.flow_card} >
-          <Image fill src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/ARJ00442.jpg" alt="" style={{ objectFit: 'cover' }} />
+          <Image fill src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/guest-list.jpg" alt="" style={{ objectFit: 'cover' }} />
           <div className={styles.shadow}></div>
           <img className={styles.lines} src="/assets/images/line_2.svg" alt="" />
           <span className={styles.flow_title}>
@@ -20,7 +24,7 @@ export const WorkFlow = () => {
           <span className={styles.flow_sub}>Crea y organiza tu lista de invitados desde un solo lugar.</span>
         </div>
         <div className={styles.flow_card}>
-          <Image fill src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/ARJ00285.jpg" alt="" style={{ objectFit: 'cover', transform: 'scaleX(-1)' }} />
+          <Image fill src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/make-inv%20(1).jpg" alt="" style={{ objectFit: 'cover', }} />
           <div className={styles.shadow}></div>
           <img style={{ bottom: "0px" }} className={styles.lines} src="/assets/images/line_3.svg" alt="" />
           <span className={styles.flow_title}>
@@ -29,7 +33,7 @@ export const WorkFlow = () => {
           <span className={styles.flow_sub}>Personaliza tu invitación de forma sencilla y sin complicaciones.</span>
         </div>
         <div className={styles.flow_card} >
-          <Image fill src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/ARJ00414.jpg" alt="" style={{ objectFit: 'cover' }} />
+          <Image fill src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/share-inv%20(1).jpg" alt="" style={{ objectFit: 'cover' }} />
           <div className={styles.shadow}></div>
           <img style={{ bottom: "12px", }} className={styles.lines} src="/assets/images/line_4.svg" alt="" />
           <span className={styles.flow_title}>
