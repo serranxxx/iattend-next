@@ -17,7 +17,7 @@ export const HeroSection = () => {
     //     backgroundImage: `url(https://picsum.photos/1200/800)`,
     //   }}
     >
-      <Image src="https://picsum.photos/1200/800" alt="" fill style={{ objectFit: "cover", position: "absolute", zIndex: "-1" }} />
+      <Image  src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/ARJ00367.jpg" alt="" fill style={{ objectFit: "cover", position: "absolute", zIndex: "-1" }} />
       <div className={styles.shadow}></div>
       <div className={styles.hero_first_row}>
         <img className={styles.hero_logo} src="/assets/images/blanco.png" alt="i attend" />

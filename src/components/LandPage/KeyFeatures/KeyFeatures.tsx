@@ -17,6 +17,7 @@ import Link from "next/link";
 type Feature = {
   label: React.ReactNode | null;
   seed: string | null;
+  image: string;
 };
 
 type Feat = {
@@ -41,7 +42,7 @@ export const KEY_FEATURES: KeyFeature[] = [
     title: "Invitación Paperless",
     value:
       "Invitaciones digitales paperless para bodas y eventos: elegantes, personalizables y fáciles de usar. Comparte toda tu información en un solo enlace, actualizable, visual y accesible desde cualquier dispositivo.",
-    image: null,
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/ARJ00299.jpg",
     path: "invitacion-digital"
   },
   {
@@ -49,7 +50,7 @@ export const KEY_FEATURES: KeyFeature[] = [
     title: "Gestión de invitados",
     value:
       "Guest Management de I attend: controla invitados en un solo lugar. Envía invitaciones por WhatsApp, gestiona accesos, confirma asistencias en tiempo real y mantén tu evento organizado, claro y sin estrés.",
-    image: null,
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/ARJ00442.jpg",
     path: "guest-management"
   },
   {
@@ -57,7 +58,7 @@ export const KEY_FEATURES: KeyFeature[] = [
     title: "Invitación privada",
     value:
       "Privacidad total en tus invitaciones digitales: elige eventos públicos o privados, controla accesos, personaliza cada invitado y cambia la modalidad cuando quieras, con seguridad, flexibilidad y control absoluto.",
-    image: null,
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/ARJ00329.jpg",
     path: "privacidad"
   },
   {
@@ -65,7 +66,7 @@ export const KEY_FEATURES: KeyFeature[] = [
     title: "Pases digitales",
     value:
       "Pases digitales personalizados para bodas y eventos: acceso seguro desde el celular, generación automática al confirmar asistencia, mesas asignadas y control claro de invitados, sin boletos físicos y con una experiencia moderna.",
-    image: null,
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/ARJ00410.jpg",
     path: "pases-digitales"
   },
   {
@@ -73,7 +74,7 @@ export const KEY_FEATURES: KeyFeature[] = [
     title: "Envíos por WhatsApp",
     value:
       "Envía invitaciones por WhatsApp de forma automática y segura con I attend. Usa el API oficial, evita bloqueos, controla envíos con créditos y comunica tu evento de manera profesional y confiable.",
-    image: null,
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/ARJ00341.jpg",
     path: "envios-whatsapp"
   },
   {
@@ -81,7 +82,7 @@ export const KEY_FEATURES: KeyFeature[] = [
     title: "Acomodo por mesas",
     value:
       "Organiza a tus invitados sin estrés con el seating chart digital de I attend: mapa de mesas interactivo, asignación visual, edición flexible y control total para bodas y eventos de cualquier tamaño.",
-    image: null,
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/ARJ00395.jpg",
     path: "mapa-de-mesas"
   },
 ];
@@ -95,6 +96,7 @@ const FEATURES: Feature[] = [
       </>
     ),
     seed: "paperless",
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/ARJ00299.jpg",
   },
   {
     label: (
@@ -103,10 +105,12 @@ const FEATURES: Feature[] = [
       </>
     ),
     seed: "invitados",
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/ARJ00442.jpg"
   },
   {
     label: (<> Invitación <b>Privada</b></>),
     seed: "privacidad",
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/ARJ00329.jpg"
   },
   {
     label: (
@@ -115,6 +119,7 @@ const FEATURES: Feature[] = [
       </>
     ),
     seed: "pases",
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/ARJ00410.jpg"
   },
   {
     label: (
@@ -123,6 +128,7 @@ const FEATURES: Feature[] = [
       </>
     ),
     seed: "mesas",
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/ARJ00395.jpg"
   },
   {
     label: (
@@ -131,6 +137,7 @@ const FEATURES: Feature[] = [
       </>
     ),
     seed: "whatsapp",
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/ARJ00341.jpg"
   },
 ];
 
@@ -147,7 +154,7 @@ export const KeyFeatures = () => {
           {FEATURES.map((feature, colIndex) => (
             <div key={colIndex} className={styles.key_item}>
               <Image
-                src={`https://picsum.photos/seed/${feature.seed}/600/400`}
+                src={`${feature.image}`}
                 alt=""
                 fill
                 style={{ position: "absolute", objectFit: "cover" }}
@@ -233,7 +240,7 @@ export const KeyFeatures = () => {
       >
         <div className={styles.image_cont}>
           <Image
-            src={`https://picsum.photos/seed/${currentItem}/600/400`}
+            src={KEY_FEATURES.find((k) => k.key === currentItem)?.image!}
             fill
             alt=""
             style={{ position: "absolute", objectFit: "cover" }}
