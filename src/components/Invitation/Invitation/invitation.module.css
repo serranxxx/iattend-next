@@ -11,6 +11,7 @@
   overflow-x: hidden;
   overflow-y: auto;
   padding-bottom: 44px;
+  min-height: 110vmax;
 }
 
 

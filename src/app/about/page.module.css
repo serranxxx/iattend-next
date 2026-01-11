@@ -1,3 +1,16 @@
+.main_container_land {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    max-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-image: linear-gradient(#F9F9F9 80%, #b09ccb40);
+    gap: 24px;
+}
+
 .home_page_container {
     display: flex;
     align-items: flex-start;
@@ -884,7 +897,7 @@
         padding-bottom: 120px;
     }
 
-    
+
 
     .invitation-container-box {
         justify-content: center;

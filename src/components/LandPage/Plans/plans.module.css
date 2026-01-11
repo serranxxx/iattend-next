@@ -1,0 +1,62 @@
+.key_cont {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-self: stretch;
+    padding: 36px 0px;
+    gap: 32px;
+    padding-bottom: 0px;
+    /* z-index: -1; */
+}
+
+.key_title {
+    padding: 0px 24px;
+    font-size: 32px;
+    font-weight: 800;
+    color: #20212B;
+    font-family: 'Geom', 'Outfit', 'Poppins';
+    line-height: 110%;
+    z-index: 2;
+}
+
+.plans_cont {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    box-sizing: border-box;
+    padding: 0px 24px;
+    gap: 12px;
+    position: relative;
+    transform: scale(0.9);
+    
+}
+
+.plan_card {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    box-sizing: border-box;
+    background-color: #CFBEE620;
+    height: 400px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Outfit", "Poppins";
+    /* border: 1px solid #ebebeb; */
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.plan_image {
+    max-width: 90%;
+    border-radius: 12px;
+    
+}
+
