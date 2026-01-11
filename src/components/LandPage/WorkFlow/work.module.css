@@ -29,7 +29,7 @@
     width: 100%;
     max-width: 100%;
     overflow-x: auto;
-    padding: 0px 24px;
+    padding: 6px 24px;
     /* background-color: #000; */
 
 }
@@ -38,7 +38,7 @@
     position: relative;
     overflow: hidden;
     min-width: 220px;
-    height: 280px;
+    height: 320px;
     border-radius: 12px;
     background-color: #CFBEE680;
     box-sizing: border-box;
@@ -62,7 +62,7 @@
     left: 50%;
     transform: translate(-50%);
     z-index: 0;
-    opacity: 0.6;
+    opacity: 0.8;
     
 }
 
