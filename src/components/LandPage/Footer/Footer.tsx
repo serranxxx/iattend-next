@@ -38,7 +38,7 @@ export const Footer = () => {
       </div>
 
       <div className={styles.link_cont}>
-        <span style={{fontWeight: 900, marginBottom:'8px'}}><b>Servicios I attend</b></span>
+        <span style={{fontWeight: 900, marginBottom:'8px'}}><b>Servicios</b></span>
         <a href="/about/invitacion-digital">Invitación Paperless</a>
         <a href="/about/guest-management">Gestión de invitados</a>
         <a href="/about/mapa-de-mesas">Organización por mesas</a>

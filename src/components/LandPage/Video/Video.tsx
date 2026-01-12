@@ -11,7 +11,7 @@ export default function Video() {
 
     useEffect(() => {
         if (videoRef.current) {
-            videoRef.current.playbackRate = 2.5
+            videoRef.current.playbackRate = 2
         }
     }, [])
 
