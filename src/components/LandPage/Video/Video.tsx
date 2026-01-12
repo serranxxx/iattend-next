@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react'
 import styles from './video.module.css'
 import { Button } from 'antd'
 import { LuArrowUpRight } from 'react-icons/lu'
+import Link from 'next/link'
 
 export default function Video() {
 
@@ -14,6 +15,11 @@ export default function Video() {
             videoRef.current.playbackRate = 2
         }
     }, [])
+
+
+    const message = encodeURIComponent(
+        "¡Hola! Me interesan los servicios de I attend"
+    );
 
     return (
         <div className={styles.main_cont}>
@@ -46,14 +52,16 @@ export default function Video() {
                         <span className={styles.cta_text}>
                             Crea tu evento, gestiona invitados y controla la asistencia desde un solo lugar. Sin complicaciones, sin herramientas extra.
                         </span>
-                        <div className={styles.action_wrap}>
+                        <Link href={`https://wa.me/6145338500?text=${message}`}
+                            rel="noreferrer"
+                            target="_blank">
                             <Button
                                 icon={<LuArrowUpRight size={16} />}
                                 className={styles.action_button}
                             >
                                 PLATICA CON NOSOTROS
                             </Button>
-                        </div>
+                        </Link>
                     </div>
 
 
