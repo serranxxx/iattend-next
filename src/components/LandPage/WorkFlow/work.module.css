@@ -1,3 +1,10 @@
+.main_cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
 .key_cont {
     display: flex;
     align-items: flex-start;
@@ -63,7 +70,7 @@
     transform: translate(-50%);
     z-index: 0;
     opacity: 0.8;
-    
+
 }
 
 
@@ -94,4 +101,22 @@
     font-weight: 400;
     margin-top: 8px;
     color: #FFFFFF;
+}
+
+@media (min-width: 768px) {
+
+    .key_cont {
+        max-width: 1320px;
+        display: flex;
+        /* z-index: -1; */
+    }
+
+    .flow_card {
+        flex: 1;
+    }
+
+    .key_title {
+        font-size: 38px;
+
+    }
 }

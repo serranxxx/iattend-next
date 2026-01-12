@@ -148,7 +148,7 @@ export const KeyFeatures = () => {
   const [currentItem, setCurrentItem] = useState<any>(null);
 
   return (
-    <>
+    <div className={styles.main_cont}>
       <section className={styles.key_cont}>
         <span className={styles.key_title}>Todo fluye cuando tienes el control</span>
         <div className={styles.key_main_cont}>
@@ -308,6 +308,6 @@ export const KeyFeatures = () => {
           </article>
         ))}
       </section>
-    </>
+    </div>
   );
 };

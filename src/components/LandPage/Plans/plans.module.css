@@ -104,3 +104,52 @@
     ;
 }
 
+.main_cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    
+}
+
+@media (min-width: 768px) {
+
+    .key_cont {
+        max-width: 1320px;
+        display: flex;
+        width: 100%;
+        background-color: #F5F3F2;
+        /* z-index: -1; */
+    }
+
+    .key_title {
+        font-size: 38px;
+
+    }
+
+    .plans_cont {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: stretch;
+        box-sizing: border-box;
+        padding: 0px 24px;
+        gap: 36px;
+        position: relative;
+        transform: scale(1);
+        margin: 36px 0px;
+        
+    }
+
+    .plan_card {
+        min-width: 300px !important;
+        max-width: 300px !important;
+        position: static !important;
+        transform: rotate(0deg) !important;
+        height: 560px;
+    }
+
+    
+      
+}

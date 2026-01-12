@@ -31,7 +31,7 @@ export const HeroSection = () => {
             icon={<LuArrowUpRight size={16} />}
             className={styles.action_button}
           >
-            AGENDA UNA REUNIÓN
+            PLATICA CON NOSOTROS
           </Button>
         </div>
         {/* <Button icon={<FaPaperPlane />} className={styles.hero_cta}>

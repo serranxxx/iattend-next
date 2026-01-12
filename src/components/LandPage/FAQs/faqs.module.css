@@ -105,3 +105,37 @@
     position: relative;
     z-index: 3;
 }
+
+.main_cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    
+}
+
+@media (min-width: 768px) {
+
+    .key_cont {
+        max-width: 1320px;
+        display: flex;
+        width: 100%;
+        /* z-index: -1; */
+    }
+
+    .key_title {
+        font-size: 38px;
+
+    }
+
+    
+    .question_head {
+        font-size: 18px;
+    }
+
+    .button_see_more {
+        font-size: 18px !important;
+    }
+    
+      
+}

@@ -6,7 +6,7 @@
     width: 100%;
     padding: 36px 0px;
     gap: 18px;
-    background-image: linear-gradient(to top, #CFBEE680 0%, #CFBEE6 100%);
+
 }
 
 .footer_main_col {
@@ -82,4 +82,80 @@
     font-family: 'Geom', 'Outfit', 'Poppins';
     color: #FFF;
     font-weight: 400;
+}
+
+.main_cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-image: linear-gradient(to top, #CFBEE680 0%, #CFBEE6 100%);
+
+}
+
+.links {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 18px;
+}
+
+@media (min-width: 768px) {
+
+    .footer_cont {
+        max-width: 1320px;
+        display: flex;
+        width: 100%;
+        /* z-index: -1; */
+    }
+
+    .footer_main_col {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        align-self: stretch;
+        gap: 44px;
+        padding: 0px 24px;
+    }
+
+    .footer_row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        align-self: stretch;
+        flex: 1;
+    }
+
+    .links_col {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: row;
+        gap: 24px;
+        width: auto;
+        /* padding: 0px 24px; */
+
+    }
+
+    .footer_logo {
+        max-width: 230px;
+    }
+
+
+
+    .links {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 18px;
+    }
+    
+
+
+   
+
 }

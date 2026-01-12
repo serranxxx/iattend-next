@@ -11,6 +11,14 @@
     gap: 24px;
 }
 
+@media (min-width: 768px) {
+
+    .main_container_land {
+        gap: 44px;
+    }
+    
+}
+
 .home_page_container {
     display: flex;
     align-items: flex-start;

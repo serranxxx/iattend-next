@@ -43,27 +43,30 @@ export const IdealCustomer = () => {
   const [activeCard, setActiveCard] = useState<number>(0);
 
   return (
-    <div className={styles.key_cont}>
-      <span className={styles.key_title}>Para quienes organizan eventos</span>
+    <div className={styles.main_cont}>
+      <div className={styles.key_cont}>
+        <span className={styles.key_title}>Para quienes organizan eventos</span>
 
-      <div className={styles.ideal_cont}>
-        {AUDIENCE_ITEMS.map((item, index) => (
-          <div
-            key={index}
-            onClick={() => setActiveCard(item.id)}
-            style={{
-              height: activeCard === item.id ? "auto" : undefined,
-            }}
-            className={styles.ideal_card}
-          >
-            <div className={styles.card_row}>
-              {item.icon}
-              <span>{item.title}</span>
+        <div className={styles.ideal_cont}>
+          {AUDIENCE_ITEMS.map((item, index) => (
+            <div
+              key={index}
+              onClick={() => setActiveCard(item.id)}
+              style={{
+                height: activeCard === item.id ? "auto" : undefined,
+              }}
+              className={styles.ideal_card}
+            >
+              <div className={styles.card_row}>
+                {item.icon}
+                <span>{item.title}</span>
+              </div>
+              <span className={styles.card_desc}>{item.description}</span>
             </div>
-            <span className={styles.card_desc}>{item.description}</span>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
+
   );
 };
