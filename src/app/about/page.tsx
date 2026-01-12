@@ -8,6 +8,7 @@ import { FAQs } from "@/components/LandPage/FAQs/FAQs";
 import { Footer } from "@/components/LandPage/Footer/Footer";
 import { CTA } from "@/components/LandPage/CTA/CTA";
 import { Reviews } from "@/components/LandPage/Reviews/Reviews";
+import Video from "@/components/LandPage/Video/Video";
 
 export default function LandPage() {
   return (
@@ -20,9 +21,14 @@ export default function LandPage() {
       <KeyFeatures></KeyFeatures>
 
       <Reviews></Reviews>
+      
+      
+      
+      <Video></Video>
+
       <Plans></Plans>
       <FAQs></FAQs>
-      <CTA></CTA>
+      {/* <CTA></CTA> */}
       <Footer></Footer>
     </div>
   );
