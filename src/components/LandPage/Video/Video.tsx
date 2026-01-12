@@ -52,16 +52,18 @@ export default function Video() {
                         <span className={styles.cta_text}>
                             Crea tu evento, gestiona invitados y controla la asistencia desde un solo lugar. Sin complicaciones, sin herramientas extra.
                         </span>
-                        <Link href={`https://wa.me/6145338500?text=${message}`}
-                            rel="noreferrer"
-                            target="_blank">
-                            <Button
-                                icon={<LuArrowUpRight size={16} />}
-                                className={styles.action_button}
-                            >
-                                PLATICA CON NOSOTROS
-                            </Button>
-                        </Link>
+                        <div className={styles.action_wrap}>
+                            <Link href={`https://wa.me/6145338500?text=${message}`}
+                                rel="noreferrer"
+                                target="_blank">
+                                <Button
+                                    icon={<LuArrowUpRight size={16} />}
+                                    className={styles.action_button}
+                                >
+                                    PLATICA CON NOSOTROS
+                                </Button>
+                            </Link>
+                        </div>
                     </div>
 
 
