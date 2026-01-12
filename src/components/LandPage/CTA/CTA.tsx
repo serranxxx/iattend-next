@@ -13,6 +13,7 @@ export const CTA = () => {
 
   return (
     <div className={styles.key_cont}>
+
       <span className={styles.key_title}>Todo tu evento, bajo control</span>
       <span className={styles.cta_text}>
         Crea tu evento, gestiona invitados y controla la asistencia desde un solo lugar. Sin complicaciones, sin herramientas extra.

@@ -6,8 +6,8 @@
     align-self: stretch;
     padding: 36px 0px;
     gap: 0px;
-    padding-bottom: -12px;
-    /* margin-bottom: -24px; */
+    /* padding-bottom: -12px; */
+    margin-bottom: -64px;
     /* z-index: -1; */
 }
 

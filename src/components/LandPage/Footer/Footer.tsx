@@ -8,32 +8,53 @@ import { FaBars, FaHeadset, FaInstagram, FaRegEnvelope, FaRegPaperPlane, FaWhats
 export const Footer = () => {
   return (
     <div className={styles.footer_cont}>
-      <div className={styles.footer_row}>
-        <img className={styles.footer_logo} src="/assets/images/blanco.png" alt="" />
-        <div className={styles.footer_col}>
-          <span style={{ fontWeight: "500", fontSize: "18px", textTransform: "uppercase" }}>Guest management</span>
-          <span style={{ fontWeight: "200", fontSize: "14px" }}>Plan with ease</span>
+      <div className={styles.footer_main_col}>
+        <div className={styles.footer_row}>
+          <img className={styles.footer_logo} src="/assets/images/blanco.png" alt="" />
+          <div className={styles.footer_col}>
+            <span style={{ fontWeight: "500", fontSize: "18px", textTransform: "uppercase" }}>Guest management</span>
+            <span style={{ fontWeight: "200", fontSize: "14px" }}>Plan with ease</span>
+          </div>
+        </div>
+
+        <div className={styles.links_col}>
+          <a href="https://wa.me/6145338500" rel="noreferrer" target="_blank" className={styles.footer_link}>
+            <FaHeadset /> Ayuda
+          </a>
+          <a href="https://wa.me/6145338500" rel="noreferrer" target="_blank" className={styles.footer_link}>
+            <FaWhatsapp /> Contacto
+          </a>
+          <a href="https://www.instagram.com/iattend.mx" rel="noreferrer" target="_blank" className={styles.footer_link}>
+            <FaInstagram />
+            @iattend.mx
+          </a>
+          <a href="mailto:contacto.iattend@gmail.com" rel="noreferrer" target="_blank" className={styles.footer_link}>
+            <FaRegEnvelope /> Mail
+          </a>
+          <a href="/about/legal" className={styles.footer_link}>
+            <FaRegPaperPlane /> Legal
+          </a>
         </div>
       </div>
 
-      <div className={styles.links_col}>
-        <a href="https://wa.me/6145338500" rel="noreferrer" target="_blank" className={styles.footer_link}>
-          <FaHeadset /> Ayuda
-        </a>
-        <a href="https://wa.me/6145338500" rel="noreferrer" target="_blank" className={styles.footer_link}>
-          <FaWhatsapp /> Contacto
-        </a>
-        <a href="https://www.instagram.com/iattend.mx" rel="noreferrer" target="_blank" className={styles.footer_link}>
-          <FaInstagram />
-          @iattend.mx
-        </a>
-        <a href="mailto:contacto.iattend@gmail.com" rel="noreferrer" target="_blank" className={styles.footer_link}>
-          <FaRegEnvelope /> Mail
-        </a>
-        <a href="/legal" className={styles.footer_link}>
-          <FaRegPaperPlane /> Legal
-        </a>
+      <div className={styles.link_cont}>
+        <span style={{fontWeight: 900, marginBottom:'8px'}}><b>Servicios I attend</b></span>
+        <a href="/about/invitacion-digital">Invitación Paperless</a>
+        <a href="/about/guest-management">Gestión de invitados</a>
+        <a href="/about/mapa-de-mesas">Organización por mesas</a>
+        <a href="/about/pases-digitales">Pases digitales</a>
+        <a href="/about/privacidad">Eventos privados</a>
+        <a href="/about/envios-whatsapp">Envíos automáticos</a>
       </div>
+
+      <div className={styles.link_cont}>
+        <span style={{fontWeight: 900, marginBottom:'8px'}}><b>Extras</b></span>
+        <a href="/about/cliente-ideal">I attend para ti</a>
+        <a href="/about/como-funciona">Cómo usar I attend</a>
+        <a href="/about/opiniones">Reviews</a>
+        <a href="/about/faqs">FAQs</a>
+      </div>
+
     </div>
   );
 };

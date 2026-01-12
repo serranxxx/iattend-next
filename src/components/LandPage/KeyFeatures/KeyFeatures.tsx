@@ -71,7 +71,7 @@ export const KEY_FEATURES: KeyFeature[] = [
   },
   {
     key: "whatsapp",
-    title: "Envíos por WhatsApp",
+    title: "Envíos automáticos",
     value:
       "Envía invitaciones por WhatsApp de forma automática y segura con I attend. Usa el API oficial, evita bloqueos, controla envíos con créditos y comunica tu evento de manera profesional y confiable.",
     image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/whats.jpg",
@@ -133,7 +133,7 @@ const FEATURES: Feature[] = [
   {
     label: (
       <>
-        Envíos por <b>Whatsapp</b>
+        Envíos <b>automáticos</b>
       </>
     ),
     seed: "whatsapp",
