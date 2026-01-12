@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     siteName: "I attend",
     images: [
       {
-        url: "/paperless.jpg",
+        url: "/images/paperless.jpg",
         width: 1200,
         height: 630,
         alt: "I attend – Guest management made easy",
