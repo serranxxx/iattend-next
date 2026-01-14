@@ -14,7 +14,7 @@
     font-size: 32px;
     font-weight: 800;
     color: #20212B;
-    font-family: 'Geom', 'Outfit', 'Poppins';
+    font-family:  'Outfit', 'Poppins';
     line-height: 110%;
     z-index: 2;
 }
@@ -23,7 +23,7 @@
     /* padding: 0px 24px; */
     font-weight: 400;
     color: #20212B;
-    font-family: 'Geom', 'Outfit', 'Poppins';
+    font-family:  'Outfit', 'Poppins';
     line-height: 140%;
     font-size: 18px;
 }

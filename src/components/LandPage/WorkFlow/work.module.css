@@ -23,7 +23,7 @@
     font-size: 32px;
     font-weight: 800;
     color: #20212B;
-    font-family: 'Geom', 'Outfit', 'Poppins';
+    font-family:  'Outfit', 'Poppins';
     line-height: 110%;
     z-index: 2;
 }
@@ -84,14 +84,14 @@
     background-image: linear-gradient(to bottom, #20212B80 20%, #FFF);
     left: 0;
     top: 0;
-    mix-blend-mode: multiply;
+    mix-blend-mode: soft-light;
     /* z-index: -1; */
 }
 
 .flow_title,
 .flow_sub {
     color: #FFF;
-    font-family: 'Geom', 'Outfit', 'Poppins';
+    font-family:  'Outfit', 'Poppins';
     line-height: 110%;
     font-size: 22px;
     font-weight: 800;

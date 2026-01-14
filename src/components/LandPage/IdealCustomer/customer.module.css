@@ -17,7 +17,7 @@
     font-size: 32px;
     font-weight: 800;
     color: #20212B;
-    font-family: 'Geom', 'Outfit', 'Poppins';
+    font-family:  'Outfit', 'Poppins';
     line-height: 110%;
     z-index: 2;
 }
@@ -55,7 +55,7 @@
     justify-content: flex-start;
     gap: 8px;
     color: #20212B;
-    font-family: 'Geom', 'Outfit', 'Poppins';
+    font-family:  'Outfit', 'Poppins';
     line-height: 110%;
     font-size: 18px;
     font-weight: 700;
@@ -67,7 +67,7 @@
 
 .card_desc {
     color: #20212B80;
-    font-family: 'Geom', 'Outfit', 'Poppins';
+    font-family:  'Outfit', 'Poppins';
     line-height: 150%;
     font-weight: 400;
     font-size: 16px;

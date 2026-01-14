@@ -97,7 +97,7 @@ const FEATURES: Feature[] = [
       </>
     ),
     seed: "paperless",
-    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/paperless.jpg",
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/key-1.jpg",
   },
   {
     label: (
@@ -106,12 +106,12 @@ const FEATURES: Feature[] = [
       </>
     ),
     seed: "invitados",
-    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/guest-management%20(1).jpg"
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/key-2.jpg"
   },
   {
     label: (<> Evento <b>Privado</b></>),
     seed: "privacidad",
-    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/privacy%20(1).jpg"
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/key-3.jpg"
   },
   {
     label: (
@@ -120,7 +120,7 @@ const FEATURES: Feature[] = [
       </>
     ),
     seed: "pases",
-    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/pass.jpg"
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/key-4.jpg"
   },
   {
     label: (
@@ -129,7 +129,7 @@ const FEATURES: Feature[] = [
       </>
     ),
     seed: "mesas",
-    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/tabs.jpg"
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/key-5.jpg"
   },
   {
     label: (
@@ -138,7 +138,7 @@ const FEATURES: Feature[] = [
       </>
     ),
     seed: "whatsapp",
-    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/whats.jpg"
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/key-6.jpg"
   },
 ];
 

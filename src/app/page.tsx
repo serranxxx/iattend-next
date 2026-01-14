@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "I attend",
     images: [
       {
-        url: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/metadata.jpg",
+        url: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.png",
         width: 1200,
         height: 630,
         alt: "I attend – Guest management made easy",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: "I attend | Guest management & event planning",
     description:
       "Manage guests, track RSVPs, and plan events with ease using I attend.",
-    images: ["https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/metadata.jpg"],
+    images: ["https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.png"],
   },
   robots: {
     index: true,

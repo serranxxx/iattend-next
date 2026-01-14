@@ -16,7 +16,7 @@
     font-size: 32px;
     font-weight: 800;
     color: #20212B;
-    font-family: 'Geom', 'Outfit', 'Poppins';
+    font-family:  'Outfit', 'Poppins';
     line-height: 110%;
     z-index: 2;
 }
@@ -94,7 +94,7 @@
 .key_label {
     text-align: center;
     color: #FFF;
-    font-family: 'Geom', 'Outfit', 'Poppins';
+    font-family:  'Outfit', 'Poppins';
     line-height: 130%;
     font-size: 14px;
     line-height: 1.4;
@@ -109,7 +109,7 @@
     height: 100%;
     bottom: 0px;
     left: 0px;
-    mix-blend-mode: multiply;
+    mix-blend-mode: soft-light;
 }
 
 .image_cont {
@@ -131,7 +131,7 @@
 .drawer_value {
     font-size: 22px;
     font-weight: 600;
-    font-family: 'Geom', 'Outfit', 'Poppins';
+    font-family:  'Outfit', 'Poppins';
     color: #000;
     line-height: 140%;
     padding: 0px 12px;
@@ -222,7 +222,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Geom', 'Outfit', 'Poppins';
+    font-family:  'Outfit', 'Poppins';
     line-height: 110%;
     display: flex;
     align-items: flex-start;
@@ -349,7 +349,7 @@
     .key_label {
         text-align: center;
         color: #FFF;
-        font-family: 'Geom', 'Outfit', 'Poppins';
+        font-family:  'Outfit', 'Poppins';
         line-height: 130%;
         font-size: 32px;
         line-height: 1.4;
