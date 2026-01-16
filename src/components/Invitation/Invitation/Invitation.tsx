@@ -30,6 +30,7 @@ import { FaArrowsRotate } from "react-icons/fa6";
 import AnimatedPath from "@/components/Motion/AnimatedPath";
 import { Footer } from "antd/es/layout/layout";
 import { FooterLand } from "@/components/LandPage/Footer/Footer";
+import { darker } from "@/helpers/functions";
 
 type invProps = {
   invitation: NewInvitation | null;
@@ -126,7 +127,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
   useEffect(() => {
     console.log('invidd: ', invitationID)
   }, [mongoID])
-  
+
 
   const onValidateUser = async (code: string) => {
 
@@ -467,7 +468,19 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
 
           </>
         )}
-        <FooterLand generals={invitation.generals}></FooterLand>
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          padding: '16px', width: '100%',
+          marginBottom:'-36px', background: secondary, 
+        }}>
+
+          <div style={{ width: '160px'}}>
+            <img src="/assets/images/blanco.png" alt="" style={{
+              width:'100%', marginTop:'12px'
+            }} />
+          </div>
+        </div>
+        {/* <FooterLand generals={invitation.generals}></FooterLand> */}
         <div
           className={styles.inv_locked_blured}
           style={{ pointerEvents: validated ? "none" : undefined, opacity: validated ? "0" : "1", backgroundColor: `${primary}20` }}
@@ -534,11 +547,11 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
         </div>
         <div
           style={{
-            opacity: animatedText ? 1 : 0, fontFamily: invitation.generals.fonts.body?.value ?? "Poppins", color: '#FFFFFF99', display: 'flex', alignItems: 'flex-start', justifyContent: 'center' ,gap:'0px',
-            flexWrap:'wrap'
+            opacity: animatedText ? 1 : 0, fontFamily: invitation.generals.fonts.body?.value ?? "Poppins", color: '#FFFFFF99', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', gap: '0px',
+            flexWrap: 'wrap'
 
           }}
-          className={styles.welcome_label}><span style={{marginRight:'8px'}}>{ui.confirm.hello}</span> <b style={{ color: '#FFF', textAlign: 'left', }}>{guestInfo?.name}</b></div>
+          className={styles.welcome_label}><span style={{ marginRight: '8px' }}>{ui.confirm.hello}</span> <b style={{ color: '#FFF', textAlign: 'left', }}>{guestInfo?.name}</b></div>
         {
           onShowTicket &&
           <div onClick={() => setOnShowTicket(false)} className={styles.ticket_bg}>
