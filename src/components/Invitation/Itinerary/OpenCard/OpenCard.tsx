@@ -15,8 +15,8 @@ type CardProps = {
   invitation: NewInvitation;
   dev: boolean;
   item: ItineraryItem;
-  setActiveSteps: React.Dispatch<React.SetStateAction<ItineraryItem[]>>;
-  activeSteps: ItineraryItem[];
+  setActiveSteps?: React.Dispatch<React.SetStateAction<ItineraryItem[]>>;
+  activeSteps?: ItineraryItem[];
 };
 
 export default function OpenCard({ invitation, dev, item, activeSteps, setActiveSteps }: CardProps) {

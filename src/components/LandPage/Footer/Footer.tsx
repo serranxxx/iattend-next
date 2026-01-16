@@ -4,8 +4,16 @@ import React, { useState } from "react";
 import styles from "./footer.module.css";
 import { Button } from "antd";
 import { FaBars, FaHeadset, FaInstagram, FaRegEnvelope, FaRegPaperPlane, FaWhatsapp } from "react-icons/fa";
+import { Generals } from "@/types/new_invitation";
 
-export const Footer = () => {
+
+
+type Props = {
+  generals?: Generals
+}
+
+export const FooterLand = ({ generals}: Props) => {
+  // export const FooterLand = () => {
   return (
     <div className={styles.main_cont}>
       <div className={styles.footer_cont}>

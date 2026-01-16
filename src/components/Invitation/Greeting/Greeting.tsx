@@ -32,7 +32,7 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
             <div
               className="g_module_info_container"
               style={{
-                padding: content.background ? "32px" : "0px 32px",
+                padding: content.background ? "24px" : "0px 24px",
                 width: "100%",
                 height: "100%",
                 boxSizing: "border-box",
@@ -55,7 +55,7 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
                 <span
                   className="g_module_regular_text"
                   style={{
-                    display: "inline-block",
+                    display: "inline-block", whiteSpace: "pre-line",
                     color: content.background && content.inverted ? primary : accent,
                     fontFamily: generals.fonts.body?.typeFace ?? "Poppins",
                   }}

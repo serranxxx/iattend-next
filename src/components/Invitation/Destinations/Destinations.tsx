@@ -1,5 +1,5 @@
 import { InvitationUIBundle, NewInvitation } from "@/types/new_invitation";
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect } from "react";
 import Card from "./Card/Card";
 import { Separador } from "../Separator/Separator";
 import FadeLeft from "@/components/Motion/FadeLeft";
@@ -8,9 +8,10 @@ type DresscodeProps = {
   dev: boolean;
   invitation: NewInvitation;
   ui?: InvitationUIBundle | null;
+  invitationID: string | undefined;
 };
 
-export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function destinations({ ui, dev, invitation }, ref) {
+export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function destinations({ ui, dev, invitation, invitationID }, ref) {
   const content = invitation.destinations;
   const generals = invitation.generals;
   const font = generals.fonts.body?.typeFace;
@@ -27,6 +28,11 @@ export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function 
   //   });
   // }, []);
 
+  useEffect(() => {
+    console.log('invid: ', invitationID)
+  }, [invitationID])
+  
+
   return (
     <>
       {content.active && generals ? (
@@ -37,7 +43,7 @@ export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function 
             ref={ref}
             className="gm_container"
             style={{
-              padding: content.background ? "32px" : "0px 32px",
+              padding: content.background ? "24px" : "0px 24px",
               position: "relative",
             }}
           >
@@ -59,7 +65,7 @@ export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function 
                   className="g_mdoule_regular_text"
                   style={{
                     color: content.background && content.inverted ? primary : accent,
-                    fontFamily: font,
+                    fontFamily: font, whiteSpace: "pre-line",
                   }}
                 >
                   {content.description}
@@ -74,7 +80,7 @@ export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function 
               >
                 {
                   invitation.destinations.cards.length > 0 &&
-                  <Card invitation={invitation} ui={ui} />
+                  <Card invitationID={invitationID} invitation={invitation} ui={ui} />
                 }
               </div>
             </div>

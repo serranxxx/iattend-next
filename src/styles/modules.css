@@ -28,13 +28,15 @@
     /* padding: 32px; */
     gap: 24px;
     text-align: center;
-    line-height: 1.5;
+    line-height: 1.7;
+    
 }
 
 .g_module_title,
 .g_module_title_dev {
     font-size: 22px;
-    font-weight: 700;
+    font-weight: 600;
+    line-height: 1.2;
 }
 
 

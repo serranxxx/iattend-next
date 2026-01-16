@@ -48,7 +48,7 @@ export const Gifts = forwardRef<HTMLDivElement, DresscodeProps>(function Greetin
             ref={ref}
             className="gm_container"
             style={{
-              padding: content.background ? "32px" : "0px 32px",
+              padding: content.background ? "24px" : "0px 24px",
               position: "relative",
             }}
           >

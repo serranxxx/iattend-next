@@ -6,9 +6,10 @@ import FadeLeft from "@/components/Motion/FadeLeft";
 type peopleProps = {
   dev: boolean;
   invitation: NewInvitation;
+  invitationID?: string;
 };
 
-export const People = forwardRef<HTMLDivElement, peopleProps>(function Greeting({ dev, invitation }, ref) {
+export const People = forwardRef<HTMLDivElement, peopleProps>(function Greeting({ dev, invitation, invitationID }, ref) {
   const content = invitation?.people;
   const generals = invitation?.generals;
 
@@ -28,8 +29,8 @@ export const People = forwardRef<HTMLDivElement, peopleProps>(function Greeting(
               ref={ref}
               className="gm_container"
               style={{
-                padding: content.background ? "32px" : "0px 32px",
-                position: "relative",
+                padding: content.background ? "24px" : "0px 24px",
+                position: "relative", 
               }}
             >
               <div className="g_module_info_container">
@@ -61,6 +62,7 @@ export const People = forwardRef<HTMLDivElement, peopleProps>(function Greeting(
                         <div
                           key={index}
                           className="g_module_items_single_col"
+                        style={{flexDirection: invitationID === "80d0c716-86e4-4c90-9e6d-9133d970d769" ? "column-reverse" : undefined,}}
                         >
                           <span
                             className="g_mdoule_light_text"

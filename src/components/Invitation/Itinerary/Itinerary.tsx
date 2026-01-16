@@ -3,14 +3,18 @@ import React, { forwardRef } from "react";
 import { Separador } from "../Separator/Separator";
 import styles from "./itinerary.module.css";
 import Card from "./Card/Card";
+import OpenCard from "./OpenCard/OpenCard";
+import { Button } from "antd";
+import { FaDiamondTurnRight } from "react-icons/fa6";
 
 type quoteProps = {
   dev: boolean;
   invitation: NewInvitation;
   ui: InvitationUIBundle;
+  invitationID: string | undefined;
 };
 
-export const Itinerary = forwardRef<HTMLDivElement, quoteProps>(function Greeting({ ui, dev, invitation }, ref) {
+export const Itinerary = forwardRef<HTMLDivElement, quoteProps>(function Greeting({ ui, dev, invitation, invitationID }, ref) {
   const content = invitation.itinerary;
   const generals = invitation.generals;
 
@@ -38,7 +42,7 @@ export const Itinerary = forwardRef<HTMLDivElement, quoteProps>(function Greetin
             className="gm_container"
             // {...(dev ? { 'data-aos': 'fade-left' } : {})}
             style={{
-              padding: content.background ? "32px" : "0px 32px",
+              padding: content.background ? "24px" : "0px 24px",
               position: "relative",
             }}
           >
@@ -57,7 +61,28 @@ export const Itinerary = forwardRef<HTMLDivElement, quoteProps>(function Greetin
                 // data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
                 className={styles.itinerary_cards_container}
               >
-                <Card ui={ui} invitation={invitation} dev={dev} />
+                {
+                  invitationID === "80d0c716-86e4-4c90-9e6d-9133d970d769"
+                    ? <div className={styles.extra_card} style={{ backgroundColor: secondary }}>
+                      <OpenCard dev={dev} invitation={invitation} item={invitation.itinerary.object[0]} />
+                      <Button
+                        href={invitation.itinerary.object[0].address?.url ?? ""}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        icon={<FaDiamondTurnRight size={14} />}
+                        style={{
+                          background: '#FFFFFF80',
+                          backdropFilter:'blur(10px)',
+                          color: primary,
+                          position:'absolute', top:'24px', right:'24px'
+                        }}
+                      >
+                        {ui?.buttons.directions}
+                      </Button>
+                    </div>
+                    : <Card ui={ui} invitation={invitation} dev={dev} />
+                }
+
               </div>
             </div>
           </div>

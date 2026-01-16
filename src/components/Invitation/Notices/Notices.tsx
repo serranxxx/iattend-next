@@ -17,6 +17,18 @@ export const Notices = forwardRef<HTMLDivElement, DresscodeProps>(function notic
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
 
+  const renderTextWithStrong = (text: string) => {
+    const parts = text.split(/(\*[^*]+\*)/g);
+  
+    return parts.map((part, index) => {
+      if (part.startsWith("*") && part.endsWith("*")) {
+        return <strong key={index}>{part.slice(1, -1)}</strong>;
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
+  
+
   return (
     <>
       {content.active && generals ? (
@@ -26,7 +38,7 @@ export const Notices = forwardRef<HTMLDivElement, DresscodeProps>(function notic
             ref={ref}
             className="gm_container"
             style={{
-              padding: content.background ? "32px" : "0px 32px",
+              padding: content.background ? "24px" : "0px 24px",
               position: "relative",
             }}
           >
@@ -51,10 +63,10 @@ export const Notices = forwardRef<HTMLDivElement, DresscodeProps>(function notic
                         className="g_mdoule_regular_text"
                         style={{
                           color: content.background && content.inverted ? primary : accent,
-                          fontFamily: font,
+                          fontFamily: font,whiteSpace: "pre-line",
                         }}
                       >
-                        {item}
+                        {renderTextWithStrong(item)}
                       </span>
                     </FadeLeft>
 

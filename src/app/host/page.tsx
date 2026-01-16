@@ -67,6 +67,7 @@ export default function Page() {
         type={"open" as InvitationType}
         mongoID={null}
         ui={uiES as InvitationUIBundle}
+        
       />
     </div>
   ) : null;

@@ -19,6 +19,17 @@ export const Quote = forwardRef<HTMLDivElement, quoteProps>(function Greeting({ 
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
 
+  const renderTextWithStrong = (text: string) => {
+    const parts = text.split(/(\*[^*]+\*)/g);
+  
+    return parts.map((part, index) => {
+      if (part.startsWith("*") && part.endsWith("*")) {
+        return <strong key={index}>{part.slice(1, -1)}</strong>;
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
+
   // useEffect(() => {
   //   AOS.init({
   //     duration: 900, // duración de las animaciones (en ms)
@@ -76,6 +87,7 @@ export const Quote = forwardRef<HTMLDivElement, quoteProps>(function Greeting({ 
                       transform: "translate(-50%)",
                       padding: "24px",
                       justifyContent: "center",
+                      lineHeight:'1.4'
                     }}
                   >
                     <span
@@ -91,7 +103,7 @@ export const Quote = forwardRef<HTMLDivElement, quoteProps>(function Greeting({ 
                         width: `${content.text.width}%`,
                       }}
                     >
-                      {content.text.font.value}
+                      {renderTextWithStrong(content.text.font.value ?? "")}
                     </span>
                   </div>
                 </div>
@@ -107,9 +119,11 @@ export const Quote = forwardRef<HTMLDivElement, quoteProps>(function Greeting({ 
                   width: "60%",
                   fontStyle: "italic",
                   padding: "64px 0px",
+                  whiteSpace: "pre-line",
+                  lineHeight:'1.4'
                 }}
               >
-                {content.text.font.value}
+                {renderTextWithStrong(content.text.font.value ?? "")}
               </span>
             )}
           </div>

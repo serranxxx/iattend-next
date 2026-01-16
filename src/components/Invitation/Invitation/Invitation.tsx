@@ -28,6 +28,8 @@ import { PiTicketDuotone } from "react-icons/pi";
 import { BsPass } from "react-icons/bs";
 import { FaArrowsRotate } from "react-icons/fa6";
 import AnimatedPath from "@/components/Motion/AnimatedPath";
+import { Footer } from "antd/es/layout/layout";
+import { FooterLand } from "@/components/LandPage/Footer/Footer";
 
 type invProps = {
   invitation: NewInvitation | null;
@@ -85,17 +87,17 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
       case 1:
         return <Greeting key={index} ref={greetingRef} dev={false} invitation={invitation} />;
       case 2:
-        return <People key={index} ref={peopleRef} dev={false} invitation={invitation} />;
+        return <People invitationID={invitationID} key={index} ref={peopleRef} dev={false} invitation={invitation} />;
       case 3:
         return <Quote key={index} ref={quoteRef} dev={dev} invitation={invitation} />;
       case 4:
-        return <Itinerary ui={ui} key={index} ref={itineraryRef} dev={false} invitation={invitation} />;
+        return <Itinerary invitationID={invitationID} ui={ui} key={index} ref={itineraryRef} dev={false} invitation={invitation} />;
       case 5:
         return <DressCode ui={ui} key={index} ref={dresscodeRef} dev={dev} invitation={invitation} />;
       case 6:
         return <Gifts ui={ui} key={index} ref={giftsRef} dev={false} invitation={invitation} />;
       case 7:
-        return <Destinations ui={ui} key={index} ref={destinationRef} dev={false} invitation={invitation} />;
+        return <Destinations invitationID={invitationID} ui={ui} key={index} ref={destinationRef} dev={false} invitation={invitation} />;
       case 8:
         return <Notices key={index} ref={noticesRef} dev={false} invitation={invitation} />;
       case 9:
@@ -120,6 +122,11 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
     boxShadow: "0px 0px 12px rgba(0,0,0,0.2)",
     fontFamily: font,
   };
+
+  useEffect(() => {
+    console.log('invidd: ', invitationID)
+  }, [mongoID])
+  
 
   const onValidateUser = async (code: string) => {
 
@@ -460,6 +467,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
 
           </>
         )}
+        <FooterLand generals={invitation.generals}></FooterLand>
         <div
           className={styles.inv_locked_blured}
           style={{ pointerEvents: validated ? "none" : undefined, opacity: validated ? "0" : "1", backgroundColor: `${primary}20` }}
