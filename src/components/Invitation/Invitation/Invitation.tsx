@@ -468,7 +468,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
 
           </>
         )}
-        <div style={{
+        {/* <div style={{
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           padding: '16px', width: '100%',
           marginBottom:'-36px', background: secondary, 
@@ -479,8 +479,8 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
               width:'100%', marginTop:'12px'
             }} />
           </div>
-        </div>
-        {/* <FooterLand generals={invitation.generals}></FooterLand> */}
+        </div> */}
+        <FooterLand invitation={invitation}></FooterLand>
         <div
           className={styles.inv_locked_blured}
           style={{ pointerEvents: validated ? "none" : undefined, opacity: validated ? "0" : "1", backgroundColor: `${primary}20` }}

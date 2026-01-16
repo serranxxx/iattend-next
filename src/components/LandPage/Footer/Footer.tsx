@@ -1,21 +1,32 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./footer.module.css";
 import { Button } from "antd";
 import { FaBars, FaHeadset, FaInstagram, FaRegEnvelope, FaRegPaperPlane, FaWhatsapp } from "react-icons/fa";
-import { Generals } from "@/types/new_invitation";
+import { Generals, NewInvitation } from "@/types/new_invitation";
+import { lighter } from "@/helpers/functions";
 
 
 
 type Props = {
-  generals?: Generals
+  invitation?: NewInvitation
 }
 
-export const FooterLand = ({ generals}: Props) => {
+export const FooterLand = ({ invitation}: Props) => {
+
+  useEffect(() => {
+    console.log('inv from footer: ', invitation)
+  }, [invitation])
+
+  const secondary = invitation?.generals.colors.secondary ?? "#CFBEE6"
+
+  
   // export const FooterLand = () => {
   return (
-    <div className={styles.main_cont}>
+    <div className={styles.main_cont} style={{
+      background: invitation ? `linear-gradient(to top, ${lighter(secondary, 0.5)} 0%, ${secondary} 100%)` : 'linear-gradient(to top, #CFBEE680 0%, #CFBEE6 100%)',
+    }}>
       <div className={styles.footer_cont}>
         <div className={styles.footer_main_col}>
           <div className={styles.footer_row}>
