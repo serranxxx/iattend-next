@@ -18,6 +18,17 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
 
+  const renderTextWithStrong = (text: string) => {
+    const parts = text.split(/(\*[^*]+\*)/g);
+  
+    return parts.map((part, index) => {
+      if (part.startsWith("*") && part.endsWith("*")) {
+        return <strong key={index}>{part.slice(1, -1)}</strong>;
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
+
 
   return (
     <>
@@ -47,7 +58,7 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
                     fontFamily: generals.fonts.body?.typeFace ?? "Poppins",
                   }}
                 >
-                  {content.title}
+                  {renderTextWithStrong(content.title)}
                 </span>
               </FadeLeft>
 
@@ -60,7 +71,7 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
                     fontFamily: generals.fonts.body?.typeFace ?? "Poppins",
                   }}
                 >
-                  {content.description}
+                  {renderTextWithStrong(content.description)}
                 </span>
               </FadeLeft>
 

@@ -28,9 +28,16 @@ export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function 
   //   });
   // }, []);
 
-  useEffect(() => {
-    console.log('invid: ', invitationID)
-  }, [invitationID])
+  const renderTextWithStrong = (text: string) => {
+    const parts = text.split(/(\*[^*]+\*)/g);
+  
+    return parts.map((part, index) => {
+      if (part.startsWith("*") && part.endsWith("*")) {
+        return <strong key={index}>{part.slice(1, -1)}</strong>;
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
   
 
   return (
@@ -56,7 +63,7 @@ export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function 
                     fontFamily: font,
                   }}
                 >
-                  {content.title}
+                  {renderTextWithStrong(content.title ?? "")}
                 </span>
               </FadeLeft>
 
@@ -68,7 +75,7 @@ export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function 
                     fontFamily: font, whiteSpace: "pre-line",
                   }}
                 >
-                  {content.description}
+                  {renderTextWithStrong(content.description ?? "")}
                 </span>
               </FadeLeft>
               <div

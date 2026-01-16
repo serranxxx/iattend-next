@@ -5,7 +5,7 @@ import styles from "./footer.module.css";
 import { Button } from "antd";
 import { FaBars, FaHeadset, FaInstagram, FaRegEnvelope, FaRegPaperPlane, FaWhatsapp } from "react-icons/fa";
 import { Generals, NewInvitation } from "@/types/new_invitation";
-import { lighter } from "@/helpers/functions";
+import { darker, lighter } from "@/helpers/functions";
 
 
 
@@ -25,7 +25,7 @@ export const FooterLand = ({ invitation}: Props) => {
   // export const FooterLand = () => {
   return (
     <div className={styles.main_cont} style={{
-      background: invitation ? `linear-gradient(to top, ${lighter(secondary, 0.5)} 0%, ${secondary} 100%)` : 'linear-gradient(to top, #CFBEE680 0%, #CFBEE6 100%)',
+      background: invitation ? `linear-gradient(to top, ${darker(secondary, 0.9)} 0%, ${darker(secondary, 0.7)} 100%)` : 'linear-gradient(to top, #CFBEE680 0%, #CFBEE6 100%)',
     }}>
       <div className={styles.footer_cont}>
         <div className={styles.footer_main_col}>

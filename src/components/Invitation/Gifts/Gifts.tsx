@@ -34,6 +34,17 @@ export const Gifts = forwardRef<HTMLDivElement, DresscodeProps>(function Greetin
     });
   };
 
+  const renderTextWithStrong = (text: string) => {
+    const parts = text.split(/(\*[^*]+\*)/g);
+  
+    return parts.map((part, index) => {
+      if (part.startsWith("*") && part.endsWith("*")) {
+        return <strong key={index}>{part.slice(1, -1)}</strong>;
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
+
   return (
     <>
       {content.active && generals ? (
@@ -61,7 +72,7 @@ export const Gifts = forwardRef<HTMLDivElement, DresscodeProps>(function Greetin
                     fontFamily: font,
                   }}
                 >
-                  {content.title}
+                  {renderTextWithStrong(content.title ?? "")}
                 </span>
               </FadeLeft>
               <FadeLeft>
@@ -72,7 +83,7 @@ export const Gifts = forwardRef<HTMLDivElement, DresscodeProps>(function Greetin
                     fontFamily: font,
                   }}
                 >
-                  {content.description}
+                  {renderTextWithStrong(content.description ?? "")}
                 </span>
               </FadeLeft>
               <div

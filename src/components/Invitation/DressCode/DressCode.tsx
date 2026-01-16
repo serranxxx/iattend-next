@@ -26,6 +26,18 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
 
+  const renderTextWithStrong = (text: string) => {
+    const parts = text.split(/(\*[^*]+\*)/g);
+  
+    return parts.map((part, index) => {
+      if (part.startsWith("*") && part.endsWith("*")) {
+        return <strong key={index}>{part.slice(1, -1)}</strong>;
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
+
+
   return content.active && generals ? (
     <>
       <div
@@ -51,7 +63,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                 className="g_module_title"
                 style={{ color: content.background && content.inverted ? primary : accent, fontFamily: generals.fonts.body?.typeFace }}
               >
-                {content.title}
+                {renderTextWithStrong(content.title ?? "")}
               </span>
             </FadeLeft>
 
@@ -60,7 +72,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                 className="g_mdoule_regular_text"
                 style={{ color: content.background && content.inverted ? primary : accent, fontFamily: generals.fonts.body?.typeFace }}
               >
-                {content.description}
+                {renderTextWithStrong(content.description ?? "")}
               </span>
             </FadeLeft>
 

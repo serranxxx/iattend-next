@@ -363,7 +363,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
         className={styles.invitation_main_cont}
         style={{
           backgroundColor: invitation.generals.colors.primary ?? "#FFF",
-          paddingBottom: validated ? "44px" : "0px",
+          paddingBottom:"0px",
           maxHeight: "100vh",
           position: "relative",
         }}
