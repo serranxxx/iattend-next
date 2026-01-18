@@ -266,24 +266,11 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
 
 
   useEffect(() => {
-    const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    setHeightSize(coverHeightPx);
+
 
     if (type === "open") {
 
       setValidated(true);
-      // if (invitationID) {
-      //   const active_guest = localStorage.getItem(invitationID)
-      //   if (active_guest) {
-      //     console.log('active g: ', active_guest)
-      //     onValidateUser(active_guest)
-      //   }
-      // }
-
-      // else {
-      //   setValidated(true);
-      // }
-
     } else {
       setValidated(false);
       if (password) {
@@ -309,6 +296,9 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
       setAnimation(true)
       setTimeout(() => {
         setAnimatedText(true)
+        const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        setHeightSize(coverHeightPx);
+        console.log('height: ', coverHeightPx)
       }, 1800);
     }
   }, [validated])
@@ -358,19 +348,19 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
     <>
       {contextHolder}
 
-      
+
 
       <div
         ref={scrollableContentRef}
         className={styles.invitation_main_cont}
         style={{
           backgroundColor: invitation.generals.colors.primary ?? "#FFF",
-          paddingBottom:"0px",
+          paddingBottom: "0px",
           maxHeight: "100vh",
           position: "relative",
         }}
       >
-       
+
         <Cover ui={ui} ref={coverRef} dev={dev} invitation={invitation} height={"100vh"} validated={validated} />
         {validated && (
           <>
@@ -453,10 +443,10 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
               </div>
             )}
 
-
+            <FooterLand invitation={invitation}></FooterLand>
           </>
         )}
-        <FooterLand invitation={invitation}></FooterLand>
+
         <div
           className={styles.inv_locked_blured}
           style={{ pointerEvents: validated ? "none" : undefined, opacity: validated ? "0" : "1", backgroundColor: `${primary}20` }}
