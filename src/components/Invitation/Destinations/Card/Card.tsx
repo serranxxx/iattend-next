@@ -210,7 +210,7 @@ export default function Card({ ui, invitation, invitationID }: CardProps) {
 
                       {invitation.generals.texture !== null && (
                         <div className={styles.card_texture}>
-                          <Image src={"/assets/textures/magzne.png"} alt="" fill style={{ objectFit: "cover", opacity: 0.6 }} />
+                          <Image src={"/assets/textures/magzne.jpg"} alt="" fill style={{ objectFit: "cover", opacity: 0.6 }} />
                         </div>
                       )}
                     </div>
@@ -276,7 +276,7 @@ export default function Card({ ui, invitation, invitationID }: CardProps) {
 
                       {invitation.generals.texture !== null && (
                         <div className={styles.card_texture}>
-                          <Image src={"/assets/textures/magzne.png"} alt="" fill style={{ objectFit: "cover", opacity: 1 }} />
+                          <Image src={"/assets/textures/magzne.jpg"} alt="" fill style={{ objectFit: "cover", opacity: 1 }} />
                         </div>
                       )}
                     </div>
