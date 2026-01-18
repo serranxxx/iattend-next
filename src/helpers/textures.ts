@@ -59,4 +59,25 @@ export const textures: Texture[] = [
     filter: "grayscale(1) contrast(1.1) brightness(1)",
     path: "/assets/textures/cotton.jpg",
   },
+  {
+    image: "/assets/textures/leather.jpg",
+    opacity: 0.5,
+    blend: "multiply",
+    filter: "grayscale(1) contrast(1.1) brightness(1)",
+    path: "/assets/textures/cotton.jpg",
+  },
+  {
+    image: "/assets/textures/magazine.jpg",
+    opacity: 0.5,
+    blend: "multiply",
+    filter: "grayscale(1) contrast(1.1) brightness(1)",
+    path: "/assets/textures/cotton.jpg",
+  },
+  {
+    image: "/assets/textures/magzne.jpg",
+    opacity: 0.5,
+    blend: "multiply",
+    filter: "grayscale(1) contrast(1.1) brightness(1)",
+    path: "/assets/textures/cotton.jpg",
+  },
 ];
