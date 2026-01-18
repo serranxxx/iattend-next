@@ -358,6 +358,8 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
     <>
       {contextHolder}
 
+      
+
       <div
         ref={scrollableContentRef}
         className={styles.invitation_main_cont}
@@ -368,21 +370,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
           position: "relative",
         }}
       >
-        {invitation.generals.texture !== null && tex && (
-          <TextureOverlay
-            containerRef={scrollableContentRef as unknown as React.RefObject<HTMLElement>}
-            coverHeightPx={heightSize}
-            extraMarginPx={mongoID === "68ffdb9cd673a17f84312991" ? 400 : 0}
-            texture={{
-              image: tex.image, // StaticImageData o "/public/..."
-              opacity: tex.opacity,
-              blend: tex.blend,
-              filter: tex.filter,
-            }}
-            tileW={1024} // ajusta a tu imagen
-            tileH={1024}
-          />
-        )}
+       
         <Cover ui={ui} ref={coverRef} dev={dev} invitation={invitation} height={"100vh"} validated={validated} />
         {validated && (
           <>
@@ -468,18 +456,6 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
 
           </>
         )}
-        {/* <div style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          padding: '16px', width: '100%',
-          marginBottom:'-36px', background: secondary, 
-        }}>
-
-          <div style={{ width: '160px'}}>
-            <img src="/assets/images/blanco.png" alt="" style={{
-              width:'100%', marginTop:'12px'
-            }} />
-          </div>
-        </div> */}
         <FooterLand invitation={invitation}></FooterLand>
         <div
           className={styles.inv_locked_blured}
@@ -670,6 +646,21 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
           }
         </div>
 
+        {invitation.generals.texture !== null && tex && (
+          <TextureOverlay
+            containerRef={scrollableContentRef as unknown as React.RefObject<HTMLElement>}
+            coverHeightPx={heightSize}
+            extraMarginPx={mongoID === "68ffdb9cd673a17f84312991" ? 400 : 0}
+            texture={{
+              image: tex.image, // StaticImageData o "/public/..."
+              opacity: tex.opacity,
+              blend: tex.blend,
+              filter: tex.filter,
+            }}
+            tileW={1024} // ajusta a tu imagen
+            tileH={1024}
+          />
+        )}
 
       </div>
       <Drawer
