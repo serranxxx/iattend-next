@@ -22,6 +22,22 @@ export const Itinerary = forwardRef<HTMLDivElement, quoteProps>(function Greetin
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
 
+  const title = {
+    font: invitation?.generals.fonts.titles?.typeFace ?? invitation?.generals.fonts.body?.typeFace,
+    weight: invitation?.generals.fonts.titles?.weight === 0 ? 600 : (invitation?.generals.fonts.titles?.weight ?? 600),
+    size: invitation?.generals.fonts.titles?.size === 0 ? 22 : (invitation?.generals.fonts.titles?.size ?? 22),
+    opacity: invitation?.generals.fonts.titles?.opacity ?? 1,
+    color: invitation?.generals.fonts.titles?.color === '#000000' ? accent : (invitation?.generals.fonts.titles?.color ?? accent )
+  }
+
+  const body = {
+    font: invitation?.generals.fonts.body?.typeFace,
+    weight: invitation?.generals.fonts.body?.weight ?? 500,
+    size: invitation?.generals.fonts.body?.size ?? 16,
+    opacity: invitation?.generals.fonts.body?.opacity ?? 1,
+    color: invitation?.generals.fonts.body?.color ?? accent
+  }
+
 
 
   // useEffect(() => {
@@ -51,8 +67,10 @@ export const Itinerary = forwardRef<HTMLDivElement, quoteProps>(function Greetin
                 // data-aos={!dev && generals.texture == null ? "fade-right" : undefined}
                 className="g_module_title"
                 style={{
-                  color: content.background ? (content.inverted ? primary : accent) : accent,
-                  fontFamily: generals.fonts.body?.typeFace,
+                  color: content.background ? (content.inverted ? primary : title.color) : title.color,
+                  display: "inline-block", whiteSpace: "pre-line",
+                  fontFamily: title.font ?? "Poppins",
+                  fontSize: title.size, fontWeight: title.weight, opacity: title.opacity
                 }}
               >
                 {content.title}
@@ -72,9 +90,9 @@ export const Itinerary = forwardRef<HTMLDivElement, quoteProps>(function Greetin
                         icon={<FaDiamondTurnRight size={14} />}
                         style={{
                           background: '#FFFFFF80',
-                          backdropFilter:'blur(10px)',
+                          backdropFilter: 'blur(10px)',
                           color: primary,
-                          position:'absolute', top:'24px', right:'24px'
+                          position: 'absolute', top: '24px', right: '24px'
                         }}
                       >
                         {ui?.buttons.directions}

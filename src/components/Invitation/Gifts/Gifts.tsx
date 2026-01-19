@@ -15,11 +15,28 @@ type DresscodeProps = {
 export const Gifts = forwardRef<HTMLDivElement, DresscodeProps>(function Greeting({ ui, dev, invitation }, ref) {
   const content = invitation.gifts;
   const generals = invitation.generals;
-  const font = generals.fonts.body?.typeFace;
 
   const primary = generals?.colors.primary ?? "#FFFFFF";
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
+
+  const title = {
+    font: invitation?.generals.fonts.titles?.typeFace ?? invitation?.generals.fonts.body?.typeFace,
+    weight: invitation?.generals.fonts.titles?.weight === 0 ? 600 : (invitation?.generals.fonts.titles?.weight ?? 600),
+    size: invitation?.generals.fonts.titles?.size === 0 ? 22 : (invitation?.generals.fonts.titles?.size ?? 22),
+    opacity: invitation?.generals.fonts.titles?.opacity ?? 1,
+    color: invitation?.generals.fonts.titles?.color === '#000000' ? accent : (invitation?.generals.fonts.titles?.color ?? accent )
+  }
+
+  const body = {
+    font: invitation?.generals.fonts.body?.typeFace,
+    weight: invitation?.generals.fonts.body?.weight ?? 500,
+    size: invitation?.generals.fonts.body?.size ?? 16,
+    opacity: invitation?.generals.fonts.body?.opacity ?? 1,
+    color: invitation?.generals.fonts.body?.color ?? accent
+  }
+
+  
 
   // 👉 Guardamos las cards en estado local
   const [cards, setCards] = useState(content.cards);
@@ -68,8 +85,10 @@ export const Gifts = forwardRef<HTMLDivElement, DresscodeProps>(function Greetin
                 <span
                   className="g_module_title"
                   style={{
-                    color: content.background && content.inverted ? primary : accent,
-                    fontFamily: font,
+                    display: "inline-block", whiteSpace: "pre-line",
+                    color: content.background && content.inverted ? primary : title.color,
+                    fontFamily: title.font ?? "Poppins",
+                    fontSize: title.size, fontWeight: title.weight, opacity:title.opacity
                   }}
                 >
                   {renderTextWithStrong(content.title ?? "")}
@@ -79,8 +98,10 @@ export const Gifts = forwardRef<HTMLDivElement, DresscodeProps>(function Greetin
                 <span
                   className="g_mdoule_regular_text"
                   style={{
+                    display: "inline-block", whiteSpace: "pre-line",
                     color: content.background && content.inverted ? primary : accent,
-                    fontFamily: font,
+                    fontFamily: body.font ?? "Poppins",
+                    fontWeight: body.weight,opacity:body.opacity
                   }}
                 >
                   {renderTextWithStrong(content.description ?? "")}

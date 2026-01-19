@@ -352,7 +352,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
 
       <div
         ref={scrollableContentRef}
-        className={styles.invitation_main_cont}
+        className={`${styles.invitation_main_cont} scroll-invitation`}
         style={{
           backgroundColor: invitation.generals.colors.primary ?? "#FFF",
           paddingBottom: "0px",

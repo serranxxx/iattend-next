@@ -5,7 +5,7 @@ import { FaArrowDown, FaArrowRight } from "react-icons/fa";
 import { InvitationUIBundle, ItineraryItem, NewInvitation } from "@/types/new_invitation";
 import { getItineraryIcon } from "@/helpers/icons";
 import styles from "./card.module.css";
-import { buttonsColorText, getMexicoHour } from "@/helpers/functions";
+import { buttonsColorText, getMexicoHour, lighter } from "@/helpers/functions";
 import Image, { StaticImageData } from "next/image";
 import { textures } from "@/helpers/textures";
 import OpenCard from "../OpenCard/OpenCard";
@@ -21,7 +21,7 @@ type CardProps = {
   ui: InvitationUIBundle;
 };
 
-export default function Card({ui, invitation, dev }: CardProps) {
+export default function Card({ ui, invitation, dev }: CardProps) {
   const content = invitation.itinerary;
   const generals = invitation.generals;
   const [open, setOpen] = useState<ItineraryItem | null>(null);
@@ -37,6 +37,15 @@ export default function Card({ui, invitation, dev }: CardProps) {
   const steps = invitation.itinerary.object;
 
   const [activeSteps, setActiveSteps] = useState<ItineraryItem[]>([]);
+
+
+  const body = {
+    font: invitation?.generals.fonts.body?.typeFace,
+    weight: invitation?.generals.fonts.body?.weight ?? 500,
+    size: invitation?.generals.fonts.body?.size ?? 16,
+    opacity: invitation?.generals.fonts.body?.opacity ?? 1,
+    color: invitation?.generals.fonts.body?.color ?? accent
+  }
 
   const renderIcon = (iconID: number, size: number, variable: boolean) => {
     if (!iconID)
@@ -127,14 +136,14 @@ export default function Card({ui, invitation, dev }: CardProps) {
                       gap: 4,
                       boxSizing: "border-box",
                       padding: "0px 6px",
-                      fontFamily: invitation.generals.fonts.body?.typeFace,
+                      fontFamily: body.font,
                       fontSize: "14px",
                       color: content.background ? (content.inverted ? primary : accent) : content.inverted ? accent : accent,
                     }}
                   >
-                    <span style={{ fontWeight: 600, fontSize: "16px" }}>{item.name}</span>
-                    <span style={{ fontWeight: 400, opacity: "0.5" }}>{item.subtext}</span>
-                    <span style={{ fontWeight: 400 }}>{item.time}</span>
+                    <span style={{ opacity: body.opacity, fontWeight: body.weight + 100, fontSize: "16px" }}>{item.name}</span>
+                    <span style={{ opacity: body.opacity, fontWeight: body.weight - 100, color: lighter(accent, 0.4) ?? "#000" }}>{item.subtext}</span>
+                    <span style={{ opacity: body.opacity, fontWeight: body.weight }}>{item.time}</span>
                     <div style={{ marginTop: 6 }}>
                       <Button
                         onClick={() => setOpen(item)}

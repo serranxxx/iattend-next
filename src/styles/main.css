@@ -527,3 +527,25 @@ h5,
   z-index: 100;
 }
 
+.scroll-invitation::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    /* Ancho del scrollbar */
+}
+
+.scroll-invitation::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Color del fondo del scrollbar */
+}
+
+.scroll-invitation::-webkit-scrollbar-thumb {
+    background: #888;
+    /* Color del scrollbar */
+}
+
+.scroll-invitation::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Color del scrollbar al pasar el cursor sobre él */
+}
+
+

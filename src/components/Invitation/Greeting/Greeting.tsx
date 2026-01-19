@@ -18,6 +18,22 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
 
+  const title = {
+    font: invitation?.generals.fonts.titles?.typeFace ?? invitation?.generals.fonts.body?.typeFace,
+    weight: invitation?.generals.fonts.titles?.weight === 0 ? 600 : (invitation?.generals.fonts.titles?.weight ?? 600),
+    size: invitation?.generals.fonts.titles?.size === 0 ? 22 : (invitation?.generals.fonts.titles?.size ?? 22),
+    opacity: invitation?.generals.fonts.titles?.opacity ?? 1,
+    color: invitation?.generals.fonts.titles?.color === '#000000' ? accent : (invitation?.generals.fonts.titles?.color ?? accent )
+  }
+
+  const body = {
+    font: invitation?.generals.fonts.body?.typeFace,
+    weight: invitation?.generals.fonts.body?.weight ?? 500,
+    size: invitation?.generals.fonts.body?.size ?? 16,
+    opacity: invitation?.generals.fonts.body?.opacity ?? 1,
+    color: invitation?.generals.fonts.body?.color ?? accent
+  }
+
   const renderTextWithStrong = (text: string) => {
     const parts = text.split(/(\*[^*]+\*)/g);
   
@@ -53,9 +69,10 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
                 <span
                   className="g_module_title"
                   style={{
-                    display: "inline-block",
-                    color: content.background && content.inverted ? primary : accent,
-                    fontFamily: generals.fonts.body?.typeFace ?? "Poppins",
+                    display: "inline-block", whiteSpace: "pre-line",
+                    color: content.background && content.inverted ? primary : title.color,
+                    fontFamily: title.font ?? "Poppins",
+                    fontSize: title.size, fontWeight: title.weight, opacity:title.opacity
                   }}
                 >
                   {renderTextWithStrong(content.title)}
@@ -68,7 +85,8 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
                   style={{
                     display: "inline-block", whiteSpace: "pre-line",
                     color: content.background && content.inverted ? primary : accent,
-                    fontFamily: generals.fonts.body?.typeFace ?? "Poppins",
+                    fontFamily: body.font ?? "Poppins",
+                    fontWeight: body.weight, opacity:body.opacity
                   }}
                 >
                   {renderTextWithStrong(content.description)}

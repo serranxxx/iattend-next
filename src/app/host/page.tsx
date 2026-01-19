@@ -58,7 +58,7 @@ export default function Page() {
   }, [hostOrigin]);
 
   return invitation ? (
-    <div ref={rootRef} style={{ width: '100%' }}>
+    <div ref={rootRef} style={{ width: '100%'}} className="scroll-invitation">
       <Invitation
         height="100vh"
         dev={true}
