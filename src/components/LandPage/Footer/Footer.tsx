@@ -6,6 +6,7 @@ import { Button } from "antd";
 import { FaBars, FaHeadset, FaInstagram, FaRegEnvelope, FaRegPaperPlane, FaWhatsapp } from "react-icons/fa";
 import { Generals, NewInvitation } from "@/types/new_invitation";
 import { darker, lighter } from "@/helpers/functions";
+import Link from "next/link";
 
 
 
@@ -13,7 +14,7 @@ type Props = {
   invitation?: NewInvitation
 }
 
-export const FooterLand = ({ invitation}: Props) => {
+export const FooterLand = ({ invitation }: Props) => {
 
   useEffect(() => {
     console.log('inv from footer: ', invitation)
@@ -21,7 +22,7 @@ export const FooterLand = ({ invitation}: Props) => {
 
   const secondary = invitation?.generals.colors.secondary ?? "#CFBEE6"
 
-  
+
   // export const FooterLand = () => {
   return (
     <div className={styles.main_cont} style={{
@@ -29,13 +30,15 @@ export const FooterLand = ({ invitation}: Props) => {
     }}>
       <div className={styles.footer_cont}>
         <div className={styles.footer_main_col}>
-          <div className={styles.footer_row}>
-            <img className={styles.footer_logo} src="/assets/images/blanco.png" alt="" />
-            <div className={styles.footer_col}>
-              <span style={{ fontWeight: "500", fontSize: "18px", textTransform: "uppercase" }}>Guest management</span>
-              <span style={{ fontWeight: "200", fontSize: "14px" }}>Plan with ease</span>
+          <Link href="/about">
+            <div className={styles.footer_row}>
+              <img className={styles.footer_logo} src="/assets/images/blanco.png" alt="" />
+              <div className={styles.footer_col}>
+                <span style={{ fontWeight: "500", fontSize: "18px", textTransform: "uppercase" }}>Guest management</span>
+                <span style={{ fontWeight: "200", fontSize: "14px" }}>Plan with ease</span>
+              </div>
             </div>
-          </div>
+          </Link>
 
           <div className={styles.links_col}>
             <a href="https://wa.me/6145338500" rel="noreferrer" target="_blank" className={styles.footer_link}>

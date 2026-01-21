@@ -31,6 +31,7 @@ import AnimatedPath from "@/components/Motion/AnimatedPath";
 import { Footer } from "antd/es/layout/layout";
 import { FooterLand } from "@/components/LandPage/Footer/Footer";
 import { darker } from "@/helpers/functions";
+import Link from "next/link";
 
 type invProps = {
   invitation: NewInvitation | null;
@@ -42,11 +43,15 @@ type invProps = {
   ui: InvitationUIBundle;
   invitationID?: string;
   password?: string;
+  plan?: string;
+  phone_number?: string | null;
 };
 
 
 
-export default function Invitation({ password, invitationID, ui, invitation, loader, type, mongoID, dev, height }: invProps) {
+
+
+export default function Invitation({ password, invitationID, ui, invitation, loader, type, mongoID, dev, height, plan, phone_number }: invProps) {
   const coverRef = useRef<HTMLDivElement>(null);
   const greetingRef = useRef<HTMLDivElement>(null);
   const peopleRef = useRef<HTMLDivElement>(null);
@@ -80,6 +85,10 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
 
   const width = useScreenWidth();
   const isLargeScreen = width >= 768;
+
+  const messagePaperless = encodeURIComponent(
+    "¡Hola! Confirmo mi asistencia."
+  );
   // const scrollableContentRef = useRef<HTMLDivElement | null>(null);
 
 
@@ -382,7 +391,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
                 />
               </div>
             )}
-            {!dev && (
+            {!dev && (plan !== 'paperless') ?
               <div style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px',
                 position: "fixed",
@@ -441,7 +450,43 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
                   </Button>
                 }
               </div>
-            )}
+
+              : phone_number && <div style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px',
+                position: "fixed",
+                left: "50%",
+                transform: "translateX(-50%)",
+                bottom: "20px",
+                zIndex: 3,
+                // flexDirection:'column'
+              }}>
+                <Link href={`https://wa.me/${phone_number}?text=${messagePaperless}`}
+                  rel="noreferrer"
+                  target="_blank">
+                  <Button
+                    style={{
+
+                      // height: '44px',
+                      letterSpacing: "2px",
+                      fontSize: "16px",
+                      height: "44px",
+                      width: '200px',
+                      backgroundColor: `${actions}80`,
+                      backdropFilter: "blur(10px)",
+                      border: `1px solid ${actions}40`,
+                      color: accent,
+                      boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
+                    }}
+                  >
+                    {
+                      ui?.buttons.confirm
+                    }
+
+                  </Button>
+                </Link>
+
+              </div>
+            }
 
             <FooterLand invitation={invitation}></FooterLand>
           </>
