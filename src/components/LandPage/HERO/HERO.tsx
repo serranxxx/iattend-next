@@ -44,9 +44,8 @@ export const HeroSection = () => {
               </Button>
             </Link>
           </div> */}
-        </div>
 
-        {/* <div className={styles.action_wrap}>
+          <div className={styles.action_wrap}>
             <Link href={`https://wa.me/6145338500?text=${message}`}
               rel="noreferrer"
               target="_blank">
@@ -57,7 +56,10 @@ export const HeroSection = () => {
                 PLATICA CON NOSOTROS
               </Button>
             </Link>
-          </div> */}
+          </div>
+        </div>
+
+
 
         <div className={styles.hero_first_row}>
           <img className={styles.hero_logo} src="/assets/images/blanco.png" alt="i attend" />

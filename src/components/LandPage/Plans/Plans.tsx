@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import styles from "./plans.module.css";
-import { LuArrowRight } from 'react-icons/lu';
+import { LuArmchair, LuArrowRight, LuClipboardList, LuLockKeyhole, LuLockOpen, LuMessageSquareQuote, LuPalette, LuPencilRuler, LuSend, LuSmartphone, LuTicket } from 'react-icons/lu';
 
 
 
@@ -22,32 +22,91 @@ const cards = [
 ]
 
 const plan_paperless = [
-    'Invitación Paperless',
-    'Diseño libre',
-    'Ediciones ilimitadas',
-    'Evento público',
-    'Confirmación manual'
+    {
+        text: "Invitación Paperless",
+        icon: LuSmartphone
+    },
+    {
+        text: "Diseño libre",
+        icon: LuPalette
+    },
+    {
+        text: "Ediciones ilimitadas",
+        icon: LuPencilRuler
+    },
+    {
+        text: "Evento público",
+        icon: LuLockOpen
+    },
+    {
+        text: "Confirmación manual",
+        icon: LuMessageSquareQuote
+    }
+
 ]
 
 const plan_pro = [
-    'Invitación Paperless',
-    'Diseño libre',
-    'Ediciones ilimitadas',
-    'Evento privado o público',
-    'Lista de invitados',
-    'Acomodo de mesas',
-    'Envíos automáticos',
-    'Pases digitales',
+    {
+        text: "Invitación Paperless",
+        icon: LuSmartphone
+    },
+    {
+        text: "Diseño libre",
+        icon: LuPalette
+    },
+    {
+        text: "Ediciones ilimitadas",
+        icon: LuPencilRuler
+    },
+    {
+        text: "Evento público o privado",
+        icon: LuLockKeyhole
+    },
+    {
+        text: "Lista de asistencia",
+        icon: LuClipboardList
+    },
+    {
+        text: "Mapa de mesas",
+        icon: LuArmchair
+    },
+    {
+        text: "Envíos automáticos",
+        icon: LuSend
+    },
+    {
+        text: "Pases digitales",
+        icon: LuTicket
+    }
+
 
 ]
 
 const plan_lite = [
-    'Invitación Paperless',
-    'Diseño libre',
-    'Ediciones ilimitadas',
-    'Evento privado o público',
-    'Lista de invitados',
-    'Acomodo de mesas',
+    {
+        text: "Invitación Paperless",
+        icon: LuSmartphone
+    },
+    {
+        text: "Diseño libre",
+        icon: LuPalette
+    },
+    {
+        text: "Ediciones ilimitadas",
+        icon: LuPencilRuler
+    },
+    {
+        text: "Evento público o privado",
+        icon: LuLockKeyhole
+    },
+    {
+        text: "Lista de asistencia",
+        icon: LuClipboardList
+    },
+    {
+        text: "Mapa de mesas",
+        icon: LuArmchair
+    },
 
 ]
 
@@ -69,21 +128,30 @@ export const Plans = () => {
                         backgroundColor: '#FFF'
                     }}>
                         <img className={styles.plan_image} src="/assets/images/PAPERLESS.svg" alt='' />
+                        <span style={{
+                            maxWidth: '180px', textAlign: 'center', lineHeight: '1.2', fontWeight: 400, opacity: '0.5',
+                            fontSize: '12px', marginTop: '12px'
+                        }} >La invitación digital esencial, simple y sin límites.</span>
+                        <div className={styles.price_cont}>
+                            <span style={{
+                                textDecoration: 'line-through',
+                                fontSize: '20px', fontWeight: '500', opacity: '0.5'
+                            }}>$1200</span>
+                            <span>$849</span>
+                        </div>
                         <div style={{ fontSize: active === 0 ? '12px' : '10px' }} className={styles.plan_info_cont}>
                             {
                                 plan_paperless.map((i, index) => (
                                     <div key={index} className={styles.plan_item}>
-                                        <LuArrowRight />
-                                        <span>{i}</span>
+                                        <i.icon />
+                                        <span>{i.text}</span>
                                     </div>
                                 ))
                             }
 
                         </div>
 
-                        <div className={styles.price_cont}>
-                            <span>$849</span>
-                        </div>
+
 
                     </div>
 
@@ -95,21 +163,31 @@ export const Plans = () => {
                         minWidth: active === 1 ? '220px' : 'auto'
                     }}>
                         <img className={styles.plan_image} src="/assets/images/PRO.svg" alt='' />
+                        <span style={{
+                            maxWidth: '180px', textAlign: 'center', lineHeight: '1.2', fontWeight: 400, opacity: '0.5',
+                            fontSize: '12px', marginTop: '12px'
+                        }} >La experiencia completa: invita, gestiona y automatiza.</span>
+
+                        <div className={styles.price_cont} style={{ color: '#FDFCFD' }}>
+                            <span style={{
+                                textDecoration: 'line-through',
+                                fontSize: '20px', fontWeight: '500', opacity: '0.5'
+                            }}>$3,999</span>
+                            <span>$3,499</span>
+                        </div>
                         <div style={{ fontSize: active === 1 ? '12px' : '10px', }} className={styles.plan_info_cont}>
                             {
                                 plan_pro.map((i, index) => (
                                     <div key={index} className={styles.plan_item} style={{ borderColor: '#20212B40' }}>
-                                        <LuArrowRight />
-                                        <span>{i}</span>
+                                        <i.icon style={{ color: '#E0DAF4' }} />
+                                        <span>{i.text}</span>
                                     </div>
                                 ))
                             }
 
                         </div>
 
-                        <div className={styles.price_cont} style={{ color: '#FDFCFD' }}>
-                            <span>$3,499</span>
-                        </div>
+
                     </div>
 
                     <div onClick={() => setActive(2)} className={styles.plan_card} style={{
@@ -120,21 +198,30 @@ export const Plans = () => {
                         backgroundColor: '#E0DAF4'
                     }}>
                         <img className={styles.plan_image} src="/assets/images/LITE.svg" alt='' />
+                        <span style={{
+                            maxWidth: '180px', textAlign: 'center', lineHeight: '1.2', fontWeight: 400, opacity: '0.5',
+                            fontSize: '12px', marginTop: '12px'
+                        }} >Invitación digital con control de invitados.</span>
+                        <div className={styles.price_cont} style={{ color: '#706787' }}>
+                            <span style={{
+                                textDecoration: 'line-through',
+                                fontSize: '20px', fontWeight: '500', opacity: '0.5'
+                            }}>$3,499</span>
+                            <span>$3,099</span>
+                        </div>
                         <div style={{ fontSize: active === 2 ? '12px' : '10px', }} className={styles.plan_info_cont}>
                             {
                                 plan_lite.map((i, index) => (
                                     <div key={index} className={styles.plan_item} style={{ borderColor: '#BDB4D040', color: '#706787' }}>
-                                        <LuArrowRight />
-                                        <span>{i}</span>
+                                        <i.icon />
+                                        <span>{i.text}</span>
                                     </div>
                                 ))
                             }
 
                         </div>
 
-                        <div className={styles.price_cont} style={{ color: '#706787' }}>
-                            <span>$3,099</span>
-                        </div>
+
                     </div>
                 </div>
             </div>
