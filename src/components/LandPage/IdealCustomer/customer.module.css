@@ -36,7 +36,7 @@
     height: 60px;
     align-self: stretch;
     border-radius: 12px;
-    background-image: linear-gradient(to right, #F5F3F260, #CFBEE640);
+    background-image: linear-gradient(to top, #F5F3F260, #CFBEE620);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
     box-sizing: border-box;

@@ -13,7 +13,7 @@ export const WorkFlow = () => {
         <span className={styles.key_title}>Paso a paso, sin complicarte</span>
 
 
-        <div className={styles.flow_container}>
+        <div className={`scroll-invitation ${styles.flow_container}`}>
           <div className={styles.flow_card} >
             <Image fill src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/flow_1.jpg" alt="" style={{ objectFit: 'cover' }} />
             <div className={styles.shadow}></div>

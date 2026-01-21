@@ -11,7 +11,7 @@ export const Reviews = () => {
       <div className={styles.key_cont}>
         <span className={styles.key_title}>Personas reales, eventos reales</span>
 
-        <div className={styles.flow_container}>
+        <div className={`scroll-invitation ${styles.flow_container}`}>
           {reviews_list.slice(0,6).map((card, index) => (
             <div key={index} className={styles.flow_card}>
               <FaQuoteLeft size={24} style={{ color: "#CFBEE6" }} />

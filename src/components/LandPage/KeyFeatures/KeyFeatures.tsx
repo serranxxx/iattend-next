@@ -162,7 +162,7 @@ export const KeyFeatures = () => {
               />
               <div className={styles.shadow}></div>
               <span className={styles.key_label}>{feature.label}</span>
-              <div style={{ position: "absolute", top: "16px", right: "16px" }}>
+              <div style={{ position: "absolute", top: "8px", right: "8px" }}>
                 <div className={styles.key_wrap}>
                   <Button
                     icon={<LuArrowUpRight />}

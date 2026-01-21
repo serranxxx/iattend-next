@@ -25,7 +25,7 @@
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
     padding: 0px 24px;
     align-self: stretch;
 }
@@ -46,8 +46,8 @@
 .ideal_card {
     /* height: 40px; */
     align-self: stretch;
-    border-radius: 6px;
-    background-image: linear-gradient(to right, #F5F3F260, #CFBEE640);
+    border-radius: 12px;
+    background-image: linear-gradient(to top, #F5F3F260, #CFBEE620);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
     padding: 12px 16px;
