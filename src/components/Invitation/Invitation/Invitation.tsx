@@ -280,6 +280,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
     if (type === "open") {
 
       setValidated(true);
+      setAnimation(true)
     } else {
       setValidated(false);
       if (password) {
@@ -307,9 +308,8 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
         setAnimatedText(true)
         const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
         setHeightSize(coverHeightPx);
-        console.log('height: ', coverHeightPx)
       }, 1800);
-    }
+    } 
   }, [validated])
 
   useEffect(() => {
