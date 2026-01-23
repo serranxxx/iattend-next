@@ -71,7 +71,7 @@ export const Gallery = forwardRef<HTMLDivElement, DresscodeProps>(function galle
                 </span>
               </FadeLeft>
               {
-                images.length > 0 &&
+                images?.length > 0 &&
                 <FadeIn>
                   <FanStack
                     images={images}
