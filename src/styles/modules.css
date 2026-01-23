@@ -144,10 +144,17 @@
     .textures_background,
     .background_image_quote_container {
         border-radius: 16px;
+        
     }
 
+    /* .background_image_quote_container {
+        border: 1px solid red;
+        width: 100%;
+    } */
+
+
     .gm_container {
-        max-width: 550px;
+        /* max-width: 550px; */
         /* border: 1px solid; */
     }
 

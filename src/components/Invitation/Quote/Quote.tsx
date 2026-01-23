@@ -50,7 +50,7 @@ export const Quote = forwardRef<HTMLDivElement, quoteProps>(function Greeting({ 
             style={{
               position: "relative",
               zIndex: 2,
-              maxWidth:'1250px !important'
+              maxWidth:'1250px !important',
             }}
           >
             {content.image.active ? (
