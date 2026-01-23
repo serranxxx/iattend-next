@@ -86,7 +86,7 @@ export const Notices = forwardRef<HTMLDivElement, DresscodeProps>(function notic
                           fontWeight: body.weight, opacity: body.opacity
                         }}
                       >
-                        {renderTextWithStrong(item)}
+                        {renderTextWithStrong(item ?? "")}
                       </span>
                     </FadeLeft>
 

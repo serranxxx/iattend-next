@@ -75,7 +75,7 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
                     fontSize: title.size, fontWeight: title.weight, opacity:title.opacity
                   }}
                 >
-                  {renderTextWithStrong(content.title)}
+                  {renderTextWithStrong(content.title ?? "")}
                 </span>
               </FadeLeft>
 
@@ -89,7 +89,7 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
                     fontWeight: body.weight, opacity:body.opacity
                   }}
                 >
-                  {renderTextWithStrong(content.description)}
+                  {renderTextWithStrong(content.description ?? "")}
                 </span>
               </FadeLeft>
 
