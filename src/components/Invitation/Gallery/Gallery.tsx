@@ -15,13 +15,31 @@ type DresscodeProps = {
 export const Gallery = forwardRef<HTMLDivElement, DresscodeProps>(function gallery({ dev, invitation }, ref) {
   const content = invitation.gallery;
   const generals = invitation.generals;
-  const font = generals.fonts.body?.typeFace;
 
   const images = dev ? content.dev : content.prod;
 
   const primary = generals?.colors.primary ?? "#FFFFFF";
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
+
+  const title = {
+    font: invitation?.generals.fonts.titles?.typeFace ?? invitation?.generals.fonts.body?.typeFace,
+    weight: invitation?.generals.fonts.titles?.weight === 0 ? 600 : (invitation?.generals.fonts.titles?.weight ?? 600),
+    size: invitation?.generals.fonts.titles?.size === 0 ? 22 : (invitation?.generals.fonts.titles?.size ?? 22),
+    opacity: invitation?.generals.fonts.titles?.opacity ?? 1,
+    color: invitation?.generals.fonts.titles?.color === '#000000' ? accent : (invitation?.generals.fonts.titles?.color ?? accent )
+  }
+
+  const renderTextWithStrong = (text: string) => {
+    const parts = text.split(/(\*[^*]+\*)/g);
+
+    return parts.map((part, index) => {
+      if (part.startsWith("*") && part.endsWith("*")) {
+        return <strong key={index}>{part.slice(1, -1)}</strong>;
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
 
   return (
     <>
@@ -43,15 +61,17 @@ export const Gallery = forwardRef<HTMLDivElement, DresscodeProps>(function galle
                 <span
                   className="g_module_title"
                   style={{
-                    fontFamily: font,
-                    color: content.background && content.inverted ? primary : accent,
+                    display: "inline-block", whiteSpace: "pre-line",
+                    color: content.background && content.inverted ? primary : title.color,
+                    fontFamily: title.font ?? "Poppins",
+                    fontSize: title.size, fontWeight: title.weight, opacity: title.opacity
                   }}
                 >
-                  {content.title}
+                  {renderTextWithStrong(content.title ?? "")}
                 </span>
               </FadeLeft>
               {
-                images.length > 0 &&
+                images?.length > 0 &&
                 <FadeIn>
                   <FanStack
                     images={images}

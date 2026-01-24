@@ -26,6 +26,34 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
 
+  const title = {
+    font: invitation?.generals.fonts.titles?.typeFace ?? invitation?.generals.fonts.body?.typeFace,
+    weight: invitation?.generals.fonts.titles?.weight === 0 ? 600 : (invitation?.generals.fonts.titles?.weight ?? 600),
+    size: invitation?.generals.fonts.titles?.size === 0 ? 22 : (invitation?.generals.fonts.titles?.size ?? 22),
+    opacity: invitation?.generals.fonts.titles?.opacity ?? 1,
+    color: invitation?.generals.fonts.titles?.color === '#000000' ? accent : (invitation?.generals.fonts.titles?.color ?? accent )
+  }
+
+  const body = {
+    font: invitation?.generals.fonts.body?.typeFace,
+    weight: invitation?.generals.fonts.body?.weight ?? 500,
+    size: invitation?.generals.fonts.body?.size ?? 16,
+    opacity: invitation?.generals.fonts.body?.opacity ?? 1,
+    color: invitation?.generals.fonts.body?.color ?? accent
+  }
+
+  const renderTextWithStrong = (text: string) => {
+    const parts = text.split(/(\*[^*]+\*)/g);
+
+    return parts.map((part, index) => {
+      if (part.startsWith("*") && part.endsWith("*")) {
+        return <strong key={index}>{part.slice(1, -1)}</strong>;
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
+
+
   return content.active && generals ? (
     <>
       <div
@@ -41,7 +69,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
           ref={ref}
           className="gm_container"
           style={{
-            padding: content.background ? "32px" : "0px 32px",
+            padding: content.background ? "24px" : "0px 24px",
             position: "relative",
           }}
         >
@@ -49,18 +77,28 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
             <FadeLeft>
               <span
                 className="g_module_title"
-                style={{ color: content.background && content.inverted ? primary : accent, fontFamily: generals.fonts.body?.typeFace }}
+                style={{
+                  display: "inline-block", whiteSpace: "pre-line",
+                  color: content.background && content.inverted ? primary : title.color,
+                  fontFamily: title.font ?? "Poppins",
+                  fontSize: title.size, fontWeight: title.weight, opacity: title.opacity
+                }}
               >
-                {content.title}
+                {renderTextWithStrong(content.title ?? "")}
               </span>
             </FadeLeft>
 
             <FadeLeft>
               <span
                 className="g_mdoule_regular_text"
-                style={{ color: content.background && content.inverted ? primary : accent, fontFamily: generals.fonts.body?.typeFace }}
+                style={{
+                  display: "inline-block", whiteSpace: "pre-line",
+                  color: content.background && content.inverted ? primary : accent,
+                  fontFamily: body.font ?? "Poppins",
+                  fontWeight: body.weight, opacity: body.opacity
+                }}
               >
-                {content.description}
+                {renderTextWithStrong(content.description ?? "")}
               </span>
             </FadeLeft>
 
@@ -90,7 +128,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                       key={index}
                       className={styles.dresscode_image_container}
                     >
-                      <Image fill alt="" loading="lazy"  src={image} style={{ objectFit: "cover" }} />
+                      <Image fill alt="" loading="lazy" src={image} style={{ objectFit: "cover" }} />
                     </div>
                   </FadeIn>
                 ))}
@@ -103,20 +141,20 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
                   content.links.map((link, index) => (
                     <FadeIn key={index}>
                       <Button
-                      key={index}
-                      href={link}
-                      target="_blank"
-                      icon={<FaPinterest />}
-                      style={{
-                        backgroundColor: content.background ? (content.inverted ? primary : secondary) : primary,
-                        color: accent,
-                        // backgroundColor: "#E60024",
-                        // color: "#FFF",
-                        boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
-                      }}
-                    >
-                      {ui?.buttons.inspiration ?? "HOLA"}
-                    </Button>
+                        key={index}
+                        href={link}
+                        target="_blank"
+                        icon={<FaPinterest />}
+                        style={{
+                          backgroundColor: content.background ? (content.inverted ? primary : secondary) : primary,
+                          color: accent,
+                          // backgroundColor: "#E60024",
+                          // color: "#FFF",
+                          boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
+                        }}
+                      >
+                        {ui?.buttons.inspiration ?? "HOLA"}
+                      </Button>
                     </FadeIn>
                   ))}
               </div>

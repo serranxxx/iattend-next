@@ -11,11 +11,39 @@ type DresscodeProps = {
 export const Notices = forwardRef<HTMLDivElement, DresscodeProps>(function notices({ dev, invitation }, ref) {
   const content = invitation.notices;
   const generals = invitation.generals;
-  const font = generals.fonts.body?.typeFace;
+
 
   const primary = generals?.colors.primary ?? "#FFFFFF";
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
+
+  const title = {
+    font: invitation?.generals.fonts.titles?.typeFace ?? invitation?.generals.fonts.body?.typeFace,
+    weight: invitation?.generals.fonts.titles?.weight === 0 ? 600 : (invitation?.generals.fonts.titles?.weight ?? 600),
+    size: invitation?.generals.fonts.titles?.size === 0 ? 22 : (invitation?.generals.fonts.titles?.size ?? 22),
+    opacity: invitation?.generals.fonts.titles?.opacity ?? 1,
+    color: invitation?.generals.fonts.titles?.color === '#000000' ? accent : (invitation?.generals.fonts.titles?.color ?? accent )
+  }
+
+  const body = {
+    font: invitation?.generals.fonts.body?.typeFace,
+    weight: invitation?.generals.fonts.body?.weight ?? 500,
+    size: invitation?.generals.fonts.body?.size ?? 16,
+    opacity: invitation?.generals.fonts.body?.opacity ?? 1,
+    color: invitation?.generals.fonts.body?.color ?? accent
+  }
+
+  const renderTextWithStrong = (text: string) => {
+    const parts = text.split(/(\*[^*]+\*)/g);
+
+    return parts.map((part, index) => {
+      if (part.startsWith("*") && part.endsWith("*")) {
+        return <strong key={index}>{part.slice(1, -1)}</strong>;
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
+
 
   return (
     <>
@@ -26,7 +54,7 @@ export const Notices = forwardRef<HTMLDivElement, DresscodeProps>(function notic
             ref={ref}
             className="gm_container"
             style={{
-              padding: content.background ? "32px" : "0px 32px",
+              padding: content.background ? "24px" : "0px 24px",
               position: "relative",
             }}
           >
@@ -35,8 +63,10 @@ export const Notices = forwardRef<HTMLDivElement, DresscodeProps>(function notic
                 <span
                   className="g_module_title"
                   style={{
-                    fontFamily: font,
-                    color: content.background && content.inverted ? primary : accent,
+                    display: "inline-block", whiteSpace: "pre-line",
+                    color: content.background && content.inverted ? primary : title.color,
+                    fontFamily: title.font ?? "Poppins",
+                    fontSize: title.size, fontWeight: title.weight, opacity: title.opacity
                   }}
                 >
                   {content.title}
@@ -50,11 +80,13 @@ export const Notices = forwardRef<HTMLDivElement, DresscodeProps>(function notic
                       <span
                         className="g_mdoule_regular_text"
                         style={{
+                          display: "inline-block", whiteSpace: "pre-line",
                           color: content.background && content.inverted ? primary : accent,
-                          fontFamily: font,
+                          fontFamily: body.font ?? "Poppins",
+                          fontWeight: body.weight, opacity: body.opacity
                         }}
                       >
-                        {item}
+                        {renderTextWithStrong(item ?? "")}
                       </span>
                     </FadeLeft>
 
@@ -64,8 +96,10 @@ export const Notices = forwardRef<HTMLDivElement, DresscodeProps>(function notic
                           // data-aos={!dev && generals.texture == null ? "fade-left" : undefined}
                           className="g_mdoule_regular_text"
                           style={{
-                            fontFamily: font,
+                            display: "inline-block", whiteSpace: "pre-line",
                             color: content.background && content.inverted ? primary : accent,
+                            fontFamily: body.font ?? "Poppins",
+                            fontWeight: body.weight, opacity: body.opacity
                           }}
                         >
                           ...

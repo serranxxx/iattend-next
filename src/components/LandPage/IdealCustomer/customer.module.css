@@ -1,3 +1,5 @@
+
+
 .key_cont {
     display: flex;
     align-items: flex-start;
@@ -15,7 +17,7 @@
     font-size: 32px;
     font-weight: 800;
     color: #20212B;
-    font-family: 'Geom', 'Outfit', 'Poppins';
+    font-family:  'Outfit', 'Poppins';
     line-height: 110%;
     z-index: 2;
 }
@@ -34,7 +36,7 @@
     height: 60px;
     align-self: stretch;
     border-radius: 12px;
-    background-image: linear-gradient(to right, #F5F3F260, #CFBEE640);
+    background-image: linear-gradient(to top, #F5F3F260, #CFBEE620);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
     box-sizing: border-box;
@@ -53,7 +55,7 @@
     justify-content: flex-start;
     gap: 8px;
     color: #20212B;
-    font-family: 'Geom', 'Outfit', 'Poppins';
+    font-family:  'Outfit', 'Poppins';
     line-height: 110%;
     font-size: 18px;
     font-weight: 700;
@@ -65,9 +67,47 @@
 
 .card_desc {
     color: #20212B80;
-    font-family: 'Geom', 'Outfit', 'Poppins';
+    font-family:  'Outfit', 'Poppins';
     line-height: 150%;
     font-weight: 400;
     font-size: 16px;
     margin-top: 8px;
+}
+
+.main_cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+
+    .key_cont {
+        max-width: 1320px;
+        display: flex;
+        /* z-index: -1; */
+    }
+
+    .flow_card {
+        flex: 1;
+    }
+
+    .key_title {
+        font-size: 38px;
+
+    }
+
+    .ideal_card {
+        height: auto !important;
+        flex: 1;
+    }
+
+    .ideal_cont {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        align-self: stretch;
+        flex-direction: row;
+    }
 }

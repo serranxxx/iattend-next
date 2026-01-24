@@ -28,6 +28,10 @@ import { PiTicketDuotone } from "react-icons/pi";
 import { BsPass } from "react-icons/bs";
 import { FaArrowsRotate } from "react-icons/fa6";
 import AnimatedPath from "@/components/Motion/AnimatedPath";
+import { Footer } from "antd/es/layout/layout";
+import { FooterLand } from "@/components/LandPage/Footer/Footer";
+import { darker } from "@/helpers/functions";
+import Link from "next/link";
 
 type invProps = {
   invitation: NewInvitation | null;
@@ -39,11 +43,15 @@ type invProps = {
   ui: InvitationUIBundle;
   invitationID?: string;
   password?: string;
+  plan?: string;
+  phone_number?: string | null;
 };
 
 
 
-export default function Invitation({ password, invitationID, ui, invitation, loader, type, mongoID, dev, height }: invProps) {
+
+
+export default function Invitation({ password, invitationID, ui, invitation, loader, type, mongoID, dev, height, plan, phone_number }: invProps) {
   const coverRef = useRef<HTMLDivElement>(null);
   const greetingRef = useRef<HTMLDivElement>(null);
   const peopleRef = useRef<HTMLDivElement>(null);
@@ -77,6 +85,10 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
 
   const width = useScreenWidth();
   const isLargeScreen = width >= 768;
+
+  const messagePaperless = encodeURIComponent(
+    "¡Hola! Confirmo mi asistencia."
+  );
   // const scrollableContentRef = useRef<HTMLDivElement | null>(null);
 
 
@@ -85,17 +97,17 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
       case 1:
         return <Greeting key={index} ref={greetingRef} dev={false} invitation={invitation} />;
       case 2:
-        return <People key={index} ref={peopleRef} dev={false} invitation={invitation} />;
+        return <People invitationID={invitationID} key={index} ref={peopleRef} dev={false} invitation={invitation} />;
       case 3:
         return <Quote key={index} ref={quoteRef} dev={dev} invitation={invitation} />;
       case 4:
-        return <Itinerary ui={ui} key={index} ref={itineraryRef} dev={false} invitation={invitation} />;
+        return <Itinerary invitationID={invitationID} ui={ui} key={index} ref={itineraryRef} dev={false} invitation={invitation} />;
       case 5:
         return <DressCode ui={ui} key={index} ref={dresscodeRef} dev={dev} invitation={invitation} />;
       case 6:
         return <Gifts ui={ui} key={index} ref={giftsRef} dev={false} invitation={invitation} />;
       case 7:
-        return <Destinations ui={ui} key={index} ref={destinationRef} dev={false} invitation={invitation} />;
+        return <Destinations invitationID={invitationID} ui={ui} key={index} ref={destinationRef} dev={false} invitation={invitation} />;
       case 8:
         return <Notices key={index} ref={noticesRef} dev={false} invitation={invitation} />;
       case 9:
@@ -120,6 +132,11 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
     boxShadow: "0px 0px 12px rgba(0,0,0,0.2)",
     fontFamily: font,
   };
+
+  useEffect(() => {
+    console.log('invidd: ', invitationID)
+  }, [mongoID])
+
 
   const onValidateUser = async (code: string) => {
 
@@ -258,24 +275,12 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
 
 
   useEffect(() => {
-    const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    setHeightSize(coverHeightPx);
+
 
     if (type === "open") {
 
       setValidated(true);
-      // if (invitationID) {
-      //   const active_guest = localStorage.getItem(invitationID)
-      //   if (active_guest) {
-      //     console.log('active g: ', active_guest)
-      //     onValidateUser(active_guest)
-      //   }
-      // }
-
-      // else {
-      //   setValidated(true);
-      // }
-
+      setAnimation(true)
     } else {
       setValidated(false);
       if (password) {
@@ -301,8 +306,10 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
       setAnimation(true)
       setTimeout(() => {
         setAnimatedText(true)
+        const coverHeightPx = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        setHeightSize(coverHeightPx);
       }, 1800);
-    }
+    } 
   }, [validated])
 
   useEffect(() => {
@@ -350,31 +357,19 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
     <>
       {contextHolder}
 
+
+
       <div
         ref={scrollableContentRef}
-        className={styles.invitation_main_cont}
+        className={`${styles.invitation_main_cont} scroll-invitation`}
         style={{
           backgroundColor: invitation.generals.colors.primary ?? "#FFF",
-          paddingBottom: validated ? "44px" : "0px",
+          paddingBottom: "0px",
           maxHeight: "100vh",
           position: "relative",
         }}
       >
-        {invitation.generals.texture !== null && tex && (
-          <TextureOverlay
-            containerRef={scrollableContentRef as unknown as React.RefObject<HTMLElement>}
-            coverHeightPx={heightSize}
-            extraMarginPx={mongoID === "68ffdb9cd673a17f84312991" ? 400 : 0}
-            texture={{
-              image: tex.image, // StaticImageData o "/public/..."
-              opacity: tex.opacity,
-              blend: tex.blend,
-              filter: tex.filter,
-            }}
-            tileW={1024} // ajusta a tu imagen
-            tileH={1024}
-          />
-        )}
+
         <Cover ui={ui} ref={coverRef} dev={dev} invitation={invitation} height={"100vh"} validated={validated} />
         {validated && (
           <>
@@ -396,7 +391,7 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
                 />
               </div>
             )}
-            {!dev && (
+            {!dev && (plan !== 'paperless') ?
               <div style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px',
                 position: "fixed",
@@ -455,11 +450,48 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
                   </Button>
                 }
               </div>
-            )}
 
+              : phone_number && <div style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px',
+                position: "fixed",
+                left: "50%",
+                transform: "translateX(-50%)",
+                bottom: "20px",
+                zIndex: 3,
+                // flexDirection:'column'
+              }}>
+                <Link href={`https://wa.me/${phone_number}?text=${messagePaperless}`}
+                  rel="noreferrer"
+                  target="_blank">
+                  <Button
+                    style={{
 
+                      // height: '44px',
+                      letterSpacing: "2px",
+                      fontSize: "16px",
+                      height: "44px",
+                      width: '200px',
+                      backgroundColor: `${actions}80`,
+                      backdropFilter: "blur(10px)",
+                      border: `1px solid ${actions}40`,
+                      color: accent,
+                      boxShadow: "0 0 6px 0 rgba(0, 0, 0, 0.25)",
+                    }}
+                  >
+                    {
+                      ui?.buttons.confirm
+                    }
+
+                  </Button>
+                </Link>
+
+              </div>
+            }
+
+            <FooterLand invitation={invitation}></FooterLand>
           </>
         )}
+
         <div
           className={styles.inv_locked_blured}
           style={{ pointerEvents: validated ? "none" : undefined, opacity: validated ? "0" : "1", backgroundColor: `${primary}20` }}
@@ -526,11 +558,11 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
         </div>
         <div
           style={{
-            opacity: animatedText ? 1 : 0, fontFamily: invitation.generals.fonts.body?.value ?? "Poppins", color: '#FFFFFF99', display: 'flex', alignItems: 'flex-start', justifyContent: 'center' ,gap:'0px',
-            flexWrap:'wrap'
+            opacity: animatedText ? 1 : 0, fontFamily: invitation.generals.fonts.body?.value ?? "Poppins", color: '#FFFFFF99', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', gap: '0px',
+            flexWrap: 'wrap'
 
           }}
-          className={styles.welcome_label}><span style={{marginRight:'8px'}}>{ui.confirm.hello}</span> <b style={{ color: '#FFF', textAlign: 'left', }}>{guestInfo?.name}</b></div>
+          className={styles.welcome_label}><span style={{ marginRight: '8px' }}>{ui.confirm.hello}</span> <b style={{ color: '#FFF', textAlign: 'left', }}>{guestInfo?.name}</b></div>
         {
           onShowTicket &&
           <div onClick={() => setOnShowTicket(false)} className={styles.ticket_bg}>
@@ -649,6 +681,21 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
           }
         </div>
 
+        {invitation.generals.texture !== null && tex && (
+          <TextureOverlay
+            containerRef={scrollableContentRef as unknown as React.RefObject<HTMLElement>}
+            coverHeightPx={heightSize}
+            extraMarginPx={mongoID === "68ffdb9cd673a17f84312991" ? 400 : 0}
+            texture={{
+              image: tex.image, // StaticImageData o "/public/..."
+              opacity: tex.opacity,
+              blend: tex.blend,
+              filter: tex.filter,
+            }}
+            tileW={1024} // ajusta a tu imagen
+            tileH={1024}
+          />
+        )}
 
       </div>
       <Drawer

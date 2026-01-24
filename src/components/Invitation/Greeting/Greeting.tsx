@@ -18,6 +18,33 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
 
+  const title = {
+    font: invitation?.generals.fonts.titles?.typeFace ?? invitation?.generals.fonts.body?.typeFace,
+    weight: invitation?.generals.fonts.titles?.weight === 0 ? 600 : (invitation?.generals.fonts.titles?.weight ?? 600),
+    size: invitation?.generals.fonts.titles?.size === 0 ? 22 : (invitation?.generals.fonts.titles?.size ?? 22),
+    opacity: invitation?.generals.fonts.titles?.opacity ?? 1,
+    color: invitation?.generals.fonts.titles?.color === '#000000' ? accent : (invitation?.generals.fonts.titles?.color ?? accent )
+  }
+
+  const body = {
+    font: invitation?.generals.fonts.body?.typeFace,
+    weight: invitation?.generals.fonts.body?.weight ?? 500,
+    size: invitation?.generals.fonts.body?.size ?? 16,
+    opacity: invitation?.generals.fonts.body?.opacity ?? 1,
+    color: invitation?.generals.fonts.body?.color ?? accent
+  }
+
+  const renderTextWithStrong = (text: string) => {
+    const parts = text.split(/(\*[^*]+\*)/g);
+  
+    return parts.map((part, index) => {
+      if (part.startsWith("*") && part.endsWith("*")) {
+        return <strong key={index}>{part.slice(1, -1)}</strong>;
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
+
 
   return (
     <>
@@ -32,7 +59,7 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
             <div
               className="g_module_info_container"
               style={{
-                padding: content.background ? "32px" : "0px 32px",
+                padding: content.background ? "24px" : "0px 24px",
                 width: "100%",
                 height: "100%",
                 boxSizing: "border-box",
@@ -42,12 +69,13 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
                 <span
                   className="g_module_title"
                   style={{
-                    display: "inline-block",
-                    color: content.background && content.inverted ? primary : accent,
-                    fontFamily: generals.fonts.body?.typeFace ?? "Poppins",
+                    display: "inline-block", whiteSpace: "pre-line",
+                    color: content.background && content.inverted ? primary : title.color,
+                    fontFamily: title.font ?? "Poppins",
+                    fontSize: title.size, fontWeight: title.weight, opacity:title.opacity
                   }}
                 >
-                  {content.title}
+                  {renderTextWithStrong(content.title ?? "")}
                 </span>
               </FadeLeft>
 
@@ -55,12 +83,13 @@ export const Greeting = forwardRef<HTMLDivElement, GreetingProps>(function Greet
                 <span
                   className="g_module_regular_text"
                   style={{
-                    display: "inline-block",
+                    display: "inline-block", whiteSpace: "pre-line",
                     color: content.background && content.inverted ? primary : accent,
-                    fontFamily: generals.fonts.body?.typeFace ?? "Poppins",
+                    fontFamily: body.font ?? "Poppins",
+                    fontWeight: body.weight, opacity:body.opacity
                   }}
                 >
-                  {content.description}
+                  {renderTextWithStrong(content.description ?? "")}
                 </span>
               </FadeLeft>
 

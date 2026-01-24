@@ -15,11 +15,28 @@ type DresscodeProps = {
 export const Gifts = forwardRef<HTMLDivElement, DresscodeProps>(function Greeting({ ui, dev, invitation }, ref) {
   const content = invitation.gifts;
   const generals = invitation.generals;
-  const font = generals.fonts.body?.typeFace;
 
   const primary = generals?.colors.primary ?? "#FFFFFF";
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
+
+  const title = {
+    font: invitation?.generals.fonts.titles?.typeFace ?? invitation?.generals.fonts.body?.typeFace,
+    weight: invitation?.generals.fonts.titles?.weight === 0 ? 600 : (invitation?.generals.fonts.titles?.weight ?? 600),
+    size: invitation?.generals.fonts.titles?.size === 0 ? 22 : (invitation?.generals.fonts.titles?.size ?? 22),
+    opacity: invitation?.generals.fonts.titles?.opacity ?? 1,
+    color: invitation?.generals.fonts.titles?.color === '#000000' ? accent : (invitation?.generals.fonts.titles?.color ?? accent )
+  }
+
+  const body = {
+    font: invitation?.generals.fonts.body?.typeFace,
+    weight: invitation?.generals.fonts.body?.weight ?? 500,
+    size: invitation?.generals.fonts.body?.size ?? 16,
+    opacity: invitation?.generals.fonts.body?.opacity ?? 1,
+    color: invitation?.generals.fonts.body?.color ?? accent
+  }
+
+  
 
   // 👉 Guardamos las cards en estado local
   const [cards, setCards] = useState(content.cards);
@@ -31,6 +48,17 @@ export const Gifts = forwardRef<HTMLDivElement, DresscodeProps>(function Greetin
       const [selected] = newArr.splice(index, 1);
       newArr.unshift(selected);
       return newArr;
+    });
+  };
+
+  const renderTextWithStrong = (text: string) => {
+    const parts = text.split(/(\*[^*]+\*)/g);
+  
+    return parts.map((part, index) => {
+      if (part.startsWith("*") && part.endsWith("*")) {
+        return <strong key={index}>{part.slice(1, -1)}</strong>;
+      }
+      return <span key={index}>{part}</span>;
     });
   };
 
@@ -48,7 +76,7 @@ export const Gifts = forwardRef<HTMLDivElement, DresscodeProps>(function Greetin
             ref={ref}
             className="gm_container"
             style={{
-              padding: content.background ? "32px" : "0px 32px",
+              padding: content.background ? "24px" : "0px 24px",
               position: "relative",
             }}
           >
@@ -57,22 +85,26 @@ export const Gifts = forwardRef<HTMLDivElement, DresscodeProps>(function Greetin
                 <span
                   className="g_module_title"
                   style={{
-                    color: content.background && content.inverted ? primary : accent,
-                    fontFamily: font,
+                    display: "inline-block", whiteSpace: "pre-line",
+                    color: content.background && content.inverted ? primary : title.color,
+                    fontFamily: title.font ?? "Poppins",
+                    fontSize: title.size, fontWeight: title.weight, opacity:title.opacity
                   }}
                 >
-                  {content.title}
+                  {renderTextWithStrong(content.title ?? "")}
                 </span>
               </FadeLeft>
               <FadeLeft>
                 <span
                   className="g_mdoule_regular_text"
                   style={{
+                    display: "inline-block", whiteSpace: "pre-line",
                     color: content.background && content.inverted ? primary : accent,
-                    fontFamily: font,
+                    fontFamily: body.font ?? "Poppins",
+                    fontWeight: body.weight,opacity:body.opacity
                   }}
                 >
-                  {content.description}
+                  {renderTextWithStrong(content.description ?? "")}
                 </span>
               </FadeLeft>
               <div

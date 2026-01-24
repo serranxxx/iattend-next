@@ -20,19 +20,13 @@ type Feature = {
   image: string;
 };
 
-type Feat = {
-  label: React.ReactNode | null;
-  seed: string | null;
-  icon: any;
-  desc: string;
-};
-
 export type KeyFeature = {
   key: string;
   title: string;
   value: string;
   image: string | null;
   path: string;
+  type: "video" | "image";
 };
 
 export const KEY_FEATURES: KeyFeature[] = [
@@ -41,48 +35,54 @@ export const KEY_FEATURES: KeyFeature[] = [
     title: "Invitación Paperless",
     value:
       "Invitaciones digitales paperless para bodas y eventos: elegantes, personalizables y fáciles de usar. Comparte toda tu información en un solo enlace, actualizable, visual y accesible desde cualquier dispositivo.",
-    image: null,
-    path: "invitacion-paperless",
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/C0014.mp4",
+    path: "invitacion-digital",
+    type: "video",
   },
   {
     key: "invitados",
     title: "Gestión de invitados",
     value:
       "Guest Management de I attend: controla invitados en un solo lugar. Envía invitaciones por WhatsApp, gestiona accesos, confirma asistencias en tiempo real y mantén tu evento organizado, claro y sin estrés.",
-    image: null,
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/guest-management%20(1).jpg",
     path: "guest-management",
+    type: "image",
   },
   {
     key: "privacidad",
     title: "Evento privado",
     value:
       "Privacidad total en tus invitaciones digitales: elige eventos públicos o privados, controla accesos, personaliza cada invitado y cambia la modalidad cuando quieras, con seguridad, flexibilidad y control absoluto.",
-    image: null,
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/C0003%20(1).mp4",
     path: "privacidad",
+    type: "video",
   },
   {
     key: "pases",
     title: "Pases digitales",
     value:
       "Pases digitales personalizados para bodas y eventos: acceso seguro desde el celular, generación automática al confirmar asistencia, mesas asignadas y control claro de invitados, sin boletos físicos y con una experiencia moderna.",
-    image: null,
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/C0007%202.mp4",
     path: "pases-digitales",
+    type: "video",
   },
   {
     key: "whatsapp",
     title: "Envíos automáticos",
     value:
       "Envía invitaciones por WhatsApp de forma automática y segura con I attend. Usa el API oficial, evita bloqueos, controla envíos con créditos y comunica tu evento de manera profesional y confiable.",
-    image: null,
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/C0018.mp4",
     path: "envios-whatsapp",
+    type: "video",
   },
   {
     key: "mesas",
     title: "Acomodo por mesas",
     value:
       "Organiza a tus invitados sin estrés con el seating chart digital de I attend: mapa de mesas interactivo, asignación visual, edición flexible y control total para bodas y eventos de cualquier tamaño.",
-    image: null,
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/mesas.png",
     path: "mapa-de-mesas",
+    type: "image",
   },
 ];
 
@@ -94,7 +94,7 @@ const FEATURES: Feature[] = [
       </>
     ),
     seed: "paperless",
-    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/paperless.jpg",
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/key-1.jpg",
   },
   {
     label: (
@@ -103,7 +103,7 @@ const FEATURES: Feature[] = [
       </>
     ),
     seed: "invitados",
-    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/guest-management%20(1).jpg",
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/key-2.jpg",
   },
   {
     label: (
@@ -113,7 +113,7 @@ const FEATURES: Feature[] = [
       </>
     ),
     seed: "privacidad",
-    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/privacy%20(1).jpg",
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/key-3.jpg",
   },
   {
     label: (
@@ -122,7 +122,7 @@ const FEATURES: Feature[] = [
       </>
     ),
     seed: "pases",
-    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/pass.jpg",
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/key-4.jpg",
   },
   {
     label: (
@@ -131,7 +131,7 @@ const FEATURES: Feature[] = [
       </>
     ),
     seed: "mesas",
-    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/tabs.jpg",
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/key-5.jpg",
   },
   {
     label: (
@@ -140,7 +140,7 @@ const FEATURES: Feature[] = [
       </>
     ),
     seed: "whatsapp",
-    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/whats.jpg",
+    image: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/key-6.jpg",
   },
 ];
 
@@ -149,39 +149,28 @@ export const KeyFeatures = () => {
   const [currentItem, setCurrentItem] = useState<any>(null);
 
   return (
-    <>
+    <div className={styles.main_cont}>
       <section className={styles.key_cont}>
         <span className={styles.key_title}>Todo fluye cuando tienes el control</span>
         <div className={styles.key_main_cont}>
-          {FEATURES.map((column, colIndex) => (
-            <div key={colIndex} className={styles.key_col}>
-              {column.map((feature, index) =>
-                feature && feature.seed ? (
-                  <div key={index} className={styles.key_item}>
-                    <Image
-                      src={`https://picsum.photos/seed/${feature.seed}/600/400`}
-                      alt=""
-                      fill
-                      style={{ position: "absolute", objectFit: "cover" }}
-                    />
-                    <div className={styles.shadow}></div>
-                    <span className={styles.key_label}>{feature.label}</span>
-                    <div className={styles.key_wrap}>
-                      <Button
-                        icon={<LuArrowUpRight />}
-                        onClick={() => {
-                          setOpen(true);
-                          setCurrentItem(feature.seed);
-                        }}
-                        className={styles.key_button}
-                        // style={{ position: "absolute", top: "0px", right: "16px" }}
-                      ></Button>
-                    </div>
-                  </div>
-                ) : (
-                  <div key={index} className={styles.key_space} />
-                )
-              )}
+          {FEATURES.map((feature, colIndex) => (
+            <div key={colIndex} className={styles.key_item}>
+              <Image src={`${feature.image}`} alt="" fill style={{ position: "absolute", objectFit: "cover" }} />
+              <div className={styles.shadow}></div>
+              <span className={styles.key_label}>{feature.label}</span>
+              <div style={{ position: "absolute", top: "8px", right: "8px" }}>
+                <div className={styles.key_wrap}>
+                  <Button
+                    icon={<LuArrowUpRight />}
+                    onClick={() => {
+                      setOpen(true);
+                      setCurrentItem(feature.seed);
+                    }}
+                    className={styles.key_button}
+                    //
+                  ></Button>
+                </div>
+              </div>
             </div>
             // <div key={colIndex} className={styles.key_col}>
             //   {column.map((feature, index) =>
@@ -246,12 +235,51 @@ export const KeyFeatures = () => {
         }}
       >
         <div className={styles.image_cont}>
-          <Image
+          {KEY_FEATURES.find((k) => k.key === currentItem)?.type === "video" ? (
+            <video
+              // ref={videoRef}
+              src={KEY_FEATURES.find((k) => k.key === currentItem)?.image!}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              controls={false}
+              style={{
+                width: "100%",
+                borderRadius: 0,
+                position: "absolute",
+                border: "none",
+                objectFit: "cover",
+                left: "50%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            />
+          ) : (
+            <Image
+              src={KEY_FEATURES.find((k) => k.key === currentItem)?.image!}
+              fill
+              alt=""
+              style={{
+                position: "absolute",
+                objectFit: "cover",
+                left: "50%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            />
+          )}
+
+          {/* <Image
             src={KEY_FEATURES.find((k) => k.key === currentItem)?.image!}
             fill
             alt=""
-            style={{ position: "absolute", objectFit: "cover", left: "50%", top: "50%", transform: "translate(-50%, -50%)" }}
-          />
+            style={{
+              position: "absolute", objectFit: "cover",
+              left: '50%', top: '50%', transform: 'translate(-50%, -50%)'
+            }}
+          /> */}
         </div>
 
         <span className={styles.drawer_title}>{KEY_FEATURES.find((k) => k.key === currentItem)?.title}</span>
@@ -273,6 +301,6 @@ export const KeyFeatures = () => {
           </article>
         ))}
       </section>
-    </>
+    </div>
   );
 };

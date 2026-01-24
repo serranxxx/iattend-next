@@ -113,7 +113,7 @@ export default async function InvitationDynamicPage({
 
   const { data, error } = await supabase
     .from("invitations")
-    .select("data, type, mongo_id, id")
+    .select("data, type, mongo_id, id, plan, phone_number")
     .eq("label", label)
     .eq("name", name)
     .maybeSingle();
@@ -129,6 +129,8 @@ export default async function InvitationDynamicPage({
   const type = data.type as InvitationType;
   const mongoID = data.mongo_id as string | null;
   const invitationID = String(data.id);
+  const plan = data.plan as string;
+  const phone_number = data.phone_number as string | null;
 
   const lang =
     typeof resolvedSearchParams?.lang === "string"
@@ -155,7 +157,7 @@ export default async function InvitationDynamicPage({
     "es"
   );
 
-  console.log('type: ', type)
+  console.log('phone_number: ', phone_number)
 
   return (
     <Invitation
@@ -168,6 +170,8 @@ export default async function InvitationDynamicPage({
       loader={false}
       type={type}
       mongoID={mongoID}
+      plan={plan}
+      phone_number={phone_number}
     />
   );
 }

@@ -24,7 +24,7 @@ export const CTA = () => {
           icon={<LuArrowUpRight size={16} />}
           className={styles.action_button}
         >
-          AGENDA UNA REUNIÓN
+          PLATICA CON NOSOTROS
         </Button>
       </div>
       {/* <Button icon={<FaPaperPlane />} className={styles.cta_button}>

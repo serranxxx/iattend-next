@@ -7,8 +7,16 @@
     max-height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
-    background-image: linear-gradient(#F9F9F9 80%, #b09ccb40);
+    background-image: linear-gradient(#F9F9F9 80%, #FFF);
     gap: 24px;
+}
+
+@media (min-width: 768px) {
+
+    .main_container_land {
+        gap: 44px;
+    }
+    
 }
 
 .home_page_container {

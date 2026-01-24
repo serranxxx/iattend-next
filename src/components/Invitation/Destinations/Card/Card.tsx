@@ -15,10 +15,11 @@ import FadeLeft from "@/components/Motion/FadeLeft";
 
 type CardProps = {
   invitation: NewInvitation;
-  ui?: InvitationUIBundle | null
+  ui?: InvitationUIBundle | null;
+  invitationID: string | undefined;
 };
 
-export default function Card({ ui, invitation }: CardProps) {
+export default function Card({ ui, invitation, invitationID }: CardProps) {
   const content = invitation.destinations;
 
   const slice = 6;
@@ -94,6 +95,11 @@ export default function Card({ ui, invitation }: CardProps) {
     return { dx, dy, rot, scale, z, shadow };
   };
 
+  useEffect(() => {
+    console.log('inv id: ', invitationID)
+  }, [invitationID])
+  
+
   return (
     <div
       className="fan_container"
@@ -116,7 +122,7 @@ export default function Card({ ui, invitation }: CardProps) {
         const elev = i === frontCard ? 1 : shadow; // al frente, más fuerte
 
         return (
-          <FadeLeft key={i} zIndex={z} duration={i} start={-10 - (i*2)} end={180 + (-28*i)}>
+          <FadeLeft key={i} zIndex={z} duration={i} start={-10 - (i * 2)} end={180 + (-28 * i)}>
             <div
               key={i}
               className={styles[card.type]}
@@ -165,9 +171,10 @@ export default function Card({ ui, invitation }: CardProps) {
                           >
                             {card.name}
                           </span>
+                         
                         </div>
 
-                        {frontCard === i && (
+                        {invitationID !== "80d0c716-86e4-4c90-9e6d-9133d970d769" && frontCard === i && (
                           <Button
                             icon={<MdOpenInFull />}
                             onClick={(e) => {
@@ -192,15 +199,18 @@ export default function Card({ ui, invitation }: CardProps) {
                           />
                         )}
 
-                        <div className={styles.tag_label_container}>
-                          <span className={styles.card_label_class}>{translateType(card.type)?.label}</span>
-                          <span className={styles.card_icon_class}>{translateType(card.type)?.icon}</span>
-                        </div>
+                        {
+                          invitationID !== "80d0c716-86e4-4c90-9e6d-9133d970d769" &&
+                          <div className={styles.tag_label_container}>
+                            <span className={styles.card_label_class}>{translateType(card.type)?.label}</span>
+                            <span className={styles.card_icon_class}>{translateType(card.type)?.icon}</span>
+                          </div>
+                        }
                       </div>
 
                       {invitation.generals.texture !== null && (
                         <div className={styles.card_texture}>
-                          <Image src={"/assets/textures/magzne.png"} alt="" fill style={{ objectFit: "cover", opacity: 0.6 }} />
+                          <Image src={"/assets/textures/magzne.jpg"} alt="" fill style={{ objectFit: "cover", opacity: 0.6 }} />
                         </div>
                       )}
                     </div>
@@ -266,14 +276,14 @@ export default function Card({ ui, invitation }: CardProps) {
 
                       {invitation.generals.texture !== null && (
                         <div className={styles.card_texture}>
-                          <Image src={"/assets/textures/magzne.png"} alt="" fill style={{ objectFit: "cover", opacity: 1 }} />
+                          <Image src={"/assets/textures/magzne.jpg"} alt="" fill style={{ objectFit: "cover", opacity: 1 }} />
                         </div>
                       )}
                     </div>
                   </div>
                 </div>
               </div>
-              
+
             </div>
           </FadeLeft>
         );

@@ -5,4 +5,5 @@
     flex-direction: column-reverse;
     position: relative;
     margin-top: -24px;
+    max-width: 480px;
 }

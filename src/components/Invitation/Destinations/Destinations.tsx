@@ -1,5 +1,5 @@
 import { InvitationUIBundle, NewInvitation } from "@/types/new_invitation";
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect } from "react";
 import Card from "./Card/Card";
 import { Separador } from "../Separator/Separator";
 import FadeLeft from "@/components/Motion/FadeLeft";
@@ -8,16 +8,32 @@ type DresscodeProps = {
   dev: boolean;
   invitation: NewInvitation;
   ui?: InvitationUIBundle | null;
+  invitationID: string | undefined;
 };
 
-export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function destinations({ ui, dev, invitation }, ref) {
+export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function destinations({ ui, dev, invitation, invitationID }, ref) {
   const content = invitation.destinations;
   const generals = invitation.generals;
-  const font = generals.fonts.body?.typeFace;
-
   const primary = generals?.colors.primary ?? "#FFFFFF";
   const secondary = generals?.colors.secondary ?? "#FFFFFF";
   const accent = generals?.colors.accent ?? "#FFFFFF";
+
+  const title = {
+    font: invitation?.generals.fonts.titles?.typeFace ?? invitation?.generals.fonts.body?.typeFace,
+    weight: invitation?.generals.fonts.titles?.weight === 0 ? 600 : (invitation?.generals.fonts.titles?.weight ?? 600),
+    size: invitation?.generals.fonts.titles?.size === 0 ? 22 : (invitation?.generals.fonts.titles?.size ?? 22),
+    opacity: invitation?.generals.fonts.titles?.opacity ?? 1,
+    color: invitation?.generals.fonts.titles?.color === '#000000' ? accent : (invitation?.generals.fonts.titles?.color ?? accent )
+  }
+
+  const body = {
+    font: invitation?.generals.fonts.body?.typeFace,
+    weight: invitation?.generals.fonts.body?.weight ?? 500,
+    size: invitation?.generals.fonts.body?.size ?? 16,
+    opacity: invitation?.generals.fonts.body?.opacity ?? 1,
+    color: invitation?.generals.fonts.body?.color ?? accent
+  }
+
 
   // useEffect(() => {
   //   AOS.init({
@@ -26,6 +42,18 @@ export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function 
   //     easing: "ease-out", // tipo de easing
   //   });
   // }, []);
+
+  const renderTextWithStrong = (text: string) => {
+    const parts = text.split(/(\*[^*]+\*)/g);
+
+    return parts.map((part, index) => {
+      if (part.startsWith("*") && part.endsWith("*")) {
+        return <strong key={index}>{part.slice(1, -1)}</strong>;
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
+
 
   return (
     <>
@@ -37,7 +65,7 @@ export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function 
             ref={ref}
             className="gm_container"
             style={{
-              padding: content.background ? "32px" : "0px 32px",
+              padding: content.background ? "24px" : "0px 24px",
               position: "relative",
             }}
           >
@@ -46,11 +74,13 @@ export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function 
                 <span
                   className="g_module_title"
                   style={{
-                    color: content.background && content.inverted ? primary : accent,
-                    fontFamily: font,
+                    display: "inline-block", whiteSpace: "pre-line",
+                    color: content.background && content.inverted ? primary : title.color,
+                    fontFamily: title.font ?? "Poppins",
+                    fontSize: title.size, fontWeight: title.weight, opacity: title.opacity
                   }}
                 >
-                  {content.title}
+                  {renderTextWithStrong(content.title ?? "")}
                 </span>
               </FadeLeft>
 
@@ -58,11 +88,13 @@ export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function 
                 <span
                   className="g_mdoule_regular_text"
                   style={{
+                    display: "inline-block", whiteSpace: "pre-line",
                     color: content.background && content.inverted ? primary : accent,
-                    fontFamily: font,
+                    fontFamily: body.font ?? "Poppins",
+                    fontWeight: body.weight, opacity: body.opacity
                   }}
                 >
-                  {content.description}
+                  {renderTextWithStrong(content.description ?? "")}
                 </span>
               </FadeLeft>
               <div
@@ -74,7 +106,7 @@ export const Destinations = forwardRef<HTMLDivElement, DresscodeProps>(function 
               >
                 {
                   invitation.destinations.cards.length > 0 &&
-                  <Card invitation={invitation} ui={ui} />
+                  <Card invitationID={invitationID} invitation={invitation} ui={ui} />
                 }
               </div>
             </div>

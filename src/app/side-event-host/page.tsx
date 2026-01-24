@@ -1,7 +1,6 @@
 "use client";
-import Invitation from "@/components/Invitation/Invitation/Invitation";
-import uiES from "@/data/ui/invitation_ui_es";
-import { InvitationType, InvitationUIBundle, NewInvitation } from "@/types/new_invitation";
+import SideEvents from "@/components/SideEvent/SideEvent";
+import { SideEvent } from "@/types/side_event";
 import { useEffect, useRef, useState } from "react";
 
 
@@ -14,9 +13,10 @@ const ALLOWED_ORIGINS = [
 ];
 
 export default function Page() {
-  const [invitation, setInvitation] = useState<NewInvitation | null>(null);
+  // const [invitation, setInvitation] = useState<NewInvitation | null>(null);
   const [hostOrigin, setHostOrigin] = useState<string | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
+  const [SideEvent, setSideEvent] = useState<SideEvent | null>(null)
 
   // Handshake inicial
   useEffect(() => {
@@ -31,8 +31,8 @@ export default function Page() {
       if (!ALLOWED_ORIGINS.includes(ev.origin)) return;
       const { type, payload } = ev.data || {};
       if (!hostOrigin) setHostOrigin(ev.origin);
-      if (type === "HOST_PROPS" && payload?.invitationConfig) {
-        setInvitation(payload.invitationConfig as NewInvitation);
+      if (type === "HOST_PROPS" && payload?.sideEventCondif) {
+        setSideEvent(payload.sideEventCondif as SideEvent);
       }
     }
     window.addEventListener("message", onMessage);
@@ -57,18 +57,9 @@ export default function Page() {
     return () => ro.disconnect();
   }, [hostOrigin]);
 
-  return invitation ? (
-    <div ref={rootRef} style={{ width: '100%'}} className="scroll-invitation">
-      <Invitation
-        height="100vh"
-        dev={true}
-        invitation={invitation}
-        loader={false}
-        type={"open" as InvitationType}
-        mongoID={null}
-        ui={uiES as InvitationUIBundle}
-        
-      />
+  return  (
+    <div ref={rootRef} style={{ width: '100%', backgroundColor:'#FFF'}} className="scroll-invitation">
+      <SideEvents info={SideEvent} />
     </div>
-  ) : null;
+  ) 
 }

@@ -9,14 +9,13 @@ import { FaMinus, FaRegCalendarCheck } from "react-icons/fa";
 import { FaRegCalendarXmark } from "react-icons/fa6";
 import { InvitationType, InvitationUIBundle, NewInvitation } from "@/types/new_invitation";
 import { GuestSubabasePayload } from "@/types/guests";
-import styles from './confirm.module.css'
+import styles from "./confirm.module.css";
 import { IoClose } from "react-icons/io5";
 import { AddToCalendarButton } from "add-to-calendar-button-react";
 import { createClient } from "@/lib/supabase/client";
 import { generateSimpleId } from "@/helpers/functions";
 import { IoMdAdd } from "react-icons/io";
 import { FiMinus } from "react-icons/fi";
-
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -28,7 +27,7 @@ type ConfirmProps = {
   mongoID: string;
   ui: InvitationUIBundle;
   invitationID?: string;
-  refreshGuest:() => Promise<void>
+  refreshGuest: () => Promise<void>;
 };
 
 export default function Confirm({ invitationID, ui, invitation, type, guestInfo, mongoID, refreshGuest }: ConfirmProps) {
@@ -41,15 +40,12 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
   const actions = generals?.colors.actions ?? "#FFFFFF";
 
   const supabase = createClient();
-  const [mainGuest, setMainGuest] = useState<GuestSubabasePayload | null>(null)
+  const [mainGuest, setMainGuest] = useState<GuestSubabasePayload | null>(null);
   const [localStatus, setLocalStatus] = useState<"creado" | "esperando" | "confirmado" | "rechazado">("esperando");
-  const [companions, setCompanions] = useState<GuestSubabasePayload[] | null>(null)
-  const [openInvitation, setOpenInvitation] = useState<boolean>(false)
-
-
+  const [companions, setCompanions] = useState<GuestSubabasePayload[] | null>(null);
+  const [openInvitation, setOpenInvitation] = useState<boolean>(false);
 
   const rejectInvitation = async () => {
-
     // Si no hay mainGuest, no hacemos nada
     if (!mainGuest) return;
 
@@ -57,29 +53,22 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
     const mainGuestUpdate = formatGuestForUpdateRejected(mainGuest);
 
     // 2. Formatear acompañantes SOLO si existen
-    const companionsUpdate = Array.isArray(companions)
-      ? companions.map(c => formatGuestForUpdateRejected(c))
-      : [];
+    const companionsUpdate = Array.isArray(companions) ? companions.map((c) => formatGuestForUpdateRejected(c)) : [];
 
     // 3. Combinar
     const allUpdates = [mainGuestUpdate, ...companionsUpdate];
 
     // 4. Guardar en Supabase
-    const { data, error } = await supabase
-      .from("guests")
-      .upsert(allUpdates, { onConflict: "id" });
+    const { data, error } = await supabase.from("guests").upsert(allUpdates, { onConflict: "id" });
 
     if (error) {
       console.error("❌ Error al actualizar:", error);
       return;
     }
 
-
     // console.log("✅ Invitados actualizados:", data);
-    setLocalStatus('rechazado')
-    refreshGuest()
-
-
+    setLocalStatus("rechazado");
+    refreshGuest();
   };
 
   const getTitle = (title: unknown): string => {
@@ -113,24 +102,17 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
 
   const getCompanions = async () => {
     try {
-      const { data, error } = await supabase
-        .from("guests")
-        .select("*")
-        .eq("companion_id", guestInfo?.id)
+      const { data, error } = await supabase.from("guests").select("*").eq("companion_id", guestInfo?.id);
 
       if (error) {
-        console.log(error, 'not found')
-        return
+        console.log(error, "not found");
+        return;
       }
 
       // console.log('companions: ', data)
-      setCompanions(data)
-
-
-    } catch (error) {
-
-    }
-  }
+      setCompanions(data);
+    } catch (error) {}
+  };
 
   const createNewCompanion = (invitationID: string): GuestSubabasePayload => ({
     invitation_id: invitationID,
@@ -154,28 +136,27 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
   });
 
   const addCompanion = () => {
-    setCompanions(prev => {
+    setCompanions((prev) => {
       const list = prev ?? [];
       return [...list, createNewCompanion(invitationID!)];
     });
   };
 
   const removeCompanion = () => {
-    setCompanions(prev => {
+    setCompanions((prev) => {
       if (!prev || prev.length === 0) return prev; // nada que eliminar
       return prev.slice(0, -1);
     });
   };
 
-
   useEffect(() => {
     if (guestInfo) {
-      setMainGuest(guestInfo)
+      setMainGuest(guestInfo);
       if (guestInfo.has_companion) {
-        getCompanions()
+        getCompanions();
       }
-      setOpenInvitation(false)
-      setLocalStatus(guestInfo.state === 'creado' ? 'esperando' : guestInfo.state )
+      setOpenInvitation(false);
+      setLocalStatus(guestInfo.state === "creado" ? "esperando" : guestInfo.state);
     } else {
       if (invitationID) {
         const newguest: GuestSubabasePayload = {
@@ -199,9 +180,9 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
           side: null,
           // id se genera en supabase → NO lo pones aquí
         };
-        setOpenInvitation(true)
-        setMainGuest(newguest)
-        setLocalStatus('creado')
+        setOpenInvitation(true);
+        setMainGuest(newguest);
+        setLocalStatus("creado");
       }
     }
     // else {
@@ -212,12 +193,12 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
   const getUpdatedState = (state: string) => {
     if (state === "creado" || state === "esperando") return "confirmado";
     return state; // rechazado o confirmado no cambian
-  }
+  };
 
   const getUpdatedStateRejected = (state: string) => {
     if (state === "creado" || state === "esperando") return "rechazado";
     return state; // rechazado o confirmado no cambian
-  }
+  };
 
   const formatGuestForUpdateRejected = (guest: GuestSubabasePayload) => {
     const updatedState = getUpdatedStateRejected(guest.state);
@@ -228,7 +209,7 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
       state: updatedState,
       last_action: updatedState,
       last_update_date: new Date().toISOString(),
-      last_action_by: false
+      last_action_by: false,
     };
   };
 
@@ -241,12 +222,11 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
       state: updatedState,
       last_action: updatedState,
       last_update_date: new Date().toISOString(),
-      last_action_by: false
+      last_action_by: false,
     };
   };
 
   const onConfirmAssitence = async () => {
-
     // Si no hay mainGuest, no hacemos nada
     if (!mainGuest) return;
 
@@ -254,56 +234,46 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
     const mainGuestUpdate = formatGuestForUpdate(mainGuest);
 
     // 2. Formatear acompañantes SOLO si existen
-    const companionsUpdate = Array.isArray(companions)
-      ? companions.map(c => formatGuestForUpdate(c))
-      : [];
+    const companionsUpdate = Array.isArray(companions) ? companions.map((c) => formatGuestForUpdate(c)) : [];
 
     // 3. Combinar
     const allUpdates = [mainGuestUpdate, ...companionsUpdate];
 
     // 4. Guardar en Supabase
-    const { data, error } = await supabase
-      .from("guests")
-      .upsert(allUpdates, { onConflict: "id" });
+    const { data, error } = await supabase.from("guests").upsert(allUpdates, { onConflict: "id" });
 
     if (error) {
       console.error("❌ Error al actualizar:", error);
       return;
     }
 
-
     // console.log("✅ Invitados actualizados:", data);
-    setLocalStatus('confirmado')
-    refreshGuest()
+    setLocalStatus("confirmado");
+    refreshGuest();
   };
-  
 
   const changeAnswer = () => {
     if (openInvitation) {
-      setLocalStatus("creado")
-    }
-    else {
-      setLocalStatus("esperando")
-      setMainGuest(prev => ({ ...prev!, state: 'esperando' }))
+      setLocalStatus("creado");
+    } else {
+      setLocalStatus("esperando");
+      setMainGuest((prev) => ({ ...prev!, state: "esperando" }));
       if (companions && companions.length > 0) {
-        setCompanions(prev => prev!.map(c => ({ ...c, state: "esperando" })));
+        setCompanions((prev) => prev!.map((c) => ({ ...c, state: "esperando" })));
       }
     }
-
-  }
+  };
 
   const onInsertGuests = async () => {
     if (!mainGuest) return;
 
     if (!mainGuest.name || mainGuest.name === "") {
-      messageApi.error("Agrega tu nombre por favor")
-      return
+      messageApi.error("Agrega tu nombre por favor");
+      return;
     }
 
     // 🔎 Filtrar companions sin nombre
-    const validCompanions = Array.isArray(companions)
-      ? companions.filter(c => c.name && c.name.trim() !== "")
-      : [];
+    const validCompanions = Array.isArray(companions) ? companions.filter((c) => c.name && c.name.trim() !== "") : [];
 
     const hasCompanions = validCompanions.length > 0;
 
@@ -316,10 +286,7 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
     };
 
     // 2. Insertar mainGuest
-    const { data: mainInserted, error: mainError } = await supabase
-      .from("guests")
-      .insert([formattedMainGuest])
-      .select();
+    const { data: mainInserted, error: mainError } = await supabase.from("guests").insert([formattedMainGuest]).select();
 
     if (mainError) {
       console.error("❌ Error insertando mainGuest:", mainError);
@@ -344,7 +311,7 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
     }
 
     // 4. Preparar companions válidos
-    const formattedCompanions = validCompanions.map(c => ({
+    const formattedCompanions = validCompanions.map((c) => ({
       ...c,
       companion_id: mainGuestID,
       state: "confirmado",
@@ -352,10 +319,7 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
     }));
 
     // 5. Insertar companions válidos
-    const { data: companionsInserted, error: companionsError } = await supabase
-      .from("guests")
-      .insert(formattedCompanions)
-      .select();
+    const { data: companionsInserted, error: companionsError } = await supabase.from("guests").insert(formattedCompanions).select();
 
     if (companionsError) {
       console.error("❌ Error insertando companions:", companionsError);
@@ -368,81 +332,74 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
     setLocalStatus("confirmado");
   };
 
-
-
-
   return (
     <>
       {contextHolder}
 
-
-      {
-        localStatus === 'creado' &&
+      {localStatus === "creado" && (
         <div className={styles.confirm_container}>
+          <span className={styles.confirm_label}>{ui.confirm.open_hi}</span>
 
           <span className={styles.confirm_label}>
-            {ui.confirm.open_hi}
+            <b>{ui.confirm.open_add_name}</b>
           </span>
-
-          <span className={styles.confirm_label}><b>{ui.confirm.open_add_name}</b></span>
-
-
-
 
           <div className={styles.inputs_cont}>
             <Input
               value={mainGuest?.name ?? ""}
-              onChange={(e) =>
-                setMainGuest(prev => ({ ...prev!, name: e.target.value }))
-              }
+              onChange={(e) => setMainGuest((prev) => ({ ...prev!, name: e.target.value }))}
               className={styles.confirm_input}
               placeholder="Tu nombre"
               style={{
                 color: accent,
-                borderColor: `${accent}20`
+                borderColor: `${accent}20`,
               }}
             />
 
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-              <span style={{ width: 'auto' }} className={styles.confirm_label}><b>{ui.confirm.add_companion}</b></span>
-              <div style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px'
-              }}>
-                <Button style={{ backgroundColor: secondary }} onClick={removeCompanion} icon={<FiMinus style={{ color: accent }} />}></Button>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
+              <span style={{ width: "auto" }} className={styles.confirm_label}>
+                <b>{ui.confirm.add_companion}</b>
+              </span>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "6px",
+                }}
+              >
+                <Button
+                  style={{ backgroundColor: secondary }}
+                  onClick={removeCompanion}
+                  icon={<FiMinus style={{ color: accent }} />}
+                ></Button>
                 <Button style={{ backgroundColor: accent }} onClick={addCompanion} icon={<IoMdAdd style={{ color: primary }} />}></Button>
               </div>
             </div>
             {companions?.map((c, index) => (
-              <div key={index} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '-6px' }}>
+              <div
+                key={index}
+                style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "-6px" }}
+              >
                 <Input
                   onChange={(e) =>
-                    setCompanions(prev =>
-                      prev
-                        ? prev.map((c, i) =>
-                          i === index ? { ...c, name: e.target.value } : c
-                        )
-                        : prev
-                    )
+                    setCompanions((prev) => (prev ? prev.map((c, i) => (i === index ? { ...c, name: e.target.value } : c)) : prev))
                   }
                   placeholder={`Acompañante de ${mainGuest?.name}`}
                   className={styles.confirm_input}
                   value={c.name ?? ""}
                   style={{
                     color: accent,
-                    borderColor: `${accent}20`
+                    borderColor: `${accent}20`,
                   }}
                 />
-
               </div>
-
             ))}
 
-            {
-              companions?.find((comp) => comp.name === '' || comp.name === undefined || comp.name === null) &&
+            {companions?.find((comp) => comp.name === "" || comp.name === undefined || comp.name === null) && (
               <span className={styles.confirm_label_tip}>{ui.confirm.dont_forget}</span>
-            }
+            )}
           </div>
-
 
           <div className={styles.buttons_container}>
             <Button
@@ -450,120 +407,104 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
               style={{
                 color: primary,
                 backgroundColor: accent,
-                letterSpacing: "2px", borderRadius: '16px',
-                minHeight: '52px', width: '100%', fontSize: '16px'
+                letterSpacing: "2px",
+                borderRadius: "16px",
+                minHeight: "52px",
+                width: "100%",
+                fontSize: "16px",
               }}
             >
               {ui?.confirm.cta}
             </Button>
-
-
           </div>
         </div>
-      }
+      )}
 
-
-      {
-        localStatus === 'esperando' &&
+      {localStatus === "esperando" && (
         <div className={styles.confirm_container}>
-
           <span className={styles.confirm_label}>
             {ui.confirm.closed_hi} <b>{mainGuest?.name}</b>, {ui.confirm.closed_happy}.
           </span>
-          {
-            companions &&
-            <span className={styles.confirm_label}>{ui.confirm.closed_invitation} <b>{companions?.length} {ui.confirm.closed_companion}.</b></span>
-          }
+          {companions && (
+            <span className={styles.confirm_label}>
+              {ui.confirm.closed_invitation}{" "}
+              <b>
+                {companions?.length} {ui.confirm.closed_companion}.
+              </b>
+            </span>
+          )}
 
-          {
-            companions &&
-            <span className={styles.confirm_label}><b>{ui.confirm.closed_notgoing}.</b></span>
-          }
-
-
+          {companions && (
+            <span className={styles.confirm_label}>
+              <b>{ui.confirm.closed_notgoing}.</b>
+            </span>
+          )}
 
           <div className={styles.inputs_cont}>
             <Input
               value={mainGuest?.name ?? ""}
-              onChange={(e) =>
-                setMainGuest(prev => ({ ...prev!, name: e.target.value }))
-              }
+              onChange={(e) => setMainGuest((prev) => ({ ...prev!, name: e.target.value }))}
               className={styles.confirm_input}
               placeholder="Tu nombre"
               style={{
                 color: accent,
-                borderColor: `${accent}20`
+                borderColor: `${accent}20`,
               }}
             />
             {companions?.map((c, index) => (
-              <div key={index} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                <div key={index} style={{ position: 'relative', width: '100%', }}>
+              <div key={index} style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+                <div key={index} style={{ position: "relative", width: "100%" }}>
                   <Input
                     onChange={(e) =>
-                      setCompanions(prev =>
-                        prev
-                          ? prev.map((c, i) =>
-                            i === index ? { ...c, name: e.target.value } : c
-                          )
-                          : prev
-                      )
+                      setCompanions((prev) => (prev ? prev.map((c, i) => (i === index ? { ...c, name: e.target.value } : c)) : prev))
                     }
                     placeholder={`Acompañante de ${mainGuest?.name}`}
                     className={styles.confirm_input}
                     value={c.name ?? ""}
                     style={{
                       color: accent,
-                      borderColor: `${accent}20`
+                      borderColor: `${accent}20`,
                     }}
                   />
-                  {
-                    c.state === 'confirmado' &&
-                    <div
-                      style={{ backgroundColor: accent, color: primary }}
-                      className={styles.confirm_tag}>{ui.confirm.confirmed}</div>
-                  }
+                  {c.state === "confirmado" && (
+                    <div style={{ backgroundColor: accent, color: primary }} className={styles.confirm_tag}>
+                      {ui.confirm.confirmed}
+                    </div>
+                  )}
 
-                  {
-                    c.state === 'rechazado' &&
-                    <div
-                      style={{ backgroundColor: secondary, color: accent, borderColor: 'transparent' }}
-                      className={styles.confirm_tag}>{ui.confirm.not_going}</div>
-                  }
-
+                  {c.state === "rechazado" && (
+                    <div style={{ backgroundColor: secondary, color: accent, borderColor: "transparent" }} className={styles.confirm_tag}>
+                      {ui.confirm.not_going}
+                    </div>
+                  )}
                 </div>
-                {
-                  c.state == 'rechazado' ?
-                    <Button onClick={() =>
-                      setCompanions(prev =>
-                        prev
-                          ? prev.map((c, i) =>
-                            i === index ? { ...c, state: "esperando" } : c
-                          )
-                          : prev
-                      )
-                    }>Editar</Button>
-                    : c.state !== 'confirmado' &&
-                    <Button style={{ height: '38px' }} onClick={() =>
-                      setCompanions(prev =>
-                        prev
-                          ? prev.map((c, i) =>
-                            i === index ? { ...c, state: "rechazado" } : c
-                          )
-                          : prev
-                      )
-                    }><IoClose /></Button>
-                }
-
+                {c.state == "rechazado" ? (
+                  <Button
+                    onClick={() =>
+                      setCompanions((prev) => (prev ? prev.map((c, i) => (i === index ? { ...c, state: "esperando" } : c)) : prev))
+                    }
+                  >
+                    Editar
+                  </Button>
+                ) : (
+                  c.state !== "confirmado" && (
+                    <Button
+                      style={{ height: "38px" }}
+                      onClick={() =>
+                        setCompanions((prev) => (prev ? prev.map((c, i) => (i === index ? { ...c, state: "rechazado" } : c)) : prev))
+                      }
+                    >
+                      <IoClose />
+                    </Button>
+                  )
+                )}
               </div>
-
             ))}
 
-            {
-              companions?.find((comp) => comp.name === '' || comp.name === undefined || comp.name === null) &&
+            {companions?.find((comp) => comp.name === "" || comp.name === undefined || comp.name === null) && (
               <span className={styles.confirm_label_tip}>{ui.confirm.dont_forget}</span>
-            }
+            )}
           </div>
-
 
           <div className={styles.buttons_container}>
             <Button
@@ -571,8 +512,11 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
               style={{
                 color: primary,
                 backgroundColor: accent,
-                letterSpacing: "2px", borderRadius: '16px',
-                minHeight: '52px', width: '100%', fontSize: '16px'
+                letterSpacing: "2px",
+                borderRadius: "16px",
+                minHeight: "52px",
+                width: "100%",
+                fontSize: "16px",
               }}
             >
               {ui?.confirm.cta}
@@ -581,26 +525,24 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
             <Button
               onClick={rejectInvitation}
               style={{
-
                 border: `1px solid  ${accent}`,
-                color: accent, borderRadius: '16px',
-                backgroundColor: 'transparent',
-                minHeight: '52px', width: '100%', fontSize: '16px'
+                color: accent,
+                borderRadius: "16px",
+                backgroundColor: "transparent",
+                minHeight: "52px",
+                width: "100%",
+                fontSize: "16px",
               }}
             >
               {ui?.confirm.decline}
             </Button>
-
           </div>
         </div>
-      }
+      )}
 
-      {
-        localStatus === 'confirmado' &&
+      {localStatus === "confirmado" && (
         <div className={styles.confirm_cont}>
-          <div
-            className={styles.icon_cont}
-          >
+          <div className={styles.icon_cont}>
             <FaRegCalendarCheck size={50} style={{ color: accent }} />
           </div>
 
@@ -608,7 +550,7 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
             className={styles.confirm_label}
             style={{
               color: accent,
-              maxWidth: '80%'
+              maxWidth: "80%",
             }}
           >
             {ui.confirm.confirmedMsgBold}
@@ -631,43 +573,39 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
           >
             {ui?.confirm.addToCalendar}
           </span>
-          {
-            invitation &&
+          {invitation && (
             <AddToCalendarButton
-              name={getTitle(invitation?.cover?.title)}
+              name={invitation?.cover?.title?.text?.value ?? ""}
               options={["Google"]}
               // startDate={formatISODate(invitation.cover.date)}
-              startDate={toYYYYMMDD(invitation?.cover?.date)}
+              startDate={toYYYYMMDD(invitation?.cover?.date?.value)}
               timeZone="America/Los_Angeles"
             ></AddToCalendarButton>
-          }
+          )}
 
-          {
-            !openInvitation &&
+          {!openInvitation && (
             <Button
               onClick={changeAnswer}
               style={{
                 background: "transparent",
-                minHeight: '52px', width: '100%', fontSize: '16px',
-                borderRadius: '16px',
-                maxWidth: '80%',
+                minHeight: "52px",
+                width: "100%",
+                fontSize: "16px",
+                borderRadius: "16px",
+                maxWidth: "80%",
                 border: `1px solid  ${accent}`,
                 color: accent,
               }}
             >
               {ui?.confirm.changeAnswer}
             </Button>
-          }
-
+          )}
         </div>
-      }
+      )}
 
-      {
-        localStatus == 'rechazado' &&
+      {localStatus == "rechazado" && (
         <div className={styles.confirm_cont}>
-          <div
-            className={styles.icon_cont}
-          >
+          <div className={styles.icon_cont}>
             <FaRegCalendarXmark size={50} style={{ color: accent }} />
           </div>
 
@@ -683,9 +621,11 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
             onClick={changeAnswer}
             style={{
               background: "transparent",
-              minHeight: '52px', width: '100%', fontSize: '16px',
-              borderRadius: '16px',
-              maxWidth: '80%',
+              minHeight: "52px",
+              width: "100%",
+              fontSize: "16px",
+              borderRadius: "16px",
+              maxWidth: "80%",
               border: `1px solid  ${accent}`,
               color: accent,
             }}
@@ -693,7 +633,7 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
             {ui?.confirm.changeAnswer}
           </Button>
         </div>
-      }
+      )}
     </>
   );
 }
