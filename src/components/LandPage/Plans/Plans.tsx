@@ -258,7 +258,7 @@ export const Plans = () => {
                       opacity: "0.5",
                     }}
                   >
-                    $3,099
+                    $3,125
                   </span>
 
                   <div className={styles.price_tag}>20% OFF</div>
