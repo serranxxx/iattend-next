@@ -263,7 +263,7 @@ export const Plans = () => {
 
                   <div className={styles.price_tag}>20% OFF</div>
                 </div>
-                <span>$2,500</span>
+                <span>$2,499</span>
               </div>
               <div style={{ fontSize: active === 2 ? "12px" : "10px" }} className={styles.plan_info_cont}>
                 {plan_lite.map((i, index) => (
