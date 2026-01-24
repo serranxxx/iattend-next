@@ -30,11 +30,7 @@ type PageProps = {
 // --------------------
 // Metadata dinámica
 // --------------------
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<RouteParams>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<RouteParams> }): Promise<Metadata> {
   const { invitation_label, invitation_name } = await params;
 
   const supabase = await createClient();
@@ -42,17 +38,12 @@ export async function generateMetadata({
   const label = decodeURIComponent(invitation_label);
   const name = decodeURIComponent(invitation_name);
 
-  const { data } = await supabase
-    .from("invitations")
-    .select("data")
-    .eq("label", label)
-    .eq("name", name)
-    .maybeSingle();
+  const { data } = await supabase.from("invitations").select("data").eq("label", label).eq("name", name).maybeSingle();
 
   if (!data?.data) {
     return {
       title: "I attend",
-      description: "Diseña, comparte, celebra.",
+      description: "Plan with ease",
     };
   }
 
@@ -82,9 +73,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: inv?.cover?.image?.prod
-        ? [inv.cover.image.prod]
-        : undefined,
+      images: inv?.cover?.image?.prod ? [inv.cover.image.prod] : undefined,
     },
     icons: {
       icon: [
@@ -99,10 +88,7 @@ export async function generateMetadata({
 // --------------------
 // Página
 // --------------------
-export default async function InvitationDynamicPage({
-  params,
-  searchParams,
-}: PageProps) {
+export default async function InvitationDynamicPage({ params, searchParams }: PageProps) {
   const { invitation_label, invitation_name } = await params;
   const resolvedSearchParams = await searchParams;
 
@@ -132,15 +118,9 @@ export default async function InvitationDynamicPage({
   const plan = data.plan as string;
   const phone_number = data.phone_number as string | null;
 
-  const lang =
-    typeof resolvedSearchParams?.lang === "string"
-      ? resolvedSearchParams.lang
-      : undefined;
+  const lang = typeof resolvedSearchParams?.lang === "string" ? resolvedSearchParams.lang : undefined;
 
-  const password =
-    typeof resolvedSearchParams?.password === "string"
-      ? resolvedSearchParams.password
-      : undefined;
+  const password = typeof resolvedSearchParams?.password === "string" ? resolvedSearchParams.password : undefined;
 
   const invitationForRender = lang
     ? await getTranslatedInvitationFromCache({
@@ -151,13 +131,9 @@ export default async function InvitationDynamicPage({
       })
     : invitation;
 
-  const ui = await getTranslatedCopy(
-    "invitation_ui_v1",
-    lang ?? "es",
-    "es"
-  );
+  const ui = await getTranslatedCopy("invitation_ui_v1", lang ?? "es", "es");
 
-  console.log('phone_number: ', phone_number)
+  console.log("phone_number: ", phone_number);
 
   return (
     <Invitation
