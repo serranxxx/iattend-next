@@ -51,7 +51,7 @@ export default function SideEvents({ info }: invProps) {
         className={styles.info_cont}
         style={
           {
-            "--blur-color": `${info?.body.color ?? "#000000"}80`,
+            "--blur-color": `${info?.body.color ?? "#000000"}`,
           } as React.CSSProperties
         }
       >
@@ -74,6 +74,7 @@ export default function SideEvents({ info }: invProps) {
           className={styles.col}
           style={{
             fontFamily: info?.body.title.font,
+            zIndex: 99,
           }}
         >
           <span>{formatDateMexico(info?.body.hour)}</span>
@@ -137,11 +138,12 @@ export default function SideEvents({ info }: invProps) {
           <div className={styles.mapa_container} style={{ padding: "12px 18px" }}>
             <span
               style={{
-                color: "#FFFFFF99",
+                color: "#FFFFFF",
                 whiteSpace: "pre-line",
                 textAlign: "center",
                 fontFamily: "Poppins",
                 fontSize: "14px",
+                mixBlendMode: "soft-light",
               }}
             >
               {renderTextWithStrong(info.body.extras ?? "")}

@@ -58,7 +58,7 @@
     padding: 24px;
     gap: 12px;
     /* tu gradiente base (visual) */
-    background-image: linear-gradient(to bottom, #FFFFFF00, #FFFFFF40, var(--blur-color));
+    background-image: linear-gradient(to bottom, transparent, var(--blur-color));
 }
 
 /* Capa 1: blur suave arriba (principalmente en el primer ~20%) */
@@ -72,10 +72,8 @@
     -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
 
-    /* “relleno” mínimo para que se note el blur */
     background-image: linear-gradient(to bottom, #FFFFFF05, #ff000015);
 
-    /* máscara: afecta más arriba y se desvanece al bajar */
     -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 35%);
     mask-image: linear-gradient(to bottom, black 0%, transparent 35%);
 }
@@ -91,9 +89,8 @@
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 
-    background-image: linear-gradient(to bottom, #FFFFFF00, var(--blur-color));
+    background-image: linear-gradient(to bottom, transparent, var(--blur-color));
 
-    /* máscara: empieza a notarse después del 15–20% */
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 100%);
     mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 100%);
 }
@@ -115,7 +112,7 @@
     text-align: center;
     color: #FFFFFF;
     font-size: 18px;
-    mix-blend-mode: multiply;
+    mix-blend-mode: soft-light;
     /* opacity: 0.7; */
 
 }
