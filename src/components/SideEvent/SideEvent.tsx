@@ -1,7 +1,7 @@
 "use client";
 
 import { SideEvent } from "@/types/side_event";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./side-event.module.css";
 import Image from "next/image";
 import dayjs from "dayjs";
@@ -39,10 +39,23 @@ export default function SideEvents({ info }: invProps) {
     });
   };
 
+  useEffect(() => {
+    const onScroll = () => {
+      const scrollY = window.scrollY;
+
+      // ajusta estos valores a tu gusto
+      const scale = Math.min(1 + scrollY / 1000, 1.25);
+      document.documentElement.style.setProperty("--bg-scale", scale.toString());
+    };
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <div className={styles.side_event_main_cont}>
       <div className={styles.hero}>
-        {info?.body.image && <Image fill src={info?.body.image} alt="" style={{ objectFit: "cover" }} />}
+        {info?.body.image && <Image className={styles.hero_bg} fill src={info?.body.image} alt="" style={{ objectFit: "cover" }} />}
         <div className={styles.blur_cover}></div>
         <div className={styles.shadow}></div>
       </div>
