@@ -78,7 +78,7 @@
 }
 
 /* Capa 1: blur suave arriba (principalmente en el primer ~20%) */
-.info_cont::before {
+/* .info_cont::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -92,10 +92,10 @@
 
     -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 35%);
     mask-image: linear-gradient(to bottom, black 0%, transparent 35%);
-}
+} */
 
 /* Capa 2: blur medio (entra desde ~15% hacia abajo) */
-.info_cont::after {
+/* .info_cont::after {
     content: "";
     position: absolute;
     inset: 0;
@@ -109,7 +109,7 @@
 
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 100%);
     mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 100%);
-}
+} */
 
 /* Si quieres aún MÁS denso al fondo, agrega una 3ra capa con un wrapper */
 
