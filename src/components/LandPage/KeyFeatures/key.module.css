@@ -352,9 +352,10 @@
         color: #FFF;
         font-family:  'Outfit', 'Poppins';
         line-height: 130%;
-        font-size: 32px;
+        font-size: 24px;
         line-height: 1.4;
         text-transform: uppercase;
+        text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
         z-index: 2;
     }
 
@@ -385,5 +386,18 @@
         box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
         pointer-events: none; 
         
+    }
+
+    .loop_img {
+        width: 110%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.5;
+        pointer-events: none;
+        
+    
+        /* opacity: 0.1; */
     }
 }

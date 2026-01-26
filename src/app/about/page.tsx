@@ -9,6 +9,7 @@ import { FooterLand } from "@/components/LandPage/Footer/Footer";
 import { Reviews } from "@/components/LandPage/Reviews/Reviews";
 import Video from "@/components/LandPage/Video/Video";
 import type { Metadata } from "next";
+import { Drawer } from "antd";
 
 export const metadata: Metadata = {
   title: "I attend | Guest management & paperless invitations",
@@ -59,23 +60,25 @@ export const metadata: Metadata = {
 export default function LandPage() {
   return (
     <div className={styles.main_container_land}>
-      
+
       <HeroSection></HeroSection>
       <WorkFlow></WorkFlow>
-      
+
       <IdealCustomer></IdealCustomer>
       <KeyFeatures></KeyFeatures>
 
       <Reviews></Reviews>
-      
-      
-      
+
+
+
       <Video></Video>
 
       <Plans></Plans>
       <FAQs></FAQs>
       {/* <CTA></CTA> */}
       <FooterLand></FooterLand>
+
+     
     </div>
   );
 }

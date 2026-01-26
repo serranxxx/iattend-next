@@ -4,14 +4,7 @@ import React, { useState } from "react";
 import styles from "./key.module.css";
 import { Button, Drawer } from "antd";
 import Image from "next/image";
-import { body } from "motion/react-client";
-import { FaAngleRight, FaEnvelopeOpen, FaPaperPlane, FaUber } from "react-icons/fa";
-import { MdOutlinePhoneAndroid, MdOutlinePhonelink, MdOutlinePhonelinkLock } from "react-icons/md";
-import { BsPassport, BsStars } from "react-icons/bs";
-import { ImSpoonKnife } from "react-icons/im";
-import { FaTableList, FaTicket, FaUnlockKeyhole } from "react-icons/fa6";
 import { LuArrowUpRight } from "react-icons/lu";
-import AnimatedPath from "@/components/Motion/AnimatedPath";
 import Link from "next/link";
 
 type Feature = {

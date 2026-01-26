@@ -64,7 +64,7 @@ export const DressCode = forwardRef<HTMLDivElement, DresscodeProps>(function Gre
           paddingBottom: content.separator ? "12px" : content.separator && content.background ? "36px" : undefined,
         }}
       >
-        <div className="textures_background" style={{ backgroundColor: content.background ? secondary : "transparent" }} />
+        <div className="textures_background" style={{ backgroundColor: content.background ? secondary : "transparent", }} />
         <div
           ref={ref}
           className="gm_container"

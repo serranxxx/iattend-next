@@ -80,4 +80,34 @@ export const textures: Texture[] = [
     filter: "grayscale(1) contrast(1.1) brightness(1)",
     path: "/assets/textures/cotton.jpg",
   },
+  {
+    image: "/assets/textures/thread.jpg",
+    opacity: 0.3,
+    blend: "multiply",
+    filter: "grayscale(1) contrast(1) brightness(0.9)",
+    path: "/assets/textures/thread.jpg",
+  },
+  {
+    image: "/assets/textures/kraft.jpg",
+    opacity: 0.4,
+    blend: "multiply",
+    filter: "grayscale(1) contrast(1.2) brightness(1)",
+    path: "/assets/textures/thread.jpg",
+  },
+  {
+    image: "/assets/textures/trees.jpg",
+    opacity: 0.4,
+    blend: "multiply",
+    filter: "grayscale(1) contrast(1.2) brightness(1)",
+    path: "/assets/textures/thread.jpg",
+  },
+  {
+    image: "/assets/textures/water.jpg",
+    opacity: 0.8,
+    blend: "soft-light",
+    filter: "grayscale(1) contrast(1.4) brightness(1.2)",
+    path: "/assets/textures/thread.jpg",
+  },
+  
+
 ];

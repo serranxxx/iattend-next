@@ -23,7 +23,7 @@ export const HeroSection = () => {
         src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/hero_2.jpg"
         alt=""
         fill
-        style={{ objectFit: "cover", position: "absolute", zIndex: "-1", left: 0 }}
+        style={{ objectFit: "cover", position: "absolute", zIndex: "-1", left: 0,  }}
       />
       <div className={styles.shadow}></div>
       {/* <div className={styles.hero_first_row}>
