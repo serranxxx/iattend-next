@@ -12,6 +12,8 @@ import { Button } from "antd";
 import { LuCircleCheck, LuCircleHelp, LuCircleX } from "react-icons/lu";
 import { simpleaddress } from "../Invitation/Itinerary/OpenCard/OpenCard";
 import WeatherWidget from "../Invitation/Itinerary/WeatherApi/WeatherWidget";
+import { FooterLand } from "../LandPage/Footer/Footer";
+import { darker } from "@/helpers/functions";
 
 type invProps = {
   info: SideEvent | null;
@@ -64,7 +66,7 @@ export default function SideEvents({ info }: invProps) {
         className={styles.info_cont}
         style={
           {
-            "--blur-color": `${info?.body.color ?? "#000000"}`,
+            "--blur-color": `${darker(info?.body.color!, 0.9) ?? "#000000"}`,
           } as React.CSSProperties
         }
       >
@@ -111,41 +113,6 @@ export default function SideEvents({ info }: invProps) {
           </Button>
         </div>
 
-        {info?.body.address.street &&
-          info?.body.address.number &&
-          info?.body.address.neighborhood &&
-          info?.body.address.zipcode &&
-          info?.body.address.city &&
-          info?.body.address.state &&
-          info?.body.address.country && (
-            <>
-              <WeatherWidget item={info?.body} isSide={true} />
-
-              <div className={styles.mapa_container}>
-                <Button className={styles.get_there} type="text">
-                  Como llegar
-                </Button>
-                <iframe
-                  title="Mapa"
-                  width="100%"
-                  height="100%"
-                  // style={{ borderColor: content.inverted ? primary : secondary }}
-                  loading="lazy"
-                  allowFullScreen
-                  referrerPolicy="no-referrer-when-downgrade"
-                  src={simpleaddress(
-                    info?.body.address.street,
-                    info?.body.address.number,
-                    info?.body.address.neighborhood,
-                    info?.body.address.zipcode,
-                    info?.body.address.city,
-                    info?.body.address.state,
-                    info?.body.address.country
-                  )}
-                />
-              </div>
-            </>
-          )}
 
         {info?.body.extras && (
           <div className={styles.mapa_container} style={{ padding: "12px 18px" }}>
@@ -163,7 +130,52 @@ export default function SideEvents({ info }: invProps) {
             </span>
           </div>
         )}
+
+        {info?.body.address.street &&
+          info?.body.address.number &&
+          info?.body.address.neighborhood &&
+          info?.body.address.zipcode &&
+          info?.body.address.city &&
+          info?.body.address.state &&
+          info?.body.address.country && (
+            <div className={styles.mapa_container}>
+              <Button className={styles.get_there} type="text">
+                Como llegar
+              </Button>
+              <iframe
+                title="Mapa"
+                width="100%"
+                height="100%"
+                // style={{ borderColor: content.inverted ? primary : secondary }}
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                src={simpleaddress(
+                  info?.body.address.street,
+                  info?.body.address.number,
+                  info?.body.address.neighborhood,
+                  info?.body.address.zipcode,
+                  info?.body.address.city,
+                  info?.body.address.state,
+                  info?.body.address.country
+                )}
+              />
+            </div>
+          )}
+
+
+
+        {
+          info?.body.address.city &&
+          <WeatherWidget item={info?.body} isSide={true} />
+        }
       </div>
+
+      {
+        info?.body.color &&
+        <FooterLand color={info?.body.color}></FooterLand>
+      }
+      
     </div>
   );
 }

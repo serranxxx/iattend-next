@@ -3,7 +3,7 @@
     /* height: 100vh; */
 
     position: relative;
-    background-image: linear-gradient(to bottom, transparent, var(--blur-color));
+    background-image: linear-gradient(to bottom, #EEE, #CCC);
 }
 
 .hero {
