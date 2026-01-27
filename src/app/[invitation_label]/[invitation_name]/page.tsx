@@ -133,8 +133,6 @@ export default async function InvitationDynamicPage({ params, searchParams }: Pa
 
   const ui = await getTranslatedCopy("invitation_ui_v1", lang ?? "es", "es");
 
-  console.log("phone_number: ", phone_number);
-
   return (
     <Invitation
       height={null}

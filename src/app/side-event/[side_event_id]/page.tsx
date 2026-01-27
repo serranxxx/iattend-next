@@ -14,9 +14,16 @@ type RouteParams = {
   side_event_id: string;
 };
 
+type SearchParams = {
+  password?: string;
+};
+
 type PageProps = {
   params: Promise<RouteParams>;
+  searchParams?: Promise<SearchParams>;
 };
+
+
 
 // --------------------
 // Metadata dinámica
@@ -79,8 +86,9 @@ export async function generateMetadata({ params }: { params: Promise<RouteParams
 // --------------------
 // Página
 // --------------------
-export default async function InvitationDynamicPage({ params }: PageProps) {
+export default async function InvitationDynamicPage({ params, searchParams }: PageProps) {
   const { side_event_id } = await params;
+  const resolvedSearchParams = await searchParams;
 
   const supabase = await getPublicServerClient();
 
@@ -100,8 +108,9 @@ export default async function InvitationDynamicPage({ params }: PageProps) {
   }
 
   const sideEvent = data as SideEvent;
+  const password = typeof resolvedSearchParams?.password === "string" ? resolvedSearchParams.password : undefined;
 
-  console.log(sideEvent);
+  console.log(password);
 
-  return <SideEvents info={sideEvent} />;
+  return <SideEvents info={sideEvent} password={password}/>;
 }

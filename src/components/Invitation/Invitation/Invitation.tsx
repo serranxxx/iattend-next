@@ -133,10 +133,6 @@ export default function Invitation({ password, invitationID, ui, invitation, loa
     fontFamily: font,
   };
 
-  useEffect(() => {
-    console.log('invidd: ', invitationID)
-  }, [mongoID])
-
 
   const onValidateUser = async (code: string) => {
 

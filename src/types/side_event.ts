@@ -21,6 +21,7 @@ export type SideEvent = {
   date: string;
   name: string;
   body: SideEventBody;
+  type: 'open' | 'closed';
 };
 
 export type SideAddress = {

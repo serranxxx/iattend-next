@@ -1,27 +1,53 @@
 "use client";
 
 import { SideEvent } from "@/types/side_event";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./side-event.module.css";
 import Image from "next/image";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import "dayjs/locale/es";
-import { Button } from "antd";
+import { Button, Input, message } from "antd";
 import { LuCircleCheck, LuCircleHelp, LuCircleX } from "react-icons/lu";
 import { simpleaddress } from "../Invitation/Itinerary/OpenCard/OpenCard";
 import WeatherWidget from "../Invitation/Itinerary/WeatherApi/WeatherWidget";
 import { FooterLand } from "../LandPage/Footer/Footer";
+import { color } from "motion";
+import { FaLock } from "react-icons/fa";
+import { createClient } from "@/lib/supabase/client";
+import { GuestSubabasePayload } from "@/types/guests";
 
 type invProps = {
   info: SideEvent | null;
+  password?: string;
 };
 
-export default function SideEvents({ info }: invProps) {
+export default function SideEvents({ info, password }: invProps) {
   dayjs.extend(utc);
   dayjs.extend(timezone);
   dayjs.locale("es");
+
+  const [validated, setValidated] = useState<boolean>(false);
+  const [guestCode, setGuestCode] = useState<string>("");
+  const supabase = createClient();
+  const [messageApi, contextHolder] = message.useMessage();
+  // const [guestInfo, setGuestInfo] = useState<GuestSubabasePayload | null>(null);
+
+  interface CSSVars extends React.CSSProperties {
+    ["--hover-color"]?: string;
+  }
+
+  const btnStyle: CSSVars = {
+    ["--hover-color"]: `${color}`,
+    height: "56px",
+    width: "280px",
+    fontSize: "18px",
+    fontWeight: 600,
+    letterSpacing: "2px",
+    boxShadow: "0px 0px 12px rgba(0,0,0,0.2)",
+    fontFamily: 'Poppins',
+  };
 
   const formatDateMexico = (isoString: string | null | undefined): string => {
     if (!isoString) return "";
@@ -40,6 +66,63 @@ export default function SideEvents({ info }: invProps) {
     });
   };
 
+  const onValidateUser = async (code: string) => {
+
+    try {
+      const { data, error } = await supabase
+        .from("side_events_guests")
+        .select("*")
+        .eq("password", code)
+        .maybeSingle();
+
+      if (error) {
+        console.log(error, 'not found')
+        return
+      }
+
+      if (!data) {
+        messageApi.error(`Código incorrecto`);
+        return
+      }
+
+      // messageApi.success(`Bienvenido ${data.name}`);
+      setValidated(true);
+      // setGuestInfo(data)
+
+
+    } catch (error) {
+
+    }
+  };
+
+  const onMagicLogin = async (code: string) => {
+
+    // console.log('getting guest ----')
+    try {
+      const { data, error } = await supabase
+        .from("side_events_guests")
+        .select("*")
+        .eq("password", code)
+        .maybeSingle();
+
+      if (error) {
+        console.log(error, 'not found')
+        return
+      }
+
+      if (!data) {
+        messageApi.error(`Código incorrecto`);
+        return
+      }
+
+      setValidated(true);
+      // setGuestInfo(data)
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
     const onScroll = () => {
       const scrollY = window.scrollY;
@@ -53,127 +136,200 @@ export default function SideEvents({ info }: invProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+
+
+    if (info?.type === "open") {
+
+      setValidated(true);
+      // setAnimation(true)
+    } else {
+      setValidated(false);
+      if (password) {
+        onMagicLogin(password)
+      }
+    }
+  }, []);
+
   return (
     <>
-    <div className={styles.side_event_main_cont}>
-      <div className={styles.hero}>
-        {info?.body.image && <Image className={styles.hero_bg} fill src={info?.body.image} alt="" style={{ objectFit: "cover" }} />}
-        <div className={styles.blur_cover}></div>
-        <div className={styles.shadow}></div>
-      </div>
-
-      <div
-        className={styles.info_cont}
-        style={
-          {
-            "--blur-color": `${info?.body.color ?? "#000000"}`,
-          } as React.CSSProperties
-        }
-      >
-        <span
-          style={{
-            fontFamily: info?.body.title.font,
-            fontWeight: info?.body.title.weight,
-            fontSize: info?.body.title.size,
-            lineHeight: info?.body.title.line_height,
-            opacity: info?.body.title.opacity,
-            textAlign: "center",
-            color: "#FFF",
-            textShadow: "0px 0px 12px rgba(0, 0, 0, 0.55)",
-          }}
-        >
-          {info?.name}
-        </span>
-
-        <div
-          className={styles.col}
-          style={{
-            fontFamily: info?.body.title.font,
-            zIndex: 99,
-          }}
-        >
-          <span>{formatDateMexico(info?.body.hour)}</span>
-          <span>
-            {info?.body.address.street} {info?.body.address.number},
-          </span>
-          <span>
-            {info?.body.address.state} {info?.body.address.country}
-          </span>
+      {contextHolder}
+      <div className={styles.side_event_main_cont}>
+        <div className={styles.hero}>
+          {info?.body.image && <Image className={styles.hero_bg} fill src={info?.body.image} alt="" style={{ objectFit: "cover" }} />}
+          <div className={styles.blur_cover}></div>
+          <div className={styles.shadow}></div>
         </div>
-
-        <div className={styles.buttons_cont}>
-          <Button icon={<LuCircleCheck size={18} style={{ opacity: "0.5" }} />} type="text" className={styles.side_buttons}>
-            Asistiré
-          </Button>
-          <Button icon={<LuCircleX size={18} style={{ opacity: "0.5" }} />} type="text" className={styles.side_buttons}>
-            No asistiré
-          </Button>
-          <Button icon={<LuCircleHelp size={18} style={{ opacity: "0.5" }} />} type="text" className={styles.side_buttons}>
-            Quizá
-          </Button>
-        </div>
-
-
-        {info?.body.extras && (
-          <div className={styles.mapa_container} style={{ padding: "12px 18px" }}>
-            <span
-              style={{
-                color: "#FFFFFF",
-                whiteSpace: "pre-line",
-                textAlign: "center",
-                fontFamily: "Poppins",
-                fontSize: "14px",
-                mixBlendMode: "soft-light",
-              }}
-            >
-              {renderTextWithStrong(info.body.extras ?? "")}
-            </span>
-          </div>
-        )}
-
-        {info?.body.address.street &&
-          info?.body.address.number &&
-          info?.body.address.neighborhood &&
-          info?.body.address.zipcode &&
-          info?.body.address.city &&
-          info?.body.address.state &&
-          info?.body.address.country && (
-            <div className={styles.mapa_container}>
-              <Button className={styles.get_there} type="text">
-                Como llegar
-              </Button>
-              <iframe
-                title="Mapa"
-                width="100%"
-                height="100%"
-                // style={{ borderColor: content.inverted ? primary : secondary }}
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
-                src={simpleaddress(
-                  info?.body.address.street,
-                  info?.body.address.number,
-                  info?.body.address.neighborhood,
-                  info?.body.address.zipcode,
-                  info?.body.address.city,
-                  info?.body.address.state,
-                  info?.body.address.country
-                )}
-              />
-            </div>
-          )}
-
-        
 
         {
-          info?.body.address.city &&
-          <WeatherWidget item={info?.body} isSide={true} />
-        }
-      </div>
+          validated &&
 
-      
-    </div>
-    <FooterLand color={info?.body.color}></FooterLand>
+          <div
+            className={styles.info_cont}
+            style={
+              {
+                "--blur-color": `${info?.body.color ?? "#000000"}`,
+              } as React.CSSProperties
+            }
+          >
+            <span
+              style={{
+                fontFamily: info?.body.title.font,
+                fontWeight: info?.body.title.weight,
+                fontSize: info?.body.title.size,
+                lineHeight: info?.body.title.line_height,
+                opacity: info?.body.title.opacity,
+                textAlign: "center",
+                color: "#FFF",
+                textShadow: "0px 0px 12px rgba(0, 0, 0, 0.55)",
+              }}
+            >
+              {info?.name}
+            </span>
+
+            <div
+              className={styles.col}
+              style={{
+                fontFamily: info?.body.title.font,
+                zIndex: 99,
+              }}
+            >
+              <span>{formatDateMexico(info?.body.hour)}</span>
+              <span>
+                {info?.body.address.street} {info?.body.address.number},
+              </span>
+              <span>
+                {info?.body.address.state} {info?.body.address.country}
+              </span>
+            </div>
+
+            <div className={styles.buttons_cont}>
+              <Button icon={<LuCircleCheck size={18} style={{ opacity: "0.5" }} />} type="text" className={styles.side_buttons}>
+                Asistiré
+              </Button>
+              <Button icon={<LuCircleX size={18} style={{ opacity: "0.5" }} />} type="text" className={styles.side_buttons}>
+                No asistiré
+              </Button>
+              <Button icon={<LuCircleHelp size={18} style={{ opacity: "0.5" }} />} type="text" className={styles.side_buttons}>
+                Quizá
+              </Button>
+            </div>
+
+
+            {info?.body.extras && (
+              <div className={styles.mapa_container} style={{ padding: "12px 18px" }}>
+                <span
+                  style={{
+                    color: "#FFFFFF",
+                    whiteSpace: "pre-line",
+                    textAlign: "center",
+                    fontFamily: "Poppins",
+                    fontSize: "14px",
+                    mixBlendMode: "soft-light",
+                  }}
+                >
+                  {renderTextWithStrong(info.body.extras ?? "")}
+                </span>
+              </div>
+            )}
+
+            {info?.body.address.street &&
+              info?.body.address.number &&
+              info?.body.address.neighborhood &&
+              info?.body.address.zipcode &&
+              info?.body.address.city &&
+              info?.body.address.state &&
+              info?.body.address.country && (
+                <div className={styles.mapa_container}>
+                  <Button className={styles.get_there} type="text">
+                    Como llegar
+                  </Button>
+                  <iframe
+                    title="Mapa"
+                    width="100%"
+                    height="100%"
+                    // style={{ borderColor: content.inverted ? primary : secondary }}
+                    loading="lazy"
+                    allowFullScreen
+                    referrerPolicy="no-referrer-when-downgrade"
+                    src={simpleaddress(
+                      info?.body.address.street,
+                      info?.body.address.number,
+                      info?.body.address.neighborhood,
+                      info?.body.address.zipcode,
+                      info?.body.address.city,
+                      info?.body.address.state,
+                      info?.body.address.country
+                    )}
+                  />
+                </div>
+              )}
+
+
+
+            {
+              info?.body.address.city &&
+              <WeatherWidget item={info?.body} isSide={true} />
+            }
+          </div>
+        }
+        <div
+          className={styles.inv_locked_blured}
+          style={{ pointerEvents: validated ? "none" : undefined, opacity: validated ? "0" : "1", backgroundColor: `${color}20` }}
+        >
+          <div className={styles.locked_icon}>
+            <FaLock size={32} style={{ color: "#FFF" }} />
+          </div>
+          <span style={{ fontFamily: 'Poppins' }} className={styles.locked_title}>
+            Invitación Privada
+          </span>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
+              gap: "8px",
+            }}
+          >
+            <span style={{ fontFamily: 'Poppins' }} className={styles.locked_text}>
+              Nos alegra mucho que seas parte de este evento tan especial.
+            </span>
+            <span style={{ fontFamily: 'Poppins' }} className={styles.locked_text}>
+              Esta invitación es exclusiva para ti. Ingresa tu código de invitado para continuar y disfrutar de esta experiencia única.
+            </span>
+          </div>
+          <Input
+            value={guestCode}
+            // length={6}
+            size="large"
+            onChange={(e) => setGuestCode(e.target.value)}
+            placeholder="Código de invitado"
+            className={styles.locked_input}
+            style={{
+              backgroundColor: "#FFFFFF20",
+              boxShadow: "0px 0px 12px rgba(0,0,0,0.2)",
+              borderWidth: "2px",
+              color: "#FFF",
+              fontSize: "18px",
+              textAlign: "center",
+              maxWidth: "280px",
+              borderRadius: "99px",
+              minHeight: "56px",
+              fontFamily: 'Poppins',
+            }}
+          />
+
+          <Button className={styles.locked_btn} style={btnStyle} onClick={() => onValidateUser(guestCode)}>
+            ACCEDER
+          </Button>
+        </div>
+
+      </div>
+      {
+        validated &&
+        <FooterLand color={info?.body.color}></FooterLand>
+      }
     </>
   );
 }
