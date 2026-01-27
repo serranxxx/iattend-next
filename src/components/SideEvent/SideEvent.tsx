@@ -13,7 +13,6 @@ import { LuCircleCheck, LuCircleHelp, LuCircleX } from "react-icons/lu";
 import { simpleaddress } from "../Invitation/Itinerary/OpenCard/OpenCard";
 import WeatherWidget from "../Invitation/Itinerary/WeatherApi/WeatherWidget";
 import { FooterLand } from "../LandPage/Footer/Footer";
-import { darker } from "@/helpers/functions";
 
 type invProps = {
   info: SideEvent | null;
@@ -55,6 +54,7 @@ export default function SideEvents({ info }: invProps) {
   }, []);
 
   return (
+    <>
     <div className={styles.side_event_main_cont}>
       <div className={styles.hero}>
         {info?.body.image && <Image className={styles.hero_bg} fill src={info?.body.image} alt="" style={{ objectFit: "cover" }} />}
@@ -66,7 +66,7 @@ export default function SideEvents({ info }: invProps) {
         className={styles.info_cont}
         style={
           {
-            "--blur-color": `${darker(info?.body.color!, 0.9) ?? "#000000"}`,
+            "--blur-color": `${info?.body.color ?? "#000000"}`,
           } as React.CSSProperties
         }
       >
@@ -163,7 +163,7 @@ export default function SideEvents({ info }: invProps) {
             </div>
           )}
 
-
+        
 
         {
           info?.body.address.city &&
@@ -171,11 +171,9 @@ export default function SideEvents({ info }: invProps) {
         }
       </div>
 
-      {
-        info?.body.color &&
-        <FooterLand color={info?.body.color}></FooterLand>
-      }
       
     </div>
+    <FooterLand color={info?.body.color}></FooterLand>
+    </>
   );
 }
