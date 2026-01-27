@@ -45,7 +45,7 @@ export default function SideEvents({ info }: invProps) {
       const scrollY = window.scrollY;
 
       // ajusta estos valores a tu gusto
-      const scale = Math.min(1 + scrollY / 1000, 1.25);
+      const scale = Math.min(1 + scrollY / 1000, 1.8);
       document.documentElement.style.setProperty("--bg-scale", scale.toString());
     };
 
