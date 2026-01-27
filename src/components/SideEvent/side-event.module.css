@@ -9,7 +9,7 @@
 .hero {
     position: sticky;
     top: 0;
-    height: 100vh;
+    min-height: 100vmax;
     width: 100%;
     overflow: hidden;
     z-index: 1;
