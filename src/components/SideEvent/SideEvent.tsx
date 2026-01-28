@@ -75,6 +75,7 @@ export default function SideEvents({ info, password, preview }: invProps) {
         .from("side_events_guests")
         .select("*")
         .eq("password", code)
+        .eq("side_events_id", info?.id)
         .maybeSingle();
 
       if (error) {
