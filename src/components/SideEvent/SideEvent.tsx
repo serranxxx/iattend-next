@@ -17,13 +17,15 @@ import { color } from "motion";
 import { FaLock } from "react-icons/fa";
 import { createClient } from "@/lib/supabase/client";
 import { GuestSubabasePayload } from "@/types/guests";
+import { darker } from "@/helpers/functions";
 
 type invProps = {
   info: SideEvent | null;
   password?: string;
+  preview?: boolean
 };
 
-export default function SideEvents({ info, password }: invProps) {
+export default function SideEvents({ info, password, preview }: invProps) {
   dayjs.extend(utc);
   dayjs.extend(timezone);
   dayjs.locale("es");
@@ -138,17 +140,22 @@ export default function SideEvents({ info, password }: invProps) {
 
   useEffect(() => {
 
-
-    if (info?.type === "open") {
-
+    if (preview) {
       setValidated(true);
-      // setAnimation(true)
     } else {
-      setValidated(false);
-      if (password) {
-        onMagicLogin(password)
+      if (info?.type === "open") {
+
+        setValidated(true);
+        // setAnimation(true)
+      } else {
+        setValidated(false);
+        if (password) {
+          onMagicLogin(password)
+        }
       }
     }
+
+
   }, []);
 
   return (
@@ -169,6 +176,7 @@ export default function SideEvents({ info, password }: invProps) {
             style={
               {
                 "--blur-color": `${info?.body.color ?? "#000000"}`,
+                "--blur-color--dark": `${darker(info?.body.color!, 0.8) ?? "#000000"}80`,
               } as React.CSSProperties
             }
           >
@@ -176,12 +184,12 @@ export default function SideEvents({ info, password }: invProps) {
               style={{
                 fontFamily: info?.body.title.font,
                 fontWeight: info?.body.title.weight,
-                fontSize: info?.body.title.size,
+                fontSize: `${info?.body.title.size}px`,
                 lineHeight: info?.body.title.line_height,
                 opacity: info?.body.title.opacity,
                 textAlign: "center",
                 color: "#FFF",
-                textShadow: "0px 0px 12px rgba(0, 0, 0, 0.55)",
+                textShadow: "0px 0px 18px rgba(0, 0, 0, 0.35)",
               }}
             >
               {info?.name}
@@ -190,7 +198,7 @@ export default function SideEvents({ info, password }: invProps) {
             <div
               className={styles.col}
               style={{
-                fontFamily: info?.body.title.font,
+                fontFamily: 'Poppins',
                 zIndex: 99,
               }}
             >
@@ -210,9 +218,9 @@ export default function SideEvents({ info, password }: invProps) {
               <Button icon={<LuCircleX size={18} style={{ opacity: "0.5" }} />} type="text" className={styles.side_buttons}>
                 No asistiré
               </Button>
-              <Button icon={<LuCircleHelp size={18} style={{ opacity: "0.5" }} />} type="text" className={styles.side_buttons}>
+              {/* <Button icon={<LuCircleHelp size={18} style={{ opacity: "0.5" }} />} type="text" className={styles.side_buttons}>
                 Quizá
-              </Button>
+              </Button> */}
             </div>
 
 
@@ -269,7 +277,7 @@ export default function SideEvents({ info, password }: invProps) {
 
             {
               info?.body.address.city &&
-              <WeatherWidget item={info?.body} isSide={true} />
+              <WeatherWidget item={info?.body} isSide={true} color={`${darker(info?.body.color!, 0.8) ?? "#000000"}80`} />
             }
           </div>
         }

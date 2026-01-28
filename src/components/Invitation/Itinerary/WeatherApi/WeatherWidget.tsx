@@ -9,9 +9,10 @@ type CardProps = {
   dev?: boolean;
   item: ItineraryItem | SideEventBody | undefined;
   isSide?: boolean;
+  color?: string;
 };
 
-export default function WeatherWidget({ invitation, item, isSide }: CardProps) {
+export default function WeatherWidget({ invitation, item, isSide, color }: CardProps) {
   const [weather, setWeather] = useState<any>(null);
   const key = "fa4d2a7fce5841d5a51205220251009";
 
@@ -36,7 +37,7 @@ export default function WeatherWidget({ invitation, item, isSide }: CardProps) {
             maxWidth: "450px",
             backdropFilter: "blur(10px)",
             border: "1px solid #FFFFFF40",
-            background: "#00000040",
+            background: color,
             fontFamily: invitation?.generals.fonts.body?.typeFace ?? "Poppins",
           }}
         >
