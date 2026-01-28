@@ -3,7 +3,7 @@
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Button, Input, message } from "antd";
 import { FaMinus, FaRegCalendarCheck } from "react-icons/fa";
 import { FaRegCalendarXmark } from "react-icons/fa6";
@@ -16,6 +16,7 @@ import { createClient } from "@/lib/supabase/client";
 import { generateSimpleId } from "@/helpers/functions";
 import { IoMdAdd } from "react-icons/io";
 import { FiMinus } from "react-icons/fi";
+import confetti from "canvas-confetti";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -44,6 +45,15 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
   const [localStatus, setLocalStatus] = useState<"creado" | "esperando" | "confirmado" | "rechazado">("esperando");
   const [companions, setCompanions] = useState<GuestSubabasePayload[] | null>(null);
   const [openInvitation, setOpenInvitation] = useState<boolean>(false);
+
+  const onClick = useCallback(() => {
+    confetti({
+      particleCount: 200,
+      spread: 80,
+      angle: 90,                 // 90 = hacia abajo, 270 = hacia arriba
+      origin: { x: 0.5, y: 0.9 }
+    });
+  }, []);
 
   const rejectInvitation = async () => {
     // Si no hay mainGuest, no hacemos nada
@@ -249,6 +259,7 @@ export default function Confirm({ invitationID, ui, invitation, type, guestInfo,
 
     // console.log("✅ Invitados actualizados:", data);
     setLocalStatus("confirmado");
+    onClick()
     refreshGuest();
   };
 

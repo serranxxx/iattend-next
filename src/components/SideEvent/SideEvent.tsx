@@ -1,7 +1,7 @@
 "use client";
 
 import { SideEvent } from "@/types/side_event";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "./side-event.module.css";
 import Image from "next/image";
 import dayjs from "dayjs";
@@ -16,8 +16,9 @@ import { FooterLand } from "../LandPage/Footer/Footer";
 import { color } from "motion";
 import { FaLock } from "react-icons/fa";
 import { createClient } from "@/lib/supabase/client";
-import { GuestSubabasePayload } from "@/types/guests";
+import { GuestSubabasePayload, SideGuestSubabasePayload } from "@/types/guests";
 import { darker } from "@/helpers/functions";
+import confetti from "canvas-confetti";
 
 type invProps = {
   info: SideEvent | null;
@@ -34,7 +35,7 @@ export default function SideEvents({ info, password, preview }: invProps) {
   const [guestCode, setGuestCode] = useState<string>("");
   const supabase = createClient();
   const [messageApi, contextHolder] = message.useMessage();
-  // const [guestInfo, setGuestInfo] = useState<GuestSubabasePayload | null>(null);
+  const [guestInfo, setGuestInfo] = useState<SideGuestSubabasePayload | null>(null);
 
   interface CSSVars extends React.CSSProperties {
     ["--hover-color"]?: string;
@@ -89,8 +90,9 @@ export default function SideEvents({ info, password, preview }: invProps) {
       }
 
       // messageApi.success(`Bienvenido ${data.name}`);
+      console.log('valid user: ', data)
       setValidated(true);
-      // setGuestInfo(data)
+      setGuestInfo(data)
 
 
     } catch (error) {
@@ -120,12 +122,67 @@ export default function SideEvents({ info, password, preview }: invProps) {
       }
 
       setValidated(true);
-      // setGuestInfo(data)
+      setGuestInfo(data)
     }
     catch (error) {
       console.log(error)
     }
   }
+
+  const updateGuestStatus = async (state: string) => {
+    console.log(guestInfo?.password)
+    console.log(info?.id)
+    try {
+      const { data, error } = await supabase
+        .from("side_events_guests")
+        .update({ state })
+        .eq("password", guestInfo?.password)
+        .eq("side_events_id", info?.id)
+        .select()
+        .maybeSingle();
+
+      if (error) {
+        console.log(error, "error updating status");
+        messageApi.error("No se pudo actualizar el estado");
+        return;
+      }
+
+      if (!data) {
+        messageApi.error("Invitado no encontrado");
+        return;
+      }
+
+      console.log(data)
+
+      // Si quieres hacer algo después de actualizar
+      setGuestInfo(data)
+      // messageApi.success("Estado actualizado");
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onClick = useCallback(() => {
+    confetti({
+      particleCount: 200,
+      spread: 80,
+      angle: 90,                 // 90 = hacia abajo, 270 = hacia arriba
+      origin: { x: 0.5, y: 0.9 }
+    });
+  }, []);
+
+  const handleConfirmAttendance = () => {
+    if (!guestInfo) return;
+
+    if (guestInfo.state === 'confirmado') {
+      updateGuestStatus('creado');
+    } else {
+      updateGuestStatus('confirmado');
+      onClick(); // si esto cierra modal, avanza paso, etc.
+    }
+  };
+
 
   useEffect(() => {
     const onScroll = () => {
@@ -213,16 +270,23 @@ export default function SideEvents({ info, password, preview }: invProps) {
               </span>
             </div>
 
+
             <div className={styles.buttons_cont}>
-              <Button icon={<LuCircleCheck size={18} style={{ opacity: "0.5" }} />} type="text" className={styles.side_buttons}>
-                Asistiré
-              </Button>
-              <Button icon={<LuCircleX size={18} style={{ opacity: "0.5" }} />} type="text" className={styles.side_buttons}>
-                No asistiré
-              </Button>
-              {/* <Button icon={<LuCircleHelp size={18} style={{ opacity: "0.5" }} />} type="text" className={styles.side_buttons}>
-                Quizá
-              </Button> */}
+              {
+                guestInfo?.state !== 'rechazado' &&
+                <Button onClick={handleConfirmAttendance} style={{ height: '64px', borderRadius: guestInfo?.state === 'confirmado' ? '99px' : '99px 0px 0px 99px' }} icon={guestInfo?.state !== 'confirmado' && <LuCircleCheck size={18} style={{ opacity: "0.5" }} />} type="text" className={styles.side_buttons}>
+                  {
+                    guestInfo?.state === 'confirmado' ? 'Asistencia confirmada' : 'Asistiré'
+                  }
+                </Button>
+              }
+              {
+                guestInfo?.state !== 'confirmado' &&
+                <Button onClick={() => updateGuestStatus(guestInfo?.state === 'rechazado' ? 'creado' : 'rechazado')} style={{ height: '64px', borderRadius: guestInfo?.state === 'rechazado' ? '99px' : '0px 99px 99px 0px' }} icon={guestInfo?.state !== 'rechazado' && <LuCircleX size={18} style={{ opacity: "0.5" }} />} type="text" className={styles.side_buttons}>
+                  {guestInfo?.state === 'rechazado' ? 'Asistencia declinada' : 'No asistiré'}
+                </Button>
+              }
+
             </div>
 
 

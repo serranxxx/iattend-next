@@ -92,3 +92,26 @@ export interface GuestSubabasePayload {
   ticket: boolean;
   tier: string | null;
 }
+
+
+export interface SideGuestSubabasePayload {
+  companion_id: string | null;
+  created_at: string;
+  has_companion: boolean;
+  id?: number;
+  side_events_id: string;
+  last_action: string;
+  last_action_by: boolean;
+  last_update_date: string;
+  meal: string | null;
+  name: string | null;
+  notes: string | null;
+  password: string;
+  phone_number: string | null;
+  side: null;
+  state: "creado" | "esperando" | "confirmado" | "rechazado";
+  table: string | null;
+  tag: string | null;
+  ticket: boolean;
+  tier: string | null;
+}
