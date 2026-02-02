@@ -59,8 +59,9 @@ export const Cover = forwardRef<HTMLDivElement, CoverProps>(function Cover({ui, 
                   height: "100%",
                   top: "0px",
                   left: "0px",
-                  background: `linear-gradient(to top, ${darker(generals?.colors.primary ?? "#FFFFFF", 0.2)}, rgba(0,0,0,0))`,
+                  background: `linear-gradient(to top, ${darker(generals?.colors.primary ?? "#FFFFFF", 0.2)}, transparent)`,
                   pointerEvents: "none",
+                  mixBlendMode:'multiply'
                 }}
               />
             ) : (
