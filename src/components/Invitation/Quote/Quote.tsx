@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { forwardRef } from "react";
 import { Separador } from "../Separator/Separator";
 import FadeIn from "@/components/Motion/FadeIn";
+import { darker } from "@/helpers/functions";
 
 type quoteProps = {
   dev: boolean;
@@ -69,7 +70,8 @@ export const Quote = forwardRef<HTMLDivElement, quoteProps>(function Greeting({ 
                         top: "0px",
                         left: "50%",
                         transform: "translate(-50%)",
-                        background: `linear-gradient(to top, ${accent}, rgba(0,0,0,0))`,
+                        background: `linear-gradient(to top, ${darker(accent, 0.7)}80, rgba(0,0,0,0))`,
+                        mixBlendMode:'multiply'
                       }}
                     ></div>
                   )}
