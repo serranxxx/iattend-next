@@ -15,15 +15,15 @@ export const HeroSection = () => {
   return (
     <div
       className={styles.hero_cont}
-      //   style={{
-      //     backgroundImage: `url(https://picsum.photos/1200/800)`,
-      //   }}
+    //   style={{
+    //     backgroundImage: `url(https://picsum.photos/1200/800)`,
+    //   }}
     >
       <Image
         src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/hero_2.jpg"
         alt=""
         fill
-        style={{ objectFit: "cover", position: "absolute", zIndex: "-1", left: 0,  }}
+        style={{ objectFit: "cover", position: "absolute", zIndex: "-1", left: 0, }}
       />
       <div className={styles.shadow}></div>
       {/* <div className={styles.hero_first_row}>
@@ -47,18 +47,20 @@ export const HeroSection = () => {
             </Link>
           </div> */}
 
-          <div className={styles.action_wrap}>
-            <Link href={`https://wa.me/6145338500?text=${message}`} rel="noreferrer" target="_blank">
-              <Button icon={<LuArrowUpRight size={16} />} className={styles.action_button}>
-                PLATICA CON NOSOTROS
-              </Button>
-            </Link>
-          </div>
+          {/* <div className={styles.hero_first_row}>
+            <img className={styles.hero_logo} src="/assets/images/blanco.png" alt="i attend" />
+          </div> */}
         </div>
 
-        <div className={styles.hero_first_row}>
-          <img className={styles.hero_logo} src="/assets/images/blanco.png" alt="i attend" />
+        <div className={styles.action_wrap}>
+          <Link href={`https://wa.me/6145338500?text=${message}`} rel="noreferrer" target="_blank">
+            <Button icon={<LuArrowUpRight size={16} />} className={styles.action_button}>
+              PLATICA CON NOSOTROS
+            </Button>
+          </Link>
         </div>
+
+
 
         {/* <Button icon={<FaPaperPlane />} className={styles.hero_cta}>
           QUIERO MÁS INFORMACIÓN
