@@ -17,7 +17,7 @@ export const HomeScroll = () => {
 
     useEffect(() => {
         const container = scrollRef.current;
-        const speed = 1.5;
+        const speed = 2.2;
 
         let animationFrame: any;
 

@@ -7,7 +7,7 @@ export const cover_samples: string[] = [
   "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/scroll6.jpg",
   "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/scroll5.jpg",
   "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/scroll4.jpg",
-  "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/scroll3.jpg",
+  // "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/scroll3.jpg",
   "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/scroll2.jpg",
   "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/scroll14.jpg",
   "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/scroll11.jpg",
