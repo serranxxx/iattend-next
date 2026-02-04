@@ -59,7 +59,7 @@ export default function Page() {
 
   return  (
     <div ref={rootRef} style={{ width: '100%', backgroundColor:'#FFF'}} className="scroll-invitation">
-      <SideEvents info={SideEvent} preview={false} />
+      <SideEvents info={SideEvent} preview={true} />
     </div>
   ) 
 }
