@@ -148,7 +148,7 @@ export const KeyFeatures = () => {
         <div className={styles.key_main_cont}>
           {FEATURES.map((feature, colIndex) => (
             <div key={colIndex} className={styles.key_item}>
-              <Image src={`${feature.image}`} alt="" fill style={{ position: "absolute", objectFit: "cover" }} />
+              <img src={`${feature.image}`} alt=""  style={{ position: "absolute", objectFit: "cover", width:'100%', height:'100%', left:0, top:0 }} />
               <div className={styles.shadow}></div>
               <span className={styles.key_label}>{feature.label}</span>
               <div style={{ position: "absolute", top: "8px", right: "8px" }}>

@@ -4,6 +4,7 @@ import { cover_samples } from "@/helpers/images";
 import { useEffect, useRef, useState } from "react";
 
 import styles from "./homescroll.module.css";
+import Image from "next/image";
 
 export const HomeScroll = () => {
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -17,7 +18,7 @@ export const HomeScroll = () => {
 
     useEffect(() => {
         const container = scrollRef.current;
-        const speed = 2.2;
+        const speed = 2;
 
         let animationFrame: any;
 
@@ -128,7 +129,7 @@ export const HomeScroll = () => {
                             </div>
 
                             <div className={`${styles.ios_invitation} ${styles.inv_set_position} ${styles.cover_sample_img} scroll-invitation`}>
-                                <img alt="" src={cover} />
+                                <Image width={214} height={400} alt="" src={cover} />
                             </div>
                             <div className={styles.inv_light_space_ios} />
                         </div>

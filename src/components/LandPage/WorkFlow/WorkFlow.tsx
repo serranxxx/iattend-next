@@ -15,7 +15,7 @@ export const WorkFlow = () => {
 
         <div className={`scroll-invitation ${styles.flow_container}`}>
           <div className={styles.flow_card} >
-            <Image fill src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/flow_1.jpg" alt="" style={{ objectFit: 'cover' }} />
+            <img loading="lazy" src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/flow_1.jpg" alt="" style={{ objectFit: 'cover', width:'100%', height:'100%',position:'absolute',left:0, top:0 }} />
             <div className={styles.shadow}></div>
             <img className={styles.lines} src="/assets/images/line_2.svg" alt="" />
             <span className={styles.flow_title}>
@@ -24,7 +24,7 @@ export const WorkFlow = () => {
             <span className={styles.flow_sub}>Crea y organiza tu lista de invitados desde un solo lugar.</span>
           </div>
           <div className={styles.flow_card}>
-            <Image fill src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/flow-2.jpg" alt="" style={{ objectFit: 'cover', }} />
+            <img loading="lazy" src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/flow-2.jpg" alt="" style={{ objectFit: 'cover', width:'100%', height:'100%',position:'absolute',left:0, top:0 }} />
             <div className={styles.shadow}></div>
             <img style={{ bottom: "0px" }} className={styles.lines} src="/assets/images/line_3.svg" alt="" />
             <span className={styles.flow_title}>
@@ -33,7 +33,7 @@ export const WorkFlow = () => {
             <span className={styles.flow_sub}>Personaliza tu invitación de forma sencilla y sin complicaciones.</span>
           </div>
           <div className={styles.flow_card} >
-            <Image fill src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/flow-3.jpg" alt="" style={{ objectFit: 'cover', }} />
+            <img loading="lazy" src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/flow-3.jpg" alt="" style={{ objectFit: 'cover', width:'100%', height:'100%',position:'absolute',left:0, top:0  }} />
             <div className={styles.shadow}></div>
             <img style={{ bottom: "12px", }} className={styles.lines} src="/assets/images/line_4.svg" alt="" />
             <span className={styles.flow_title}>
