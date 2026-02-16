@@ -34,6 +34,13 @@ export const HeroSection = () => {
         <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "flex-start", flexDirection: "column", gap: "8px" }}>
           <span className={styles.hero_h1}>Organiza a tus invitados sin estrés</span>
           <span className={styles.hero_h2}>I attend te acompaña durante todo el proceso</span>
+          <div className={styles.action_wrap}>
+            <Link href={`https://wa.me/6145338500?text=${message}`} rel="noreferrer" target="_blank">
+              <Button icon={<LuArrowUpRight size={16} />} className={styles.action_button}>
+                PLATICA CON NOSOTROS
+              </Button>
+            </Link>
+          </div>
           {/* <div className={styles.action_wrap}>
             <Link href={`https://wa.me/6145338500?text=${message}`}
               rel="noreferrer"
@@ -52,13 +59,13 @@ export const HeroSection = () => {
           </div> */}
         </div>
 
-        <div className={styles.action_wrap}>
+        {/* <div className={styles.action_wrap}>
           <Link href={`https://wa.me/6145338500?text=${message}`} rel="noreferrer" target="_blank">
             <Button icon={<LuArrowUpRight size={16} />} className={styles.action_button}>
               PLATICA CON NOSOTROS
             </Button>
           </Link>
-        </div>
+        </div> */}
 
 
 

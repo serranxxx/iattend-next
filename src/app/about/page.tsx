@@ -11,6 +11,7 @@ import Video from "@/components/LandPage/Video/Video";
 import type { Metadata } from "next";
 import { Drawer } from "antd";
 import { HomeScroll } from "@/components/HomeScroll/HomeScroll";
+import { InvitationAbout } from "@/components/LandPage/Invitation/Invitation";
 
 export const metadata: Metadata = {
   title: "I attend | Guest management & paperless invitations",
@@ -64,6 +65,7 @@ export default function LandPage() {
 
       <HeroSection></HeroSection>
       <HomeScroll />
+      {/* <InvitationAbout /> */}
       <WorkFlow></WorkFlow>
 
       <IdealCustomer></IdealCustomer>
