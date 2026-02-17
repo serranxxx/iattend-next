@@ -6,7 +6,7 @@ import { cover_samples } from "@/helpers/images";
 import Image from "next/image";
 import { invitationFeatures } from "@/helpers/features";
 import { CustomButton } from "@/components/CustomButton/CustomButton";
-import { LuArrowUpRight, LuFrame } from "react-icons/lu";
+import { LuArrowUpRight, LuFrame, LuSparkles } from "react-icons/lu";
 
 
 export const InvitationAbout = () => {
@@ -72,7 +72,7 @@ export const InvitationAbout = () => {
 
 
                 <div className={styles.button_container}>
-                    <CustomButton type="primary" url="https://www.iattend.events/wedding/ejemplo4?password=WdJ-81e" icon={LuArrowUpRight} label="Ver ejemplo" />
+                    <CustomButton type="primary" url="https://www.iattend.events/wedding/ejemplo4?password=WdJ-81e" icon={LuSparkles} label="Ver ejemplo" />
                 </div>
 
 

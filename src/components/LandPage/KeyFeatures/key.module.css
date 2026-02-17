@@ -16,7 +16,7 @@
     font-size: 32px;
     font-weight: 800;
     color: #20212B;
-    font-family:  'Outfit', 'Poppins';
+    font-family: 'Outfit', 'Poppins';
     line-height: 110%;
     z-index: 2;
 }
@@ -29,15 +29,18 @@
     transform: translate(-50%, -50%);
     opacity: 0.5;
     pointer-events: none;
-    
+
 
     /* opacity: 0.1; */
 }
 
 .key_main_cont {
-    display: grid;                  /* 🔥 cambia flex → grid */
-    grid-template-columns: repeat(2, 1fr); /* 3 columnas iguales */
-    gap: 0;                         /* sin separación */
+    display: grid;
+    /* 🔥 cambia flex → grid */
+    grid-template-columns: repeat(2, 1fr);
+    /* 3 columnas iguales */
+    gap: 0;
+    /* sin separación */
 
     align-items: stretch;
     justify-items: stretch;
@@ -94,7 +97,7 @@
 .key_label {
     text-align: center;
     color: #FFF;
-    font-family:  'Outfit', 'Poppins';
+    font-family: 'Outfit', 'Poppins';
     line-height: 130%;
     font-size: 18px;
     line-height: 1.4;
@@ -132,7 +135,7 @@
 .drawer_value {
     font-size: 22px;
     font-weight: 600;
-    font-family:  'Outfit', 'Poppins';
+    font-family: 'Outfit', 'Poppins';
     color: #000;
     line-height: 140%;
     padding: 0px 12px;
@@ -155,7 +158,7 @@
     position: relative;
     display: inline-block;
     transition: all 0.3s ease;
-    
+
     /* margin: 12px 0px 0px 0px; */
 }
 
@@ -169,8 +172,8 @@
     border-radius: 8px;
     z-index: 0;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-    pointer-events: none; 
-    
+    pointer-events: none;
+
 }
 
 
@@ -223,7 +226,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family:  'Outfit', 'Poppins';
+    font-family: 'Outfit', 'Poppins';
     line-height: 110%;
     display: flex;
     align-items: flex-start;
@@ -281,8 +284,8 @@
     border-radius: 12px;
     z-index: 0;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-    pointer-events: none; 
-    
+    pointer-events: none;
+
 }
 
 .action_button {
@@ -337,20 +340,25 @@
     }
 
     .key_main_cont {
-               /* 🔥 cambia flex → grid */
+        /* 🔥 cambia flex → grid */
 
         width: 100%;
         height: 850px;
         z-index: 2;
         transform: scale(1);
-   
-    
+
+        grid-template-columns: repeat(3, 1fr);
+        /* 3 columnas iguales */
+        gap: 24;
+        padding: 0px 24px;
+
+
     }
 
     .key_label {
         text-align: center;
         color: #FFF;
-        font-family:  'Outfit', 'Poppins';
+        font-family: 'Outfit', 'Poppins';
         line-height: 130%;
         font-size: 24px;
         line-height: 1.4;
@@ -384,8 +392,8 @@
         border-radius: 8px;
         z-index: 0;
         box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-        pointer-events: none; 
-        
+        pointer-events: none;
+
     }
 
     .loop_img {
@@ -396,8 +404,8 @@
         transform: translate(-50%, -50%);
         opacity: 0.5;
         pointer-events: none;
-        
-    
+
+
         /* opacity: 0.1; */
     }
 }

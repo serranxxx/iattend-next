@@ -10,6 +10,7 @@ import {
   LuLockOpen,
   LuMessageSquareQuote,
   LuPalette,
+  LuPartyPopper,
   LuPencilRuler,
   LuSend,
   LuSmartphone,
@@ -92,6 +93,10 @@ const plan_pro = [
     text: "Pases digitales",
     icon: LuTicket,
   },
+  {
+    text: "3 Side events",
+    icon: LuPartyPopper,
+  },
 ];
 
 const plan_lite = [
@@ -118,6 +123,10 @@ const plan_lite = [
   {
     text: "Mapa de mesas",
     icon: LuArmchair,
+  },
+  {
+    text: "1 Side event",
+    icon: LuPartyPopper,
   },
 ];
 
