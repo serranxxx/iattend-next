@@ -8,6 +8,7 @@ import Image from "next/image";
 import AnimatedPath from "@/components/Motion/AnimatedPath";
 import { LuArrowUpRight } from "react-icons/lu";
 import Link from "next/link";
+import { CustomButton } from "@/components/CustomButton/CustomButton";
 
 export const HeroSection = () => {
   const message = encodeURIComponent("¡Hola! Me interesan los servicios de I attend");
@@ -34,44 +35,11 @@ export const HeroSection = () => {
         <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "flex-start", flexDirection: "column", gap: "8px" }}>
           <span className={styles.hero_h1}>Organiza a tus invitados sin estrés</span>
           <span className={styles.hero_h2}>I attend te acompaña durante todo el proceso</span>
-          <div className={styles.action_wrap}>
-            <Link href={`https://wa.me/6145338500?text=${message}`} rel="noreferrer" target="_blank">
-              <Button icon={<LuArrowUpRight size={16} />} className={styles.action_button}>
-                PLATICA CON NOSOTROS
-              </Button>
-            </Link>
-          </div>
-          {/* <div className={styles.action_wrap}>
-            <Link href={`https://wa.me/6145338500?text=${message}`}
-              rel="noreferrer"
-              target="_blank">
-              <Button
-                icon={<LuArrowUpRight size={16} />}
-                className={styles.action_button}
-              >
-                PLATICA CON NOSOTROS
-              </Button>
-            </Link>
-          </div> */}
 
-          {/* <div className={styles.hero_first_row}>
-            <img className={styles.hero_logo} src="/assets/images/blanco.png" alt="i attend" />
-          </div> */}
+          <CustomButton type="secondary" url={`https://wa.me/6145338500?text=${message}`} icon={LuArrowUpRight} label="PLATICA CON NOSOTROS" />
+
+
         </div>
-
-        {/* <div className={styles.action_wrap}>
-          <Link href={`https://wa.me/6145338500?text=${message}`} rel="noreferrer" target="_blank">
-            <Button icon={<LuArrowUpRight size={16} />} className={styles.action_button}>
-              PLATICA CON NOSOTROS
-            </Button>
-          </Link>
-        </div> */}
-
-
-
-        {/* <Button icon={<FaPaperPlane />} className={styles.hero_cta}>
-          QUIERO MÁS INFORMACIÓN
-        </Button> */}
       </div>
 
       <div className={styles.animated}>

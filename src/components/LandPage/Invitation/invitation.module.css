@@ -18,14 +18,118 @@
     /* z-index: -1; */
 }
 
-.key_title {
+.key_title,
+.key_sub {
     padding: 0px 24px;
     font-size: 32px;
     font-weight: 800;
     color: #20212B;
-    font-family:  'Outfit', 'Poppins';
+    font-family: 'Outfit', 'Poppins';
     line-height: 110%;
     z-index: 2;
+}
+
+.key_sub {
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.5;
+    line-height: 1.4;
+}
+
+.col {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 12;
+}
+
+.button_container {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content_container {
+    align-self: stretch;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    /* flex-direction: column; */
+    gap: 0px;
+    position: relative;
+}
+
+.features_grid {
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    /* gap: 24px; */
+    box-sizing: border-box;
+    /* padding: 6px 24px; */
+    /* max-width: 100%; */
+    overflow-x: hidden;
+    overflow-y: auto;
+    flex: 1;
+    max-height: 420px;
+    padding: 0;
+    position: absolute;
+    max-width: 60%;
+    right: 12px;
+    top: 0;
+    /* display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    flex: 1;
+    padding: 12px;
+    box-sizing: border-box; */
+    /* espacio entre elementos */
+}
+
+
+.feature_card,
+.selected_card {
+    width: 100%;
+    height: auto;
+    /* min-height: 80px; */
+    box-sizing: border-box;
+    padding: 12px;
+    border-radius: 16px;
+    font-family: 'Poppins';
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 14px;
+    background-image: linear-gradient(to right, #FFFFFF80, #FFFFFF40);
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    /* min-width: 330px; */
+    color: #00000080;
+    transform: scale(0.9);
+}
+
+.feature_title {
+    font-size: 14px;
+    color: #000;
+}
+
+/* .selected_card {
+    background-color: var(--brand-color-500-40);
+    outline: 1px solid var(--brand-color-500);
+} */
+
+.feature_row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    align-self: stretch;
 }
 
 .inv_device_main_container_ios {
@@ -36,7 +140,6 @@
     border: 2px solid #7F7E7E;
     position: relative;
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.5);
-    cursor: grab;
     /* margin-left: -40px; */
 }
 
@@ -46,8 +149,8 @@
 } */
 
 .regular_card_cover {
-    transform: scale(0.8);
-    margin: -60px 0px;
+    transform: scale(0.5);
+    margin: -180px -70px;
 }
 
 .device_buttons_container_ios {
@@ -188,6 +291,12 @@
     border-radius: 0px;
 }
 
+@media (min-width: 600px) {
+    .regular_card_cover {
+        transform: scale(0.55);
+        margin: -180px -0px;
+    }
+}
 
 
 @media (min-width: 768px) {
@@ -202,7 +311,7 @@
     .flow_container {
         align-items: center;
 
-    
+
     }
 
     .flow_card {
@@ -213,4 +322,111 @@
         font-size: 38px;
 
     }
+
+    .key_sub {
+        font-size: 16px;
+    }
+
+    .regular_card_cover {
+        transform: scale(0.65);
+        margin: -140px -0px;
+        margin-right: -160px;
+    }
+
+    .features_grid {
+
+        /* gap: 24px; */
+        overflow-x: auto;
+        overflow-y: auto;
+        flex: 1;
+        position: absolute;
+        max-width: 100%;
+        right: 0px;
+        top: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        flex: 1;
+        padding: 12px;
+        box-sizing: border-box;
+        max-height: 500px;
+        position: static;
+
+
+    }
+
+    .feature_card,
+    .selected_card {
+        width: 100%;
+        /* height: auto; */
+        min-height: 140px;
+        box-sizing: border-box;
+        padding: 12px;
+        border-radius: 16px;
+        font-family: 'Poppins';
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+        gap: 6px;
+        font-size: 14px;
+        background-image: linear-gradient(to right, #FFFFFF80, #FFFFFF40);
+        backdrop-filter: blur(10px);
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        /* min-width: 330px; */
+        color: #00000080;
+        transform: scale(1);
+    }
+
+}
+
+
+@media (min-width: 1000px) { 
+
+    .features_grid {
+
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        flex: 1;
+        padding: 12px;
+        box-sizing: border-box;
+        max-height: none;
+        position: static;
+        overflow: hidden;
+
+
+    }
+
+    .regular_card_cover {
+        transform: scale(0.75);
+        margin: -80px -0px;
+        margin-right: -100px;
+    }
+
+    .feature_card,
+    .selected_card {
+        width: 100%;
+        /* height: auto; */
+        min-height: 140px;
+        box-sizing: border-box;
+        padding: 12px;
+        border-radius: 16px;
+        font-family: 'Poppins';
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+        gap: 6px;
+        font-size: 14px;
+        background-image: linear-gradient(to right, #FFFFFF80, #FFFFFF40);
+        backdrop-filter: blur(10px);
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        /* min-width: 330px; */
+        color: #00000080;
+        transform: scale(1);
+    }
+
+
 }

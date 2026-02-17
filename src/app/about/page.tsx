@@ -65,7 +65,7 @@ export default function LandPage() {
 
       <HeroSection></HeroSection>
       <HomeScroll />
-      {/* <InvitationAbout /> */}
+      <InvitationAbout />
       <WorkFlow></WorkFlow>
 
       <IdealCustomer></IdealCustomer>

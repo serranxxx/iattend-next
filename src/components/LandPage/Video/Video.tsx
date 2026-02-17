@@ -5,6 +5,7 @@ import styles from './video.module.css'
 import { Button } from 'antd'
 import { LuArrowUpRight } from 'react-icons/lu'
 import Link from 'next/link'
+import { CustomButton } from '@/components/CustomButton/CustomButton'
 
 export default function Video() {
 
@@ -52,18 +53,7 @@ export default function Video() {
                         <span className={styles.cta_text}>
                             Crea tu evento, gestiona invitados y controla la asistencia desde un solo lugar. Sin complicaciones, sin herramientas extra.
                         </span>
-                        <div className={styles.action_wrap}>
-                            <Link href={`https://wa.me/6145338500?text=${message}`}
-                                rel="noreferrer"
-                                target="_blank">
-                                <Button
-                                    icon={<LuArrowUpRight size={16} />}
-                                    className={styles.action_button}
-                                >
-                                    PLATICA CON NOSOTROS
-                                </Button>
-                            </Link>
-                        </div>
+                        <CustomButton type="secondary" url={`https://wa.me/6145338500?text=${message}`} icon={LuArrowUpRight} label="PLATICA CON NOSOTROS" />
                     </div>
 
 
