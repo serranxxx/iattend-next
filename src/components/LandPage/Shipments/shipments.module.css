@@ -1,0 +1,113 @@
+.main_cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.key_cont {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-self: stretch;
+    padding: 36px 0px;
+    gap: 32px;
+    padding-bottom: 0px;
+    width: 100%;
+    /* z-index: -1; */
+}
+
+.key_title,
+.key_sub {
+    padding: 0px 24px;
+    font-size: 32px;
+    font-weight: 800;
+    color: #20212B;
+    font-family: 'Outfit', 'Poppins';
+    line-height: 110%;
+    z-index: 2;
+}
+
+.key_sub {
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.5;
+    line-height: 1.4;
+}
+
+.col {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.button_container {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 24px;
+}
+
+.expirence_cont {
+    align-self: stretch;
+    padding: 24px;
+    border-radius: 24px;
+    background-image: linear-gradient(to right, #FFFFFF40, var(--brand-color-500-40));
+    border: 1px solid var(--brand-color-500-40);
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    font-family: 'Poppins';
+    font-size: 14px;
+    gap: 4px;
+
+}
+
+.exprince_row {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+
+
+
+@media (min-width: 768px) {
+
+    .key_cont {
+        max-width: 1320px;
+        display: flex;
+        width: 100%;
+        /* z-index: -1; */
+    }
+
+    .flow_container {
+        align-items: center;
+
+
+    }
+
+    .flow_card {
+        flex: 1;
+    }
+
+    .key_title {
+        font-size: 38px;
+
+    }
+
+    .key_sub {
+        font-size: 24px;
+    }
+
+
+}
+

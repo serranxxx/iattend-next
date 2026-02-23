@@ -12,6 +12,8 @@ import type { Metadata } from "next";
 import { Drawer } from "antd";
 import { HomeScroll } from "@/components/HomeScroll/HomeScroll";
 import { InvitationAbout } from "@/components/LandPage/Invitation/Invitation";
+import { Shipments } from "@/components/LandPage/Shipments/Shipments";
+import { SideEvents } from "@/components/LandPage/SideEvents/SideEvents";
 
 export const metadata: Metadata = {
   title: "I attend | Guest management & paperless invitations",
@@ -64,10 +66,13 @@ export default function LandPage() {
     <div className={styles.main_container_land}>
 
       <HeroSection></HeroSection>
-      <HomeScroll />
+      
+      
       <InvitationAbout />
+      <SideEvents />
+      <HomeScroll />
       <WorkFlow></WorkFlow>
-
+      {/* <Shipments /> */}
       <IdealCustomer></IdealCustomer>
       <KeyFeatures></KeyFeatures>
 
