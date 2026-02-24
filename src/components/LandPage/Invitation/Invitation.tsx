@@ -72,7 +72,7 @@ export const InvitationAbout = () => {
 
 
                 <div className={styles.button_container}>
-                    <CustomButton type="primary" url="https://www.iattend.events/wedding/ejemplo4?password=WdJ-81e" icon={LuSparkles} label="Ver ejemplo" />
+                    <CustomButton type="primary" url="https://www.iattend.events/wedding/prueba-iattend?password=Vvx-R7F" icon={LuSparkles} label="Ver ejemplo" />
                 </div>
 
 
