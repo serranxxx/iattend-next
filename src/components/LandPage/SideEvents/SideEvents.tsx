@@ -36,7 +36,7 @@ const cards: {
 
 
 const phrase: string[] = [
-    'Cada Side Event es su propia invitación.',
+    'Es su propia invitación.',
     'Su propia lista de invitados.',
     'Su propio control de asistencia.',
     'Su propia experiencia.'
@@ -44,8 +44,6 @@ const phrase: string[] = [
 
 
 export const SideEvents = () => {
-
-    const [selected, setSelected] = useState<number>(0)
 
     return (
         <div className={styles.main_cont}>
@@ -105,11 +103,11 @@ export const SideEvents = () => {
                     </span>
 
                     <div className={styles.side_side_cont}>
-                        <div className={styles.side_events_cont} style={{ gap: '12px', flexDirection: 'column' }}>
+                        <div className={styles.side_events_cont_cards} style={{ gap: '12px', overflowX:'hidden' }}>
                             {
                                 cards.map((i, index) => (
                                     <div key={index} className={styles.side_card}>
-                                        <i.icon size={32} />
+                                        <i.icon size={24} />
                                         <span>{i.text}</span>
                                     </div>
                                 ))
@@ -121,7 +119,7 @@ export const SideEvents = () => {
                             {
                                 phrase.map((i, index) => (
                                     <div key={index} className={styles.single_row}>
-                                        <CircleChevronRight style={{ color: 'var(--brand-color-500)' }} />
+                                        <CircleChevronRight style={{ color: 'var(--brand-color-500)' }} size={16}/>
                                         <span>{i}</span>
                                     </div>
                                 ))
@@ -131,7 +129,7 @@ export const SideEvents = () => {
                     </div>
 
                     <div className={styles.button_container}>
-                        <CustomButton type="primary" url="www.iattend.events/side-event/8?password=8UR-zYv" icon={LuSparkles} label="Ver ejemplo" />
+                        <CustomButton type="primary" url="https://www.iattend.events/side-event/8?password=8UR-zYv" icon={LuSparkles} label="Ver ejemplo" />
                     </div>
 
                 </div>
