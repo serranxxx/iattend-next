@@ -87,8 +87,9 @@ export const HomeScroll = () => {
     };
     return (
         <div className={styles.key_cont}>
-            <span className={styles.key_title}>Envía invitaciones fantásticas</span>
-            <div ref={scrollRef} onScroll={handleScroll} className={`${styles.cover_samples_container} scroll-invitation`}>
+            <span className={styles.key_title}>Todo bajo control el día de tu evento</span>
+
+            {/* <div ref={scrollRef} onScroll={handleScroll} className={`${styles.cover_samples_container} scroll-invitation`}>
 
                 {[...cover_samples, ...cover_samples].map((cover, idx) => (
                     <div
@@ -114,18 +115,6 @@ export const HomeScroll = () => {
                                 className={styles.inv_black_space_ios}
                             >
                                 <span style={{ color: "#FFF", fontFamily:'Poppins' }}>5:15</span>
-                                {/* <div className={`camera-ios`} /> */}
-                                <div>
-                                    {/* <Image
-                  alt=""
-                  src={ios_settings}
-                  style={{
-                    height: "100%",
-                    objectFit: "cover",
-                    // marginRight: "50px",
-                  }}
-                /> */}
-                                </div>
                             </div>
 
                             <div className={`${styles.ios_invitation} ${styles.inv_set_position} ${styles.cover_sample_img} scroll-invitation`}>
@@ -135,7 +124,7 @@ export const HomeScroll = () => {
                         </div>
                     </div>
                 ))}
-            </div>
+            </div> */}
         </div>
     );
 };

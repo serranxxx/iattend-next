@@ -15,7 +15,7 @@
     "@supabase/ssr": "^0.7.0",
     "@supabase/supabase-js": "^2.57.2",
     "add-to-calendar-button-react": "^2.12.2",
-    "antd": "^5.25.1",
+    "antd": "^6.3.1",
     "axios": "^1.9.0",
     "canvas-confetti": "^1.9.3",
     "deepl-node": "^1.21.0",

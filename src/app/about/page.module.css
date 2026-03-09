@@ -8,7 +8,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     background-image: linear-gradient(#F9F9F9 80%, #FFF);
-    gap: 24px;
+    gap: 44px;
 }
 
 @media (min-width: 768px) {

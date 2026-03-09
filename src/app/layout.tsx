@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { AppProvider } from "@/context/AppProvider";
 import "@/styles/globals.css";
 import { AntdProvider } from "@/context/AntdProvider";
+import 'antd/dist/reset.css'
+import { AntdRegistry } from '@ant-design/nextjs-registry'
 
 
 export const metadata: Metadata = {
@@ -32,7 +34,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="scroll-invitation">
         <AppProvider>
           <AntdProvider>
-            {children}
+            <AntdRegistry>
+              {children}
+            </AntdRegistry>
+
           </AntdProvider>
         </AppProvider>
       </body>

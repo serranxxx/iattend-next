@@ -204,7 +204,7 @@ export const KeyFeatures = () => {
         placement="left"
         open={open}
         onClose={() => setOpen(false)}
-        height="auto"
+        size="auto"
         closeIcon={false}
         style={{
           borderRadius: "0px 12px 12px 0",

@@ -1,82 +1,146 @@
 'use client'
 
-import React, { useState } from "react";
 import styles from "./invitation.module.css";
-import { cover_samples } from "@/helpers/images";
-import Image from "next/image";
-import { invitationFeatures } from "@/helpers/features";
-import { CustomButton } from "@/components/CustomButton/CustomButton";
-import { LuArrowUpRight, LuFrame, LuSparkles } from "react-icons/lu";
+import { Button } from "antd";
 
 
 export const InvitationAbout = () => {
 
-    const [selected, setSelected] = useState<number>(0)
 
     return (
         <div className={styles.main_cont}>
             <div className={styles.key_cont}>
+                <div className={styles.row}>
+                    <span className={styles.key_title}>
+                        Una experiencia completa.
+                    </span>
 
-                <div className={styles.col}>
-                    <span className={styles.key_title}>La experiencia completa, en cualquier plan</span>
-                    <span className={styles.key_sub}>En I attend no creemos en versiones limitadas.
-                        Todos nuestros planes incluyen todas las funciones</span>
+                    <a href="https://www.iattend.events/wedding/prueba-iattend?password=Vvx-R7F" target="_blank" className={styles.key_sub_link} >
+                        Ver ejemplo
+                    </a>
+
                 </div>
-                <div className={styles.content_container}>
-                    <div
-                        className={`${styles.inv_device_main_container_ios} ${styles.regular_card_cover
-                            }`}
-                    >
-                        <div className={styles.device_buttons_container_ios}>
-                            <div className={styles.device_button_ios} />
-                            <div className={styles.device_button_ios} />
-                            <div className={styles.device_button_ios} />
-                        </div>
-                        <div className={styles.device_power_button_ios} />
-                        <div className={styles.inv_device_container_ios}>
-                            <div
-                                style={{
-                                    width: "100%",
-                                }}
-                                className={styles.inv_black_space_ios}
-                            >
-                                <span style={{ color: "#FFF", fontFamily: 'Poppins' }}>5:15</span>
-                                {/* <div className={`camera-ios`} /> */}
-                                <div>
-                                </div>
-                            </div>
 
-                            <div className={`${styles.ios_invitation} ${styles.inv_set_position} ${styles.cover_sample_img} scroll-invitation`}>
-                                <Image fill alt="" src={cover_samples[10]} />
-                            </div>
-                            <div className={styles.inv_light_space_ios} />
+                <div className={`${styles.cards_cont} scroll-invitation`}>
+                    <div className={styles.big_card}>
+
+                        <span className={styles.key_sub}>
+                            No creemos en <b>versiones limitadas</b>.
+                            Todos nuestros planes incluyen todas las funciones
+                        </span>
+                        <div className={styles.image_cont}>
+                            <img src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/phones_u.jpg" alt="" />
                         </div>
+
                     </div>
 
-                    <div className={`${styles.features_grid} srcoll-invitation`}>
-                        {
-                            invitationFeatures.map((f) => (
-                                <div onClick={() => setSelected(f.id)} key={f.id} className={selected === f.id ? styles.selected_card : styles.feature_card}>
-                                    <div className={styles.feature_row}>
-                                        <f.icon className={styles.feature_title} />
-                                        <span className={styles.feature_title}><b>{f.name}</b></span>
-                                    </div>
+                    <div className={styles.big_card_cover} style={{
+                        flexDirection: 'row'
+                    }}>
+                        <span className={styles.key_sub} >
+                            <b>Portada visual</b> con cuenta regresiva. Genera emoción y expectativa antes del evento.
+                        </span>
+                        <div className={styles.image_cont_cover} >
+                            <img src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/portada_u_1.png" alt="" />
+                        </div>
 
-                                    <span>{f.description}</span>
-
-                                </div>
-                            ))
-                        }
                     </div>
+
+
+                    <div className={styles.big_card} style={{
+                        flexDirection: 'row'
+                    }}>
+
+                        {/* <div className={styles.shadow}></div> */}
+                        <img style={{ right: 0, top: 0, zIndex: '0', position: 'absolute', width: '100%', height: '100%', objectFit: 'cover' }} src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/gifts_u.jpg" alt="" />
+                        <span className={styles.key_sub_w} style={{ zIndex: '2' }}>
+                            <b>Mesa de regalos digital</b> Integrada con hasta tres opciones como enlaces externos
+                        </span>
+                    </div>
+
+                    <div className={styles.big_card_map} style={{
+                        flexDirection: 'row'
+                    }}>
+
+                        <div className={styles.shadow_inverse}></div>
+                        <img style={{ right: 0, top: 0, zIndex: '0', position: 'absolute', width: '100%', height: '100%', objectFit: 'cover' }} src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/it_u_1.jpg" alt="" />
+                        <span className={styles.key_sub_w} style={{ color: '#FFF', zIndex: '2' }}>
+                            <b>Mapas interactivos</b> con direcciones para facilitar la llegada de tus invitados.
+                        </span>
+                    </div>
+
+
+
+
+                    <div className={styles.big_card_cover} style={{
+                        flexDirection: 'row'
+                    }}>
+                        <span className={styles.key_sub_it} >
+                            <b>Itinerario dinámico.</b> Comparte cada momento especial de tu evento.
+                        </span>
+                        <div className={styles.image_cont_it} >
+                            <img src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/itinerary_u.jpg" alt="" />
+                        </div>
+
+                    </div>
+
+
+
+
+
+                    <div className={styles.big_card_fam} style={{
+                        flexDirection: 'row'
+                    }}>
+                        <span className={styles.key_sub} >
+                            <b>Mensaje de bienvenida personalizable.</b> Destaca a las personas más importantes del evento.
+                        </span>
+                        <div className={styles.image_cont_fam} >
+                            <img src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/family_u.jpg" alt="" />
+                        </div>
+
+                    </div>
+
+                    <div className={styles.big_card} style={{
+                        flexDirection: 'row'
+                    }}>
+
+                        <div className={styles.shadow}></div>
+                        <img style={{ right: 0, top: 0, zIndex: '0', position: 'absolute', width: '100%', height: '100%', objectFit: 'cover' }} src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/acts_u.jpg" alt="" />
+                        <span className={styles.key_sub_w} style={{ color: '#FFF', zIndex: '2' }}>
+                            Ideal para <b>bodas destino</b> Recomienda hospedaje, restaurantes o actividades.
+                        </span>
+                    </div>
+
+                    <div className={styles.big_card} style={{
+                        flexDirection: 'row'
+                    }}>
+
+                        <div className={styles.shadow}></div>
+                        <img style={{ right: 0, top: 0, zIndex: '0', position: 'absolute', width: '100%', height: '100%', objectFit: 'cover' }} src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/lock_u.jpg" alt="" />
+                        <span className={styles.key_sub_w} style={{ color: '#FFF', zIndex: '2' }}>
+                            <b>Control total</b> sobre quién puede ver la invitación y cómo se accede a ella.
+                        </span>
+                    </div>
+
+
                 </div>
 
+                {/* <div className={styles.carousel_wrap}>
+                    <Carousel arrows dots dotPlacement="bottom" fade={true}>
+                        
+                        <div className={styles.big_card_cont}>
+                            <div className={styles.big_card}>B</div>
+                        </div>
+                        <div className={styles.big_card_cont}>
+                            <div className={styles.big_card}>C</div>
+                        </div>
+                        <div className={styles.big_card_cont}>
+                            <div className={styles.big_card}>D</div>
+                        </div>
 
-                <div className={styles.button_container}>
-                    <CustomButton type="primary" url="https://www.iattend.events/wedding/prueba-iattend?password=Vvx-R7F" icon={LuSparkles} label="Ver ejemplo" />
-                </div>
-
-
+                    </Carousel>
+                </div> */}
             </div>
         </div>
-    );
+    )
 };

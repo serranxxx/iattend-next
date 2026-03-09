@@ -7,6 +7,7 @@ import { LucideIcon } from "lucide-react";
 import { Calendar1, Crown, LockKeyhole, CircleChevronRight } from "lucide-react";
 import { CustomButton } from "@/components/CustomButton/CustomButton";
 import { LuSparkles } from "react-icons/lu";
+import { useScreenWidth } from "@/hooks/useScreenWidth";
 
 const side_events: string[] = [
     'https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/side_2.jpg',
@@ -45,11 +46,63 @@ const phrase: string[] = [
 
 export const SideEvents = () => {
 
+    const width = useScreenWidth();
+    const isLargeScreen = width >= 768;
+
     return (
         <div className={styles.main_cont}>
             <div className={styles.key_cont}>
 
+                <span className={styles.key_sub}>Los grandes eventos rara vez ocurren en un solo momento</span>
+                <span className={styles.key_title}>Porque tu evento nunca es solo un día I attend introduce: SideEvents</span>
+
+
+                <div className={styles.image_cont}>
+
+                    {
+                        isLargeScreen ?
+                            <img src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/side_u.jpg" alt="" style={{ objectFit: 'cover' }} />
+                            : <img src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/side_u_1.jpg" alt="" style={{ objectFit: 'cover' }} />
+                    }
+
+                </div>
+
+
+                <span className={styles.key_sub} style={{ opacity: 1 }}>Los Side Events te permiten crear <b>mini eventos</b> que pertenecen a un evento principal,
+                    pero que al mismo tiempo son:</span>
+
+                <div className={styles.col} style={{ marginTop: '24px', marginBottom: '-24px' }}>
+                    <span style={{ lineHeight: 1 }} className={styles.key_title}>Únicos</span>
+                    <span style={{ lineHeight: 1 }} className={styles.key_title}>Independientes</span>
+                    <span style={{ lineHeight: 1 }} className={styles.key_title}>Privados</span>
+
+                </div>
+
+
+                <div className={styles.image_cont}>
+
+                    <img src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/side_u_2.jpg" alt="" style={{ objectFit: 'cover' }} />
+
+                </div>
+
                 <div className={styles.col}>
+                    <span style={{ margin: 0, maxWidth: '100%' }} className={styles.key_sub}>Es su propia invitación.</span>
+                    <span style={{ margin: 0 }} className={styles.key_sub}>Su propia lista de invitados.</span>
+                    <span style={{ margin: 0 }} className={styles.key_sub}>Su propio control de asistencia.</span>
+                    <span style={{ margin: 0 }} className={styles.key_sub}>Su propia experiencia</span>
+                </div>
+
+
+
+
+                <div className={styles.button_container}>
+                    <a href="https://www.iattend.events/side-event/8?password=8UR-zYv" target="_blank" style={{ lineHeight: 1, fontSize:'18px', textDecoration:'underline' }} className={styles.key_title}>Ver ejemplo</a>
+                </div>
+
+
+
+
+                {/* <div className={styles.col}>
 
                     <span className={styles.key_title}>Porque tu evento nunca es solo un evento: <span style={{
                         color: 'var(--brand-color-500)', fontFamily: 'Dancing Script', fontSize: '36px', marginLeft: '4px', lineHeight: '1.4',
@@ -81,7 +134,6 @@ export const SideEvents = () => {
                                         className={styles.inv_black_space_ios}
                                     >
                                         <span style={{ color: "#FFF", fontFamily: 'Poppins' }}>5:15</span>
-                                        {/* <div className={`camera-ios`} /> */}
                                         <div>
                                         </div>
                                     </div>
@@ -132,7 +184,7 @@ export const SideEvents = () => {
                         <CustomButton type="primary" url="https://www.iattend.events/side-event/8?password=8UR-zYv" icon={LuSparkles} label="Ver ejemplo" />
                     </div>
 
-                </div>
+                </div> */}
 
 
             </div>

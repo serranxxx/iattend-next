@@ -1,74 +1,48 @@
 .hero_cont {
     width: 100%;
-    height: 100vmax;
-    min-height: 100vmax;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    flex-direction: column;
-    background-color: #CFBEE6;
     opacity: 1;
     padding: 24px;
     z-index: 3;
     position: relative;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    overflow: hidden;
-
+    background-image: linear-gradient(to top, #736E7C, #CCC5D7);
 }
 
-.hero_first_row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    align-self: stretch;
-}
 
 .hero_logo {
-    max-width: 100px;
-}
-
-.hero_menu {
-    background-color: #FFFFFF40;
-    backdrop-filter: blur(10px);
-    color: #FFF;
-    border: none !important;
+    max-width: 80px;
 }
 
 .hero_info_box {
+    font-family:'Poppins';
+    color: #FFF;
+    width: 100%;
+    height: 95vh;
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: space-between;
     flex-direction: column;
-    flex: 1;
-    gap: 12px;
-    font-family: 'Outfit', 'Poppins';
-    color: #FFF;
-    padding-bottom: 24px;
-
 }
 
 .hero_h1 {
-    font-size: 48px;
-    font-weight: 800;
-    line-height: 100%;
-    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
-    /* letter-spacing: 2px; */
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 120%;
+    max-width: 80%;
+    background: linear-gradient(to right, #fff, var(--brand-color-500));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .hero_h2 {
-    font-size: 24px;
-    font-weight: 400;
+    font-size: 22px;
+    font-weight: 200;
     line-height: 120%;
-    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
-    /* letter-spacing: 2px;
-
-    text-transform: uppercase; */
+    margin-top: 8px;
+    max-width: 80%;
 }
 
 .hero_cta {
-    font-size: 16px;
+    font-size: 12px;
     border-radius: 12px;
     font-weight: 600;
     height: 42px;
@@ -80,11 +54,11 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(to bottom, #20212B80, #FFFFFF);
+    background-image: linear-gradient(to top, #898295, #FFFFFF);
     left: 0;
     top: 0;
     z-index: -1;
-    mix-blend-mode: soft-light;
+    mix-blend-mode: multiply;
 }
 
 .animated {
@@ -100,20 +74,34 @@
 
 }
 
-
+.carousel_wrap {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+  }
+  
+  .carousel_wrap :global(.slick-slider),
+  .carousel_wrap :global(.slick-list),
+  .carousel_wrap :global(.slick-track) {
+    width: 100%;
+  }
+  
+  .carousel_wrap :global(.slick-slide) > div {
+    width: 100%;
+  }
 
 @media (min-width: 768px) {
     .hero_cont {
         width: 100%;
         height: 60vh;
-        min-height: 60vh;
+        min-height: 80vh;
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
         flex-direction: column;
         background-color: #CFBEE6;
         opacity: 1;
-        padding: 24px;
+        padding: 44px;
         z-index: 3;
         position: relative;
         background-size: cover;
@@ -124,7 +112,9 @@
     }
 
     .hero_info_box {
-        flex-direction: column-reverse;
+        align-items: flex-start;
+        align-self: stretch;
+        flex: 1;
     }
 
     .animated {
@@ -143,22 +133,18 @@
 
     .hero_h1 {
         font-size: 64px;
-        font-weight: 800;
-        line-height: 100%;
-        letter-spacing: 2px;
+        font-weight: 600;
+        line-height: 1.2;
     }
     
     .hero_h2 {
-        font-size: 36px;
+        font-size: 32px;
         font-weight: 200;
         line-height: 120%;
-        /* letter-spacing: 2px;
-    
-        text-transform: uppercase; */
     }
 
     .hero_logo {
-        max-width: 140px;
+        max-width: 100px;
     }
 
     .shadow {

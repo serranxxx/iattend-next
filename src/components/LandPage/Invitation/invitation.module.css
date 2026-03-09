@@ -11,30 +11,33 @@
     justify-content: flex-start;
     flex-direction: column;
     align-self: stretch;
-    padding: 36px 0px;
-    gap: 32px;
+    padding-top: 24px;
+    /* padding: 36px 0px; */
+    gap: 64px;
     padding-bottom: 0px;
     width: 100%;
     /* z-index: -1; */
 }
 
-.key_title,
-.key_sub {
-    padding: 0px 24px;
-    font-size: 32px;
-    font-weight: 800;
+.key_title {
+    font-size: 24px;
+    font-weight: 600;
     color: #20212B;
-    font-family: 'Outfit', 'Poppins';
+    font-family: 'Poppins';
     line-height: 110%;
     z-index: 2;
 }
 
-.key_sub {
-    font-size: 16px;
-    font-weight: 400;
-    opacity: 0.5;
-    line-height: 1.4;
+.row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0px 24px;
+    gap: 18px;
 }
+
+
 
 .col {
     display: flex;
@@ -130,7 +133,7 @@
     justify-content: flex-start;
     gap: 8px;
     align-self: stretch;
-   
+
 }
 
 .inv_device_main_container_ios {
@@ -291,6 +294,143 @@
     border-radius: 0px;
 }
 
+.cards_cont {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    max-width: 100vw;
+    overflow-y: hidden;
+    overflow-x: auto;
+    padding: 0px 24px;
+}
+
+
+.big_card,
+.big_card_cover,
+.big_card_map,
+.big_card_fam {
+    width: 80%;
+    min-width: 300px;
+    height: 420px;
+    background-color: #FFF;
+    border-radius: 24px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.big_card_map {
+    align-items: flex-end;
+}
+
+.key_sub,
+.key_sub_link,
+.key_sub_w,
+.key_sub_it {
+    font-family: 'Poppins';
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 120%;
+    width: 100%;
+    /* background: linear-gradient(to right, #21222B, var(--brand-color-500));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; */
+}
+
+.key_sub_link {
+    font-size: 16px;
+    text-decoration: underline;
+    width: auto;
+}
+
+.key_sub_link,
+.key_sub b,
+.key_sub_w b,
+.key_sub_it b {
+    background: linear-gradient(to left, var(--brand-color-300), #674abe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+}
+
+.key_sub_w b {
+    background: linear-gradient(to left, var(--brand-color-300), #a795dd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+}
+
+.image_cont,
+.image_cont_cover,
+.image_cont_fam,
+.image_cont_it {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+}
+
+.image_cont_cover,
+.image_cont_fam,
+.image_cont_it {
+    position: absolute;
+    bottom: -10px;
+    width: 160%;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.image_cont_fam {
+    width: 200%;
+    bottom: 0;
+}
+
+.image_cont_it {
+    width: 130%;
+    bottom: 0;
+}
+
+.image_cont img,
+.image_cont_cover img,
+.image_cont_fam img,
+.image_cont_it img {
+    width: 70%;
+}
+
+.shadow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, #20212B80, transparent);
+    left: 0;
+    top: 0;
+    z-index: 1;
+    mix-blend-mode: multiply;  
+}
+
+.shadow_inverse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to top, #20212B80, transparent);
+    left: 0;
+    top: 0;
+    z-index: 1;
+    mix-blend-mode: multiply;  
+}
+
+
+
+
+
+
 @media (min-width: 600px) {
     .regular_card_cover {
         transform: scale(0.55);
@@ -301,10 +441,17 @@
 
 @media (min-width: 768px) {
 
-    .key_cont {
+    .row {
         max-width: 1320px;
+    }
+
+    .key_cont {
+        /* max-width: 1320px; */
         display: flex;
+        align-items: center;
+        justify-content: center;
         width: 100%;
+        /* padding: 0px 64px; */
         /* z-index: -1; */
     }
 
@@ -319,12 +466,80 @@
     }
 
     .key_title {
-        font-size: 38px;
+        font-size: 36px;
 
     }
 
-    .key_sub {
-        font-size: 24px;
+    .cards_cont {
+        padding: 0px 92px;
+    }
+
+    .cards_cont {
+        gap: 24px;
+    }
+
+    .big_card,
+    .big_card_map,
+    .big_card_cover,
+    .big_card_fam {
+        width: 100%;
+        min-width: 850px;
+        height: 650px;
+
+        gap: 16px;
+        padding: 36px;
+        position: relative;
+    }
+
+    .big_card_cover {
+        align-items: center;
+    }
+
+    .big_card_cover .key_sub {
+        max-width: 50%;
+    }
+
+    .big_card_cover .key_sub_it {
+        max-width: 40%;
+    }
+
+    .image_cont_cover {
+        width: 100%;
+        left: 75%;
+    }
+
+    .image_cont_it {
+        width: 85%;
+        left: 70%;
+        bottom: 0;
+    }
+
+    .image_cont_fam {
+        z-index: 0;
+        left: 50%;
+        transform: translate(-50%);
+        bottom: -30%
+    }
+
+    .image_cont img {
+        max-width: 40%;
+        
+    }
+
+    .key_sub_link {
+        font-size: 18px;
+        text-decoration: underline;
+        width: auto;
+    }
+    
+    .key_sub,
+    .key_sub_w,
+    .key_sub_it {
+        font-size: 28px;
+        padding: 0;
+        line-height: 1.2;
+        max-width: 85%;
+        z-index: 2;
     }
 
     .regular_card_cover {
@@ -379,10 +594,11 @@
         transform: scale(1);
     }
 
+
 }
 
 
-@media (min-width: 1000px) { 
+@media (min-width: 1000px) {
 
     .features_grid {
 
