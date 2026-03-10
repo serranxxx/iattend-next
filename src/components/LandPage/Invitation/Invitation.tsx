@@ -76,9 +76,10 @@ export const InvitationAbout = () => {
                     </div>
 
                     <div
-                        className={styles.big_card}
+                        className={styles.big_card_map}
                         style={{ flexDirection: 'row' }}
                     >
+                        <div className={styles.shadow_inverse}></div>
                         <img
                             style={{
                                 right: 0,
@@ -89,13 +90,13 @@ export const InvitationAbout = () => {
                                 height: '100%',
                                 objectFit: 'cover'
                             }}
-                            src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/gifts_u.jpg"
+                            src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/gift_u.jpg"
                             alt=""
                         />
 
                         <span
                             className={styles.key_sub_w}
-                            style={{ zIndex: 2 }}
+                            style={{ color: '#FFF', zIndex: 2 }}
                         >
                             <b>Mesa de regalos digital</b> Integrada con hasta tres opciones como enlaces externos
                         </span>

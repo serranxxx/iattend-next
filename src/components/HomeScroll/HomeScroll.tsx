@@ -87,19 +87,25 @@ export const HomeScroll = () => {
     };
     return (
         <div className={styles.key_cont}>
-            <span className={styles.key_title}>Todo bajo control el día de tu evento</span>
 
-            <div className={styles.card_cont}>
-                <div className={styles.big_card}>
-                    <div className={styles.col}>
-                        <span className={styles.sub_title}>Conoce los pases digitales de I attend.</span>
-                        <span className={styles.sub_text}>Cada invitado recibe un pase digital con su información personalizada.</span>
-                    </div>
-                    <div className={styles.image_cont}>
-                        <img src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/ticket_u.jpg" alt="" />
-                    </div>
+            <div className={styles.big_card}>
+
+
+
+                <div className={styles.image_cont}>
+                    <img src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/ticket_u.jpg" alt="" />
                 </div>
+
+                <span className={styles.sub_text}>Cada que uno de tus invitados confirma recibe un pase digital con su información personalizada.</span>
+
+
+                <div className={styles.image_cont}>
+                    <img src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/tick_u.jpg" alt="" />
+                </div>
+
+                <span className={styles.sub_title}>Todo bajo control el día de tu evento. Conoce los pases digitales de I attend.</span>
             </div>
+
 
             {/* <div ref={scrollRef} onScroll={handleScroll} className={`${styles.cover_samples_container} scroll-invitation`}>
 

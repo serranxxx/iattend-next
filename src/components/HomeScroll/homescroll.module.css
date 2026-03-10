@@ -39,7 +39,7 @@
 
 .sub_title {
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 700;
     color: #20212B;
     font-family: 'Poppins';
     line-height: 130%;
@@ -48,16 +48,17 @@
     -webkit-text-fill-color: transparent;
     font-weight: 600;
     text-align: center;
-    max-width: 100%;
+    max-width: 80%;
 }
 
 .sub_text {
     font-size: 16px;
     color: #20212B;
     font-family: 'Poppins';
-    line-height: 140%;
+    line-height: 180%;
     font-weight: 400;
     text-align: center;
+    max-width: 80%;
 }
 
 .col {
@@ -67,6 +68,7 @@
     justify-content: flex-start;
     flex-direction: column;
     gap: 12px;
+    margin: 24px 0px;
 }
 
 .card_cont {
@@ -80,13 +82,13 @@
 
 .big_card {
     width: 100%;
-    border-radius: 24px;
-    background-color: #FFF;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column-reverse;
-    padding: 36px;
+    gap: 24px;
+    background-color: #FFF;
+    padding: 24px;
 }
 
 .image_cont {
@@ -99,7 +101,7 @@
 }
 
 .image_cont img {
-    width: 100%;
+    width: 80%;
 }
 
 .inv_device_main_container_ios {
@@ -299,14 +301,11 @@
     }
 
     .big_card {
-        width: 90%;
-        border-radius: 24px;
+        width: 100%;
         background-color: #FFF;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: row;
         padding: 64px;
+        gap: 44px;
+        
     }
 
     .col {
@@ -315,13 +314,18 @@
     }
 
     .sub_title {
-        font-size: 42px;
-        text-align: left;
+        font-size: 38px;
+        text-align: center;
+        max-width: 40%;
+        font-weight: 600;
+
     }
     
     .sub_text {
-        font-size: 32px;
-        text-align: left;
+        font-size: 24px;
+        text-align: center;
+        max-width: 40%;
+        line-height: 1.8;
     }
 
     .image_cont {
@@ -330,7 +334,8 @@
     }
     
     .image_cont img {
-        width: 80%;
+        width: 60%;
+        max-width: 700px;
     }
 
     .key_cont {
