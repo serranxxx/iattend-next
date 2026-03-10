@@ -51,6 +51,17 @@
     max-width: 80%;
 }
 
+.sub_title_black {
+    font-size: 24px;
+    color: #20212B;
+    font-family: 'Poppins';
+    line-height: 130%;
+    font-weight: 500;
+    text-align: center;
+    max-width: 80%;
+    margin-bottom: -16px;
+}
+
 .sub_text {
     font-size: 16px;
     color: #20212B;
@@ -316,15 +327,30 @@
     .sub_title {
         font-size: 38px;
         text-align: center;
-        max-width: 40%;
+        max-width: 70%;
+        max-width: 700px;
         font-weight: 600;
 
+    }
+
+    .sub_title_black {
+        font-size: 36px;
+        color: #20212B;
+        font-family: 'Poppins';
+        line-height: 130%;
+        font-weight: 500;
+        text-align: center;
+        max-width: 70%;
+        max-width: 700px;
+        margin-bottom: -24px;
     }
     
     .sub_text {
         font-size: 24px;
+        font-weight: 400;
         text-align: center;
-        max-width: 40%;
+        max-width: 70%;
+        max-width: 700px;
         line-height: 1.8;
     }
 

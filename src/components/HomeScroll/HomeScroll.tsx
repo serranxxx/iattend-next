@@ -96,9 +96,11 @@ export const HomeScroll = () => {
                     <img src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/ticket_u.jpg" alt="" />
                 </div>
 
-                <span className={styles.sub_text}>Cada que uno de tus invitados confirma recibe un pase digital con su información personalizada.</span>
 
 
+                <span className={styles.sub_text}>Cuando tus invitados confirman, obtienen su pase digital con toda la información del evento. <b>Todo listo para una entrada rápida y sin complicaciones.</b></span>
+
+                <span className={styles.sub_title_black}>Todo claro para todos tus invitados.</span>
                 <div className={styles.image_cont}>
                     <img src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/tick_u.jpg" alt="" />
                 </div>
