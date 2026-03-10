@@ -5,11 +5,16 @@ import React from "react";
 import styles from "./hero.module.css";
 import Image from "next/image";
 import { useScreenWidth } from "@/hooks/useScreenWidth";
+import { CustomButton } from "@/components/CustomButton/CustomButton";
+import { LucideArrowUpRight } from "lucide-react";
 
 export const HeroSection = () => {
 
   const width = useScreenWidth();
   const isLargeScreen = width >= 768;
+  const message = encodeURIComponent(
+    "¡Hola! Me interesan los servicios de I attend"
+  );
 
   return (
     // <div className={styles.carousel_wrap}>
@@ -35,10 +40,16 @@ export const HeroSection = () => {
       <div className={styles.shadow}></div>
 
       <div className={styles.hero_info_box}>
-        <img className={styles.hero_logo} src="/assets/images/blanco.png" alt="i attend" />
+        {
+          isLargeScreen ?
+            <img className={styles.hero_logo} src="/assets/images/blanco.png" alt="i attend" />
+            : <img className={styles.hero_logo} src="/assets/images/morado.png" alt="i attend" />
+        }
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', flexDirection: 'column' }}>
           <span className={styles.hero_h1}>Organiza a tus invitados sin estrés</span>
-          <span className={styles.hero_h2}>I attend te acompaña durante todo el proceso</span>
+          <span style={{ marginBottom: '12px' }} className={styles.hero_h2}>I attend te acompaña durante todo el proceso</span>
+          <CustomButton type="secondary" url={`https://wa.me/6145338500?text=${message}`} icon={LucideArrowUpRight} label="PLATICA CON NOSOTROS" />
+
         </div>
       </div>
 

@@ -6,6 +6,7 @@ import { Button } from 'antd'
 import { LuArrowUpRight } from 'react-icons/lu'
 import Link from 'next/link'
 import { CustomButton } from '@/components/CustomButton/CustomButton'
+import Image from 'next/image'
 
 export default function Video() {
 
@@ -37,32 +38,39 @@ export default function Video() {
                     style={{ width: "100%", borderRadius: 0, position: 'absolute', border: 'none' }}
                 />
                 <div className={styles.shadow}>
-                    {/* <div style={{
-                    display:'flex',alignItems:'flex-start',justifyContent:'flex-start',flexDirection:'column',gap:'16px'
-                }}> */}
-                    <span className={styles.key_title}>Todo tu evento, bajo control</span>
-                    {/* <span className={styles.cta_text}>
-                        Crea tu evento, gestiona invitados y controla la asistencia desde un solo lugar. Sin complicaciones, sin herramientas extra.
-                    </span>
-                </div> */}
-
-                    <div style={{
-                        display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', flexDirection: 'column', gap: '24px'
-                    }}>
-
-                        <span className={styles.cta_text}>
-                            Crea tu evento, gestiona invitados y controla la asistencia desde un solo lugar. Sin complicaciones, sin herramientas extra.
-                        </span>
-                        <CustomButton type="secondary" url={`https://wa.me/6145338500?text=${message}`} icon={LuArrowUpRight} label="PLATICA CON NOSOTROS" />
-                    </div>
-
-
+                    <Image src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/bag_u.jpg" style={{ objectFit: 'cover' }} fill alt="" />
                 </div>
 
-                {/* <img className={styles.loop_img} src="/assets/images/espiral.svg" alt="" /> */}
+            </div>
 
+            <div className={styles.col}>
+                <span className={styles.key_title}>Todo tu evento, bajo control</span>
+
+                <div style={{
+                    display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', flexDirection: 'column', gap: '12px'
+                }}>
+
+                    <span className={styles.cta_text}>
+                        Crea tu evento, gestiona invitados y controla la asistencia desde un solo lugar. Sin complicaciones, sin herramientas extra.
+                    </span>
+                    <CustomButton type="secondary" url={`https://wa.me/6145338500?text=${message}`} icon={LuArrowUpRight} label="PLATICA CON NOSOTROS" />
+                </div>
             </div>
         </div>
 
+
+
     )
 }
+
+{/* <span className={styles.key_title}>Todo tu evento, bajo control</span>
+
+<div style={{
+    display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', flexDirection: 'column', gap: '24px'
+}}>
+
+    <span className={styles.cta_text}>
+        Crea tu evento, gestiona invitados y controla la asistencia desde un solo lugar. Sin complicaciones, sin herramientas extra.
+    </span>
+    <CustomButton type="secondary" url={`https://wa.me/6145338500?text=${message}`} icon={LuArrowUpRight} label="PLATICA CON NOSOTROS" />
+</div> */}

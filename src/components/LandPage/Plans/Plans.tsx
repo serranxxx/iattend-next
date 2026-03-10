@@ -5,6 +5,7 @@ import styles from "./plans.module.css";
 import {
   LuArmchair,
   LuArrowRight,
+  LuArrowUpRight,
   LuClipboardList,
   LuLockKeyhole,
   LuLockOpen,
@@ -18,6 +19,7 @@ import {
   LuTicket,
 } from "react-icons/lu";
 import { FaStar } from "react-icons/fa";
+import { useScreenWidth } from "@/hooks/useScreenWidth";
 
 const cards = [
   {
@@ -130,12 +132,22 @@ const plan_lite = [
   },
 ];
 
+const message = encodeURIComponent(
+  "¡Hola! Me interesan los servicios de I attend"
+);
+
 export const Plans = () => {
   const [active, setActive] = useState(1);
+  const width = useScreenWidth();
+  const isLargeScreen = width >= 768;
+
   return (
     <div className={styles.main_cont}>
       <div className={styles.key_cont}>
-        <span className={styles.key_title}>Elige como comenzar</span>
+        <div className={styles.col_text}>
+          <span className={styles.key_title}>Elige como comenzar</span>
+          <span className={styles.key_sub}>Conoce el plan que mejor se adapte a tu evento y empieza a crear, organizar y compartir tu invitación digital en minutos.</span>
+        </div>
 
         <div className={styles.plans_cont}>
           <div
@@ -209,15 +221,11 @@ export const Plans = () => {
                 La experiencia completa: invita, gestiona y automatiza.
               </span>
 
-              <div className={styles.price_cont} style={{ color: "#FDFCFD" }}>
-                {/* <span style={{
-                                textDecoration: 'line-through',
-                                fontSize: '20px', fontWeight: '500', opacity: '0.5'
-                            }}>$3,999</span> */}
+              <div className={`${styles.price_cont} ${styles.gradient_price}`} style={{ color: "#FDFCFD" }}>
                 <span>$3,499</span>
               </div>
               <div style={{ fontSize: active === 1 ? "12px" : "10px" }} className={styles.plan_info_cont}>
-                {plan_pro.map((i, index) => (
+                {plan_pro.slice(0, active === 1 || isLargeScreen ? 12 : 5).map((i, index) => (
                   <div key={index} className={styles.plan_item} style={{ borderColor: "#20212B40" }}>
                     <i.icon style={{ color: "#E0DAF4" }} />
                     <span>{i.text}</span>
@@ -275,7 +283,7 @@ export const Plans = () => {
                 <span>$2,499</span>
               </div>
               <div style={{ fontSize: active === 2 ? "12px" : "10px" }} className={styles.plan_info_cont}>
-                {plan_lite.map((i, index) => (
+                {plan_lite.slice(0, active === 2 || isLargeScreen ? 12 : 5).map((i, index) => (
                   <div key={index} className={styles.plan_item} style={{ borderColor: "#BDB4D040", color: "#706787" }}>
                     <i.icon />
                     <span>{i.text}</span>
@@ -286,6 +294,9 @@ export const Plans = () => {
           </div>
         </div>
       </div>
+
+      {/* <CustomButton url={`https://wa.me/6145338500?text=${message}`} icon={LuArrowUpRight} label="PLATICA CON NOSOTROS" /> */}
+
     </div>
   );
 };

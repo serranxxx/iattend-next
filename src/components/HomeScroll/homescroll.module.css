@@ -20,9 +20,10 @@
     flex-direction: column;
     align-self: stretch;
     padding: 36px 0px;
-    gap: 32px;
+    gap: 36px;
     padding-bottom: 0px;
     width: 100%;
+
     /* z-index: -1; */
 }
 
@@ -31,9 +32,74 @@
     font-size: 24px;
     font-weight: 600;
     color: #20212B;
-    font-family:  'Outfit', 'Poppins';
+    font-family: 'Poppins';
     line-height: 110%;
     z-index: 2;
+}
+
+.sub_title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #20212B;
+    font-family: 'Poppins';
+    line-height: 130%;
+    background: linear-gradient(to left, var(--brand-color-300), #674abe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+    text-align: center;
+    max-width: 100%;
+}
+
+.sub_text {
+    font-size: 16px;
+    color: #20212B;
+    font-family: 'Poppins';
+    line-height: 140%;
+    font-weight: 400;
+    text-align: center;
+}
+
+.col {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.card_cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    padding: 0px 24px;
+    /* padding: 0px 64px; */
+}
+
+.big_card {
+    width: 100%;
+    border-radius: 24px;
+    background-color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column-reverse;
+    padding: 36px;
+}
+
+.image_cont {
+    /* flex: 2; */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.image_cont img {
+    width: 100%;
 }
 
 .inv_device_main_container_ios {
@@ -224,7 +290,55 @@
     .key_title {
         font-size: 38px;
         max-width: 1320px;
-    width: 100%;
+        width: 100%;
 
     }
+
+    .card_cont {
+        padding: 0px 64px;
+    }
+
+    .big_card {
+        width: 90%;
+        border-radius: 24px;
+        background-color: #FFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        padding: 64px;
+    }
+
+    .col {
+        flex: 2;
+        gap: 16px;
+    }
+
+    .sub_title {
+        font-size: 42px;
+        text-align: left;
+    }
+    
+    .sub_text {
+        font-size: 32px;
+        text-align: left;
+    }
+
+    .image_cont {
+        flex: 3;
+        
+    }
+    
+    .image_cont img {
+        width: 80%;
+    }
+
+    .key_cont {
+
+        gap: 64px;
+
+    
+        /* z-index: -1; */
+    }
+    
 }

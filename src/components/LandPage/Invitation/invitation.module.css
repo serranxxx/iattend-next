@@ -12,6 +12,7 @@
     flex-direction: column;
     align-self: stretch;
     padding-top: 24px;
+    position: relative;
     /* padding: 36px 0px; */
     gap: 64px;
     padding-bottom: 0px;
@@ -426,6 +427,30 @@
     mix-blend-mode: multiply;  
 }
 
+.button_frame {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 99;
+    padding-right: 44px;
+    display: none;
+    margin-left: -24px;
+}
+
+.scroll_button {
+    /* position: absolute;
+    z-index: 3;
+    top: 50%;
+    transform: translate(-50%); */
+    border-radius: 90px;
+    height: 50px;
+    min-width: 50px;
+    background-color: #FFF;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
 
 
 
@@ -440,6 +465,10 @@
 
 
 @media (min-width: 768px) {
+
+    .button_frame {
+        display: flex;
+    }
 
     .row {
         max-width: 1320px;
@@ -472,11 +501,9 @@
 
     .cards_cont {
         padding: 0px 92px;
-    }
-
-    .cards_cont {
         gap: 24px;
     }
+
 
     .big_card,
     .big_card_map,
@@ -527,7 +554,7 @@
     }
 
     .key_sub_link {
-        font-size: 18px;
+        font-size: 22px;
         text-decoration: underline;
         width: auto;
     }

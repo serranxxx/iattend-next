@@ -2,46 +2,43 @@
 
 import React, { useState } from "react";
 import styles from "./side-events.module.css";
-import Image from "next/image";
 import { LucideIcon } from "lucide-react";
 import { Calendar1, Crown, LockKeyhole, CircleChevronRight } from "lucide-react";
-import { CustomButton } from "@/components/CustomButton/CustomButton";
-import { LuSparkles } from "react-icons/lu";
 import { useScreenWidth } from "@/hooks/useScreenWidth";
 
-const side_events: string[] = [
-    'https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/side_2.jpg',
-    'https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/side_3.jpg',
-    'https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/side_1.jpg',
-    'https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/side_4.jpg'
-]
+// const side_events: string[] = [
+//     'https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/side_2.jpg',
+//     'https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/side_3.jpg',
+//     'https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/side_1.jpg',
+//     'https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/side_4.jpg'
+// ]
 
-const cards: {
-    text: string,
-    icon: LucideIcon
-}[] = [
-        {
-            text: 'Únicos',
-            icon: Calendar1
-        },
-        {
-            text: 'Independientes',
-            icon: Crown
-        },
-        {
-            text: 'Privados',
-            icon: LockKeyhole
-        }
+// const cards: {
+//     text: string,
+//     icon: LucideIcon
+// }[] = [
+//         {
+//             text: 'Únicos',
+//             icon: Calendar1
+//         },
+//         {
+//             text: 'Independientes',
+//             icon: Crown
+//         },
+//         {
+//             text: 'Privados',
+//             icon: LockKeyhole
+//         }
 
-    ]
+//     ]
 
 
-const phrase: string[] = [
-    'Es su propia invitación.',
-    'Su propia lista de invitados.',
-    'Su propio control de asistencia.',
-    'Su propia experiencia.'
-]
+// const phrase: string[] = [
+//     'Es su propia invitación.',
+//     'Su propia lista de invitados.',
+//     'Su propio control de asistencia.',
+//     'Su propia experiencia.'
+// ]
 
 
 export const SideEvents = () => {
@@ -96,7 +93,7 @@ export const SideEvents = () => {
 
 
                 <div className={styles.button_container}>
-                    <a href="https://www.iattend.events/side-event/8?password=8UR-zYv" target="_blank" style={{ lineHeight: 1, fontSize:'18px', textDecoration:'underline' }} className={styles.key_title}>Ver ejemplo</a>
+                    <a href="https://www.iattend.events/side-event/8?password=8UR-zYv" target="_blank" style={{ lineHeight: 1, fontSize:'20px', textDecoration:'underline' }} className={styles.key_title}>Ver ejemplo</a>
                 </div>
 
 

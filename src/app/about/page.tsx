@@ -73,16 +73,16 @@ export default function LandPage() {
       <HomeScroll />
       <WorkFlow></WorkFlow>
       {/* <Shipments /> */}
-      <IdealCustomer></IdealCustomer>
+      {/* <IdealCustomer></IdealCustomer> */}
       <KeyFeatures></KeyFeatures>
 
-      <Reviews></Reviews>
+      {/* <Reviews></Reviews> */}
 
-
+      <Plans></Plans>
 
       <Video></Video>
 
-      <Plans></Plans>
+      
       <FAQs></FAQs>
       {/* <CTA></CTA> */}
       <FooterLand></FooterLand>

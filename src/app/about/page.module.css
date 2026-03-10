@@ -4,7 +4,7 @@
     justify-content: flex-start;
     flex-direction: column;
     width: 100%;
-    max-height: 100vh;
+    /* max-height: 100vh; */
     overflow-y: auto;
     overflow-x: hidden;
     background-image: linear-gradient(#F9F9F9 80%, #FFF);
@@ -14,7 +14,7 @@
 @media (min-width: 768px) {
 
     .main_container_land {
-        gap: 44px;
+        gap: 84px;
     }
     
 }

@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./key.module.css";
 import { Button, Drawer } from "antd";
 import Image from "next/image";
 import { LuArrowUpRight } from "react-icons/lu";
 import Link from "next/link";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 type Feature = {
   label: React.ReactNode | null;
@@ -141,14 +142,249 @@ export const KeyFeatures = () => {
   const [open, setOpen] = useState(false);
   const [currentItem, setCurrentItem] = useState<any>(null);
 
+
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({
+        left: -800,
+        behavior: "smooth"
+      });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({
+        left: 800,
+        behavior: "smooth"
+      });
+    }
+  };
+
+
   return (
     <div className={styles.main_cont}>
-      <section className={styles.key_cont}>
+      <section className={styles.key_cont} style={{ position: 'relative' }}>
         <span className={styles.key_title}>Todo fluye cuando tienes el control</span>
-        <div className={styles.key_main_cont}>
+
+
+        <div className={styles.col}>
+          <span className={styles.key_title_sec}>Crea tu lista de invitados y recibe confirmaciones al instante</span>
+          <span className={styles.key_title_third}>Administra fácilmente a tus invitados, envía su invitación y recibe sus confirmaciones en tiempo real desde un solo lugar.</span>
+          <div className={styles.image_cont}>
+            <img src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/list_u_1.jpg" alt="" />
+          </div>
+        </div>
+
+        <span className={styles.key_sub}>Organizar a tus invitados nunca fue tan fácil</span>
+
+
+        <div
+
+          ref={scrollRef}
+          className={`${styles.cards_cont} scroll-invitation`}
+        >
+
+
+          <div className={styles.card_col}>
+            <div
+              className={styles.big_card}
+              style={{ flexDirection: 'row' }}
+            >
+              <img
+                style={{
+                  right: 0,
+                  top: 0,
+                  zIndex: 0,
+                  position: 'absolute',
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+                src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/list_u_2.jpg"
+                alt=""
+              />
+            </div>
+            <span>
+              <b>Organiza a tus invitados fácilmente</b> Crea tu lista de invitados, clasifícalos como prefieras y envía la invitación solo a las personas que tú decidas.
+            </span>
+          </div>
+
+          <div className={styles.card_col}>
+            <div
+              className={styles.big_card}
+              style={{ flexDirection: 'row' }}
+            >
+              <img
+                style={{
+                  right: 0,
+                  top: 0,
+                  zIndex: 0,
+                  position: 'absolute',
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+                src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/lap_u.jpg"
+                alt=""
+              />
+            </div>
+            <span>
+              <b>Clasifica a tus invitados</b> Organiza tu lista de invitados en diferentes categorías o tiers. Con I attend puedes dar un trato especial a cada grupo y gestionar tu evento con mayor control.
+            </span>
+          </div>
+
+          <div className={styles.card_col}>
+            <div
+              className={styles.big_card}
+              style={{ flexDirection: 'row' }}
+            >
+              <img
+                style={{
+                  right: 0,
+                  top: 0,
+                  zIndex: 0,
+                  position: 'absolute',
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+                src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/download_u.jpg"
+                alt=""
+              />
+            </div>
+            <span>
+              <b>Descarga tu información cuando la necesites</b> Exporta tus listas y datos en formato Excel para consultarlos, compartirlos o analizarlos fácilmente en cualquier momento.
+            </span>
+          </div>
+
+          <div className={styles.card_col}>
+            <div
+              className={styles.big_card}
+              style={{ flexDirection: 'row' }}
+            >
+              <img
+                style={{
+                  right: 0,
+                  top: 0,
+                  zIndex: 0,
+                  position: 'absolute',
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+                src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/whats_u.jpg"
+                alt=""
+              />
+            </div>
+            <span>
+              <b>Envía tus invitaciones automáticamente por WhatsApp</b> Haz que tus invitados reciban su invitación de forma automática a través de WhatsApp. Con I attend, los envíos son más organizados y seguros para evitar bloqueos.
+            </span>
+          </div>
+
+          <div className={styles.card_col}>
+            <div
+              className={styles.big_card}
+              style={{ flexDirection: 'row' }}
+            >
+              <img
+                style={{
+                  right: 0,
+                  top: 0,
+                  zIndex: 0,
+                  position: 'absolute',
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+                src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/noti_u.jpg"
+                alt=""
+              />
+            </div>
+            <span>
+              <b>Recibe confirmaciones al instante</b> Cada vez que un invitado confirme su asistencia, I attend te envía una notificación para que siempre sepas quién asistirá a tu evento.
+            </span>
+          </div>
+
+          <div className={styles.card_col}>
+            <div
+              className={styles.big_card}
+              style={{ flexDirection: 'row' }}
+            >
+              <img
+                style={{
+                  right: 0,
+                  top: 0,
+                  zIndex: 0,
+                  position: 'absolute',
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+                src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/cont_u.jpg"
+                alt=""
+              />
+            </div>
+            <span>
+              <b>Control de tus pases</b> Administra y gestiona fácilmente los pases digitales de tus invitados para mantener el orden y control durante tu evento.
+            </span>
+          </div>
+
+          <div className={styles.card_col}>
+            <div
+              className={styles.big_card}
+              style={{ flexDirection: 'row' }}
+            >
+              <img
+                style={{
+                  right: 0,
+                  top: 0,
+                  zIndex: 0,
+                  position: 'absolute',
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+                src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/tables_u.jpg"
+                alt=""
+              />
+            </div>
+            <span>
+              <b>Planifica el acomodo de tus mesas</b> Organiza a tus invitados fácilmente asignándolos a diferentes mesas y mantén todo listo para el día de tu evento.
+            </span>
+          </div>
+
+
+
+
+
+
+        </div>
+
+        <div className={styles.button_frame} style={{ bottom: '20%' }}>
+          <Button
+            onClick={scrollLeft}
+            icon={<ArrowLeft size={16} />}
+            style={{ left: '5%' }}
+            className={styles.scroll_button}
+          />
+
+          <Button
+            onClick={scrollRight}
+            icon={<ArrowRight size={16} />}
+            style={{ right: '0%' }}
+            className={styles.scroll_button}
+          />
+        </div>
+
+
+
+        {/* <div className={styles.key_main_cont}>
           {FEATURES.map((feature, colIndex) => (
             <div key={colIndex} className={styles.key_item}>
-              <img src={`${feature.image}`} alt=""  style={{ position: "absolute", objectFit: "cover", width:'100%', height:'100%', left:0, top:0 }} />
+              <img src={`${feature.image}`} alt="" style={{ position: "absolute", objectFit: "cover", width: '100%', height: '100%', left: 0, top: 0 }} />
               <div className={styles.shadow}></div>
               <span className={styles.key_label}>{feature.label}</span>
               <div style={{ position: "absolute", top: "8px", right: "8px" }}>
@@ -160,7 +396,7 @@ export const KeyFeatures = () => {
                       setCurrentItem(feature.seed);
                     }}
                     className={styles.key_button}
-                    //
+                  //
                   ></Button>
                 </div>
               </div>
@@ -176,7 +412,7 @@ export const KeyFeatures = () => {
             // </div>
           ))}
           <img className={styles.loop_img} src="/assets/images/espiral.svg" alt="" />
-        </div>
+        </div> */}
         {/* <div className={styles.key_grid}>
           {FEAT.map((feature, index) => (
             <div key={index} className={styles.grid_card}>

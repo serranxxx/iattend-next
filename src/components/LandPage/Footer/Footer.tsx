@@ -21,8 +21,9 @@ export const FooterLand = ({ invitation, color }: Props) => {
   const secondary = color ? color : (invitation?.generals.colors.secondary ?? "#CFBEE6")
   return (
     <div className={styles.main_cont} style={{
-      background: (color || invitation )? `linear-gradient(to top, ${darker(secondary, 0.5)} 0%, ${darker(secondary,1)} 100%)` : 'linear-gradient(to bottom, #CFBEE680 0%, #CFBEE6 100%)',
+      background:  'linear-gradient(to top, #8f77af 0%, #CCC5D7 100%)',
     }}>
+      
       <div className={styles.footer_cont}>
         <div className={styles.footer_main_col}>
           <Link href="/about">

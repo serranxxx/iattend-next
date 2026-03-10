@@ -1,19 +1,21 @@
 import React from "react";
 import styles from "./work.module.css";
-import { Button } from "antd";
-import { FaBars } from "react-icons/fa";
 import Image from "next/image";
-import { PiFlowArrowBold } from "react-icons/pi";
+
 
 export const WorkFlow = () => {
   return (
     <div className={styles.main_cont}>
       <div className={styles.key_cont}>
 
+        <Image src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/bg_u.png" style={{objectFit:'cover'}} fill alt="" />
+
         <span className={styles.key_title}>Paso a paso, sin complicarte</span>
+        <img className={styles.hero_logo} src="/assets/images/blanco.png" alt="i attend" />
+        
 
 
-        <div className={`scroll-invitation ${styles.flow_container}`}>
+        {/* <div className={`scroll-invitation ${styles.flow_container}`}>
           <div className={styles.flow_card} >
             <img loading="lazy" src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/flow_1.jpg" alt="" style={{ objectFit: 'cover', width:'100%', height:'100%',position:'absolute',left:0, top:0 }} />
             <div className={styles.shadow}></div>
@@ -48,8 +50,8 @@ export const WorkFlow = () => {
             <span style={{ color: "#CFBEE6" }}>Controla</span> confirmaciones y acomodo
           </span>
           <span className={styles.flow_sub}>Visualiza respuestas en tiempo real y organiza a tus invitados con facilidad.</span>
+        </div> 
         </div> */}
-        </div>
       </div>
     </div>
   );
