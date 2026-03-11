@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import styles from "./invitation.module.css";
 import { Button } from "antd";
+import Image from "next/image";
 
 export const InvitationAbout = () => {
 
@@ -58,7 +59,7 @@ export const InvitationAbout = () => {
                         </span>
 
                         <div className={styles.image_cont}>
-                            <img src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/phones_u.jpg" alt="" />
+                            <Image style={{ inset: 'auto' }} fill src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/phones_u.jpg" alt="" />
                         </div>
                     </div>
 
@@ -71,7 +72,7 @@ export const InvitationAbout = () => {
                         </span>
 
                         <div className={styles.image_cont_cover}>
-                            <img src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/portada_u_1.png" alt="" />
+                            <Image fill style={{ }} src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/portada_u_1.png" alt="" />
                         </div>
                     </div>
 
@@ -80,7 +81,8 @@ export const InvitationAbout = () => {
                         style={{ flexDirection: 'row' }}
                     >
                         <div className={styles.shadow_inverse}></div>
-                        <img
+                        <Image
+                            fill
                             style={{
                                 right: 0,
                                 top: 0,
@@ -108,7 +110,8 @@ export const InvitationAbout = () => {
                     >
                         <div className={styles.shadow_inverse}></div>
 
-                        <img
+                        <Image
+                            fill
                             style={{
                                 right: 0,
                                 top: 0,
@@ -139,7 +142,7 @@ export const InvitationAbout = () => {
                         </span>
 
                         <div className={styles.image_cont_it}>
-                            <img src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/itinerary_u.jpg" alt="" />
+                            <Image style={{ inset: 'auto', }} fill src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/itinerary_u.jpg" alt="" />
                         </div>
                     </div>
 
@@ -152,7 +155,7 @@ export const InvitationAbout = () => {
                         </span>
 
                         <div className={styles.image_cont_fam}>
-                            <img src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/family_u.jpg" alt="" />
+                            <Image fill src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/family_u.jpg" alt="" />
                         </div>
                     </div>
 
@@ -162,7 +165,8 @@ export const InvitationAbout = () => {
                     >
                         <div className={styles.shadow}></div>
 
-                        <img
+                        <Image
+                            fill
                             style={{
                                 right: 0,
                                 top: 0,
@@ -190,7 +194,8 @@ export const InvitationAbout = () => {
                     >
                         <div className={styles.shadow}></div>
 
-                        <img
+                        <Image
+                            fill
                             style={{
                                 right: 0,
                                 top: 0,
