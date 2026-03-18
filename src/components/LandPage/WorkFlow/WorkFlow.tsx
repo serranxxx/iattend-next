@@ -8,7 +8,7 @@ export const WorkFlow = () => {
     <div className={styles.main_cont}>
       <div className={styles.key_cont}>
 
-        <Image src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/bg_u.png" style={{objectFit:'cover'}} fill alt="" />
+        <Image src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/bgg_u.png" style={{objectFit:'cover'}} fill alt="" />
 
         <span className={styles.key_title}>Paso a paso, sin complicarte</span>
         <img className={styles.hero_logo} src="/assets/images/blanco.png" alt="i attend" />

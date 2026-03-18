@@ -33,7 +33,7 @@ export const InvitationAbout = () => {
             <div className={styles.key_cont}>
                 <div className={styles.row}>
                     <span className={styles.key_title}>
-                        Una experiencia completa.
+                        Tu invitación digital sin limitaciones
                     </span>
 
                     <a

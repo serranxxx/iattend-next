@@ -46,8 +46,8 @@ export const HeroSection = () => {
             : <img className={styles.hero_logo} src="/assets/images/morado.png" alt="i attend" />
         }
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', flexDirection: 'column' }}>
-          <span className={styles.hero_h1}>Organiza a tus invitados sin estrés</span>
-          <span style={{ marginBottom: '12px' }} className={styles.hero_h2}>I attend te acompaña durante todo el proceso</span>
+          <span className={styles.hero_h1}>Crea, diseña y comparte invitaciones digitales sin complicaciones</span>
+          <span style={{ marginBottom: '12px' }} className={styles.hero_h2}>Todo tu evento empieza con una invitación digital</span>
           <CustomButton type="secondary" url={`https://wa.me/6145338500?text=${message}`} icon={LucideArrowUpRight} label="PLATICA CON NOSOTROS" />
 
         </div>

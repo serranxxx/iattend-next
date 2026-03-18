@@ -4,7 +4,7 @@
     padding: 24px;
     z-index: 3;
     position: relative;
-    background-image: linear-gradient(to bottom, #fafafa, #CCC5D7);
+    background-image: linear-gradient(to bottom, #fff, #595583);
 }
 
 
@@ -24,20 +24,18 @@
 }
 
 .hero_h1 {
-    font-size: 36px;
-    font-weight: 800;
+    font-size: 42px;
+    font-weight: 500;
     line-height: 120%;
     max-width: 80%;
-    background: linear-gradient(to right, #FFF, #f3e3ff);;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #FFF;
 
-    text-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
+    text-shadow: 0px 0px 12px rgba(0, 0, 0, 0.25);
 }
 
 .hero_h2 {
-    font-size: 22px;
-    font-weight: 500;
+    font-size: 24px;
+    font-weight: 200;
     line-height: 120%;
     margin-top: 8px;
     max-width: 80%;
@@ -138,7 +136,7 @@
     }
 
     .hero_h1 {
-        font-size: 64px;
+        font-size: 56px;
         font-weight: 600;
         line-height: 1.2;
         background: linear-gradient(to right, #FFF, #f3e3ff);
