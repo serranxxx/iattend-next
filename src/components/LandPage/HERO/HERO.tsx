@@ -1,62 +1,29 @@
-
 "use client";
 
-import React from "react";
 import styles from "./hero.module.css";
-import Image from "next/image";
-import { useScreenWidth } from "@/hooks/useScreenWidth";
-import { CustomButton } from "@/components/CustomButton/CustomButton";
-import { LucideArrowUpRight } from "lucide-react";
+import { Button } from "antd";
 
-export const HeroSection = () => {
+const VIDEO_URL =
+  "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/sign/landing/hf_20260526_202936_917dc5b6-9089-4b7f-82b0-2e76d8126e5d.mp4?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8xYTYzMmQ4Yy0wZDFiLTRmZGItYTk3MS1kZWY4YmVlNWFiOTIiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsYW5kaW5nL2hmXzIwMjYwNTI2XzIwMjkzNl85MTdkYzViNi05MDg5LTRiN2YtODJiMC0yZTc2ZDgxMjZlNWQubXA0IiwiaWF0IjoxNzc5ODI4MTY1LCJleHAiOjIwOTUxODgxNjV9.y4s9j1n3_LIWa7_PV4mGJ6FkhE7HxhGaqG1Lz7aHQmE";
 
-  const width = useScreenWidth();
-  const isLargeScreen = width >= 768;
-  const message = encodeURIComponent(
-    "¡Hola! Me interesan los servicios de I attend"
-  );
-
-  return (
-    // <div className={styles.carousel_wrap}>
-    //   <Carousel>
-    <div
-      className={styles.hero_cont}
-    >
-      {
-        isLargeScreen ?
-          <Image
-            src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/hero_u.jpg"
-            alt=""
-            fill
-            style={{ objectFit: "cover", zIndex: "-1", right: 0 }} />
-          :
-          <Image
-            src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/cov_u.png"
-            alt=""
-            fill
-            style={{ objectFit: "cover", zIndex: "-1", right: 0 }} />
-      }
-
-      <div className={styles.shadow}></div>
-
-      <div className={styles.hero_info_box}>
-        {
-          isLargeScreen ?
-            <img className={styles.hero_logo} src="/assets/images/blanco.png" alt="i attend" />
-            : <img className={styles.hero_logo} src="/assets/images/morado.png" alt="i attend" />
-        }
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', flexDirection: 'column' }}>
-          <span className={styles.hero_h1}>Crea invitaciones digitales sin complicaciones</span>
-          <span style={{ marginBottom: '12px' }} className={styles.hero_h2}>Todo tu evento empieza con una invitación digital</span>
-          <CustomButton type="secondary" url={`https://wa.me/6145338500?text=${message}`} icon={LucideArrowUpRight} label="PLATICA CON NOSOTROS" />
-
+export const HeroSection = () => (
+  <div className={styles.hero_cont}>
+    <video className={styles.hero_video} src={VIDEO_URL} autoPlay muted loop playsInline />
+    <div className={styles.shadow} />
+    <div className={styles.hero_info_box}>
+      <img src="/landing/logo_cover.png" alt="I attend" className={styles.hero_logo} />
+      <div className={styles.hero_main_row}>
+        <img src="/landing/corazon.png" alt="" className={styles.hero_heart} aria-hidden="true" />
+        <div className={styles.hero_texts}>
+          <h1 className={`${styles.hero_h1} ${styles.hero_h1_spaced}`}>TU EVENTO,</h1>
+          <h1 className={`${styles.hero_h1} ${styles.hero_h1_tight}`}>BAJO CONTROL,</h1>
+          <h2 className={styles.hero_h2}>en menos de una tarde</h2>
+          <h3 className={styles.hero_h3}>Invitación, confirmaciones, mesas: TODO en un solo</h3>
+          <h3 className={styles.hero_h3}>lugar mientras tu disfrutas el proceso de tu MOMENTO.</h3>
+          <Button className={styles.hero_button}>See how it works</Button>
         </div>
+        <img src="/landing/corazon.png" alt="" className={styles.hero_heart} aria-hidden="true" />
       </div>
-
     </div>
-
-
-    //   </Carousel>
-    // </div>
-  );
-};
+  </div>
+);

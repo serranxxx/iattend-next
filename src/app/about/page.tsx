@@ -14,6 +14,7 @@ import { HomeScroll } from "@/components/HomeScroll/HomeScroll";
 import { InvitationAbout } from "@/components/LandPage/Invitation/Invitation";
 import { Shipments } from "@/components/LandPage/Shipments/Shipments";
 import { SideEvents } from "@/components/LandPage/SideEvents/SideEvents";
+import { SocialProof } from "@/components/LandPage/SocialProof/SocialProof";
 
 export const metadata: Metadata = {
   title: "I attend | Guest management & paperless invitations",
@@ -66,7 +67,7 @@ export default function LandPage() {
     <div className={styles.main_container_land}>
 
       <HeroSection></HeroSection>
-      
+      <SocialProof></SocialProof>
       
       <InvitationAbout />
       <SideEvents />

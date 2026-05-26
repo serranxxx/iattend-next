@@ -1,0 +1,232 @@
+.cont {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #eeeadf;
+}
+
+/* ── Stats row ── */
+
+.proof_row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    max-width: 900px;
+    padding: 60px 24px;
+}
+
+.proof_col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.proof_divider {
+    width: 2px;
+    height: 60px;
+    background-color: #0c171b;
+    opacity: 0.2;
+    flex-shrink: 0;
+}
+
+.proof_number {
+    font-family: 'Denver Serial', sans-serif;
+    font-size: clamp(40px, 8vw, 56px);
+    font-weight: 800;
+    color: #0c171b;
+    line-height: 1;
+}
+
+.proof_label {
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: clamp(8px, 1.4vw, 14px);
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: #0c171b;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* ── Situation blocks ── */
+
+.situation_row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.situation_block_1 {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.situation_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.situation_block_2 {
+    width: 100%;
+    background-color: #0c171b;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    padding: 32px 24px;
+    padding-bottom: 48px;
+    position: relative;
+}
+
+.situation_info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 24px;
+    color: #EFEADF;
+    width: 100%;
+}
+
+.situation_info_title {
+    font-family: 'Denver Serial', sans-serif;
+    font-size: clamp(28px, 5vw, 36px);
+    font-weight: 800;
+    color: #EFEADF;
+    line-height: 1.2;
+}
+
+.situation_info_grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+}
+
+.situation_info_grid_item {
+    border: 2px solid #EFEADF;
+    box-sizing: border-box;
+    padding: 12px;
+    font-size: 12px;
+    font-family: 'Luxora Grotesk', sans-serif;
+    color: #EFEADF;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.4;
+    border-radius: 12px;
+}
+
+.situation_info_label {
+    font-family: 'Windsor', sans-serif;
+    font-size: clamp(14px, 2vw, 18px);
+    font-weight: 800;
+    color: #EFEADF;
+}
+
+.situation_button {
+    font-family: 'Windsor', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    height: 42px;
+    padding: 0 32px;
+    color: #0c171b;
+    background-color: #EFEADF;
+}
+
+.item1,
+.item2,
+.item3,
+.item4 {
+    position: absolute;
+}
+
+.item1 {
+    max-width: 210px;
+    top: -25%;
+    right: 10%;
+}
+
+.item2 {
+    max-width: 200px;
+    left: 70%;
+    bottom: -15%;
+}
+
+
+.item3,
+.item4 {
+    display: none;
+}
+
+/* ── Desktop ── */
+
+@media (min-width: 768px) {
+    .proof_row {
+        padding: 80px 44px;
+    }
+
+    .proof_divider {
+        height: 80px;
+    }
+
+    .situation_row {
+        flex-direction: row;
+    }
+
+    .situation_block_1 {
+        flex: 1;
+        height: 650px;
+    }
+
+    .situation_block_2 {
+        flex: 1;
+        height: 650px;
+        padding: 4%;
+        padding-bottom: 8%;
+    }
+
+    .situation_info_grid {
+        max-width: 80%;
+    }
+
+    .item1 {
+        max-width: 250px;
+        top: -15%;
+        right: 10%;
+    }
+
+    .item2 {
+        max-width: 220px;
+        left: -12%;
+        bottom: -15%;
+    }
+
+    .item4 {
+        display: block;
+        max-width: 400px;
+        right: -10%;
+        bottom: 0%;
+        transform: scaleY(-1) rotate(70deg);
+    }
+
+    .item3 {
+        display: block;
+        max-width: 400px;
+        left: -10%;
+        top: -10%;
+    }
+}
