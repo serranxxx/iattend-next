@@ -1,7 +1,31 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { Button } from "antd";
 import styles from "./socialproof.module.css";
 
+const ROW_NATURAL_WIDTH = 1008; // 3 cards × 320px + 2 gaps × 24px
+const CARD_HEIGHT = 400;
+const BREAKPOINT = 768;
+const PADDING = 32;
+
 export const SocialProof = () => {
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    setWidth(window.innerWidth);
+    const handler = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+
+  const isMobile = width > 0 && width < BREAKPOINT;
+  const cardScale = isMobile ? Math.min(1, (width - PADDING) / ROW_NATURAL_WIDTH) : 1;
+  const marginCompensation = `${(CARD_HEIGHT * (cardScale - 1)) / 2}px`;
+
+  const rowStyle = isMobile
+    ? { transform: `scale(${cardScale})`, marginTop: marginCompensation, marginBottom: marginCompensation }
+    : undefined;
   return (
     <section className={styles.cont}>
       <div className={styles.proof_row}>
@@ -65,6 +89,41 @@ export const SocialProof = () => {
            <img 
           src="/landing/items/item2.png" alt="situation 2" className={styles.item2} />
         </div>
+      </div>
+
+      <div className={styles.situation_cards}>
+        <img
+        style={{ height: "100%", width: "100%", objectFit: "cover", position: "absolute", top: 0, left: 0 }}
+        src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/landing/situation.jpg" alt="situation cards" />
+        <div className={styles.shadow} />
+
+        <span className={styles.situation_cards_labels}>Pero imagina esto:</span>
+        <div className={styles.situation_cards_row} style={rowStyle}>
+          <div className={styles.situation_card}>
+            <img src="/landing/items/clip.png" alt="" className={styles.clip}/>
+            <img src="/landing/items/i_sticker.png" alt="" className={styles.i_sticker}/>
+            <span className={styles.sit_card_text}>
+              Las cosas en tu organización fluyen sin que tengas que pensar en TODO
+            </span>
+          </div>
+
+          <div className={styles.situation_card}>
+            <img src="/landing/items/clip.png" alt="" className={styles.clip}/>
+            <span className={styles.sit_card_text}>
+              Vuelves a tener el control de tu evento, sin cargarlo tú sola
+            </span>
+          </div>
+
+          <div className={styles.situation_card}>
+            <img src="/landing/items/clip.png" alt="" className={styles.clip}/>
+            <img src="/landing/items/a_sticker.png" alt="" className={styles.a_sticker}/>
+            <span className={styles.sit_card_text}>
+              Puedes disfrutar el proceso en lugar de sobrevivirlo
+            </span>
+          </div>
+        </div>
+        <span className={styles.situation_cards_labels}>Un sistema que trabaja contigo para que no tengas que preocuparte</span>
+
       </div>
     </section>
   );

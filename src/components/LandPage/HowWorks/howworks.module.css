@@ -1,0 +1,522 @@
+/* ── Shell ── */
+
+.cont {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: #eeeadf;
+    position: relative;
+}
+
+.how_line {
+    flex: 1;
+    align-self: stretch;
+    max-width: 30px;
+    background-color: #0c171b;
+}
+
+.how_main {
+    flex: 4;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 82px 66px;
+    box-sizing: border-box;
+}
+
+/* ── Inner content wrapper ── */
+
+.how_inner {
+    width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+
+
+}
+
+/* ── Steps + image row ── */
+
+.how_cont {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 36px;
+
+}
+
+.how_steps_cont {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+
+}
+
+/* ── Individual step ── */
+
+.step {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.step_header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.step_number {
+    height: 40px;
+    width: 40px;
+    border-radius: 99px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0c171b;
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #eeeadf;
+    flex-shrink: 0;
+}
+
+.step_title {
+    border: 2.5px solid #0c171b;
+    padding: 4px 16px;
+    border-radius: 8px;
+    color: #0c171b;
+    font-family: 'Windsor', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.step_desc {
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #0c171b;
+}
+
+/* ── Titles ── */
+
+.title_wrap {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 32px;
+}
+
+.steps_title {
+    font-family: 'Denver Serial', sans-serif;
+    font-size: 56px;
+    font-style: italic;
+    font-weight: 800;
+    color: #0c171b;
+    line-height: 1;
+}
+
+/* ── Spin connectors ── */
+
+.spin_cont {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 20%;
+    align-self: stretch;
+    min-height: 100px;
+    position: relative;
+}
+
+.spin {
+    position: absolute;
+    max-height: 100%;
+    width: auto;
+}
+
+.spin_cont_h {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 0 16px;
+}
+
+.spin_mobile {
+    display: none;
+}
+
+.spin_desktop {
+    display: block;
+}
+
+.spin_h {
+    max-height: 80px;
+}
+
+/* ── Image panel ── */
+
+.image_cont {
+    flex: 2;
+    max-width: 450px;
+    /* max-height: 623px; */
+    align-self: stretch;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+}
+
+.img_test {
+    width: 100%;
+    height: 90%;
+    object-fit: cover;
+}
+
+.s_sticker {
+    position: absolute;
+    max-width: 160px;
+    top: 0%;
+    right: -5%;
+}
+
+.item4 {
+    position: absolute;
+    max-width: 480px;
+    bottom: -5%;
+    right: -15%;
+}
+
+/* ── Bottom row (steps 4 & 5) ── */
+
+.extra_steps_row {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0;
+}
+
+.bottom_row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: 'Denver Serial', sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    margin-top: 64px;
+    font-style: italic;
+    color: #0c171b;
+}
+
+.stamp {
+    position: absolute;
+    bottom: -8%;
+    left: 50%;
+    transform: translate(-50%);
+    max-width: 140px;
+    z-index: 3;
+}
+
+/* ── Mobile carousel (hidden on desktop) ── */
+
+.mob_carousel {
+    display: none;
+}
+
+.mob_image_cont {
+    width: 100%;
+    /* height: 220px; */
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.mob_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+.mob_sticker {
+    position: absolute;
+    max-width: 30%;
+    top: 0;
+    right: 8px;
+}
+
+.mob_item4 {
+    position: absolute;
+    max-width: 100%;
+    bottom: -7%;
+    right: -5%;
+}
+
+.mob_nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.mob_arrow {
+    background: none;
+    border: 2px solid #0c171b;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: #0c171b;
+    line-height: 1;
+    padding: 0;
+}
+
+.mob_card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: opacity 150ms ease, transform 150ms ease;
+    /* min-height: 180px; */
+}
+
+.mob_num {
+    font-family: 'Denver Serial', sans-serif;
+    font-size: 48px;
+    font-style: italic;
+    font-weight: 800;
+    color: #0c171b;
+    line-height: 1;
+}
+
+.mob_spin {
+    align-self: flex-end;
+    margin-top: auto;
+}
+
+.mob_dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.mob_dot {
+    height: 8px;
+    width: 8px;
+    border-radius: 99px;
+    background-color: #0c171b;
+    opacity: 0.25;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: width 250ms ease, opacity 250ms ease;
+}
+
+.mob_dot_active {
+    width: 24px;
+    opacity: 1;
+}
+
+.filter_row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    position: relative;
+    
+}
+
+.filter_block_1,
+.filter_block_2 {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #16323d;
+    align-self: stretch;
+    gap: 42px;
+    padding: 128px 64px ;
+    position: relative;
+    overflow: hidden;
+}
+
+.filter_block_2 {
+    background-color: #0c171b;
+}
+
+.filter_title {
+    font-family: 'Denver Serial', sans-serif;
+    font-style: italic;
+    font-weight: 800;
+}
+
+.filter_content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+.loops {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.filter_title {
+    font-family: 'Denver Serial';
+    color: #eeeadf;
+    font-size: 44px;
+    font-weight: 800;
+    max-width: 40%;
+    line-height: 1.2;
+    z-index: 3;
+}
+
+.filter_content {
+    font-family: 'Luxora Grotesk';
+     color: #eeeadf;
+    font-size: 20px;
+    font-weight: 500;
+    gap: 12px;
+    line-height: 1.6;
+}
+
+.detail {
+    position: absolute;
+    max-width: 260px;
+    bottom: -15%;
+    right: 10%;
+    z-index: 3;
+}
+
+.spin5 {
+    position: absolute;
+    max-width: 35%;
+    bottom: -5%;
+    left: 20%;
+    z-index: 3;
+}
+
+.spin6 {
+    position: absolute;
+    max-width: 65%;
+    top: -5%;
+    left: -5%;
+}
+
+
+.bonus_cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 800px;
+    position: relative;
+}
+
+.dinner {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+}
+
+.shadow {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* ── Mobile ── */
+
+
+@media (max-width: 767px) {
+    .how_line {
+        display: none;
+    }
+
+    .how_main {
+        display: none;
+    }
+
+    .mob_carousel {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 48px 24px 80px;
+        box-sizing: border-box;
+        gap: 24px;
+    }
+
+    .steps_title {
+        font-size: 32px;
+    }
+
+    .step_number {
+        height: 32px;
+        width: 32px;
+        font-size: 12px;
+    }
+
+    .step_title {
+        font-size: 16px;
+        padding: 3px 12px;
+    }
+
+    .step_desc {
+        font-size: 15px;
+    }
+
+    .stamp {
+        bottom: -5%;
+        max-width: 100px;
+    }
+
+    .step_header {
+        justify-content: center;
+    }
+
+    .filter_row {
+        flex-direction: column;
+    }
+
+    .filter_block_1,
+    .filter_block_2 {
+        width: 100%;
+        padding: 64px 24px;
+    }
+
+    .filter_title {
+        font-size: 28px;
+        max-width: 100%;
+    }
+
+    .filter_content {
+        font-size: 16px;
+    }
+}

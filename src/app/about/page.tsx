@@ -15,6 +15,7 @@ import { InvitationAbout } from "@/components/LandPage/Invitation/Invitation";
 import { Shipments } from "@/components/LandPage/Shipments/Shipments";
 import { SideEvents } from "@/components/LandPage/SideEvents/SideEvents";
 import { SocialProof } from "@/components/LandPage/SocialProof/SocialProof";
+import { HowWorks } from "@/components/LandPage/HowWorks/HowWorks";
 
 export const metadata: Metadata = {
   title: "I attend | Guest management & paperless invitations",
@@ -68,6 +69,7 @@ export default function LandPage() {
 
       <HeroSection></HeroSection>
       <SocialProof></SocialProof>
+      <HowWorks></HowWorks>
       
       <InvitationAbout />
       <SideEvents />

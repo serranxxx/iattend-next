@@ -88,6 +88,7 @@
     padding: 32px 24px;
     padding-bottom: 48px;
     position: relative;
+    z-index: 3;
 }
 
 .situation_info {
@@ -157,7 +158,7 @@
 .item1 {
     max-width: 210px;
     top: -25%;
-    right: 10%;
+    right: -10%;
 }
 
 .item2 {
@@ -170,7 +171,122 @@
 .item3,
 .item4 {
     display: none;
+
 }
+
+.situation_cards {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 40px;
+    padding: 80px 0;
+}
+
+.shadow {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+
+.situation_cards_labels {
+    font-size: 22px;
+    font-family: 'Denver Serial', sans-serif;
+    font-weight: 800;
+    color: #EFEADF;
+    z-index: 3;
+    text-align: center;
+    line-height: 1.3;
+    padding: 0 24px;
+}
+
+.situation_cards_row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    z-index: 3;
+    transform-origin: center center;
+}
+
+
+.situation_card {
+    width: 320px;
+    height: 400px;
+    background-color: #D3CFBC;
+    position: relative;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* flex-direction: column; */
+    box-sizing: border-box;
+    padding: 44px;
+}
+
+.situation_card::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 380px;
+    border: 2px solid #0c171b;
+}
+
+.situation_card::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 290px;
+    height: 370px;
+    border: 2px solid #0c171b;
+
+}
+
+.clip {
+    position: absolute;
+    max-width: 80px;
+    left: 50%;
+    transform: translate(-50%);
+    top: -15%;
+}
+
+.sit_card_text {
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 24px;
+    line-height: 1.4;
+    font-weight: 400;
+    text-align: center;
+}
+
+.i_sticker,
+.a_sticker {
+    position: absolute;
+    max-width: 120px;
+    z-index: 4;
+}
+
+.i_sticker {
+    top: -20%;
+    left: -14%;
+}
+
+.a_sticker {
+    bottom: -14%;
+    right: -14%;
+}
+
+
+
 
 /* ── Desktop ── */
 
@@ -207,6 +323,7 @@
         max-width: 250px;
         top: -15%;
         right: 10%;
+        
     }
 
     .item2 {
@@ -228,5 +345,23 @@
         max-width: 400px;
         left: -10%;
         top: -10%;
+    }
+
+    .situation_cards {
+        gap: 82px;
+        padding: 128px 24px;
+    }
+
+    .situation_cards_labels {
+        font-size: 28px;
+        padding: 0;
+    }
+
+    .situation_cards_row {
+        transform: none;
+        margin-top: 0;
+        margin-bottom: 0;
+        justify-content: space-evenly;
+        width: 90%;
     }
 }

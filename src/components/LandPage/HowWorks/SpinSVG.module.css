@@ -1,0 +1,12 @@
+@keyframes spinDraw {
+  0%   { stroke-dashoffset: var(--path-length); }
+  40%  { stroke-dashoffset: 0; }
+  60%  { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: var(--path-length); }
+}
+
+.path {
+  stroke-dasharray: var(--path-length);
+  stroke-dashoffset: var(--path-length);
+  animation: spinDraw 3s ease-in-out infinite;
+}

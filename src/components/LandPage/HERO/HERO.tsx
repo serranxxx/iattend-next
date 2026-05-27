@@ -4,7 +4,7 @@ import styles from "./hero.module.css";
 import { Button } from "antd";
 
 const VIDEO_URL =
-  "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/sign/landing/hf_20260526_202936_917dc5b6-9089-4b7f-82b0-2e76d8126e5d.mp4?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8xYTYzMmQ4Yy0wZDFiLTRmZGItYTk3MS1kZWY4YmVlNWFiOTIiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsYW5kaW5nL2hmXzIwMjYwNTI2XzIwMjkzNl85MTdkYzViNi05MDg5LTRiN2YtODJiMC0yZTc2ZDgxMjZlNWQubXA0IiwiaWF0IjoxNzc5ODI4MTY1LCJleHAiOjIwOTUxODgxNjV9.y4s9j1n3_LIWa7_PV4mGJ6FkhE7HxhGaqG1Lz7aHQmE";
+  "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/landing/hf_20260526_202936_917dc5b6-9089-4b7f-82b0-2e76d8126e5d.mp4";
 
 export const HeroSection = () => (
   <div className={styles.hero_cont}>
