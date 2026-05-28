@@ -18,21 +18,18 @@ type Props = {
 export const FooterLand = ({ invitation, color }: Props) => {
 
 
-  const secondary = color ? color : (invitation?.generals.colors.secondary ?? "#CFBEE6")
   return (
-    <div className={styles.main_cont} style={{
-      background:  'linear-gradient(to top, #8f77af 0%, #CCC5D7 100%)',
-    }}>
+    <div className={styles.main_cont} >
       
       <div className={styles.footer_cont}>
         <div className={styles.footer_main_col}>
           <Link href="/about">
             <div className={styles.footer_row}>
-              <img className={styles.footer_logo} src="/assets/images/blanco.png" alt="" />
-              <div className={styles.footer_col}>
+              <img className={styles.footer_logo} src="/landing/logo_cover.png" alt="" />
+              {/* <div className={styles.footer_col}>
                 <span style={{ fontWeight: "500", fontSize: "18px", textTransform: "uppercase" }}>Guest management</span>
                 <span style={{ fontWeight: "200", fontSize: "14px" }}>Plan with ease</span>
-              </div>
+              </div> */}
             </div>
           </Link>
 

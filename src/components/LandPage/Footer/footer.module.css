@@ -37,8 +37,8 @@
     justify-content: flex-start;
     flex-direction: column;
     gap: 0px;
-    font-family:  'Outfit', 'Poppins';
-    color: #FFF;
+    font-family:  'Luxora Grotesk', sans-serif;
+    color: #eeeadf;
     font-weight: 400;
     line-height: 110%;
     margin-top: -12px;
@@ -56,9 +56,9 @@
 }
 
 .footer_link {
-    font-family:  'Outfit', 'Poppins';
-    color: #FFF !important;
-    font-weight: 400;
+    font-family:  'Luxora Grotesk', sans-serif;
+    color: #eeeadf !important;
+    font-weight: 200;
     line-height: 110%;
     display: flex;
     align-items: center;
@@ -73,15 +73,15 @@
     flex-direction: column;
     gap: 0px;
     padding: 0px 24px;
-    font-family:  'Outfit', 'Poppins';
-    color: #FFF;
+    font-family:  'Luxora Grotesk', sans-serif;
+    color: #eeeadf;
     font-weight: 400;
 }
 
 .link_cont a {
-    font-family:  'Outfit', 'Poppins';
-    color: #FFF;
-    font-weight: 400;
+    font-family:  'Luxora Grotesk', sans-serif;
+    color: #eeeadf;
+    font-weight: 200;
 }
 
 .main_cont {
@@ -89,8 +89,13 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    /* background-image: linear-gradient(to top, #CFBEE680 0%, #CFBEE6 100%); */
-
+    background: repeating-linear-gradient(
+        90deg,
+        #0c171b 0px,
+        #0c171b 20px,
+        #071013 20px,
+        #071013 50px
+    );
 }
 
 .links {

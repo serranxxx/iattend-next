@@ -345,7 +345,7 @@
     justify-content: center;
     align-self: stretch;
     position: relative;
-    
+
 }
 
 .filter_block_1,
@@ -358,7 +358,7 @@
     background-color: #16323d;
     align-self: stretch;
     gap: 42px;
-    padding: 128px 64px ;
+    padding: 128px 64px;
     position: relative;
     overflow: hidden;
 }
@@ -399,7 +399,7 @@
 
 .filter_content {
     font-family: 'Luxora Grotesk';
-     color: #eeeadf;
+    color: #eeeadf;
     font-size: 20px;
     font-weight: 500;
     gap: 12px;
@@ -416,9 +416,9 @@
 
 .spin5 {
     position: absolute;
-    max-width: 35%;
+    max-width: 30%;
     bottom: -5%;
-    left: 20%;
+    left: 25%;
     z-index: 3;
 }
 
@@ -434,8 +434,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    gap: 36px;
     width: 100%;
-    min-height: 800px;
+    padding: 124px 0px;
+    box-sizing: border-box;
+    /* min-height: 800px; */
     position: relative;
 }
 
@@ -444,12 +448,114 @@
     width: 100%;
     object-fit: cover;
     position: absolute;
+    z-index: 0;
 }
 
 .shadow {
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+.bonus_label {
+    z-index: 3;
+    font-family: 'Denver Serial';
+    font-size: 42px;
+    color: #eeeadf;
+    line-height: 1.1;
+    max-width: 60%;
+    text-align: center;
+}
+
+/* ── Invitation card ── */
+
+.inv_cards_row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    z-index: 3;
+    width: 100%;
+}
+
+.inv_row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 24px;
+    flex-shrink: 0;
+}
+
+.inv_sleeve_wrap {
+    position: relative;
+    width: 198px;
+    height: 264px;
+}
+
+.inv_card_peek {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 165px;
+    height: 231px;
+    background: #FAF4F2;
+    border-radius: 6px;
+    z-index: 1;
+
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.inv_pocket {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 226px;
+    background: #8A9E79;
+    border-radius: 6px;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    padding: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+    mask-image: radial-gradient(circle 44px at 50% 0px, transparent 42px, black 44px);
+    -webkit-mask-image: radial-gradient(circle 44px at 50% 0px, transparent 42px, black 44px);
+}
+
+.inv_card {
+    width: 182px;
+    height: 231px;
+    background: #FAF4F2;
+    border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 16px;
+    text-align: center;
+    gap: 6px;
+}
+
+.bonus_title {
+    font-family: 'Windsor';
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1;
+    color: #0c171b;
+}
+
+.bonus_text {
+    font-family: 'Luxora Grotesk';
+    font-size: 14px;
+    font-weight: 200;
+    color: #0c171b;
 }
 
 /* ── Mobile ── */
@@ -519,4 +625,42 @@
     .filter_content {
         font-size: 16px;
     }
+
+    .inv_cards_row {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding: 0 24px 16px;
+        gap: 24px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .inv_cards_row::-webkit-scrollbar {
+        display: none;
+    }
+
+    .spin5 {
+        display: none;
+    }
+
+    .detail {
+        max-width: 160px;
+        bottom: -7%;
+        right: 5%;
+    }
+
+    .bonus_label {
+        z-index: 3;
+        font-family: 'Denver Serial';
+        font-size: 36px;
+        color: #eeeadf;
+        line-height: 1.2;
+        max-width: 85%;
+        text-align: center;
+    }
+
+    .bonus_cont {
+        padding: 64px 0px;
+    }
+
 }

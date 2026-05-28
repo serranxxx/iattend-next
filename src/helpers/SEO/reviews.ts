@@ -20,7 +20,7 @@ export const reviews_list: reviewType[] = [
   {
     name: "Mariana López",
     review:
-      "Nos fascinó. La sentimos muy nuestra y queríamos que realmente nos representara y que la gente sintiera que estábamos ahí invitándolos. Y lo logramos. Estamos encantados.",
+      "Nos fascinó. La sentimos muy nuestra y queríamos que realmente nos representara y que la gente sintiera que estábamos ahí invitándolos.",
   },
   {
     name: "Eva Chávez",

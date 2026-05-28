@@ -16,6 +16,9 @@ import { Shipments } from "@/components/LandPage/Shipments/Shipments";
 import { SideEvents } from "@/components/LandPage/SideEvents/SideEvents";
 import { SocialProof } from "@/components/LandPage/SocialProof/SocialProof";
 import { HowWorks } from "@/components/LandPage/HowWorks/HowWorks";
+import { Action } from "@/components/LandPage/Action/Action";
+import { Frequent } from "@/components/LandPage/Frequent/Frequent";
+import { Final } from "@/components/LandPage/Final/Final";
 
 export const metadata: Metadata = {
   title: "I attend | Guest management & paperless invitations",
@@ -70,23 +73,26 @@ export default function LandPage() {
       <HeroSection></HeroSection>
       <SocialProof></SocialProof>
       <HowWorks></HowWorks>
-      
-      <InvitationAbout />
+      <Action />
+      <Frequent />
+      <Final />
+
+      {/* <InvitationAbout />
       <SideEvents />
       <HomeScroll />
-      <WorkFlow></WorkFlow>
+      <WorkFlow></WorkFlow> */}
       {/* <Shipments /> */}
       {/* <IdealCustomer></IdealCustomer> */}
-      <KeyFeatures></KeyFeatures>
+      {/* <KeyFeatures></KeyFeatures> */}
 
       {/* <Reviews></Reviews> */}
 
-      <Plans></Plans>
+      {/* <Plans></Plans>
 
       <Video></Video>
 
       
-      <FAQs></FAQs>
+      <FAQs></FAQs> */}
       {/* <CTA></CTA> */}
       <FooterLand></FooterLand>
 

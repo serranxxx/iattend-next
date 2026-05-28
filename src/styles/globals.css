@@ -75,3 +75,11 @@
     font-display: swap;
 }
 
+.scroll-invitation {
+    scrollbar-width: none;
+}
+
+.scroll-invitation::-webkit-scrollbar {
+    display: none;
+}
+

@@ -1,0 +1,354 @@
+.cont {
+    width: 100%;
+    min-height: 800px;
+    display: flex;
+    flex-direction: row;
+}
+
+/* ── Left panel ── */
+
+.left {
+    flex: 1;
+    background-color: #16323d;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left::before,
+.left::after {
+    content: '';
+    position: absolute;
+    border: 3px solid #aac187;
+    pointer-events: none;
+    border-radius: 16px;
+    z-index: 0;
+}
+
+.left::before { inset: 5%; }
+.left::after  { inset: 8%; }
+
+.left_center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.wrap1 {
+    position: absolute;
+    height: 400px;
+    width: 400px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wrap_cont {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pic4 {
+    max-width: 340px;
+    position: absolute;
+    top: -20%;
+    left: -10%;
+}
+
+.pic5 {
+    max-width: 370px;
+    position: absolute;
+    bottom: -20%;
+    right: -10%;
+}
+
+.patch {
+    position: absolute;
+    width: 100px;
+    top: -10%;
+    left: -5%;
+    z-index: 5;
+}
+
+.i_sticker {
+    position: absolute;
+    width: 80px;
+    bottom: -7%;
+    right: 10%;
+    z-index: 5;
+}
+
+.text_1 {
+    position: absolute;
+    top: -10%;
+    right: -25%;
+    width: 65%;
+    font-family: 'Windsor', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #eeeadf;
+    line-height: 1.6;
+    text-align: left;
+    margin: 0;
+    z-index: 6;
+}
+
+.text_2 {
+    position: absolute;
+    bottom: 14%;
+    left: -25%;
+    width: 55%;
+    font-family: 'Windsor', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #eeeadf;
+    line-height: 1.6;
+    text-align: center;
+    margin: 0;
+    z-index: 6;
+}
+
+/* ── Right panel ── */
+
+.right {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.shadow {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1;
+}
+
+.bg_img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.right_content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+    padding: 64px 0;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.info_block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 48px;
+    box-sizing: border-box;
+}
+
+.logo {
+    max-width: 220px;
+    margin-bottom: -4px;
+}
+
+.hero_title {
+    font-family: 'Denver Serial', sans-serif;
+    font-style: italic;
+    font-weight: 800;
+    font-size: 60px;
+    color: #eeeadf;
+    line-height: 0.9;
+    margin: 0;
+}
+
+.stats {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.stats li {
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 14px;
+    color: #eeeadf;
+    font-weight: 200;
+    line-height: 1.4;
+}
+
+.reviews_scroll {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    overflow-x: auto;
+    width: 100%;
+    scrollbar-width: none;
+    padding-left: 48px;
+    box-sizing: border-box;
+}
+
+.reviews_scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.review_card {
+    flex-shrink: 0;
+    width: 460px;
+    background-color: #f5f0e8;
+    border-radius: 12px;
+    padding: 20px 24px;
+    scroll-snap-align: start;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.review_text {
+    font-family: 'Windsor', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #0c171b;
+    line-height: 1.55;
+    margin: 0;
+}
+
+.review_name {
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 13px;
+    color: #0c171b;
+    font-weight: 500;
+}
+
+.bottom_block {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 48px;
+    box-sizing: border-box;
+}
+
+.scroll_nav {
+    display: flex;
+    gap: 8px;
+}
+
+.scroll_btn {
+    background: none;
+    border: 1.5px solid #eeeadf;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #eeeadf;
+    font-size: 16px;
+    flex-shrink: 0;
+    transition: background-color 200ms ease;
+}
+
+.scroll_btn:hover {
+    background-color: rgba(238, 234, 223, 0.15);
+}
+
+.cta {
+    font-family: 'Windsor', sans-serif !important;
+    font-weight: 800 !important;
+    font-size: 16px !important;
+    color: #0c171b !important;
+    background-color: #d2bfdd !important;
+    padding: 0 32px !important;
+    border-radius: 16px !important;
+    min-height: 52px;
+    border: none !important;
+    letter-spacing: 0.04em;
+    max-width: 220px;
+}
+
+/* ── Breakpoint: stack panels ── */
+
+@media (max-width: 1050px) {
+    .cont {
+        flex-direction: column;
+        min-height: unset;
+    }
+
+    .left {
+        width: 100%;
+        min-height: 700px;
+    }
+
+    .right {
+        min-height: 600px;
+    }
+
+    .right_content {
+        padding: 48px 0;
+        gap: 16px;
+    }
+
+    .info_block,
+    .bottom_block {
+        padding: 0 24px;
+    }
+
+    .hero_title {
+        font-size: 40px;
+    }
+
+    .reviews_scroll {
+        padding-left: 24px;
+    }
+
+    .cta {
+        min-width: unset !important;
+        width: 100%;
+    }
+}
+
+/* ── Breakpoint: small screens ── */
+
+@media (max-width: 750px) {
+    .review_card {
+        width: 350px;
+    }
+
+    .text_1 {
+        top: -10%;
+        right: 10%;
+        width: 30%;
+        font-size: 12px;
+    }
+
+    .text_2 {
+        bottom: -20%;
+        left: 50%;
+        transform: translate(-50%);
+        width: 75%;
+    }
+
+    .patch {
+        top: -15%;
+        left: 5%;
+    }
+}

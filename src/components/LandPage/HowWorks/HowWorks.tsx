@@ -2,7 +2,10 @@
 
 import { useState, useRef } from "react";
 import styles from "./howworks.module.css";
+import { Star } from "lucide-react";
 import { SpinSVG } from "./SpinSVG";
+
+import { FaStar } from "react-icons/fa";
 
 const SPIN1_PATH = "M3 3C6.86 13.58 15.12 22.48 25.4 27.11C36.02 31.89 49.5 32.26 60.06 27.04C72.89 20.7 82.65 2.19 98.67 14.09C113.84 25.36 116.86 49.54 120.68 66.65C124.8 85.12 125.21 104.61 119.47 122.79C117.97 127.53 114.93 132.97 109.96 132.91C103.96 132.83 101.54 125.15 101.34 119.15C100.6 96.07 114.07 30.81 149.59 42.24C158.8 45.2 165.46 53.56 168.81 62.64C173.48 75.27 173.86 86.14 173.21 91.2";
 const SPIN2_PATH = "M97.5 3C85.98 13.75 74.4 25.88 69.67 41.3C67.85 47.25 67.37 54.24 71.88 59.12C75.28 62.79 80.39 64.4 85.17 65.27C95.88 67.22 107.61 66.52 118.44 65.89C130.59 65.19 145.84 63.5 154.69 54.19C159.67 48.96 168.92 35.82 160.88 29.41C153.56 23.57 141.13 30.73 134.52 34.46C125.07 39.8 115.71 46.11 107.15 52.77C94.89 62.3 83.22 73.63 77.07 88.1C74.31 94.59 72.04 101.4 67.98 107.23C63.79 113.25 57.83 117.31 50.73 119.12C44.16 120.79 37.19 120.8 30.6 119.32C24.37 117.91 18.31 115.59 11.93 114.9C8.95 114.58 5.91 114.64 3 115.44";
@@ -256,10 +259,38 @@ export const HowWorks = () => {
       </div>
 
       <div className={styles.bonus_cont}>
-        a
         <img src="/landing/dinner.jpg" alt="" className={styles.dinner} />
-        <div className={styles.shadow}>
+        <div className={styles.shadow} />
+        <span className={styles.bonus_label}>Oh, and one more thing</span>
+
+        <div className={styles.inv_cards_row}>
+          {[
+            {
+              title: "¿Tienes despedida, ensayo o brunch del día siguiente?",
+              text: "Todo conectado en el mismo sistema, sin empezar de cero.",
+            },
+            {
+              title: "¿Te preocupa que te llegue alguien de sorpresa?",
+              text: "Cada invitado recibe su propio link personalizado y sin que se pueda reenviar. Sin descargar nada, ni saber de tecnología.",
+            },
+          ].map((item, i) => (
+            <div key={i} className={styles.inv_row}>
+              <div className={styles.inv_sleeve_wrap}>
+                <div className={styles.inv_card_peek} />
+                <div className={styles.inv_pocket}>
+                  <span className={styles.bonus_title}>{item.title}</span>
+                </div>
+              </div>
+              <div className={styles.inv_card}>
+                <Star size={16} color="#0c171b" />
+                <span className={styles.bonus_text}>{item.text}</span>
+              </div>
+            </div>
+          ))}
         </div>
+
+        <span className={styles.bonus_label} style={{ fontSize: '24px' }}>Pero no te dejamos sola., estamos contigo desde que empiezas
+          hasta el día de tu boda: soporte en TODO el proceso</span>t
       </div>
     </div>
   );

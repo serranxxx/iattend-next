@@ -1,16 +1,38 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "antd";
 import styles from "./socialproof.module.css";
+import { createClient } from "@/lib/supabase/client";
 
 const ROW_NATURAL_WIDTH = 1008; // 3 cards × 320px + 2 gaps × 24px
 const CARD_HEIGHT = 400;
 const BREAKPOINT = 768;
 const PADDING = 32;
 
+const useCountUp = (target: number | null, duration = 900) => {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (target === null) return;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * target));
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, [target, duration]);
+  return count;
+};
+
 export const SocialProof = () => {
   const [width, setWidth] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [eventsCount, setEventsCount] = useState<number | null>(null);
+  const [guestsCount, setGuestsCount] = useState<number | null>(null);
+  const [summaryCount, setSummaryCount] = useState<number | null>(null);
 
   useEffect(() => {
     setWidth(window.innerWidth);
@@ -18,6 +40,35 @@ export const SocialProof = () => {
     window.addEventListener("resize", handler);
     return () => window.removeEventListener("resize", handler);
   }, []);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setIsVisible(true); observer.disconnect(); } },
+      { threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.rpc("get_total_events_count").then(({ data }) => {
+      if (typeof data === "number") setEventsCount(data);
+    });
+    supabase.rpc("get_total_guest_states").then(({ data }) => {
+      if (typeof data === "number") setGuestsCount(data);
+    });
+    supabase.rpc("get_guest_states_total").then(({ data }) => {
+      console.log(data);
+      if (typeof data === "number") setSummaryCount(data);
+    });
+  }, []);
+
+  const animatedEvents = useCountUp(isVisible ? eventsCount : null);
+  const animatedGuests = useCountUp(isVisible ? guestsCount : null);
+  const animatedSummary = useCountUp(isVisible ? summaryCount : null);
 
   const isMobile = width > 0 && width < BREAKPOINT;
   const cardScale = isMobile ? Math.min(1, (width - PADDING) / ROW_NATURAL_WIDTH) : 1;
@@ -27,21 +78,21 @@ export const SocialProof = () => {
     ? { transform: `scale(${cardScale})`, marginTop: marginCompensation, marginBottom: marginCompensation }
     : undefined;
   return (
-    <section className={styles.cont}>
+    <section ref={sectionRef} className={styles.cont}>
       <div className={styles.proof_row}>
         <div className={styles.proof_col}>
-          <span className={styles.proof_number}>30</span>
-          <span className={styles.proof_label}>NOVIAS ESTE MES</span>
+          <span className={styles.proof_number}>{animatedEvents}</span>
+          <span className={styles.proof_label}>EVENTOS CREADOS</span>
         </div>
         <div className={styles.proof_divider} />
         <div className={styles.proof_col}>
-          <span className={styles.proof_number}>1,500</span>
-          <span className={styles.proof_label}>INVITADOS MANEJADOS</span>
+          <span className={styles.proof_number}>{animatedGuests.toLocaleString()}</span>
+          <span className={styles.proof_label}>INVITACIONES ENVIADAS</span>
         </div>
         <div className={styles.proof_divider} />
         <div className={styles.proof_col}>
-          <span className={styles.proof_number}>800k</span>
-          <span className={styles.proof_label}>FOTOGRAFÍAS</span>
+          <span className={styles.proof_number}>{animatedSummary.toLocaleString()}</span>
+          <span className={styles.proof_label}>INVITADOS CONFIRMADOS</span>
         </div>
       </div>
 

@@ -13,16 +13,18 @@ export const HeroSection = () => (
     <div className={styles.hero_info_box}>
       <img src="/landing/logo_cover.png" alt="I attend" className={styles.hero_logo} />
       <div className={styles.hero_main_row}>
-        <img src="/landing/corazon.png" alt="" className={styles.hero_heart} aria-hidden="true" />
         <div className={styles.hero_texts}>
-          <h1 className={`${styles.hero_h1} ${styles.hero_h1_spaced}`}>TU EVENTO,</h1>
-          <h1 className={`${styles.hero_h1} ${styles.hero_h1_tight}`}>BAJO CONTROL,</h1>
+          <div className={styles.h1_wrap}>
+            <img src="/landing/corazon.png" alt="" className={styles.hero_heart_left} aria-hidden="true" />
+            <h1 className={`${styles.hero_h1} ${styles.hero_h1_spaced}`}>TU EVENTO,</h1>
+            <h1 className={`${styles.hero_h1} ${styles.hero_h1_tight}`}>BAJO CONTROL,</h1>
+            <img src="/landing/corazon.png" alt="" className={styles.hero_heart_right} aria-hidden="true" />
+          </div>
           <h2 className={styles.hero_h2}>en menos de una tarde</h2>
           <h3 className={styles.hero_h3}>Invitación, confirmaciones, mesas: TODO en un solo</h3>
           <h3 className={styles.hero_h3}>lugar mientras tu disfrutas el proceso de tu MOMENTO.</h3>
           <Button className={styles.hero_button}>See how it works</Button>
         </div>
-        <img src="/landing/corazon.png" alt="" className={styles.hero_heart} aria-hidden="true" />
       </div>
     </div>
   </div>

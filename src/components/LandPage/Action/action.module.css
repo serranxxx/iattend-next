@@ -1,0 +1,141 @@
+.cont {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 36px;
+    padding: 264px 0px;
+    background: repeating-linear-gradient(90deg,
+            #0c171b 0px,
+            #0c171b 30px,
+            #071013 30px,
+            #071013 70px);
+}
+
+.title_cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    gap: 36px;
+}
+
+.title {
+    font-family: 'Denver Serial';
+    font-size: 44px;
+    font-weight: 800;
+    color: #eeeadf;
+    max-width: 70%;
+    text-align: center;
+    line-height: 1.1;
+    font-style: italic;
+}
+
+.cta {
+    font-family: 'Windsor';
+    font-weight: 800;
+    font-size: 18px;
+    color: #0c171b;
+    background-color: #d2bfdd;
+    padding: 0px 24px;
+    border-radius: 8px;
+    min-height: 42px;
+}
+
+/* ── Desktop: imágenes absolutas a los lados ── */
+
+.pics_top {
+    position: absolute;
+    left: -10%;
+    top: -100%;
+}
+
+.pics_bottom {
+    position: absolute;
+    right: -10%;
+    bottom: -100%;
+}
+
+.pic1 {
+    max-width: 260px;
+    position: relative;
+    z-index: 1;
+}
+
+.stamp2 {
+    max-width: 110px;
+    position: absolute;
+    bottom: -10%;
+    left: -8%;
+    z-index: 2;
+}
+
+.pic2 {
+    max-width: 260px;
+    position: relative;
+    z-index: 1;
+}
+
+.stamp3 {
+    max-width: 110px;
+    position: absolute;
+    bottom: -10%;
+    right: -8%;
+    z-index: 2;
+}
+
+/* ── Mobile ── */
+
+@media (max-width: 767px) {
+
+    .cont {
+        padding: 64px 0px;
+ 
+    }
+
+    .title_cont {
+        width: 100%;
+        padding: 48px 24px;
+        box-sizing: border-box;
+        gap: 32px;
+    }
+
+    .pics_top,
+    .pics_bottom {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        width: 100%;
+    }
+
+    .title {
+        font-size: 32px;
+        max-width: 90%;
+    }
+
+    .pic1,
+    .pic2 {
+        max-width: 50%;
+    }
+
+    .stamp2,
+    .stamp3 {
+        max-width: 25%;
+    }
+
+    .stamp2 {
+        bottom: -5%;
+        left: 30%
+    }
+
+
+    .stamp3 {
+        bottom: -10%;
+        right: 20%;
+        max-width: 20%;
+    }
+}
