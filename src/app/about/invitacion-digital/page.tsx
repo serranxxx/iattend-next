@@ -1,6 +1,49 @@
 import BackButton from "@/components/BackButton/BackButton";
 import React from "react";
 import { IoMdReturnLeft } from "react-icons/io";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Invitación Digital para Boda | Qué incluye | I attend",
+    description:
+        "Descubre todo lo que incluye una invitación digital de I attend: portada con cuenta regresiva, itinerario, dress code, mesa de regalos, galería y pase digital. 100% personalizable.",
+    keywords: [
+        "invitación digital para boda",
+        "qué incluye invitación digital",
+        "invitación digital personalizable",
+        "invitaciones digitales bodas",
+        "invitación digital con RSVP",
+        "pase digital boda",
+        "mesa de regalos digital",
+        "dress code digital",
+        "I attend invitaciones",
+    ],
+    openGraph: {
+        title: "Invitación Digital para Boda | Qué incluye | I attend",
+        description:
+            "Todo lo que incluye una invitación digital de I attend: cuenta regresiva, itinerario, dress code, mesa de regalos y más. Totalmente personalizable.",
+        url: "https://iattend.site/about/invitacion-digital",
+        siteName: "I attend",
+        images: [
+            {
+                url: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg",
+                width: 1200,
+                height: 630,
+                alt: "I attend – Invitación digital para boda",
+            },
+        ],
+        locale: "es_MX",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Invitación Digital para Boda | I attend",
+        description:
+            "Conoce todo lo que incluye tu invitación digital: cuenta regresiva, itinerario, dress code y más.",
+        images: ["https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg"],
+    },
+    robots: { index: true, follow: true },
+};
 
 export default function Page() {
     const schemaProduct = {
@@ -14,8 +57,8 @@ export default function Page() {
             "name": "I attend"
         },
         "category": "Digital Invitations",
-        "url": "https://iattend.site/about/features/invitaciones-paperless",
-        "image": "https://iattend.site/about/features/invitaciones-paperlessjpg",
+        "url": "https://iattend.site/about/invitacion-digital",
+        "image": "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg",
         "offers": {
             "@type": "Offer",
             "priceCurrency": "MXN",
@@ -45,7 +88,7 @@ export default function Page() {
                         <BackButton />
                     </div>
 
-                    <h2>¿Qué incluye una invitación digital paperless de I attend?</h2>
+                    <h1>¿Qué incluye una invitación digital paperless de I attend?</h1>
 
                     <p>
                         Las <strong>invitaciones digitales paperless de I attend</strong> están diseñadas para

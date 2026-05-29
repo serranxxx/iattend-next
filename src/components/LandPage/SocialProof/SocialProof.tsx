@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "antd";
 import styles from "./socialproof.module.css";
 import { createClient } from "@/lib/supabase/client";
+import { ArrowRight } from "lucide-react";
 
 const ROW_NATURAL_WIDTH = 1008; // 3 cards × 320px + 2 gaps × 24px
 const CARD_HEIGHT = 400;
@@ -129,7 +130,7 @@ export const SocialProof = () => {
               </div>
             </div>
             <span className={styles.situation_info_label}>Planear tu boda no debería sentirse así...</span>
-            <Button className={styles.situation_button}>Let&apos;s start</Button>
+            <Button className={styles.situation_button}>Let&apos;s start <ArrowRight strokeWidth={3} size={18}  /></Button>
           </div>
 
           

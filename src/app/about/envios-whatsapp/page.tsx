@@ -1,207 +1,191 @@
 import React from "react";
-import Head from "next/head";
-import { IoMdReturnLeft } from "react-icons/io";
 import BackButton from "@/components/BackButton/BackButton";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Envíos Automáticos de Invitaciones por WhatsApp | I attend",
+    description:
+        "Envía invitaciones digitales por WhatsApp de forma automática usando el API oficial de Meta. Sin riesgo de bloqueo, con sistema de créditos y envíos masivos seguros para bodas y eventos.",
+    keywords: [
+        "enviar invitaciones por WhatsApp",
+        "envíos automáticos WhatsApp bodas",
+        "envío masivo invitaciones WhatsApp",
+        "API WhatsApp invitaciones",
+        "invitaciones WhatsApp boda",
+        "envío automático invitados",
+        "mandar invitaciones digitales WhatsApp",
+        "WhatsApp API eventos",
+        "I attend WhatsApp",
+    ],
+    openGraph: {
+        title: "Envíos Automáticos de Invitaciones por WhatsApp | I attend",
+        description:
+            "Envía invitaciones digitales por WhatsApp de forma automática con el API oficial de Meta. Sin bloqueos, con créditos incluidos y control total desde I attend.",
+        url: "https://iattend.site/about/envios-whatsapp",
+        siteName: "I attend",
+        images: [
+            {
+                url: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg",
+                width: 1200,
+                height: 630,
+                alt: "I attend – Envíos automáticos de invitaciones por WhatsApp",
+            },
+        ],
+        locale: "es_MX",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Envíos Automáticos por WhatsApp | I attend",
+        description:
+            "Manda invitaciones digitales por WhatsApp de forma automática y segura con el API oficial de Meta.",
+        images: ["https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg"],
+    },
+    robots: { index: true, follow: true },
+};
 
 export default function WhatsAppDeliveryPage() {
     const whatsappDeliverySchema = {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        "name": "Envíos por WhatsApp I attend",
-        "description":
-            "Sistema de envío de invitaciones por WhatsApp utilizando el API oficial de Meta. Envíos seguros, automatizados y gestionados por créditos para bodas y eventos.",
-        "applicationCategory": "EventManagementApplication",
-        "operatingSystem": "Web",
-        "brand": {
+        name: "Envíos Automáticos por WhatsApp — I attend",
+        description:
+            "Sistema de envío automático de invitaciones por WhatsApp con el API oficial de Meta. Envíos seguros, masivos y sin riesgo de bloqueo para bodas y eventos.",
+        applicationCategory: "EventManagementApplication",
+        operatingSystem: "Web",
+        brand: {
             "@type": "Brand",
-            "name": "I attend"
+            name: "I attend",
         },
-        "url": "https://iattend.mx/envios-whatsapp",
-        "offers": {
+        url: "https://iattend.site/about/envios-whatsapp",
+        offers: {
             "@type": "Offer",
-            "priceCurrency": "MXN",
-            "availability": "https://schema.org/InStock",
-            "url": "https://iattend.mx/precios"
+            priceCurrency: "MXN",
+            availability: "https://schema.org/InStock",
+            url: "https://iattend.mx/precios",
         },
-        "audience": {
+        audience: {
             "@type": "Audience",
-            "audienceType": "Personas que organizan bodas y eventos sociales"
+            audienceType: "Personas que organizan bodas y eventos sociales",
         },
-        "featureList": [
-            "Envío de invitaciones por WhatsApp",
-            "Uso del API oficial de WhatsApp (Meta)",
-            "Envíos múltiples sin riesgo de bloqueo",
+        featureList: [
+            "Envío automático de invitaciones por WhatsApp",
+            "API oficial de WhatsApp (Meta)",
+            "Envíos masivos sin riesgo de bloqueo",
             "Sistema de créditos por envío",
             "300 créditos incluidos en I attend PRO",
-            "Compra de créditos adicionales"
-        ]
+            "Compra de créditos adicionales",
+            "Link mágico personalizado por invitado",
+        ],
     };
 
     return (
         <div className="seo_first_container">
-            {/* ================= SEO HEAD ================= */}
-            <Head>
-                <title>Envíos de Invitaciones por WhatsApp | I attend</title>
-
-                <meta
-                    name="description"
-                    content="Envía invitaciones digitales por WhatsApp de forma segura usando el API oficial de Meta. Sistema de créditos, envíos múltiples y control total con I attend."
-                />
-
-                <meta
-                    name="keywords"
-                    content="envíos por whatsapp, invitaciones por whatsapp, whatsapp api eventos, envío masivo invitaciones, whatsapp bodas"
-                />
-
-                <meta name="robots" content="index, follow" />
-                <meta name="author" content="I attend" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-                {/* Open Graph */}
-                <meta property="og:type" content="website" />
-                <meta
-                    property="og:title"
-                    content="Envíos de Invitaciones por WhatsApp | I attend"
-                />
-                <meta
-                    property="og:description"
-                    content="Envía invitaciones por WhatsApp de forma segura y automatizada usando el API oficial de Meta, sin riesgo de bloqueos."
-                />
-                <meta
-                    property="og:url"
-                    content="https://iattend.mx/envios-whatsapp"
-                />
-                <meta property="og:site_name" content="I attend" />
-                <meta
-                    property="og:image"
-                    content="https://iattend.mx/og/envios-whatsapp.jpg"
-                />
-                <meta property="og:locale" content="es_MX" />
-
-                {/* Twitter */}
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta
-                    name="twitter:title"
-                    content="Envíos de Invitaciones por WhatsApp | I attend"
-                />
-                <meta
-                    name="twitter:description"
-                    content="Invitaciones digitales enviadas por WhatsApp de forma segura con créditos y API oficial."
-                />
-                <meta
-                    name="twitter:image"
-                    content="https://iattend.mx/og/envios-whatsapp.jpg"
-                />
-
-                {/* Schema.org */}
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{
-                        __html: JSON.stringify(whatsappDeliverySchema)
-                    }}
-                />
-            </Head>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(whatsappDeliverySchema) }}
+            />
 
             {/* ================= CONTENIDO ================= */}
             <div className="seo_second_container">
                 <section className="seo_container" id="envios-whatsapp">
 
                     <div className="action_wrap">
-                        <BackButton></BackButton>
+                        <BackButton />
                     </div>
 
-                    <h2>Envíos de invitaciones por WhatsApp de forma segura y automatizada</h2>
+                    <h1>Envíos automáticos de invitaciones por WhatsApp con I attend</h1>
 
                     <p>
-                        Los <strong>envíos por WhatsApp de I attend</strong> están diseñados para que puedas
-                        compartir tus <a href="/about/invitacion-paperless">invitaciones digitales</a> de manera
-                        <strong>rápida, automatizada y segura</strong>,
-                        sin poner en riesgo tu cuenta personal de WhatsApp.
+                        Con I attend puedes <strong>enviar tu invitación digital por WhatsApp</strong>
+                        de forma <strong>automática, masiva y segura</strong>,
+                        sin poner en riesgo tu número personal.
+                        Con un solo clic, cada invitado recibe su invitación directamente
+                        en su WhatsApp, con un enlace personalizado para acceder a ella.
                     </p>
 
                     <p>
-                        Para lograrlo, I attend utiliza el <strong>API oficial de WhatsApp de Meta (Facebook)</strong>,
-                        lo que permite realizar <strong>envíos múltiples</strong>
-                        de forma controlada y profesional,
-                        cumpliendo con las políticas de la plataforma.
+                        No tienes que copiar y pegar mensajes ni escribir uno por uno.
+                        I attend lo hace todo por ti.
                     </p>
 
-                    <h3>Envíos seguros con el API oficial de WhatsApp</h3>
+                    <h2>Envíos seguros con el API oficial de WhatsApp (Meta)</h2>
 
                     <p>
-                        A diferencia de los envíos manuales o herramientas no oficiales,
-                        el uso del <strong>API de WhatsApp</strong> evita bloqueos,
-                        restricciones o sanciones en tu cuenta.
-                        Esto garantiza que tus invitaciones lleguen correctamente
-                        a tus <a href="/about/guest-management">invitados</a> sin afectar tu número personal.
-                    </p>
-
-                    <p>
-                        Gracias a esta integración, puedes enviar <a href="/about/invitacion-paperless">invitaciones</a>
-                        de forma masiva y ordenada,
-                        manteniendo una experiencia confiable tanto para ti
-                        como para tus invitados.
-                    </p>
-
-                    <h3>Sistema de créditos para envíos</h3>
-
-                    <p>
-                        Los envíos por WhatsApp en I attend se gestionan mediante un
-                        <strong>sistema de créditos</strong>.
-                        Cada vez que envías una invitación por WhatsApp,
-                        se utiliza <strong>1 crédito por envío</strong>.
+                        Para garantizar que tus envíos no sean bloqueados,
+                        I attend utiliza el <strong>API oficial de WhatsApp de Meta</strong>.
+                        A diferencia de herramientas no oficiales o envíos manuales masivos,
+                        el API oficial permite realizar <strong>envíos múltiples de forma controlada</strong>
+                        y dentro de las políticas de la plataforma.
                     </p>
 
                     <p>
-                        Este sistema te permite tener un control claro
-                        sobre cuántos mensajes has enviado
-                        y cuántos envíos te quedan disponibles.
+                        Esto significa que tus <a href="/about/invitacion-paperless">invitaciones digitales</a>
+                        llegan correctamente a cada invitado,
+                        sin arriesgar restricciones ni bloqueos en tu número.
                     </p>
 
-                    <h3>Paquete I attend PRO con créditos incluidos</h3>
+                    <h2>Cada invitado recibe un link mágico personalizado</h2>
 
                     <p>
-                        El <strong>paquete <a>I attend <b>PRO</b></a></strong> incluye
+                        Al enviar la invitación por WhatsApp, cada invitado recibe un
+                        <strong> link mágico único</strong> que lo lleva directamente
+                        a su invitación personalizada.
+                        No necesita ingresar ningún código —
+                        el enlace lo identifica automáticamente y le da acceso inmediato.
+                    </p>
+
+                    <p>
+                        Desde ahí puede confirmar su asistencia, revisar el itinerario,
+                        ver su mesa asignada y guardar su
+                        <a href="/about/pases-digitales"> pase digital en Apple Wallet</a>.
+                    </p>
+
+                    <h2>Sistema de créditos para envíos</h2>
+
+                    <p>
+                        Los <strong>envíos automáticos por WhatsApp</strong> funcionan
+                        con un <strong>sistema de créditos</strong>.
+                        Cada invitación enviada por WhatsApp consume <strong>1 crédito</strong>,
+                        lo que te da un control claro sobre cuántos mensajes has mandado
+                        y cuántos envíos tienes disponibles.
+                    </p>
+
+                    <h2>I attend PRO: 300 créditos incluidos</h2>
+
+                    <p>
+                        El <strong>paquete I attend PRO</strong> incluye
                         <strong> 300 créditos de envío por WhatsApp</strong>,
-                        ideales para cubrir la mayoría de los eventos
-                        sin necesidad de compras adicionales.
+                        suficientes para la mayoría de las bodas y eventos
+                        sin necesidad de comprar créditos adicionales.
                     </p>
 
                     <p>
-                        Estos créditos pueden utilizarse para enviar invitaciones
-                        a tus invitados directamente desde la plataforma,
-                        de forma automática y sin pasos adicionales.
+                        Si tu lista de invitados es más grande,
+                        puedes <strong>comprar créditos adicionales</strong> de forma independiente
+                        y usarlos cuando los necesites.
+                        Solo pagas por los envíos que realmente utilizas.
                     </p>
 
-                    <h3>Compra de créditos adicionales cuando lo necesites</h3>
+                    <h2>Control total desde la plataforma</h2>
 
                     <p>
-                        Si tu evento requiere más envíos,
-                        puedes <strong>adquirir créditos adicionales </strong>
-                        de forma independiente.
-                        Esto te da flexibilidad total para adaptarte
-                        al tamaño y necesidades de tu lista de invitados.
+                        Desde el panel de <a href="/about/guest-management">gestión de invitados</a> de I attend
+                        puedes ver el estado de cada envío:
+                        quiénes recibieron la invitación, quiénes confirmaron
+                        y quiénes aún no han respondido.
+                        Todo centralizado, sin salir de la plataforma.
                     </p>
 
                     <p>
-                        De esta manera, solo pagas por los envíos que realmente utilizas,
-                        manteniendo un sistema transparente y escalable.
-                    </p>
-
-                    <h3>Comunicación directa, ordenada y confiable</h3>
-
-                    <p>
-                        Con los <strong>envíos por WhatsApp de I attend</strong>,
-                        la comunicación con tus invitados es directa,
-                        profesional y organizada.
-                        Cada invitación llega de forma clara,
-                        segura y en el momento adecuado,
-                        mejorando la experiencia general de tu evento.
+                        Con los <strong>envíos automáticos por WhatsApp de I attend</strong>,
+                        invitar a toda tu lista se convierte en un proceso de segundos,
+                        sin estrés, sin riesgo de bloqueos y con la certeza
+                        de que cada invitado recibió su invitación correctamente.
                     </p>
 
                 </section>
             </div>
-
         </div>
     );
 }

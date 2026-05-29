@@ -1,6 +1,49 @@
 import BackButton from "@/components/BackButton/BackButton";
 import React from "react";
 import { IoMdReturnLeft } from "react-icons/io";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Invitaciones Paperless para Bodas y Eventos | I attend",
+    description:
+        "Crea invitaciones digitales paperless para tu boda o evento. Modernas, elegantes, sin papel y 100% personalizables. Incluye RSVP, itinerario, dress code, mesa de regalos y más.",
+    keywords: [
+        "invitaciones paperless",
+        "invitación paperless boda",
+        "invitaciones digitales sin papel",
+        "invitaciones digitales personalizadas",
+        "invitación digital boda",
+        "crear invitación digital",
+        "invitaciones bodas modernas",
+        "invitación digital gratuita",
+        "I attend paperless",
+    ],
+    openGraph: {
+        title: "Invitaciones Paperless para Bodas y Eventos | I attend",
+        description:
+            "La alternativa moderna a la invitación tradicional. Invitaciones digitales personalizadas para bodas y eventos especiales, con RSVP, itinerario y mucho más.",
+        url: "https://iattend.site/about/invitacion-paperless",
+        siteName: "I attend",
+        images: [
+            {
+                url: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg",
+                width: 1200,
+                height: 630,
+                alt: "I attend – Invitaciones paperless para bodas",
+            },
+        ],
+        locale: "es_MX",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Invitaciones Paperless para Bodas | I attend",
+        description:
+            "Invitaciones digitales personalizadas para bodas y eventos. Sin papel, con RSVP y 100% editables.",
+        images: ["https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg"],
+    },
+    robots: { index: true, follow: true },
+};
 
 export default function Page() {
     const schemaProduct = {
@@ -14,8 +57,8 @@ export default function Page() {
             "name": "I attend"
         },
         "category": "Digital Invitations",
-        "url": "https://iattend.site/about/features/invitaciones-paperless",
-        "image": "https://iattend.site/about/features/invitaciones-paperlessjpg",
+        "url": "https://iattend.site/about/invitacion-paperless",
+        "image": "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg",
         "offers": {
             "@type": "Offer",
             "priceCurrency": "MXN",

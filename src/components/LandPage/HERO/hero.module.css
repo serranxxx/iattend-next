@@ -1,9 +1,11 @@
 .hero_cont {
     width: 100%;
+    max-width: 1700px;
     position: relative;
     overflow: hidden;
     background-color: #20212B;
     min-height: 100vh;
+    box-shadow: -20px 0 40px rgba(0,0,0,0.2), 20px 0 40px rgba(0,0,0,0.2);
 }
 
 .hero_video {
@@ -14,6 +16,15 @@
     object-fit: cover;
     object-position: center;
     z-index: 1;
+    transition: opacity 1.5s ease;
+}
+
+.hero_video_active {
+    opacity: 1;
+}
+
+.hero_video_inactive {
+    opacity: 0;
 }
 
 .shadow {

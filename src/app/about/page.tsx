@@ -21,42 +21,49 @@ import { Frequent } from "@/components/LandPage/Frequent/Frequent";
 import { Final } from "@/components/LandPage/Final/Final";
 
 export const metadata: Metadata = {
-  title: "I attend | Guest management & paperless invitations",
+  title: "I attend | Invitaciones Digitales y Gestión de Invitados para Bodas",
   description:
-    "Plan events with ease using I attend. Manage your guest list, track RSVPs in real time, and send beautiful paperless invitations — all in one place.",
+    "Crea invitaciones digitales personalizadas, gestiona tu lista de invitados y confirma asistencias en tiempo real. Todo en un solo lugar para bodas y eventos especiales.",
   keywords: [
+    "invitaciones digitales",
+    "invitaciones para boda",
+    "invitaciones paperless",
+    "gestión de invitados",
+    "RSVP digital",
+    "confirmación de asistencia",
+    "pases digitales",
+    "mapa de mesas",
+    "envíos por WhatsApp",
+    "organizar boda",
+    "plataforma para eventos",
+    "I attend",
     "guest management",
     "event planning",
-    "RSVP management",
-    "paperless invitations",
-    "event guest list",
-    "I attend",
   ],
   authors: [{ name: "I attend" }],
   creator: "I attend",
-  metadataBase: new URL("https://iattend.site"),
   openGraph: {
-    title: "I attend | Plan with ease",
+    title: "I attend | Invitaciones Digitales y Gestión de Invitados",
     description:
-      "A modern guest management platform to plan events, manage RSVPs, and send paperless invitations effortlessly.",
-    url: "https://iattend.site",
+      "Crea invitaciones digitales personalizadas, gestiona tu lista de invitados y confirma asistencias en tiempo real. La plataforma todo-en-uno para bodas y eventos especiales.",
+    url: "https://iattend.site/about",
     siteName: "I attend",
     images: [
       {
         url: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg",
         width: 1200,
         height: 630,
-        alt: "I attend – Guest management made easy",
+        alt: "I attend – Invitaciones digitales y gestión de invitados",
       },
     ],
-    locale: "en_US",
+    locale: "es_MX",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "I attend | Guest management & event planning",
+    title: "I attend | Invitaciones Digitales para Bodas",
     description:
-      "Manage guests, track RSVPs, and plan events with ease using I attend.",
+      "Crea invitaciones digitales personalizadas y gestiona tu lista de invitados en tiempo real con I attend.",
     images: ["https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg"],
   },
   robots: {
@@ -69,6 +76,7 @@ export const metadata: Metadata = {
 export default function LandPage() {
   return (
     <div className={styles.main_container_land}>
+      <div className={styles.bg_blur} />
 
       <HeroSection></HeroSection>
       <SocialProof></SocialProof>

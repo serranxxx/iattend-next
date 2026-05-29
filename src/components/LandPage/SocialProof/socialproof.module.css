@@ -1,11 +1,13 @@
 .cont {
     width: 100%;
+    max-width: 1700px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #eeeadf;
+    box-shadow: -20px 0 40px rgba(0,0,0,0.2), 20px 0 40px rgba(0,0,0,0.2);
 }
 
 /* ── Stats row ── */

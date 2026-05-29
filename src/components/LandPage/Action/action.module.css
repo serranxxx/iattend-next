@@ -1,11 +1,13 @@
 .cont {
     width: 100%;
+    max-width: 1700px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 36px;
     padding: 264px 0px;
+    box-shadow: -20px 0 40px rgba(0,0,0,0.2), 20px 0 40px rgba(0,0,0,0.2);
     background: repeating-linear-gradient(90deg,
             #0c171b 0px,
             #0c171b 30px,

@@ -1,6 +1,6 @@
 "use client";
 
-import { IoMdReturnLeft } from "react-icons/io";
+import { HiArrowLeft } from "react-icons/hi";
 import styles from "./backbutton.module.css"
 
 export default function BackButton() {
@@ -8,6 +8,7 @@ export default function BackButton() {
         <button
             className={styles.action_button}
             type="button"
+            aria-label="Regresar"
             onClick={() => {
                 if (window.history.length > 1) {
                     window.history.back();
@@ -16,8 +17,7 @@ export default function BackButton() {
                 }
             }}
         >
-            <IoMdReturnLeft />
-            <span> Regresar</span>
+            <HiArrowLeft />
         </button>
     );
 }

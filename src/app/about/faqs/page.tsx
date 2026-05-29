@@ -8,9 +8,43 @@ import { IoMdReturnLeft } from "react-icons/io";
    SEO METADATA
 ========================= */
 export const metadata: Metadata = {
-  title: "Preguntas Frecuentes | I attend",
+  title: "Preguntas Frecuentes sobre Invitaciones Digitales | I attend",
   description:
     "Resuelve todas tus dudas sobre invitaciones digitales, gestión de invitados, confirmaciones de asistencia y envíos automáticos por WhatsApp con I attend.",
+  keywords: [
+    "preguntas frecuentes invitaciones digitales",
+    "dudas invitación digital boda",
+    "cómo funciona I attend",
+    "FAQ invitaciones digitales",
+    "RSVP dudas frecuentes",
+    "confirmación de asistencia bodas",
+    "I attend FAQs",
+  ],
+  openGraph: {
+    title: "Preguntas Frecuentes sobre Invitaciones Digitales | I attend",
+    description:
+      "Resuelve todas tus dudas sobre invitaciones digitales, gestión de invitados y envíos por WhatsApp con I attend.",
+    url: "https://iattend.site/about/faqs",
+    siteName: "I attend",
+    images: [
+      {
+        url: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg",
+        width: 1200,
+        height: 630,
+        alt: "I attend – Preguntas frecuentes",
+      },
+    ],
+    locale: "es_MX",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Preguntas Frecuentes | I attend",
+    description:
+      "Resuelve tus dudas sobre invitaciones digitales, gestión de invitados y confirmaciones de asistencia.",
+    images: ["https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg"],
+  },
+  robots: { index: true, follow: true },
 };
 
 /* =========================

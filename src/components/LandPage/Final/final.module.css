@@ -1,8 +1,10 @@
 .cont {
     width: 100%;
+    max-width: 1700px;
     min-height: 800px;
     display: flex;
     flex-direction: row;
+    box-shadow: -20px 0 40px rgba(0,0,0,0.2), 20px 0 40px rgba(0,0,0,0.2);
 }
 
 /* ── Left panel ── */

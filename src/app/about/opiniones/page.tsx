@@ -8,9 +8,42 @@ import { IoMdReturnLeft } from "react-icons/io";
    SEO METADATA
 ========================= */
 export const metadata: Metadata = {
-  title: "Opiniones de Usuarios | I attend",
+  title: "Opiniones y Reseñas de I attend | Invitaciones Digitales",
   description:
-    "Conoce las opiniones reales de quienes han organizado sus eventos con I attend. Experiencias sobre invitaciones digitales, gestión de invitados y confirmaciones.",
+    "Conoce las opiniones reales de quienes han organizado sus eventos con I attend. Experiencias sobre invitaciones digitales, gestión de invitados y confirmaciones de asistencia.",
+  keywords: [
+    "opiniones I attend",
+    "reseñas invitaciones digitales",
+    "testimonios bodas digitales",
+    "experiencias I attend",
+    "reviews plataforma eventos",
+    "opiniones usuarios invitaciones",
+  ],
+  openGraph: {
+    title: "Opiniones y Reseñas de I attend | Invitaciones Digitales",
+    description:
+      "Conoce las experiencias reales de quienes han organizado sus bodas y eventos con I attend.",
+    url: "https://iattend.site/about/opiniones",
+    siteName: "I attend",
+    images: [
+      {
+        url: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg",
+        width: 1200,
+        height: 630,
+        alt: "I attend – Opiniones de usuarios",
+      },
+    ],
+    locale: "es_MX",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Opiniones de I attend | Invitaciones Digitales",
+    description:
+      "Experiencias reales de personas que han organizado sus bodas y eventos con I attend.",
+    images: ["https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg"],
+  },
+  robots: { index: true, follow: true },
 };
 
 /* =========================
@@ -33,7 +66,7 @@ export default function ReviewsPage() {
       reviewRating: review.review
         ? {
           "@type": "Rating",
-          ratingValue: review.name,
+          ratingValue: "5",
           bestRating: "5",
         }
         : undefined,

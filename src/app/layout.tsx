@@ -7,23 +7,43 @@ import { AntdRegistry } from '@ant-design/nextjs-registry'
 
 
 export const metadata: Metadata = {
-  title: "I attend",
-  description: "Plan with ease",
-  keywords: ["invitaciones digitales", "bodas", "fiestas", "I attend"],
+  title: {
+    default: "I attend | Invitaciones Digitales y Gestión de Invitados",
+    template: "%s | I attend",
+  },
+  description:
+    "Crea invitaciones digitales personalizadas, gestiona tu lista de invitados y confirma asistencias en tiempo real. La plataforma todo-en-uno para bodas y eventos.",
+  keywords: [
+    "invitaciones digitales",
+    "invitaciones para boda",
+    "gestión de invitados",
+    "confirmación de asistencia",
+    "RSVP digital",
+    "invitación paperless",
+    "bodas",
+    "eventos",
+    "I attend",
+    "pases digitales",
+    "mapa de mesas",
+    "envíos por WhatsApp",
+  ],
+  metadataBase: new URL("https://iattend.site"),
+  authors: [{ name: "I attend" }],
+  creator: "I attend",
   icons: {
     icon: [
       { url: "/icon.png", type: "image/png" },
       { url: "/icon.svg", type: "image/svg+xml" },
     ],
     apple: "/apple-icon.png",
-  }
+  },
 };
 
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 
   return (
-    <html lang="en" >
+    <html lang="es" >
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <link

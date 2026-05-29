@@ -2,6 +2,7 @@
 
 .cont {
     width: 100%;
+    max-width: 1700px;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;

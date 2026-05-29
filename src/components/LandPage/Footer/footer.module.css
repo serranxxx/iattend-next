@@ -4,6 +4,7 @@
     justify-content: flex-start;
     flex-direction: column;
     width: 100%;
+    max-width: 1700px;
     padding: 36px 0px;
     gap: 18px;
 
@@ -89,6 +90,8 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    max-width: 1700px;
+    box-shadow: -20px 0 40px rgba(0,0,0,0.2), 20px 0 40px rgba(0,0,0,0.2);
     background: repeating-linear-gradient(
         90deg,
         #0c171b 0px,
