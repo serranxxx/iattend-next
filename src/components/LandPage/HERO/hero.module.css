@@ -80,8 +80,8 @@
     transform: translateY(-50%);
 }
 
-.hero_heart_left  { left: 0; transform: rotate(-20deg); }
-.hero_heart_right { right: 0;transform: rotate(20deg); }
+.hero_heart_left  { left: 0;  }
+.hero_heart_right { right: 0; }
 
 .hero_texts {
     display: flex;

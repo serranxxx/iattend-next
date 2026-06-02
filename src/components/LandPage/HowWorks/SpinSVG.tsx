@@ -9,9 +9,10 @@ interface SpinSVGProps {
   height: number;
   viewBox: string;
   delay?: number;
+  color?: string;
 }
 
-export const SpinSVG = ({ path, width, height, viewBox, delay = 0 }: SpinSVGProps) => {
+export const SpinSVG = ({ path, width, height, viewBox, delay = 0, color = "#0C171B" }: SpinSVGProps) => {
   const pathRef = useRef<SVGPathElement>(null);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export const SpinSVG = ({ path, width, height, viewBox, delay = 0 }: SpinSVGProp
       <path
         ref={pathRef}
         d={path}
-        stroke="#0C171B"
+        stroke={color}
         strokeWidth="6"
         strokeLinecap="round"
         strokeMiterlimit="10"

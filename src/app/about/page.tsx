@@ -1,19 +1,8 @@
 import { HeroSection } from "@/components/LandPage/HERO/HERO";
-import { KeyFeatures } from "@/components/LandPage/KeyFeatures/KeyFeatures";
+import { Header } from "@/components/LandPage/Header/Header";
 import styles from "./page.module.css";
-import { WorkFlow } from "@/components/LandPage/WorkFlow/WorkFlow";
-import { IdealCustomer } from "@/components/LandPage/IdealCustomer/IdealCustomer";
-import { Plans } from "@/components/LandPage/Plans/Plans";
-import { FAQs } from "@/components/LandPage/FAQs/FAQs";
 import { FooterLand } from "@/components/LandPage/Footer/Footer";
-import { Reviews } from "@/components/LandPage/Reviews/Reviews";
-import Video from "@/components/LandPage/Video/Video";
 import type { Metadata } from "next";
-import { Drawer } from "antd";
-import { HomeScroll } from "@/components/HomeScroll/HomeScroll";
-import { InvitationAbout } from "@/components/LandPage/Invitation/Invitation";
-import { Shipments } from "@/components/LandPage/Shipments/Shipments";
-import { SideEvents } from "@/components/LandPage/SideEvents/SideEvents";
 import { SocialProof } from "@/components/LandPage/SocialProof/SocialProof";
 import { HowWorks } from "@/components/LandPage/HowWorks/HowWorks";
 import { Action } from "@/components/LandPage/Action/Action";
@@ -75,36 +64,19 @@ export const metadata: Metadata = {
 
 export default function LandPage() {
   return (
-    <div className={styles.main_container_land}>
+    <div className={styles.main_container_land} id="land-scroll-container">
+      <Header />
       <div className={styles.bg_blur} />
 
       <HeroSection></HeroSection>
+      <div id="hero-sentinel" />
       <SocialProof></SocialProof>
       <HowWorks></HowWorks>
       <Action />
       <Frequent />
       <Final />
-
-      {/* <InvitationAbout />
-      <SideEvents />
-      <HomeScroll />
-      <WorkFlow></WorkFlow> */}
-      {/* <Shipments /> */}
-      {/* <IdealCustomer></IdealCustomer> */}
-      {/* <KeyFeatures></KeyFeatures> */}
-
-      {/* <Reviews></Reviews> */}
-
-      {/* <Plans></Plans>
-
-      <Video></Video>
-
-      
-      <FAQs></FAQs> */}
-      {/* <CTA></CTA> */}
       <FooterLand></FooterLand>
 
-     
     </div>
   );
 }

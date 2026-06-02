@@ -12,7 +12,7 @@ export const Action = () => {
         </div>
 
         <span className={styles.title}>TU EVENTO MERECE QUE DISFRUTES PLANEARLO</span>
-        <Button className={styles.cta}>GET STARTED TODAY</Button>
+        <Button className={styles.cta} href="https://www.iattend.site/login?mode=register">GET STARTED TODAY</Button>
 
         <div className={styles.pics_bottom}>
           <img src="landing/items/pic2.png" alt="" className={styles.pic2} />

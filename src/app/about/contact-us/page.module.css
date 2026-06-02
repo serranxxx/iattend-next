@@ -1,0 +1,254 @@
+.page {
+    background-color: #EEE9DE;
+    min-height: 100vh;
+}
+
+/* ── Hero ── */
+.hero {
+    padding: 150px 52px 72px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero_title {
+    font-family: 'Denver Serial', sans-serif;
+    font-style: italic;
+    font-weight: 800;
+    font-size: clamp(64px, 11vw, 120px);
+    line-height: 1.0;
+    color: #0c171b;
+    margin: 0 0 20px;
+}
+
+.hero_sub {
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 200;
+    color: #0c171b;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 440px;
+}
+
+/* ── Contacts ── */
+.contacts_section {
+    padding: 0 52px 60px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.contacts_grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact_card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.65);
+    border: 1.5px solid rgba(12, 23, 27, 0.1);
+    border-radius: 16px;
+    padding: 20px 24px;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact_card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+}
+
+.contact_icon {
+    color: #0c171b;
+    opacity: 0.7;
+    flex-shrink: 0;
+}
+
+.contact_info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
+
+.contact_label {
+    font-family: 'Windsor', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #0c171b;
+    opacity: 0.45;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.contact_value {
+    font-family: 'Windsor', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #0c171b;
+}
+
+.contact_cta {
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: #0c171b;
+    opacity: 0.5;
+    white-space: nowrap;
+}
+
+/* ── Schedule ── */
+.schedule_section {
+    padding: 0 52px 80px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.schedule_card {
+    background: #0c171b;
+    border-radius: 20px;
+    padding: 40px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+.schedule_left {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    flex: 1;
+}
+
+.schedule_icon {
+    color: #EEE9DE;
+    opacity: 0.7;
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.schedule_title {
+    font-family: 'Windsor', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #EEE9DE;
+    margin: 0 0 8px;
+}
+
+.schedule_desc {
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 200;
+    color: #EEE9DE;
+    opacity: 0.65;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 420px;
+}
+
+.schedule_btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #EEE9DE;
+    color: #0c171b;
+    font-family: 'Windsor', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 12px;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+    flex-shrink: 0;
+}
+
+.schedule_btn:hover { opacity: 0.8; }
+
+/* ── Programa de colaboradores ── */
+.work_section {
+    background: repeating-linear-gradient(
+        90deg,
+        #0c171b 0px,
+        #0c171b 20px,
+        #071013 20px,
+        #071013 50px
+    );
+    border-top: 1.5px solid rgba(12, 23, 27, 0.1);
+    padding: 100px 52px;
+}
+
+.work_inner {
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.work_icon {
+    color: #EEE9DE;
+    opacity: 0.55;
+}
+
+.work_eyebrow {
+    font-family: 'Windsor', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #EEE9DE;
+    opacity: 0.45;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 0;
+}
+
+.work_title {
+    font-family: 'Denver Serial', sans-serif;
+    font-style: italic;
+    font-weight: 800;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.05;
+    color: #EEE9DE;
+    margin: 0;
+}
+
+.work_desc {
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 17px;
+    font-weight: 200;
+    color: #EEE9DE;
+    opacity: 0.65;
+    line-height: 1.75;
+    margin: 0;
+}
+
+.work_cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #EEE9DE;
+    color: #0c171b;
+    font-family: 'Windsor', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 16px 32px;
+    border-radius: 12px;
+    transition: opacity 0.2s ease;
+}
+
+.work_cta:hover { opacity: 0.8; }
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+    .hero             { padding: 100px 24px 52px; }
+    .contacts_section { padding: 0 24px 48px; }
+    .schedule_section { padding: 0 24px 60px; }
+    .work_section     { padding: 60px 24px; }
+    .schedule_card    { flex-direction: column; }
+}

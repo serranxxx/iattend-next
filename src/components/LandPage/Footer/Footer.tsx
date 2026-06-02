@@ -1,21 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import styles from "./footer.module.css";
-import { Button } from "antd";
-import { FaBars, FaHeadset, FaInstagram, FaRegEnvelope, FaRegPaperPlane, FaWhatsapp } from "react-icons/fa";
-import { Generals, NewInvitation } from "@/types/new_invitation";
-import { darker, lighter } from "@/helpers/functions";
+import {  FaHeadset, FaInstagram, FaRegEnvelope, FaRegPaperPlane, FaWhatsapp } from "react-icons/fa";
 import Link from "next/link";
 
 
 
-type Props = {
-  invitation?: NewInvitation;
-  color?: string;
-}
-
-export const FooterLand = ({ invitation, color }: Props) => {
+export const FooterLand = () => {
 
 
   return (

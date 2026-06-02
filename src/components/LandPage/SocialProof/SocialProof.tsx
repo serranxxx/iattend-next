@@ -114,7 +114,7 @@ export const SocialProof = () => {
           src="/landing/items/item3.png" alt="situation 2" className={styles.item4} />
 
           <div className={styles.situation_info}>
-            <span className={styles.situation_info_title}>SOUND FAMILIAR?</span>
+            <span className={styles.situation_info_title}>TE IDENTIFICAS CON...</span>
             <div className={styles.situation_info_grid}>
               <div className={styles.situation_info_grid_item}>
                 <span>Tienes mil decisiones encima y no sabes cuál delegar y cuál resolver tú.</span>
@@ -174,7 +174,7 @@ export const SocialProof = () => {
             </span>
           </div>
         </div>
-        <span className={styles.situation_cards_labels}>Un sistema que trabaja contigo para que no tengas que preocuparte</span>
+        <span className={styles.situation_cards_labels}>Una plataforma que trabaja contigo para que no tengas que preocuparte</span>
 
       </div>
     </section>

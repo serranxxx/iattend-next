@@ -90,7 +90,7 @@ export const Final = () => {
               <button className={styles.scroll_btn} onClick={() => scroll("left")}>←</button>
               <button className={styles.scroll_btn} onClick={() => scroll("right")}>→</button>
             </div>
-            <Button className={styles.cta}>GET STARTED NOW</Button>
+            <Button className={styles.cta} href="https://www.iattend.site/login?mode=register">GET STARTED NOW</Button>
           </div>
         </div>
       </div>

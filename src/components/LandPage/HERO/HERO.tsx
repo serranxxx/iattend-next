@@ -58,7 +58,7 @@ export const HeroSection = () => {
             <h2 className={styles.hero_h2}>en menos de una tarde</h2>
             <h3 className={styles.hero_h3}>Invitación, confirmaciones, mesas: TODO en un solo</h3>
             <h3 className={styles.hero_h3}>lugar mientras tu disfrutas el proceso de tu MOMENTO.</h3>
-            <Button className={styles.hero_button}>See how it works <ArrowRight size={18} strokeWidth={3} /></Button>
+            <Button className={styles.hero_button} href="https://www.iattend.site/login?mode=register">See how it works <ArrowRight size={18} strokeWidth={3} /></Button>
           </div>
         </div>
       </div>

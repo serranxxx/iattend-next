@@ -1,11 +1,4 @@
 User-agent: *
 Allow: /
 
-# No indexar rutas de app
-Disallow: /login
-Disallow: /host
-Disallow: /side-event-host
-Disallow: /side-event/
-
-# Sitemap
 Sitemap: https://iattend.site/sitemap.xml

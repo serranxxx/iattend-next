@@ -1,0 +1,352 @@
+/* ─────────────────────────────────────
+   HEADER — fixed top bar
+   ───────────────────────────────────── */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    background: transparent;
+    transition: background-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.header_inner {
+    max-width: 1530px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 36px;
+    box-sizing: border-box;
+}
+
+.header_hidden {
+    transform: translateY(-110%);
+}
+
+.header_solid {
+    /* backdrop-filter: blur(16px); */
+    background: #eeeadf;
+    border-bottom: 1px solid rgba(222, 216, 202, 0.764);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+    border-radius: 0 0 36px 36px;
+}
+
+
+/* ─────────────────────────────────────
+   LOGO
+   ───────────────────────────────────── */
+
+.logo_wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 38px;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.logo_full {
+    max-height: 38px;
+    height: 38px;
+    width: auto;
+    display: block;
+    opacity: 0;
+    transform: scale(0.85) translateX(-6px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.logo_full_visible {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+}
+
+.logo_icon {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) scale(1);
+    max-width: 24px;
+    height: auto;
+    opacity: 1;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.logo_icon_hidden {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.4);
+    pointer-events: none;
+}
+
+/* ─────────────────────────────────────
+   DESKTOP NAV
+   ───────────────────────────────────── */
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.link {
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 200;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    transition: color 0.35s ease, opacity 0.2s ease;
+    position: relative;
+}
+
+.link::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background-color: currentColor;
+    transition: width 0.25s ease;
+}
+
+.link:hover::after {
+    width: 100%;
+}
+
+.link_active {
+    opacity: 1 !important;
+}
+
+.link_active::after {
+    width: 100%;
+}
+
+.light {
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.light:hover {
+    color: #ffffff;
+    opacity: 1;
+}
+
+.dark {
+    color: #eeeadf;
+}
+
+.dark:hover {
+    color: #ffffff;
+    opacity: 0.7;
+}
+
+/* ─────────────────────────────────────
+   CTA BUTTON (desktop + mobile)
+   ───────────────────────────────────── */
+
+.cta_btn {
+    font-family: 'Windsor', sans-serif;
+    font-size: clamp(13px, 1.4vw, 16px) !important;
+    font-weight: 500;
+    background-color: #eeeadf;
+    color: #0c171b;
+}
+
+/* ─────────────────────────────────────
+   SUB-PAGE OVERRIDES
+   (products, pricing, this-is-us, contact-us)
+   ───────────────────────────────────── */
+
+.header_subpage .link {
+    color: #0c171b;
+}
+
+.header_subpage .link:hover {
+    color: #0c171b;
+    opacity: 0.55;
+}
+
+.header_subpage .menu_btn {
+    color: #0c171b;
+}
+
+.header_subpage .cta_btn {
+    background-color: #0c171b !important;
+    color: #EEE9DE !important;
+    border-color: transparent !important;
+}
+
+/* ─────────────────────────────────────
+   MOBILE ROW (hidden on desktop)
+   ───────────────────────────────────── */
+
+.mobile_row {
+    display: none;
+    align-items: center;
+    gap: 12px;
+}
+
+.menu_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    transition: opacity 0.2s ease;
+}
+
+.menu_btn:hover {
+    opacity: 0.7;
+}
+
+/* ─────────────────────────────────────
+   OVERLAY MENU
+   ───────────────────────────────────── */
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background: repeating-linear-gradient(90deg,
+            #0c171b 0px,
+            #0c171b 20px,
+            #071013 20px,
+            #071013 45px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 36px 52px;
+    box-sizing: border-box;
+
+    /* hidden state */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-12px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.overlay_open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* Close button */
+.overlay_close {
+    position: absolute;
+    top: 20px;
+    right: 28px;
+    background: transparent;
+    border: none;
+    color: #eeeadf;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.overlay_close:hover {
+    opacity: 1;
+}
+
+/* Nav links inside overlay */
+.overlay_nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.overlay_link {
+    font-family: 'Denver Serial', sans-serif;
+    font-style: italic;
+    font-weight: 800;
+    font-size: clamp(40px, 12vw, 72px);
+    color: #eeeadf;
+    text-decoration: none;
+    line-height: 1.05;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.35s ease, transform 0.35s ease, color 0.2s ease;
+}
+
+.overlay_link_visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.overlay_link:hover {
+    color: rgba(238, 233, 222, 0.55);
+}
+
+/* Active page — full opacity */
+.overlay_link_active {
+    opacity: 1 !important;
+}
+
+/* Inactive pages — dimmed */
+.overlay_link_inactive {
+    opacity: 0.35;
+}
+
+.overlay_link_inactive:hover {
+    opacity: 0.65;
+}
+
+/* Bottom CTA */
+.overlay_bottom {
+    margin-top: 48px;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.overlay_cta {
+    font-family: 'Windsor', sans-serif;
+    font-size: 18px !important;
+    font-weight: 600;
+    height: auto !important;
+    padding: 14px 32px !important;
+}
+
+/* ─────────────────────────────────────
+   RESPONSIVE
+   ───────────────────────────────────── */
+
+@media (max-width: 767px) {
+    .header_inner {
+        padding: 14px 20px;
+    }
+
+    /* hide desktop nav, show mobile row */
+    .nav {
+        display: none;
+    }
+
+    .mobile_row {
+        display: flex;
+    }
+
+    .logo_icon {
+        max-width: 22px;
+    }
+
+    .logo_full {
+        max-height: 32px;
+        height: 32px;
+    }
+
+    .logo_wrap {
+        height: 28px;
+    }
+}
