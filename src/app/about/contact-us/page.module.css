@@ -1,6 +1,7 @@
 .page {
     background-color: #EEE9DE;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 /* ── Hero ── */
@@ -88,6 +89,8 @@
     font-size: 17px;
     font-weight: 700;
     color: #0c171b;
+    word-break: break-all;
+    overflow-wrap: anywhere;
 }
 
 .contact_cta {

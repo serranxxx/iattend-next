@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import styles from "./page.module.css";
 import { Header } from "@/components/LandPage/Header/Header";
 import Link from "next/link";
-import { Check, Star, Gift, Mail, Sparkles, ArrowUpRight } from "lucide-react";
+import { Star, Gift, Mail, Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Precios | I attend",
@@ -17,29 +17,25 @@ const PLANS = [
     tagline: "La experiencia completa: invita, gestiona y automatiza.",
     price: 3499,
     popular: true,
-    features: [
-      "Invitación Digital",
-      "Gestión de Invitados",
-      "Envíos Automáticos por WhatsApp",
-      "Acomodo de Mesas",
-      "Pases Digitales + Apple Wallet",
-      "3 Side Events",
-      "LIA — AI Assistant",
+    desc: <>Incluye una <Link href="/about/invitacion-digital" className={styles.desc_link}><strong>invitación digital</strong></Link> para que te olvides de impresiones y reimpresiones. Un <Link href="/about/guest-management" className={styles.desc_link}><strong>gestor de invitados</strong></Link> para alejarte del Excel de 200 filas: sabes en tiempo real quién confirmó y quién no, sin perseguir a nadie. Y el <Link href="/about/mapa-de-mesas" className={styles.desc_link}><strong>acomodo de mesas</strong></Link> para que el seating chart no te quite el sueño. Y un <Link href="/about/side-events" className={styles.desc_link}><strong>Side Event</strong></Link> para ese momento extra que no puede faltar.</>,
+    extras: [
+      { label: "Envíos automáticos por WhatsApp",  note: "invita a todos en minutos, sin copiar y pegar, sin arriesgar tu número.",          href: "/about/envios-whatsapp" },
+      { label: "2 Side Events adicionales",         note: "porque tu boda son muchos momentos — la cena, el brunch, el civil, todo desde el mismo lugar.", href: "/about/side-events" },
+      { label: "Pases digitales + Apple Wallet",    note: "para que nadie busque listas impresas el día del evento ni haga filas en la entrada.", href: "/about/pases-digitales" },
+      // { label: "LIA — AI Assistant",                note: "tu asistente disponible 24/7 dentro de la invitación, sin que tú tengas que responder nada." },
     ],
   },
   {
     id: "lite",
     name: "Lite",
-    tagline: "Invitación digital con control de invitados.",
+    tagline: "Invitación digital completa con control de invitados y organización de tu evento.",
     price: 2499,
-    originalPrice: 3125,
-    discount: "20% OFF",
-    features: [
-      "Invitación Digital",
-      "Gestión de Invitados",
-      "Acomodo de Mesas",
-      "1 Side Event",
-    ],
+    // originalPrice: 2499,
+    // discount: "20% OFF",
+    desc: <>Incluye una <Link href="/about/invitacion-digital" className={styles.desc_link}><strong>invitación digital</strong></Link> para que te olvides de impresiones y reimpresiones. Un <Link href="/about/guest-management" className={styles.desc_link}><strong>gestor de invitados</strong></Link> para alejarte del Excel de 200 filas: sabes en tiempo real quién confirmó y quién no, sin perseguir a nadie. Y el <Link href="/about/mapa-de-mesas" className={styles.desc_link}><strong>acomodo de mesas</strong></Link> para que el seating chart no te quite el sueño. Y un <Link href="/about/side-events" className={styles.desc_link}><strong>Side Event</strong></Link> para ese momento extra que no puede faltar.</>,
+    extras: [
+      { label: "Acompañamiento del equipo de I attend", note: "estamos contigo desde que empiezas hasta el día de tu evento, en todo momento." },
+    ] as { label: string; note: string; href?: string }[],
   },
 ];
 
@@ -82,16 +78,6 @@ const PAIN_POINTS = [
   },
 ];
 
-/* ── Feature → SEO page links ───────── */
-const FEATURE_LINKS: Record<string, string> = {
-  "Invitación Digital":               "/about/invitacion-digital",
-  "Gestión de Invitados":             "/about/guest-management",
-  "Envíos Automáticos por WhatsApp":  "/about/envios-whatsapp",
-  "Acomodo de Mesas":                 "/about/mapa-de-mesas",
-  "Pases Digitales + Apple Wallet":   "/about/pases-digitales",
-  "3 Side Events":                    "/about/side-events",
-  "1 Side Event":                     "/about/side-events",
-};
 
 /* ── Gift steps ──────────────────────── */
 const GIFT_STEPS = [
@@ -154,27 +140,34 @@ export default function PricingPage() {
                   <p className={styles.card_tagline}>{plan.tagline}</p>
                 </div>
                 <div className={styles.card_price_block}>
-                  {plan.originalPrice && (
+                  {/* {plan?.originalPrice && (
                     <div className={styles.price_row}>
                       <span className={styles.original}>${plan.originalPrice.toLocaleString()}</span>
                       <span className={styles.discount_tag}>{plan.discount}</span>
                     </div>
-                  )}
+                  )} */}
                   <span className={styles.price}>${plan.price.toLocaleString()}</span>
                 </div>
               </div>
-              <ul className={styles.card_features}>
-                {plan.features.map((f) => (
-                  <li key={f} className={styles.card_feature}>
-                    <Check size={13} strokeWidth={2.5} />
-                    {FEATURE_LINKS[f] ? (
-                      <Link href={FEATURE_LINKS[f]} className={styles.feature_link}>
-                        {f} <ArrowUpRight size={11} strokeWidth={2.5} />
-                      </Link>
-                    ) : f}
-                  </li>
-                ))}
-              </ul>
+              <p className={styles.card_desc}>{plan.desc}</p>
+
+              {plan.extras.length > 0 && (
+                <div className={styles.card_extras}>
+                  <span className={styles.card_extras_label}>Y además incluye:</span>
+                  <ul className={styles.extras_list}>
+                    {plan.extras.map((e) => (
+                      <li key={e.label} className={styles.extras_item}>
+                        {e.href ? (
+                          <Link href={e.href} className={`${styles.extras_label} ${styles.desc_link}`}>{e.label}</Link>
+                        ) : (
+                          <span className={styles.extras_label}>{e.label}</span>
+                        )}
+                        <span className={styles.extras_note}> — {e.note}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               <a href="https://www.iattend.site/login?mode=register" className={styles.card_cta}>Comenzar</a>
             </div>
           ))}
@@ -208,11 +201,12 @@ export default function PricingPage() {
           {/* Hook header */}
           <div className={styles.gift_header}>
             <p className={styles.gift_eyebrow}>El regalo que nadie espera y todos agradecen</p>
-            <h2 className={styles.gift_title}>REGALA I ATTEND</h2>
-            <p className={styles.gift_desc}>
-              Regálales la herramienta con la que van a organizar toda su boda.
-              Que se vaya el estrés y quede solo el momento.
-            </p>
+            <div className={styles.gift_header_row}>
+              <h2 className={styles.gift_title}>Regala I attend</h2>
+              <p className={styles.gift_desc}>
+                Alguien que conoces está planeando su boda. Dales I attend y que ellos diseñen cada detalle.
+              </p>
+            </div>
           </div>
 
           {/* 2-col: steps left, mockup right */}
@@ -233,19 +227,8 @@ export default function PricingPage() {
 
             {/* Right: envelope mockup */}
             <div className={styles.gift_right}>
-              <div className={styles.gift_card}>
-                <div className={styles.gift_card_stripe} />
-                <div className={styles.gift_card_body}>
-                  <p className={styles.gift_card_pre}>Alguien pensó en ti</p>
-                  <p className={styles.gift_card_headline}>para este momento.</p>
-                  <p className={styles.gift_card_sub}>Tu invitación de boda perfecta ya está lista.<br />Solo falta que tú la hagas tuya.</p>
-                </div>
-                <div className={styles.gift_card_footer}>
-                  <span className={styles.gift_code_label}>Tu código de regalo:</span>
-                  <span className={styles.gift_code}>IATT-XXXX</span>
-                  <div className={styles.gift_open_btn}>ABRIR MI REGALO →</div>
-                </div>
-              </div>
+              <img src="/landing/items/letter.png" alt="Gift mockup" className={styles.gift_mockup} />
+
             </div>
 
           </div>

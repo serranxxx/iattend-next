@@ -67,7 +67,6 @@ export default function ContactUsPage() {
                 <span className={styles.contact_label}>{c.label}</span>
                 <span className={styles.contact_value}>{c.value}</span>
               </div>
-              <span className={styles.contact_cta}>{c.cta} →</span>
             </Link>
           ))}
         </div>

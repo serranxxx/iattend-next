@@ -19,8 +19,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 36px;
+    padding: 16px 26px;
     box-sizing: border-box;
+    padding-right: 20px;
 }
 
 .header_hidden {
@@ -32,7 +33,13 @@
     background: #eeeadf;
     border-bottom: 1px solid rgba(222, 216, 202, 0.764);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
-    border-radius: 0 0 36px 36px;
+    border-radius: 36px 36px;
+    max-width: 85%;
+    width: 100%;
+    left: 50%;
+    transform: translate(-50%);
+    top: 2%;   
+    
 }
 
 
