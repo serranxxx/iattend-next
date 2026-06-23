@@ -51,7 +51,13 @@ export const HowWorks = () => {
   const invCardsRef = useRef<HTMLDivElement>(null);
 
   const scrollInvCards = (dir: 'left' | 'right') => {
-    invCardsRef.current?.scrollBy({ left: dir === 'right' ? 240 : -240, behavior: 'smooth' });
+    const el = invCardsRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    const target = dir === 'right'
+      ? Math.min(el.scrollLeft + 240, max)
+      : Math.max(el.scrollLeft - 240, 0);
+    el.scrollTo({ left: target, behavior: 'smooth' });
   };
 
   const goTo = (idx: number) => {
