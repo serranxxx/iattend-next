@@ -6,8 +6,33 @@ import { ArrowRight } from "lucide-react";
 import { FooterLand } from "@/components/LandPage/Footer/Footer";
 
 export const metadata: Metadata = {
-  title: "Productos | I attend",
-  description: "Descubre todos los productos de I attend: invitaciones digitales, gestión de invitados, pases digitales, acomodo de mesas, envíos automáticos y más.",
+  title: "Herramientas para tu boda | I attend",
+  description: "Invitación digital, gestión de invitados, confirmaciones automáticas, mapa de mesas, pases digitales, side events y Lia — tu asistente de IA. Todo en un solo lugar, sin complicaciones.",
+  keywords: [
+    "herramientas para boda",
+    "invitación digital",
+    "gestión de invitados",
+    "pases digitales",
+    "mapa de mesas",
+    "Lia asistente IA",
+    "side events boda",
+    "I attend productos",
+  ],
+  openGraph: {
+    title: "Todo lo que necesitas para tu boda | I attend",
+    description: "Invitación digital, gestión de invitados, mesas, pases, envíos por WhatsApp y Lia, tu asistente de IA. Todo en un solo lugar.",
+    url: "https://iattend.site/about/products",
+    siteName: "I attend",
+    images: [{ url: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg", width: 1200, height: 630, alt: "I attend – Herramientas para tu boda" }],
+    locale: "es_MX",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Todo lo que necesitas para tu boda | I attend",
+    description: "Invitación digital, invitados, mesas, pases y Lia tu asistente de IA. Todo en un solo lugar.",
+    images: ["https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg"],
+  },
 };
 
 const PRODUCTS = [

@@ -6,8 +6,23 @@ import { ArrowRight } from "lucide-react";
 import { FooterLand } from "@/components/LandPage/Footer/Footer";
 
 export const metadata: Metadata = {
-  title: "This is us | I attend",
-  description: "La historia de I attend: cómo una invitación de boda se convirtió en la plataforma para bodas y eventos especiales.",
+  title: "Nuestra historia | I attend",
+  description: "I attend nació porque vimos a novias increíbles perder horas, energía y paz mental en algo que debería ser simple. Somos el sistema que hace que la parte más pesada de planear tu boda deje de pesarte.",
+  openGraph: {
+    title: "La historia detrás de I attend",
+    description: "Nacimos de ver cómo algo tan especial como una boda se convertía en una carga. I attend existe para que tú disfrutes el proceso.",
+    url: "https://iattend.site/about/this-is-us",
+    siteName: "I attend",
+    images: [{ url: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg", width: 1200, height: 630, alt: "I attend – Nuestra historia" }],
+    locale: "es_MX",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "La historia detrás de I attend",
+    description: "Nacimos de ver cómo algo tan especial como una boda se convertía en una carga. I attend existe para que disfrutes el proceso.",
+    images: ["https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg"],
+  },
 };
 
 const COLLAGE = [

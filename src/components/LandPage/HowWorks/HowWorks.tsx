@@ -248,7 +248,7 @@ export const HowWorks = () => {
             <span>• No estás lista para soltar una parte del proceso</span>
             <span>• Crees que un evento es algo que puedes resolver sola</span>
             <span>• Tu boda ya está completamente organizada y tienes todo bajo control</span>
-            <span>• Tu fecha es en más de un año y todavía no estás en modo planificación</span>
+            {/* <span>• Tu fecha es en más de un año y todavía no estás en modo planificación</span> */}
           </div>
         </div>
 

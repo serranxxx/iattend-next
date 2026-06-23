@@ -6,8 +6,32 @@ import Link from "next/link";
 import { Star, Gift, Mail, Sparkles, ShoppingCart, Wand2, Check } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Precios | I attend",
-  description: "Conoce los planes de I attend: PRO y Lite con gestión completa de invitados.",
+  title: "Planes y Precios | I attend",
+  description: "Elige el plan que va con tu boda. Desde invitación digital hasta gestión completa de invitados, confirmaciones automáticas, mapa de mesas y pases digitales. Sin sorpresas, sin complicaciones.",
+  keywords: [
+    "precios invitaciones digitales",
+    "plan boda I attend",
+    "gestión de invitados precio",
+    "invitación digital costo",
+    "plan pro boda",
+    "plan lite boda",
+    "I attend precios",
+  ],
+  openGraph: {
+    title: "Planes y Precios | I attend",
+    description: "Plan Pro o Lite — elige el que va con tu boda. Invitación digital, invitados, mesas, pases y envíos automáticos. Sin sorpresas.",
+    url: "https://iattend.site/about/pricing",
+    siteName: "I attend",
+    images: [{ url: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg", width: 1200, height: 630, alt: "I attend – Planes y Precios" }],
+    locale: "es_MX",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Planes y Precios | I attend",
+    description: "Plan Pro o Lite — elige el que va con tu boda. Todo lo que necesitas, sin sorpresas.",
+    images: ["https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg"],
+  },
 };
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL;

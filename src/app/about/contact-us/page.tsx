@@ -10,8 +10,23 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Contact us | I attend",
-  description: "Contáctanos por WhatsApp, email o redes sociales. También puedes agendar una llamada con el equipo de I attend.",
+  title: "Habla con nosotros | I attend",
+  description: "¿Tienes dudas sobre I attend o quieres ver una demo? Escríbenos por WhatsApp, email o redes sociales. El equipo responde rápido.",
+  openGraph: {
+    title: "Habla con nosotros | I attend",
+    description: "¿Tienes dudas o quieres una demo? Escríbenos por WhatsApp, email o redes sociales. Estamos aquí para ayudarte.",
+    url: "https://iattend.site/about/contact-us",
+    siteName: "I attend",
+    images: [{ url: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg", width: 1200, height: 630, alt: "I attend – Habla con nosotros" }],
+    locale: "es_MX",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Habla con nosotros | I attend",
+    description: "Escríbenos por WhatsApp, email o redes sociales. El equipo de I attend responde rápido.",
+    images: ["https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg"],
+  },
 };
 
 const CONTACTS = [

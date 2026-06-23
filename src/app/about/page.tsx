@@ -27,6 +27,8 @@ export const metadata: Metadata = {
     "organizar boda",
     "plataforma para eventos",
     "I attend",
+    "Lia asistente AI",
+    "asistente inteligente para bodas",
     "guest management",
     "event planning",
   ],
