@@ -1,17 +1,17 @@
-import { InvitationType } from "./new_invitation";
+export type InvitationType = string;
 
 export interface Guests {
   userID: string;
   invitationID: string;
   tickets: number | null;
-  type: "open" | "private"; // o simplemente `string` si usas más tipos
-  guests: Guest[]; // Puedes tiparlo más adelante si defines su estructura
+  type: "open" | "private";
+  guests: Guest[];
   share: {
     email: string;
     password: string;
     id: string;
   }[];
-  tables: any[]; // o define una interfaz Table[] si tienes su estructura
+  tables: Table[];
 }
 
 export interface Guest {

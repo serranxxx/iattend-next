@@ -20,8 +20,8 @@ export const useWeather = () => {
       });
       setResponse(result);
       setError("");
-    } catch (err: any) {
-      setError(err?.message || "Error desconocido");
+    } catch (err: unknown) {
+      setError((err as Error)?.message || "Error desconocido");
     } finally {
       setLoading(false);
     }
@@ -45,8 +45,8 @@ export const useInvitation = () => {
       });
       setResponse(result);
       setError("");
-    } catch (err: any) {
-      setError(err?.message || "Error desconocido");
+    } catch (err: unknown) {
+      setError((err as Error)?.message || "Error desconocido");
     } finally {
       setLoading(false);
     }
