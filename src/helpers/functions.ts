@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 
 export function generateSimpleId() {
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";

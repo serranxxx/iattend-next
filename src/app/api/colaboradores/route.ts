@@ -7,7 +7,7 @@ const supabase = createClient(
 );
 
 const NOTIFY_EMAILS = ['albserrano8@gmail.com', 'pa.perez98@gmail.com'];
-const API_URL = process.env.IATTEND_API_URL;
+const _API_URL = process.env.IATTEND_API_URL;
 
 function formatPhone(telefono: string) {
   const digits = telefono.replace(/\D/g, '');

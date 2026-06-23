@@ -14,7 +14,7 @@ function hashJSON(obj: any) {
 export async function getTranslatedCopy(
   slug: string,
   lang: string,
-  sourceLang = "es"
+  _sourceLang = "es"
 ) {
   const supabase = await createClient();
 

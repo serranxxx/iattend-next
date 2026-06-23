@@ -1,9 +1,7 @@
 'use client'
 
-import React, { useState } from "react";
+import React from "react";
 import styles from "./side-events.module.css";
-import { LucideIcon } from "lucide-react";
-import { Calendar1, Crown, LockKeyhole, CircleChevronRight } from "lucide-react";
 import { useScreenWidth } from "@/hooks/useScreenWidth";
 
 // const side_events: string[] = [

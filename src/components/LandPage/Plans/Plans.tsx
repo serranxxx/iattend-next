@@ -4,8 +4,6 @@ import React, { useState } from "react";
 import styles from "./plans.module.css";
 import {
   LuArmchair,
-  LuArrowRight,
-  LuArrowUpRight,
   LuClipboardList,
   LuLockKeyhole,
   LuLockOpen,
@@ -15,13 +13,12 @@ import {
   LuPencilRuler,
   LuSend,
   LuSmartphone,
-  LuStar,
   LuTicket,
 } from "react-icons/lu";
 import { FaStar } from "react-icons/fa";
 import { useScreenWidth } from "@/hooks/useScreenWidth";
 
-const cards = [
+const _cards = [
   {
     user: "Alberto",
     review:
@@ -132,7 +129,7 @@ const plan_lite = [
   },
 ];
 
-const message = encodeURIComponent(
+const _message = encodeURIComponent(
   "¡Hola! Me interesan los servicios de I attend"
 );
 

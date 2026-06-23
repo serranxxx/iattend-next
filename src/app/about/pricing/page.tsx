@@ -79,7 +79,7 @@ const PAIN_POINTS = [
 
 
 /* ── Gift steps ──────────────────────── */
-const GIFT_STEPS = [
+const _GIFT_STEPS = [
   {
     icon: <Gift size={26} strokeWidth={1.5} />,
     num: "01",

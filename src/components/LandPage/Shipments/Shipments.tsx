@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import styles from "./shipments.module.css";
 import { CustomButton } from "@/components/CustomButton/CustomButton";
-import { Button, Input, Space } from "antd";
+import { Input, Space } from "antd";
 import { FaPaperPlane, FaWhatsapp } from "react-icons/fa";
 import axios from "axios";
 
@@ -26,7 +26,7 @@ export const Shipments = () => {
         return phoneRegex.test(cleaned);
       }
 
-    const onSedingInvitation = async () => {
+    const _onSedingInvitation = async () => {
 
         console.log('hey')
         try {

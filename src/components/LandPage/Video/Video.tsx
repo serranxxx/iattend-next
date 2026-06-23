@@ -2,9 +2,7 @@
 
 import React, { useEffect, useRef } from 'react'
 import styles from './video.module.css'
-import { Button } from 'antd'
 import { LuArrowUpRight } from 'react-icons/lu'
-import Link from 'next/link'
 import { CustomButton } from '@/components/CustomButton/CustomButton'
 import Image from 'next/image'
 

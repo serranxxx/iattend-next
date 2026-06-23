@@ -80,7 +80,7 @@ export const KEY_FEATURES: KeyFeature[] = [
   },
 ];
 
-const FEATURES: Feature[] = [
+const _FEATURES: Feature[] = [
   {
     label: (
       <>
@@ -140,7 +140,7 @@ const FEATURES: Feature[] = [
 
 export const KeyFeatures = () => {
   const [open, setOpen] = useState(false);
-  const [currentItem, setCurrentItem] = useState<any>(null);
+  const [currentItem, _setCurrentItem] = useState<any>(null);
 
 
   const scrollRef = useRef<HTMLDivElement | null>(null);

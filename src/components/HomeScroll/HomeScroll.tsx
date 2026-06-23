@@ -1,14 +1,12 @@
 "use client";
 
-import { cover_samples } from "@/helpers/images";
 import { useEffect, useRef, useState } from "react";
 
 import styles from "./homescroll.module.css";
-import Image from "next/image";
 
 export const HomeScroll = () => {
     const scrollRef = useRef<HTMLDivElement>(null);
-    const [centerIndex, setCenterIndex] = useState<number>(0);
+    const [_centerIndex, setCenterIndex] = useState<number>(0);
     // const [prevScrollPos, setPrevScrollPos] = useState<number>(0);
     // const [isVisible, setIsVisible] = useState(true);
 

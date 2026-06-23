@@ -79,7 +79,7 @@ export const Final = () => {
           <div ref={scrollRef} className={`${styles.reviews_scroll} scroll-invitation`}>
             {reviews_list.map((r, i) => (
               <div key={i} className={styles.review_card}>
-                <p className={styles.review_text}>"{r.review}"</p>
+                <p className={styles.review_text}>&ldquo;{r.review}&rdquo;</p>
                 <span className={styles.review_name}>— {r.name}</span>
               </div>
             ))}
