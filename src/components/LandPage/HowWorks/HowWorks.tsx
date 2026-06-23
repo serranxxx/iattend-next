@@ -48,6 +48,11 @@ export const HowWorks = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [visible, setVisible] = useState(true);
   const touchStartX = useRef(0);
+  const invCardsRef = useRef<HTMLDivElement>(null);
+
+  const scrollInvCards = (dir: 'left' | 'right') => {
+    invCardsRef.current?.scrollBy({ left: dir === 'right' ? 240 : -240, behavior: 'smooth' });
+  };
 
   const goTo = (idx: number) => {
     setVisible(false);
@@ -176,7 +181,7 @@ export const HowWorks = () => {
           <span className={styles.steps_title}>HOW IT WORKS.</span>
 
           <div className={styles.mob_image_cont}>
-            <img src="/landing/img_test.png" alt="" className={styles.mob_img} />
+            <img src="/landing/dance.jpg" alt="" className={styles.mob_img} />
             <img src="/landing/items/s_sticker.png" alt="" className={styles.mob_sticker} />
             <img src="/landing/items/item4.png" alt="" className={styles.mob_item4} />
           </div>
@@ -262,7 +267,7 @@ export const HowWorks = () => {
         <div className={styles.shadow} />
         <span className={styles.bonus_label}>Oh, and one more thing</span>
 
-        <div className={styles.inv_cards_row}>
+        <div className={styles.inv_cards_row} ref={invCardsRef}>
           {[
             {
               title: "¿Tienes despedida, ensayo o brunch del día siguiente?",
@@ -286,6 +291,10 @@ export const HowWorks = () => {
               </div>
             </div>
           ))}
+        </div>
+        <div className={styles.inv_nav}>
+          <button className={styles.inv_nav_btn} onClick={() => scrollInvCards('left')} aria-label="Anterior">←</button>
+          <button className={styles.inv_nav_btn} onClick={() => scrollInvCards('right')} aria-label="Siguiente">→</button>
         </div>
 
         <span className={styles.bonus_label} style={{ fontSize: '24px' }}>Pero no te dejamos sola., estamos contigo desde que empiezas

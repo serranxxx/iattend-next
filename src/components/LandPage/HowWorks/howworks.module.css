@@ -262,14 +262,15 @@
     position: absolute;
     max-width: 30%;
     top: 0;
-    right: 8px;
+    right: -10px;
 }
 
 .mob_item4 {
     position: absolute;
     max-width: 100%;
-    bottom: -7%;
-    right: -5%;
+    bottom: -12%;
+    right: -10%;
+    transform: scale(0.95);
 }
 
 .mob_nav {
@@ -562,6 +563,10 @@
     color: #0c171b;
 }
 
+.inv_nav {
+    display: none;
+}
+
 /* ── Mobile ── */
 
 
@@ -665,6 +670,35 @@
 
     .bonus_cont {
         padding: 64px 0px;
+    }
+
+    .inv_nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+       margin: -24px 0px;
+        z-index: 3;
+    }
+
+    .inv_nav_btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid #eeeadf;
+        background: none;
+        color: #eeeadf;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        padding: 0;
+        transition: background 200ms ease;
+    }
+
+    .inv_nav_btn:active {
+        background: rgba(238, 233, 222, 0.2);
     }
 
 }

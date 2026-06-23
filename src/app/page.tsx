@@ -32,9 +32,9 @@ export const metadata: Metadata = {
     siteName: "I attend",
     images: [
       {
-        url: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/landing/linkimg.jpg",
+        url: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/landing/cover.jpg",
         width: 800,
-        height: 1200,
+        height: 800,
         alt: "I attend – Tu evento, bajo control",
       },
     ],
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     title: "I attend | Tu evento, bajo control",
     description:
       "Deja de perseguir confirmaciones. Gestiona invitados, envía invitaciones y ten todo tu evento en un solo lugar.",
-    images: ["https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/landing/linkimg.jpg"],
+    images: ["https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/landing/cover.jpg"],
   },
   robots: {
     index: true,
