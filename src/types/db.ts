@@ -1,16 +1,14 @@
 // types/db.ts
 
-import { NewInvitation } from "./new_invitation";
-
 export interface InvitationRow {
-  id: string; // uuid (PK)
-  user_id: string; // uuid → auth.users.id
+  id: string;
+  user_id: string;
   active: boolean;
   started: boolean;
-  type: string | null; // puedes refinarlo con InvitationType si ya usas enums
-  plan: string | null; // idem con InvitationPlan
+  type: string | null;
+  plan: string | null;
   payment_type: string | null;
-  created_at: string; // ISO string (timestampz)
-  updated_at: string; // ISO string (timestampz)
-  data: NewInvitation; // tu JSON de invitación completa
+  created_at: string;
+  updated_at: string;
+  data: Record<string, unknown>;
 }
