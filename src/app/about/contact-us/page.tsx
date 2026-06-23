@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import styles from "./page.module.css";
 import { Header } from "@/components/LandPage/Header/Header";
+import { FooterLand } from "@/components/LandPage/Footer/Footer";
+import { CollaboratorCTA } from "@/components/LandPage/CollaboratorCTA/CollaboratorCTA";
 import Link from "next/link";
 import {
   MessageCircle, Mail, Instagram, Linkedin,
-  CalendarDays, ArrowRight, TrendingUp,
+  CalendarDays, ArrowRight,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -85,29 +87,15 @@ export default function ContactUsPage() {
               </p>
             </div>
           </div>
-          {/* Replace this href with your Calendly link */}
           <Link href="https://calendar.app.google/pw8B74XMXiu4uBNq7" target="_blank" rel="noopener noreferrer" className={styles.schedule_btn}>
             Agendar llamada <ArrowRight size={16} strokeWidth={2.5} />
           </Link>
         </div>
       </section>
 
-      {/* Programa de colaboradores */}
-      <section className={styles.work_section}>
-        <div className={styles.work_inner}>
-          <TrendingUp size={36} strokeWidth={1.5} className={styles.work_icon} />
-          <p className={styles.work_eyebrow}>Programa de colaboradores</p>
-          <h2 className={styles.work_title}>¿Te gustaría generar<br />ingresos extra?</h2>
-          <p className={styles.work_desc}>
-            Si conoces parejas que están planeando su boda, si trabajas en el mundo de los eventos
-            o simplemente te gusta recomendar lo que usas — hay una oportunidad aquí para ti.
-            Sé distribuidor de I attend y gana por cada cliente que llegue contigo.
-          </p>
-          <Link href="https://wa.me/526145338500" target="_blank" className={styles.work_cta}>
-            Me interesa, cuéntame más <ArrowRight size={16} strokeWidth={2.5} />
-          </Link>
-        </div>
-      </section>
+      <CollaboratorCTA />
+
+      <FooterLand />
     </div>
   );
 }

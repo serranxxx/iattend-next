@@ -2,6 +2,7 @@ import BackButton from "@/components/BackButton/BackButton";
 import React from "react";
 import { IoMdReturnLeft } from "react-icons/io";
 import type { Metadata } from "next";
+import { FooterLand } from "@/components/LandPage/Footer/Footer";
 
 export const metadata: Metadata = {
     title: "Invitación Digital para Boda | Qué incluye | I attend",
@@ -186,6 +187,8 @@ export default function Page() {
 
                 </section>
             </div>
-        </div>
+              <FooterLand />
+
+</div>
     );
 }

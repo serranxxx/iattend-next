@@ -1,0 +1,204 @@
+/* ── Sección wrapper ── */
+.work_section {
+    width: 100%;
+    box-sizing: border-box;
+    background: repeating-linear-gradient(
+        90deg,
+        #0c171b 0px,
+        #0c171b 20px,
+        #071013 20px,
+        #071013 50px
+    );
+    border-top: 1.5px solid rgba(12, 23, 27, 0.1);
+    padding: 100px 52px;
+}
+
+.work_inner {
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.work_icon {
+    color: #EEE9DE;
+    opacity: 0.55;
+}
+
+.work_eyebrow {
+    font-family: 'Windsor', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #EEE9DE;
+    opacity: 0.45;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 0;
+}
+
+.work_title {
+    font-family: 'Denver Serial', sans-serif;
+    font-style: italic;
+    font-weight: 800;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.05;
+    color: #EEE9DE;
+    margin: 0;
+}
+
+.work_desc {
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 17px;
+    font-weight: 200;
+    color: #EEE9DE;
+    opacity: 0.65;
+    line-height: 1.75;
+    margin: 0;
+}
+
+/* ── Formulario ── */
+.collab_form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form_row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form_field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form_label {
+    font-family: 'Windsor', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #EEE9DE;
+    opacity: 0.5;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form_input,
+.form_select,
+.form_textarea {
+    background: rgba(238, 233, 222, 0.08);
+    border: 1.5px solid rgba(238, 233, 222, 0.2);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 200;
+    color: #EEE9DE;
+    outline: none;
+    transition: border-color 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form_input::placeholder,
+.form_textarea::placeholder {
+    color: rgba(238, 233, 222, 0.3);
+}
+
+.form_input:focus,
+.form_select:focus,
+.form_textarea:focus {
+    border-color: rgba(238, 233, 222, 0.5);
+}
+
+.form_select {
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(238,233,222,0.4)' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+}
+
+.form_select option {
+    background: #0c171b;
+    color: #EEE9DE;
+}
+
+.form_textarea {
+    resize: vertical;
+    min-height: 80px;
+    line-height: 1.6;
+}
+
+.form_submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #AAC186;
+    color: #0c171b;
+    font-family: 'Windsor', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    padding: 0 32px;
+    min-height: 52px;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    align-self: flex-start;
+    margin-top: 12px;
+}
+
+.form_submit:hover { opacity: 0.88; transform: translateY(-1px); }
+.form_submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.form_error {
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 14px;
+    color: #ff8a8a;
+    margin: 0;
+}
+
+.form_success {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    color: #EEE9DE;
+}
+
+.form_success svg {
+    opacity: 0.75;
+}
+
+.form_success_title {
+    font-family: 'Windsor', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #EEE9DE;
+    margin: 0;
+}
+
+.form_success_desc {
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 200;
+    color: #EEE9DE;
+    opacity: 0.65;
+    line-height: 1.6;
+    margin: 0;
+}
+
+@media (max-width: 700px) {
+    .work_section { padding: 60px 24px; }
+    .form_row     { grid-template-columns: 1fr; }
+}

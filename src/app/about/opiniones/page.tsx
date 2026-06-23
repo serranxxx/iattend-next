@@ -3,6 +3,7 @@ import { reviews_list } from "@/helpers/SEO/reviews";
 import { Metadata } from "next";
 import Script from "next/script";
 import { IoMdReturnLeft } from "react-icons/io";
+import { FooterLand } from "@/components/LandPage/Footer/Footer";
 
 /* =========================
    SEO METADATA
@@ -121,6 +122,8 @@ export default function ReviewsPage() {
           ))}
         </section>
       </div>
-    </div>
+          <FooterLand />
+
+</div>
   );
 }

@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { IoMdReturnLeft } from "react-icons/io";
 import BackButton from "@/components/BackButton/BackButton";
+import { FooterLand } from "@/components/LandPage/Footer/Footer";
 
 export default function TableOrganizationPage() {
     const tableOrganizationSchema = {
@@ -221,6 +222,8 @@ export default function TableOrganizationPage() {
 
             </div>
 
-        </div>
+              <FooterLand />
+
+</div>
     );
 }

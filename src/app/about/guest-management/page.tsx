@@ -1,6 +1,7 @@
 import React from "react";
 import BackButton from "@/components/BackButton/BackButton";
 import type { Metadata } from "next";
+import { FooterLand } from "@/components/LandPage/Footer/Footer";
 
 export const metadata: Metadata = {
     title: "Gestión de Invitados para Boda | RSVP Digital | I attend",
@@ -193,6 +194,8 @@ export default function GuestManagementPage() {
 
                 </section>
             </div>
-        </div>
+              <FooterLand />
+
+</div>
     );
 }

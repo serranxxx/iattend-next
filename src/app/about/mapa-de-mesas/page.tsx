@@ -1,6 +1,7 @@
 import React from "react";
 import BackButton from "@/components/BackButton/BackButton";
 import type { Metadata } from "next";
+import { FooterLand } from "@/components/LandPage/Footer/Footer";
 
 export const metadata: Metadata = {
     title: "Acomodo de Mesas para Boda | Seating Chart Digital | I attend",
@@ -192,6 +193,8 @@ export default function TableOrganizationPage() {
 
                 </section>
             </div>
-        </div>
+              <FooterLand />
+
+</div>
     );
 }

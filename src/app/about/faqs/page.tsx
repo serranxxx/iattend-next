@@ -3,6 +3,7 @@ import { faqs_list } from "@/helpers/SEO/faqs";
 import { Metadata } from "next";
 import Script from "next/script";
 import { IoMdReturnLeft } from "react-icons/io";
+import { FooterLand } from "@/components/LandPage/Footer/Footer";
 
 /* =========================
    SEO METADATA
@@ -98,6 +99,8 @@ export default function FAQsPage() {
           ))}
         </section>
       </div>
-    </div>
+          <FooterLand />
+
+</div>
   );
 }

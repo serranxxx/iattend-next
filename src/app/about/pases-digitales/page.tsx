@@ -1,6 +1,7 @@
 import React from "react";
 import BackButton from "@/components/BackButton/BackButton";
 import type { Metadata } from "next";
+import { FooterLand } from "@/components/LandPage/Footer/Footer";
 
 export const metadata: Metadata = {
     title: "Pases Digitales para Bodas | Apple Wallet | I attend",
@@ -190,6 +191,8 @@ export default function DigitalPassesPage() {
 
                 </section>
             </div>
-        </div>
+              <FooterLand />
+
+</div>
     );
 }

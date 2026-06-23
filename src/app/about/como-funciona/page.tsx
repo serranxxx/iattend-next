@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { IoMdReturnLeft } from "react-icons/io";
 import BackButton from "@/components/BackButton/BackButton";
+import { FooterLand } from "@/components/LandPage/Footer/Footer";
 
 export default function WorkflowPage() {
     const workflowSchema = {
@@ -208,6 +209,8 @@ export default function WorkflowPage() {
 
                 </section>
             </div>
-        </div>
+              <FooterLand />
+
+</div>
     );
 }

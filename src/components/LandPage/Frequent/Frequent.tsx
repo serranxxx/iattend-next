@@ -20,8 +20,8 @@ const FAQS = [
     a: "Puedes, claro — pero el día de tu evento agradecerás no estar buscando nombres en un Excel ni respondiendo '¿ya confirmaste?' por WhatsApp. I attend te da esa tranquilidad.",
   },
   {
-    q: "¿Cuánto tiempo tarda en estar lista mi invitación?",
-    a: "Una vez que eliges tu diseño y nos das los datos del evento, tu invitación digital está lista en menos de 48 horas. El modelo digital básico puede quedar el mismo día.",
+    q: "¿Cuánto tiempo tengo para usar I attend?",
+    a: "Puedes contratar hoy y utilizar la plataforma cuando gustes. El enlace de tu invitación digital estará vigente por siempre",
   },
 ];
 

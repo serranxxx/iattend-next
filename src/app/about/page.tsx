@@ -2,6 +2,7 @@ import { HeroSection } from "@/components/LandPage/HERO/HERO";
 import { Header } from "@/components/LandPage/Header/Header";
 import styles from "./page.module.css";
 import { FooterLand } from "@/components/LandPage/Footer/Footer";
+import { CollaboratorCTA } from "@/components/LandPage/CollaboratorCTA/CollaboratorCTA";
 import type { Metadata } from "next";
 import { SocialProof } from "@/components/LandPage/SocialProof/SocialProof";
 import { HowWorks } from "@/components/LandPage/HowWorks/HowWorks";
@@ -75,6 +76,7 @@ export default function LandPage() {
       <Action />
       <Frequent />
       <Final />
+      <CollaboratorCTA />
       <FooterLand></FooterLand>
 
     </div>

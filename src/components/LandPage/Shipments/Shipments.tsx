@@ -85,7 +85,7 @@ export const Shipments = () => {
             };
 
             const response = await axios.post(
-                `https://i-attend-22z4h.ondigitalocean.app/api/whats`,
+                `${process.env.NEXT_PUBLIC_IATTEND_API_URL}/whats`,
                 payload
             );
 

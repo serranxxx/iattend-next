@@ -3,8 +3,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 // URLs de las APIs
 const baseURL1 = "https://api.openweathermap.org/data/2.5/";
-const baseLocal = "http://localhost:4000/api";
-const baseProd = "https://i-attend-22z4h.ondigitalocean.app/api";
+const baseAPI = process.env.NEXT_PUBLIC_IATTEND_API_URL!;
 
 // Hook para clima (OpenWeather)
 export const useWeather = () => {
@@ -42,7 +41,7 @@ export const useInvitation = () => {
       setLoading(true);
       const result = await axios.request({
         ...params,
-        baseURL: baseProd,
+        baseURL: baseAPI,
       });
       setResponse(result);
       setError("");

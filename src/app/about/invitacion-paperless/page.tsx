@@ -2,6 +2,7 @@ import BackButton from "@/components/BackButton/BackButton";
 import React from "react";
 import { IoMdReturnLeft } from "react-icons/io";
 import type { Metadata } from "next";
+import { FooterLand } from "@/components/LandPage/Footer/Footer";
 
 export const metadata: Metadata = {
     title: "Invitaciones Paperless para Bodas y Eventos | I attend",
@@ -212,6 +213,8 @@ export default function Page() {
                 </section>
             </div>
 
-        </div>
+              <FooterLand />
+
+</div>
     );
 }

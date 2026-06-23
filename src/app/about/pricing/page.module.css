@@ -84,7 +84,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 48px;
-    align-items: stretch;
+    align-items: start;
 }
 
 /* Card top row: name+tagline on left, price on right */
@@ -256,8 +256,10 @@
 }
 
 .card_cta {
-    display: block;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     padding: 13px;
     border-radius: 10px;
     font-family: 'Windsor', sans-serif;
@@ -265,16 +267,13 @@
     font-weight: 700;
     text-decoration: none;
     margin-top: auto;
-    transition: opacity 0.2s, background 0.2s;
-    background: rgba(255, 255, 255, 0.15);
-    color: #EEE9DE;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(4px);
+    transition: opacity 0.2s ease;
+    background: #EEE9DE;
+    color: #0c171b;
+    border: none;
 }
 
-.card_cta:hover {
-    background: rgba(255, 255, 255, 0.22);
-}
+.card_cta:hover { opacity: 0.88; }
 
 /* ── Card description paragraph ── */
 .card_desc {
@@ -646,17 +645,26 @@
     text-transform: uppercase;
     letter-spacing: 1.5px;
     margin: 0;
+    margin-bottom:-12px;
 }
 
 .gift_title {
     font-family: 'Denver Serial', sans-serif;
     font-style: italic;
     font-weight: 800;
-    font-size: clamp(52px, 8vw, 108px);
+    font-size: clamp(46px, 8vw, 88px);
     color: #EEE9DE;
     line-height: 0.9;
     margin: 0;
     letter-spacing: 2px;
+    width: 100%;
+
+}
+
+.gift_logo {
+    width: 320px;
+    margin-left: 10px;
+
 }
 
 .gift_desc {
@@ -668,7 +676,7 @@
     line-height: 1.7;
     margin: 0;
     flex-shrink: 0;
-    align-self: flex-end;
+    /* align-self: flex-end; */
 }
 
 /* ── 2-column layout ── */
@@ -833,7 +841,7 @@
 
     .gift_mockup {
         min-width: 100%;
-        margin:-36px 0px;
+        margin: -36px 0px;
         margin-bottom: -20px;
     }
 
@@ -853,10 +861,20 @@
     }
 
     .gift_step_item {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .gift_logo {
+        width: 50%;
+        margin-left: 0px;
+
+    }
+
+    .gift_eyebrow {
+        text-align: center;
+    }
 
 }
 
@@ -880,4 +898,68 @@
     .card_top {
         flex-direction: column;
     }
+}
+
+/* ── Hero CTA ── */
+.hero_cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #EEE9DE;
+    color: #0c171b;
+    font-family: 'Windsor', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 14px 32px;
+    border-radius: 50px;
+    border: none;
+    transition: opacity 0.2s ease;
+    margin-top: 8px;
+}
+.hero_cta:hover { opacity: 0.88; }
+
+.hero_cta_note {
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 200;
+    color: rgba(238, 233, 222, 0.5);
+    margin: 8px 0 0;
+}
+
+/* ── Price note ── */
+.price_note {
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 200;
+    color: rgba(238, 233, 222, 0.5);
+    text-align: right;
+    margin-top: 2px;
+}
+
+/* ── Free trial link ── */
+.card_cta_free {
+    display: block;
+    text-align: center;
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(238, 233, 222, 0.5);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-top: -8px;
+    transition: color 0.2s ease;
+}
+.card_cta_free:hover { color: rgba(238, 233, 222, 0.85); }
+
+/* ── Extras checkmark ── */
+.extras_header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.extras_check {
+    color: #AAC186;
+    flex-shrink: 0;
 }

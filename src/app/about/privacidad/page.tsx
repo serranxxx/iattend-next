@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { IoMdReturnLeft } from "react-icons/io";
 import BackButton from "@/components/BackButton/BackButton";
+import { FooterLand } from "@/components/LandPage/Footer/Footer";
 
 export default function GuestManagementPage() {
     const privacySchema = {
@@ -215,6 +216,8 @@ export default function GuestManagementPage() {
 
 
 
-        </div>
+              <FooterLand />
+
+</div>
     );
 }

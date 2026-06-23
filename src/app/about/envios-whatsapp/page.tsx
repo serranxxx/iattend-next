@@ -1,6 +1,7 @@
 import React from "react";
 import BackButton from "@/components/BackButton/BackButton";
 import type { Metadata } from "next";
+import { FooterLand } from "@/components/LandPage/Footer/Footer";
 
 export const metadata: Metadata = {
     title: "Envíos Automáticos de Invitaciones por WhatsApp | I attend",
@@ -186,6 +187,8 @@ export default function WhatsAppDeliveryPage() {
 
                 </section>
             </div>
-        </div>
+              <FooterLand />
+
+</div>
     );
 }

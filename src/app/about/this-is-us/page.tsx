@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import { Header } from "@/components/LandPage/Header/Header";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { FooterLand } from "@/components/LandPage/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "This is us | I attend",
@@ -110,11 +111,10 @@ export default function ThisIsUsPage() {
           <Link href="/about/contact-us" className={styles.cta_primary}>
             Contáctanos <ArrowRight size={18} strokeWidth={2.5} />
           </Link>
-          <Link href="/about/products" className={styles.cta_secondary}>
-            Ver productos
-          </Link>
         </div>
       </section>
-    </div>
+          <FooterLand />
+
+</div>
   );
 }

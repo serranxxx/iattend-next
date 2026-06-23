@@ -46,6 +46,19 @@
     min-height: 42px;
 }
 
+.cta_text {
+    font-family: 'Windsor';
+    font-weight: 800;
+    font-size: 18px;
+    color: #d2bfdd;
+    /* border: 2px solid; */
+    /* border-color: #d2bfdd; */
+    background-color: transparent;
+    /* padding: 0px 24px; */
+    /* border-radius: 8px; */
+    /* min-height: 42px; */
+}
+
 /* ── Desktop: imágenes absolutas a los lados ── */
 
 .pics_top {

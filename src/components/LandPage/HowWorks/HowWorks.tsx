@@ -127,7 +127,7 @@ export const HowWorks = () => {
               </div>
 
               <div className={styles.image_cont}>
-                <img src="/landing/img_test.png" alt="test" className={styles.img_test} />
+                <img src="/landing/dance.jpg" alt="test" className={styles.img_test} />
                 <img src="/landing/items/s_sticker.png" alt="" className={styles.s_sticker} />
                 <img src="/landing/items/item4.png" alt="" className={styles.item4} />
               </div>

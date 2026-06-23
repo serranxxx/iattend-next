@@ -12,7 +12,7 @@ export const faqs_list: faqType[] = [
   {
     question: "¿Cuánto tiempo tengo para usar la plataforma?",
     answer:
-      "Puedes contratar hoy y utilizar la plataforma cuando gustes. El enlace de tu invitación digital estará vigente por hasta 5 años.",
+      "Puedes contratar hoy y utilizar la plataforma cuando gustes. El enlace de tu invitación digital estará vigente por siempre",
   },
   {
     question: "¿Cuánto tiempo antes debería enviar mi invitación digital?",

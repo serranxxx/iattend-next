@@ -107,11 +107,11 @@ export const SocialProof = () => {
         </div>
         <div className={styles.situation_block_2}>
 
-          <img 
-          src="/landing/items/item3.png" alt="situation 2" className={styles.item3} />
+          <img
+            src="/landing/items/item3.png" alt="situation 2" className={styles.item3} />
 
-          <img 
-          src="/landing/items/item3.png" alt="situation 2" className={styles.item4} />
+          <img
+            src="/landing/items/item3.png" alt="situation 2" className={styles.item4} />
 
           <div className={styles.situation_info}>
             <span className={styles.situation_info_title}>TE IDENTIFICAS CON...</span>
@@ -130,45 +130,50 @@ export const SocialProof = () => {
               </div>
             </div>
             <span className={styles.situation_info_label}>Planear tu boda no debería sentirse así...</span>
-            <Button className={styles.situation_button}>Let&apos;s start <ArrowRight strokeWidth={3} size={18}  /></Button>
+            <div style={{
+              display:'flex',alignItems:'center',justifyContent:'center', gap:'12px'
+            }}>
+              <Button className={styles.situation_button} href={`${process.env.NEXT_PUBLIC_APP_URL}/preview-mood`}>Let&apos;s start <ArrowRight strokeWidth={3} size={18} /></Button>
+              <Button className={styles.text_button} href="/about/pricing">See plans</Button>
+            </div>
           </div>
 
-          
 
-          <img 
-          src="/landing/items/item1.png" alt="situation 2" className={styles.item1} />
 
-           <img 
-          src="/landing/items/item2.png" alt="situation 2" className={styles.item2} />
+          <img
+            src="/landing/items/item1.png" alt="situation 2" className={styles.item1} />
+
+          <img
+            src="/landing/items/item2.png" alt="situation 2" className={styles.item2} />
         </div>
       </div>
 
       <div className={styles.situation_cards}>
         <img
-        style={{ height: "100%", width: "100%", objectFit: "cover", position: "absolute", top: 0, left: 0 }}
-        src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/landing/situation.jpg" alt="situation cards" />
+          style={{ height: "100%", width: "100%", objectFit: "cover", position: "absolute", top: 0, left: 0 }}
+          src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/landing/situation.jpg" alt="situation cards" />
         <div className={styles.shadow} />
 
         <span className={styles.situation_cards_labels}>Pero imagina esto:</span>
         <div className={styles.situation_cards_row} style={rowStyle}>
           <div className={styles.situation_card}>
-            <img src="/landing/items/clip.png" alt="" className={styles.clip}/>
-            <img src="/landing/items/i_sticker.png" alt="" className={styles.i_sticker}/>
+            <img src="/landing/items/clip.png" alt="" className={styles.clip} />
+            <img src="/landing/items/i_sticker.png" alt="" className={styles.i_sticker} />
             <span className={styles.sit_card_text}>
               Las cosas en tu organización fluyen sin que tengas que pensar en TODO
             </span>
           </div>
 
           <div className={styles.situation_card}>
-            <img src="/landing/items/clip.png" alt="" className={styles.clip}/>
+            <img src="/landing/items/clip.png" alt="" className={styles.clip} />
             <span className={styles.sit_card_text}>
               Vuelves a tener el control de tu evento, sin cargarlo tú sola
             </span>
           </div>
 
           <div className={styles.situation_card}>
-            <img src="/landing/items/clip.png" alt="" className={styles.clip}/>
-            <img src="/landing/items/a_sticker.png" alt="" className={styles.a_sticker}/>
+            <img src="/landing/items/clip.png" alt="" className={styles.clip} />
+            <img src="/landing/items/a_sticker.png" alt="" className={styles.a_sticker} />
             <span className={styles.sit_card_text}>
               Puedes disfrutar el proceso en lugar de sobrevivirlo
             </span>

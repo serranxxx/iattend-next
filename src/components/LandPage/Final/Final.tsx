@@ -50,10 +50,10 @@ export const Final = () => {
         <div className={styles.left_center}>
           <div className={styles.wrap1}>
             <div className={styles.wrap_cont}>
-              <img src="landing/items/pic4.png" alt="" className={styles.pic4} />
+              <img src="landing/items/pic4_.png" alt="" className={styles.pic4} />
               <img src="landing/items/patch.png" alt="" className={styles.patch} />
               <span className={styles.text_1}>I attend nació porque vimos a novias increíbles perder horas, energía y paz mental en algo que debería ser simple.</span>
-              <img src="landing/items/pic5.png" alt="" className={styles.pic5} />
+              <img src="landing/items/pic5_.png" alt="" className={styles.pic5} />
               <img src="landing/items/i_sticker.png" alt="" className={styles.i_sticker} />
               <span className={styles.text_2}>Somos el sistema que hace que la parte más pesada de planear tu boda deje de pesarte a ti.</span>
             </div>
@@ -90,7 +90,12 @@ export const Final = () => {
               <button className={styles.scroll_btn} onClick={() => scroll("left")}>←</button>
               <button className={styles.scroll_btn} onClick={() => scroll("right")}>→</button>
             </div>
-            <Button className={styles.cta} href="https://www.iattend.site/login?mode=register">GET STARTED NOW</Button>
+            <div style={{
+              display:'flex', alignItems:'center',justifyContent:'flex-start', gap:'12px'
+            }}>
+              <Button className={styles.cta} href={`${process.env.NEXT_PUBLIC_APP_URL}/preview-mood`}>GET STARTED NOW</Button>
+              <Button className={styles.cta_text} href="/about/pricing">SEE PLANS</Button>
+            </div>
           </div>
         </div>
       </div>

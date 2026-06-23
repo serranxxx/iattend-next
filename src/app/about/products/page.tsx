@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import { Header } from "@/components/LandPage/Header/Header";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { FooterLand } from "@/components/LandPage/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Productos | I attend",
@@ -112,6 +113,8 @@ export default function ProductsPage() {
           ))}
         </div>
       </section>
-    </div>
+          <FooterLand />
+
+</div>
   );
 }

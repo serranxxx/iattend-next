@@ -151,6 +151,17 @@
     background-color: #EFEADF;
 }
 
+.text_button {
+    font-family: 'Windsor', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: #EFEADF;
+    height: 42px;
+    padding: 0 32px;
+    border: 2px solid #EFEADF;
+    background-color: transparent;
+}
+
 .item1,
 .item2,
 .item3,

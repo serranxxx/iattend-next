@@ -8,8 +8,8 @@ import { Button } from "antd";
 import { ArrowRight, Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
-  { label: "Precios",    href: "/about/pricing" },
-  { label: "Nosotros",   href: "/about/this-is-us" },
+  { label: "Planes",    href: "/about/pricing" },
+  // { label: "Nosotros",   href: "/about/this-is-us" },
   { label: "Contacto", href: "/about/contact-us" },
 ];
 
@@ -105,15 +105,15 @@ export const Header = () => {
               {label}
             </Link>
           ))}
-          <Button className={styles.cta_btn} href="https://www.iattend.site/login?mode=register">
-            Let&apos;s start <ArrowRight strokeWidth={3} size={16} />
+          <Button className={styles.cta_btn} href={`${process.env.NEXT_PUBLIC_APP_URL}/login`}>
+            Iniciar sesión <ArrowRight strokeWidth={3} size={16} />
           </Button>
         </nav>
 
         {/* Mobile row */}
         <div className={styles.mobile_row}>
-          <Button className={styles.cta_btn} href="https://www.iattend.site/login?mode=register">
-            Let&apos;s start <ArrowRight strokeWidth={3} size={16} />
+          <Button className={styles.cta_btn} href={`${process.env.NEXT_PUBLIC_APP_URL}/login`}>
+            Iniciar sesión <ArrowRight strokeWidth={3} size={16} />
           </Button>
           <button
             className={`${styles.menu_btn} ${colorClass}`}
@@ -167,8 +167,8 @@ export const Header = () => {
           className={`${styles.overlay_bottom} ${menuOpen ? styles.overlay_link_visible : ""}`}
           style={{ transitionDelay: menuOpen ? `${80 + NAV_LINKS.length * 70}ms` : "0ms" }}
         >
-          <Button className={styles.overlay_cta} href="https://www.iattend.site/login?mode=register" onClick={() => setMenuOpen(false)}>
-            Let&apos;s start <ArrowRight strokeWidth={3} size={18} />
+          <Button className={styles.overlay_cta} href={`${process.env.NEXT_PUBLIC_APP_URL}/login`} onClick={() => setMenuOpen(false)}>
+            Iniciar sesión <ArrowRight strokeWidth={3} size={18} />
           </Button>
         </div>
       </div>

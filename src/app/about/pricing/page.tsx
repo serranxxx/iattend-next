@@ -1,41 +1,40 @@
 import type { Metadata } from "next";
 import styles from "./page.module.css";
 import { Header } from "@/components/LandPage/Header/Header";
+import { FooterLand } from "@/components/LandPage/Footer/Footer";
 import Link from "next/link";
-import { Star, Gift, Mail, Sparkles } from "lucide-react";
+import { Star, Gift, Mail, Sparkles, ShoppingCart, Wand2, Check } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Precios | I attend",
   description: "Conoce los planes de I attend: PRO y Lite con gestión completa de invitados.",
 };
 
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL;
+
 /* ── Plans ───────────────────────────── */
 const PLANS = [
   {
     id: "pro",
-    name: "PRO",
+    name: "Pro",
     tagline: "La experiencia completa: invita, gestiona y automatiza.",
-    price: 3499,
-    popular: true,
     desc: <>Incluye una <Link href="/about/invitacion-digital" className={styles.desc_link}><strong>invitación digital</strong></Link> para que te olvides de impresiones y reimpresiones. Un <Link href="/about/guest-management" className={styles.desc_link}><strong>gestor de invitados</strong></Link> para alejarte del Excel de 200 filas: sabes en tiempo real quién confirmó y quién no, sin perseguir a nadie. Y el <Link href="/about/mapa-de-mesas" className={styles.desc_link}><strong>acomodo de mesas</strong></Link> para que el seating chart no te quite el sueño. Y un <Link href="/about/side-events" className={styles.desc_link}><strong>Side Event</strong></Link> para ese momento extra que no puede faltar.</>,
+    price: 3999,
+    popular: true,
     extras: [
-      { label: "Envíos automáticos por WhatsApp",  note: "invita a todos en minutos, sin copiar y pegar, sin arriesgar tu número.",          href: "/about/envios-whatsapp" },
-      { label: "2 Side Events adicionales",         note: "porque tu boda son muchos momentos — la cena, el brunch, el civil, todo desde el mismo lugar.", href: "/about/side-events" },
-      { label: "Pases digitales + Apple Wallet",    note: "para que nadie busque listas impresas el día del evento ni haga filas en la entrada.", href: "/about/pases-digitales" },
-      // { label: "LIA — AI Assistant",                note: "tu asistente disponible 24/7 dentro de la invitación, sin que tú tengas que responder nada." },
+      { label: "Envíos automáticos por WhatsApp", note: "invita a todos en minutos, sin copiar y pegar, sin arriesgar tu número." },
+      { label: "2 Side Events adicionales", note: "porque tu boda son muchos momentos — la cena, el brunch, el civil, todo desde el mismo lugar." },
+      { label: "Pases digitales + Apple Wallet", note: "para que nadie busque listas impresas el día del evento ni haga filas en la entrada." },
     ],
   },
   {
     id: "lite",
     name: "Lite",
-    tagline: "Invitación digital completa con control de invitados y organización de tu evento.",
-    price: 2499,
-    // originalPrice: 2499,
-    // discount: "20% OFF",
-    desc: <>Incluye una <Link href="/about/invitacion-digital" className={styles.desc_link}><strong>invitación digital</strong></Link> para que te olvides de impresiones y reimpresiones. Un <Link href="/about/guest-management" className={styles.desc_link}><strong>gestor de invitados</strong></Link> para alejarte del Excel de 200 filas: sabes en tiempo real quién confirmó y quién no, sin perseguir a nadie. Y el <Link href="/about/mapa-de-mesas" className={styles.desc_link}><strong>acomodo de mesas</strong></Link> para que el seating chart no te quite el sueño. Y un <Link href="/about/side-events" className={styles.desc_link}><strong>Side Event</strong></Link> para ese momento extra que no puede faltar.</>,
-    extras: [
-      { label: "Acompañamiento del equipo de I attend", note: "estamos contigo desde que empiezas hasta el día de tu evento, en todo momento." },
-    ] as { label: string; note: string; href?: string }[],
+    tagline: "Invitación digital con control de invitados.",
+    desc: <>Incluye una <Link href="/about/invitacion-digital" className={styles.desc_link}><strong>invitación digital</strong></Link> para que te olvides de las impresiones y reimpresiones. Un <Link href="/about/guest-management" className={styles.desc_link}><strong>gestor de invitados</strong></Link> para alejarte del Excel de 200 filas — sabes quién confirmó sin perseguir a nadie. <Link href="/about/mapa-de-mesas" className={styles.desc_link}><strong>Acomodo de mesas</strong></Link> para organizar el seating chart sin dolores de cabeza. Y un <Link href="/about/side-events" className={styles.desc_link}><strong>Side Event</strong></Link> para ese momento extra que no puede faltar.</>,
+    price: 2899,
+    popular: false,
+    extras: [] as { label: string; note: string }[],
   },
 ];
 
@@ -122,9 +121,13 @@ export default function PricingPage() {
         <p className={styles.hero_sub}>
           Cada boda es diferente. Encuentra el nivel que se adapta a lo que tú necesitas organizar.
         </p>
+        <a href={`${APP_URL}/preview-mood`} className={styles.hero_cta}>
+          <Wand2 size={16} strokeWidth={2} /> Mira cómo funciona
+        </a>
+        <p className={styles.hero_cta_note}>Sin tarjeta · tu portada lista en minutos</p>
       </section>
 
-      {/* Plan cards — stacked column */}
+      {/* Plan cards */}
       <section className={styles.cards_section}>
         <div className={styles.cards_col}>
           {PLANS.map((plan) => (
@@ -140,15 +143,11 @@ export default function PricingPage() {
                   <p className={styles.card_tagline}>{plan.tagline}</p>
                 </div>
                 <div className={styles.card_price_block}>
-                  {/* {plan?.originalPrice && (
-                    <div className={styles.price_row}>
-                      <span className={styles.original}>${plan.originalPrice.toLocaleString()}</span>
-                      <span className={styles.discount_tag}>{plan.discount}</span>
-                    </div>
-                  )} */}
                   <span className={styles.price}>${plan.price.toLocaleString()}</span>
+                  <span className={styles.price_note}>MXN · pago único</span>
                 </div>
               </div>
+
               <p className={styles.card_desc}>{plan.desc}</p>
 
               {plan.extras.length > 0 && (
@@ -157,18 +156,23 @@ export default function PricingPage() {
                   <ul className={styles.extras_list}>
                     {plan.extras.map((e) => (
                       <li key={e.label} className={styles.extras_item}>
-                        {e.href ? (
-                          <Link href={e.href} className={`${styles.extras_label} ${styles.desc_link}`}>{e.label}</Link>
-                        ) : (
+                        <div className={styles.extras_header}>
+                          <Check size={13} strokeWidth={2.5} className={styles.extras_check} />
                           <span className={styles.extras_label}>{e.label}</span>
-                        )}
-                        <span className={styles.extras_note}> — {e.note}</span>
+                        </div>
+                        <p className={styles.extras_note}>{e.note}</p>
                       </li>
                     ))}
                   </ul>
                 </div>
               )}
-              <a href="https://www.iattend.site/login?mode=register" className={styles.card_cta}>Comenzar</a>
+
+              <a href={`${APP_URL}/checkout?plan=${plan.id}`} className={styles.card_cta}>
+                <ShoppingCart size={15} strokeWidth={2} /> Comprar {plan.name}
+              </a>
+              <a href={`${APP_URL}/preview-mood`} className={styles.card_cta_free}>
+                o pruébala gratis →
+              </a>
             </div>
           ))}
         </div>
@@ -195,24 +199,27 @@ export default function PricingPage() {
       </section>
 
       {/* Regala I attend */}
-      <section className={styles.gift_section}>
+      {/* <section className={styles.gift_section}>
         <div className={styles.gift_inner}>
 
-          {/* Hook header */}
+     
           <div className={styles.gift_header}>
-            <p className={styles.gift_eyebrow}>El regalo que nadie espera y todos agradecen</p>
+            
             <div className={styles.gift_header_row}>
-              <h2 className={styles.gift_title}>Regala I attend</h2>
+              <h2 className={styles.gift_title} style={{position:'relative'}}>Regala
+                <img src="/landing/items/green.png" alt="I attend" className={styles.gift_logo} />
+              </h2>
+              <p className={styles.gift_eyebrow}>El regalo que nadie espera y todos agradecen</p>
               <p className={styles.gift_desc}>
                 Alguien que conoces está planeando su boda. Dales I attend y que ellos diseñen cada detalle.
               </p>
             </div>
           </div>
 
-          {/* 2-col: steps left, mockup right */}
+          
           <div className={styles.gift_cols}>
 
-            {/* Left: steps + SpinSVGs */}
+
             <div className={styles.gift_left}>
               {GIFT_STEPS.map((s, i) => (
                 <div key={s.num} className={styles.gift_step_item}>
@@ -225,7 +232,7 @@ export default function PricingPage() {
               ))}
             </div>
 
-            {/* Right: envelope mockup */}
+
             <div className={styles.gift_right}>
               <img src="/landing/items/letter.png" alt="Gift mockup" className={styles.gift_mockup} />
 
@@ -233,7 +240,7 @@ export default function PricingPage() {
 
           </div>
 
-          {/* CTA below */}
+
           <div className={styles.gift_cta_wrap}>
             <Link href="/about/contact-us" className={styles.gift_cta}>
               <Gift size={18} strokeWidth={2} /> Regalar I attend
@@ -241,7 +248,9 @@ export default function PricingPage() {
           </div>
 
         </div>
-      </section>
+      </section> */}
+
+      <FooterLand />
 
     </div>
   );

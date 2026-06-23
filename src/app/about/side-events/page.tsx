@@ -1,5 +1,6 @@
 import BackButton from "@/components/BackButton/BackButton";
 import type { Metadata } from "next";
+import { FooterLand } from "@/components/LandPage/Footer/Footer";
 
 export const metadata: Metadata = {
     title: "Side Events para Bodas y Eventos | I attend",
@@ -235,6 +236,8 @@ export default function SideEventsPage() {
 
                 </section>
             </div>
-        </div>
+              <FooterLand />
+
+</div>
     );
 }
