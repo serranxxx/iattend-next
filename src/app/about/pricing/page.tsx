@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import styles from "./page.module.css";
 import { Header } from "@/components/LandPage/Header/Header";
-import { FooterLand } from "@/components/LandPage/Footer/Footer";
 import Link from "next/link";
 import { Star, Gift, Mail, Sparkles, ShoppingCart, Wand2, Check } from "lucide-react";
 
