@@ -34,8 +34,8 @@ export const Frequent = () => {
     <section className={styles.cont}>
       <div className={styles.left}>
         <div className={styles.stack_wrap}>
-          <img src="landing/items/pic3_1.png" alt="" className={styles.pic_bg} />
-          <img src="landing/items/envelope_1.png" alt="" className={styles.pic_front} />
+          <img src="/landing/items/pic3_1.png" alt="" className={styles.pic_bg} />
+          <img src="/landing/items/envelope_1.png" alt="" className={styles.pic_front} />
         </div>
       </div>
 

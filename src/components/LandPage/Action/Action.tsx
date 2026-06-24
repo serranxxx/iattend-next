@@ -7,8 +7,8 @@ export const Action = () => {
       <div className={styles.title_cont}>
 
         <div className={styles.pics_top}>
-          <img src="landing/items/pic1_1.png" alt="" className={styles.pic1} />
-          <img src="landing/items/stamp2.png" alt="" className={styles.stamp2} />
+          <img src="/landing/items/pic1_1.png" alt="" className={styles.pic1} />
+          <img src="/landing/items/stamp2.png" alt="" className={styles.stamp2} />
         </div>
 
         <span className={styles.title}>TU EVENTO MERECE QUE DISFRUTES PLANEARLO</span>
@@ -20,8 +20,8 @@ export const Action = () => {
 
         </div>
         <div className={styles.pics_bottom}>
-          <img src="landing/items/pic2_1.png" alt="" className={styles.pic2} />
-          <img src="landing/items/stamp3.png" alt="" className={styles.stamp3} />
+          <img src="/landing/items/pic2_1.png" alt="" className={styles.pic2} />
+          <img src="/landing/items/stamp3.png" alt="" className={styles.stamp3} />
         </div>
 
       </div>

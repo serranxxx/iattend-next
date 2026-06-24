@@ -50,11 +50,11 @@ export const Final = () => {
         <div className={styles.left_center}>
           <div className={styles.wrap1}>
             <div className={styles.wrap_cont}>
-              <img src="landing/items/pic4_.png" alt="" className={styles.pic4} />
-              <img src="landing/items/patch.png" alt="" className={styles.patch} />
+              <img src="/landing/items/pic4_.png" alt="" className={styles.pic4} />
+              <img src="/landing/items/patch.png" alt="" className={styles.patch} />
               <span className={styles.text_1}>I attend nació porque vimos a novias increíbles perder horas, energía y paz mental en algo que debería ser simple.</span>
-              <img src="landing/items/pic5_.png" alt="" className={styles.pic5} />
-              <img src="landing/items/i_sticker.png" alt="" className={styles.i_sticker} />
+              <img src="/landing/items/pic5_.png" alt="" className={styles.pic5} />
+              <img src="/landing/items/i_sticker.png" alt="" className={styles.i_sticker} />
               <span className={styles.text_2}>Somos el sistema que hace que la parte más pesada de planear tu boda deje de pesarte a ti.</span>
             </div>
           </div>
@@ -63,11 +63,11 @@ export const Final = () => {
 
       <div className={styles.right}>
         <div className={styles.shadow} />
-        <img src="landing/share.jpg" alt="" className={styles.bg_img} />
+        <img src="/landing/share.jpg" alt="" className={styles.bg_img} />
 
         <div className={styles.right_content}>
           <div className={styles.info_block}>
-            <img src="landing/items/green.png" alt="I attend" className={styles.logo} />
+            <img src="/landing/items/green.png" alt="I attend" className={styles.logo} />
             <h2 className={styles.hero_title}>Your event, handled.</h2>
             <ul className={styles.stats}>
               <li>{animatedEvents}+ eventos creados</li>
