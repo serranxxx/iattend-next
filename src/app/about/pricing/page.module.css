@@ -10,7 +10,11 @@
 
 .video_bg {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;   /* fallback Safari viejo */
+    height: 100lvh;  /* large viewport → siempre cubre, nunca deja hueco */
     z-index: 0;
     overflow: hidden;
 }
