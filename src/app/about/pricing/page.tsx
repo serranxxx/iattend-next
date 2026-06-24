@@ -130,97 +130,102 @@ export default function PricingPage() {
     <div className={styles.page}>
 
       {/* Fixed video background */}
+
+
+      <Header />
+
       <div className={styles.video_bg}>
         <video autoPlay muted loop playsInline className={styles.video}>
           <source src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/landing/bucket.mp4" type="video/mp4" />
         </video>
         <div className={styles.video_overlay} />
-      </div>
 
-      <Header />
+        {/* Hero */}
+        <div className={styles.hero_cont}>
+          <section className={styles.hero}>
+            <h1 className={styles.hero_title}>Hecho para<br />tu momento.</h1>
+            <p className={styles.hero_sub}>
+              Cada boda es diferente. Encuentra el nivel que se adapta a lo que tú necesitas organizar.
+            </p>
+            <a href={`${APP_URL}/preview-mood`} className={styles.hero_cta}>
+              <Wand2 size={16} strokeWidth={2} /> Mira cómo funciona
+            </a>
+            <p className={styles.hero_cta_note}>Sin tarjeta · tu portada lista en minutos</p>
+          </section>
 
-      {/* Hero */}
-      <section className={styles.hero}>
-        <h1 className={styles.hero_title}>Hecho para<br />tu momento.</h1>
-        <p className={styles.hero_sub}>
-          Cada boda es diferente. Encuentra el nivel que se adapta a lo que tú necesitas organizar.
-        </p>
-        <a href={`${APP_URL}/preview-mood`} className={styles.hero_cta}>
-          <Wand2 size={16} strokeWidth={2} /> Mira cómo funciona
-        </a>
-        <p className={styles.hero_cta_note}>Sin tarjeta · tu portada lista en minutos</p>
-      </section>
+          {/* Plan cards */}
+          <section className={styles.cards_section}>
+            <div className={styles.cards_col}>
+              {PLANS.map((plan) => (
+                <div key={plan.id} className={`${styles.card} ${plan.popular ? styles.card_popular : ""}`}>
+                  {plan.popular && (
+                    <div className={styles.popular_badge}>
+                      <Star size={13} fill="currentColor" strokeWidth={0} /> Más popular
+                    </div>
+                  )}
+                  <div className={styles.card_top}>
+                    <div>
+                      <h2 className={styles.card_name}>{plan.name}</h2>
+                      <p className={styles.card_tagline}>{plan.tagline}</p>
+                    </div>
+                    <div className={styles.card_price_block}>
+                      <span className={styles.price}>${plan.price.toLocaleString()}</span>
+                      <span className={styles.price_note}>MXN · pago único</span>
+                    </div>
+                  </div>
 
-      {/* Plan cards */}
-      <section className={styles.cards_section}>
-        <div className={styles.cards_col}>
-          {PLANS.map((plan) => (
-            <div key={plan.id} className={`${styles.card} ${plan.popular ? styles.card_popular : ""}`}>
-              {plan.popular && (
-                <div className={styles.popular_badge}>
-                  <Star size={13} fill="currentColor" strokeWidth={0} /> Más popular
+                  <p className={styles.card_desc}>{plan.desc}</p>
+
+                  {plan.extras.length > 0 && (
+                    <div className={styles.card_extras}>
+                      <span className={styles.card_extras_label}>Y además incluye:</span>
+                      <ul className={styles.extras_list}>
+                        {plan.extras.map((e) => (
+                          <li key={e.label} className={styles.extras_item}>
+                            <div className={styles.extras_header}>
+                              <Check size={13} strokeWidth={2.5} className={styles.extras_check} />
+                              <span className={styles.extras_label}>{e.label}</span>
+                            </div>
+                            <p className={styles.extras_note}>{e.note}</p>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  <a href={`${APP_URL}/checkout?plan=${plan.id}`} className={styles.card_cta}>
+                    <ShoppingCart size={15} strokeWidth={2} /> Comprar {plan.name}
+                  </a>
+                  <a href={`${APP_URL}/preview-mood`} className={styles.card_cta_free}>
+                    o pruébala gratis →
+                  </a>
                 </div>
-              )}
-              <div className={styles.card_top}>
-                <div>
-                  <h2 className={styles.card_name}>{plan.name}</h2>
-                  <p className={styles.card_tagline}>{plan.tagline}</p>
-                </div>
-                <div className={styles.card_price_block}>
-                  <span className={styles.price}>${plan.price.toLocaleString()}</span>
-                  <span className={styles.price_note}>MXN · pago único</span>
-                </div>
-              </div>
-
-              <p className={styles.card_desc}>{plan.desc}</p>
-
-              {plan.extras.length > 0 && (
-                <div className={styles.card_extras}>
-                  <span className={styles.card_extras_label}>Y además incluye:</span>
-                  <ul className={styles.extras_list}>
-                    {plan.extras.map((e) => (
-                      <li key={e.label} className={styles.extras_item}>
-                        <div className={styles.extras_header}>
-                          <Check size={13} strokeWidth={2.5} className={styles.extras_check} />
-                          <span className={styles.extras_label}>{e.label}</span>
-                        </div>
-                        <p className={styles.extras_note}>{e.note}</p>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              <a href={`${APP_URL}/checkout?plan=${plan.id}`} className={styles.card_cta}>
-                <ShoppingCart size={15} strokeWidth={2} /> Comprar {plan.name}
-              </a>
-              <a href={`${APP_URL}/preview-mood`} className={styles.card_cta_free}>
-                o pruébala gratis →
-              </a>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
+          </section>
 
-      {/* Pain points */}
-      <section className={styles.pain_section}>
-        <div className={styles.pain_inner}>
-          <p className={styles.pain_eyebrow}>Cada funcionalidad resuelve algo real</p>
-          <h2 className={styles.pain_title}>Por qué funciona</h2>
-          <div className={styles.pain_list}>
-            {PAIN_POINTS.map((p, i) => (
-              <div key={p.product} className={styles.pain_item}>
-                <div className={styles.pain_row}>
-                  <span className={styles.pain_num_circle}>{i + 1}</span>
-                  <span className={styles.pain_product_tag}>{p.product}</span>
-                </div>
-                <p className={styles.pain_headline}>{p.headline}</p>
-                <p className={styles.pain_desc}>{p.desc}</p>
+          {/* Pain points */}
+          <section className={styles.pain_section}>
+            <div className={styles.pain_inner}>
+              <p className={styles.pain_eyebrow}>Cada funcionalidad resuelve algo real</p>
+              <h2 className={styles.pain_title}>Por qué funciona</h2>
+              <div className={styles.pain_list}>
+                {PAIN_POINTS.map((p, i) => (
+                  <div key={p.product} className={styles.pain_item}>
+                    <div className={styles.pain_row}>
+                      <span className={styles.pain_num_circle}>{i + 1}</span>
+                      <span className={styles.pain_product_tag}>{p.product}</span>
+                    </div>
+                    <p className={styles.pain_headline}>{p.headline}</p>
+                    <p className={styles.pain_desc}>{p.desc}</p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          </section>
         </div>
-      </section>
+
+      </div>
 
       {/* Regala I attend */}
       {/* <section className={styles.gift_section}>
@@ -274,7 +279,7 @@ export default function PricingPage() {
         </div>
       </section> */}
 
-      <FooterLand />
+      {/* <FooterLand /> */}
 
     </div>
   );

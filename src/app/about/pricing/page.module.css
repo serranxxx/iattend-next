@@ -1,57 +1,68 @@
 /* ─────────────────────────────────────
-   Video background
+   Page shell
    ───────────────────────────────────── */
 .page {
-    min-height: 100vh;
-    min-height: 100dvh;
-    position: relative;
-    background-color: #0c171b;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    gap: 0px;
 }
 
+/* ─────────────────────────────────────
+   Video background
+   ───────────────────────────────────── */
 .video_bg {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100vh;   /* fallback Safari viejo */
-    height: 100lvh;  /* large viewport → siempre cubre, nunca deja hueco */
+    height: 100vh;
+    min-height: 100lvh;
     z-index: 0;
-    overflow: hidden;
+    position: relative;
 }
 
 .video {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    position: fixed;
 }
 
 .video_overlay {
-    position: absolute;
+    position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.52);
+}
+
+/* ─────────────────────────────────────
+   Content container (inside video_bg)
+   ───────────────────────────────────── */
+.hero_cont {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 36px;
+    padding: 36px;
+    padding-top: 120px;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 /* All content sits above the video */
 .hero,
 .cards_section,
-.table_section,
-.gift_section,
 .pain_section {
     position: relative;
     z-index: 1;
 }
 
 /* ─────────────────────────────────────
-   Glass mixin (shared properties)
-   ───────────────────────────────────── */
-/* Applied via individual selectors below */
-
-/* ─────────────────────────────────────
    Hero
    ───────────────────────────────────── */
 .hero {
-    min-height: 100dvh;
-    padding: 150px 52px 64px;
     max-width: 1100px;
     margin: 0 auto;
     text-align: center;
@@ -82,8 +93,35 @@
     line-height: 1.65;
 }
 
+.hero_cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #EEE9DE;
+    color: #0c171b;
+    font-family: 'Windsor', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 14px 32px;
+    border-radius: 50px;
+    border: none;
+    transition: opacity 0.2s ease;
+    margin-top: 8px;
+}
+
+.hero_cta:hover { opacity: 0.88; }
+
+.hero_cta_note {
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 200;
+    color: rgba(238, 233, 222, 0.5);
+    margin: 8px 0 0;
+}
+
 /* ─────────────────────────────────────
-   Plan cards — stacked column
+   Plan cards
    ───────────────────────────────────── */
 .cards_section {
     padding: 0 36px 56px;
@@ -99,7 +137,6 @@
     align-items: start;
 }
 
-/* Card top row: name+tagline on left, price on right */
 .card_top {
     display: flex;
     align-items: flex-start;
@@ -115,6 +152,9 @@
 .card_price_block {
     flex-shrink: 0;
     text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .card {
@@ -124,21 +164,17 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    /* Liquid glass */
     background: linear-gradient(145deg,
             rgba(255, 255, 255, 0.22) 0%,
             rgba(255, 255, 255, 0.05) 50%,
             rgba(255, 255, 255, 0.12) 100%);
     backdrop-filter: blur(4px) saturate(100%);
-    /* -webkit-backdrop-filter: blur(28px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.28); */
     box-shadow:
         0 8px 20px rgba(0, 0, 0, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.55),
         inset 0 -1px 0 rgba(0, 0, 0, 0.18);
 }
 
-/* Specular highlight at top edge */
 .card::before {
     content: "";
     position: absolute;
@@ -207,37 +243,6 @@
     color: rgba(238, 233, 222, 0.65);
 }
 
-.card_price_block {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.price_row {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 8px;
-}
-
-.original {
-    font-family: 'Luxora Grotesk', sans-serif;
-    font-size: 15px;
-    text-decoration: line-through;
-    color: rgba(238, 233, 222, 0.45);
-}
-
-.discount_tag {
-    background: rgba(255, 255, 255, 0.15);
-    color: #EEE9DE;
-    font-family: 'Windsor', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 2px 9px;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-}
-
 .price {
     font-family: 'Outfit', sans-serif;
     font-weight: 800;
@@ -247,47 +252,15 @@
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
 }
 
-.card_features {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    flex: 1;
-}
-
-.card_feature {
-    display: flex;
-    align-items: center;
-    gap: 9px;
+.price_note {
     font-family: 'Luxora Grotesk', sans-serif;
-    font-size: 13px;
-    font-weight: 300;
-    color: rgba(238, 233, 222, 0.85);
+    font-size: 12px;
+    font-weight: 200;
+    color: rgba(238, 233, 222, 0.5);
+    text-align: right;
+    margin-top: 2px;
 }
 
-.card_cta {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 13px;
-    border-radius: 10px;
-    font-family: 'Windsor', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    text-decoration: none;
-    margin-top: auto;
-    transition: opacity 0.2s ease;
-    background: #EEE9DE;
-    color: #0c171b;
-    border: none;
-}
-
-.card_cta:hover { opacity: 0.88; }
-
-/* ── Card description paragraph ── */
 .card_desc {
     font-family: 'Luxora Grotesk', sans-serif;
     font-size: 14px;
@@ -309,11 +282,8 @@
     transition: border-color 0.2s ease;
 }
 
-.desc_link:hover {
-    border-color: rgba(238, 233, 222, 0.85);
-}
+.desc_link:hover { border-color: rgba(238, 233, 222, 0.85); }
 
-/* ── PRO extras/bonus section ── */
 .card_extras {
     border-top: 1px solid rgba(238, 233, 222, 0.15);
     padding-top: 16px;
@@ -346,6 +316,17 @@
     line-height: 1.55;
 }
 
+.extras_header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.extras_check {
+    color: #AAC186;
+    flex-shrink: 0;
+}
+
 .extras_label {
     font-weight: 600;
     color: rgba(238, 233, 222, 0.9);
@@ -356,176 +337,49 @@
     color: rgba(238, 233, 222, 0.55);
 }
 
-.feature_link {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    color: inherit;
-    text-decoration: none;
-    border-bottom: 1px solid rgba(238, 233, 222, 0.2);
-    transition: border-color 0.2s ease;
-}
-
-.feature_link:hover {
-    border-color: rgba(238, 233, 222, 0.7);
-}
-
-/* ─────────────────────────────────────
-   Comparison table — hidden
-   ───────────────────────────────────── */
-.table_section {
-    display: none;
-}
-
-.table_wrap {
-    overflow-x: auto;
-    border-radius: 16px;
-    /* glass */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    background: transparent;
-    min-width: 560px;
-}
-
-.th_feature {
-    background: rgba(0, 0, 0, 0.35);
-    padding: 18px 28px;
-    text-align: left;
-    width: 42%;
-}
-
-.th {
-    background: rgba(0, 0, 0, 0.35);
-    color: rgba(238, 233, 222, 0.9);
-    font-family: 'Windsor', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    padding: 18px 0;
-    text-align: center;
-    width: 19%;
-}
-
-.th_pro {
-    background: rgba(238, 233, 222, 0.18);
-    color: #EEE9DE;
-}
-
-.th_price {
-    background: rgba(0, 0, 0, 0.25);
-    color: rgba(238, 233, 222, 0.45);
-    font-family: 'Luxora Grotesk', sans-serif;
-    font-size: 13px;
-    font-weight: 300;
-    padding: 0 0 14px;
-    text-align: center;
-}
-
-.th_price_pro {
-    background: rgba(238, 233, 222, 0.12);
-    color: rgba(238, 233, 222, 0.55);
-}
-
-.tr_even {
-    background: rgba(255, 255, 255, 0.03);
-}
-
-.tr_odd {
-    background: rgba(255, 255, 255, 0.07);
-}
-
-.td_feature {
-    padding: 13px 28px;
-    font-family: 'Luxora Grotesk', sans-serif;
-    font-size: 14px;
-    font-weight: 300;
-    color: rgba(238, 233, 222, 0.85);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-}
-
-.td {
-    text-align: center;
-    padding: 13px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-}
-
-.td_pro {
-    background: rgba(238, 233, 222, 0.07);
-}
-
-.check_pill {
-    display: inline-flex;
+.card_cta {
+    display: flex;
     align-items: center;
     justify-content: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    color: #EEE9DE;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.dash {
-    font-family: 'Luxora Grotesk', sans-serif;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.2);
-}
-
-.cell_val {
+    gap: 8px;
+    padding: 13px;
+    border-radius: 10px;
     font-family: 'Windsor', sans-serif;
     font-size: 14px;
     font-weight: 700;
-    color: rgba(238, 233, 222, 0.9);
-}
-
-.tr_cta {
-    background: rgba(0, 0, 0, 0.15);
-}
-
-.tbl_cta {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.12);
-    color: #EEE9DE;
-    font-family: 'Windsor', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    padding: 9px 22px;
-    border-radius: 8px;
     text-decoration: none;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: background 0.2s;
-    margin: 10px 0;
-    backdrop-filter: blur(4px);
+    margin-top: auto;
+    transition: opacity 0.2s ease;
+    background: #EEE9DE;
+    color: #0c171b;
+    border: none;
 }
 
-.tbl_cta:hover {
-    background: rgba(255, 255, 255, 0.2);
+.card_cta:hover { opacity: 0.88; }
+
+.card_cta_free {
+    display: block;
+    text-align: center;
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(238, 233, 222, 0.5);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-top: -8px;
+    transition: color 0.2s ease;
 }
 
-.tbl_cta_pro {
-    background: rgba(238, 233, 222, 0.18);
-    border-color: rgba(238, 233, 222, 0.35);
-}
-
-.tbl_cta_pro:hover {
-    background: rgba(238, 233, 222, 0.28);
-}
+.card_cta_free:hover { color: rgba(238, 233, 222, 0.85); }
 
 /* ─────────────────────────────────────
-   Pain points — hidden for now
+   Pain points (display: none por ahora)
    ───────────────────────────────────── */
 .pain_section {
     display: none;
 }
 
-.pain_inner {
-    width: 100%;
-}
+.pain_inner { width: 100%; }
 
 .pain_eyebrow {
     font-family: 'Windsor', sans-serif;
@@ -562,7 +416,6 @@
     border-bottom: 1px solid rgba(238, 233, 222, 0.08);
 }
 
-/* Number circle + product tag row */
 .pain_row {
     display: flex;
     align-items: center;
@@ -616,204 +469,6 @@
 }
 
 /* ─────────────────────────────────────
-   Regala I attend section
-   ───────────────────────────────────── */
-.gift_section {
-    padding: 100px 52px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    background: repeating-linear-gradient(90deg,
-            #0c171b 0px,
-            #0c171b 20px,
-            #071013 20px,
-            #071013 50px);
-}
-
-.gift_inner {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-/* Header */
-.gift_header {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-bottom: 64px;
-}
-
-.gift_header_row {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    /* justify-content: space-between; */
-    gap: 12px;
-}
-
-.gift_eyebrow {
-    font-family: 'Windsor', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    color: rgba(238, 233, 222, 0.45);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin: 0;
-    margin-bottom:-12px;
-}
-
-.gift_title {
-    font-family: 'Denver Serial', sans-serif;
-    font-style: italic;
-    font-weight: 800;
-    font-size: clamp(46px, 8vw, 88px);
-    color: #EEE9DE;
-    line-height: 0.9;
-    margin: 0;
-    letter-spacing: 2px;
-    width: 100%;
-
-}
-
-.gift_logo {
-    width: 320px;
-    margin-left: 10px;
-
-}
-
-.gift_desc {
-    font-family: 'Luxora Grotesk', sans-serif;
-    font-size: 16px;
-    font-weight: 200;
-    color: rgba(238, 233, 222, 0.6);
-    /* max-width: 420px; */
-    line-height: 1.7;
-    margin: 0;
-    flex-shrink: 0;
-    /* align-self: flex-end; */
-}
-
-/* ── 2-column layout ── */
-.gift_cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: center;
-    margin-bottom: 52px;
-}
-
-/* Left: steps */
-.gift_left {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-
-.gift_step_item {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 16px 0;
-}
-
-.gift_step_row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.gift_step_circle {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: #EEE9DE;
-    color: #0c171b;
-    font-family: 'Windsor', sans-serif;
-    font-size: 15px;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.gift_step_tag {
-    border: 2px solid rgba(238, 233, 222, 0.45);
-    color: #EEE9DE;
-    font-family: 'Windsor', sans-serif;
-    font-size: 12px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    padding: 5px 14px;
-    border-radius: 8px;
-}
-
-.gift_step_desc {
-    font-family: 'Luxora Grotesk', sans-serif;
-    font-size: 14px;
-    font-weight: 200;
-    color: rgba(238, 233, 222, 0.6);
-    margin: 0;
-    line-height: 1.65;
-}
-
-.gift_spin {
-    padding: 8px 0 4px 20px;
-    opacity: 0.7;
-}
-
-/* Right: mockup image */
-.gift_right {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.gift_mockup {
-    width: 100%;
-    max-width: 540px;
-    min-width: 500px;
-    height: auto;
-    border-radius: 16px;
-    object-fit: contain;
-    filter: drop-shadow(0 16px 40px rgba(0, 0, 0, 0.45));
-}
-
-/* CTA */
-.gift_cta_wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.gift_cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: #EEE9DE;
-    color: #0c171b;
-    font-family: 'Windsor', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    padding: 16px 36px;
-    border-radius: 50px;
-    text-decoration: none;
-    transition: opacity 0.2s;
-}
-
-.gift_cta:hover {
-    opacity: 0.85;
-}
-
-.gift_cta_note {
-    font-family: 'Luxora Grotesk', sans-serif;
-    font-size: 12px;
-    font-weight: 200;
-    color: rgba(238, 233, 222, 0.4);
-    margin: 0;
-}
-
-/* ─────────────────────────────────────
    Responsive
    ───────────────────────────────────── */
 @media (max-width: 900px) {
@@ -821,73 +476,22 @@
         grid-template-columns: 1fr;
         max-width: 480px;
         margin: 0 auto;
-        gap: 24px
+        gap: 24px;
     }
 
     .card_popular {
         order: -1;
     }
 
-    .gift_cols {
-        grid-template-columns: 1fr;
-        gap: 36px;
-    }
-
-    .gift_right {
-        order: -1;
-    }
-
-    .gift_header_row {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .gift_desc {
-        max-width: 100%;
-        align-self: flex-start;
-    }
-
     .pain_list {
         grid-template-columns: 1fr;
     }
 
-    .gift_mockup {
-        min-width: 100%;
-        margin: -36px 0px;
-        margin-bottom: -20px;
+    .hero_cont {
+        gap: 12px;
+        padding: 16px;
+        padding-top: 18px;
     }
-
-    .gift_left {
-        max-width: 100%;
-    }
-
-    .gift_title {
-        font-size: clamp(36px, 8vw, 72px);
-        text-align: center;
-        width: 100%;
-    }
-
-    .gift_desc {
-        font-size: 14px;
-        text-align: center;
-    }
-
-    .gift_step_item {
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-
-    .gift_logo {
-        width: 50%;
-        margin-left: 0px;
-
-    }
-
-    .gift_eyebrow {
-        text-align: center;
-    }
-
 }
 
 @media (max-width: 600px) {
@@ -903,75 +507,163 @@
         padding: 48px 20px;
     }
 
-    .gift_section {
-        padding: 60px 24px;
-    }
-
     .card_top {
         flex-direction: column;
     }
 }
 
-/* ── Hero CTA ── */
-.hero_cta {
-    display: inline-flex;
+
+/* ===========================================
+   UNUSED — secciones comentadas en page.tsx
+   =========================================== */
+
+/*
+── Precio con descuento (no implementado) ──
+
+.price_row {
+    display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 8px;
-    background: #EEE9DE;
-    color: #0c171b;
+}
+
+.original {
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 15px;
+    text-decoration: line-through;
+    color: rgba(238, 233, 222, 0.45);
+}
+
+.discount_tag {
+    background: rgba(255, 255, 255, 0.15);
+    color: #EEE9DE;
     font-family: 'Windsor', sans-serif;
-    font-size: 16px;
+    font-size: 11px;
     font-weight: 700;
-    text-decoration: none;
-    padding: 14px 32px;
-    border-radius: 50px;
-    border: none;
-    transition: opacity 0.2s ease;
-    margin-top: 8px;
+    padding: 2px 9px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
 }
-.hero_cta:hover { opacity: 0.88; }
+*/
 
-.hero_cta_note {
-    font-family: 'Luxora Grotesk', sans-serif;
-    font-size: 13px;
-    font-weight: 200;
-    color: rgba(238, 233, 222, 0.5);
-    margin: 8px 0 0;
-}
+/*
+── Lista de features con links (reemplazada por card_desc) ──
 
-/* ── Price note ── */
-.price_note {
-    font-family: 'Luxora Grotesk', sans-serif;
-    font-size: 12px;
-    font-weight: 200;
-    color: rgba(238, 233, 222, 0.5);
-    text-align: right;
-    margin-top: 2px;
+.card_features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
 }
 
-/* ── Free trial link ── */
-.card_cta_free {
-    display: block;
-    text-align: center;
+.card_feature {
+    display: flex;
+    align-items: center;
+    gap: 9px;
     font-family: 'Luxora Grotesk', sans-serif;
     font-size: 13px;
     font-weight: 300;
-    color: rgba(238, 233, 222, 0.5);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    margin-top: -8px;
-    transition: color 0.2s ease;
+    color: rgba(238, 233, 222, 0.85);
 }
-.card_cta_free:hover { color: rgba(238, 233, 222, 0.85); }
 
-/* ── Extras checkmark ── */
-.extras_header {
-    display: flex;
+.feature_link {
+    display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 3px;
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(238, 233, 222, 0.2);
+    transition: border-color 0.2s ease;
 }
 
-.extras_check {
-    color: #AAC186;
-    flex-shrink: 0;
+.feature_link:hover {
+    border-color: rgba(238, 233, 222, 0.7);
 }
+*/
+
+/*
+── Tabla comparativa (table_section comentada) ──
+
+.table_section { display: none; }
+
+.table_wrap {
+    overflow-x: auto;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: transparent;
+    min-width: 560px;
+}
+
+.th_feature { background: rgba(0,0,0,0.35); padding: 18px 28px; text-align: left; width: 42%; }
+.th { background: rgba(0,0,0,0.35); color: rgba(238,233,222,0.9); font-family: 'Windsor', sans-serif; font-size: 15px; font-weight: 700; padding: 18px 0; text-align: center; width: 19%; }
+.th_pro { background: rgba(238,233,222,0.18); color: #EEE9DE; }
+.th_price { background: rgba(0,0,0,0.25); color: rgba(238,233,222,0.45); font-family: 'Luxora Grotesk', sans-serif; font-size: 13px; font-weight: 300; padding: 0 0 14px; text-align: center; }
+.th_price_pro { background: rgba(238,233,222,0.12); color: rgba(238,233,222,0.55); }
+.tr_even { background: rgba(255,255,255,0.03); }
+.tr_odd { background: rgba(255,255,255,0.07); }
+.td_feature { padding: 13px 28px; font-family: 'Luxora Grotesk', sans-serif; font-size: 14px; font-weight: 300; color: rgba(238,233,222,0.85); border-bottom: 1px solid rgba(255,255,255,0.07); }
+.td { text-align: center; padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.td_pro { background: rgba(238,233,222,0.07); }
+.check_pill { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,0.2); color: #EEE9DE; border: 1px solid rgba(255,255,255,0.3); }
+.dash { font-family: 'Luxora Grotesk', sans-serif; font-size: 14px; color: rgba(255,255,255,0.2); }
+.cell_val { font-family: 'Windsor', sans-serif; font-size: 14px; font-weight: 700; color: rgba(238,233,222,0.9); }
+.tr_cta { background: rgba(0,0,0,0.15); }
+.tbl_cta { display: inline-block; background: rgba(255,255,255,0.12); color: #EEE9DE; font-family: 'Windsor', sans-serif; font-size: 13px; font-weight: 700; padding: 9px 22px; border-radius: 8px; text-decoration: none; border: 1px solid rgba(255,255,255,0.2); transition: background 0.2s; margin: 10px 0; backdrop-filter: blur(4px); }
+.tbl_cta:hover { background: rgba(255,255,255,0.2); }
+.tbl_cta_pro { background: rgba(238,233,222,0.18); border-color: rgba(238,233,222,0.35); }
+.tbl_cta_pro:hover { background: rgba(238,233,222,0.28); }
+*/
+
+/*
+── Sección "Regala I attend" (gift_section comentada en page.tsx) ──
+
+.gift_section { padding: 100px 52px; border-top: 1px solid rgba(255,255,255,0.1); background: repeating-linear-gradient(90deg, #0c171b 0px, #0c171b 20px, #071013 20px, #071013 50px); }
+.gift_inner { max-width: 1000px; margin: 0 auto; }
+.gift_header { display: flex; flex-direction: column; gap: 16px; margin-bottom: 64px; }
+.gift_header_row { display: flex; align-items: flex-start; flex-direction: column; gap: 12px; }
+.gift_eyebrow { font-family: 'Windsor', sans-serif; font-size: 12px; font-weight: 700; color: rgba(238,233,222,0.45); text-transform: uppercase; letter-spacing: 1.5px; margin: 0 0 -12px; }
+.gift_title { font-family: 'Denver Serial', sans-serif; font-style: italic; font-weight: 800; font-size: clamp(46px, 8vw, 88px); color: #EEE9DE; line-height: 0.9; margin: 0; letter-spacing: 2px; width: 100%; }
+.gift_logo { width: 320px; margin-left: 10px; }
+.gift_desc { font-family: 'Luxora Grotesk', sans-serif; font-size: 16px; font-weight: 200; color: rgba(238,233,222,0.6); line-height: 1.7; margin: 0; flex-shrink: 0; }
+.gift_cols { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-bottom: 52px; }
+.gift_left { display: flex; flex-direction: column; flex: 1; }
+.gift_step_item { display: flex; flex-direction: column; gap: 8px; padding: 16px 0; }
+.gift_step_row { display: flex; align-items: center; gap: 12px; }
+.gift_step_circle { width: 38px; height: 38px; border-radius: 50%; background: #EEE9DE; color: #0c171b; font-family: 'Windsor', sans-serif; font-size: 15px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.gift_step_tag { border: 2px solid rgba(238,233,222,0.45); color: #EEE9DE; font-family: 'Windsor', sans-serif; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; padding: 5px 14px; border-radius: 8px; }
+.gift_step_desc { font-family: 'Luxora Grotesk', sans-serif; font-size: 14px; font-weight: 200; color: rgba(238,233,222,0.6); margin: 0; line-height: 1.65; }
+.gift_spin { padding: 8px 0 4px 20px; opacity: 0.7; }
+.gift_right { display: flex; justify-content: center; align-items: center; }
+.gift_mockup { width: 100%; max-width: 540px; min-width: 500px; height: auto; border-radius: 16px; object-fit: contain; filter: drop-shadow(0 16px 40px rgba(0,0,0,0.45)); }
+.gift_cta_wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.gift_cta { display: inline-flex; align-items: center; gap: 10px; background: #EEE9DE; color: #0c171b; font-family: 'Windsor', sans-serif; font-size: 16px; font-weight: 700; padding: 16px 36px; border-radius: 50px; text-decoration: none; transition: opacity 0.2s; }
+.gift_cta:hover { opacity: 0.85; }
+.gift_cta_note { font-family: 'Luxora Grotesk', sans-serif; font-size: 12px; font-weight: 200; color: rgba(238,233,222,0.4); margin: 0; }
+
+@media (max-width: 900px) {
+    .gift_cols { grid-template-columns: 1fr; gap: 36px; }
+    .gift_right { order: -1; }
+    .gift_header_row { flex-direction: column; gap: 20px; }
+    .gift_desc { max-width: 100%; align-self: flex-start; font-size: 14px; text-align: center; }
+    .gift_mockup { min-width: 100%; margin: -36px 0px -20px; }
+    .gift_left { max-width: 100%; }
+    .gift_title { font-size: clamp(36px, 8vw, 72px); text-align: center; width: 100%; }
+    .gift_step_item { align-items: center; justify-content: center; text-align: center; }
+    .gift_logo { width: 50%; margin-left: 0px; }
+    .gift_eyebrow { text-align: center; }
+}
+
+@media (max-width: 600px) {
+    .gift_section { padding: 60px 24px; }
+}
+*/
