@@ -278,9 +278,6 @@ export default function PricingPage() {
 
         </div>
       </section> */}
-
-      {/* <FooterLand /> */}
-
     </div>
   );
 }
