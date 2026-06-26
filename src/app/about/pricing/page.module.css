@@ -7,8 +7,8 @@
     justify-content: flex-start;
     flex-direction: column;
     width: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
+    /* overflow-y: auto;
+    overflow-x: hidden; */
     gap: 0px;
 }
 
@@ -49,6 +49,7 @@
     padding-top: 120px;
     box-sizing: border-box;
     width: 100%;
+    border: 1px solid red;
 }
 
 /* All content sits above the video */
@@ -71,6 +72,7 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    width: 100%;
 }
 
 .hero_title {

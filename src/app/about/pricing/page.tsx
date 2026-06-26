@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import { Header } from "@/components/LandPage/Header/Header";
 import Link from "next/link";
 import { Star, Gift, Mail, Sparkles, ShoppingCart, Wand2, Check } from "lucide-react";
+import { FooterLand } from "@/components/LandPage/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Planes y Precios | I attend",
@@ -140,7 +141,7 @@ export default function PricingPage() {
         <div className={styles.video_overlay} />
 
         {/* Hero */}
-        <div className={styles.hero_cont}>
+        <div className={styles.hero_cont} style={{border:'1px solid red'}}>
           <section className={styles.hero}>
             <h1 className={styles.hero_title}>Hecho para<br />tu momento.</h1>
             <p className={styles.hero_sub}>
@@ -224,7 +225,11 @@ export default function PricingPage() {
           </section>
         </div>
 
+        <FooterLand />
+
       </div>
+
+      
 
       {/* Regala I attend */}
       {/* <section className={styles.gift_section}>
