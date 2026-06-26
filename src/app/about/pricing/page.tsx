@@ -141,7 +141,7 @@ export default function PricingPage() {
         <div className={styles.video_overlay} />
 
         {/* Hero */}
-        <div className={styles.hero_cont} style={{border:'1px solid red'}}>
+        <div className={styles.hero_cont} >
           <section className={styles.hero}>
             <h1 className={styles.hero_title}>Hecho para<br />tu momento.</h1>
             <p className={styles.hero_sub}>
