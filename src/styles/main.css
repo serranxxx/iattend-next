@@ -1,10 +1,9 @@
-
 :root {
     --border-color: #EBEBEB;
 
-    --font-family: 'Poppins'
+    --font-family: 'Poppins';
 
-        --button-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
+    --button-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
     --card-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.20);
     --modal-shadow: 0px 0px 24px rgba(0, 0, 0, 0.25);
 
@@ -524,12 +523,12 @@ h5,
 
 .gt-widget,
 #google_translate_element {
-  /* position: absolute;
+    /* position: absolute;
   bottom: 8px;
   left: 8px; */
-  border-radius: 99px !important;
-  opacity: 0.9;
-  z-index: 100;
+    border-radius: 99px !important;
+    opacity: 0.9;
+    z-index: 100;
 }
 
 .scroll-invitation::-webkit-scrollbar {
@@ -552,5 +551,3 @@ h5,
     background: #555;
     /* Color del scrollbar al pasar el cursor sobre él */
 }
-
-
