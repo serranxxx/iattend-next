@@ -15,7 +15,7 @@ export const Action = () => {
         <div style={{
           display:'flex',alignItems:'center',justifyContent:'center',gap:'12px'
         }}>
-          <Button className={styles.cta} href={`${process.env.NEXT_PUBLIC_APP_URL}/preview-mood`}>GET STARTED TODAY</Button>
+          <Button className={styles.cta} href={`${process.env.NEXT_PUBLIC_APP_URL}/checkout?openWizard=true`}>GET STARTED TODAY</Button>
           {/* <Button className={styles.cta_text} href="https://www.iattend.site/login?mode=register">See plans</Button> */}
 
         </div>

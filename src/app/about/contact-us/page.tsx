@@ -47,7 +47,7 @@ const CONTACTS = [
   {
     icon: <Instagram size={26} strokeWidth={1.5} />,
     label: "Instagram",
-    value: "@iattend.mx",
+    value: "iattend.mx",
     href: "https://instagram.com/iattend.mx",
     cta: "Seguirnos",
   },

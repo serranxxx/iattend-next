@@ -21,7 +21,7 @@
 }
 
 .footer_logo {
-    max-width: 130px;
+    max-width: 110px;
 }
 
 .footer_row {
@@ -77,12 +77,14 @@
     font-family:  'Luxora Grotesk', sans-serif;
     color: #eeeadf;
     font-weight: 400;
+    font-size: 12px;
 }
 
 .link_cont a {
     font-family:  'Luxora Grotesk', sans-serif;
     color: #eeeadf;
     font-weight: 200;
+    font-size: 12px;
 }
 
 .main_cont {
@@ -150,7 +152,7 @@
     }
 
     .footer_logo {
-        max-width: 160px;
+        max-width: 130px;
     }
 
 

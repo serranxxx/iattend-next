@@ -33,7 +33,7 @@ export const FooterLand = () => {
             </a>
             <a href="https://www.instagram.com/iattend.mx" rel="noreferrer" target="_blank" className={styles.footer_link}>
               <FaInstagram />
-              @iattend.mx
+              iattend.mx
             </a>
             <a href="mailto:contacto.iattend@gmail.com" rel="noreferrer" target="_blank" className={styles.footer_link}>
               <FaRegEnvelope /> Mail

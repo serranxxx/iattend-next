@@ -147,7 +147,7 @@ export default function PricingPage() {
             <p className={styles.hero_sub}>
               Cada boda es diferente. Encuentra el nivel que se adapta a lo que tú necesitas organizar.
             </p>
-            <a href={`${APP_URL}/preview-mood`} className={styles.hero_cta}>
+            <a href={`${APP_URL}/checkout?openWizard=true`} className={styles.hero_cta}>
               <Wand2 size={16} strokeWidth={2} /> Mira cómo funciona
             </a>
             <p className={styles.hero_cta_note}>Sin tarjeta · tu portada lista en minutos</p>
@@ -196,9 +196,9 @@ export default function PricingPage() {
                   <a href={`${APP_URL}/checkout?plan=${plan.id}`} className={styles.card_cta}>
                     <ShoppingCart size={15} strokeWidth={2} /> Comprar {plan.name}
                   </a>
-                  <a href={`${APP_URL}/preview-mood`} className={styles.card_cta_free}>
+                  {/* <a href={`${APP_URL}/preview-mood`} className={styles.card_cta_free}>
                     o pruébala gratis →
-                  </a>
+                  </a> */}
                 </div>
               ))}
             </div>

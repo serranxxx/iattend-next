@@ -93,7 +93,7 @@ export const Final = () => {
             <div style={{
               display:'flex', alignItems:'center',justifyContent:'flex-start', gap:'12px'
             }}>
-              <Button className={styles.cta} href={`${process.env.NEXT_PUBLIC_APP_URL}/preview-mood`}>GET STARTED NOW</Button>
+              <Button className={styles.cta} href={`${process.env.NEXT_PUBLIC_APP_URL}/checkout?openWizard=true`}>GET STARTED NOW</Button>
               <Button className={styles.cta_text} href="/about/pricing">SEE PLANS</Button>
             </div>
           </div>

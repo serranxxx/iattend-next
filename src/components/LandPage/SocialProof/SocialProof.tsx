@@ -133,7 +133,7 @@ export const SocialProof = () => {
             <div style={{
               display:'flex',alignItems:'center',justifyContent:'center', gap:'12px'
             }}>
-              <Button className={styles.situation_button} href={`${process.env.NEXT_PUBLIC_APP_URL}/preview-mood`}>Let&apos;s start <ArrowRight strokeWidth={3} size={18} /></Button>
+              <Button className={styles.situation_button} href={`${process.env.NEXT_PUBLIC_APP_URL}/checkout?openWizard=true`}>Let&apos;s start <ArrowRight strokeWidth={3} size={18} /></Button>
               <Button className={styles.text_button} href="/about/pricing">See plans</Button>
             </div>
           </div>
