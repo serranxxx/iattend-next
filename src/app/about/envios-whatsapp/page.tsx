@@ -2,6 +2,7 @@ import React from "react";
 import BackButton from "@/components/BackButton/BackButton";
 import type { Metadata } from "next";
 import { FooterLand } from "@/components/LandPage/Footer/Footer";
+import { getPlan } from "@/lib/plans";
 
 export const metadata: Metadata = {
     title: "Envíos Automáticos de Invitaciones por WhatsApp | I attend",
@@ -45,7 +46,13 @@ export const metadata: Metadata = {
     robots: { index: true, follow: true },
 };
 
-export default function WhatsAppDeliveryPage() {
+export default async function WhatsAppDeliveryPage() {
+    // Créditos incluidos en PRO: vienen del catálogo (Admin → Planes).
+    const pro = await getPlan("pro");
+    const proName = pro?.name || "PRO";
+    const proCredits = pro?.credits_included ?? 0;
+    const proCreditsText = proCredits.toLocaleString("es-MX");
+
     const whatsappDeliverySchema = {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
@@ -74,7 +81,7 @@ export default function WhatsAppDeliveryPage() {
             "API oficial de WhatsApp (Meta)",
             "Envíos masivos sin riesgo de bloqueo",
             "Sistema de créditos por envío",
-            "300 créditos incluidos en I attend PRO",
+            ...(proCredits > 0 ? [`${proCreditsText} créditos incluidos en I attend ${proName}`] : []),
             "Compra de créditos adicionales",
             "Link mágico personalizado por invitado",
         ],
@@ -152,14 +159,18 @@ export default function WhatsAppDeliveryPage() {
                         y cuántos envíos tienes disponibles.
                     </p>
 
-                    <h2>I attend PRO: 300 créditos incluidos</h2>
+                    {proCredits > 0 && (
+                        <>
+                            <h2>I attend {proName}: {proCreditsText} créditos incluidos</h2>
 
-                    <p>
-                        El <strong>paquete I attend PRO</strong> incluye
-                        <strong> 300 créditos de envío por WhatsApp</strong>,
-                        suficientes para la mayoría de las bodas y eventos
-                        sin necesidad de comprar créditos adicionales.
-                    </p>
+                            <p>
+                                El <strong>paquete I attend {proName}</strong> incluye
+                                <strong> {proCreditsText} créditos de envío por WhatsApp</strong>,
+                                suficientes para la mayoría de las bodas y eventos
+                                sin necesidad de comprar créditos adicionales.
+                            </p>
+                        </>
+                    )}
 
                     <p>
                         Si tu lista de invitados es más grande,

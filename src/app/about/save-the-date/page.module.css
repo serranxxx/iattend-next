@@ -1,0 +1,355 @@
+/* ─────────────────────────────────────
+   Save the Date gratis — mini landing.
+   Mismo lenguaje que /about/pricing: fondo oscuro de marca, títulos en
+   Denver Serial, texto en Luxora Grotesk, CTA crema en Windsor.
+   ───────────────────────────────────── */
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    background:
+        radial-gradient(90% 60% at 80% 0%, rgba(209, 190, 221, 0.16), transparent 60%),
+        radial-gradient(70% 50% at 0% 40%, rgba(170, 193, 135, 0.1), transparent 60%),
+        #0c171b;
+    color: #EEE9DE;
+}
+
+/* ─────────────────────────────────────
+   Hero
+   ───────────────────────────────────── */
+.hero {
+    width: 100%;
+    max-width: 1100px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 48px;
+    padding: 140px 36px 72px;
+}
+
+.hero_text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+}
+
+.eyebrow {
+    font-family: 'Michigan Signature', 'Denver Serial', serif;
+    font-size: 30px;
+    color: #D1BEDD;
+    line-height: 1;
+}
+
+.title {
+    margin: 0;
+    font-family: 'Denver Serial', sans-serif;
+    font-weight: 800;
+    font-size: clamp(42px, 5.6vw, 76px);
+    line-height: 1.02;
+    color: #EEE9DE;
+}
+
+.title em {
+    font-style: italic;
+    color: #AAC187;
+}
+
+.sub {
+    margin: 0;
+    max-width: 480px;
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 17px;
+    font-weight: 200;
+    line-height: 1.65;
+    color: rgba(238, 233, 222, 0.72);
+}
+
+.cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 6px;
+    padding: 15px 30px;
+    border-radius: 50px;
+    background: #EEE9DE;
+    color: #0c171b;
+    font-family: 'Windsor', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.cta:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.cta_note {
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 200;
+    color: rgba(238, 233, 222, 0.5);
+}
+
+/* Teléfono con el Save the Date real adentro (390 × 844 escalado). */
+.hero_visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+.phone {
+    transform: rotate(-3deg);
+}
+
+.phone_caption {
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 200;
+    color: rgba(238, 233, 222, 0.55);
+}
+
+/* ─────────────────────────────────────
+   Secciones
+   ───────────────────────────────────── */
+.section {
+    width: 100%;
+    max-width: 1100px;
+    box-sizing: border-box;
+    padding: 64px 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+}
+
+.section_eyebrow {
+    font-family: 'Michigan Signature', 'Denver Serial', serif;
+    font-size: 26px;
+    color: #D1BEDD;
+}
+
+.section_title {
+    margin: 0;
+    font-family: 'Denver Serial', sans-serif;
+    font-weight: 800;
+    font-size: clamp(30px, 3.6vw, 46px);
+    line-height: 1.1;
+    color: #EEE9DE;
+}
+
+.section_sub {
+    margin: 0;
+    max-width: 580px;
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 200;
+    line-height: 1.65;
+    color: rgba(238, 233, 222, 0.7);
+}
+
+.grid,
+.steps {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin: 22px 0 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+}
+
+.card,
+.step {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 26px 24px;
+    border-radius: 22px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card h3,
+.step h3 {
+    margin: 0;
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: #EEE9DE;
+}
+
+.card p,
+.step p {
+    margin: 0;
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 14.5px;
+    font-weight: 200;
+    line-height: 1.6;
+    color: rgba(238, 233, 222, 0.7);
+}
+
+.card_icon,
+.step_icon {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(170, 193, 135, 0.16);
+    color: #AAC187;
+}
+
+.step_num {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    font-family: 'Denver Serial', sans-serif;
+    font-style: italic;
+    font-weight: 800;
+    font-size: 42px;
+    line-height: 1;
+    color: rgba(238, 233, 222, 0.12);
+}
+
+/* ─────────────────────────────────────
+   Preguntas
+   ───────────────────────────────────── */
+.faq {
+    width: 100%;
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 18px;
+    text-align: left;
+}
+
+.faq_item {
+    padding: 18px 22px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(238, 233, 222, 0.1);
+}
+
+.faq_item summary {
+    cursor: pointer;
+    list-style: none;
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #EEE9DE;
+}
+
+.faq_item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq_item summary::after {
+    content: "+";
+    float: right;
+    color: #AAC187;
+    font-weight: 400;
+}
+
+.faq_item[open] summary::after {
+    content: "–";
+}
+
+.faq_item p {
+    margin: 10px 0 0;
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 14.5px;
+    font-weight: 200;
+    line-height: 1.6;
+    color: rgba(238, 233, 222, 0.7);
+}
+
+/* ─────────────────────────────────────
+   CTA final
+   ───────────────────────────────────── */
+.final {
+    width: calc(100% - 72px);
+    max-width: 1028px;
+    box-sizing: border-box;
+    margin: 32px 36px 96px;
+    padding: 56px 32px;
+    border-radius: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+    background:
+        radial-gradient(80% 120% at 50% 0%, rgba(170, 193, 135, 0.22), transparent 70%),
+        rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(238, 233, 222, 0.12);
+}
+
+.final h2 {
+    margin: 0;
+    font-family: 'Denver Serial', sans-serif;
+    font-style: italic;
+    font-weight: 800;
+    font-size: clamp(32px, 4vw, 52px);
+    color: #EEE9DE;
+}
+
+.final p {
+    margin: 0 0 8px;
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 200;
+    color: rgba(238, 233, 222, 0.7);
+}
+
+/* ─────────────────────────────────────
+   Responsive
+   ───────────────────────────────────── */
+@media (max-width: 900px) {
+    .hero {
+        grid-template-columns: 1fr;
+        padding: 120px 24px 48px;
+        gap: 40px;
+        text-align: center;
+    }
+
+    .hero_text {
+        align-items: center;
+    }
+
+    .sub {
+        margin: 0 auto;
+    }
+
+    .phone {
+        transform: rotate(-3deg) scale(0.85);
+        transform-origin: top center;
+        margin-bottom: -80px;
+    }
+
+    .section {
+        padding: 48px 24px;
+    }
+
+    .grid,
+    .steps {
+        grid-template-columns: 1fr;
+    }
+
+    .final {
+        width: calc(100% - 48px);
+        margin: 24px 24px 72px;
+        padding: 44px 24px;
+    }
+}

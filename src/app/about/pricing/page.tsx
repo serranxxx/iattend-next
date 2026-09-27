@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { Fragment, type ReactNode } from "react";
 import styles from "./page.module.css";
 import { Header } from "@/components/LandPage/Header/Header";
 import Link from "next/link";
 import { Star, Gift, Mail, Sparkles, ShoppingCart, Wand2, Check } from "lucide-react";
 import { FooterLand } from "@/components/LandPage/Footer/Footer";
+import { descriptionSegments, formatMXN, getPlans, planHighlights, planText, type Plan } from "@/lib/plans";
 
 export const metadata: Metadata = {
   title: "Planes y Precios | I attend",
@@ -37,30 +39,53 @@ export const metadata: Metadata = {
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL;
 
 /* ── Plans ───────────────────────────── */
-const PLANS = [
-  {
-    id: "pro",
-    name: "Pro",
-    tagline: "La experiencia completa: invita, gestiona y automatiza.",
-    desc: <>Incluye una <Link href="/about/invitacion-digital" className={styles.desc_link}><strong>invitación digital</strong></Link> para que te olvides de impresiones y reimpresiones. Un <Link href="/about/guest-management" className={styles.desc_link}><strong>gestor de invitados</strong></Link> para alejarte del Excel de 200 filas: sabes en tiempo real quién confirmó y quién no, sin perseguir a nadie. Y el <Link href="/about/mapa-de-mesas" className={styles.desc_link}><strong>acomodo de mesas</strong></Link> para que el seating chart no te quite el sueño. Y un <Link href="/about/side-events" className={styles.desc_link}><strong>Side Event</strong></Link> para ese momento extra que no puede faltar.</>,
-    price: 3999,
-    popular: true,
-    extras: [
-      { label: "Envíos automáticos por WhatsApp", note: "invita a todos en minutos, sin copiar y pegar, sin arriesgar tu número." },
-      { label: "2 Side Events adicionales", note: "porque tu boda son muchos momentos — la cena, el brunch, el civil, todo desde el mismo lugar." },
-      { label: "Pases digitales + Apple Wallet", note: "para que nadie busque listas impresas el día del evento ni haga filas en la entrada." },
-    ],
-  },
-  {
-    id: "lite",
-    name: "Lite",
-    tagline: "Invitación digital con control de invitados.",
-    desc: <>Incluye una <Link href="/about/invitacion-digital" className={styles.desc_link}><strong>invitación digital</strong></Link> para que te olvides de las impresiones y reimpresiones. Un <Link href="/about/guest-management" className={styles.desc_link}><strong>gestor de invitados</strong></Link> para alejarte del Excel de 200 filas — sabes quién confirmó sin perseguir a nadie. <Link href="/about/mapa-de-mesas" className={styles.desc_link}><strong>Acomodo de mesas</strong></Link> para organizar el seating chart sin dolores de cabeza. Y un <Link href="/about/side-events" className={styles.desc_link}><strong>Side Event</strong></Link> para ese momento extra que no puede faltar.</>,
-    price: 2899,
-    popular: false,
-    extras: [] as { label: string; note: string }[],
-  },
-];
+// Todo el contenido de la tarjeta (nombre, frase, precio, descripción y "Y además
+// incluye") sale del catálogo: se edita en Admin → Planes de iattend-vite, que
+// muestra una vista previa de esta misma tarjeta.
+type PlanCard = {
+  id: string;
+  name: string;
+  tagline: string;
+  desc: ReactNode;
+  price: number | null;
+  popular: boolean;
+  extras: { label: string; note: string }[];
+};
+
+
+const renderDescription = (plan: Plan): ReactNode =>
+  descriptionSegments(planText(plan, plan.description)).map((seg, i) =>
+    seg.href ? (
+      <Link key={i} href={seg.href} className={styles.desc_link}>
+        <strong>{seg.text}</strong>
+      </Link>
+    ) : (
+      // Los saltos de línea del editor de Admin → Planes se respetan.
+      <Fragment key={i}>
+        {seg.text.split("\n").map((linea, j) => (
+          <Fragment key={j}>{j > 0 && <br />}{linea}</Fragment>
+        ))}
+      </Fragment>
+    )
+  );
+
+// Se muestran los planes con "Landing" prendido en Admin → Planes, del más
+// completo al más sencillo (sort_order descendente: Pro, Lite, Paperless). Pro
+// lleva la etiqueta "Más popular".
+function buildPlans(plans: Plan[]): PlanCard[] {
+  return plans
+    .filter((p) => p.show_landing)
+    .sort((a, b) => b.sort_order - a.sort_order)
+    .map((plan) => ({
+      id: plan.id,
+      name: plan.name,
+      tagline: plan.tagline,
+      desc: renderDescription(plan),
+      price: plan.price?.amount ?? null,
+      popular: plan.id === "pro",
+      extras: planHighlights(plan).map((h) => ({ label: h.title, note: h.note })),
+    }));
+}
 
 /* ── Pain points ─────────────────────── */
 const PAIN_POINTS = [
@@ -125,7 +150,59 @@ const _GIFT_STEPS = [
 ];
 
 /* ── Page ────────────────────────────── */
-export default function PricingPage() {
+export default async function PricingPage() {
+  const PLANS = buildPlans(await getPlans());
+  const featured = PLANS.find((p) => p.popular);
+  const rest = PLANS.filter((p) => p !== featured);
+
+  const renderCard = (plan: PlanCard) => (
+    <div key={plan.id} className={`${styles.card} ${plan.popular ? styles.card_popular : ""}`}>
+      {plan.popular && (
+        <div className={styles.popular_badge}>
+          <Star size={13} fill="currentColor" strokeWidth={0} /> Más popular
+        </div>
+      )}
+      <div className={styles.card_top}>
+        <div>
+          <h2 className={styles.card_name}>{plan.name}</h2>
+          <p className={styles.card_tagline}>{plan.tagline}</p>
+        </div>
+        {plan.price !== null && (
+          <div className={styles.card_price_block}>
+            <span className={styles.price}>{formatMXN(plan.price)}</span>
+            <span className={styles.price_note}>MXN · pago único</span>
+          </div>
+        )}
+      </div>
+
+      <p className={styles.card_desc}>{plan.desc}</p>
+
+      {plan.extras.length > 0 && (
+        <div className={styles.card_extras}>
+          <span className={styles.card_extras_label}>Y además incluye:</span>
+          <ul className={styles.extras_list}>
+            {plan.extras.map((e) => (
+              <li key={e.label} className={styles.extras_item}>
+                <div className={styles.extras_header}>
+                  <Check size={13} strokeWidth={2.5} className={styles.extras_check} />
+                  <span className={styles.extras_label}>{e.label}</span>
+                </div>
+                <p className={styles.extras_note}>{e.note}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <a href={`${APP_URL}/checkout?plan=${plan.id}`} className={styles.card_cta}>
+        <ShoppingCart size={15} strokeWidth={2} /> Comprar {plan.name}
+      </a>
+      {/* <a href={`${APP_URL}/preview-mood`} className={styles.card_cta_free}>
+        o pruébala gratis →
+      </a> */}
+    </div>
+  );
+
   return (
     <div className={styles.page}>
 
@@ -155,52 +232,16 @@ export default function PricingPage() {
 
           {/* Plan cards */}
           <section className={styles.cards_section}>
-            <div className={styles.cards_col}>
-              {PLANS.map((plan) => (
-                <div key={plan.id} className={`${styles.card} ${plan.popular ? styles.card_popular : ""}`}>
-                  {plan.popular && (
-                    <div className={styles.popular_badge}>
-                      <Star size={13} fill="currentColor" strokeWidth={0} /> Más popular
-                    </div>
-                  )}
-                  <div className={styles.card_top}>
-                    <div>
-                      <h2 className={styles.card_name}>{plan.name}</h2>
-                      <p className={styles.card_tagline}>{plan.tagline}</p>
-                    </div>
-                    <div className={styles.card_price_block}>
-                      <span className={styles.price}>${plan.price.toLocaleString()}</span>
-                      <span className={styles.price_note}>MXN · pago único</span>
-                    </div>
-                  </div>
-
-                  <p className={styles.card_desc}>{plan.desc}</p>
-
-                  {plan.extras.length > 0 && (
-                    <div className={styles.card_extras}>
-                      <span className={styles.card_extras_label}>Y además incluye:</span>
-                      <ul className={styles.extras_list}>
-                        {plan.extras.map((e) => (
-                          <li key={e.label} className={styles.extras_item}>
-                            <div className={styles.extras_header}>
-                              <Check size={13} strokeWidth={2.5} className={styles.extras_check} />
-                              <span className={styles.extras_label}>{e.label}</span>
-                            </div>
-                            <p className={styles.extras_note}>{e.note}</p>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  <a href={`${APP_URL}/checkout?plan=${plan.id}`} className={styles.card_cta}>
-                    <ShoppingCart size={15} strokeWidth={2} /> Comprar {plan.name}
-                  </a>
-                  {/* <a href={`${APP_URL}/preview-mood`} className={styles.card_cta_free}>
-                    o pruébala gratis →
-                  </a> */}
+            {/* Pro a la izquierda; a la derecha, apilados, el resto de planes con
+                "Landing" prendido en Admin → Planes (Lite, Paperless…). Con un solo
+                grupo, una columna centrada. */}
+            <div className={`${styles.cards_col} ${featured && rest.length ? "" : styles.cards_col_single}`}>
+              {featured && renderCard(featured)}
+              {rest.length > 0 && (
+                <div className={styles.cards_stack}>
+                  {rest.map(renderCard)}
                 </div>
-              ))}
+              )}
             </div>
           </section>
 

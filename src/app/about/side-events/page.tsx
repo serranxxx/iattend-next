@@ -1,6 +1,7 @@
 import BackButton from "@/components/BackButton/BackButton";
 import type { Metadata } from "next";
 import { FooterLand } from "@/components/LandPage/Footer/Footer";
+import { getPlans, joinEs, sideEventsLabel } from "@/lib/plans";
 
 export const metadata: Metadata = {
     title: "Side Events para Bodas y Eventos | I attend",
@@ -44,7 +45,23 @@ export const metadata: Metadata = {
     robots: { index: true, follow: true },
 };
 
-export default function SideEventsPage() {
+export default async function SideEventsPage() {
+    // Qué planes incluyen side events y en cuáles se pueden comprar extra sale
+    // del catálogo (Admin → Planes), nunca de este archivo.
+    const plans = (await getPlans()).filter((p) => p.is_public);
+    const withSideEvents = plans
+        .filter((p) => p.side_events_included > 0)
+        .sort((a, b) => b.side_events_included - a.side_events_included);
+    const canBuyExtra = plans
+        .filter((p) => p.can_buy_side_events)
+        .sort((a, b) => b.sort_order - a.sort_order);
+
+    const includedFeature = withSideEvents.length > 0
+        ? `Incluido en ${withSideEvents.length === 1 ? "el plan" : "planes"} ${joinEs(
+            withSideEvents.map((p) => `${p.name} (${sideEventsLabel(p.side_events_included)})`)
+        )}`
+        : null;
+
     const schema = {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
@@ -70,7 +87,7 @@ export default function SideEventsPage() {
             "Confirmación de asistencia separada",
             "Pase digital propio por evento",
             "Dashboard con confirmados, pendientes y cancelados",
-            "Incluido en planes PRO (3 Side Events) y Lite (1 Side Event)",
+            ...(includedFeature ? [includedFeature] : []),
         ],
     };
 
@@ -223,9 +240,21 @@ export default function SideEventsPage() {
                     <h2>¿En qué planes está disponible?</h2>
 
                     <p>
-                        Los Side Events están incluidos en los planes <strong>PRO</strong> (hasta 3 Side Events)
-                        y <strong>Lite</strong> (1 Side Event). Si necesitas más, puedes contactarnos
-                        para un plan personalizado.
+                        {withSideEvents.length > 0 && (
+                            <>
+                                Los Side Events están incluidos en {withSideEvents.length === 1 ? "el plan" : "los planes"}{" "}
+                                {withSideEvents.map((p, i) => (
+                                    <span key={p.id}>
+                                        {i > 0 && (i === withSideEvents.length - 1 ? " y " : ", ")}
+                                        <strong>{p.name}</strong> ({p.side_events_included > 1 ? "hasta " : ""}{sideEventsLabel(p.side_events_included)})
+                                    </span>
+                                ))}
+                                .{" "}
+                            </>
+                        )}
+                        {canBuyExtra.length > 0
+                            ? <>Si necesitas más, puedes comprar Side Events adicionales en {canBuyExtra.length === 1 ? "el plan" : "los planes"} {joinEs(canBuyExtra.map((p) => p.name))} o contactarnos para un plan personalizado.</>
+                            : <>Si necesitas más, puedes contactarnos para un plan personalizado.</>}
                     </p>
 
                     <p>

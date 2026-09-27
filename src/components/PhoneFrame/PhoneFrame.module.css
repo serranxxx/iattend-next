@@ -1,0 +1,219 @@
+/* Marco ios26 del editor de iattend-vite (build-invitation.css), mismas
+   medidas. El `wrap` reserva el espacio del teléfono ya escalado. */
+
+.wrap {
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* ── Chasis: riel de titanio ── */
+.device {
+    position: absolute;
+    top: 0;
+    padding: 7px;
+    border-radius: 70px;
+    transform-origin: top left;
+    background: linear-gradient(155deg,
+            #9A9AA0 0%,
+            #5A5A60 12%,
+            #2E2E33 32%,
+            #1B1B1F 52%,
+            #3C3C42 74%,
+            #86868C 92%,
+            #55555B 100%);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, .22),
+        inset 0 1px 1px rgba(255, 255, 255, .35),
+        0 26px 60px rgba(0, 0, 0, .5);
+}
+
+/* ── Bisel negro entre el riel y la pantalla ── */
+.screen {
+    position: relative;
+    z-index: 1;
+    width: 357px;
+    height: 763px;
+    box-sizing: content-box;
+    border: 5px solid #060608;
+    border-radius: 63px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .06);
+}
+
+/* ── Contenido con zonas de seguridad (igual que el editor: el iframe no
+   puede leer env(safe-area-inset-*)). ── */
+.content {
+    position: absolute;
+    top: 52px;
+    bottom: 80px;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.content > iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* ── Botones físicos ── */
+.buttons {
+    position: absolute;
+    top: 124px;
+    left: -5px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 10;
+}
+
+.buttons span,
+.power {
+    display: block;
+    width: 5px;
+    height: 60px;
+    border-radius: 3px 1px 1px 3px;
+    background: linear-gradient(90deg, #B4B4BA 0%, #6E6E75 35%, #2E2E33 100%);
+    box-shadow:
+        -1px 0 2px rgba(0, 0, 0, .45),
+        inset 1px 0 0 rgba(255, 255, 255, .3);
+}
+
+.buttons span:first-child {
+    height: 30px;
+    margin-bottom: 12px;
+}
+
+.power {
+    position: absolute;
+    top: 196px;
+    right: -5px;
+    height: 98px;
+    border-radius: 1px 3px 3px 1px;
+    background: linear-gradient(270deg, #B4B4BA 0%, #6E6E75 35%, #2E2E33 100%);
+    box-shadow:
+        1px 0 2px rgba(0, 0, 0, .45),
+        inset -1px 0 0 rgba(255, 255, 255, .3);
+    z-index: 10;
+}
+
+/* ── Dynamic Island ── */
+.island {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 104px;
+    height: 32px;
+    border-radius: 20px;
+    background: #000;
+    z-index: 4;
+}
+
+/* ── Status bar ── */
+.status {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 52px;
+    padding: 0 26px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.status span {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.status img {
+    height: 12px;
+    object-fit: contain;
+}
+
+/* ── Barra de Safari flotante (liquid glass) ── */
+.nav {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 26px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 5;
+}
+
+.navRound,
+.navPill {
+    background: rgba(255, 255, 255, .16);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: .5px solid rgba(255, 255, 255, .4);
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, .22),
+        inset 0 1px 0 rgba(255, 255, 255, .45),
+        inset 0 -1px 0 rgba(255, 255, 255, .12);
+    color: #fff;
+}
+
+.navRound {
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+}
+
+.navPill {
+    flex: 1;
+    min-width: 0;
+    height: 46px;
+    border-radius: 23px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 14px;
+}
+
+.navPill span {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, .92);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.navPill svg,
+.navRound svg {
+    flex-shrink: 0;
+    opacity: .9;
+}
+
+/* Indicador de home */
+.home {
+    position: absolute;
+    left: 50%;
+    bottom: 9px;
+    transform: translateX(-50%);
+    width: 132px;
+    height: 5px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .55);
+    z-index: 5;
+}
