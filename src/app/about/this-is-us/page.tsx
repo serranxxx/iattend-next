@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import styles from "./page.module.css";
 import { Header } from "@/components/LandPage/Header/Header";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { FooterLand } from "@/components/LandPage/Footer/Footer";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Nuestra historia | I attend",
@@ -25,18 +24,35 @@ export const metadata: Metadata = {
   },
 };
 
-const COLLAGE = [
-  { seed: "wedding-flowers-white",  w: 600, h: 440 },
-  { seed: "elegant-couple-wedding", w: 600, h: 440 },
-  { seed: "wedding-reception-hall", w: 600, h: 440 },
-  { seed: "wedding-planning-table", w: 600, h: 440 },
-  { seed: "couple-celebration",     w: 600, h: 440 },
-];
-
-const BOTTOM_PHOTOS = [
-  { seed: "bridal-bouquet-white",   w: 800, h: 600 },
-  { seed: "wedding-ceremony-light", w: 800, h: 600 },
-  { seed: "celebration-reception",  w: 800, h: 600 },
+const CHAPTERS = [
+  {
+    num: "01",
+    title: "El punto de partida",
+    imgLabel: "Pau buscando invitaciones, momento de estrés",
+    imgSide: "left" as const,
+    body: [
+      "Cuando Pau se comprometió en 2024 comenzó la búsqueda de unas invitaciones que fueran elegantes, personales, privadas y que le facilitaran algo que anticipadamente la tenía muy estresada: la confirmación de sus invitados. Esta búsqueda se extendió sin éxito.",
+    ],
+  },
+  {
+    num: "02",
+    title: "El encuentro",
+    imgLabel: "Alberto diseñando/programando, close-up detalle",
+    imgSide: "right" as const,
+    body: [
+      "Hasta que se acercó con Alberto, un buen amigo dispuesto a ayudar; programador, dedicado hasta el detalle y sumamente perfeccionista.",
+      "Y así empezó a tomar forma algo nuevo. Algo que resolviera todo lo que el mercado de las invitaciones estaba dejando a medias.",
+    ],
+  },
+  {
+    num: "03",
+    title: "Lo que se construyó",
+    imgLabel: "mockup de la plataforma / pareja usando el dashboard",
+    imgSide: "left" as const,
+    body: [
+      "Alberto diseñó una plataforma que superó cualquier expectativa. Un espacio donde Pau podía diseñar su invitación a su gusto, gestionar a cada uno de sus invitados y, sobre todo, dejar de cargar sola con el estrés de perseguir confirmaciones una por una.",
+    ],
+  },
 ];
 
 export default function ThisIsUsPage() {
@@ -46,90 +62,54 @@ export default function ThisIsUsPage() {
 
       {/* ── Hero ── */}
       <section className={styles.hero}>
-        <video autoPlay muted loop playsInline className={styles.hero_video}>
-          <source src="https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/landing/video.mp4" type="video/mp4" />
-        </video>
-        <div className={styles.hero_overlay} />
+        <div className={styles.hero_bg} />
+        <div className={styles.hero_label_pill}>IMG DE FONDO · Pau y Alberto, retrato editorial candid, full-bleed</div>
         <div className={styles.hero_content}>
-          <p className={styles.hero_eyebrow}>Quiénes somos</p>
-          <h1 className={styles.hero_title}>Our Story</h1>
+          <p className={styles.hero_eyebrow}>Sobre nosotros</p>
+          <h1 className={styles.hero_title}>
+            I attend surgió de la necesidad de una novia recién comprometida y la bondad de un amigo dispuesto a ayudarla.
+          </h1>
+          <Link href="/about" className={styles.hero_btn}>¡Bienvenidos!</Link>
         </div>
       </section>
 
-      {/* ── Intro: texto + collage ── */}
-      <section className={styles.intro}>
-        <div className={styles.intro_left}>
-          <p className={styles.intro_text}>
-            I attend nació del momento más real que puede vivir una pareja: necesitar
-            una invitación de boda que los representara de verdad, no solo un archivo
-            genérico enviado por WhatsApp.
-          </p>
-          <p className={styles.intro_text}>
-            Alberto le construyó algo único a Pau. La reacción de sus invitados
-            fue la primera señal de que había algo aquí — y las preguntas de
-            amigos y conocidos hicieron el resto.
-          </p>
-          <img
-            src={`https://picsum.photos/seed/wedding-tall-portrait/500/620`}
-            alt=""
-            className={styles.intro_tall_img}
-          />
-        </div>
-
-        <div className={styles.intro_right}>
-          <div className={styles.collage}>
-            <img src={`https://picsum.photos/seed/${COLLAGE[0].seed}/${COLLAGE[0].w}/${COLLAGE[0].h}`} alt="" className={`${styles.collage_img} ${styles.collage_1}`} />
-            <img src={`https://picsum.photos/seed/${COLLAGE[1].seed}/${COLLAGE[1].w}/${COLLAGE[1].h}`} alt="" className={`${styles.collage_img} ${styles.collage_2}`} />
-            <img src={`https://picsum.photos/seed/${COLLAGE[2].seed}/${COLLAGE[2].w}/${COLLAGE[2].h}`} alt="" className={`${styles.collage_img} ${styles.collage_3}`} />
-            <img src={`https://picsum.photos/seed/${COLLAGE[3].seed}/${COLLAGE[3].w}/${COLLAGE[3].h}`} alt="" className={`${styles.collage_img} ${styles.collage_4}`} />
+      {/* ── Story chapters ── */}
+      {CHAPTERS.map((ch) => (
+        <section
+          key={ch.num}
+          className={`${styles.chapter} ${ch.imgSide === "right" ? styles.chapter_flip : ""}`}
+        >
+          <div className={styles.chapter_img_wrap}>
+            <div className={styles.chapter_img_placeholder} />
+            <span className={styles.img_label}>IMG · {ch.imgLabel}</span>
           </div>
-        </div>
-      </section>
 
-      {/* ── What we believe ── */}
-      <section className={styles.what}>
-        <div className={styles.what_left}>
-          <span className={styles.what_eyebrow}>Nuestra misión</span>
-          <h2 className={styles.what_title}>Lo que<br />nos mueve</h2>
-        </div>
-        <div className={styles.what_right}>
-          <p className={styles.what_big}>
-            Que planear tu boda sea una experiencia bonita, no un estrés.
-          </p>
-          <p className={styles.what_body}>
-            Creemos que detrás de cada boda hay una historia que merece ser contada
-            con cuidado. Nuestro trabajo es darte las herramientas para que puedas
-            enfocarte en lo que importa: disfrutar el proceso de tu momento.
-            Invitaciones digitales, gestión de invitados, pases con Apple Wallet,
-            acomodo de mesas y envíos automáticos — todo en un solo lugar, sin complicaciones.
-          </p>
-        </div>
-      </section>
-
-      {/* ── Bottom photos ── */}
-      <section className={styles.photos}>
-        {BOTTOM_PHOTOS.map((p) => (
-          <div key={p.seed} className={styles.photo_wrap}>
-            <img
-              src={`https://picsum.photos/seed/${p.seed}/${p.w}/${p.h}`}
-              alt=""
-              className={styles.photo}
-            />
+          <div className={styles.chapter_text}>
+            <p className={styles.chapter_eyebrow}>{ch.num} · {ch.title.toUpperCase()}</p>
+            {ch.body.map((p, i) => (
+              <p key={i} className={styles.chapter_body}>{p}</p>
+            ))}
           </div>
-        ))}
+        </section>
+      ))}
+
+      {/* ── Quote ── */}
+      <section className={styles.quote_section}>
+        <blockquote className={styles.quote_text}>
+          &ldquo;Así nació I attend: desde las necesidades reales de una novia. Y desde entonces continúa nutriéndose con cada pareja que nos elige; con cada necesidad real que nos comparten (y claro, hasta con las tendencias que van llegando).&rdquo;
+        </blockquote>
+        <p className={styles.quote_tagline}>Your event, handled.</p>
       </section>
 
-      {/* ── CTA ── */}
-      <section className={styles.cta_section}>
-        <h2 className={styles.cta_title}>¿Listo para empezar?</h2>
-        <div className={styles.cta_row}>
-          <Link href="/about/contact-us" className={styles.cta_primary}>
-            Contáctanos <ArrowRight size={18} strokeWidth={2.5} />
-          </Link>
-        </div>
+      {/* ── Dark closing ── */}
+      <section className={styles.dark_section}>
+        <p className={styles.dark_text}>
+          Eso es I attend: la bondad de un amigo, la dedicación y la disposición de escuchar de verdad lo que cada pareja va necesitando. Todo esto para que el proceso de planear tu boda se sienta, por fin, bajo control.
+        </p>
+        <Link href="/about" className={styles.dark_btn}>¡Bienvenidos!</Link>
       </section>
-          <FooterLand />
 
-</div>
+      <FooterLand />
+    </div>
   );
 }
