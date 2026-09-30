@@ -292,7 +292,7 @@ export const Plans = () => {
         </div>
       </div>
 
-      {/* <CustomButton url={`https://wa.me/6145338500?text=${message}`} icon={LuArrowUpRight} label="PLATICA CON NOSOTROS" /> */}
+      {/* <CustomButton url={`https://wa.me/526143681307?text=${message}`} icon={LuArrowUpRight} label="PLATICA CON NOSOTROS" /> */}
 
     </div>
   );

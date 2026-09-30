@@ -51,7 +51,7 @@ export default function Video() {
                     <span className={styles.cta_text}>
                         Crea tu evento, gestiona invitados y controla la asistencia desde un solo lugar. Sin complicaciones, sin herramientas extra.
                     </span>
-                    <CustomButton type="secondary" url={`https://wa.me/6145338500?text=${message}`} icon={LuArrowUpRight} label="PLATICA CON NOSOTROS" />
+                    <CustomButton type="secondary" url={`https://wa.me/526143681307?text=${message}`} icon={LuArrowUpRight} label="PLATICA CON NOSOTROS" />
                 </div>
             </div>
         </div>
@@ -70,5 +70,5 @@ export default function Video() {
     <span className={styles.cta_text}>
         Crea tu evento, gestiona invitados y controla la asistencia desde un solo lugar. Sin complicaciones, sin herramientas extra.
     </span>
-    <CustomButton type="secondary" url={`https://wa.me/6145338500?text=${message}`} icon={LuArrowUpRight} label="PLATICA CON NOSOTROS" />
+    <CustomButton type="secondary" url={`https://wa.me/526143681307?text=${message}`} icon={LuArrowUpRight} label="PLATICA CON NOSOTROS" />
 </div> */}

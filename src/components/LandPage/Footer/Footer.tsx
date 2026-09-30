@@ -25,10 +25,10 @@ export const FooterLand = () => {
           </Link>
 
           <div className={styles.links_col}>
-            <a href="https://wa.me/6145338500" rel="noreferrer" target="_blank" className={styles.footer_link}>
+            <a href="https://wa.me/526143681307" rel="noreferrer" target="_blank" className={styles.footer_link}>
               <FaHeadset /> Ayuda
             </a>
-            <a href="https://wa.me/6145338500" rel="noreferrer" target="_blank" className={styles.footer_link}>
+            <a href="https://wa.me/526143681307" rel="noreferrer" target="_blank" className={styles.footer_link}>
               <FaWhatsapp /> Contacto
             </a>
             <a href="https://www.instagram.com/iattend.mx" rel="noreferrer" target="_blank" className={styles.footer_link}>

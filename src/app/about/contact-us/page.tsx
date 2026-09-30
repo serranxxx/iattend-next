@@ -33,8 +33,8 @@ const CONTACTS = [
   {
     icon: <MessageCircle size={26} strokeWidth={1.5} />,
     label: "WhatsApp",
-    value: "+52 614 533 8500",
-    href: "https://wa.me/526145338500",
+    value: "+52 614 368 1307",
+    href: "https://wa.me/526143681307",
     cta: "Escríbenos",
   },
   {
