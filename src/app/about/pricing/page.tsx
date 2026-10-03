@@ -5,7 +5,7 @@ import { Header } from "@/components/LandPage/Header/Header";
 import Link from "next/link";
 import { Star, Gift, Mail, Sparkles, ShoppingCart, Wand2, Check } from "lucide-react";
 import { FooterLand } from "@/components/LandPage/Footer/Footer";
-import { descriptionSegments, formatMXN, getPlans, planHighlights, planText, type Plan } from "@/lib/plans";
+import { descriptionSegments, formatMXN, formatMXNMonthly, getPlans, longestInstallment, planHighlights, planText, type Plan, type PlanInstallment } from "@/lib/plans";
 
 export const metadata: Metadata = {
   title: "Planes y Precios | I attend",
@@ -48,6 +48,8 @@ type PlanCard = {
   tagline: string;
   desc: ReactNode;
   price: number | null;
+  // Plazo más largo a meses sin intereses, para la leyenda bajo el precio.
+  msi: PlanInstallment | null;
   popular: boolean;
   extras: { label: string; note: string }[];
 };
@@ -82,6 +84,7 @@ function buildPlans(plans: Plan[]): PlanCard[] {
       tagline: plan.tagline,
       desc: renderDescription(plan),
       price: plan.price?.amount ?? null,
+      msi: longestInstallment(plan),
       popular: plan.id === "pro",
       extras: planHighlights(plan).map((h) => ({ label: h.title, note: h.note })),
     }));
@@ -171,6 +174,11 @@ export default async function PricingPage() {
           <div className={styles.card_price_block}>
             <span className={styles.price}>{formatMXN(plan.price)}</span>
             <span className={styles.price_note}>MXN · pago único</span>
+            {plan.msi && (
+              <span className={styles.price_msi}>
+                o hasta {plan.msi.months} pagos de {formatMXNMonthly(plan.msi.monthly)}
+              </span>
+            )}
           </div>
         )}
       </div>

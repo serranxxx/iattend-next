@@ -275,6 +275,15 @@
     margin-top: 2px;
 }
 
+.price_msi {
+    font-family: 'Luxora Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(238, 233, 222, 0.75);
+    text-align: right;
+    margin-top: 6px;
+}
+
 .card_desc {
     font-family: 'Luxora Grotesk', sans-serif;
     font-size: 14px;
