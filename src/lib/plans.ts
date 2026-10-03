@@ -50,6 +50,15 @@ export type PlanPrice = {
   active: boolean;
 };
 
+/** Plazo a meses sin intereses: price propio en Stripe, más caro que el contado. */
+export type PlanInstallment = {
+  months: number;
+  amount: number;
+  monthly: number;
+  currency: string;
+  lookup_key: string;
+};
+
 export type Plan = {
   id: PlanId | string;
   name: string;
@@ -70,6 +79,8 @@ export type Plan = {
   show_app: boolean;
   sort_order: number;
   price: PlanPrice | null;
+  // Meses sin intereses que ofrece el plan ([] = solo contado).
+  installments: PlanInstallment[];
 };
 
 // Solo es un respaldo mientras el API no responde (p. ej. el endpoint aún no
@@ -100,6 +111,7 @@ export const FALLBACK_PLANS: Plan[] = [
     show_app: true,
     sort_order: 1,
     price: { amount: 849, currency: "mxn", active: true },
+    installments: [],
   },
   {
     id: "lite",
@@ -127,6 +139,7 @@ export const FALLBACK_PLANS: Plan[] = [
     show_app: true,
     sort_order: 2,
     price: { amount: 2899, currency: "mxn", active: true },
+    installments: [],
   },
   {
     id: "pro",
@@ -162,6 +175,7 @@ export const FALLBACK_PLANS: Plan[] = [
     show_app: true,
     sort_order: 3,
     price: { amount: 3999, currency: "mxn", active: true },
+    installments: [],
   },
 ];
 
@@ -200,6 +214,9 @@ function normalizePlan(raw: Partial<Plan>): Plan {
     show_app: raw.show_app ?? ["pro", "lite", "paperless"].includes(String(raw.id)),
     sort_order: toNumber(raw.sort_order),
     price: raw.price && typeof raw.price.amount === "number" ? raw.price : null,
+    installments: Array.isArray(raw.installments)
+      ? raw.installments.filter((t) => typeof t?.amount === "number" && typeof t?.monthly === "number" && t.months > 0)
+      : [],
   };
 }
 
@@ -293,6 +310,26 @@ export function descriptionSegments(text: string | null | undefined): Descriptio
 export function sideEventsLabel(n: number): string | null {
   if (!n || n <= 0) return null;
   return `${n} Side Event${n === 1 ? "" : "s"}`;
+}
+
+/**
+ * Plazo más largo a meses sin intereses (la mensualidad más baja) o null. Es
+ * el que se anuncia en la tarjeta: "o hasta 12 pagos de $394". No se dice "sin
+ * intereses": el precio a meses es más caro que el de contado.
+ */
+export function longestInstallment(plan: Plan): PlanInstallment | null {
+  return plan.installments.reduce<PlanInstallment | null>(
+    (max, t) => (!max || t.months > max.months ? t : max),
+    null
+  );
+}
+
+/**
+ * Mensualidad sin centavos: "$394" para $393.25. Se redondea hacia arriba para
+ * nunca anunciar menos de lo que se cobra.
+ */
+export function formatMXNMonthly(amount: number): string {
+  return formatMXN(Math.ceil(amount));
 }
 
 /** "$3,999" — el sufijo "MXN" lo pone cada página según su diseño. */
