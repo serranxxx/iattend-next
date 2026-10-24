@@ -36,6 +36,31 @@
     background: rgba(0, 0, 0, 0.52);
 }
 
+/* Mobile: el video no puede ser fixed (ni sticky). En iOS 26 Safari pinta una franja
+   oscura sobre su barra flotante cuando un elemento así toca el borde de abajo; con
+   absolute la barra queda transparente. Así que en mobile el video cubre la primera
+   pantalla (+64px: lo que queda detrás de la barra, que 100lvh no alcanza) y se va con
+   el scroll, desvaneciéndose hacia el fondo del body (#071013, main.css). Arriba, el
+   mismo color funde la barra de estado, que Safari pinta con el fondo del body. */
+@media (max-width: 767px) {
+    .video,
+    .video_overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: auto;
+        height: calc(100lvh + 64px);
+    }
+
+    .video_overlay {
+        background:
+            linear-gradient(to bottom, #071013 0, rgba(7, 16, 19, 0) 140px),
+            linear-gradient(to top, #071013 0, rgba(7, 16, 19, 0) 35%),
+            rgba(0, 0, 0, 0.52);
+    }
+}
+
 /* ─────────────────────────────────────
    Content container (inside video_bg)
    ───────────────────────────────────── */
