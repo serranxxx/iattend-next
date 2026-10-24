@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer } from "react";
 import { appContext } from "./AppContext";
 import { authReducer } from "./appReducer";
 import { types } from "./types";
@@ -14,7 +14,6 @@ const initialState: AppState = {
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [authState, dispatch] = useReducer(authReducer, initialState);
-  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -26,8 +25,6 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
       if (isLogged && user) {
         dispatch({ type: types.LOGIN, payload: user });
       }
-
-      setIsClient(true);
     }
   }, []);
 
@@ -67,8 +64,6 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
   const setCurrentInvitation = (id: string | null = null) =>
     dispatch({ type: types.INVID, payload: id });
-
-  if (!isClient) return null;
 
   return (
     <appContext.Provider
