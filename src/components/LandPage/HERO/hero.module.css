@@ -6,6 +6,11 @@
     background-color: #20212B;
     min-height: 100vh;
     min-height: 100dvh;
+    /* Mobile: en iOS 26 Safari pinta la página detrás de su barra flotante y ni 100lvh
+       ni env(safe-area-inset-bottom) cubren esa franja (~58px), así que la portada
+       se alarga para que no asome la siguiente sección. El texto sigue centrado en
+       100dvh (.hero_info_box), o sea, en lo que queda visible sobre la barra. */
+    min-height: calc(100lvh + 64px);
     box-shadow: -20px 0 40px rgba(0,0,0,0.2), 20px 0 40px rgba(0,0,0,0.2);
 }
 
@@ -31,7 +36,12 @@
 .shadow {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
+    /* Mobile: Safari pinta la barra de estado con el fondo del body (#071013, main.css)
+       y no deja dibujar contenido ahí; el degradado arranca de ese mismo color para que
+       la barra se funda con el video en vez de verse como una franja aparte. */
+    background:
+        linear-gradient(to bottom, #071013 0, rgba(7, 16, 19, 0) 140px),
+        rgba(0, 0, 0, 0.5);
     z-index: 2;
 }
 
@@ -154,6 +164,15 @@
 
 
 @media (min-width: 768px) {
+    .hero_cont {
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+
+    .shadow {
+        background: rgba(0, 0, 0, 0.5);
+    }
+
     .hero_logo {
         max-width: 164px;
     }

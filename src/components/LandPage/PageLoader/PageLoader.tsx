@@ -4,7 +4,17 @@ import { useEffect, useState } from "react";
 import styles from "./PageLoader.module.css";
 
 const MIN_VISIBLE_MS = 300;
-const MAX_WAIT_MS = 4000;
+const MAX_WAIT_MS = 3000;
+
+// document.fonts.ready no espera fuentes que el navegador aún no ha empezado a pedir,
+// así que se piden explícitamente las de marca que se ven al entrar.
+const BRAND_FONTS = [
+  "700 1em 'Denver Serial'",
+  "italic 700 1em 'Denver Serial'",
+  "400 1em 'Michigan Signature'",
+  "300 1em 'Luxora Grotesk'",
+  "700 1em 'Windsor'",
+];
 
 export const PageLoader = ({ children }: { children: React.ReactNode }) => {
   const [ready, setReady] = useState(false);
@@ -23,7 +33,9 @@ export const PageLoader = ({ children }: { children: React.ReactNode }) => {
     const fallback = window.setTimeout(reveal, MAX_WAIT_MS);
 
     if (typeof document !== "undefined" && "fonts" in document) {
-      document.fonts.ready.then(reveal, reveal);
+      Promise.all(BRAND_FONTS.map((font) => document.fonts.load(font)))
+        .then(() => document.fonts.ready)
+        .then(reveal, reveal);
     } else {
       reveal();
     }
