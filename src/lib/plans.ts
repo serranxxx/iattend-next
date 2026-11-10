@@ -313,9 +313,11 @@ export function sideEventsLabel(n: number): string | null {
 }
 
 /**
- * Plazo más largo a meses sin intereses (la mensualidad más baja) o null. Es
- * el que se anuncia en la tarjeta: "o hasta 12 pagos de $394". No se dice "sin
- * intereses": el precio a meses es más caro que el de contado.
+ * Pago a meses del plan (la mensualidad más baja, con el plazo más largo) o
+ * null. Desde el 10 nov 2026 la API manda una sola entrada: un precio "a
+ * meses" y el cliente elige el plazo en Stripe. Es el que se anuncia en la
+ * tarjeta: "o hasta 12 pagos de $375". No se dice "sin intereses": el precio
+ * a meses es más caro que el de contado.
  */
 export function longestInstallment(plan: Plan): PlanInstallment | null {
   return plan.installments.reduce<PlanInstallment | null>(
@@ -325,7 +327,7 @@ export function longestInstallment(plan: Plan): PlanInstallment | null {
 }
 
 /**
- * Mensualidad sin centavos: "$394" para $393.25. Se redondea hacia arriba para
+ * Mensualidad sin centavos: "$375" para $374.92. Se redondea hacia arriba para
  * nunca anunciar menos de lo que se cobra.
  */
 export function formatMXNMonthly(amount: number): string {
