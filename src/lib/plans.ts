@@ -168,7 +168,7 @@ export const FALLBACK_PLANS: Plan[] = [
       { group: "event", icon: "passes", es: "Pases en Apple Wallet", en: "Apple Wallet passes" },
       { group: "event", icon: "lia", es: "Lia · asistente IA", en: "Lia · AI assistant" },
     ],
-    stripe_price_id: "price_1Tl9fQAAdNlITNVb953oCZLs",
+    stripe_price_id: "price_1UaFaqAAdNlITNVb73fqH4yd",
     is_public: true,
     show_landing: true,
     show_checkout: true,
