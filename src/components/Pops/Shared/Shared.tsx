@@ -71,10 +71,22 @@ export const Polaroid = ({
 
 /* ── CTA ────────────────────────────────────────────────── */
 
-export const SendPopButton = ({ variant, className }: { variant: "lime" | "white"; className?: string }) => (
-  <Button href={POPS_APP_URL} data-anim="drop" data-idle="nudge" className={cx(styles.sendPop, variant === "white" && styles.sendPopWhite, className)}>
+/** CTA de papel lima/blanco. Por defecto "Send a Pop" hacia la app; con
+ *  `href={null}` queda como botón sin destino (aún no hay a dónde llevarlo). */
+export const SendPopButton = ({
+  variant,
+  className,
+  label = "Send a Pop",
+  href = POPS_APP_URL,
+}: {
+  variant: "lime" | "white";
+  className?: string;
+  label?: string;
+  href?: string | null;
+}) => (
+  <Button href={href ?? undefined} data-anim="drop" data-idle="nudge" className={cx(styles.sendPop, variant === "white" && styles.sendPopWhite, className)}>
     <span aria-hidden="true" className={styles.sendPopPlus}>+</span>
-    Send a Pop
+    {label}
   </Button>
 );
 
@@ -116,8 +128,8 @@ const Sparkles = ({ className }: { className: string }) => (
 
 /* ── Teléfono del editor ────────────────────────────────── */
 
-export const PhoneEditor = ({ className }: { className?: string }) => (
-  <div data-anim="rise" className={cx(styles.phone, className)} role="img" aria-label="Editor de Pops en el teléfono">
+export const PhoneEditor = ({ className, animGroup }: { className?: string; animGroup?: string }) => (
+  <div data-anim="rise" data-anim-group={animGroup} className={cx(styles.phone, className)} role="img" aria-label="Editor de Pops en el teléfono">
     <span className={cx(styles.phoneKey, styles.phoneKey1)} />
     <span className={cx(styles.phoneKey, styles.phoneKey2)} />
     <span className={cx(styles.phoneKey, styles.phoneKey3)} />
@@ -188,8 +200,8 @@ export const WalletSticker = ({ className }: { className?: string }) => (
 /* ── MacBook del editor de escritorio ───────────────────── */
 
 // Lienzo fijo de 780px (pantalla 780×464 + base 905×17); se escala desde fuera.
-export const MacBook = ({ className, sizes }: { className?: string; sizes: string }) => (
-  <div data-anim="rise" className={cx(styles.mac, className)} role="img" aria-label="Editor de Pops en computadora">
+export const MacBook = ({ className, sizes, animGroup }: { className?: string; sizes: string; animGroup?: string }) => (
+  <div data-anim="rise" data-anim-group={animGroup} className={cx(styles.mac, className)} role="img" aria-label="Editor de Pops en computadora">
     <div className={styles.macLid}>
       <span className={styles.macCam} />
       <div className={styles.macScreen}>

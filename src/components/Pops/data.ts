@@ -32,10 +32,10 @@ export const IMG = {
 export type Tone = "warm" | "white" | "gray" | "pink" | "sky" | "lime" | "limeAlt" | "dark";
 
 export const STEPS: { n: string; title: string; text: string; tone: Tone }[] = [
-  { n: "1.", title: "Dale estilo", text: "Escoge colores, portada y fuente. Lo que vaya con el evento.", tone: "warm" },
-  { n: "2.", title: "Arma tu evento", text: "Pon el lugar, la hora y lo que va a pasar. Lo demás lo agregas después.", tone: "pink" },
-  { n: "3.", title: "Mándala", text: "Comparte tu link por WhatsApp, con hasta 30 envíos automáticos gratis.", tone: "sky" },
-  { n: "4.", title: "Recibe confirmaciones", text: "Mira quién va, en tiempo real. Cada quien guarda su pase en Apple Wallet.", tone: "lime" },
+  { n: "1.", title: "Dale estilo", text: "Colores, portada y fuente.", tone: "warm" },
+  { n: "2.", title: "Arma tu evento", text: "Lugar, hora y lo que va a pasar.", tone: "pink" },
+  { n: "3.", title: "Mándala fácil", text: "Por WhatsApp, 30 envíos gratis.", tone: "sky" },
+  { n: "4.", title: "Recibe confirmaciones", text: "Quién va, en tiempo real.", tone: "lime" },
 ];
 
 export const OCASIONES: { label: string; tone: Tone | "pinkStrong" }[] = [
