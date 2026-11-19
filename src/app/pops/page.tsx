@@ -13,8 +13,9 @@ const patrickHand = Patrick_Hand({
   variable: "--font-patrick",
 });
 
+// La landing vive en www.iattend.mx (iattend.site sirve la app).
 // Imagen al compartir el link: etiqueta "Pops by I attend" sobre el tablero, cuadrada.
-const OG_IMAGE = "https://iattend.site/pops/og-pops.jpg";
+const OG_IMAGE = "https://www.iattend.mx/pops/og-pops.jpg";
 
 export const metadata: Metadata = {
   title: "Pops — invitaciones digitales para lo que surja | I attend",
@@ -30,11 +31,11 @@ export const metadata: Metadata = {
     "confirmación de asistencia",
     "I attend pops",
   ],
-  alternates: { canonical: "https://iattend.site/pops" },
+  alternates: { canonical: "https://www.iattend.mx/pops" },
   openGraph: {
     title: "Pops by I attend — Para lo que surja, Send a Pop.",
     description: "Una invitación en minutos. La cena del viernes, la junta de ventas, la posada: todo en un solo link.",
-    url: "https://iattend.site/pops",
+    url: "https://www.iattend.mx/pops",
     siteName: "I attend",
     images: [{ url: OG_IMAGE, width: 1200, height: 1200, alt: "Pops by I attend — Send a Pop." }],
     locale: "es_MX",

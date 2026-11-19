@@ -8,7 +8,7 @@ import { FooterLand } from "@/components/LandPage/Footer/Footer";
 import { descriptionSegments, formatMXN, formatMXNMonthly, getPlans, longestInstallment, planHighlights, planText, type Plan, type PlanInstallment } from "@/lib/plans";
 
 // Imagen al compartir el link: ramo del video de fondo + "Hecho para tu momento."
-const OG_IMAGE = "https://iattend.site/landing/og-pricing.jpg";
+const OG_IMAGE = "https://www.iattend.mx/landing/og-pricing.jpg";
 
 export const metadata: Metadata = {
   title: "Planes y Precios | I attend",
