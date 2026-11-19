@@ -1,0 +1,904 @@
+/* Landing Pops — web. Lienzo de 1440px con composición "a mano":
+   las posiciones absolutas vienen 1:1 del handoff (Landing Web.dc.html). */
+
+.canvas {
+    position: relative;
+    width: 1440px;
+    margin: 0 auto;
+    color: var(--pops-ink);
+    font-family: var(--font-family), sans-serif;
+}
+
+/* ── Sistema papel ──────────────────────────────────────── */
+.paper {
+    background-image: var(--pops-paper-texture);
+    box-shadow: var(--pops-shadow-md);
+}
+
+.label {
+    display: inline-block;
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    line-height: 1;
+    white-space: nowrap;
+    color: var(--pops-navy);
+}
+
+/* ── Tablero ────────────────────────────────────────────── */
+.board {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.rulerNum,
+.angle {
+    position: absolute;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--pops-chalk);
+}
+
+.angle { font-size: 13px; }
+
+.line {
+    position: absolute;
+    height: 0;
+    border-top: 1.5px solid var(--pops-chalk-soft);
+    transform-origin: 0 0;
+}
+
+.lineDashed { border-top-style: dashed; }
+
+.line45a { left: 0; top: 1008px; width: 1440px; transform: rotate(-45deg); }
+.line30a { left: 0; top: 1008px; width: 1700px; transform: rotate(-30deg); }
+.line150 { left: 1440px; top: 1830px; width: 1700px; transform: rotate(-150deg); }
+.line60 { left: 0; top: 3600px; width: 1100px; transform: rotate(-60deg); }
+.line135 { left: 1440px; top: 4300px; width: 1500px; transform: rotate(-135deg); }
+.line30b { left: 0; top: 6150px; width: 1700px; transform: rotate(-30deg); }
+
+.circleBig,
+.circleSmall {
+    position: absolute;
+    border-radius: var(--border-radius-full);
+    border: 1.5px solid var(--pops-chalk-soft);
+}
+
+.circleBig { left: 1060px; top: 3560px; width: 560px; height: 560px; }
+.circleSmall { left: 1200px; top: 3700px; width: 280px; height: 280px; border-style: dashed; }
+
+.glow1,
+.glow2,
+.glow3 {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.glow1 { top: 0; height: 1300px; background: radial-gradient(ellipse 900px 700px at 22% 12%, rgba(255, 244, 200, .20), transparent 70%); }
+.glow2 { top: 2700px; height: 1800px; background: radial-gradient(ellipse 800px 900px at 80% 40%, rgba(255, 244, 200, .12), transparent 70%); }
+.glow3 { top: 4600px; height: 1800px; background: radial-gradient(ellipse 900px 800px at 30% 50%, rgba(255, 244, 200, .12), transparent 70%); }
+
+/* ── Nav ────────────────────────────────────────────────── */
+.nav {
+    position: relative;
+    z-index: 5;
+    padding: 28px 56px 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.logo {
+    position: relative;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 10px 22px 12px;
+    background-color: var(--pops-paper-gray);
+    color: var(--pops-ink);
+    transform: rotate(-2deg);
+}
+
+.logo:hover { color: var(--pops-ink); }
+
+.logoTape { width: 70px; height: 22px; margin-left: -35px; transform: rotate(3deg); }
+
+.logoPops {
+    font-size: 34px;
+    font-weight: 900;
+    letter-spacing: -0.07em;
+    line-height: 1.5;
+}
+
+.logoBy {
+    font-family: var(--font-patrick), cursive;
+    font-size: 18px;
+    color: var(--pops-ink-4);
+}
+
+.navLinks {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-patrick), cursive;
+    font-size: 22px;
+}
+
+.navLink {
+    padding: 6px 16px;
+    color: var(--pops-ink);
+    line-height: 1.5;
+    box-shadow: var(--pops-shadow-sm);
+    transition: transform 180ms ease-out;
+}
+
+.navLink:hover { color: var(--pops-ink); }
+.navLinkComo { background-color: var(--pops-white); transform: rotate(2deg); }
+.navLinkPrecios { background-color: var(--pops-pink); transform: rotate(-3deg); }
+.navLink:hover { transform: rotate(0) translateY(-2px); }
+
+/* !important: anula alto, borde y colores del Button de antd */
+.navCta {
+    height: auto !important;
+    padding: 10px 22px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: var(--pops-lime) !important;
+    color: var(--pops-ink) !important;
+    font-family: var(--font-family), sans-serif;
+    font-size: 18px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em;
+    line-height: 1.5 !important;
+    transform: rotate(1.5deg);
+    box-shadow: 0 4px 0 var(--pops-lime-shadow), 0 8px 16px rgba(0, 0, 0, .25) !important;
+    transition: transform 180ms ease-out, box-shadow 180ms ease-out !important;
+}
+
+.navCta:hover {
+    transform: rotate(1.5deg) translateY(2px);
+    box-shadow: 0 2px 0 var(--pops-lime-shadow), 0 5px 10px rgba(0, 0, 0, .25) !important;
+}
+
+/* ── Hero ───────────────────────────────────────────────── */
+.hero {
+    position: relative;
+    height: 900px;
+}
+
+.heroObj { left: -70px; top: 150px; width: 330px; height: 240px; transform: rotate(-14deg); }
+
+.heroPolaroid { right: 30px; top: 96px; width: 260px; padding: 12px 12px 50px; transform: rotate(7deg); }
+.heroPolaroid figcaption { left: 18px; bottom: 14px; font-size: 24px; }
+.heroPolaroidTape { top: -14px; width: 90px; height: 26px; transform: rotate(-5deg); }
+
+.heroStar1 { left: 250px; top: 150px; width: 64px; height: 64px; transform: rotate(-12deg); }
+.heroStar2 { left: 1260px; top: 510px; width: 80px; height: 80px; transform: rotate(18deg); }
+.heroStar3 { left: 300px; top: 800px; width: 26px; height: 26px; background: var(--pops-lime); }
+.heroStar4 { left: 1120px; top: 470px; width: 22px; height: 22px; background: var(--pops-lime); }
+.heroStar5 { left: 180px; top: 520px; width: 20px; height: 20px; background: var(--pops-paper-gray); }
+
+.heroText {
+    position: absolute;
+    left: 345px;
+    top: 200px;
+    width: 820px;
+    height: 560px;
+}
+
+.handle {
+    position: absolute;
+    left: 40px;
+    top: 0;
+    z-index: 2;
+    padding: 4px 14px;
+    background-color: var(--pops-lime);
+    color: var(--pops-ink);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.5;
+    transform: rotate(-3deg);
+    box-shadow: var(--pops-shadow-sm);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.handle:hover,
+.handle:focus-visible { color: var(--pops-navy); }
+
+.heroTitle { margin: 0; }
+
+.heroL1,
+.heroL2,
+.heroL3 {
+    position: absolute;
+    letter-spacing: -0.065em;
+    box-shadow: var(--pops-shadow-lg);
+}
+
+.heroL1 {
+    left: 0;
+    top: 50px;
+    padding: 10px 34px 22px;
+    background-color: var(--pops-navy);
+    color: var(--pops-white);
+    font-size: 118px;
+    transform: rotate(-4deg);
+}
+
+.heroL2 {
+    left: 390px;
+    top: 196px;
+    z-index: 1;
+    padding: 6px 30px 16px;
+    background-color: var(--pops-lime);
+    font-size: 130px;
+    transform: rotate(2deg);
+}
+
+.heroL3 {
+    left: 150px;
+    top: 330px;
+    padding: 6px 30px 16px;
+    background-color: var(--pops-white);
+    font-size: 112px;
+    transform: rotate(-1.5deg);
+}
+
+.heroDash {
+    position: absolute;
+    left: 250px;
+    top: 150px;
+    width: 150px;
+    height: 60px;
+    border: 2px dashed rgba(255, 255, 255, .85);
+    transform: rotate(-4deg);
+}
+
+.heroNote {
+    position: absolute;
+    left: 0;
+    top: 236px;
+    color: var(--pops-white);
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.5;
+    white-space: nowrap;
+    transform: rotate(-4deg);
+    text-shadow: var(--pops-text-shadow);
+}
+
+.heroLead {
+    position: absolute;
+    left: 130px;
+    top: 478px;
+    width: 600px;
+    margin: 0;
+    color: var(--pops-white);
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.35;
+    transform: rotate(-1deg);
+    text-shadow: var(--pops-text-shadow);
+    text-wrap: pretty;
+}
+
+.heroCtas {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 790px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+}
+
+.seePrices {
+    height: 56px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    background-color: var(--pops-paper-gray);
+    color: var(--pops-ink);
+    font-family: var(--font-patrick), cursive;
+    font-size: 24px;
+    transform: rotate(2deg);
+    transition: transform 180ms ease-out;
+}
+
+.seePrices:hover { color: var(--pops-ink); transform: rotate(0) translateY(-2px); }
+
+.bubble {
+    position: absolute;
+    left: 1150px;
+    top: 650px;
+    width: 230px;
+    padding: 12px 16px;
+    background-color: var(--pops-white);
+    border-radius: 18px 18px 4px 18px;
+    transform: rotate(5deg);
+    box-shadow: var(--pops-shadow-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.bubbleFrom { font-size: 12px; font-weight: 700; color: var(--pops-whatsapp); line-height: 1.5; }
+.bubbleText { font-size: 16px; line-height: 1.3; }
+.bubbleTime { align-self: flex-end; font-size: 11px; color: var(--pops-gray); line-height: 1.5; }
+
+.heroHeart { left: 150px; top: 640px; width: 100px; transform: rotate(-14deg); }
+.heroEyes { left: 960px; top: 110px; width: 96px; transform: rotate(10deg); }
+
+/* ── Cómo funciona ──────────────────────────────────────── */
+.como {
+    position: relative;
+    padding: 80px 80px 120px;
+}
+
+.comoHead {
+    position: relative;
+    height: 220px;
+}
+
+.comoKicker {
+    position: absolute;
+    left: 200px;
+    top: 0;
+    z-index: 2;
+    padding: 4px 14px;
+    background: var(--pops-navy);
+    color: var(--pops-white);
+    font-family: var(--font-patrick), cursive;
+    font-size: 22px;
+    line-height: 1.5;
+    transform: rotate(-6deg);
+}
+
+.comoTitle { margin: 0; }
+
+.comoL1,
+.comoL2 {
+    position: absolute;
+    padding: 6px 26px 14px;
+    font-size: 76px;
+}
+
+.comoL1 { left: 300px; top: 20px; background-color: var(--pops-white); transform: rotate(-2deg); }
+.comoL2 { left: 640px; top: 110px; background-color: var(--pops-lime); transform: rotate(2deg); }
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 36px;
+    margin: 40px 0 0;
+    padding: 0;
+    list-style: none;
+    align-items: start;
+}
+
+.step {
+    position: relative;
+    padding: 34px 26px 30px;
+    background-image: var(--pops-paper-texture);
+    box-shadow: var(--pops-paper-edge), 0 12px 22px rgba(0, 0, 0, .3), 0 30px 55px -22px rgba(0, 0, 0, .25);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 200ms ease-out;
+}
+
+.step1 {
+    background: var(--pops-paper-warm) repeating-linear-gradient(180deg, transparent 0 31px, rgba(80, 130, 200, .25) 31px 32px);
+    transform: rotate(-3deg);
+}
+
+.step2 { margin-top: 40px; transform: rotate(2deg); }
+.step3 { transform: rotate(-1.5deg); }
+.step4 { margin-top: 30px; transform: rotate(3deg); }
+
+.stepTape1 { transform: rotate(-4deg); }
+.stepTape2 { left: 30%; transform: rotate(5deg); }
+.stepTape3 { left: 70%; transform: rotate(-3deg); }
+.stepTape4 { transform: rotate(4deg); }
+
+.stepN {
+    font-family: var(--font-patrick), cursive;
+    font-size: 56px;
+    line-height: 1;
+}
+
+.step1 .stepN { color: var(--pops-pink-strong); }
+
+.stepTitle {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.3;
+    color: inherit;
+}
+
+.stepText {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.step1 .stepText { color: var(--pops-ink-2); }
+
+/* Etiqueta lima con cinta bajo las notas */
+.comoEasy {
+    position: absolute;
+    left: 90px;
+    bottom: 34px;
+    margin: 0;
+    padding: 8px 22px 12px;
+    background-color: var(--pops-lime);
+    color: var(--pops-navy);
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    transform: rotate(-2deg);
+}
+
+.comoEasyTape { left: -14px; top: -8px; width: 54px; height: 18px; margin-left: 0; transform: rotate(-28deg); }
+
+.comoFoot {
+    position: absolute;
+    right: 90px;
+    bottom: 40px;
+    color: var(--pops-white);
+    font-family: var(--font-patrick), cursive;
+    font-size: 28px;
+    transform: rotate(-4deg);
+}
+
+/* ── Para todo (banda de papel crema rasgada) ───────────── */
+.band {
+    position: relative;
+    height: 848px;
+    background: var(--pops-cream) linear-gradient(180deg, var(--pops-cream-dark), var(--pops-cream-light));
+    /* Un solo recorte: arriba y abajo rasgados; se ve el tablero a través. */
+    clip-path: polygon(0 12px, 3% 25px, 8% 14px, 14% 27px, 20% 11px, 26% 25px, 32% 15px, 38% 28px, 44% 11px, 50% 25px, 56% 14px, 62% 27px, 68% 11px, 74% 24px, 80% 13px, 86% 28px, 91% 14px, 96% 25px, 100% 11px, 100% calc(100% - 14px), 95% 100%, 89% calc(100% - 17px), 83% calc(100% - 3px), 77% calc(100% - 15px), 71% 100%, 65% calc(100% - 14px), 59% calc(100% - 4px), 53% calc(100% - 17px), 47% calc(100% - 1px), 41% calc(100% - 14px), 35% calc(100% - 3px), 29% calc(100% - 17px), 23% 100%, 17% calc(100% - 13px), 11% calc(100% - 3px), 5% calc(100% - 15px), 0 calc(100% - 4px));
+}
+
+.bandInner {
+    position: relative;
+    width: 1440px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.bandMoto {
+    position: absolute;
+    left: 588px;
+    top: 390px;
+    transform: rotate(-3deg) scale(1.28);
+    transform-origin: 50% 100%;
+}
+
+.pills {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pill {
+    position: absolute;
+    z-index: 3;
+    padding: 10px 26px;
+    border-radius: 30px;
+    border: 2px solid var(--pops-ink);
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+.pill1 { left: 495px; top: 140px; transform: rotate(-3deg); }
+.pill2 { left: 760px; top: 155px; transform: rotate(4deg); }
+.pill3 { left: 315px; top: 250px; transform: rotate(-1deg); }
+.pill4 { left: 940px; top: 260px; transform: rotate(5deg); }
+.pill5 { left: 230px; top: 345px; transform: rotate(-4deg); }
+.pill6 { left: 950px; top: 355px; transform: rotate(2deg); }
+
+.bandStar1 { left: 420px; top: 185px; width: 24px; height: 24px; background: var(--pops-white); }
+.bandStar2 { left: 1000px; top: 180px; width: 34px; height: 34px; background: var(--pops-pink); }
+
+.bandHead {
+    position: absolute;
+    left: 80px;
+    top: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.bandKicker {
+    font-family: var(--font-patrick), cursive;
+    font-size: 24px;
+}
+
+.bandTitle {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.bandL1,
+.bandL2 {
+    padding: 4px 18px 10px;
+    font-size: 52px;
+    color: var(--pops-ink);
+}
+
+.bandL1 { background-color: var(--pops-white); transform: rotate(-2deg); box-shadow: var(--pops-shadow-sm); }
+.bandL2 { background: var(--pops-ink); color: var(--pops-white); transform: rotate(1.5deg); }
+
+.bandPolaroid { right: 90px; top: 430px; width: 250px; padding: 12px 12px 48px; transform: rotate(6deg); }
+.bandPolaroid figcaption { left: 16px; bottom: 12px; font-size: 22px; }
+
+/* ── Qué incluye ────────────────────────────────────────── */
+.incluye {
+    position: relative;
+    margin-top: -28px;
+    padding: 100px 80px 120px;
+}
+
+.incluyeHead {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.incluyeTitle {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.incluyeL1,
+.incluyeL2 {
+    padding: 6px 24px 14px;
+    font-size: 72px;
+}
+
+.incluyeL1 { background-color: var(--pops-lime); transform: rotate(-2deg); }
+.incluyeL2 { margin-left: 120px; background-color: var(--pops-navy); color: var(--pops-white); transform: rotate(1.5deg); }
+
+.incluyeNote {
+    max-width: 380px;
+    margin: 0;
+    color: var(--pops-white);
+    font-family: var(--font-patrick), cursive;
+    font-size: 28px;
+    line-height: 1.25;
+    transform: rotate(-2deg);
+    text-wrap: pretty;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 48px 40px;
+    margin: 70px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Situación real del anfitrión (título) → cómo la resuelve Pops. */
+.feature {
+    position: relative;
+    padding: 26px 26px 30px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    box-shadow: var(--pops-paper-edge), 0 10px 20px rgba(0, 0, 0, .28), 0 25px 50px -20px rgba(0, 0, 0, .25);
+}
+
+.feature1 { transform: rotate(1.5deg); }
+.feature2 { transform: rotate(-1deg); }
+.feature3 { transform: rotate(2deg); }
+.feature4 { transform: rotate(-2.5deg); }
+.feature5 { transform: rotate(1deg); }
+.feature6 { transform: rotate(-1.5deg); }
+.feature7 { transform: rotate(2.5deg); }
+.feature8 { transform: rotate(1.5deg); }
+.feature9 { padding: 26px 30px 30px; transform: rotate(-1deg); }
+.feature9 .featureText { color: var(--pops-gray-light); }
+
+.featureTape { width: 80px; height: 22px; margin-left: -40px; transform: rotate(-4deg); }
+
+.featureN {
+    font-family: var(--font-patrick), cursive;
+    font-size: 40px;
+    line-height: 1;
+}
+
+.featureNPink { color: var(--pops-pink-strong); }
+.feature9 .featureN { color: var(--pops-lime); }
+
+.featureBody {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.featureTitle {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    text-wrap: balance;
+    color: inherit;
+}
+
+.featureText {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--pops-ink-3);
+    text-wrap: pretty;
+}
+
+.feature2 .featureText,
+.feature4 .featureText,
+.feature7 .featureText { color: var(--pops-ink-2); }
+
+.featureSticker_explosion { right: -26px; top: -30px; width: 64px; transform: rotate(14deg); filter: none; }
+.featureSticker_globo { right: -22px; bottom: -26px; width: 60px; transform: rotate(-10deg); filter: none; }
+
+/* ── Editor ─────────────────────────────────────────────── */
+.editor {
+    position: relative;
+    height: 1170px;
+}
+
+/* MacBook a la izquierda, el cel encima de su borde derecho. */
+.editorMac {
+    position: absolute;
+    left: 170px;
+    top: 380px;
+    z-index: 1;
+    transform: rotate(-1.5deg) scale(1.15);
+    transform-origin: 0 0;
+}
+
+.editorHead {
+    position: absolute;
+    left: 80px;
+    top: 60px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.editorKicker {
+    font-family: var(--font-patrick), cursive;
+    font-size: 24px;
+    color: var(--pops-white);
+}
+
+.editorTitle {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.editorL1,
+.editorL2,
+.editorL3 {
+    padding: 6px 22px 12px;
+    font-size: 58px;
+}
+
+.editorL1 { background-color: var(--pops-white); transform: rotate(-2deg); }
+.editorL2 { margin-left: 30px; background-color: var(--pops-lime); transform: rotate(1.5deg); }
+.editorL3 { margin-left: 120px; background-color: var(--pops-white); transform: rotate(-1deg); }
+
+.editorPhone {
+    position: absolute;
+    left: 950px;
+    top: 470px;
+    z-index: 3;
+    transform: rotate(12deg) scale(.9);
+}
+
+.editorNote {
+    position: absolute;
+    color: var(--pops-white);
+    font-family: var(--font-patrick), cursive;
+    font-size: 30px;
+    line-height: 1.15;
+}
+
+.editorNoteTap { left: 560px; top: 990px; width: 300px; text-align: right; transform: rotate(-4deg); }
+.editorNoteMac { left: 210px; top: 960px; width: 400px; z-index: 3; transform: rotate(3deg); }
+
+.editorTag {
+    position: absolute;
+    left: 880px;
+    top: 1085px;
+    z-index: 3;
+    white-space: nowrap;
+    padding: 8px 18px;
+    background-color: var(--pops-navy);
+    color: var(--pops-white);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.5;
+    transform: rotate(-3deg);
+    box-shadow: var(--pops-shadow-sm);
+}
+
+.scissors {
+    position: absolute;
+    left: 1150px;
+    top: 70px;
+    z-index: 4;
+    width: auto;
+    height: 260px;
+    transform: rotate(18deg);
+    filter: drop-shadow(3px 0 0 var(--pops-white)) drop-shadow(-3px 0 0 var(--pops-white)) drop-shadow(0 3px 0 var(--pops-white)) drop-shadow(0 -3px 0 var(--pops-white)) drop-shadow(0 1px 1px rgba(0, 0, 0, .4)) drop-shadow(0 14px 16px rgba(0, 0, 0, .35));
+}
+
+.editorStar { left: 100px; top: 950px; width: 70px; height: 80px; transform: rotate(-20deg); }
+
+/* ── Precios ────────────────────────────────────────────── */
+.precios {
+    position: relative;
+    padding: 60px 80px 120px;
+    scroll-margin-top: 20px;
+}
+
+.preciosHead {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.preciosKicker {
+    font-family: var(--font-patrick), cursive;
+    font-size: 24px;
+    color: var(--pops-white);
+}
+
+.preciosTitle {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.preciosL1,
+.preciosL2 {
+    padding: 6px 24px 14px;
+    font-size: 72px;
+}
+
+.preciosL1 { background-color: var(--pops-white); transform: rotate(-2deg); }
+.preciosL2 { background-color: var(--pops-lime); transform: rotate(2deg); }
+
+.prices {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 44px;
+    margin-top: 80px;
+    align-items: start;
+}
+
+.prices > :nth-child(2) { margin-top: 30px; }
+
+/* ── CTA final ──────────────────────────────────────────── */
+.cta {
+    position: relative;
+    height: 620px;
+}
+
+.ctaPolaroid { left: 80px; top: 90px; width: 260px; padding: 12px 12px 50px; transform: rotate(-8deg); }
+.ctaPolaroid figcaption { left: 16px; bottom: 12px; font-size: 22px; }
+.ctaPolaroidTape { width: 80px; margin-left: -40px; transform: rotate(4deg); }
+
+.ctaObj { right: 60px; top: 120px; width: 300px; height: 300px; transform: rotate(10deg); }
+
+.ctaText {
+    position: absolute;
+    left: 380px;
+    top: 130px;
+    width: 680px;
+    height: 360px;
+}
+
+.ctaTitle { margin: 0; }
+
+.ctaL1,
+.ctaL2 {
+    position: absolute;
+    padding: 8px 28px 18px;
+    font-size: 96px;
+    letter-spacing: -0.065em;
+    box-shadow: var(--pops-shadow-lg);
+}
+
+.ctaL1 { left: 30px; top: 0; background-color: var(--pops-navy); color: var(--pops-white); transform: rotate(-3deg); }
+.ctaL2 { left: 150px; top: 120px; background-color: var(--pops-lime); transform: rotate(2deg); }
+
+.ctaBtn {
+    position: absolute !important;
+    left: 190px;
+    top: 270px;
+}
+
+.ctaSparkle { left: 1040px; top: 440px; width: 80px; transform: rotate(-12deg); }
+.ctaStar { left: 360px; top: 470px; width: 28px; height: 28px; background: var(--pops-lime); }
+
+/* ── Footer ─────────────────────────────────────────────── */
+.footer {
+    position: relative;
+    padding: 0 56px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footerLogo {
+    padding: 10px 18px;
+    background-color: var(--pops-paper-gray);
+    transform: rotate(-1.5deg);
+    box-shadow: var(--pops-shadow-sm);
+}
+
+.footerLogoImg {
+    display: block;
+    height: 24px;
+    width: auto;
+}
+
+.footerCopy {
+    color: var(--pops-white);
+    font-family: var(--font-patrick), cursive;
+    font-size: 20px;
+}
+
+/* ── Hover "papel" ──────────────────────────────────────── */
+@media (hover: hover) {
+    .step:hover,
+    .feature:hover { transform: rotate(0) translateY(-4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .step,
+    .feature,
+    .navLink,
+    .navCta,
+    .seePrices { transition: none !important; }
+}
+
+/* Más ancho que el lienzo: la banda crema va a todo lo ancho. */
+@media (min-width: 1441px) {
+    .band { margin: 0 calc(720px - 50vw); }
+}

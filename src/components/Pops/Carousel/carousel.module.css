@@ -1,0 +1,34 @@
+.track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    outline: none;
+}
+
+.track::-webkit-scrollbar { display: none; }
+
+.track > * { scroll-snap-align: center; }
+
+.dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--pops-white);
+    font-family: var(--font-patrick), cursive;
+    font-size: 18px;
+}
+
+.dot,
+.dotOn {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--border-radius-full);
+    background: rgba(255, 255, 255, .4);
+    transition: background 150ms ease-out;
+}
+
+.dotOn { background: var(--pops-white); }
+
+.hint { margin-left: 6px; }
