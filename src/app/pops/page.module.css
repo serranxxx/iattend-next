@@ -1,0 +1,109 @@
+/* /pops — tablero de corte azul. El contenido vive en lienzos fijos
+   (PopsWeb 1440px, PopsMobile 390px) escalados con --pops-zoom-*. */
+
+.page {
+    position: relative;
+    min-height: 100vh;
+    overflow-x: clip;
+    background-color: var(--pops-board);
+    background-image:
+        url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22220%22 height=%22220%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%22.85%22 numOctaves=%222%22/%3E%3CfeColorMatrix values=%220 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .22 0%22/%3E%3C/filter%3E%3Crect width=%22220%22 height=%22220%22 filter=%22url(%23n)%22/%3E%3C/svg%3E'),
+        linear-gradient(rgba(232, 240, 255, .6) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(232, 240, 255, .6) 2px, transparent 2px),
+        linear-gradient(rgba(232, 240, 255, .2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232, 240, 255, .2) 1px, transparent 1px),
+        radial-gradient(ellipse at 50% 40%, rgba(255, 255, 255, .08), rgba(0, 0, 0, .22) 90%);
+    background-size: 220px 220px, 144px 144px, 144px 144px, 36px 36px, 36px 36px, 100% 100%;
+    color: var(--pops-ink);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html:has(.page) { scroll-behavior: smooth; }
+}
+
+/* Reglas impresas en los bordes del tablero */
+.rulerTop,
+.rulerLeft,
+.rulerRight {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.rulerTop {
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 24px;
+    background-image:
+        linear-gradient(90deg, var(--pops-chalk) 1px, transparent 1px),
+        linear-gradient(90deg, var(--pops-chalk) 1.5px, transparent 1.5px),
+        linear-gradient(90deg, var(--pops-chalk) 2px, transparent 2px);
+    background-size: 12px 7px, 36px 13px, 144px 20px;
+    background-repeat: repeat-x;
+}
+
+.rulerLeft,
+.rulerRight {
+    top: 0;
+    bottom: 0;
+    width: 24px;
+    background-image:
+        linear-gradient(var(--pops-chalk) 1px, transparent 1px),
+        linear-gradient(var(--pops-chalk) 1.5px, transparent 1.5px),
+        linear-gradient(var(--pops-chalk) 2px, transparent 2px);
+    background-size: 7px 12px, 13px 36px, 20px 144px;
+    background-repeat: repeat-y;
+}
+
+.rulerLeft { left: 0; }
+.rulerRight { right: 0; background-position: right 0; }
+
+.web,
+.mobile { position: relative; z-index: 2; }
+
+.web { zoom: var(--pops-zoom-web, 1); }
+.mobile { display: none; zoom: var(--pops-zoom-mobile, 1); }
+
+/* Luz final + viñeta lateral sobre todo el tablero */
+.light {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+    background:
+        linear-gradient(112deg, transparent 30%, rgba(255, 255, 255, .05) 42%, transparent 55%),
+        linear-gradient(90deg, rgba(0, 0, 0, .28), transparent 9%, transparent 91%, rgba(0, 0, 0, .28));
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, .18), inset 0 0 140px rgba(0, 0, 0, .28);
+}
+
+@media (max-width: 767px) {
+    .page {
+        background-image:
+            url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Cg fill=%22none%22 stroke=%22rgb(232,240,255)%22%3E%3Cpath d=%22M0 1H96M1 0V96%22 stroke-width=%222%22 stroke-opacity=%22.55%22/%3E%3Cpath d=%22M0 24.5H96M0 48.5H96M0 72.5H96M24.5 0V96M48.5 0V96M72.5 0V96%22 stroke-width=%221%22 stroke-opacity=%22.2%22/%3E%3C/g%3E%3C/svg%3E'),
+            radial-gradient(ellipse at 50% 30%, rgba(255, 255, 255, .08), rgba(0, 0, 0, .22) 90%);
+        background-size: 96px 96px, 100% 100%;
+        background-position: 0 0, 0 0;
+    }
+
+    .web,
+    .rulerTop,
+    .rulerRight { display: none; }
+
+    .mobile { display: block; }
+
+    .rulerLeft {
+        width: 14px;
+        background-image:
+            linear-gradient(rgba(232, 240, 255, .6) 1px, transparent 1px),
+            linear-gradient(rgba(232, 240, 255, .6) 2px, transparent 2px);
+        background-size: 6px 12px, 12px 96px;
+    }
+
+    .light {
+        background:
+            linear-gradient(112deg, transparent 30%, rgba(255, 255, 255, .05) 42%, transparent 55%),
+            linear-gradient(90deg, rgba(0, 0, 0, .22), transparent 10%, transparent 90%, rgba(0, 0, 0, .22));
+        box-shadow: none;
+    }
+}

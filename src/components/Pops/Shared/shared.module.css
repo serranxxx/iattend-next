@@ -1,0 +1,823 @@
+/* Piezas reutilizables del collage de Pops (papel, cinta, estrellas,
+   polaroids, teléfonos y etiquetas de precio). Tokens en main.css (--pops-*). */
+
+/* ── Tonos de papel ─────────────────────────────────────── */
+.tone_white { background-color: var(--pops-white); }
+.tone_warm { background-color: var(--pops-paper-warm); }
+.tone_gray { background-color: var(--pops-paper-gray); }
+.tone_pink { background-color: var(--pops-pink); }
+.tone_pinkStrong { background-color: var(--pops-pink-strong); color: var(--pops-white); }
+.tone_sky { background-color: var(--pops-sky); }
+.tone_lime { background-color: var(--pops-lime); }
+.tone_limeAlt { background-color: var(--pops-lime-alt); }
+.tone_kraft { background-color: var(--pops-kraft); }
+.tone_dark { background-color: var(--pops-ink); color: var(--pops-white); }
+
+/* ── Decoración ─────────────────────────────────────────── */
+.star {
+    position: absolute;
+    display: block;
+    clip-path: var(--pops-star);
+}
+
+.starLined {
+    background: var(--pops-star-paper) var(--pops-star-lines);
+}
+
+.tape {
+    position: absolute;
+    left: 50%;
+    top: -12px;
+    width: 90px;
+    height: 24px;
+    margin-left: -45px;
+    background: var(--pops-tape);
+    z-index: 2;
+}
+
+.sticker {
+    position: absolute;
+    height: auto;
+    filter: var(--pops-sticker-shadow);
+}
+
+.cutout {
+    position: absolute;
+    filter: var(--pops-cutout-shadow);
+}
+
+.cover { object-fit: cover; }
+.contain { object-fit: contain; }
+
+/* ── Polaroid ───────────────────────────────────────────── */
+.polaroid {
+    position: absolute;
+    margin: 0;
+    background-color: var(--pops-white);
+    background-image: var(--pops-paper-texture);
+    box-shadow: var(--pops-shadow-photo);
+}
+
+.polaroidPhoto {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+}
+
+.polaroidCaption {
+    position: absolute;
+    font-family: var(--font-patrick), cursive;
+    color: var(--pops-ink);
+    white-space: nowrap;
+}
+
+/* ── Botón "Send a Pop" (antd Button) ───────────────────── */
+/* !important: el CSS-in-JS de antd fija alto, padding, borde y colores del
+   Button; aquí es un recorte de papel con sombra 3D. */
+.sendPop {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 12px !important;
+    height: 66px !important;
+    padding: 0 30px 0 12px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background-color: var(--pops-lime) !important;
+    background-image: var(--pops-paper-texture) !important;
+    color: var(--pops-navy) !important;
+    font-family: var(--font-family), sans-serif;
+    font-size: 24px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.03em;
+    transform: rotate(-1.5deg);
+    box-shadow: 0 5px 0 var(--pops-lime-shadow), 0 12px 22px rgba(0, 0, 0, .3) !important;
+    transition: transform 180ms ease-out, box-shadow 180ms ease-out !important;
+}
+
+.sendPopWhite {
+    background-color: var(--pops-white) !important;
+    color: var(--pops-ink) !important;
+    box-shadow: 0 5px 0 var(--pops-gray), 0 12px 22px rgba(0, 0, 0, .3) !important;
+}
+
+.sendPop:hover {
+    transform: rotate(-1.5deg) translateY(2px);
+    box-shadow: 0 3px 0 var(--pops-lime-shadow), 0 8px 14px rgba(0, 0, 0, .3) !important;
+}
+
+.sendPopWhite:hover {
+    box-shadow: 0 3px 0 var(--pops-gray), 0 8px 14px rgba(0, 0, 0, .3) !important;
+}
+
+.sendPopPlus {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--border-radius-full);
+    background: var(--pops-navy);
+    color: var(--pops-lime);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+/* ── Motorola con un Pop ────────────────────────────────── */
+.moto {
+    position: relative;
+    width: 271px;
+    height: 480px;
+}
+
+.motoImg {
+    position: absolute;
+    inset: 0;
+    width: 271px;
+    height: 480px;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .35)) drop-shadow(0 18px 24px rgba(11, 31, 58, .3));
+}
+
+.motoScreen {
+    position: absolute;
+    left: 43px;
+    top: 106px;
+    width: 187px;
+    height: 228px;
+    overflow: hidden;
+    border-radius: 3px;
+    background: var(--pops-ink);
+    color: var(--pops-white);
+}
+
+.motoShade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(20, 14, 10, .25) 0%, rgba(20, 14, 10, 0) 25%, rgba(20, 14, 10, 0) 42%, rgba(30, 20, 14, .78) 66%, #24180F 100%);
+}
+
+.motoDots span,
+.editorDots span {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: var(--border-radius-full);
+    background: rgba(255, 255, 255, .8);
+}
+
+.motoDots,
+.editorDots {
+    position: absolute;
+    inset: 0;
+}
+
+.editorDots span {
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, .75);
+}
+
+.popInfo {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    text-align: center;
+}
+
+.motoTitle {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+}
+
+.motoMeta { font-size: 7.5px; line-height: 1.4; }
+
+.motoRsvp,
+.editorRsvp {
+    margin-top: 5px;
+    width: 150px;
+    height: 30px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, .85);
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    align-items: center;
+}
+
+.motoRsvp > span:not(.rsvpDivider),
+.editorRsvp > span:not(.rsvpDivider) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+    font-size: 8px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.rsvpDivider {
+    height: 18px;
+    background: rgba(255, 255, 255, .5);
+}
+
+.motoGlare {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(125deg, rgba(255, 255, 255, .22) 0%, rgba(255, 255, 255, 0) 38%, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, .12) 100%);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .4);
+}
+
+/* ── MacBook del editor ─────────────────────────────────── */
+.mac { width: 780px; }
+
+.macLid {
+    position: relative;
+    width: 780px;
+    height: 464px;
+    border-radius: 17px 17px 4px 4px;
+    padding: 14px 14px 22px;
+    box-sizing: border-box;
+    background: linear-gradient(160deg, #4A4A47 0%, var(--pops-ink) 14%, #0E0E0D 55%, var(--pops-phone-dark) 80%, #2C2C2A 100%);
+    box-shadow: inset 0 0 0 1.5px #5A5A57, inset 0 2px 0 rgba(255, 255, 255, .18), inset 0 -1px 0 rgba(0, 0, 0, .6), 0 0 0 1px rgba(0, 0, 0, .5), 0 2px 3px rgba(0, 0, 0, .35), 0 18px 30px rgba(0, 0, 0, .35), 0 50px 90px -30px rgba(0, 0, 0, .55), -30px 40px 60px -40px rgba(0, 0, 0, .4);
+}
+
+.macCam {
+    position: absolute;
+    left: 50%;
+    top: 5px;
+    width: 5px;
+    height: 5px;
+    margin-left: -3px;
+    border-radius: var(--border-radius-full);
+    background: #2C2C2A;
+    box-shadow: inset 0 0 0 1px #4A4A47;
+}
+
+.macScreen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 3px;
+    background: var(--pops-white);
+}
+
+.macShot { object-fit: fill; }
+
+.macGlare {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(118deg, rgba(255, 255, 255, .28) 0%, rgba(255, 255, 255, .1) 18%, rgba(255, 255, 255, 0) 32%, rgba(255, 255, 255, 0) 64%, rgba(255, 255, 255, .08) 78%, rgba(255, 255, 255, 0) 90%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, .08) 100%);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .35), inset 0 0 18px rgba(0, 0, 0, .18);
+}
+
+.macName {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 4px;
+    text-align: center;
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--pops-gray);
+    letter-spacing: .04em;
+}
+
+.macBase {
+    position: relative;
+    margin-left: -62px;
+    width: 905px;
+    height: 17px;
+    border-radius: 0 0 23px 23px;
+    background: linear-gradient(180deg, #F1F1F0 0%, #E3E3E0 20%, #C9C8C4 55%, #8A8A86 100%);
+    box-shadow: inset 0 1px 0 var(--pops-white), inset 0 -1px 0 rgba(0, 0, 0, .25), 0 1px 0 rgba(0, 0, 0, .3), 0 4px 6px rgba(0, 0, 0, .3), 0 22px 34px -8px rgba(0, 0, 0, .5), 0 40px 60px -20px rgba(0, 0, 0, .35);
+}
+
+.macBaseShine {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(0, 0, 0, .18) 0%, rgba(255, 255, 255, 0) 12%, rgba(255, 255, 255, .35) 40%, rgba(255, 255, 255, 0) 60%, rgba(0, 0, 0, .2) 100%);
+}
+
+.macHinge {
+    position: absolute;
+    left: 4%;
+    right: 4%;
+    top: -4px;
+    height: 6px;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, .45));
+    filter: blur(2px);
+}
+
+.macNotch {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 125px;
+    height: 6px;
+    margin-left: -62px;
+    border-radius: 0 0 6px 6px;
+    background: linear-gradient(180deg, #A5A49E, #C9C8C4);
+}
+
+/* ── Teléfono del editor ────────────────────────────────── */
+.phone {
+    position: relative;
+    width: 290px;
+    height: 580px;
+    border-radius: 46px;
+    padding: 11px;
+    background: linear-gradient(135deg, #4A4A47 0%, var(--pops-ink) 18%, var(--pops-phone-dark) 55%, #2C2C2A 82%, #0E0E0D 100%);
+    box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .14), inset 2px 2px 1px rgba(255, 255, 255, .22), inset -2px -2px 2px rgba(0, 0, 0, .6), 0 1px 2px rgba(0, 0, 0, .5), 0 18px 28px rgba(0, 0, 0, .4), 0 50px 70px -20px rgba(0, 0, 0, .45);
+}
+
+.phoneKey {
+    position: absolute;
+    left: -3px;
+    width: 4px;
+    border-radius: 2px 0 0 2px;
+    background: linear-gradient(90deg, #3A3A38, var(--pops-ink));
+}
+
+.phoneKey1 { top: 110px; height: 30px; }
+.phoneKey2 { top: 160px; height: 52px; }
+.phoneKey3 { top: 222px; height: 52px; }
+
+.phoneKeyRight {
+    left: auto;
+    right: -3px;
+    top: 180px;
+    height: 80px;
+    border-radius: 0 2px 2px 0;
+    background: linear-gradient(90deg, var(--pops-ink), #3A3A38);
+}
+
+.phoneGlass {
+    position: absolute;
+    inset: 11px;
+    border-radius: 36px;
+    z-index: 4;
+    pointer-events: none;
+    background: linear-gradient(118deg, rgba(255, 255, 255, .22) 0%, rgba(255, 255, 255, .08) 22%, rgba(255, 255, 255, 0) 34%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, .06) 86%, rgba(255, 255, 255, 0) 100%);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .35), inset 0 0 12px rgba(0, 0, 0, .12);
+}
+
+.phoneScreen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 36px;
+    overflow: hidden;
+    background-color: var(--pops-phone-screen);
+    background-image: radial-gradient(rgba(0, 0, 0, .13) 1px, transparent 1.3px);
+    background-size: 13px 13px;
+    color: var(--pops-ink);
+}
+
+.island {
+    position: absolute;
+    left: 50%;
+    top: 8px;
+    width: 72px;
+    height: 20px;
+    margin-left: -36px;
+    border-radius: 12px;
+    background: var(--pops-ink);
+    z-index: 3;
+}
+
+.topBar {
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    top: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.topGroup {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.circleBtn {
+    width: 24px;
+    height: 24px;
+    border-radius: var(--border-radius-full);
+    background: var(--pops-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .08);
+}
+
+.dim {
+    opacity: .7;
+    color: var(--pops-phone-muted);
+}
+
+.green {
+    background: var(--pops-phone-green-bg);
+    color: var(--pops-phone-green);
+}
+
+.segment {
+    height: 26px;
+    padding: 0 2px;
+    border-radius: 13px;
+    background: var(--pops-white);
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .08);
+}
+
+.segmentOn {
+    width: 30px;
+    height: 22px;
+    border-radius: 11px;
+    background: var(--pops-ink);
+    color: var(--pops-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.segmentOff {
+    width: 24px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.editorCard {
+    position: absolute;
+    left: 24px;
+    right: 24px;
+    top: 84px;
+    height: 356px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--pops-phone-card);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .22);
+    color: var(--pops-white);
+}
+
+.editorShade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, .15) 0%, rgba(0, 0, 0, 0) 40%, rgba(15, 15, 14, .75) 70%, var(--pops-phone-dark) 100%);
+}
+
+.colorDot {
+    position: absolute;
+    left: 9px;
+    top: 9px;
+    width: 24px;
+    height: 24px;
+    border-radius: var(--border-radius-full);
+    border: 1.5px solid rgba(255, 255, 255, .85);
+    background: var(--pops-lime);
+}
+
+.formChip {
+    position: absolute;
+    right: 8px;
+    top: 9px;
+    height: 24px;
+    padding: 0 9px;
+    border-radius: 12px;
+    border: 1px dashed rgba(255, 255, 255, .85);
+    background: rgba(20, 20, 19, .6);
+    display: flex;
+    align-items: center;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.editorInfo {
+    bottom: 12px;
+    gap: 4px;
+}
+
+.editorTitle {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+}
+
+.editorMeta { font-size: 10.5px; line-height: 1.4; }
+
+.editorRsvp {
+    margin-top: 6px;
+    width: 172px;
+    height: 44px;
+    border-radius: 22px;
+    border-width: 1.5px;
+}
+
+.editorRsvp > span:not(.rsvpDivider) {
+    gap: 2px;
+    font-size: 11px;
+}
+
+.editorRsvp .rsvpDivider { height: 28px; }
+
+.editHint {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 452px;
+    text-align: center;
+    font-size: 9.5px;
+    color: var(--pops-phone-hint);
+}
+
+.toolbar {
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    bottom: 20px;
+    height: 44px;
+    border-radius: 22px;
+    background: var(--pops-white);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4px 0 14px;
+    gap: 2px;
+}
+
+.toolbarDivider {
+    width: 1px;
+    height: 22px;
+    background: var(--pops-phone-divider);
+}
+
+.previewBtn {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--border-radius-full);
+    background: var(--pops-ink);
+    color: var(--pops-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Etiquetas de precio ────────────────────────────────── */
+.priceWrap {
+    position: relative;
+    transform-origin: 50% 28px;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .35)) drop-shadow(0 12px 16px rgba(0, 0, 0, .35));
+    transition: transform 200ms ease-out;
+}
+
+.price_kraft { transform: rotate(-3deg); }
+.price_gray { transform: rotate(1.5deg); }
+.price_lime { transform: rotate(-1.5deg); }
+
+.priceTag {
+    position: relative;
+    padding: 54px 30px 30px;
+    background-image: var(--pops-paper-texture);
+    clip-path: polygon(18% 0, 82% 0, 100% 9%, 100% 100%, 0 100%, 0 9%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: var(--pops-ink);
+}
+
+.priceHole {
+    position: absolute;
+    left: 50%;
+    top: 18px;
+    width: 20px;
+    height: 20px;
+    margin-left: -10px;
+    border-radius: var(--border-radius-full);
+    background: var(--pops-board);
+    box-shadow: inset 0 2px 3px rgba(0, 0, 0, .4);
+}
+
+.priceKind {
+    font-family: var(--font-patrick), cursive;
+    font-size: 22px;
+    line-height: 1.3;
+}
+
+.priceTitle {
+    margin: 0;
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    line-height: 1;
+    color: inherit;
+}
+
+.priceSub { font-size: 16px; line-height: 1.5; }
+
+.priceBullets {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.priceBig {
+    margin-top: 6px;
+    font-size: 54px;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+}
+
+.priceTable {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 8px 16px;
+    font-size: 15px;
+    line-height: 1.5;
+    border-top: 2px dashed var(--pops-gray);
+    padding-top: 12px;
+}
+
+.price_lime .priceTable { border-top-color: var(--pops-lime-shadow); }
+
+.priceRow { display: contents; }
+
+.priceHead {
+    font-family: var(--font-patrick), cursive;
+    color: var(--pops-ink-4);
+}
+
+.price_lime .priceHead { color: inherit; }
+
+/* !important: anula alto, borde y colores del Button de antd. */
+.priceCta {
+    height: 54px !important;
+    margin-top: 6px;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: var(--pops-ink) !important;
+    color: var(--pops-white) !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    transition: transform 150ms ease-out !important;
+}
+
+.priceCta:hover { transform: translateY(2px); }
+
+.price_kraft .priceCta { margin-top: 0; }
+
+.bestSeal {
+    position: absolute;
+    right: -30px;
+    top: -40px;
+    width: 120px;
+    height: 120px;
+    border-radius: var(--border-radius-full);
+    background-color: var(--pops-pink-strong);
+    background-image: var(--pops-paper-texture);
+    color: var(--pops-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: var(--font-patrick), cursive;
+    font-size: 24px;
+    line-height: 1;
+    transform: rotate(14deg);
+    box-shadow: var(--pops-shadow-md);
+}
+
+@media (hover: hover) {
+    .priceWrap:hover { transform: rotate(0) translateY(-4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sendPop,
+    .priceWrap,
+    .priceCta { transition: none !important; }
+}
+
+/* Sello en el carrusel mobile de precios */
+@media (max-width: 767px) {
+    .bestSeal {
+        right: -8px;
+        top: -34px;
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* ── Tipos de papel (Problemas → soluciones) ────────────────
+   Capa extra encima de la textura base. Clase doble para ganarle a `.paper`
+   de cada página (mismo peso, orden de carga no garantizado). */
+.paper_plain.paper_plain { background-image: var(--pops-paper-texture); }
+
+/* Cuaderno: renglones azules + margen rojo */
+.paper_notebook.paper_notebook {
+    background-image:
+        repeating-linear-gradient(180deg, transparent 0 27px, rgba(80, 130, 200, .3) 27px 28px),
+        linear-gradient(90deg, transparent 0 22px, rgba(230, 90, 90, .4) 22px 23px, transparent 23px),
+        var(--pops-paper-texture);
+}
+
+/* Cuadriculado de 20px */
+.paper_grid.paper_grid {
+    background-image:
+        repeating-linear-gradient(0deg, transparent 0 19px, rgba(20, 40, 80, .1) 19px 20px),
+        repeating-linear-gradient(90deg, transparent 0 19px, rgba(20, 40, 80, .1) 19px 20px),
+        var(--pops-paper-texture);
+}
+
+/* Punteado de 18px */
+.paper_dots.paper_dots,
+.paper_dotsPink.paper_dotsPink {
+    background-image:
+        radial-gradient(circle at 9px 9px, rgba(0, 0, 0, .22) 1.3px, transparent 1.7px),
+        var(--pops-paper-texture);
+    background-size: 18px 18px, auto;
+}
+
+.paper_dotsPink.paper_dotsPink {
+    background-image:
+        radial-gradient(circle at 9px 9px, rgba(120, 20, 60, .28) 1.3px, transparent 1.7px),
+        var(--pops-paper-texture);
+}
+
+/* Renglones sin margen */
+.paper_lined.paper_lined {
+    background-image:
+        repeating-linear-gradient(180deg, transparent 0 27px, rgba(80, 130, 200, .3) 27px 28px),
+        var(--pops-paper-texture);
+}
+
+/* Post-it con la esquina inferior derecha doblada (deja ver el tablero) */
+.paper_postit.paper_postit { background-image: var(--pops-paper-texture); }
+
+.paper_postit::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(315deg, var(--pops-board) 0 49%, rgba(0, 0, 0, .25) 50%, #E6F7A8 52%, #B8E356 100%);
+    box-shadow: -2px -2px 4px rgba(0, 0, 0, .12);
+}
+
+/* Sticker de Apple Wallet: se sale de la esquina de la tarjeta */
+.walletSticker {
+    position: absolute;
+    right: -24px;
+    bottom: -30px;
+    z-index: 2;
+    display: block;
+    transform: rotate(-4deg);
+}
+
+.walletTape {
+    position: absolute;
+    left: -22px;
+    top: -6px;
+    z-index: 1;
+    width: 64px;
+    height: 20px;
+    transform: rotate(-38deg);
+    background: linear-gradient(180deg, rgba(255, 253, 240, .62), rgba(236, 230, 205, .55));
+    box-shadow: 0 1px 1.5px rgba(0, 0, 0, .18);
+    clip-path: polygon(0 8%, 4% 0, 8% 10%, 12% 0, 16% 8%, 20% 2%, 80% 2%, 84% 8%, 88% 0, 92% 10%, 96% 0, 100% 8%, 100% 92%, 96% 100%, 92% 90%, 88% 100%, 84% 92%, 80% 98%, 20% 98%, 16% 92%, 12% 100%, 8% 90%, 4% 100%, 0 92%);
+    backdrop-filter: blur(.5px);
+}
+
+.walletImg {
+    display: block;
+    width: auto;
+    height: 42px;
+    filter: drop-shadow(2.5px 0 0 var(--pops-white)) drop-shadow(-2.5px 0 0 var(--pops-white)) drop-shadow(0 2.5px 0 var(--pops-white)) drop-shadow(0 -2.5px 0 var(--pops-white)) drop-shadow(0 1px 1px rgba(0, 0, 0, .4)) drop-shadow(0 8px 12px rgba(0, 0, 0, .35));
+}

@@ -7,6 +7,9 @@ import { Star, Gift, Mail, Sparkles, ShoppingCart, Wand2, Check } from "lucide-r
 import { FooterLand } from "@/components/LandPage/Footer/Footer";
 import { descriptionSegments, formatMXN, formatMXNMonthly, getPlans, longestInstallment, planHighlights, planText, type Plan, type PlanInstallment } from "@/lib/plans";
 
+// Imagen al compartir el link: ramo del video de fondo + "Hecho para tu momento."
+const OG_IMAGE = "https://iattend.site/landing/og-pricing.jpg";
+
 export const metadata: Metadata = {
   title: "Planes y Precios | I attend",
   description: "Elige el plan que va con tu boda. Desde invitación digital hasta gestión completa de invitados, confirmaciones automáticas, mapa de mesas y pases digitales. Sin sorpresas, sin complicaciones.",
@@ -24,7 +27,7 @@ export const metadata: Metadata = {
     description: "Plan Pro o Lite — elige el que va con tu boda. Invitación digital, invitados, mesas, pases y envíos automáticos. Sin sorpresas.",
     url: "https://iattend.site/about/pricing",
     siteName: "I attend",
-    images: [{ url: "https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg", width: 1200, height: 630, alt: "I attend – Planes y Precios" }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "I attend – Planes y Precios: hecho para tu momento" }],
     locale: "es_MX",
     type: "website",
   },
@@ -32,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Planes y Precios | I attend",
     description: "Plan Pro o Lite — elige el que va con tu boda. Todo lo que necesitas, sin sorpresas.",
-    images: ["https://jblcqcxckefmydvtrxbi.supabase.co/storage/v1/object/public/land_page/meta.jpg"],
+    images: [OG_IMAGE],
   },
 };
 

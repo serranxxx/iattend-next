@@ -551,3 +551,57 @@ h5,
     background: #555;
     /* Color del scrollbar al pasar el cursor sobre él */
 }
+
+/* ───────────────────────── Pops (landing /pops) ─────────────────────────
+   Paleta y "sistema papel" del handoff "Landing Pops — Collage (tablero azul · lima)".
+   Solo los usan los componentes de src/components/Pops y src/app/pops. */
+:root {
+    --pops-board: #2457A4;
+    --pops-navy: #0B1F3A;
+    --pops-lime: #CDF22B;
+    --pops-lime-shadow: #9DBB12;
+    --pops-lime-alt: #C8F560;
+    --pops-white: #FFFFFF;
+    --pops-paper-warm: #FBFAF5;
+    --pops-paper-gray: #F3F2EE;
+    --pops-cream: #EFEADC;
+    --pops-cream-dark: #E9E3D3;
+    --pops-cream-light: #F6F2E8;
+    --pops-pink: #FFB3C9;
+    --pops-pink-strong: #FF5FA8;
+    --pops-sky: #9FD8F5;
+    --pops-kraft: #D9B27C;
+    --pops-ink: #1D1D1B;
+    --pops-ink-2: #4A4A45;
+    --pops-ink-3: #3A3A36;
+    --pops-ink-4: #6A6A64;
+    --pops-gray: #A5A49E;
+    --pops-gray-light: #D6D4CC;
+    --pops-whatsapp: #2EBE88;
+    --pops-tape: rgba(238, 232, 212, .85);
+    --pops-star-paper: #EDEBE4;
+    --pops-chalk: rgba(232, 240, 255, .62);
+    --pops-chalk-soft: rgba(232, 240, 255, .42);
+
+    /* UI del teléfono (editor / Pop) */
+    --pops-phone-screen: #F1F1F0;
+    --pops-phone-dark: #121211;
+    --pops-phone-card: #151514;
+    --pops-phone-muted: #9A9A96;
+    --pops-phone-hint: #8A8A86;
+    --pops-phone-divider: #E3E3E0;
+    --pops-phone-green-bg: #E3F4E8;
+    --pops-phone-green: #2E9E5B;
+
+    --pops-paper-texture: linear-gradient(160deg, rgba(255, 255, 255, .28) 0%, rgba(255, 255, 255, .06) 30%, rgba(255, 255, 255, 0) 55%, rgba(0, 0, 0, .05) 80%, rgba(0, 0, 0, .14) 100%), repeating-linear-gradient(97deg, rgba(255, 255, 255, .035) 0 1px, transparent 1px 5px), url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22%3E%3Cfilter id=%22p%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%221.1%22 numOctaves=%223%22/%3E%3CfeColorMatrix values=%220 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .14 0%22/%3E%3C/filter%3E%3Crect width=%22160%22 height=%22160%22 filter=%22url(%23p)%22/%3E%3C/svg%3E');
+    --pops-paper-edge: inset 0 1px 0 rgba(255, 255, 255, .55), inset 0 -1.5px 0 rgba(0, 0, 0, .14), inset 1px 0 0 rgba(255, 255, 255, .25), 0 1px 1.5px rgba(0, 0, 0, .3);
+    --pops-shadow-sm: var(--pops-paper-edge), 0 4px 10px rgba(0, 0, 0, .22), 0 10px 25px -10px rgba(0, 0, 0, .25);
+    --pops-shadow-md: var(--pops-paper-edge), 0 8px 16px rgba(0, 0, 0, .3), 0 20px 34px -12px rgba(0, 0, 0, .25);
+    --pops-shadow-lg: var(--pops-paper-edge), 0 10px 22px rgba(0, 0, 0, .35), 0 25px 55px -22px rgba(0, 0, 0, .25);
+    --pops-shadow-photo: var(--pops-paper-edge), 0 14px 26px rgba(0, 0, 0, .35), 0 35px 65px -26px rgba(0, 0, 0, .25);
+    --pops-sticker-shadow: drop-shadow(0 1px 1px rgba(0, 0, 0, .35)) drop-shadow(0 6px 8px rgba(0, 0, 0, .3));
+    --pops-cutout-shadow: drop-shadow(0 1px 1px rgba(0, 0, 0, .35)) drop-shadow(0 18px 18px rgba(0, 0, 0, .35));
+    --pops-text-shadow: 0 2px 6px rgba(0, 0, 0, .35);
+    --pops-star: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    --pops-star-lines: repeating-linear-gradient(0deg, rgba(0, 0, 0, .28) 0 1px, transparent 1px 4px);
+}
