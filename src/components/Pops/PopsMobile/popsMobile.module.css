@@ -333,10 +333,15 @@
     transform: rotate(-4deg);
 }
 
+.comoCta {
+    align-self: center;
+    margin-top: 30px;
+}
+
 /* ── Para todo ──────────────────────────────────────────── */
 .band {
     position: relative;
-    height: 760px;
+    height: 720px;
     background: var(--pops-cream) linear-gradient(180deg, var(--pops-cream-dark), var(--pops-cream-light));
     clip-path: polygon(0 7px, 7% 16px, 14% 5px, 22% 18px, 30% 8px, 38% 15px, 46% 6px, 54% 17px, 62% 7px, 70% 16px, 78% 5px, 86% 18px, 93% 8px, 100% 14px, 100% calc(100% - 4px), 93% calc(100% - 10px), 86% 100%, 78% calc(100% - 13px), 70% calc(100% - 2px), 62% calc(100% - 11px), 54% calc(100% - 1px), 46% calc(100% - 12px), 38% calc(100% - 3px), 30% calc(100% - 10px), 22% 100%, 14% calc(100% - 13px), 7% calc(100% - 2px), 0 calc(100% - 11px));
 }
@@ -381,7 +386,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px 8px;
+    gap: 24px 12px;
     margin: 0;
     padding: 0 20px;
     list-style: none;
@@ -410,10 +415,12 @@
 .bandMoto {
     position: absolute;
     left: 50%;
-    top: 330px;
+    top: 368px;
     margin-left: -135.5px;
-    transform: rotate(-3deg) scale(.92);
-    transform-origin: 50% 100%;
+    /* 480px × .76 ≈ 365px de alto: la base del recorte queda escondida
+       detrás del borde rasgado de abajo de la banda. */
+    transform: rotate(-3deg) scale(.76);
+    transform-origin: 50% 0;
 }
 
 /* ── Qué incluye ────────────────────────────────────────── */
@@ -443,7 +450,7 @@
 .featureTrack {
     gap: 16px;
     margin: 16px -18px 0 -24px;
-    padding: 24px 40px 26px;
+    padding: 24px 40px 32px;
     align-items: stretch;
 }
 

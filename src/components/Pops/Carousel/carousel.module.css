@@ -1,6 +1,10 @@
+/* Solo se desliza en horizontal: lo que sobresale de las tarjetas (giros,
+   stickers) no debe abrir un scroll vertical dentro del carrusel. */
 .track {
     display: flex;
     overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
     outline: none;

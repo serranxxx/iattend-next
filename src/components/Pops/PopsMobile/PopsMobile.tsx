@@ -93,6 +93,8 @@ export const PopsMobile = () => (
         Hacer un Pop es así de fácil.
       </p>
       <span data-anim="write" className={styles.comoFoot}>listo en 5 minutos ✂︎</span>
+      {/* Aún no lleva a ningún lado. */}
+      <SendPopButton variant="white" label="Make a Pop" href={null} className={cx(styles.sendPopSm, styles.comoCta)} />
     </section>
 
     {/* Para todo */}
@@ -156,14 +158,14 @@ export const PopsMobile = () => (
       <Carousel label="El editor en el cel o en la compu" trackClassName={styles.editorTrack} dotsClassName={styles.editorDots}>
         <figure className={styles.editorSlide}>
           <div className={styles.editorStage}>
-            <PhoneEditor className={styles.editorPhone} />
+            <PhoneEditor className={styles.editorPhone} animGroup="editor" />
           </div>
           <figcaption data-anim="write" className={cx(styles.editorCaption, styles.editorCaptionCel)}>en el cel</figcaption>
         </figure>
         <figure className={cx(styles.editorSlide, styles.editorSlideMac)}>
           <div className={styles.editorStage}>
             <div className={styles.editorMacFrame}>
-              <MacBook className={styles.editorMac} sizes="600px" />
+              <MacBook className={styles.editorMac} sizes="600px" animGroup="editor" />
             </div>
           </div>
           <figcaption data-anim="write" className={cx(styles.editorCaption, styles.editorCaptionMac)}>o en la compu</figcaption>

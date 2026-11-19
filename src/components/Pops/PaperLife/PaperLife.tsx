@@ -13,6 +13,8 @@ import styles from "./paperLife.module.css";
  *  data-idle   vida en reposo tras la entrada: flutter · float · nudge · snip
  *  data-hover  wiggle · spin · swing
  *  data-depth  px de deriva con el cursor (brisa / paralaje)
+ *  data-anim-group  los del mismo grupo entran juntos en cuanto uno se ve
+ *              (p. ej. slides de un carrusel que quedan fuera de pantalla)
  */
 export const PaperLife = ({ children }: { children: ReactNode }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -51,12 +53,21 @@ export const PaperLife = ({ children }: { children: ReactNode }) => {
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top || a.boundingClientRect.left - b.boundingClientRect.left);
-        visible.forEach((entry, i) => {
-          const el = entry.target as HTMLElement;
-          el.style.setProperty("--in-delay", `${Math.min(i, 10) * 70}ms`);
+        const enter = (el: HTMLElement, delay: string) => {
+          if (el.hasAttribute("data-in")) return;
+          el.style.setProperty("--in-delay", delay);
           el.addEventListener("animationend", onEnd as EventListener);
           el.setAttribute("data-in", "");
           io.unobserve(el);
+        };
+        visible.forEach((entry, i) => {
+          const el = entry.target as HTMLElement;
+          const delay = `${Math.min(i, 10) * 70}ms`;
+          enter(el, delay);
+          const group = el.dataset.animGroup;
+          if (group) {
+            root.querySelectorAll<HTMLElement>(`[data-anim-group="${group}"]`).forEach((g) => enter(g, delay));
+          }
         });
       },
       { rootMargin: "0px 0px -6% 0px", threshold: 0.12 },
