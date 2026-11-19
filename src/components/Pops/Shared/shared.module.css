@@ -141,10 +141,12 @@
 
 .motoScreen {
     position: absolute;
-    left: 43px;
-    top: 106px;
-    width: 187px;
-    height: 228px;
+    /* Cubre toda la pantalla blanca del Motorola (x 41–227, y 104–332 de
+       271 × 480) y 1 px del marco, para que no se asome un filo blanco. */
+    left: 40px;
+    top: 103px;
+    width: 188px;
+    height: 230px;
     overflow: hidden;
     border-radius: 3px;
     background: var(--pops-ink);
@@ -154,10 +156,10 @@
 .motoShade {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(20, 14, 10, .25) 0%, rgba(20, 14, 10, 0) 25%, rgba(20, 14, 10, 0) 42%, rgba(30, 20, 14, .78) 66%, #24180F 100%);
+    /* Sombreado suave: apenas arriba y un poco hacia abajo. */
+    background: linear-gradient(180deg, rgba(20, 14, 10, .12) 0%, rgba(20, 14, 10, 0) 22%, rgba(20, 14, 10, 0) 55%, rgba(30, 20, 14, .22) 80%, rgba(36, 24, 15, .38) 100%);
 }
 
-.motoDots span,
 .editorDots span {
     position: absolute;
     width: 3px;
@@ -166,7 +168,6 @@
     background: rgba(255, 255, 255, .8);
 }
 
-.motoDots,
 .editorDots {
     position: absolute;
     inset: 0;
@@ -190,16 +191,6 @@
     text-align: center;
 }
 
-.motoTitle {
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
-}
-
-.motoMeta { font-size: 7.5px; line-height: 1.4; }
-
-.motoRsvp,
 .editorRsvp {
     margin-top: 5px;
     width: 150px;
@@ -211,7 +202,6 @@
     align-items: center;
 }
 
-.motoRsvp > span:not(.rsvpDivider),
 .editorRsvp > span:not(.rsvpDivider) {
     display: flex;
     flex-direction: column;

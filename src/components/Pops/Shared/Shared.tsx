@@ -96,19 +96,9 @@ export const MotoPop = ({ className }: { className?: string }) => (
   <div className={cx(styles.moto, className)}>
     <Image src={IMG.motorola} alt="Teléfono mostrando un Pop" width={271} height={480} className={styles.motoImg} />
     <div className={styles.motoScreen}>
+      {/* Solo la foto, con su sombreado y el reflejo de la pantalla. */}
       <Image src={IMG.motoPop} alt="" fill sizes="190px" className={styles.cover} />
       <div className={styles.motoShade} />
-      <Sparkles className={styles.motoDots} />
-      <div className={styles.popInfo}>
-        <span className={styles.motoTitle}>CENA DEL VIERNES</span>
-        <span className={styles.motoMeta}>vie. 21 de noviembre, 21:00</span>
-        <span className={styles.motoMeta}>Casa de Pau</span>
-        <div className={styles.motoRsvp}>
-          <span><CircleCheck size={8} strokeWidth={2.2} />Asistiré</span>
-          <span className={styles.rsvpDivider} />
-          <span><CircleX size={8} strokeWidth={2.2} />No asistiré</span>
-        </div>
-      </div>
       <span className={styles.motoGlare} />
     </div>
   </div>

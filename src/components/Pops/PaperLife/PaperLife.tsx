@@ -62,7 +62,8 @@ export const PaperLife = ({ children }: { children: ReactNode }) => {
         };
         visible.forEach((entry, i) => {
           const el = entry.target as HTMLElement;
-          const delay = `${Math.min(i, 10) * 70}ms`;
+          // Uno tras otro, con calma (120 ms entre cada uno, hasta 10).
+          const delay = `${Math.min(i, 10) * 120}ms`;
           enter(el, delay);
           const group = el.dataset.animGroup;
           if (group) {
