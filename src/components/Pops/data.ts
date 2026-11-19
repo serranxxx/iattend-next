@@ -15,7 +15,7 @@ export const IMG = {
   polaroid1: "/pops/col-polaroid-1.webp",
   polaroid2: "/pops/col-polaroid-2.webp",
   polaroid3: "/pops/col-polaroid-3.webp",
-  motoPop: "/pops/col-moto-pop.webp",
+  motoPop: "/pops/col-moto-pop.jpg",
   editorFoto: "/pops/col-editor-foto.webp",
   editorDesktop: "/pops/editor-desktop.png",
   motorola: "/pops/motorola-recorte.png",
