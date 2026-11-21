@@ -71,7 +71,7 @@ export const FEATURES: Feature[] = [
   { n: "02", q: "Nos cambiaron la hora y ya las mandé todas", a: "La cambias una vez. Se actualiza para todos.", tone: "gray", paper: "notebook", pinkNumber: true },
   { n: "03", q: "El salón me pide el número final mañana y no sé cuántos van", a: "El número exacto, sin perseguir a nadie.", tone: "lime", paper: "grid" },
   { n: "04", q: "¿A mí no me invitaste?", a: "Les llega a todos. No se te pasa nadie.", tone: "white", paper: "dots", pinkNumber: true, tape: true },
-  { n: "05", q: "Llegamos a las 8, ¿no? (y la misa era a las 6)", a: "Nadie se pierde lo importante.", tone: "limeAlt", paper: "postit" },
+  { n: "05", q: "Llegamos a las 8, ¿no? (comenzaba a las 6)", a: "Nadie se pierde lo importante.", tone: "limeAlt", paper: "postit" },
   { n: "06", q: "Pásame la ubi porfa", a: "Ya la tienen. Y saben si llevar suéter.", tone: "sky", paper: "grid" },
   { n: "07", q: "Es que no conozco a nadie, no sé si ir…", a: "Ven quién va y llegan ya platicando.", tone: "gray", paper: "lined", pinkNumber: true, sticker: "globo" },
   { n: "08", q: "¿Pollo o res? ¿Alguna alergia?", a: "Pregúntale a todos, sin perseguir a nadie.", tone: "pink", paper: "dotsPink" },
@@ -83,10 +83,15 @@ export type PricePlan = {
   title: string;
   tone: "kraft" | "gray" | "lime";
   subtitle: string;
-  perPop?: string;
-  bullets?: string[];
-  price?: string;
-  rows?: [string, string, string][];
+  /** `bold` marca el renglón en negritas (p. ej. el precio por Pop). */
+  bullets: { text: string; bold?: boolean }[];
+  price: string;
+  /** Manuscrita antes del precio ("desde"). */
+  pricePrefix?: string;
+  /** Después del precio, en negritas ("/mes", "/Pop"). */
+  pricePer?: string;
+  /** Letra chica bajo el precio. */
+  fine?: string;
   cta: string;
   best?: boolean;
 };
@@ -98,35 +103,32 @@ export const PLANS: PricePlan[] = [
     title: "1 Pop",
     tone: "kraft",
     subtitle: "Para lo que surja hoy.",
-    bullets: ["Invitación completa", "30 envíos por WhatsApp", "Pases, encuestas y chat"],
+    bullets: [{ text: "Invitación completa" }, { text: "30 envíos por WhatsApp" }, { text: "Pases, encuestas y chat" }],
     price: "$549",
+    fine: "Pago único",
     cta: "Send a Pop",
   },
   {
     kind: "bucket",
     title: "5 Pops",
     tone: "gray",
-    subtitle: "5 por el precio de 4 · ",
-    perPop: "$440 por Pop",
-    rows: [
-      ["De contado", "$2,200", "—"],
-      ["3 meses", "$2,370", "$790"],
-      ["6 meses", "$2,430", "$405"],
-    ],
+    subtitle: "El paquete para la temporada.",
+    bullets: [{ text: "5 invitaciones completas" }, { text: "Úsalos cuando quieras" }, { text: "Ahorras $496" }],
+    price: "$450",
+    pricePer: "/Pop",
+    fine: "Total $2,249 · pago único",
     cta: "Comprar 5 Pops",
   },
   {
     kind: "bucket",
     title: "10 Pops",
     tone: "lime",
-    subtitle: "10 por el precio de 7 · ",
-    perPop: "$385 por Pop",
-    rows: [
-      ["De contado", "$3,850", "—"],
-      ["3 meses", "$4,170", "$1,390"],
-      ["6 meses", "$4,320", "$720"],
-      ["12 meses", "$4,560", "$380"],
-    ],
+    subtitle: "Para quien organiza seguido.",
+    bullets: [{ text: "10 invitaciones completas" }, { text: "$400 por Pop", bold: true }, { text: "Ahorras $1,490" }],
+    pricePrefix: "desde",
+    price: "$333",
+    pricePer: "/mes",
+    fine: "Hasta 12 MSI · o $4,000 de contado",
     cta: "Comprar 10 Pops",
     best: true,
   },

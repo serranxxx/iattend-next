@@ -666,13 +666,13 @@
 }
 
 .priceTrack {
-    gap: 22px;
+    gap: 18px;
     margin-top: 30px;
-    padding: 48px 50px 30px;
-    align-items: flex-start;
+    padding: 48px 40px 30px;
+    align-items: stretch;
 }
 
-.priceTrack > * { flex: 0 0 270px; }
+.priceTrack > * { flex: 0 0 290px; }
 
 .priceDots { gap: 10px; margin-top: 4px; }
 
