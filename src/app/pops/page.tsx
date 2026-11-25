@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Patrick_Hand } from "next/font/google";
+import { Caveat, Patrick_Hand } from "next/font/google";
 import { PopsWeb } from "@/components/Pops/PopsWeb/PopsWeb";
 import { PopsMobile } from "@/components/Pops/PopsMobile/PopsMobile";
 import { PaperLife } from "@/components/Pops/PaperLife/PaperLife";
@@ -11,6 +11,14 @@ const patrickHand = Patrick_Hand({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-patrick",
+});
+
+// Letra a mano del cuaderno de precios.
+const caveat = Caveat({
+  weight: "600",
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-caveat",
 });
 
 // La landing vive en www.iattend.mx (iattend.site sirve la app).
@@ -61,7 +69,7 @@ const PAPER_PRELOAD_SCRIPT = `(function(){if(matchMedia('(prefers-reduced-motion
 
 export default function PopsPage() {
   return (
-    <main className={`${styles.page} ${patrickHand.variable}`}>
+    <main className={`${styles.page} ${patrickHand.variable} ${caveat.variable}`}>
       <script dangerouslySetInnerHTML={{ __html: ZOOM_SCRIPT + PAPER_PRELOAD_SCRIPT }} />
       <span aria-hidden="true" className={styles.rulerTop} />
       <span aria-hidden="true" className={styles.rulerLeft} />

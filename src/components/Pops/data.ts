@@ -1,10 +1,14 @@
 // Contenido de la landing de Pops (/pops). Copys finales del handoff
 // "Landing Pops — Collage (tablero azul · lima)".
 
-// Todos los CTA ("Send a Pop", "Comprar N Pops") llevan a la app. Aún no hay
-// una ruta pública de creación/checkout de Pops: se manda al login y desde ahí
-// el usuario crea su Pop en el dashboard.
+// Los CTA "Make a Pop" / "Share a Pop" llevan a la app. Aún no hay una ruta
+// pública de creación de Pops: se manda al login y desde ahí el usuario crea
+// su Pop en el dashboard.
 export const POPS_APP_URL = `${process.env.NEXT_PUBLIC_APP_URL}/login`;
+
+// "Suscribirme a Pops+" todavía no tiene destino (Stripe o flujo en la app).
+// Cuando exista, poner aquí la URL; con null el botón no lleva a ningún lado.
+export const POPS_PLUS_URL: string | null = null;
 
 // Instagram de I attend (etiqueta lima del hero).
 export const INSTAGRAM_URL = "https://www.instagram.com/iattend.mx/";
@@ -27,6 +31,10 @@ export const IMG = {
   explosion: "/pops/stickers/explosion.svg",
   globo: "/pops/stickers/globo.svg",
   destello: "/pops/stickers/destello.svg",
+  // Cuaderno de precios. Provisionales hasta tener las fotos finales del
+  // handoff (foto pegada 270×160 y polaroid "la carne asada" 182×128).
+  notebookPhoto: "/pops/col-obj-1.webp",
+  notebookPolaroid: "/pops/col-polaroid-2.webp",
 };
 
 export type Tone = "warm" | "white" | "gray" | "pink" | "sky" | "lime" | "limeAlt" | "dark";
@@ -78,58 +86,41 @@ export const FEATURES: Feature[] = [
   { n: "09", q: "¿Me reenvías la invitación? Ya no la encuentro", a: "Guardada en su iPhone, a un toque.", tone: "dark", paper: "plain", wallet: true },
 ];
 
-export type PricePlan = {
-  kind: string;
-  title: string;
-  tone: "kraft" | "gray" | "lime";
-  subtitle: string;
-  /** `bold` marca el renglón en negritas (p. ej. el precio por Pop). */
-  bullets: { text: string; bold?: boolean }[];
-  price: string;
-  /** Manuscrita antes del precio ("desde"). */
-  pricePrefix?: string;
-  /** Después del precio, en negritas ("/mes", "/Pop"). */
-  pricePer?: string;
-  /** Letra chica bajo el precio. */
-  fine?: string;
-  cta: string;
-  best?: boolean;
+// Precios: cuaderno abierto con Gratis (izquierda) y Pops+ (derecha).
+export type NotebookNote = { q: string; a: string };
+
+export const FREE_PLAN = {
+  title: "Gratis",
+  subtitle: "para todos · para lo que surja hoy.",
+  items: [
+    { q: "Hazla tú, que te quedan bonitas", a: "Lista en minutos, desde tu celular." },
+    { q: "¿Y al final quién va?", a: "Lo ves en vivo, sin preguntar en el grupo." },
+    { q: "Pásame la ubi", a: "Ya la tienen, con hora y mapa." },
+    { q: "Siempre no es el sábado", a: "La cambias una vez y se actualiza para todos." },
+  ] as NotebookNote[],
+  price: "$0",
+  priceNote: "gratis, siempre",
+  fine: "Hasta 30 personas por Pop · 3 Pops activos al mismo tiempo",
+  cta: "Make a Pop",
+  ctaSticker: "gratis",
+  ctaNote: "↑ es gratis, de verdad",
 };
 
-// Valores vigentes al diseño (Stripe). Si cambian, actualizar aquí.
-export const PLANS: PricePlan[] = [
-  {
-    kind: "suelto",
-    title: "1 Pop",
-    tone: "kraft",
-    subtitle: "Para lo que surja hoy.",
-    bullets: [{ text: "Invitación completa" }, { text: "30 envíos por WhatsApp" }, { text: "Pases, encuestas y chat" }],
-    price: "$549",
-    fine: "Pago único",
-    cta: "Send a Pop",
-  },
-  {
-    kind: "bucket",
-    title: "5 Pops",
-    tone: "gray",
-    subtitle: "El paquete para la temporada.",
-    bullets: [{ text: "5 invitaciones completas" }, { text: "Úsalos cuando quieras" }, { text: "Ahorras $496" }],
-    price: "$450",
-    pricePer: "/Pop",
-    fine: "Total $2,249 · pago único",
-    cta: "Comprar 5 Pops",
-  },
-  {
-    kind: "bucket",
-    title: "10 Pops",
-    tone: "lime",
-    subtitle: "Para quien organiza seguido.",
-    bullets: [{ text: "10 invitaciones completas" }, { text: "$400 por Pop", bold: true }, { text: "Ahorras $1,490" }],
-    pricePrefix: "desde",
-    price: "$333",
-    pricePer: "/mes",
-    fine: "Hasta 12 MSI · o $4,000 de contado",
-    cta: "Comprar 10 Pops",
-    best: true,
-  },
-];
+// Color y rotación de cada post-it viven en notebook.module.css (postIt_<color>).
+export type PostIt = NotebookNote & { color: "lime" | "pink" | "sky" | "white" | "limeAlt" };
+
+export const PLUS_PLAN = {
+  subtitle: "para quien siempre termina organizando.",
+  items: [
+    { q: "Somos como 80, ¿sí caben?", a: "Invita a todos. Sin tope de personas ni de Pops.", color: "lime" },
+    { q: "Ocupo nombre, puesto y talla de playera", a: "Pídelo en el registro y descárgalo en Excel.", color: "pink" },
+    { q: "No encuentro mi pase", a: "Lo guardan en Apple Wallet, a un toque en su iPhone.", color: "sky" },
+    { q: "Son los mismos de la vez pasada", a: "Trae tu lista de otro evento en segundos.", color: "white" },
+    { q: "¿Dónde quedaron las fotos de la posada?", a: "Tus archivos se quedan contigo.", color: "limeAlt" },
+  ] as PostIt[],
+  price: "$259",
+  per: "/mes",
+  fine: "MXN · cancela cuando quieras",
+  cta: "Suscribirme a Pops+",
+  polaroidCaption: "la carne asada ★",
+};

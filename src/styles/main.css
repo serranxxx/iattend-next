@@ -593,6 +593,15 @@ h5,
     --pops-phone-green-bg: #E3F4E8;
     --pops-phone-green: #2E9E5B;
 
+    /* Cuaderno de precios */
+    --pops-pen: #22489A;
+    --pops-notebook-rule: rgba(80, 130, 200, .28);
+    --pops-notebook-margin: rgba(230, 90, 90, .5);
+    --pops-notebook-stitch: rgba(240, 236, 224, .9);
+    --pops-notebook-tape: linear-gradient(180deg, rgba(255, 253, 240, .8), rgba(236, 230, 205, .72));
+    --pops-noise: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22%3E%3Cfilter id=%22p%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%221.2%22 numOctaves=%223%22/%3E%3CfeColorMatrix values=%220 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .09 0%22/%3E%3C/filter%3E%3Crect width=%22160%22 height=%22160%22 filter=%22url(%23p)%22/%3E%3C/svg%3E');
+    --pops-torn-tape: polygon(0 8%, 4% 0, 8% 10%, 12% 0, 16% 8%, 20% 2%, 80% 2%, 84% 8%, 88% 0, 92% 10%, 96% 0, 100% 8%, 100% 92%, 96% 100%, 92% 90%, 88% 100%, 84% 92%, 80% 98%, 20% 98%, 16% 92%, 12% 100%, 8% 90%, 4% 100%, 0 92%);
+
     --pops-paper-texture: linear-gradient(160deg, rgba(255, 255, 255, .28) 0%, rgba(255, 255, 255, .06) 30%, rgba(255, 255, 255, 0) 55%, rgba(0, 0, 0, .05) 80%, rgba(0, 0, 0, .14) 100%), repeating-linear-gradient(97deg, rgba(255, 255, 255, .035) 0 1px, transparent 1px 5px), url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22%3E%3Cfilter id=%22p%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%221.1%22 numOctaves=%223%22/%3E%3CfeColorMatrix values=%220 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .14 0%22/%3E%3C/filter%3E%3Crect width=%22160%22 height=%22160%22 filter=%22url(%23p)%22/%3E%3C/svg%3E');
     --pops-paper-edge: inset 0 1px 0 rgba(255, 255, 255, .55), inset 0 -1.5px 0 rgba(0, 0, 0, .14), inset 1px 0 0 rgba(255, 255, 255, .25), 0 1px 1.5px rgba(0, 0, 0, .3);
     --pops-shadow-sm: var(--pops-paper-edge), 0 4px 10px rgba(0, 0, 0, .22), 0 10px 25px -10px rgba(0, 0, 0, .25);

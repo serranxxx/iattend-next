@@ -98,7 +98,7 @@
 /* ── Hero ───────────────────────────────────────────────── */
 .hero {
     position: relative;
-    height: 740px;
+    height: 900px;
 }
 
 .heroObj { left: -40px; top: 24px; width: 170px; height: 125px; transform: rotate(-14deg); }
@@ -114,7 +114,7 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 200px;
+    top: 230px;
     height: 330px;
 }
 
@@ -166,7 +166,7 @@
     position: absolute;
     left: 24px;
     right: 24px;
-    top: 476px;
+    top: 516px;
     margin: 0;
     color: var(--pops-white);
     font-size: 17px;
@@ -180,11 +180,20 @@
 .heroCtas {
     position: absolute;
     left: 24px;
-    top: 556px;
+    top: 626px;
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 30px;
 }
+
+/* Sticker "gratis" y nota bajo "Make a Pop" (vienen de SendPopButton). */
+.heroMake > [data-part="sticker"] { right: -24px; top: -22px; width: 50px; height: 50px; font-size: 17px; }
+
+/* En fila con "ver planes": versión compacta para que quepan en 390px. */
+.heroCtas .heroMake { gap: 8px !important; padding: 0 16px 0 8px !important; font-size: 17px !important; }
+.heroCtas .heroMake > span:first-child { width: 34px; height: 34px; font-size: 22px; }
+.heroCtas .seePrices { padding: 0 14px; font-size: 18px; white-space: nowrap; }
+.heroMake > [data-part="note"] { left: 50px; top: calc(100% + 8px); font-size: 20px; }
 
 /* Variante chica del botón "Send a Pop" (!important: antd) */
 .sendPopSm {
@@ -200,9 +209,10 @@
     font-size: 24px;
 }
 
+/* Mismo alto que "Make a Pop" (56px). */
 .seePrices {
-    height: 48px;
-    padding: 0 16px;
+    height: 56px;
+    padding: 0 22px;
     display: flex;
     align-items: center;
     background-color: var(--pops-paper-gray);
@@ -216,9 +226,10 @@
 
 .bubble {
     position: absolute;
-    left: 180px;
-    top: 640px;
-    width: 180px;
+    /* Debajo de los botones, en su propio renglón con el corazón. */
+    left: 156px;
+    top: 790px;
+    width: 190px;
     padding: 10px 13px;
     background-color: var(--pops-white);
     border-radius: 16px 16px 4px 16px;
@@ -232,7 +243,7 @@
 .bubbleText { font-size: 14px; line-height: 1.3; }
 .bubbleTime { align-self: flex-end; font-size: 10px; color: var(--pops-gray); line-height: 1.5; }
 
-.heroHeart { left: 40px; top: 650px; width: 70px; transform: rotate(-14deg); }
+.heroHeart { left: 56px; top: 800px; width: 66px; transform: rotate(-14deg); }
 
 /* ── Cómo funciona ──────────────────────────────────────── */
 .como {
@@ -657,24 +668,50 @@
 
 .preciosL1,
 .preciosL2 { padding: 4px 11px 8px; font-size: 38px; }
+.preciosPlus { color: var(--pops-pink-strong); }
 .preciosL1 { margin-top: 6px; background-color: var(--pops-white); transform: rotate(-2deg); }
 .preciosL2 { margin-top: 8px; background-color: var(--pops-lime); transform: rotate(2deg); }
 
-.pricesBleed {
+/* Cuaderno a sangre con scroll horizontal; dentro va al 66 % (cada página
+   ≈ 343px, una por pantalla) y se detiene en cada página. */
+.notebookBleed {
     align-self: stretch;
-    margin: 0 -20px;
+    margin: 30px -20px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    outline: none;
 }
 
-.priceTrack {
-    gap: 18px;
-    margin-top: 30px;
-    padding: 48px 40px 30px;
-    align-items: stretch;
+.notebookBleed::-webkit-scrollbar { display: none; }
+
+.notebookTrack {
+    display: flex;
+    width: max-content;
+    padding: 40px 60px 50px;
+    zoom: .66;
 }
 
-.priceTrack > * { flex: 0 0 290px; }
+.notebookTrack article { scroll-snap-align: center; }
 
-.priceDots { gap: 10px; margin-top: 4px; }
+.notebookHint {
+    margin-top: 4px;
+    color: var(--pops-white);
+    font-family: var(--font-patrick), cursive;
+    font-size: 18px;
+}
+
+.preciosNote {
+    margin: 24px 0 0;
+    text-align: center;
+    color: var(--pops-white);
+    font-family: var(--font-patrick), cursive;
+    font-size: 17px;
+    line-height: 1.3;
+}
 
 /* ── CTA final ──────────────────────────────────────────── */
 .cta {

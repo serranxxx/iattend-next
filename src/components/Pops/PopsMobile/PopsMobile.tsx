@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "antd";
-import { FEATURES, IMG, INSTAGRAM_URL, OCASIONES, PLANS, POPS_APP_URL, STEPS } from "../data";
+import { FEATURES, FREE_PLAN, IMG, INSTAGRAM_URL, OCASIONES, POPS_APP_URL, STEPS } from "../data";
+import { Notebook } from "../Notebook/Notebook";
 import { Carousel } from "../Carousel/Carousel";
 import {
   Cutout,
@@ -8,7 +9,6 @@ import {
   MacBook,
   PhoneEditor,
   Polaroid,
-  PriceTag,
   SendPopButton,
   Star,
   Sticker,
@@ -31,7 +31,7 @@ export const PopsMobile = () => (
         <span className={styles.logoPops}>Pops</span>
         <span className={styles.logoBy}>by I attend</span>
       </a>
-      <Button data-anim="drop" href={POPS_APP_URL} className={styles.navCta}>Send a Pop ↗</Button>
+      <Button data-anim="drop" href={POPS_APP_URL} className={styles.navCta}>Make a Pop ↗</Button>
     </header>
 
     {/* Hero */}
@@ -60,8 +60,8 @@ export const PopsMobile = () => (
       </div>
       <p data-anim="fade" className={styles.heroLead}>la cena del viernes, la junta de ventas, la posada. todo en un solo link.</p>
       <div className={styles.heroCtas}>
-        <SendPopButton variant="lime" className={styles.sendPopSm} />
-        <a data-anim="drop" data-hover="wiggle" href="#precios-m" className={cx(styles.paper, styles.seePrices)}>ver precios →</a>
+        <SendPopButton variant="lime" sticker={FREE_PLAN.ctaSticker} note={FREE_PLAN.ctaNote} className={cx(styles.sendPopSm, styles.heroMake)} />
+        <a data-anim="drop" data-hover="wiggle" href="#precios-m" className={cx(styles.paper, styles.seePrices)}>ver planes →</a>
       </div>
       <div data-anim="pop" data-idle="flutter" data-hover="wiggle" data-depth="12" className={cx(styles.paper, styles.bubble)}>
         <span className={styles.bubbleFrom}>Ana · WhatsApp</span>
@@ -180,14 +180,17 @@ export const PopsMobile = () => (
     <section id="precios-m" className={styles.precios}>
       <span data-anim="write" className={styles.kicker}>precios</span>
       <h2 className={styles.preciosTitle}>
-        <span data-anim="slap" data-hover="wiggle" className={cx(styles.paper, styles.label, styles.preciosL1)}>Entre más Pops,</span>{" "}
-        <span data-anim="slap" data-hover="wiggle" className={cx(styles.paper, styles.label, styles.preciosL2)}>menos pagas.</span>
+        <span data-anim="slap" data-hover="wiggle" className={cx(styles.paper, styles.label, styles.preciosL1)}>Empieza gratis,</span>{" "}
+        <span data-anim="slap" data-hover="wiggle" className={cx(styles.paper, styles.label, styles.preciosL2)}>crece con Pops<span className={styles.preciosPlus}>+</span>.</span>
       </h2>
-      <div className={styles.pricesBleed}>
-        <Carousel label="Precios de Pops" trackClassName={styles.priceTrack} dotsClassName={styles.priceDots}>
-          {PLANS.map((p) => <PriceTag key={p.title} plan={p} />)}
-        </Carousel>
+      {/* El mismo cuaderno de desktop, escalado, con scroll horizontal. */}
+      <div className={styles.notebookBleed} role="region" aria-label="Planes de Pops" tabIndex={0}>
+        <div className={styles.notebookTrack}>
+          <Notebook animGroup="notebook-mobile" />
+        </div>
       </div>
+      <span className={styles.notebookHint}>← desliza para ver el cuaderno →</span>
+      <p className={styles.preciosNote}>Pops+ es la suscripción de Pops. No es el plan PRO de bodas.</p>
     </section>
 
     {/* CTA final */}
@@ -205,7 +208,7 @@ export const PopsMobile = () => (
         <span data-anim="slap" data-hover="wiggle" className={cx(styles.paper, styles.label, styles.ctaL1)}>¿Qué se te</span>{" "}
         <span data-anim="slap" data-hover="wiggle" className={cx(styles.paper, styles.label, styles.ctaL2)}>antoja hoy?</span>
       </h2>
-      <SendPopButton variant="white" className={cx(styles.sendPopSm, styles.ctaBtn)} />
+      <SendPopButton variant="white" label="Share a Pop" className={cx(styles.sendPopSm, styles.ctaBtn)} />
       <Star className={styles.ctaStar1} />
       <Star lined className={styles.ctaStar2} />
     </section>

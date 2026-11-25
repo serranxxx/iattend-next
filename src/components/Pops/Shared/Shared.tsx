@@ -17,7 +17,7 @@ import {
   Undo2,
   Users,
 } from "lucide-react";
-import { IMG, PLANS, POPS_APP_URL, type PaperKind, type PricePlan, type Tone } from "../data";
+import { IMG, POPS_APP_URL, type PaperKind, type Tone } from "../data";
 import styles from "./shared.module.css";
 
 const cx = (...c: (string | false | undefined)[]) => c.filter(Boolean).join(" ");
@@ -71,22 +71,29 @@ export const Polaroid = ({
 
 /* ── CTA ────────────────────────────────────────────────── */
 
-/** CTA de papel lima/blanco. Por defecto "Send a Pop" hacia la app; con
- *  `href={null}` queda como botón sin destino (aún no hay a dónde llevarlo). */
+/** CTA de papel lima/blanco hacia la app. Con `href={null}` queda como botón
+ *  sin destino. `sticker` y `note` agregan el círculo rosa ("gratis") y la nota
+ *  a mano debajo (ajustables desde la página con `[data-part]`). */
 export const SendPopButton = ({
   variant,
   className,
-  label = "Send a Pop",
+  label = "Make a Pop",
   href = POPS_APP_URL,
+  sticker,
+  note,
 }: {
   variant: "lime" | "white";
   className?: string;
   label?: string;
   href?: string | null;
+  sticker?: string;
+  note?: string;
 }) => (
   <Button href={href ?? undefined} data-anim="drop" data-idle="nudge" className={cx(styles.sendPop, variant === "white" && styles.sendPopWhite, className)}>
     <span aria-hidden="true" className={styles.sendPopPlus}>+</span>
     {label}
+    {sticker && <span data-part="sticker" className={styles.sendPopSticker}>{sticker}</span>}
+    {note && <span data-part="note" aria-hidden="true" className={styles.sendPopNote}>{note}</span>}
   </Button>
 );
 
@@ -216,36 +223,4 @@ export const MacBook = ({ className, sizes, animGroup }: { className?: string; s
       <span className={styles.macNotch} />
     </div>
   </div>
-);
-
-/* ── Etiquetas de precio ────────────────────────────────── */
-
-export const PriceTag = ({ plan }: { plan: PricePlan }) => (
-  <div data-anim="swing" data-hover="swing" className={cx(styles.priceWrap, styles[`price_${plan.tone}`])}>
-    <article className={cx(styles.priceTag, toneClass(plan.tone))}>
-      <span aria-hidden="true" className={styles.priceHole} />
-      <span className={styles.priceKind}>{plan.kind}</span>
-      <h3 className={styles.priceTitle}>{plan.title}</h3>
-      <span className={styles.priceSub}>{plan.subtitle}</span>
-      <ul className={styles.priceBullets}>
-        {plan.bullets.map((b) => <li key={b.text}>✓ {b.bold ? <b>{b.text}</b> : b.text}</li>)}
-      </ul>
-      <div className={styles.priceLine}>
-        {plan.pricePrefix && <span className={styles.priceHand}>{plan.pricePrefix}</span>}
-        <span className={styles.priceBig}>{plan.price}</span>
-        {plan.pricePer && <b className={styles.pricePer}>{plan.pricePer}</b>}
-      </div>
-      {plan.fine && <span className={styles.priceFine}>{plan.fine}</span>}
-      <Button href={POPS_APP_URL} className={styles.priceCta}>{plan.cta}</Button>
-    </article>
-    {plan.best && (
-      <span data-anim="pop" data-idle="flutter" data-hover="wiggle" className={styles.bestSeal}>mejor<br />precio ★</span>
-    )}
-  </div>
-);
-
-export const PriceTags = () => (
-  <>
-    {PLANS.map((p) => <PriceTag key={p.title} plan={p} />)}
-  </>
 );

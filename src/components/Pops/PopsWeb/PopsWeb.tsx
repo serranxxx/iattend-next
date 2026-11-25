@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { Button } from "antd";
-import { FEATURES, IMG, INSTAGRAM_URL, OCASIONES, POPS_APP_URL, STEPS } from "../data";
+import { FEATURES, FREE_PLAN, IMG, INSTAGRAM_URL, OCASIONES, POPS_APP_URL, STEPS } from "../data";
+import { Notebook } from "../Notebook/Notebook";
 import {
   Cutout,
   MotoPop,
   MacBook,
   PhoneEditor,
   Polaroid,
-  PriceTags,
   SendPopButton,
   Star,
   Sticker,
@@ -54,7 +54,7 @@ export const PopsWeb = () => (
       <nav className={styles.navLinks}>
         <a data-anim="drop" data-hover="wiggle" href="#como" className={cx(styles.paper, styles.navLink, styles.navLinkComo)}>cómo funciona</a>
         <a data-anim="drop" data-hover="wiggle" href="#precios" className={cx(styles.paper, styles.navLink, styles.navLinkPrecios)}>precios</a>
-        <Button data-anim="drop" href={POPS_APP_URL} className={styles.navCta}>Send a Pop ↗</Button>
+        <Button data-anim="drop" href={POPS_APP_URL} className={styles.navCta}>Make a Pop ↗</Button>
       </nav>
     </header>
 
@@ -88,8 +88,8 @@ export const PopsWeb = () => (
       </div>
 
       <div className={styles.heroCtas}>
-        <SendPopButton variant="lime" />
-        <a data-anim="drop" data-hover="wiggle" href="#precios" className={cx(styles.paper, styles.seePrices)}>ver precios →</a>
+        <SendPopButton variant="lime" sticker={FREE_PLAN.ctaSticker} note={FREE_PLAN.ctaNote} />
+        <a data-anim="drop" data-hover="wiggle" href="#precios" className={cx(styles.paper, styles.seePrices)}>ver planes →</a>
       </div>
 
       <div data-anim="pop" data-idle="flutter" data-hover="wiggle" data-depth="12" className={cx(styles.paper, styles.bubble)}>
@@ -206,13 +206,14 @@ export const PopsWeb = () => (
       <div className={styles.preciosHead}>
         <span data-anim="write" className={styles.preciosKicker}>precios</span>
         <h2 className={styles.preciosTitle}>
-          <span data-anim="slap" data-hover="wiggle" className={cx(styles.paper, styles.label, styles.preciosL1)}>Entre más Pops,</span>
-          <span data-anim="slap" data-hover="wiggle" className={cx(styles.paper, styles.label, styles.preciosL2)}>menos pagas.</span>
+          <span data-anim="slap" data-hover="wiggle" className={cx(styles.paper, styles.label, styles.preciosL1)}>Empieza gratis,</span>
+          <span data-anim="slap" data-hover="wiggle" className={cx(styles.paper, styles.label, styles.preciosL2)}>crece con Pops<span className={styles.preciosPlus}>+</span>.</span>
         </h2>
       </div>
-      <div className={styles.prices}>
-        <PriceTags />
+      <div data-anim="drop" className={styles.notebookWrap}>
+        <Notebook animGroup="notebook-web" />
       </div>
+      <p data-anim="write" className={styles.preciosNote}>Pops+ es la suscripción de Pops. No es el plan PRO de bodas.</p>
     </section>
 
     {/* CTA final */}
@@ -231,7 +232,7 @@ export const PopsWeb = () => (
           <span data-anim="slap" data-hover="wiggle" className={cx(styles.paper, styles.label, styles.ctaL1)}>¿Qué se te</span>{" "}
           <span data-anim="slap" data-hover="wiggle" className={cx(styles.paper, styles.label, styles.ctaL2)}>antoja hoy?</span>
         </h2>
-        <SendPopButton variant="white" className={styles.ctaBtn} />
+        <SendPopButton variant="white" label="Share a Pop" className={styles.ctaBtn} />
       </div>
       <Sticker src={IMG.destello} className={styles.ctaSparkle} />
       <Star className={styles.ctaStar} />

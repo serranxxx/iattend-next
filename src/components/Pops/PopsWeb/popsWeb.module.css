@@ -297,12 +297,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 22px;
+    gap: 60px;
 }
 
+/* Mismo alto que "Make a Pop" (66px). */
 .seePrices {
-    height: 56px;
-    padding: 0 24px;
+    height: 66px;
+    padding: 0 30px;
     display: flex;
     align-items: center;
     background-color: var(--pops-paper-gray);
@@ -802,16 +803,21 @@
 
 .preciosL1 { background-color: var(--pops-white); transform: rotate(-2deg); }
 .preciosL2 { background-color: var(--pops-lime); transform: rotate(2deg); }
+.preciosPlus { color: var(--pops-pink-strong); }
 
-.prices {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 44px;
-    margin-top: 80px;
-    align-items: stretch;
+.notebookWrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 76px;
 }
 
-.prices > :nth-child(2) { margin-top: 30px; }
+.preciosNote {
+    margin: 40px 0 0;
+    text-align: center;
+    color: var(--pops-white);
+    font-family: var(--font-patrick), cursive;
+    font-size: 20px;
+}
 
 /* ── CTA final ──────────────────────────────────────────── */
 .cta {
