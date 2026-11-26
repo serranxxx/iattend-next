@@ -1,14 +1,14 @@
 // Contenido de la landing de Pops (/pops). Copys finales del handoff
 // "Landing Pops — Collage (tablero azul · lima)".
 
-// Los CTA "Make a Pop" / "Share a Pop" llevan a la app. Aún no hay una ruta
-// pública de creación de Pops: se manda al login y desde ahí el usuario crea
-// su Pop en el dashboard.
-export const POPS_APP_URL = `${process.env.NEXT_PUBLIC_APP_URL}/login`;
+// Los CTA "Make a Pop" / "Share a Pop" abren el editor de Pops sin cuenta de
+// la app (iattend-vite `/crear-pop`): se hace el Pop ahí y, al guardar,
+// mandar o copiar el link, la app pide crear la cuenta y lo guarda.
+export const POPS_APP_URL = `${process.env.NEXT_PUBLIC_APP_URL}/crear-pop`;
 
-// "Suscribirme a Pops+" todavía no tiene destino (Stripe o flujo en la app).
-// Cuando exista, poner aquí la URL; con null el botón no lleva a ningún lado.
-export const POPS_PLUS_URL: string | null = null;
+// "Suscribirme a Pops+": crear cuenta (o entrar) y de ahí al pago de Pops+
+// (la app lee `accion=plus` al llegar y manda a Stripe).
+export const POPS_PLUS_URL: string | null = `${process.env.NEXT_PUBLIC_APP_URL}/login?mode=register&espacio=pops&accion=plus`;
 
 // Instagram de I attend (etiqueta lima del hero).
 export const INSTAGRAM_URL = "https://www.instagram.com/iattend.mx/";
@@ -116,7 +116,7 @@ export const PLUS_PLAN = {
     { q: "Ocupo nombre, puesto y talla de playera", a: "Pídelo en el registro y descárgalo en Excel.", color: "pink" },
     { q: "No encuentro mi pase", a: "Lo guardan en Apple Wallet, a un toque en su iPhone.", color: "sky" },
     { q: "Son los mismos de la vez pasada", a: "Trae tu lista de otro evento en segundos.", color: "white" },
-    { q: "¿Dónde quedaron las fotos de la posada?", a: "Tus archivos se quedan contigo.", color: "limeAlt" },
+    { q: "Siempre no, nos vemos a las 8", a: "Avísales a todos en automático.", color: "limeAlt" },
   ] as PostIt[],
   price: "$259",
   per: "/mes",

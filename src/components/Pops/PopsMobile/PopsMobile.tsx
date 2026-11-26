@@ -93,8 +93,7 @@ export const PopsMobile = () => (
         Hacer un Pop es así de fácil.
       </p>
       <span data-anim="write" className={styles.comoFoot}>listo en 5 minutos ✂︎</span>
-      {/* Aún no lleva a ningún lado. */}
-      <SendPopButton variant="white" label="Make a Pop" href={null} className={cx(styles.sendPopSm, styles.comoCta)} />
+      <SendPopButton variant="white" label="Make a Pop" className={cx(styles.sendPopSm, styles.comoCta)} />
     </section>
 
     {/* Para todo */}
